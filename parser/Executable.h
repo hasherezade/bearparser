@@ -25,7 +25,7 @@ public:
         RVA = 2,
         VA = 3
     };
-    virtual ~Executable(void);
+    virtual ~Executable(void) {}
 
     virtual exe_bits getBitMode() { return this->bitMode; }
 

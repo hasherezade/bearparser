@@ -6,11 +6,6 @@ Executable::Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode)
     if (v_buf == NULL) throw ExeException("Cannot make Exe from NULL buffer");
 }
 
-Executable::~Executable()
-{
-    delete this->buf;
-}
-
 BYTE* Executable::getContentAt(offset_t offset, Executable::addr_type aType, bufsize_t size, bool allowExceptions)
 {
     offset_t raw = this->toRaw(offset, aType, allowExceptions);

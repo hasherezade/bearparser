@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
         exeContext.setExe(exe);
         commander.parseCommands();
         delete exe;
+        delete buf;
 
     } catch (CustomException e) {
         QMessageBox::warning(NULL, "ERR", e.getInfo());
