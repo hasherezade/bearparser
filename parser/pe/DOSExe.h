@@ -3,6 +3,16 @@
 #include "../MappedExe.h"
 #include "DosHdrWrapper.h"
 
+
+class DOSExeBuilder: public ExeBuilder {
+public:
+    DOSExeBuilder() : ExeBuilder() {}
+    virtual bool signatureMatches(AbstractByteBuffer *buf);
+    virtual Executable* build(AbstractByteBuffer *buf);
+};
+
+//-------------------------------------------------------------
+
 class DOSExe : public MappedExe
 {
 public:

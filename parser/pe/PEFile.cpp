@@ -1,6 +1,46 @@
 #include "PEFile.h"
 
- PEFile::PEFile(AbstractByteBuffer *v_buf)
+bool PEFileBuilder::signatureMatches(AbstractByteBuffer *buf)
+{
+    offset_t dosOffset = 0;
+    WORD *magic = (WORD*) buf->getContentAt(dosOffset, sizeof(WORD));
+    if (magic == NULL) return false;
+
+    if ((*magic) != S_DOS) {
+        return false;
+    }
+    offset_t newOffset = dosOffset + (sizeof(IMAGE_DOS_HEADER) - sizeof(LONG));
+    LONG* lfnew = (LONG*) buf->getContentAt(newOffset, sizeof(LONG));
+    if (lfnew == NULL) {
+        return false;
+    }
+    offset_t peOffset = static_cast<offset_t>(*lfnew);
+    DWORD *peMagic = (DWORD*) buf->getContentAt(peOffset, sizeof(DWORD));
+    if (peMagic == NULL) {
+        return false;
+    }
+    if (*peMagic == pe::S_NT) {
+        return true;
+    }
+    return false;
+}
+
+Executable* PEFileBuilder::build(AbstractByteBuffer *buf)
+{
+    Executable *exe = NULL;
+    if (signatureMatches(buf) == false) return NULL;
+
+    try {
+        exe = new PEFile(buf);
+    } catch (ExeException &e) {
+        //
+    }
+    return exe;
+}
+
+//-------------------------------------------------------------
+
+PEFile::PEFile(AbstractByteBuffer *v_buf)
     : DOSExe(v_buf), fHdr(NULL), optHdr(NULL), sects(NULL),
     album(NULL)
 {

@@ -20,6 +20,17 @@
 #include "rsrc/ResourcesAlbum.h"
 #include "pe_formats.h"
 
+class PEFile;
+
+class PEFileBuilder: public ExeBuilder {
+public:
+    PEFileBuilder() : ExeBuilder() {}
+    virtual bool signatureMatches(AbstractByteBuffer *buf);
+    virtual Executable* build(AbstractByteBuffer *buf);
+};
+
+//-------------------------------------------------------------
+
 class PEFile : public DOSExe
 {
 public:

@@ -2,6 +2,7 @@
 #include <map>
 
 #include "AbstractByteBuffer.h"
+class Executable;
 
 class ExeException : public CustomException
 {
@@ -9,6 +10,16 @@ public:
     ExeException(const QString info) : CustomException(info) {}
 };
 
+class ExeBuilder {
+public:
+    ExeBuilder() {}
+    virtual ~ExeBuilder() {}
+
+    virtual bool signatureMatches(AbstractByteBuffer *buf) = 0;
+    virtual Executable* build(AbstractByteBuffer *buf) = 0;
+};
+
+//-------------------------------------------------------------
 
 class Executable : public AbstractByteBuffer {
 public:

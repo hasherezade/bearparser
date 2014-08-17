@@ -1,6 +1,32 @@
 #include "DOSExe.h"
 
 
+bool DOSExeBuilder::signatureMatches(AbstractByteBuffer *buf)
+{
+    WORD *magic = (WORD*) buf->getContentAt(0, sizeof(WORD));
+    if (magic == NULL) return false;
+
+    if ((*magic) == S_DOS) {
+        return true;
+    }
+    return false;
+}
+
+Executable* DOSExeBuilder::build(AbstractByteBuffer *buf)
+{
+    Executable *exe = NULL;
+    if (signatureMatches(buf) == false) return NULL;
+
+    try {
+        exe = new DOSExe(buf);
+    } catch (ExeException &e) {
+        //
+    }
+    return exe;
+}
+
+//-------------------------------------------------------------
+
 DOSExe::DOSExe(AbstractByteBuffer *v_buf)
     : MappedExe(v_buf, Executable::BITS_16), dosHdrWrapper(NULL)
 {

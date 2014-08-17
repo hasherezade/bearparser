@@ -51,10 +51,16 @@ int main(int argc, char *argv[])
         ByteBuffer* buf = FileBuffer::read(fName, MINBUF);
 
         printf("Parsing executable...\n");
-        Executable *exe = new PEFile(buf);
+        Executable *exe = NULL;
 
-        exeContext.setExe(exe);
-        commander.parseCommands();
+        PEFileBuilder builder;
+        if (builder.signatureMatches(buf)) {
+
+            exe = builder.build(buf);
+
+            exeContext.setExe(exe);
+            commander.parseCommands();
+        }
         delete exe;
         delete buf;
 
