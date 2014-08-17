@@ -51,12 +51,8 @@ int main(int argc, char *argv[])
         ByteBuffer* buf = FileBuffer::read(fName, MINBUF);
 
         printf("Parsing executable...\n");
-        Executable *exe = NULL;
-        try {
-            exe = new PEFile(buf);
-        } catch (CustomException e) {
-           exe = new DOSExe(buf);
-        }
+        Executable *exe = new PEFile(buf);
+
         exeContext.setExe(exe);
         commander.parseCommands();
         delete exe;
