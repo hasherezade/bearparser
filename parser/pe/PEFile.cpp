@@ -2,6 +2,8 @@
 
 bool PEFileBuilder::signatureMatches(AbstractByteBuffer *buf)
 {
+    if (buf == NULL) return false;
+
     offset_t dosOffset = 0;
     WORD *magic = (WORD*) buf->getContentAt(dosOffset, sizeof(WORD));
     if (magic == NULL) return false;

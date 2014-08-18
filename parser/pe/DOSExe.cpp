@@ -3,6 +3,8 @@
 
 bool DOSExeBuilder::signatureMatches(AbstractByteBuffer *buf)
 {
+    if (buf == NULL) return false;
+
     WORD *magic = (WORD*) buf->getContentAt(0, sizeof(WORD));
     if (magic == NULL) return false;
 
