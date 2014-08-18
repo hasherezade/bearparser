@@ -53,6 +53,7 @@ int main(int argc, char *argv[])
 
         if (exeType == ExeFactory::NONE) {
            printf("Type not supported\n");
+           ExeFactory::destroy();
            return 1;
         }
         printf("Type: %s\n", ExeFactory::getTypeName(exeType).toStdString().c_str());
@@ -76,8 +77,8 @@ int main(int argc, char *argv[])
     } catch (CustomException e) {
         QMessageBox::warning(NULL, "ERR", e.getInfo());
     }
-    cout << "Done!"<< endl;
-    //int ret = app.exec();
+    printf("Done!");
+    ExeFactory::destroy();
     return 0;
 }
 
