@@ -12,5 +12,7 @@
 #include "ExeNodeWrapper.h"
 #include "Formatter.h"
 
+#include "ExeFactory.h"
+
 //supported formats:
 #include "pe/PEFile.h"

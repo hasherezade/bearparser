@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
     app.setApplicationName(TITLE);
     app.setQuitOnLastWindowClosed(false);
 
+    ExeFactory::init();
+
     ExeCmdContext exeContext;
     PECommander commander(&exeContext);
 
@@ -46,21 +48,28 @@ int main(int argc, char *argv[])
         fName = QString(argv[1]);
     }
     try {
+        FileMap *fileMap = new FileMap(fName);
+        ExeFactory::exe_type exeType = ExeFactory::findMatching(fileMap);
+
+        if (exeType == ExeFactory::NONE) {
+           printf("Type not supported\n");
+           return 1;
+        }
+        printf("Type: %s\n", ExeFactory::getTypeName(exeType).toStdString().c_str());
         const bufsize_t MINBUF = 0x200;
+        bufsize_t readableSize = fileMap->getContentSize();
+        bufsize_t allocSize = (readableSize < MINBUF) ? MINBUF : readableSize;
+
         printf("Buffering...\n");
-        ByteBuffer* buf = FileBuffer::read(fName, MINBUF);
+        ByteBuffer *buf= new ByteBuffer(fileMap, 0, allocSize);
+        delete fileMap;
 
         printf("Parsing executable...\n");
-        Executable *exe = NULL;
+        Executable *exe = ExeFactory::build(buf, exeType);
 
-        PEFileBuilder builder;
-        if (builder.signatureMatches(buf)) {
+        exeContext.setExe(exe);
+        commander.parseCommands();
 
-            exe = builder.build(buf);
-
-            exeContext.setExe(exe);
-            commander.parseCommands();
-        }
         delete exe;
         delete buf;
 

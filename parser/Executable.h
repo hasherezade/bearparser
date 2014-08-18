@@ -17,6 +17,7 @@ public:
 
     virtual bool signatureMatches(AbstractByteBuffer *buf) = 0;
     virtual Executable* build(AbstractByteBuffer *buf) = 0;
+    virtual QString typeName() = 0;
 };
 
 //-------------------------------------------------------------

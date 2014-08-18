@@ -8,9 +8,10 @@ bool DOSExeBuilder::signatureMatches(AbstractByteBuffer *buf)
     WORD *magic = (WORD*) buf->getContentAt(0, sizeof(WORD));
     if (magic == NULL) return false;
 
-    if ((*magic) == S_DOS) {
+    if ((*magic) == pe::S_DOS || (*magic) == pe::S_DOS2) {
         return true;
     }
+
     return false;
 }
 
@@ -45,7 +46,7 @@ void DOSExe::wrap(AbstractByteBuffer *v_buf)
         throw ExeException("Could not Wrap!");
     }
 
-    if ((*magic) != S_DOS) {
+    if ((*magic) != S_DOS && (*magic) != S_DOS2) {
         printf("It is not a DOS file!\n");
         throw ExeException("It is not a DOS file!");
     }

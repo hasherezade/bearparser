@@ -62,6 +62,7 @@ set (parser_hdrs
     MappedExe.h
     ExeElementWrapper.h
     ExeNodeWrapper.h
+    ExeFactory.h
     Formatter.h
 )
 
@@ -105,6 +106,7 @@ set (parser_srcs
     MappedExe.cpp
     ExeElementWrapper.cpp
     ExeNodeWrapper.cpp
+    ExeFactory.cpp
     Formatter.cpp
 )
 

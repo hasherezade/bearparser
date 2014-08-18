@@ -27,6 +27,7 @@ public:
     PEFileBuilder() : ExeBuilder() {}
     virtual bool signatureMatches(AbstractByteBuffer *buf);
     virtual Executable* build(AbstractByteBuffer *buf);
+    QString typeName() { return "PE"; }
 };
 
 //-------------------------------------------------------------

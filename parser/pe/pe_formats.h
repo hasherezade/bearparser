@@ -27,7 +27,8 @@ enum signature {
     S_VXD = 0x454C,
     S_NT = 0x00004550,
     S_OS2_LE = S_VXD,
-    S_DOS = 0x5A4D
+    S_DOS = 0x5A4D, // MZ
+    S_DOS2 = 0x4D5A //ZM
 };
 
 /*
