@@ -1,40 +1,38 @@
 #include "FileBuffer.h"
 
-ByteBuffer* FileBuffer::read(QString &path, bufsize_t minBufSize)
+FileMap::FileMap(QString &path)
+    : fIn (path)
 {
-    if (path.length() == 0) return NULL;
-
-    QFile fIn(path);
     if (fIn.open(QFile::ReadOnly | QFile::Truncate) == false) {
         throw FileBufferException("Cannot open the file: " + path);
     }
-    qint64 fileSize = fIn.size();
+    this->fileSize = fIn.size();
     if (DBG_LVL) printf("File of size:\t%lld\n", fileSize);
 
-    bufsize_t size = getReadableSize(fIn);
-    bufsize_t allocSize = size;
-    if (allocSize < minBufSize) {
-        allocSize = minBufSize;
-    }
-    ByteBuffer *buf = new ByteBuffer(allocSize);
-
-    if (buf->getContentSize() != allocSize) {
-        delete buf;
-        buf = NULL;
-        throw BufferException("Cannot allocate buffer for the file: " + path + " for reading");
-    }
-
-    BYTE* buffer = buf->getContent();
-
-    uchar *pData = fIn.map(0, size);
+    this->mappedSize = getReadableSize(fIn);
+    uchar *pData = fIn.map(0, this->mappedSize);
     if (pData == NULL) {
         throw BufferException("Cannot map the file: " + path);
     }
-    if (DBG_LVL) printf("Buffering size:\t%lld\n", size);
-    memcpy(buffer, pData, size);
-    fIn.unmap(pData);
+    this->mappedContent = (BYTE*) pData;
+}
+
+FileMap::~FileMap()
+{
+    fIn.unmap((uchar*)this->mappedContent);
     fIn.close();
-    return buf;
+}
+
+
+ByteBuffer* FileBuffer::read(QString &path, bufsize_t minBufSize)
+{
+    FileMap fileMap(path);
+    bufsize_t readableSize = fileMap.getContentSize();
+
+    bufsize_t allocSize = (readableSize < minBufSize) ? minBufSize : readableSize;
+
+    ByteBuffer *bufferefdFile = new ByteBuffer(&fileMap, 0, allocSize);
+    return bufferefdFile;
 }
 
 bufsize_t FileBuffer::getReadableSize(QFile &fIn)

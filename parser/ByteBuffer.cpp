@@ -12,16 +12,20 @@ ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
 ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_t v_size, bufsize_t v_padding)
 {
     if (v_parent == NULL) throw BufferException("Cannot make subBuffer for NULL buffer!");
-
     if (v_size == 0) throw BufferException("Cannot make 0 size buffer!");
 
-    BYTE *bContent = v_parent->getContentAt(v_offset, v_size);
+    bufsize_t parentSize = v_parent->getContentSize();
+
+    bufsize_t copySize = v_size < parentSize ? v_size : parentSize;
+    bufsize_t allocSize = v_size > parentSize ? v_size : parentSize;
+
+    BYTE *bContent = v_parent->getContentAt(v_offset, copySize);
     if (bContent == NULL) throw BufferException("Cannot make Buffer for NULL content!");
 
-    this->content =  allocContent(v_size, v_padding);
-    this->contentSize = v_size;
+    this->content =  allocContent(allocSize, v_padding);
+    this->contentSize = allocSize;
 
-    memcpy(this->content, bContent, this->contentSize);
+    memcpy(this->content, bContent, copySize);
     TRACE();
 }
 
