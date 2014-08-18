@@ -23,7 +23,7 @@ void Commander::clearCommands()
 
 void Commander::printHelp()
 {
-    std::cout << "Avaliable commands: " << cmds.size() << endl;
+    std::cout << "Available commands: " << cmds.size() << endl;
     std::map<std::string, Command*>::iterator itr;
     for (itr = cmds.begin(); itr != cmds.end(); itr++) {
         Command *cmd = itr->second;
