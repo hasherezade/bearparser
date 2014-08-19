@@ -166,16 +166,16 @@ public:
         pe::resource_type type = (pe::resource_type) cmd_util::readNumber("wrapper type");
 
         ResourcesContainer* wrappers = pe->getResourcesOfType(type);
-        size_t entries = 0;
-        if (wrappers == NULL || (entries = wrappers->entriesCount()) == 0) {
+        size_t wrappersCount = 0;
+        if (wrappers == NULL || (wrappersCount = wrappers->count()) == 0) {
             printf("No such resource type!\n");
             return;
         }
         size_t entryNum = 0;
         
-        if (entries > 1) {
-            printf("Entries count: %d\n", entries);
-            entryNum = cmd_util::readNumber("entryNum");
+        if (wrappersCount > 1) {
+            printf("Entries count: %d\n", wrappersCount);
+            entryNum = cmd_util::readNumber("wrapperIndex");
         }
         cmd_util::dumpResourcesInfo(pe, type, entryNum);
     }
