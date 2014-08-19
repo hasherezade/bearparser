@@ -15,11 +15,17 @@ ResourceContentWrapper* ResourceContentFactory::makeResContentWrapper(pe::resour
 
     switch (typeId) {
         case pe::RT_STRING:
-            cw = new ResourceStringsWrapper(pe, leaf);
-            break;
-        case pe::RT_VERSION:
-            cw = new ResourceVersionWrapper(pe, leaf);
-            break;
+            return new ResourceStringsWrapper(pe, leaf);
+
+        case pe::RT_VERSION: 
+            return new ResourceVersionWrapper(pe, leaf);
+
+        case pe::RT_MANIFEST:
+            return new ReourceManifestWrapper(pe, leaf);
+
+        case pe::RT_HTML:
+            return new ReourceHTMLWrapper(pe, leaf);
+
         default:
             cw = new ResourceContentWrapper(pe, leaf, typeId);
     }

@@ -22,12 +22,14 @@ public:
     virtual void* getPtr() { return getResContentPtr(); }
     virtual bufsize_t getSize() { return getResContentSize(); }
 
-    virtual QString getName() { return "Resource"; /*TODO*/ }
-    virtual size_t getFieldsCount()  { return 1; };
+    virtual QString getName() { return translateType(this->typeId); }
+    virtual size_t getFieldsCount()  { return 1; }
+    virtual size_t getSubFieldsCount()  { return 1; }
 
     /* specific field boundatries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField) { return getPtr(); }
     virtual QString getFieldName(size_t fieldId)  { return getName(); }
+    virtual WrappedValue::data_type containsDataType(size_t fieldId, size_t subField = FIELD_NONE) { return WrappedValue::COMPLEX; }
 
 protected:
     ResourceContentWrapper(Executable *pe, ResourceLeafWrapper* v_leaf, pe::resource_type v_typeId)
@@ -41,3 +43,28 @@ protected:
 friend class ResourceContentFactory;
 };
 
+
+class ReourceManifestWrapper : public ResourceContentWrapper
+{
+public:
+    virtual WrappedValue::data_type containsDataType(size_t fieldId, size_t subField = FIELD_NONE) { return WrappedValue::STRING; }
+
+protected:
+    ReourceManifestWrapper(Executable *pe, ResourceLeafWrapper* v_leaf)
+        : ResourceContentWrapper(pe, v_leaf, pe::RT_MANIFEST) {}
+
+friend class ResourceContentFactory;
+};
+
+class ReourceHTMLWrapper : public ResourceContentWrapper
+{
+public:
+    virtual WrappedValue::data_type containsDataType(size_t fieldId, size_t subField = FIELD_NONE) { return WrappedValue::STRING; }
+
+protected:
+    ReourceHTMLWrapper(Executable *pe, ResourceLeafWrapper* v_leaf)
+        : ResourceContentWrapper(pe, v_leaf, pe::RT_HTML
+        ) {}
+
+friend class ResourceContentFactory;
+};
