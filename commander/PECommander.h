@@ -138,7 +138,7 @@ public:
         PEFile *pe = dynamic_cast<PEFile*>(exe);
         ResourcesAlbum *album = pe->getResourcesAlbum();
         if (album == NULL) return;
-      
+
         cmd_util::printResourceTypes(pe);
     }
 };
@@ -171,13 +171,13 @@ public:
             printf("No such resource type!\n");
             return;
         }
-        size_t entryNum = 0;
-        
+        size_t wrapperIndx = 0;
+
         if (wrappersCount > 1) {
-            printf("Entries count: %d\n", wrappersCount);
-            entryNum = cmd_util::readNumber("wrapperIndex");
+            printf("Wrappers count: %d\n", wrappersCount);
+            wrapperIndx = cmd_util::readNumber("wrapperIndex");
         }
-        cmd_util::dumpResourcesInfo(pe, type, entryNum);
+        cmd_util::dumpResourcesInfo(pe, type, wrapperIndx);
     }
 };
 
