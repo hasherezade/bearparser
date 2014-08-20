@@ -9,7 +9,7 @@ message (STATUS "parser_dir='${PARSER_DIR}'")
 message (STATUS "parser_lib='${PARSER_LIB}'")
 
 find_package (Qt4 REQUIRED)
-include_directories ( ${PARSER_DIR} ${QT_INCLUDE_DIR} ${QT_QTCORE_INCLUDE_DIR} ${QT_QTGUI_INCLUDE_DIR} )
+include_directories ( ${PARSER_DIR} ${QT_INCLUDE_DIR} ${QT_QTCORE_INCLUDE_DIR} )
 
 set (imps_srcs
     main.cpp
@@ -25,7 +25,7 @@ set (imps_hdrs
 )
 
 add_executable (bearcommander ${imps_hdrs} ${imps_srcs} )
-target_link_libraries (bearcommander ${PARSER_LIB} ${QT_QTGUI_LIBRARIES} ${QT_QTCORE_LIBRARIES} )
+target_link_libraries (bearcommander ${PARSER_LIB} ${QT_QTCORE_LIBRARIES} )
 
 INCLUDE (${QT_USE_FILE})
 ADD_DEFINITIONS (${QT_DEFINITIONS})

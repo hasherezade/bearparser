@@ -1,40 +1,41 @@
 #include <stdio.h>
 #include <bearparser.h>
 
-#include <QtGui>
 #include <iostream>
+#include <QtCore>
+#include <QString>
+#include <QtCore/QCoreApplication>
+
 #include "PECommander.h"
 
 #define TITLE "BearCommander"
+
 using namespace std;
 
-QString getFileName(bool reading)
+QString getFileName()
 {
-    QString filter = "All Files (*);;Applications (*.exe);;Libraries (*.dll);;Drivers (*.sys);;Screensavers (*.scr)";
-    QFileDialog *dialog = new QFileDialog(NULL, "Open", QDir::homePath(), filter);
+    QTextStream qtin(stdin, QIODevice::ReadOnly);
+    QString fName;
 
-    QString fName = "";
-    if (reading)
-        fName = dialog->getOpenFileName(NULL, "Open", "", filter);
-    else
-        fName = dialog->getSaveFileName(NULL, "Save", "", filter);;
+    int trials = 3;
+    do {
+        printf("Path to executable: ");
+        fName = qtin.readLine();
+        if (QFile::exists(fName)) break;
 
-    if (fName.size() == 0) {
-        printf("No file!");
-        return "";
-    }
-    cout << "Chosen: " << fName.toStdString() << endl;
-    delete dialog;
+        fprintf(stderr, "No such file! Remaining attempts: %d\n", trials);
+        trials--;
+
+    } while (trials);
+
     return fName;
 }
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
-
     printf("Starting...\n");
-    app.setApplicationName(TITLE);
-    app.setQuitOnLastWindowClosed(false);
+
+    QCoreApplication app(argc, argv);
 
     ExeFactory::init();
 
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
 
     QString fName;
     if (argc < 2) {
-        fName = getFileName(true);
+        fName = getFileName();
     } else {
         fName = QString(argv[1]);
     }
@@ -52,7 +53,7 @@ int main(int argc, char *argv[])
         ExeFactory::exe_type exeType = ExeFactory::findMatching(fileMap);
 
         if (exeType == ExeFactory::NONE) {
-           printf("Type not supported\n");
+           fprintf(stderr, "Type not supported\n");
            ExeFactory::destroy();
            return 1;
         }
@@ -75,9 +76,9 @@ int main(int argc, char *argv[])
         delete buf;
 
     } catch (CustomException e) {
-        QMessageBox::warning(NULL, "ERR", e.getInfo());
+        fprintf(stderr, "[ERROR] %s\n", e.what());
     }
-    printf("Done!");
+    printf("Done!\n");
     ExeFactory::destroy();
     return 0;
 }
