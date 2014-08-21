@@ -390,10 +390,11 @@ enum dll_charact {
     DLL_NO_ISOLATION = 0x0200,     // Image understands isolation and doesn't want it
     DLL_NO_SEH = 0x0400,     // Image does not use SEH.  No SE handler may reside in this image
     DLL_NO_BIND = 0x0800,     // Do not bind this image.
-    //        0x1000,     // Reserved.
+    DLL_APPCONTAINER = 0x1000, // AppContainer (W8)
     DLL_WDM_DRIVER = 0x2000,     // Driver uses WDM model
-    //        0x4000,     // Reserved.
+    DLL_GUARD_CF = 0x4000, // Guard CF (W8.1)
     DLL_TERMINAL_SERVER_AWARE = 0x8000
+
 };
 
 /*

@@ -11,14 +11,16 @@ std::map<DWORD, QString> OptHdrWrapper::s_subsystem;
 void OptHdrWrapper::initDllCharact()
 {
     if (s_dllCharact.size() == 0) {
-        s_dllCharact[IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE] = "DLL can move";
-        s_dllCharact[IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY] = "Code Integrity Image";
-        s_dllCharact[IMAGE_DLLCHARACTERISTICS_NX_COMPAT] = "Image is NX compatible";
-        s_dllCharact[IMAGE_DLLCHARACTERISTICS_NO_ISOLATION] = "Image understands isolation and doesn't want it";
-        s_dllCharact[IMAGE_DLLCHARACTERISTICS_NO_SEH] = "Image does not use SEH";
-        s_dllCharact[IMAGE_DLLCHARACTERISTICS_NO_BIND] = "Do not bind this image";
-        s_dllCharact[IMAGE_DLLCHARACTERISTICS_WDM_DRIVER] = "Driver uses WDM model";
-        s_dllCharact[IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE] = "TerminalServer aware";
+        s_dllCharact[pe::DLL_DYNAMIC_BASE] = "DLL can move";
+        s_dllCharact[pe::DLL_FORCE_INTEGRITY] = "Code Integrity Image";
+        s_dllCharact[pe::DLL_NX_COMPAT] = "Image is NX compatible";
+        s_dllCharact[pe::DLL_NO_ISOLATION] = "Image understands isolation and doesn't want it";
+        s_dllCharact[pe::DLL_NO_SEH] = "Image does not use SEH";
+        s_dllCharact[pe::DLL_NO_BIND] = "Do not bind this image";
+        s_dllCharact[pe::DLL_APPCONTAINER] = "AppContainer";
+        s_dllCharact[pe::DLL_WDM_DRIVER] = "Driver uses WDM model";
+        s_dllCharact[pe::DLL_GUARD_CF] = "Guard CF";
+        s_dllCharact[pe::DLL_TERMINAL_SERVER_AWARE] = "TerminalServer aware";
     }
 }
 
