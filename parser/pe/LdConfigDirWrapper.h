@@ -65,6 +65,7 @@ public:
     virtual bufsize_t getSize();
     virtual QString getName() { return "LdConfig"; }
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
+    virtual size_t getSubFieldsCount() { return 1; }
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
