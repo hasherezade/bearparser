@@ -68,8 +68,11 @@ void* LdConfigDirWrapper::getW81part()
     if (realSize <= dirSize) return NULL;
 
     if (realSize > dirSize) {
-        void* w81partPtr = ldPtr + dirSize;
-        return m_Exe->getContentAtPtr((BYTE*) w81partPtr, getW81partSize());
+        offset_t offset = this->getOffset(ldPtr);
+        if (offset == INVALID_ADDR) return NULL;
+
+        offset += dirSize;
+        return m_Exe->getContentAt(offset, getW81partSize());
     }
     return NULL;
 }
