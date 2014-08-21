@@ -1,13 +1,13 @@
 #include "TlsDirWrapper.h"
 #include "PEFile.h"
 
-uint64_t TlsDirWrapper::EntriesLimit = 10000;
+size_t TlsDirWrapper::EntriesLimit = 10000;
 
 bool TlsDirWrapper::wrap()
 {
     clear();
 
-    for (int i = 0; i < TlsDirWrapper::EntriesLimit; i++) {
+    for (size_t i = 0; i < TlsDirWrapper::EntriesLimit; i++) {
         TlsEntryWrapper* entry = new TlsEntryWrapper(this->m_Exe, this, i);
 
         if (entry->getPtr() == NULL) {
@@ -43,39 +43,36 @@ bufsize_t TlsDirWrapper::getSize()
     return sizeof(pe::IMAGE_TLS_DIRECTORY64);
 }
 
-
-pe::IMAGE_TLS_DIRECTORY32* TlsDirWrapper::tls32()
+void* TlsDirWrapper::getTlsDirPtr()
 {
-    if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
+    size_t dirSize = 0;
+
+    if (m_Exe->getBitMode() == Executable::BITS_32) {
+        dirSize = sizeof(pe::IMAGE_TLS_DIRECTORY32);
+    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
+        dirSize = sizeof(pe::IMAGE_TLS_DIRECTORY64);
+    }
 
     IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
     if (!d) return NULL;
 
-    uint32_t rva = d[pe::DIR_TLS].VirtualAddress;
+    offset_t rva = static_cast<offset_t>(d[pe::DIR_TLS].VirtualAddress);
     if (rva == 0) return NULL;
 
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_TLS_DIRECTORY32));
-    if (ptr == NULL) return NULL;
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, dirSize);
+    return ptr;
+}
 
-    pe::IMAGE_TLS_DIRECTORY32* tls = (pe::IMAGE_TLS_DIRECTORY32*) ptr;
-    return tls;
+pe::IMAGE_TLS_DIRECTORY32* TlsDirWrapper::tls32()
+{
+    if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
+    return (pe::IMAGE_TLS_DIRECTORY32*) getTlsDirPtr();
 }
 
 pe::IMAGE_TLS_DIRECTORY64* TlsDirWrapper::tls64()
 {
     if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
-
-    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return NULL;
-
-    uint32_t rva = d[pe::DIR_TLS].VirtualAddress;
-    if (rva == 0) return NULL;
-
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_TLS_DIRECTORY64));
-    if (ptr == NULL) return NULL;
-
-    pe::IMAGE_TLS_DIRECTORY64* tls = (pe::IMAGE_TLS_DIRECTORY64*) ptr;
-    return tls;
+    return (pe::IMAGE_TLS_DIRECTORY64*) getTlsDirPtr();
 }
 
 void* TlsDirWrapper::getFieldPtr(size_t fId, size_t subField)
@@ -127,10 +124,10 @@ void* TlsEntryWrapper::getPtr()
     if (this->parentDir == NULL) return NULL;
 
     bool isOk = false;
-    uint32_t firstVA = this->parentDir->getNumValue(TlsDirWrapper::CALLBACKS_ADDR, &isOk);
+    offset_t firstVA = static_cast<offset_t>(this->parentDir->getNumValue(TlsDirWrapper::CALLBACKS_ADDR, &isOk));
     if (!isOk) return NULL;
 
-    uint64_t firstRaw = m_Exe->toRaw(firstVA, Executable::VA);
+    offset_t firstRaw = m_Exe->toRaw(firstVA, Executable::VA);
     if (firstRaw == INVALID_ADDR) return NULL;
 
     bufsize_t addrSize = this->parentDir->getFieldSize(TlsDirWrapper::CALLBACKS_ADDR);
