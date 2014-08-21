@@ -25,7 +25,7 @@ QVariant WrappedValue::getQVariant()
 
 QString WrappedValue::getIntFormat()
 {
-    QString format = "%0" + QString::number(m_Size * 2) +"X";
+    QString format = "%0" + QString::number(m_Size * 2) +"llX";
     return format;
 }
 
