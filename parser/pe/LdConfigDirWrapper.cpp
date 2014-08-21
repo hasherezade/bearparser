@@ -1,36 +1,89 @@
 #include "LdConfigDirWrapper.h"
 #include "PEFile.h"
 
-pe::IMAGE_LOAD_CONFIG_DIRECTORY32* LdConfigDirWrapper::ldConf32()
+bufsize_t LdConfigDirWrapper::getLdConfigDirSize()
 {
-    if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
+    bufsize_t dirSize = 0;
 
+    if (m_Exe->getBitMode() == Executable::BITS_32) {
+        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_DIRECTORY32);
+    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
+        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_DIRECTORY64);
+    }
+    return dirSize;
+}
+
+bufsize_t LdConfigDirWrapper::getW81partSize()
+{
+    bufsize_t dirSize = 0;
+
+    if (m_Exe->getBitMode() == Executable::BITS_32) {
+        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_D32_W81);
+    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
+        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_D64_W81);
+    }
+    return dirSize;
+}
+
+void* LdConfigDirWrapper::getLdConfigDirPtr()
+{
     IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
     if (!d) return NULL;
 
-    uint32_t rva = d[pe::DIR_LOAD_CONFIG].VirtualAddress;
+    offset_t rva = static_cast<offset_t>(d[pe::DIR_LOAD_CONFIG].VirtualAddress);
     if (rva == 0) return NULL;
 
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_LOAD_CONFIG_DIRECTORY32));
-    if (ptr == NULL) return NULL;
+    bufsize_t dirSize = getLdConfigDirSize();
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, dirSize);
+    return ptr;
+}
 
-    return (pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) ptr;
+pe::IMAGE_LOAD_CONFIG_DIRECTORY32* LdConfigDirWrapper::ldConf32()
+{
+    if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
+    return (pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) getLdConfigDirPtr();
 }
 
 pe::IMAGE_LOAD_CONFIG_DIRECTORY64* LdConfigDirWrapper::ldConf64()
 {
     if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
+    return (pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) getLdConfigDirPtr();
+}
 
-    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return NULL;
+void* LdConfigDirWrapper::getW81part()
+{
+    void *ldPtr = getLdConfigDirPtr();
+    if (ldPtr == NULL) return false;
 
-    uint32_t rva = d[pe::DIR_LOAD_CONFIG].VirtualAddress;
-    if (rva == 0) return NULL;
+    size_t dirSize = getLdConfigDirSize();
 
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_LOAD_CONFIG_DIRECTORY64));
-    if (ptr == NULL) return NULL;
+    size_t realSize = 0;
+    if (m_Exe->getBitMode() == Executable::BITS_32) {
+        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) ldPtr)->Size;
 
-    return (pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) ptr;
+    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
+        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) ldPtr)->Size;
+    }
+
+    if (realSize <= dirSize) return NULL;
+
+    if (realSize > dirSize) {
+        void* w81partPtr = ldPtr + dirSize;
+        return m_Exe->getContentAtPtr((BYTE*) w81partPtr, getW81partSize());
+    }
+    return NULL;
+}
+
+pe::IMAGE_LOAD_CONFIG_D32_W81* LdConfigDirWrapper::getW81part32()
+{
+    if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
+    return (pe::IMAGE_LOAD_CONFIG_D32_W81*) getW81part();
+}
+
+pe::IMAGE_LOAD_CONFIG_D64_W81* LdConfigDirWrapper::getW81part64()
+{
+    if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
+    return (pe::IMAGE_LOAD_CONFIG_D64_W81*) getW81part();
 }
 
 bool LdConfigDirWrapper::wrap()
@@ -79,19 +132,23 @@ void* LdConfigDirWrapper::firstSEHPtr()
 bufsize_t LdConfigDirWrapper::getSize()
 {
     if (getPtr() == NULL) return 0;
+    bufsize_t totalSize = getLdConfigDirSize();
 
-    if (m_Exe->getBitMode() == Executable::BITS_32) {
-        return sizeof(pe::IMAGE_LOAD_CONFIG_DIRECTORY32);
-    }
-    return sizeof(pe::IMAGE_LOAD_CONFIG_DIRECTORY64);
+    if (this->isW81()) totalSize += this->getW81partSize();
+    return totalSize;
 }
-
 
 void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
 {
     pe::IMAGE_LOAD_CONFIG_DIRECTORY32* ld32 = ldConf32();
     pe::IMAGE_LOAD_CONFIG_DIRECTORY64* ld64 = ldConf64();
     if (ld64 == NULL && ld32 == NULL) return NULL;
+
+    pe::IMAGE_LOAD_CONFIG_D32_W81* p32 = getW81part32();
+    pe::IMAGE_LOAD_CONFIG_D64_W81* p64 = getW81part64();
+    if (p32 == NULL && p64 == NULL) {
+        if (fId > SEH_COUNT) this->getPtr();
+    }
 
     switch (fId) {
         case SIZE : return (ld32) ? (void*) &ld32->Size :  (void*) &ld64->Size;
@@ -116,6 +173,13 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
         case SEC_COOKIE : return (ld32) ? (void*) &ld32->SecurityCookie :  (void*) &ld64->SecurityCookie ;
         case SEH_TABLE : return (ld32) ? (void*) &ld32->SEHandlerTable :  (void*) &ld64->SEHandlerTable ;
         case SEH_COUNT : return (ld32) ? (void*) &ld32->SEHandlerCount :  (void*) &ld64->SEHandlerCount ;
+
+        // W8.1 part:
+        case GUARD_CHECK : return (p32) ? (void*) &p32->GuardCFCheckFunctionPointer :  (void*) &p64->GuardCFCheckFunctionPointer;
+        case RESERVED2 : return (p32) ? (void*) &p32->Reserved2 :  (void*) &p64->Reserved2;
+        case GUARD_TABLE: return (p32) ? (void*) &p32->GuardCFFunctionTable :  (void*) &p64->GuardCFFunctionTable;
+        case GUARD_COUNT: return (p32) ? (void*) &p32->GuardCFFunctionCount :  (void*) &p64->GuardCFFunctionCount;
+        case GUARD_FLAGS: return (p32) ? (void*) &p32->GuardFlags:  (void*) &p64->GuardFlags;
     }
     return this->getPtr();
 }
@@ -143,6 +207,12 @@ QString LdConfigDirWrapper::getFieldName(size_t fieldId)
         case SEC_COOKIE : return "SecurityCookie";
         case SEH_TABLE : return "SEHandlerTable";
         case SEH_COUNT : return "SEHandlerCount";
+        // W8.1 part :
+        case GUARD_CHECK : return "GuardCFCheckFunctionPtr";
+        case RESERVED2 : return "Reserved2";
+        case GUARD_TABLE: return "GuardCFFunctionTable";
+        case GUARD_COUNT: return "GuardCFFunctionCount";
+        case GUARD_FLAGS: return "GuardFlags";
     }
     return getName();
 }
@@ -154,6 +224,8 @@ Executable::addr_type LdConfigDirWrapper::containsAddrType(size_t fieldId, size_
         case EDIT_LIST :
         case SEC_COOKIE :
         case SEH_TABLE :
+        case GUARD_CHECK :
+        case GUARD_TABLE :
             return Executable::VA;
     }
     return Executable::NOT_ADDR;

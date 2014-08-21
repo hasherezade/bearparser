@@ -1406,7 +1406,7 @@ typedef struct _IMAGE_RESOURCE_DATA_ENTRY {
 /*
  * Load Configuration Directory Entry
  */
-typedef struct {
+typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY32 {
     DWORD   Size;
     DWORD   TimeDateStamp;
     WORD    MajorVersion;
@@ -1427,9 +1427,11 @@ typedef struct {
     DWORD   SecurityCookie;             // VA
     DWORD   SEHandlerTable;             // VA
     DWORD   SEHandlerCount;
+    //if Size > sizeof(IMAGE_LOAD_CONFIG_DIRECTORY32)
+    // IMAGE_LOAD_CONFIG_D32_W81 ldc_W81_part;
 } IMAGE_LOAD_CONFIG_DIRECTORY32, *PIMAGE_LOAD_CONFIG_DIRECTORY32;
 
-typedef struct {
+typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY64{
     DWORD      Size;
     DWORD      TimeDateStamp;
     WORD       MajorVersion;
@@ -1450,7 +1452,27 @@ typedef struct {
     ULONGLONG  SecurityCookie;          // VA
     ULONGLONG  SEHandlerTable;          // VA
     ULONGLONG  SEHandlerCount;
+    // if Size > sizeof(IMAGE_LOAD_CONFIG_DIRECTORY64)
+    // IMAGE_LOAD_CONFIG_D64_W81 ldc_W81_part;
 } IMAGE_LOAD_CONFIG_DIRECTORY64, *PIMAGE_LOAD_CONFIG_DIRECTORY64;
+
+// IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W8.1 :
+typedef struct _IMAGE_LOAD_CONFIG_D32_W81 {
+    DWORD   GuardCFCheckFunctionPointer; //VA
+    DWORD   Reserved2;
+    DWORD   GuardCFFunctionTable; //VA
+    DWORD   GuardCFFunctionCount;
+    DWORD   GuardFlags;
+} IMAGE_LOAD_CONFIG_D32_W81, *PIMAGE_LOAD_CONFIG_D32_W81;
+
+// IMAGE_LOAD_CONFIG_DIRECTORY64 extension for W8.1 :
+typedef struct _IMAGE_LOAD_CONFIG_D64_W81 {
+    ULONGLONG   GuardCFCheckFunctionPointer; //VA
+    ULONGLONG   Reserved2;
+    ULONGLONG   GuardCFFunctionTable; //VA
+    ULONGLONG   GuardCFFunctionCount;
+    DWORD       GuardFlags;
+} IMAGE_LOAD_CONFIG_D64_W81, *PIMAGE_LOAD_CONFIG_D64_W81;
 
 /*
  * WIN CE Exception table format

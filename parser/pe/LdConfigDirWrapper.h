@@ -1,31 +1,6 @@
 #pragma once
 #include "../ExeNodeWrapper.h"
 #include "pe_formats.h"
-/*
-typedef struct {
-    DWORD   Size;
-    DWORD   TimeDateStamp;
-    WORD    MajorVersion;
-    WORD    MinorVersion;
-    DWORD   GlobalFlagsClear;
-    DWORD   GlobalFlagsSet;
-    DWORD   CriticalSectionDefaultTimeout;
-    DWORD   DeCommitFreeBlockThreshold;
-    DWORD   DeCommitTotalFreeThreshold;
-    DWORD   LockPrefixTable;            // VA
-    DWORD   MaximumAllocationSize;
-    DWORD   VirtualMemoryThreshold;
-    DWORD   ProcessHeapFlags;
-    DWORD   ProcessAffinityMask;
-    WORD    CSDVersion;
-    WORD    Reserved1;
-    DWORD   EditList;                   // VA
-    DWORD   SecurityCookie;             // VA
-    DWORD   SEHandlerTable;             // VA
-    DWORD   SEHandlerCount;
-} IMAGE_LOAD_CONFIG_DIRECTORY32, *PIMAGE_LOAD_CONFIG_DIRECTORY32;
-
-*/
 
 class LdConfigDirWrapper : public ExeNodeWrapper
 {
@@ -53,7 +28,13 @@ public:
         SEC_COOKIE,
         SEH_TABLE,
         SEH_COUNT,
-        FIELD_COUNTER
+        FIELD_COUNTER,
+        GUARD_CHECK = FIELD_COUNTER,
+        RESERVED2 = GUARD_CHECK + 1,
+        GUARD_TABLE,
+        GUARD_COUNT,
+        GUARD_FLAGS,
+        FIELD_COUNTER_W81
     };
 
     LdConfigDirWrapper(Executable* pe)
@@ -64,7 +45,7 @@ public:
     virtual void* getPtr();
     virtual bufsize_t getSize();
     virtual QString getName() { return "LdConfig"; }
-    virtual size_t getFieldsCount() { return FIELD_COUNTER; }
+    virtual size_t getFieldsCount() { return (isW81()) ? FIELD_COUNTER_W81 : FIELD_COUNTER; }
     virtual size_t getSubFieldsCount() { return 1; }
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
@@ -74,9 +55,18 @@ public:
     void *firstSEHPtr();
     size_t getSEHSize() { return sizeof(DWORD); } //TODO: check how it is for PE64
 
+    bool isW81() { return (this->getW81part() != NULL); }
+
 private:
+    inline bufsize_t getLdConfigDirSize();
+    inline void* getLdConfigDirPtr();
     pe::IMAGE_LOAD_CONFIG_DIRECTORY32* ldConf32();
     pe::IMAGE_LOAD_CONFIG_DIRECTORY64* ldConf64();
+
+    inline bufsize_t getW81partSize();
+    void* getW81part();
+    pe::IMAGE_LOAD_CONFIG_D32_W81* getW81part32();
+    pe::IMAGE_LOAD_CONFIG_D64_W81* getW81part64();
 };
 
 
