@@ -6,7 +6,7 @@ pe::WIN_CERTIFICATE* SecurityDirWrapper::getCert()
     IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
     if (!d) return NULL;
 
-    uint32_t rva = d[pe::DIR_SECURITY].VirtualAddress;
+    offset_t rva = static_cast<offset_t>(d[pe::DIR_SECURITY].VirtualAddress);
     if (rva == 0) return NULL;
 
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RAW, sizeof(pe::WIN_CERTIFICATE));
