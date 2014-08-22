@@ -17,11 +17,11 @@ public:
     virtual void* getPtr() { return exceptFunc64(); }
     virtual bufsize_t getSize() { return parsedSize; }
 
-    virtual QString getName() { return "Exceptionation Dir."; }
+    virtual QString getName() { return "Exceptions Dir."; }
     virtual size_t getFieldsCount() { return entries.size(); }
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField) { return getSubfieldPtr(fieldId, subField); }
-    virtual QString getFieldName(size_t fieldId) { return "Exceptionation Block"; }
+    virtual QString getFieldName(size_t fieldId) { return "Exceptions Block"; }
     virtual QString getFieldName(size_t fieldId, size_t subField) { return getSubfieldName(fieldId, subField); }
 
 protected:
