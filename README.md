@@ -9,3 +9,16 @@ Requires:
 + Qt4 Core<br/>
 + cmake http://www.cmake.org/<br/>
 
+How to build (example step-by-step):
+===
+<pre>
+mkdir re-bear
+git clone https://github.com/hasherezade/bearparser.git
+mkdir build
+cd build
+cmake -G <your_favorite_generator> ../bearparser/
+make
+</pre>
+Done!
+You can test it running the commander:<br/>
+./commander/bearcommander [optional: path to exe]<br/>
