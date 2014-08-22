@@ -13,13 +13,22 @@ const BYTE AbstractByteBuffer::operator[](std::size_t idx)
 
 offset_t AbstractByteBuffer::getOffset(BYTE *ptr,  bool allowExceptions)
 {
+    if (ptr == NULL) return INVALID_ADDR;
+
     BYTE* buf = this->getContent();
+    bufsize_t bufSize = this->getContentSize();
+
+    if (buf == NULL || bufSize == 0) {
+        if (allowExceptions) throw BufferException("Buffer if empty!");
+        return INVALID_ADDR;
+    }
+
     if (ptr < buf) {
         if (allowExceptions) throw BufferException("Pointer before buffer begining!");
         return INVALID_ADDR;
     }
     offset_t offset = ptr - buf;
-    if (offset >= this->getContentSize()) {
+    if (offset >= bufSize) {
         if (allowExceptions) throw BufferException("Pointer does not belong to buffer!");
         return INVALID_ADDR;
     }

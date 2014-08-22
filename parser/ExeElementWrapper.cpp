@@ -40,16 +40,13 @@ bufsize_t ExeElementWrapper::getFieldSize(size_t fieldId, size_t subField)
 offset_t ExeElementWrapper::getOffset()
 {
     BYTE *ptr = (BYTE*)this->getPtr();
-    if (ptr == NULL) return INVALID_ADDR;
     return getOffset(ptr);
 }
 
 offset_t ExeElementWrapper::getOffset(void *ptr)
 {
-    BYTE* content = m_Exe->getContent();
-    if (!content || !ptr) return INVALID_ADDR;
-    offset_t offset = (offset_t) ptr - (offset_t) content;
-    return offset;
+    if (!m_Exe) return INVALID_ADDR;
+    return m_Exe->getOffset((BYTE*) ptr);
 }
 
 offset_t ExeElementWrapper::getFieldOffset(size_t fieldId, size_t subField)
