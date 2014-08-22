@@ -29,7 +29,7 @@ protected:
     pe::IMAGE_BASE_RELOCATION* reloc();
 
 private:
-    static uint64_t EntriesLimit;
+    static size_t EntriesLimit;
 
     bufsize_t parsedSize;
 
@@ -49,7 +49,7 @@ public:
         FIELD_COUNTER
     };
 
-    RelocBlockWrapper(Executable *pe, RelocDirWrapper *parentDir, uint32_t entryNumber)
+    RelocBlockWrapper(Executable *pe, RelocDirWrapper *parentDir, size_t entryNumber)
         : ExeNodeWrapper(pe, parentDir, entryNumber), cachedRaw(INVALID_ADDR), cachedMaxNum(-1) { this->parentDir = parentDir; wrap(); }
 
     bool wrap();
@@ -92,7 +92,7 @@ public:
         FIELD_COUNTER
     };
 
-    RelocEntryWrapper(Executable* pe, RelocBlockWrapper *parentDir, uint32_t entryNumber)
+    RelocEntryWrapper(Executable* pe, RelocBlockWrapper *parentDir, size_t entryNumber)
         : ExeNodeWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
     // full structure boundatries
@@ -107,10 +107,10 @@ public:
     virtual QString getFieldName(size_t fieldId) { return getName(); }
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField) { return Executable::NOT_ADDR; }
 
-    uint64_t deltaToRVA(int delta);
-    static int getType(WORD relocEntryVal);
-    static int getDelta(WORD relocEntryVal);
-    static QString translateType(int type);
+    offset_t deltaToRVA(WORD delta);
+    static WORD getType(WORD relocEntryVal);
+    static WORD getDelta(WORD relocEntryVal);
+    static QString translateType(WORD type);
 
 private:
     RelocBlockWrapper* parentDir;

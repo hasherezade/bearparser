@@ -66,7 +66,7 @@ pe::IMAGE_BASE_RELOCATION* RelocDirWrapper::reloc()
     pe::IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
     if (!d) return NULL;
 
-    uint32_t rva = d[pe::DIR_BASERELOC].VirtualAddress;
+    offset_t rva = d[pe::DIR_BASERELOC].VirtualAddress;
     if (rva == 0) return NULL;
 
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_BASE_RELOCATION));
@@ -112,7 +112,7 @@ void* RelocBlockWrapper::getPtr()
     pe::IMAGE_BASE_RELOCATION* reloc = this->parentDir->reloc();
     if (!reloc) return NULL;
 
-    uint64_t raw = INVALID_ADDR;
+    offset_t raw = INVALID_ADDR;
     BYTE *ptr = NULL;
 
     // use my cached:
@@ -141,8 +141,8 @@ void* RelocBlockWrapper::getPtr()
         }
     }
     // previous cached not avaliable, calculate...
-    uint64_t firstRaw = this->getOffset(reloc);
-    uint64_t blockSize = reloc->SizeOfBlock;
+    offset_t firstRaw = this->getOffset(reloc);
+    offset_t blockSize = reloc->SizeOfBlock;
 
     raw = firstRaw;
     ptr = (BYTE*) reloc;
@@ -267,19 +267,19 @@ bufsize_t RelocEntryWrapper::getSize()
     return sizeof(WORD);
 }
 
-int RelocEntryWrapper::getType(WORD relocEntryVal)
+WORD RelocEntryWrapper::getType(WORD relocEntryVal)
 {
     pe::BASE_RELOCATION_ENTRY* entry = (pe::BASE_RELOCATION_ENTRY*) &relocEntryVal;
     return entry->Type;
 }
 
-int RelocEntryWrapper::getDelta(WORD relocEntryVal)
+WORD RelocEntryWrapper::getDelta(WORD relocEntryVal)
 {
     pe::BASE_RELOCATION_ENTRY* entry = (pe::BASE_RELOCATION_ENTRY*) &relocEntryVal;
     return entry->Offset;
 }
 
-QString RelocEntryWrapper::translateType(int type)
+QString RelocEntryWrapper::translateType(WORD type)
 {
     switch (type) {
         case 0 : return "Padding (skipped)";
@@ -295,11 +295,14 @@ QString RelocEntryWrapper::translateType(int type)
     return "";
 }
 
-uint64_t RelocEntryWrapper::deltaToRVA(int delta)
+offset_t RelocEntryWrapper::deltaToRVA(WORD delta)
 {
     if (this->parentDir == NULL) return INVALID_ADDR;
+
     pe::IMAGE_BASE_RELOCATION* reloc = parentDir->myReloc();
     if (reloc == NULL) return INVALID_ADDR;
-    return reloc->VirtualAddress + (uint64_t) delta;
+
+    offset_t offset = static_cast<offset_t>(reloc->VirtualAddress + delta);
+    return offset;
 }
 
