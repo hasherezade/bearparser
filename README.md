@@ -16,9 +16,11 @@ mkdir re-bear
 git clone https://github.com/hasherezade/bearparser.git
 mkdir build
 cd build
-cmake -G <your_favorite_generator> ../bearparser/
+cmake -G [some generator] ../bearparser/
 make
 </pre>
 Done!
 You can test it running the commander:<br/>
+<pre>
 ./commander/bearcommander [optional: path to exe]<br/>
+</pre>
