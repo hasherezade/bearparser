@@ -1,7 +1,7 @@
 #include "RelocDirWrapper.h"
 #include "PEFile.h"
 
-uint64_t RelocDirWrapper::EntriesLimit = 10000;
+size_t RelocDirWrapper::EntriesLimit = 10000;
 
 /*
 // Based relocation format.
@@ -82,13 +82,14 @@ bool RelocBlockWrapper::wrap()
 {
     clear();
     parsedSize = 0;
-    pe::IMAGE_BASE_RELOCATION* reloc = myReloc();
 
+    pe::IMAGE_BASE_RELOCATION* reloc = myReloc();
     if (!reloc) return false;
 
     size_t maxSize = reloc->SizeOfBlock;
+    parsedSize = sizeof(reloc->VirtualAddress) + sizeof(reloc->SizeOfBlock);
 
-    for (int i = 0; i < RelocDirWrapper::EntriesLimit && parsedSize < maxSize; i++) {
+    for (size_t i = 0; i < RelocDirWrapper::EntriesLimit && parsedSize < maxSize; i++) {
         RelocEntryWrapper* entry = new RelocEntryWrapper(this->m_Exe, this, i);
 
         if (entry->getPtr() == NULL) {

@@ -71,7 +71,7 @@ public:
     pe::IMAGE_BASE_RELOCATION* myReloc() { return (pe::IMAGE_BASE_RELOCATION*) getPtr(); }
 
 private:
-    static offset_t EntriesLimit;
+    static size_t EntriesLimit;
 
     offset_t cachedRaw;
     //size_t cachedSize; // TODO
