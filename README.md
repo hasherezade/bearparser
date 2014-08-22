@@ -28,7 +28,7 @@ You can test it running the commander:<br/>
 bearcommander
 ===
 <b>WARNING: Commander is <u>very</u> basic tool, used only for the purpose of testing the library capabilities.<br/>
-It's not a fully functional tool - or at least not yet!</b>
+It's not a fully functional tool - or at least not yet!</b><br/>
 Sample usage:<br/>
 <pre>
 hshrzd@kali:~/mytest/build$ ./commander/bearcommander
@@ -55,4 +55,4 @@ Contains:
 </pre>
 Use <i>dump</i> command to see the details of particular structure,<br/>
 i.e.<br/> 
-<i>dump 12</i> dumps LdConfig
+<pre>dump 12</pre> - dumps LdConfig
