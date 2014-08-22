@@ -49,9 +49,9 @@ std::vector<DWORD> OptHdrWrapper::splitDllCharact(DWORD characteristics)
 QString OptHdrWrapper::translateOptMagic(DWORD p)
 {
     if (s_optMagic.size() == 0) {
-        s_optMagic[IMAGE_NT_OPTIONAL_HDR32_MAGIC] = "NT32";
-        s_optMagic[IMAGE_NT_OPTIONAL_HDR64_MAGIC] = "NT64";
-        s_optMagic[IMAGE_ROM_OPTIONAL_HDR_MAGIC] = "ROM";
+        s_optMagic[pe::OH_NT32] = "NT32";
+        s_optMagic[pe::OH_NT64] = "NT64";
+        s_optMagic[pe::OH_ROM] = "ROM";
     }
     if (s_optMagic.find(p) == s_optMagic.end()) return "";
     return s_optMagic[p];
@@ -83,20 +83,20 @@ QString OptHdrWrapper::translateOSVersion(WORD major, WORD minor)
 QString OptHdrWrapper::translateSubsystem(DWORD subsystem)
 {
     if (s_subsystem.size() == 0) {
-        s_subsystem[IMAGE_SUBSYSTEM_UNKNOWN] = "Unknown subsystem";
-        s_subsystem[IMAGE_SUBSYSTEM_NATIVE] = "Driver";
-        s_subsystem[IMAGE_SUBSYSTEM_WINDOWS_GUI] = "Windows GUI";
-        s_subsystem[IMAGE_SUBSYSTEM_WINDOWS_CUI] = "Windows console";
-        s_subsystem[IMAGE_SUBSYSTEM_OS2_CUI] = "OS/2 console";
-        s_subsystem[IMAGE_SUBSYSTEM_POSIX_CUI] = "Posix console";
-        s_subsystem[IMAGE_SUBSYSTEM_NATIVE_WINDOWS] = "Native Win9x driver";
-        s_subsystem[IMAGE_SUBSYSTEM_WINDOWS_CE_GUI] = "Windows CE subsystem";
-        s_subsystem[IMAGE_SUBSYSTEM_EFI_APPLICATION] = "EFI_APPLICATION";
-        s_subsystem[IMAGE_SUBSYSTEM_EFI_BOOT_SERVICE_DRIVER] = "EFI_BOOT_SERVICE_DRIVER";
-        s_subsystem[IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER] = "EFI_RUNTIME_DRIVER";
-        s_subsystem[IMAGE_SUBSYSTEM_EFI_ROM] = "EFI_ROM";
-        s_subsystem[IMAGE_SUBSYSTEM_XBOX] = "XBOX";
-        s_subsystem[IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION] = "WINDOWS_BOOT_APPLICATION";
+        s_subsystem[pe::SUB_UNKNOWN] = "Unknown subsystem";
+        s_subsystem[pe::SUB_NATIVE] = "Driver";
+        s_subsystem[pe::SUB_WINDOWS_GUI] = "Windows GUI";
+        s_subsystem[pe::SUB_WINDOWS_CUI] = "Windows console";
+        s_subsystem[pe::SUB_OS2_CUI] = "OS/2 console";
+        s_subsystem[pe::SUB_POSIX_CUI] = "Posix console";
+        s_subsystem[pe::SUB_NATIVE_WINDOWS] = "Native Win9x driver";
+        s_subsystem[pe::SUB_WINDOWS_CE_GUI] = "Windows CE subsystem";
+        s_subsystem[pe::SUB_EFI_APPLICATION] = "EFI_APPLICATION";
+        s_subsystem[pe::SUB_EFI_BOOT_SERVICE_DRIVER] = "EFI_BOOT_SERVICE_DRIVER";
+        s_subsystem[pe::SUB_EFI_RUNTIME_DRIVER] = "EFI_RUNTIME_DRIVER";
+        s_subsystem[pe::SUB_EFI_ROM] = "EFI_ROM";
+        s_subsystem[pe::SUB_XBOX] = "XBOX";
+        s_subsystem[pe::SUB_WINDOWS_BOOT_APP] = "WINDOWS_BOOT_APPLICATION";
     }
     if (s_subsystem.find(subsystem) == s_subsystem.end()) return "";
     return s_subsystem[subsystem];

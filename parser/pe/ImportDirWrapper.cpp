@@ -152,12 +152,12 @@ uint64_t ImportedFuncWrapper::getThunkValue()
     if (is64) {
         uint64_t* ptr =  (uint64_t*) thunkPtr;
         ordinal = *ptr;
-        if (ordinal & IMAGE_ORDINAL_FLAG64) ordinal ^= IMAGE_ORDINAL_FLAG64;
+        if (ordinal & ORDINAL_FLAG64) ordinal ^= ORDINAL_FLAG64;
 
     } else {
         uint32_t* ptr =  (uint32_t*) thunkPtr;
         ordinal = *ptr;
-        if (uint32_t(ordinal) & IMAGE_ORDINAL_FLAG32) ordinal ^= IMAGE_ORDINAL_FLAG32;
+        if (uint32_t(ordinal) & ORDINAL_FLAG32) ordinal ^= ORDINAL_FLAG32;
     }
 
     return ordinal;
@@ -174,11 +174,11 @@ bool ImportedFuncWrapper::isByOrdinal()
 
     if (is64) {
         uint64_t* ptr =  (uint64_t*) p;
-        if ((*ptr) & IMAGE_ORDINAL_FLAG64) return true;
+        if ((*ptr) & ORDINAL_FLAG64) return true;
 
     } else {
         uint32_t* ptr =  (uint32_t*) p;
-        if ((*ptr) & IMAGE_ORDINAL_FLAG32) return true;
+        if ((*ptr) & ORDINAL_FLAG32) return true;
     }
     return false;
 }

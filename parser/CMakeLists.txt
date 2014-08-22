@@ -14,7 +14,6 @@ set (win_hdrs
     win_hdrs/pshpack2.h
     win_hdrs/pshpack4.h
     win_hdrs/pshpack8.h
-    win_hdrs/win_headers.h
     win_hdrs/win_types.h
 )
 

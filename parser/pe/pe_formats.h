@@ -5,7 +5,7 @@
 #define UNALIGNED
 #endif
 
-#include "../win_hdrs/win_headers.h"
+#include "../win_hdrs/win_types.h"
 
 //additional : WIN_CERTIFICATE
 //additional : VS_VERSIONINFO

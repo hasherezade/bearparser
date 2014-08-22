@@ -2,7 +2,7 @@
 
 #include <QtCore>
 #include "CustomException.h"
-#include "win_hdrs/win_headers.h"
+#include "win_hdrs/win_types.h"
 #include "Executable.h"
 #include "WrappedValue.h"
 
