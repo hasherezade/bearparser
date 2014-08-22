@@ -53,7 +53,7 @@ pe::IMAGE_LOAD_CONFIG_DIRECTORY64* LdConfigDirWrapper::ldConf64()
 void* LdConfigDirWrapper::getW81part()
 {
     void *ldPtr = getLdConfigDirPtr();
-    if (ldPtr == NULL) return false;
+    if (ldPtr == NULL) return NULL;
 
     size_t dirSize = getLdConfigDirSize();
 
