@@ -57,7 +57,7 @@ public:
     virtual void* getPtr();
 
     virtual bufsize_t getSize();
-    virtual QString getName() { return "Exceptionation Block"; }
+    virtual QString getName() { return "Exceptions Block"; }
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
     virtual size_t getSubFieldsCount() { return 1; }
 
