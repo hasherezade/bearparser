@@ -24,35 +24,6 @@ protected:
     virtual void initCommands();
 };
 
-class DumpLibCommand : public Command
-{
-public:
-    DumpLibCommand(int v_wrapperId, std::string desc)
-        : Command(desc), wrapperId(v_wrapperId) {}
-
-    virtual void execute(CmdParams *params, CmdContext  *context)
-    {
-        MappedExe* exe = dynamic_cast<MappedExe*>(cmd_util::getExeFromContext(context));
-        ImportBaseDirWrapper* imps = dynamic_cast<ImportBaseDirWrapper*>(exe->getWrapper(wrapperId));
-        if (imps == NULL) {
-            std::cerr << "Invalid Wrapper" << std::endl;
-            return;
-        }
-        cmd_util::dumpEntryInfo(imps);
-
-        size_t num = 0;
-        printf("lib Number: ");
-        scanf("%d", &num);
-
-        ExeNodeWrapper* lib = imps->getEntryAt(num);
-        cmd_util::dumpEntryInfo(lib);
-        cmd_util::dumpNodeInfo(lib);
-    }
-
-protected:
-    int wrapperId; //TODO: fetch it from params!
-};
-
 class SectionByAddrCommand : public Command
 {
 public:

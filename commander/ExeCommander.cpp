@@ -121,7 +121,7 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
         for (int y = 0; y < subfields; y++) {
             WrappedValue value = w->getWrappedValue(i, y);
             QString str = value.toQString();
-            
+
             Executable::addr_type aType = w->containsAddrType(i, y);
             char c = addrTypeToChar(aType);
             printf("[%s %c] ", str.toStdString().c_str(), c );
@@ -168,5 +168,6 @@ void ExeCommander::initCommands()
     this->addCommand("cl", new ClearWrapperCommand("Clear chosen wrapper"));
     this->addCommand("fdump", new DumpWrapperToFileCommand("Dump chosen wrapper into a file"));
     this->addCommand("dump", new DumpWrapperCommand("Dump chosen wrapper info"));
+    this->addCommand("edump", new DumpWrapperEntriesCommand("Dump wrapper entries"));
 }
 

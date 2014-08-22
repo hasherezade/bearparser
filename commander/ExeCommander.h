@@ -14,7 +14,7 @@ namespace cmd_util {
 
     void fetch(Executable *exe, offset_t offset, Executable::addr_type aType, bool hex);
     void printWrapperNames(MappedExe *exe);
-    
+
     void dumpEntryInfo(ExeElementWrapper *w);
     void dumpNodeInfo(ExeNodeWrapper *w);
 };
@@ -152,6 +152,40 @@ public:
         cmd_util::dumpNodeInfo(dynamic_cast<ExeNodeWrapper*>(wrapper));
     }
 };
+
+class DumpWrapperEntriesCommand : public WrapperCommand
+{
+public:
+    DumpWrapperEntriesCommand(std::string desc, int v_wrapperId = -1)
+        : WrapperCommand(desc), wrapperId(v_wrapperId) {}
+
+    virtual void wrapperAction(ExeElementWrapper *wrapper)
+    {
+        if (wrapper == NULL) {
+            std::cerr << "Invalid Wrapper" << std::endl;
+            return;
+        }
+        ExeNodeWrapper* nWrapper = dynamic_cast<ExeNodeWrapper*>(wrapper);
+        if (nWrapper == NULL) {
+            std::cerr << "This wrapper have no entries!" << std::endl;
+            return;
+        }
+
+        cmd_util::dumpEntryInfo(nWrapper);
+
+        size_t num = 0;
+        printf("Dump subentries of Index: ");
+        scanf("%d", &num);
+
+        ExeNodeWrapper* lib = nWrapper->getEntryAt(num);
+        cmd_util::dumpEntryInfo(lib);
+        cmd_util::dumpNodeInfo(lib);
+    }
+
+protected:
+    int wrapperId; //TODO: fetch it from params!
+};
+
 
 class ClearWrapperCommand : public WrapperCommand
 {

@@ -50,7 +50,7 @@ void cmd_util::printStrings(PEFile *pe, size_t limit)
 void cmd_util::dumpResourcesInfo(PEFile *pe, pe::resource_type type, size_t wrapperId)
 {
     ResourcesContainer* wrappers = pe->getResourcesOfType(type);
-    
+
     if (wrappers == NULL || wrappers->count() == 0) {
         printf ("No such resource type\n");
         return;
@@ -72,9 +72,6 @@ void PECommander::initCommands()
     //
     this->addCommand("secV", new SectionByAddrCommand(Executable::RVA, "Section by RVA"));
     this->addCommand("secR", new SectionByAddrCommand(Executable::RAW, "Section by RAW"));
-
-    this->addCommand("func", new DumpLibCommand(PEFile::WR_IMPORTS, "Functions in chosen lib (from Imports)"));
-    this->addCommand("func_d", new DumpLibCommand(PEFile::WR_DELAYIMPORTS, "Functions in chosen lib (from Delay Imports)"));
 
     this->addCommand("rstrings", new PrintStringsCommand("Print Strings from resources"));
     this->addCommand("rsrcs", new PrintWrapperTypesCommand("List Resource Types"));
