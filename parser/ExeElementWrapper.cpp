@@ -87,8 +87,7 @@ bool ExeElementWrapper::setNumValue(size_t fId, size_t subField, uint64_t newVal
 
     offset_t offset = this->getFieldOffset(fId, subField);
     bufsize_t size = this->getFieldSize(fId, subField);
-
-    return this->m_Exe->setNumValue(fId, subField, newVal);
+    return this->m_Exe->setNumValue(offset, size, newVal);
 }
 
 //TODO: check it!!
