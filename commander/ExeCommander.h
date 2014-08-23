@@ -68,6 +68,7 @@ protected:
     Executable::addr_type addrTo;
 };
 
+
 class FetchCommand : public Command
 {
 public:
@@ -257,3 +258,22 @@ protected:
     QString fileName;
 };
 
+class SaveExeToFileCommand : public Command
+{
+public:
+    SaveExeToFileCommand(std::string desc = "Save exe to file")
+        : Command(desc)
+    {
+        fileName = "dumped.exe";
+    }
+
+    virtual void execute(CmdParams *params, CmdContext  *context)
+    {
+        Executable *exe = cmd_util::getExeFromContext(context);
+
+        bufsize_t dSize = FileBuffer::dump(fileName, *exe, true);
+        printf("Dumped size: %ld into: %s\n", dSize, fileName.toStdString().c_str());
+    }
+protected:
+    QString fileName;
+};
