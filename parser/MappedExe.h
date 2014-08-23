@@ -28,10 +28,14 @@ protected:
 };
 
 class MappedExe : public Executable, public ExeWrappersContainer {
+public:
+    virtual void wrap() { return wrap(this->buf); }
 
 protected:
     MappedExe(AbstractByteBuffer *v_buf, exe_bits v_bitMode)
         : Executable(v_buf, v_bitMode), ExeWrappersContainer() { }
 
     virtual ~MappedExe(void) { }
+
+    virtual void wrap(AbstractByteBuffer *v_buf) = 0;
 };
