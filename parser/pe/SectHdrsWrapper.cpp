@@ -5,6 +5,7 @@ const size_t SECNAME_LEN = 8;
 
 bool SectionHdrWrapper::wrap()
 {
+    this->clear();
     this->header = NULL;
     getPtr();
     reloadName();
@@ -116,7 +117,7 @@ Executable::addr_type SectionHdrWrapper::containsAddrType(size_t fieldId, size_t
     return Executable::NOT_ADDR;
 }
 
-WrappedValue::data_type SectionHdrWrapper::containsDataType(size_t fieldId, size_t subField) 
+WrappedValue::data_type SectionHdrWrapper::containsDataType(size_t fieldId, size_t subField)
 {
     if (fieldId == NAME) {
         return WrappedValue::STRING;
@@ -188,8 +189,36 @@ bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool ro
 
 //-----------------------------------------------------------------------------------
 
+bool SectHdrsWrapper::isMyEntryType(ExeNodeWrapper *entry)
+{
+    SectionHdrWrapper* sEntry = dynamic_cast<SectionHdrWrapper*> (entry);
+    TRACE();
+    if (sEntry == NULL) {
+        return false;
+    }
+    return true;
+}
+
+bool SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
+{
+    PEFile *pe = dynamic_cast<PEFile*>(this->m_Exe);
+    if (pe == NULL) return false;
+
+    if (ExeNodeWrapper::addEntry(entry) == false) return false;
+
+    uint64_t count = pe->hdrSectionsNum() + 1;
+    bool canSet = pe->fHdr->setNumValue(FileHdrWrapper::SEC_NUM , count);
+    if (canSet == false) {
+        if (DBG_LVL) printf("Can not change FileHdr!\n");
+        return false;
+    }
+    this->wrap();
+    return true;
+}
+
 bool SectHdrsWrapper::wrap()
 {
+    this->clear();
     PEFile *pe = dynamic_cast<PEFile*>(this->m_Exe);
     if (pe == NULL) return false;
 

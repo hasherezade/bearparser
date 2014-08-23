@@ -83,8 +83,12 @@ public:
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool roundup, bool verbose = false);
 
     void printSectionsMapping(Executable::addr_type aType);
+    //---
+    bool addEntry(ExeNodeWrapper *entry);
 
 protected:
+    bool isMyEntryType(ExeNodeWrapper *entry); // is it an entry of appropriate type
+
     std::map<offset_t, SectionHdrWrapper*> vSec;
     std::map<offset_t, SectionHdrWrapper*> rSec;
 };

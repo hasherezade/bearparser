@@ -110,6 +110,8 @@ protected:
     SectHdrsWrapper *sects;
     ImportDirWrapper *importDir;
     ResourcesAlbum *album;
+
+friend class SectHdrsWrapper;
 };
 
 inline pe::IMAGE_DATA_DIRECTORY* getDataDirectory(Executable *exe)

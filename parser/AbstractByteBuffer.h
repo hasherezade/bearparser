@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #define DBG_LVL 0
-#define TRACE() if (DBG_LVL) printf("%s: line: %d\n", __FUNCTION__,__LINE__);
+#define TRACE() if (DBG_LVL) printf(">%s line:  %d [%s]\n", __FUNCTION__, __LINE__, __FILE__);
 #define LOG(msg) if (DBG_LVL) printf("%s: %s\n", __FUNCTION__,msg);
 //------------------------------------------------
 
@@ -43,6 +43,7 @@ public:
 
     virtual bool setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t srcSize, bufsize_t paddingSize, bool allowExceptions = false);
 
+    bool isAreaEmpty(offset_t rawOffset, bufsize_t size);
     bool fillContent(BYTE filling);
 
     bool containsBlock(offset_t rawOffset, bufsize_t size);

@@ -51,3 +51,59 @@ QString ExeNodeWrapper::getSubfieldName(size_t fieldId, size_t subField)
     return entry->getFieldName(subField);
 }
 
+bool ExeNodeWrapper::canAddEntry()
+{
+    size_t entriesCount = this->entries.size();
+    if (entriesCount == 0) {
+        if (DBG_LVL) printf("Cannot add enty after the existing entries: no entries at all...\n");
+        return false; //do not have any entiries
+    }
+    ExeNodeWrapper *lastEntry = this->getEntryAt(entriesCount - 1);
+    offset_t lastOffset = lastEntry->getOffset();
+    bufsize_t entrySize = lastEntry->getSize();
+
+    offset_t nextOffset = lastOffset + entrySize;
+    bufsize_t paddedSize = entrySize * 2;
+    bool haveSpace = this->m_Exe->isAreaEmpty(nextOffset, paddedSize);
+    if (DBG_LVL) printf("nextOffset = %llX size = %lX, canAdd: %d\n", nextOffset, entrySize, haveSpace);
+    return haveSpace;
+}
+
+bool ExeNodeWrapper::isMyEntryType(ExeNodeWrapper *entry)
+{
+    if (entry == NULL) return false;
+
+    ExeNodeWrapper *lastEntry = this->getEntryAt(this->entries.size() - 1);
+    if (lastEntry == NULL) return false;
+
+    if (entry->getSize() == lastEntry->getSize()) {
+        return true;
+    }
+    return false;
+}
+
+bool ExeNodeWrapper::addEntry(ExeNodeWrapper *entry)
+{
+    if (canAddEntry() == false) return false;
+
+    ExeNodeWrapper *lastEntry = this->getEntryAt(this->entries.size() - 1);
+    offset_t lastOffset = lastEntry->getOffset();
+    bufsize_t entrySize = lastEntry->getSize();
+
+    offset_t nextOffset = lastOffset + entrySize;
+
+    if (entry == NULL) {
+        // if no entry supplied, duplicate the last entry...
+        entry = lastEntry;
+    }
+    if (isMyEntryType(entry) == false) return false;
+
+    BYTE* aContent = (BYTE*) entry->getPtr();
+    BYTE *fBuf = m_Exe->getContentAt(nextOffset, entrySize);
+    if (fBuf == NULL) return false;
+
+    memcpy(fBuf, aContent, entrySize);
+    this->clear();
+    return this->wrap();
+}
+

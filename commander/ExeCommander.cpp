@@ -169,5 +169,7 @@ void ExeCommander::initCommands()
     this->addCommand("fdump", new DumpWrapperToFileCommand("Dump chosen wrapper into a file"));
     this->addCommand("dump", new DumpWrapperCommand("Dump chosen wrapper info"));
     this->addCommand("edump", new DumpWrapperEntriesCommand("Dump wrapper entries"));
+
+    this->addCommand("e_add", new AddEntryCommand("Add entry to a wrapper"));
 }
 

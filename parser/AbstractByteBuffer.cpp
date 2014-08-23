@@ -90,6 +90,17 @@ bool AbstractByteBuffer::setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t 
     return true;
 }
 
+bool AbstractByteBuffer::isAreaEmpty(offset_t rawOffset, bufsize_t size)
+{
+    BYTE * area = this->getContentAt(rawOffset, size);
+    if (area == NULL) return false;
+
+    for (bufsize_t i = 0; i < size; i++) {
+        if (area[i] != 0) return false;
+    }
+    return true;
+}
+
 bool AbstractByteBuffer::fillContent(BYTE filling)
 {
     bufsize_t bufSize = this->getContentSize();
@@ -171,10 +182,10 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
 {
     if (size == 0 || offset == INVALID_ADDR) return false;
     void* ptr = this->getContentAt(offset, size);
-        if (ptr == NULL) {
+    if (ptr == NULL) {
+        if (DBG_LVL) printf("Cannot get Ptr at: %llX of size: %lx!\n", offset, size);
         return false;
     }
-
 
     if (size == sizeof(uint8_t)) {
         uint8_t nVal = newVal;
@@ -199,7 +210,9 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
         uint64_t* valPtr = (uint64_t*) ptr;
         if ((*valPtr) == nVal) return false;
         (*valPtr) = nVal;
-    } else return false;
-
+    } else {
+        if (DBG_LVL) printf("Wrong size!\n");
+        return false;
+    }
     return true;
 }

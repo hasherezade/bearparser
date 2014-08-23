@@ -139,6 +139,35 @@ protected:
     int wrapperId; //TODO: fetch it from params!
 };
 
+class AddEntryCommand : public WrapperCommand
+{
+public:
+    AddEntryCommand(std::string desc, int v_wrapperId = -1)
+        : WrapperCommand(desc, v_wrapperId) {}
+
+    virtual void wrapperAction(ExeElementWrapper *wrapper)
+    {
+        if (wrapper == NULL) {
+            std::cerr << "Invalid Wrapper" << std::endl;
+            return;
+        }
+        ExeNodeWrapper* nWrapper = dynamic_cast<ExeNodeWrapper*>(wrapper);
+        if (nWrapper == NULL) {
+            std::cerr << "This wrapper stores no entries!" << std::endl;
+            return;
+        }
+        if (nWrapper->canAddEntry() == false) {
+            std::cout << "No space to add entry" << std::endl;
+            return;
+        }
+        if (nWrapper->addEntry(NULL)) {
+            std::cout << "Added!" << std::endl;
+            return;
+        }
+        std::cout << "Failed!" << endl;
+    }
+};
+
 class DumpWrapperCommand : public WrapperCommand
 {
 public:

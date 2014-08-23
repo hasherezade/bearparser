@@ -11,7 +11,7 @@ public:
 
     virtual ~ExeNodeWrapper() { clear(); }
 
-    virtual bool wrap() { return false; }
+    virtual bool wrap() { return true; }
     virtual ExeNodeWrapper* getEntryAt(size_t fieldId);
     virtual size_t getEntriesCount() { return entries.size(); }
     virtual size_t getEntriesNum() { return entries.size(); }
@@ -25,9 +25,13 @@ public:
     virtual QString getSubfieldName(size_t fieldId, size_t subField);
 
     virtual QString getFieldName(size_t fieldId) = 0;
+    //---
+    virtual bool canAddEntry();
+    virtual bool addEntry(ExeNodeWrapper *entry);
 
 protected:
     virtual void clear();
+    virtual bool isMyEntryType(ExeNodeWrapper *entry); // is it an entry of appropriate type
 
     ExeNodeWrapper* parentNode;
     size_t entryNum;
