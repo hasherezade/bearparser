@@ -230,6 +230,11 @@ public:
             printf("Filled!\n");
         } else {
             printf("Failed to fill...\n");
+            return;
+        }
+        MappedExe *mExe = dynamic_cast<MappedExe*>(wrapper->getExe());
+        if (mExe) {
+            mExe->wrap();
         }
     }
 };
