@@ -29,6 +29,8 @@ public:
 class AbstractByteBuffer
 {
 public:
+    static bool isValid(AbstractByteBuffer *buf);
+
     AbstractByteBuffer() { }
     virtual ~AbstractByteBuffer() { }
 //-----
@@ -45,6 +47,7 @@ public:
 
     bool isAreaEmpty(offset_t rawOffset, bufsize_t size);
     bool fillContent(BYTE filling);
+    bool pasteBuffer(offset_t rawOffset, AbstractByteBuffer *buf, bool allowTrunc);
 
     bool containsBlock(offset_t rawOffset, bufsize_t size);
     bool intersectsBlock(offset_t rawOffset, bufsize_t size);

@@ -1,6 +1,15 @@
 #include "AbstractByteBuffer.h"
 
 //--------------------------------------------------
+bool AbstractByteBuffer::isValid(AbstractByteBuffer *buf)
+{
+    if (buf == NULL) return false;
+    if (buf->getContent() == NULL || buf->getContentSize() == 0) {
+        return false;
+    }
+    return true;
+}
+//---
 
 const BYTE AbstractByteBuffer::operator[](std::size_t idx)
 {
@@ -109,6 +118,29 @@ bool AbstractByteBuffer::fillContent(BYTE filling)
     if (buf == NULL) return false;
 
     memset(buf, filling, bufSize);
+    return true;
+}
+
+bool AbstractByteBuffer::pasteBuffer(offset_t rawOffset, AbstractByteBuffer *buf, bool allowTrunc)
+{
+    if (isValid(buf) == false || isValid(this) == false) return false;
+    offset_t mySize = this->getContentSize();
+
+    if (mySize <= rawOffset) {
+        if (DBG_LVL) printf("Too far offset requested: %llX while mySize: %llX\n", rawOffset, mySize);
+        return false;
+    }
+    bufsize_t sizeToFill = buf->getContentSize();
+
+    BYTE *target = this->getContentAt(rawOffset, sizeToFill);
+    if (target == NULL) {
+        if (allowTrunc == false) return false;
+        sizeToFill =  mySize -rawOffset;
+        target = this->getContentAt(rawOffset, sizeToFill);
+    }
+    if (target == NULL) return false;
+
+    memcpy(target, buf->getContent(), sizeToFill);
     return true;
 }
 

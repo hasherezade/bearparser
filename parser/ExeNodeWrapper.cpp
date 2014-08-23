@@ -72,14 +72,7 @@ bool ExeNodeWrapper::canAddEntry()
 bool ExeNodeWrapper::isMyEntryType(ExeNodeWrapper *entry)
 {
     if (entry == NULL) return false;
-
-    ExeNodeWrapper *lastEntry = this->getEntryAt(this->entries.size() - 1);
-    if (lastEntry == NULL) return false;
-
-    if (entry->getSize() == lastEntry->getSize()) {
-        return true;
-    }
-    return false;
+    return true; //type cast check in inherited wrappers
 }
 
 bool ExeNodeWrapper::addEntry(ExeNodeWrapper *entry)
@@ -87,6 +80,8 @@ bool ExeNodeWrapper::addEntry(ExeNodeWrapper *entry)
     if (canAddEntry() == false) return false;
 
     ExeNodeWrapper *lastEntry = this->getEntryAt(this->entries.size() - 1);
+    if (lastEntry == NULL) return false;
+
     offset_t lastOffset = lastEntry->getOffset();
     bufsize_t entrySize = lastEntry->getSize();
 
@@ -97,12 +92,11 @@ bool ExeNodeWrapper::addEntry(ExeNodeWrapper *entry)
         entry = lastEntry;
     }
     if (isMyEntryType(entry) == false) return false;
+    if (entrySize != entry->getSize()) return false;
 
-    BYTE* aContent = (BYTE*) entry->getPtr();
-    BYTE *fBuf = m_Exe->getContentAt(nextOffset, entrySize);
-    if (fBuf == NULL) return false;
-
-    memcpy(fBuf, aContent, entrySize);
+    if (m_Exe->pasteBuffer(nextOffset, entry, false) == false) {
+        return false;
+    }
     this->clear();
     return this->wrap();
 }
