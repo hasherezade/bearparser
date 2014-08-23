@@ -71,7 +71,7 @@ offset_t Executable::toRaw(offset_t offset, addr_type aT, bool allowExceptions)
     if (offset == INVALID_ADDR) return INVALID_ADDR;
 
     if (this->isValidAddr(offset, aT) == false) {
-        printf("Address out of bounds: offset = %llX addrType = %d\n", offset, aT);
+        if (DBG_LVL) printf("Address out of bounds: offset = %llX addrType = %d\n", offset, aT);
         if (allowExceptions) throw CustomException("Address out of bounds!");
         return INVALID_ADDR;
     }
