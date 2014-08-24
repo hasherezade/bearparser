@@ -206,10 +206,8 @@ bool SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
 
     if (ExeNodeWrapper::addEntry(entry) == false) return false;
 
-    uint64_t count = pe->hdrSectionsNum() + 1;
-    bool canSet = pe->fHdr->setNumValue(FileHdrWrapper::SEC_NUM , count);
-    if (canSet == false) {
-        if (DBG_LVL) printf("Can not change FileHdr!\n");
+    size_t count = pe->hdrSectionsNum() + 1;
+    if (pe->setHdrSectionsNum(count) == false) {
         return false;
     }
     this->wrap();

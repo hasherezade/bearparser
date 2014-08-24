@@ -104,6 +104,8 @@ protected:
     PECore core;
     virtual void wrap(AbstractByteBuffer *v_buf);
     virtual void wrapDataDirs(AbstractByteBuffer *v_buf);
+    //---
+    bool setHdrSectionsNum(size_t newNum);
 
     FileHdrWrapper *fHdr;
     OptHdrWrapper *optHdr;

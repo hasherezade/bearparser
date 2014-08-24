@@ -187,6 +187,17 @@ size_t PEFile::hdrSectionsNum()
     return static_cast<size_t> (secNum);
 }
 
+bool PEFile::setHdrSectionsNum(size_t newNum)
+{
+    uint64_t count = newNum;
+    bool canSet = fHdr->setNumValue(FileHdrWrapper::SEC_NUM , count);
+    if (canSet == false) {
+        if (DBG_LVL) printf("Can not change FileHdr!\n");
+        return false;
+    }
+    return true;
+}
+
 
 offset_t PEFile::fileAddrToRva(offset_t raw, bool getClosestIfInCave)
 {
