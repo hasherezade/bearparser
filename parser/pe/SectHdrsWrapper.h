@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../ExeNodeWrapper.h"
-#include "pe_formats.h"
+#include "PENodeWrapper.h"
 
-class SectionHdrWrapper : public ExeNodeWrapper
+class SectionHdrWrapper : public PENodeWrapper
 {
 public:
 
@@ -26,8 +25,8 @@ public:
         FIELD_COUNTER
     };
 
-    SectionHdrWrapper(Executable *pe, uint32_t sectionNumber)
-        : ExeNodeWrapper(pe), sectNum(sectionNumber), name(NULL), header(NULL) { wrap(); }
+    SectionHdrWrapper(PEFile *pe, uint32_t sectionNumber)
+        : PENodeWrapper(pe), sectNum(sectionNumber), name(NULL), header(NULL) { wrap(); }
     bool wrap();
 
     /* full structure boundatries */
@@ -61,11 +60,11 @@ private:
 
 //----
 
-class SectHdrsWrapper : public ExeNodeWrapper
+class SectHdrsWrapper : public PENodeWrapper
 {
 public:
     // fields :
-    SectHdrsWrapper(Executable *pe) : ExeNodeWrapper(pe) { wrap(); }
+    SectHdrsWrapper(PEFile *pe) : PENodeWrapper(pe) { wrap(); }
     bool wrap();
 
     // full structure boundatries

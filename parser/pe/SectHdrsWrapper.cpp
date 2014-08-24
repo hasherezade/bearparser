@@ -14,17 +14,17 @@ bool SectionHdrWrapper::wrap()
 
 void* SectionHdrWrapper::getPtr()
 {
+    if (m_PE == NULL) return NULL;
+
     if (header != NULL) {
         return (void*) this->header;
     }
-    PEFile *pe = dynamic_cast<PEFile*>(this->m_Exe);
-    if (pe == NULL) return NULL;
-    if (this->sectNum >= pe->hdrSectionsNum()) return NULL;
+    if (this->sectNum >= m_PE->hdrSectionsNum()) return NULL;
 
-    uint32_t hdrOffset = pe->secHdrsOffset();
-    uint64_t secOffset = hdrOffset + (this->sectNum * sizeof(pe::IMAGE_SECTION_HEADER));
+    offset_t hdrOffset = m_PE->secHdrsOffset();
+    offset_t secOffset = hdrOffset + (this->sectNum * sizeof(pe::IMAGE_SECTION_HEADER));
     if ( (secOffset + sizeof(IMAGE_SECTION_HEADER)) > m_Exe->getRawSize()) return NULL;
-    BYTE* content = m_Exe->getContent();
+    BYTE* content = m_PE->getContent();
     if (!content) return NULL;
 
     this->header = (pe::IMAGE_SECTION_HEADER*) ((uint64_t)content + secOffset);
@@ -53,8 +53,7 @@ bool SectionHdrWrapper::reloadName()
 
 bufsize_t SectionHdrWrapper::getSize()
 {
-    PEFile *pe = dynamic_cast<PEFile*>(this->m_Exe);
-    if (pe == NULL) return 0;
+    if (m_PE == NULL) return 0;
     return sizeof(pe::IMAGE_SECTION_HEADER);
 }
 
@@ -161,7 +160,8 @@ offset_t SectionHdrWrapper::getContentEndOffset(Executable::addr_type addrType, 
 bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool roundup)
 {
     if (this->header == NULL) return 0;
-    //bool isOk = false;
+    if (m_PE == NULL) return 0;
+
     bufsize_t size = 0;
 
     if (aType == Executable::RAW) {
@@ -169,19 +169,15 @@ bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool ro
     } else if (aType == Executable::VA || aType == Executable::RVA) {
         size = static_cast<bufsize_t>(this->header->Misc.VirtualSize);//this->getNumValue(VSIZE, &isOk));
     }
-    //if (!isOk) return 0;
 
     if (roundup) {
-        PEFile *pe = dynamic_cast<PEFile*>(m_Exe);
-        if (pe) {
-            offset_t unit = pe->getAlignment(aType);
-            offset_t startOffset = getContentOffset(aType);
-            //TODO: check it!
-            if (aType == Executable::RAW) {
-                bufsize_t maxSize = pe->getRawSize() - startOffset; //round down only for Raw
-                size = roundupToUnit(size, unit);
-                if (size > maxSize) size = maxSize;
-            }
+        offset_t unit = m_PE->getAlignment(aType);
+        offset_t startOffset = getContentOffset(aType);
+        //TODO: check it!
+        if (aType == Executable::RAW) {
+            bufsize_t maxSize = m_PE->getRawSize() - startOffset; //round down only for Raw
+            size = roundupToUnit(size, unit);
+            if (size > maxSize) size = maxSize;
         }
     }
     return size;
@@ -201,13 +197,12 @@ bool SectHdrsWrapper::isMyEntryType(ExeNodeWrapper *entry)
 
 bool SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
 {
-    PEFile *pe = dynamic_cast<PEFile*>(this->m_Exe);
-    if (pe == NULL) return false;
+    if (m_PE == NULL) return false;
 
     if (ExeNodeWrapper::addEntry(entry) == false) return false;
 
-    size_t count = pe->hdrSectionsNum() + 1;
-    if (pe->setHdrSectionsNum(count) == false) {
+    size_t count = m_PE->hdrSectionsNum() + 1;
+    if (m_PE->setHdrSectionsNum(count) == false) {
         return false;
     }
     this->wrap();
@@ -217,13 +212,12 @@ bool SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
 bool SectHdrsWrapper::wrap()
 {
     this->clear();
-    PEFile *pe = dynamic_cast<PEFile*>(this->m_Exe);
-    if (pe == NULL) return false;
+    if (this->m_PE == NULL) return false;
 
-    size_t count = pe->hdrSectionsNum();
+    size_t count = this->m_PE->hdrSectionsNum();
 
     for (int i = 0; i < count; i++) {
-        SectionHdrWrapper *sec = new SectionHdrWrapper(this->m_Exe, i);
+        SectionHdrWrapper *sec = new SectionHdrWrapper(this->m_PE, i);
         if (sec == NULL) break;
         if (sec->getPtr() == NULL) {
             printf("deleting invalid section..\n");
@@ -270,14 +264,13 @@ void* SectHdrsWrapper::getPtr()
 
 bufsize_t SectHdrsWrapper::getSize()
 {
-    PEFile *pe = dynamic_cast<PEFile*>(this->m_Exe);
-    if (pe == NULL) return 0;
+    if (this->m_PE == NULL) return 0;
 
     size_t secCount = getFieldsCount();
 
-    uint64_t hdrOffset = pe->secHdrsOffset();
-    uint64_t fileSize = m_Exe->getRawSize();
-    uint64_t endOffset = hdrOffset + (secCount * sizeof(pe::IMAGE_SECTION_HEADER));
+    offset_t hdrOffset = m_PE->secHdrsOffset();
+    offset_t fileSize = m_PE->getRawSize();
+    offset_t endOffset = hdrOffset + (secCount * sizeof(pe::IMAGE_SECTION_HEADER));
 
     if (endOffset > fileSize) {
         return bufsize_t (fileSize - hdrOffset);
