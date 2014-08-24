@@ -58,6 +58,9 @@ public:
     Executable* getExe() { return m_Exe; }
 
 protected:
+    virtual bool canCopyToOffset(offset_t rawOffset);
+    bool copyToOffset(offset_t rawOffset);
+
     Executable *m_Exe;
 };
 

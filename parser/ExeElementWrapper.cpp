@@ -98,3 +98,28 @@ bool ExeElementWrapper::setStringValue(char* dstPtr, QString newText)
     bool isOk = m_Exe->setBufferedValue((BYTE*)dstPtr, (BYTE*)newTextC, newTextLen, 1);
     return isOk;
 }
+
+bool ExeElementWrapper::canCopyToOffset(offset_t rawOffset)
+{
+    if (this->m_Exe == NULL) return false;
+
+    if (this->m_Exe->isAreaEmpty(rawOffset, getSize()) == false) {
+        return false;
+    }
+    return true;
+}
+
+bool ExeElementWrapper::copyToOffset(offset_t rawOffset)
+{
+    if (this->m_Exe == NULL) return false;
+
+    if (canCopyToOffset(rawOffset) == false) {
+        if (DBG_LVL) printf("The area is not empty!\n");
+        return false;
+    }
+    if (m_Exe->pasteBuffer(rawOffset, this, false) == false) {
+        if (DBG_LVL) printf("Cannot paste the buffer!\n");
+        return false;
+    }
+    return true;
+}
