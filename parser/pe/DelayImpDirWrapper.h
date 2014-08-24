@@ -8,8 +8,6 @@ class DelayImpFuncWrapper;
 class DelayImpDirWrapper : public ImportBaseDirWrapper
 {
 public:
-    static uint64_t EntriesLimit;
-
     DelayImpDirWrapper(Executable *pe)
         : ImportBaseDirWrapper(pe, pe::DIR_DELAY_IMPORT) { wrap(); }
 
@@ -44,7 +42,7 @@ public:
         FIELD_COUNTER
     };
 
-    DelayImpEntryWrapper(Executable *pe, DelayImpDirWrapper *importsDir, uint32_t entryNumber)
+    DelayImpEntryWrapper(Executable *pe, DelayImpDirWrapper *importsDir, size_t entryNumber)
         : ImportBaseEntryWrapper(pe, importsDir, entryNumber) { wrap(); }
     bool wrap();
 
@@ -59,8 +57,6 @@ public:
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
 
 protected:
-    static uint64_t entriesLimit;
-
     pe::IMAGE_DELAY_LOAD32* dl32();
     pe::IMAGE_DELAY_LOAD64* dl64();
     virtual pe::IMAGE_IMPORT_BY_NAME* getFirstImpByNamePtr();
@@ -82,7 +78,7 @@ public:
         FIELD_COUNTER
     };
 
-    DelayImpFuncWrapper(Executable *pe, DelayImpEntryWrapper *parentDir, uint32_t entryNumber)
+    DelayImpFuncWrapper(Executable *pe, DelayImpEntryWrapper *parentDir, size_t entryNumber)
         : ImportBaseFuncWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
     // full structure boundatries

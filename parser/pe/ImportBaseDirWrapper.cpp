@@ -1,10 +1,10 @@
 #include "ImportBaseDirWrapper.h"
 
 //---------------------------------
-uint64_t ImportBaseDirWrapper::EntriesLimit = 1000;
+size_t ImportBaseDirWrapper::EntriesLimit = 1000;
+size_t ImportBaseEntryWrapper::EntriesLimit = 1000;
 
-uint64_t ImportBaseEntryWrapper::EntriesLimit = 1000;
-uint32_t ImportBaseEntryWrapper::NameLenLimit = 0xFF;
+bufsize_t ImportBaseEntryWrapper::NameLenLimit = 0xFF;
 
 //---------------------------------
 

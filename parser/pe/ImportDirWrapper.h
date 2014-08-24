@@ -60,7 +60,7 @@ public:
         FIELD_COUNTER
     };
 
-    ImportEntryWrapper(Executable *pe, ImportDirWrapper *importsDir, uint32_t entryNumber)
+    ImportEntryWrapper(Executable *pe, ImportDirWrapper *importsDir, size_t entryNumber)
         : ImportBaseEntryWrapper(pe, importsDir, entryNumber) { wrap(); }
 
     bool wrap();
@@ -97,7 +97,7 @@ public:
         FIELD_COUNTER
     };
 
-    ImportedFuncWrapper(Executable *pe, ImportEntryWrapper* parentLib, uint32_t entryNumber)
+    ImportedFuncWrapper(Executable *pe, ImportEntryWrapper* parentLib, size_t entryNumber)
         : ImportBaseFuncWrapper(pe, parentLib, entryNumber) {}// this->parentLib = parentLib; }
 
     /* full structure boundatries */

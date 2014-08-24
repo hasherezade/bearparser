@@ -3,8 +3,6 @@
 
 using namespace pe;
 
-uint64_t DelayImpDirWrapper::EntriesLimit = 1000;
-
 /*
 typedef struct _IMAGE_DELAY_LOAD {
     DWORD grAttrs;        //must be 0
@@ -33,18 +31,18 @@ bool DelayImpDirWrapper::wrap()
 {
     clear();
 
-    uint64_t cntr = 0;
+    size_t cntr = 0;
     if (!getDataDirectory()) {
         if (this->importsCount == cntr) return false;
         this->importsCount = cntr;
         return true;
     }
 
-    const uint32_t LIMIT = DelayImpDirWrapper::EntriesLimit;//(-1);
+    const size_t LIMIT = ImportBaseDirWrapper::EntriesLimit;//(-1);
     DelayImpEntryWrapper* imp = NULL;
     bool isNext = false;
 
-    for (cntr = 0; cntr < DelayImpDirWrapper::EntriesLimit; cntr++) {
+    for (cntr = 0; cntr < ImportBaseDirWrapper::EntriesLimit; cntr++) {
         isNext = false;
 
         imp = new DelayImpEntryWrapper(m_Exe, this, cntr);
@@ -95,7 +93,6 @@ bufsize_t DelayImpDirWrapper::getEntrySize()
 }
 
 //---------------------------------------------------------------------------
-uint64_t DelayImpEntryWrapper::entriesLimit = 1000;
 
 pe::IMAGE_IMPORT_BY_NAME* DelayImpEntryWrapper::getFirstImpByNamePtr()
 {
@@ -112,7 +109,7 @@ bool DelayImpEntryWrapper::wrap()
 {
     clear();
 
-    for (int i = 0; i < DelayImpEntryWrapper::entriesLimit;  i++) { //
+    for (size_t i = 0; i < ImportBaseEntryWrapper::EntriesLimit;  i++) { //
 
         DelayImpFuncWrapper* entry = new DelayImpFuncWrapper(this->m_Exe, this, i);
         if (entry->getPtr() == NULL) {

@@ -10,7 +10,7 @@ class ImportBaseFuncWrapper;
 class ImportBaseDirWrapper : public DataDirEntryWrapper
 {
 public:
-    static uint64_t EntriesLimit;
+    static size_t EntriesLimit;
 
     virtual size_t getFieldsCount() { return this->importsCount; }
 
@@ -37,14 +37,14 @@ friend class ImportBaseEntryWrapper;
 class ImportBaseEntryWrapper : public ExeNodeWrapper
 {
 public:
-    static uint64_t EntriesLimit;
-    static uint32_t NameLenLimit;
+    static size_t EntriesLimit;
+    static bufsize_t NameLenLimit;
 
     virtual char* getLibraryName() = 0;
     virtual size_t getSubFieldsCount() { return 1; }
 
 protected:
-    ImportBaseEntryWrapper(Executable *pe, ImportBaseDirWrapper *importsDir, uint32_t entryNumber)
+    ImportBaseEntryWrapper(Executable *pe, ImportBaseDirWrapper *importsDir, size_t entryNumber)
         : ExeNodeWrapper(pe, importsDir, entryNumber), impDir(importsDir) { wrap(); }
 
     void addFuncMapping(ImportBaseFuncWrapper *func) { if (impDir) impDir->addFuncMapping(func); }
@@ -57,7 +57,7 @@ friend class ImportBaseDirWrapper;
 class ImportBaseFuncWrapper : public ExeNodeWrapper
 {
 public:
-    ImportBaseFuncWrapper(Executable *pe, ImportBaseEntryWrapper* parentLib, uint32_t entryNumber)
+    ImportBaseFuncWrapper(Executable *pe, ImportBaseEntryWrapper* parentLib, size_t entryNumber)
         : ExeNodeWrapper(pe, parentLib, entryNumber) { }
 
     virtual QString getName();

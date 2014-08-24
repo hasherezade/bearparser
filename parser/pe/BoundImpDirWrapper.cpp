@@ -2,7 +2,7 @@
 #include "PEFile.h"
 
 using namespace pe;
-uint64_t BoundImpDirWrapper::EntriesLimit = 1000;
+size_t BoundImpDirWrapper::EntriesLimit = 1000;
 
 /*
 typedef struct _IMAGE_BOUND_IMPORT_DESCRIPTOR {
@@ -33,14 +33,14 @@ bool BoundImpDirWrapper::wrap()
 {
     clear();
 
-    uint64_t cntr = 0;
+    size_t cntr = 0;
     if (!getDataDirectory()) {
         if (this->importsCount == cntr) return false;
         this->importsCount = cntr;
         return true;
     }
 
-    const uint32_t LIMIT = BoundImpDirWrapper::EntriesLimit;//(-1);
+    const size_t LIMIT = BoundImpDirWrapper::EntriesLimit;
     BoundEntryWrapper* imp = NULL;
     bool isNext = false;
 

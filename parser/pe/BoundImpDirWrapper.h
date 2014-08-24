@@ -5,7 +5,7 @@
 class BoundImpDirWrapper : public DataDirEntryWrapper
 {
 public:
-    static uint64_t EntriesLimit;
+    static size_t EntriesLimit;
 
     BoundImpDirWrapper(Executable *pe)
         : DataDirEntryWrapper(pe, pe::DIR_BOUND_IMPORT), importsCount(0) { wrap(); }
@@ -25,7 +25,7 @@ public:
 
 protected:
     pe::IMAGE_BOUND_IMPORT_DESCRIPTOR* boundImp();
-    uint64_t importsCount;
+    size_t importsCount;
 
 friend class BoundEntryWrapper;
 };
@@ -41,7 +41,7 @@ public:
         FIELD_COUNTER
     };
 
-    BoundEntryWrapper(Executable *pe, BoundImpDirWrapper* parent, uint32_t entryNum)
+    BoundEntryWrapper(Executable *pe, BoundImpDirWrapper* parent, size_t entryNum)
         : ExeNodeWrapper(pe, parent, entryNum ) { }
 
     bool wrap() { return true; }

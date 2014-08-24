@@ -268,11 +268,11 @@ bool ImportEntryWrapper::wrap()
     thunkToFuncMap.clear();
 
     ImportedFuncWrapper* func = NULL;
-    const uint64_t LIMIT = ImportEntryWrapper::EntriesLimit;
+    const size_t LIMIT = ImportBaseEntryWrapper::EntriesLimit;
     if (!isValid()) {
         return false;
     }
-    uint64_t cntr = 0;
+    size_t cntr = 0;
     if (this->getPtr() == NULL) {
         return false;
     }
@@ -447,14 +447,14 @@ bool ImportDirWrapper::wrap()
     clear();
     thunkToLibMap.clear();
 
-    uint64_t cntr = 0;
+    size_t cntr = 0;
     if (!m_Exe || !getDataDirectory()) {
         if (this->importsCount == cntr) return false;
         this->importsCount = cntr;
         return true;
     }
 
-    const uint64_t LIMIT = ImportDirWrapper::EntriesLimit;//(-1);
+    const size_t LIMIT = ImportBaseDirWrapper::EntriesLimit;
     ImportEntryWrapper* imp = NULL;
     bool isNext = false;
 
