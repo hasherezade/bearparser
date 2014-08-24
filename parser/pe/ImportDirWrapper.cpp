@@ -442,53 +442,29 @@ pe::IMAGE_IMPORT_DESCRIPTOR* ImportDirWrapper::firstDescriptor()
     return (pe::IMAGE_IMPORT_DESCRIPTOR*) dirPtr;
 }
 
-bool ImportDirWrapper::wrap()
+bool ImportDirWrapper::loadNextEntry(size_t cntr)
 {
-    clear();
-    thunkToLibMap.clear();
-
-    size_t cntr = 0;
-    if (!m_Exe || !getDataDirectory()) {
-        if (this->importsCount == cntr) return false;
-        this->importsCount = cntr;
-        return true;
-    }
-
-    const size_t LIMIT = ImportBaseDirWrapper::EntriesLimit;
-    ImportEntryWrapper* imp = NULL;
-    bool isNext = false;
-
-    for (cntr = 0; cntr < LIMIT; cntr++) {
-        isNext = false;
-
-        imp = new ImportEntryWrapper(m_Exe, this, cntr);
-        if (!imp || !imp->getPtr()) {
-            break;
-        }
-
-        bool isOk = false;
-        uint64_t thunk = imp->getNumValue(ImportEntryWrapper::FIRST_THUNK, &isOk);
-        if (!isOk) {
-            break;
-        }
-
-        uint64_t oThunk = imp->getNumValue(ImportEntryWrapper::ORIG_FIRST_THUNK, &isOk);
-        if (!isOk) {
-            break;
-        }
-
-        if (!thunk && !oThunk) {
-            break;
-        }
-        entries.push_back(imp);
-        isNext = true;
-    }
-    if (!isNext) {
+    ImportEntryWrapper* imp = new ImportEntryWrapper(m_Exe, this, cntr);
+    if (!imp || !imp->getPtr()) {
         delete imp;
-
+        return false;
     }
-    if (this->importsCount == cntr) return false;
-    this->importsCount = cntr;
+    bool isOk = false;
+    uint64_t thunk = imp->getNumValue(ImportEntryWrapper::FIRST_THUNK, &isOk);
+    if (!isOk) {
+        delete imp;
+        return false;
+    }
+    uint64_t oThunk = imp->getNumValue(ImportEntryWrapper::ORIG_FIRST_THUNK, &isOk);
+    if (!isOk) {
+        delete imp;
+        return false;
+    }
+    if (!thunk && !oThunk) {
+        delete imp;
+        return false;
+    }
+    entries.push_back(imp);
     return true;
 }
 

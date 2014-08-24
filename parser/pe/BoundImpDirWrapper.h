@@ -24,6 +24,8 @@ public:
     virtual QString getFieldName(size_t fieldId) { return getFieldName(fieldId, FIELD_NONE); }
 
 protected:
+    bool loadNextEntry(size_t entryNum);
+
     pe::IMAGE_BOUND_IMPORT_DESCRIPTOR* boundImp();
     size_t importsCount;
 
@@ -55,5 +57,6 @@ public:
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
+
 };
 

@@ -27,43 +27,22 @@ void* DelayImpDirWrapper::firstDelayLd(bufsize_t size)
     return ptr;
 }
 
-bool DelayImpDirWrapper::wrap()
+bool DelayImpDirWrapper::loadNextEntry(size_t cntr)
 {
-    clear();
-
-    size_t cntr = 0;
-    if (!getDataDirectory()) {
-        if (this->importsCount == cntr) return false;
-        this->importsCount = cntr;
-        return true;
+    DelayImpEntryWrapper* imp = new DelayImpEntryWrapper(m_Exe, this, cntr);
+    if (!imp || !imp->getPtr()) {
+        delete imp;
+        return false;
     }
-
-    const size_t LIMIT = ImportBaseDirWrapper::EntriesLimit;//(-1);
-    DelayImpEntryWrapper* imp = NULL;
-    bool isNext = false;
-
-    for (cntr = 0; cntr < ImportBaseDirWrapper::EntriesLimit; cntr++) {
-        isNext = false;
-
-        imp = new DelayImpEntryWrapper(m_Exe, this, cntr);
-        if (!imp || !imp->getPtr()) break;
-
-        // TODO! do it in proper way!
-        bool isOk = false;
-        uint64_t offset = imp->getNumValue(DelayImpEntryWrapper::NAME, &isOk);
-        if (!isOk || offset == 0) {
-            //will be deleted at the end
-            break;
-        }
+    // TODO! do it in proper way!
+    bool isOk = false;
+    uint64_t offset = imp->getNumValue(DelayImpEntryWrapper::NAME, &isOk);
+    if (!isOk || offset == 0) {
+        delete imp;
+        return false;
+    }
         //printf("Name = %s\n", imp->getName().c_str());
-        entries.push_back(imp);
-        isNext = true;
-    }
-    if (!isNext) delete imp;
-
-
-    if (this->importsCount == cntr) return false;
-    this->importsCount = cntr;
+    entries.push_back(imp);
     return true;
 }
 

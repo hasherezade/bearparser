@@ -11,13 +11,13 @@ public:
     DelayImpDirWrapper(Executable *pe)
         : ImportBaseDirWrapper(pe, pe::DIR_DELAY_IMPORT) { wrap(); }
 
-    bool wrap();
-
     virtual void* getPtr();
     virtual bufsize_t getSize();
     virtual QString getName() { return "DelayImports"; }
 
 protected:
+    virtual bool loadNextEntry(size_t cntr);
+
     pe::IMAGE_DELAY_LOAD32* firstDelayLd32() { return (pe::IMAGE_DELAY_LOAD32*) firstDelayLd(sizeof(pe::IMAGE_DELAY_LOAD32)); }
     pe::IMAGE_DELAY_LOAD64* firstDelayLd64() { return (pe::IMAGE_DELAY_LOAD64*) firstDelayLd(sizeof(pe::IMAGE_DELAY_LOAD64)); }
     void* firstDelayLd(bufsize_t size);

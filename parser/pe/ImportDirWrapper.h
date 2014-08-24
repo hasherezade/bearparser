@@ -33,12 +33,13 @@ public:
     ImportDirWrapper(Executable *pe)
         : ImportBaseDirWrapper(pe, pe::DIR_IMPORT) { wrap(); }
 
-    bool wrap();
     virtual void* getPtr() { return firstDescriptor(); }
     virtual bufsize_t getSize();
     virtual QString getName() { return "Imports"; }
 
 protected:
+    virtual bool loadNextEntry(size_t cntr);
+
     pe::IMAGE_DATA_DIRECTORY* getDataDirectory();
     pe::IMAGE_IMPORT_DESCRIPTOR *firstDescriptor();
 
@@ -63,7 +64,7 @@ public:
     ImportEntryWrapper(Executable *pe, ImportDirWrapper *importsDir, size_t entryNumber)
         : ImportBaseEntryWrapper(pe, importsDir, entryNumber) { wrap(); }
 
-    bool wrap();
+    virtual bool wrap();
     bool isValid();
 
     /* full structure boundatries */

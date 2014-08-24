@@ -23,7 +23,10 @@ public:
 
 protected:
     ImportBaseDirWrapper(Executable *pe, pe:: dir_entry v_entryType)
-        : DataDirEntryWrapper(pe, v_entryType), importsCount(0) { wrap(); }
+        : DataDirEntryWrapper(pe, v_entryType), importsCount(0) { }
+
+    virtual bool wrap();
+    virtual bool loadNextEntry(size_t entryNum) = 0;
 
     void addFuncMapping(ImportBaseFuncWrapper *func);
     //---
@@ -48,6 +51,7 @@ protected:
         : ExeNodeWrapper(pe, importsDir, entryNumber), impDir(importsDir) { wrap(); }
 
     void addFuncMapping(ImportBaseFuncWrapper *func) { if (impDir) impDir->addFuncMapping(func); }
+
     std::map<offset_t, size_t> thunkToFuncMap;
     ImportBaseDirWrapper* impDir;
 

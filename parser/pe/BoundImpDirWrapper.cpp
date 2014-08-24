@@ -29,44 +29,41 @@ pe::IMAGE_BOUND_IMPORT_DESCRIPTOR* BoundImpDirWrapper::boundImp()
     return (pe::IMAGE_BOUND_IMPORT_DESCRIPTOR*) ptr;
 }
 
+bool BoundImpDirWrapper::loadNextEntry(size_t entryNum)
+{
+    BoundEntryWrapper* imp = new BoundEntryWrapper(m_Exe, this, entryNum);
+    if (!imp || !imp->getPtr()) return false;
+
+    // TODO! do it in proper way!
+    bool isOk = false;
+    uint64_t offset = imp->getNumValue(BoundEntryWrapper::MODULE_NAME_OFFSET, &isOk);
+    if (!isOk || offset == 0) {
+        delete imp;
+        return false;
+    }
+    entries.push_back(imp);
+    return true;
+}
+
 bool BoundImpDirWrapper::wrap()
 {
     clear();
+    size_t oldCount = this->importsCount;
+    this->importsCount = 0;
 
-    size_t cntr = 0;
     if (!getDataDirectory()) {
-        if (this->importsCount == cntr) return false;
-        this->importsCount = cntr;
-        return true;
+        return (oldCount != this->importsCount); //has count changed
     }
 
     const size_t LIMIT = BoundImpDirWrapper::EntriesLimit;
-    BoundEntryWrapper* imp = NULL;
-    bool isNext = false;
 
-    for (cntr = 0; cntr < EntriesLimit; cntr++) {
-        isNext = false;
-
-        imp = new BoundEntryWrapper(m_Exe, this, cntr);
-        if (!imp || !imp->getPtr()) break;
-
-        // TODO! do it in proper way!
-        bool isOk = false;
-        uint64_t offset = imp->getNumValue(BoundEntryWrapper::MODULE_NAME_OFFSET, &isOk);
-        if (!isOk || offset == 0) {
-            //will be deleted at the end
-            break;
-        }
-        //printf("Name = %s\n", imp->getName().c_str());
-        entries.push_back(imp);
-        isNext = true;
+    size_t cntr = 0;
+    for (cntr = 0; cntr < LIMIT; cntr++) {
+        if (loadNextEntry(cntr) == false) break;
     }
-    if (!isNext) delete imp;
-    //printf ("entries = %d\n", entries.size());
 
-    if (this->importsCount == cntr) return false;
     this->importsCount = cntr;
-    return true;
+    return (oldCount != this->importsCount); //has count changed
 }
 
 bufsize_t BoundImpDirWrapper::getSize()

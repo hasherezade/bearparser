@@ -43,6 +43,30 @@ QString ImportBaseDirWrapper::thunkToFuncName(offset_t thunk)
 
     return func->getName();
 }
+
+bool ImportBaseDirWrapper::wrap()
+{
+    clear();
+    thunkToLibMap.clear();
+
+    size_t oldCount = this->importsCount;
+    this->importsCount = 0;
+
+    if (!getDataDirectory()) {
+        return (oldCount != this->importsCount); //has count changed
+    }
+
+    const size_t LIMIT = ImportBaseDirWrapper::EntriesLimit;
+
+    size_t cntr = 0;
+    for (cntr = 0; cntr < LIMIT; cntr++) {
+        if (loadNextEntry(cntr) == false) break;
+    }
+
+    this->importsCount = cntr;
+    return (oldCount != this->importsCount); //has count changed
+}
+
 //--------------------------------------------------------------------------------------------------------------
 
 
