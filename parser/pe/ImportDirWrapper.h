@@ -30,7 +30,7 @@ class ImportedFuncWrapper;
 class ImportDirWrapper : public ImportBaseDirWrapper
 {
 public:
-    ImportDirWrapper(Executable *pe)
+    ImportDirWrapper(PEFile *pe)
         : ImportBaseDirWrapper(pe, pe::DIR_IMPORT) { wrap(); }
 
     virtual void* getPtr() { return firstDescriptor(); }

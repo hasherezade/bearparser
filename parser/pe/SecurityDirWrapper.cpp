@@ -11,13 +11,6 @@ pe::WIN_CERTIFICATE* SecurityDirWrapper::getCert()
     return (pe::WIN_CERTIFICATE*) ptr;
 }
 
-SecurityDirWrapper::SecurityDirWrapper(Executable* pe)
-    : DataDirEntryWrapper(pe, pe::DIR_SECURITY), sizeOk(false)
-{
-    wrap();
-}
-
-
 bool SecurityDirWrapper::wrap()
 {
     this->sizeOk = false;

@@ -1,11 +1,13 @@
 #pragma once
 
-#include "../ExeNodeWrapper.h"
-#include "pe_formats.h"
+#include "PENodeWrapper.h"
+
+class PEFile;
 
 using namespace pe;
 
-class DataDirEntryWrapper : public ExeNodeWrapper
+
+class DataDirEntryWrapper : public PENodeWrapper
 {
 public:
     pe::IMAGE_DATA_DIRECTORY* getDataDirectory();
@@ -15,12 +17,8 @@ public:
     pe:: dir_entry getDirEntryType() { return this->entryType; }
 
 protected:
-    DataDirEntryWrapper(Executable* pe, pe:: dir_entry v_entryType)
-        :  ExeNodeWrapper(pe), entryType(v_entryType)
-    {
-        wrap();
-    }
+    DataDirEntryWrapper(PEFile* pe, pe:: dir_entry v_entryType);
 
-    pe:: dir_entry entryType;
+    pe::dir_entry entryType;
 };
 

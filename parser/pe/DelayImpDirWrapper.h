@@ -8,7 +8,7 @@ class DelayImpFuncWrapper;
 class DelayImpDirWrapper : public ImportBaseDirWrapper
 {
 public:
-    DelayImpDirWrapper(Executable *pe)
+    DelayImpDirWrapper(PEFile *pe)
         : ImportBaseDirWrapper(pe, pe::DIR_DELAY_IMPORT) { wrap(); }
 
     virtual void* getPtr();

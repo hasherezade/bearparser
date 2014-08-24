@@ -22,7 +22,7 @@ public:
         FIELD_COUNTER
     };
 
-    ExportDirWrapper(Executable *pe)
+    ExportDirWrapper(PEFile *pe)
         : DataDirEntryWrapper(pe, pe::DIR_EXPORT) { wrap(); }
 
     bool wrap();

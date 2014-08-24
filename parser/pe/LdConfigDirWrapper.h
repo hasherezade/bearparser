@@ -36,7 +36,7 @@ public:
         FIELD_COUNTER_W81
     };
 
-    LdConfigDirWrapper(Executable* pe)
+    LdConfigDirWrapper(PEFile* pe)
         :  DataDirEntryWrapper(pe, pe::DIR_LOAD_CONFIG) { wrap(); }
 
     bool wrap();

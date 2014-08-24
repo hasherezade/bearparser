@@ -9,7 +9,7 @@ class RelocDirWrapper;
 class RelocDirWrapper : public DataDirEntryWrapper
 {
 public:
-    RelocDirWrapper(Executable *pe)
+    RelocDirWrapper(PEFile *pe)
         : DataDirEntryWrapper(pe, pe::DIR_BASERELOC), parsedSize(0) { wrap(); }
 
     bool wrap();

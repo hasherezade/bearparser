@@ -89,7 +89,7 @@ bool ResourceDirWrapper::wrap()
         long topDirId = (this->topEntryID != TOP_ENTRY_ROOT) ? this->topEntryID : i ;
 
         //(PEFileBase *pe, ResourceDirWrapper *parentDir, uint32_t entryNumber, long topEntryId, ResourcesAlbum *resAlbum = NULL)
-        ResourceEntryWrapper* entry = new ResourceEntryWrapper(this->m_Exe, this, i, topDirId, this->album);
+        ResourceEntryWrapper* entry = new ResourceEntryWrapper(this->m_PE, this, i, topDirId, this->album);
 
         if (entry->getPtr() == NULL) {
             delete entry;
@@ -168,7 +168,7 @@ bool ResourceEntryWrapper::wrap()
         long depth = this->parentDir->getDepth() + 1;
         if (depth >= MAX_DEPTH) return false;
         //printf("Subdir at: %x ,depth : %lld\n", childRaw, depth);
-        this->childDir = new ResourceDirWrapper(this->m_Exe, this->album, childRaw, depth, topEntryID);
+        this->childDir = new ResourceDirWrapper(this->m_PE, this->album, childRaw, depth, topEntryID);
     } else {
         //printf("Leaf at: %x\n", childRaw);
         this->childLeaf = new ResourceLeafWrapper(m_Exe, childRaw, topEntryID);

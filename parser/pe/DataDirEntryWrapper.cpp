@@ -3,13 +3,18 @@
 
 using namespace pe;
 
-//-------------
+DataDirEntryWrapper::DataDirEntryWrapper(PEFile* pe, pe:: dir_entry v_entryType)
+    :  PENodeWrapper(pe), entryType(v_entryType)
+{
+    wrap();
+}
+
 pe::IMAGE_DATA_DIRECTORY* DataDirEntryWrapper::getDataDirectory()
 {
-    PEFile *pe = dynamic_cast<PEFile*> (m_Exe);
-    if (pe == NULL) return NULL;
 
-    IMAGE_DATA_DIRECTORY *d = pe->getDataDirectory();
+    if (m_PE == NULL) return NULL;
+
+    IMAGE_DATA_DIRECTORY *d = m_PE->getDataDirectory();
     return d;
 }
 

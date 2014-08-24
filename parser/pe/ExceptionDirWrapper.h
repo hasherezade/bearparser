@@ -8,7 +8,7 @@ class ExceptionDirWrapper;
 class ExceptionDirWrapper : public DataDirEntryWrapper
 {
 public:
-    ExceptionDirWrapper(Executable *pe)
+    ExceptionDirWrapper(PEFile* pe)
         : DataDirEntryWrapper(pe, pe::DIR_EXCEPTION), parsedSize(0) { wrap(); }
 
     bool wrap();

@@ -22,7 +22,7 @@ public:
     QString thunkToFuncName(offset_t thunk);
 
 protected:
-    ImportBaseDirWrapper(Executable *pe, pe:: dir_entry v_entryType)
+    ImportBaseDirWrapper(PEFile *pe, pe:: dir_entry v_entryType)
         : DataDirEntryWrapper(pe, v_entryType), importsCount(0) { }
 
     virtual bool wrap();

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../ExeElementWrapper.h"
-#include "pe_formats.h"
+#include "PENodeWrapper.h"
 
 using namespace pe;
 

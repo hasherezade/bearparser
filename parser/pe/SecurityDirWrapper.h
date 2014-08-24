@@ -25,7 +25,12 @@ public:
         FIELD_COUNTER
     };
 
-    SecurityDirWrapper(Executable *pe);
+    SecurityDirWrapper(PEFile * pe)
+        : DataDirEntryWrapper(pe, pe::DIR_SECURITY), sizeOk(false)
+    {
+        wrap();
+    }
+
     ~SecurityDirWrapper() { clear(); }
 
     bool wrap();

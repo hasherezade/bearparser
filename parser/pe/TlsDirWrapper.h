@@ -21,7 +21,7 @@ public:
         FIELD_COUNTER
     };
 
-    TlsDirWrapper(Executable *pe)
+    TlsDirWrapper(PEFile *pe)
         : DataDirEntryWrapper(pe, pe::DIR_TLS) { wrap(); }
 
     bool wrap();

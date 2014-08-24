@@ -19,7 +19,7 @@ public:
         FIELD_COUNTER
     };
 
-    DebugDirWrapper(Executable *pe)
+    DebugDirWrapper(PEFile *pe)
         : DataDirEntryWrapper(pe, pe::DIR_DEBUG) { wrap(); }
 
     ~DebugDirWrapper() { clear(); }
