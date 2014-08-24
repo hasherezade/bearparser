@@ -58,11 +58,7 @@ typedef struct _IMAGE_RESOURCE_DIRECTORY_ENTRY {
 
 pe::IMAGE_RESOURCE_DIRECTORY* ResourceDirWrapper::mainResourceDir()
 {
-    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return NULL;
-
-    uint32_t rva = d[pe::DIR_RESOURCE].VirtualAddress;
-    if (rva == 0) return NULL;
+    offset_t rva = getDirEntryAddress();
 
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_RESOURCE_DIRECTORY));
     return (pe::IMAGE_RESOURCE_DIRECTORY*) ptr;

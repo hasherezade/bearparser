@@ -21,11 +21,7 @@ typedef struct _IMAGE_DELAY_LOAD {
 
 void* DelayImpDirWrapper::firstDelayLd(bufsize_t size)
 {
-    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return NULL;
-
-    offset_t rva = static_cast<offset_t>(d[pe::DIR_DELAY_IMPORT].VirtualAddress);
-    if (rva == 0) return NULL;
+    offset_t rva = getDirEntryAddress();
 
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, size);
     if (ptr == NULL) return NULL;

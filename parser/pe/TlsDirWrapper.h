@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../ExeNodeWrapper.h"
+#include "DataDirEntryWrapper.h"
 #include "PEFile.h"
 
 class TlsEntryWrapper;
 class TlsDirWrapper;
 
-class TlsDirWrapper : public ExeNodeWrapper
+class TlsDirWrapper : public DataDirEntryWrapper
 {
 public:
         /* fields :*/
@@ -22,7 +22,7 @@ public:
     };
 
     TlsDirWrapper(Executable *pe)
-        : ExeNodeWrapper(pe) { wrap(); }
+        : DataDirEntryWrapper(pe, pe::DIR_TLS) { wrap(); }
 
     bool wrap();
 

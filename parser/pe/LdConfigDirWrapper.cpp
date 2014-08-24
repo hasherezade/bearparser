@@ -27,11 +27,7 @@ bufsize_t LdConfigDirWrapper::getW81partSize()
 
 void* LdConfigDirWrapper::getLdConfigDirPtr()
 {
-    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return NULL;
-
-    offset_t rva = static_cast<offset_t>(d[pe::DIR_LOAD_CONFIG].VirtualAddress);
-    if (rva == 0) return NULL;
+    offset_t rva = getDirEntryAddress();
 
     bufsize_t dirSize = getLdConfigDirSize();
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, dirSize);

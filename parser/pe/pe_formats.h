@@ -417,7 +417,7 @@ enum dir_entry {
     DIR_IAT = 12,   // Import Address Table
     DIR_DELAY_IMPORT = 13,   // Delay Load Import Descriptors
     DIR_COM_DESCRIPTOR = 14,   // COM Runtime descriptor
-    DIR_ENTRY_NUMBER // counter - convinience field - added by hasherezade
+    DIR_ENTRIES_COUNT // counter - convinience field
 };
 
 /*

@@ -1,16 +1,15 @@
 #pragma once
 
-#include "pe_formats.h"
-#include "../ExeNodeWrapper.h"
+#include "DataDirEntryWrapper.h"
 
 class ExceptionEntryWrapper;
 class ExceptionDirWrapper;
 
-class ExceptionDirWrapper : public ExeNodeWrapper
+class ExceptionDirWrapper : public DataDirEntryWrapper
 {
 public:
     ExceptionDirWrapper(Executable *pe)
-        : ExeNodeWrapper(pe), parsedSize(0) { wrap(); }
+        : DataDirEntryWrapper(pe, pe::DIR_EXCEPTION), parsedSize(0) { wrap(); }
 
     bool wrap();
 

@@ -27,6 +27,7 @@ set (pe_hdrs
     pe/OptHdrWrapper.h
     pe/SectHdrsWrapper.h
     pe/DataDirWrapper.h
+    pe/DataDirEntryWrapper.h
     pe/ImportBaseDirWrapper.h
     pe/ImportDirWrapper.h
     pe/DelayImpDirWrapper.h
@@ -75,6 +76,7 @@ set (pe_srcs
     pe/OptHdrWrapper.cpp
     pe/SectHdrsWrapper.cpp
     pe/DataDirWrapper.cpp
+    pe/DataDirEntryWrapper.cpp
     pe/ImportBaseDirWrapper.cpp
     pe/ImportDirWrapper.cpp
     pe/DelayImpDirWrapper.cpp

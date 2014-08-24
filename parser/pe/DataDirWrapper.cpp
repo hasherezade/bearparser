@@ -84,4 +84,3 @@ Executable::addr_type DataDirWrapper::containsAddrType(size_t fieldId, size_t su
     if (fieldId == DIR_SECURITY) return Executable::RAW;
     return Executable::RVA;
 }
-

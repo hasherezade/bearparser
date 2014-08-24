@@ -1,15 +1,14 @@
 #pragma once
 
-#include "../ExeNodeWrapper.h"
-#include "pe_formats.h"
+#include "DataDirEntryWrapper.h"
 
-class BoundImpDirWrapper : public ExeNodeWrapper
+class BoundImpDirWrapper : public DataDirEntryWrapper
 {
 public:
     static uint64_t EntriesLimit;
 
     BoundImpDirWrapper(Executable *pe)
-        : ExeNodeWrapper(pe), importsCount(0) { wrap(); }
+        : DataDirEntryWrapper(pe, pe::DIR_BOUND_IMPORT), importsCount(0) { wrap(); }
 
     virtual bool wrap();
 

@@ -16,7 +16,7 @@ pe::WIN_CERTIFICATE* SecurityDirWrapper::getCert()
 }
 
 SecurityDirWrapper::SecurityDirWrapper(Executable* pe)
-    : ExeElementWrapper(pe), sizeOk(false)
+    : DataDirEntryWrapper(pe, pe::DIR_SECURITY), sizeOk(false)
 {
     wrap();
 }

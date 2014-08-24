@@ -63,11 +63,7 @@ bool RelocDirWrapper::wrap()
 
 pe::IMAGE_BASE_RELOCATION* RelocDirWrapper::reloc()
 {
-    pe::IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return NULL;
-
-    offset_t rva = d[pe::DIR_BASERELOC].VirtualAddress;
-    if (rva == 0) return NULL;
+    offset_t rva = getDirEntryAddress();
 
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_BASE_RELOCATION));
     if (ptr == NULL) return NULL;

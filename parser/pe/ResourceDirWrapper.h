@@ -2,7 +2,7 @@
 
 #define TOP_ENTRY_ROOT (-1)
 
-#include "../ExeElementWrapper.h"
+#include "DataDirEntryWrapper.h"
 #include "ResourceLeafWrapper.h"
 
 #include "rsrc/ResourcesAlbum.h"
@@ -12,7 +12,7 @@
 #include <vector>
 
 
-class ResourceDirWrapper : public ExeNodeWrapper
+class ResourceDirWrapper : public DataDirEntryWrapper
 {
 public:
 
@@ -29,7 +29,7 @@ public:
     };
 
     ResourceDirWrapper(Executable *pe, ResourcesAlbum *resAlbum = NULL, uint64_t rawOffset = 0, long depth = 0, long topEntryId = TOP_ENTRY_ROOT)
-        : ExeNodeWrapper(pe), rawOff(rawOffset), dirDepth(depth), album(resAlbum), topEntryID(topEntryId) { wrap(); }
+        : DataDirEntryWrapper(pe, pe::DIR_RESOURCE), rawOff(rawOffset), dirDepth(depth), album(resAlbum), topEntryID(topEntryId) { wrap(); }
 
     bool wrap();
 

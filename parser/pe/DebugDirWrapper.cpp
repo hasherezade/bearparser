@@ -18,24 +18,13 @@ typedef struct _IMAGE_DEBUG_DIRECTORY {
 
 pe::IMAGE_DEBUG_DIRECTORY* DebugDirWrapper::debugDir()
 {
-    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return NULL;
-
-    uint32_t rva = d[pe::DIR_DEBUG].VirtualAddress;
-    if (rva == 0) return NULL;
+    offset_t rva = getDirEntryAddress();
 
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_DEBUG_DIRECTORY));
     if (ptr == NULL) return NULL;
 
     return (pe::IMAGE_DEBUG_DIRECTORY*) ptr;
 }
-
-DebugDirWrapper::DebugDirWrapper(Executable *pe)
-    : ExeElementWrapper(pe)
-{
-    wrap();
-}
-
 
 bool DebugDirWrapper::wrap()
 {

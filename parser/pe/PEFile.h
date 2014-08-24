@@ -117,12 +117,4 @@ protected:
 friend class SectHdrsWrapper;
 };
 
-inline pe::IMAGE_DATA_DIRECTORY* getDataDirectory(Executable *exe)
-{
-    PEFile *pe = dynamic_cast<PEFile*> (exe);
-    if (pe == NULL) return NULL;
-
-    IMAGE_DATA_DIRECTORY *d = pe->getDataDirectory();
-    return d;
-}
 

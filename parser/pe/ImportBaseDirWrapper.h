@@ -1,19 +1,16 @@
 #pragma once
 
-#include "../ExeNodeWrapper.h"
+#include "DataDirEntryWrapper.h"
 #include "../Util.h"
 
 class ImportBaseDirWrapper;
 class ImportBaseEntryWrapper;
 class ImportBaseFuncWrapper;
 
-class ImportBaseDirWrapper : public ExeNodeWrapper
+class ImportBaseDirWrapper : public DataDirEntryWrapper
 {
 public:
     static uint64_t EntriesLimit;
-
-    ImportBaseDirWrapper(Executable *pe)
-        : ExeNodeWrapper(pe), importsCount(0) { wrap(); }
 
     virtual size_t getFieldsCount() { return this->importsCount; }
 
@@ -25,6 +22,9 @@ public:
     QString thunkToFuncName(offset_t thunk);
 
 protected:
+    ImportBaseDirWrapper(Executable *pe, pe:: dir_entry v_entryType)
+        : DataDirEntryWrapper(pe, v_entryType), importsCount(0) { wrap(); }
+
     void addFuncMapping(ImportBaseFuncWrapper *func);
     //---
     std::map<offset_t, size_t> thunkToLibMap;
@@ -40,13 +40,13 @@ public:
     static uint64_t EntriesLimit;
     static uint32_t NameLenLimit;
 
-    ImportBaseEntryWrapper(Executable *pe, ImportBaseDirWrapper *importsDir, uint32_t entryNumber)
-        : ExeNodeWrapper(pe, importsDir, entryNumber), impDir(importsDir) { wrap(); }
-
     virtual char* getLibraryName() = 0;
     virtual size_t getSubFieldsCount() { return 1; }
 
 protected:
+    ImportBaseEntryWrapper(Executable *pe, ImportBaseDirWrapper *importsDir, uint32_t entryNumber)
+        : ExeNodeWrapper(pe, importsDir, entryNumber), impDir(importsDir) { wrap(); }
+
     void addFuncMapping(ImportBaseFuncWrapper *func) { if (impDir) impDir->addFuncMapping(func); }
     std::map<offset_t, size_t> thunkToFuncMap;
     ImportBaseDirWrapper* impDir;

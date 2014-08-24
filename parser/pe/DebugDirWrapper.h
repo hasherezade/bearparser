@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../ExeNodeWrapper.h"
-#include "pe_formats.h"
+#include "DataDirEntryWrapper.h"
 
-class DebugDirWrapper : public ExeElementWrapper
+class DebugDirWrapper : public DataDirEntryWrapper
 {
 public:
 
@@ -20,7 +19,9 @@ public:
         FIELD_COUNTER
     };
 
-    DebugDirWrapper(Executable *pe);
+    DebugDirWrapper(Executable *pe)
+        : DataDirEntryWrapper(pe, pe::DIR_DEBUG) { wrap(); }
+
     ~DebugDirWrapper() { clear(); }
 
     bool wrap();

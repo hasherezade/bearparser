@@ -27,9 +27,7 @@ pe::IMAGE_EXPORT_DIRECTORY* ExportDirWrapper::exportDir()
     IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
     if (!d) return NULL;
 
-    uint32_t rva = d[pe::DIR_EXPORT].VirtualAddress;
-    if (rva == 0) return NULL;
-
+    offset_t rva = getDirEntryAddress();
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_EXPORT_DIRECTORY));
     if (ptr == NULL) return NULL;
 

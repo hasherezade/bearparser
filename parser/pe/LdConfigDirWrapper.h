@@ -1,8 +1,7 @@
 #pragma once
-#include "../ExeNodeWrapper.h"
-#include "pe_formats.h"
+#include "DataDirEntryWrapper.h"
 
-class LdConfigDirWrapper : public ExeNodeWrapper
+class LdConfigDirWrapper : public DataDirEntryWrapper
 {
 public:
 
@@ -38,7 +37,7 @@ public:
     };
 
     LdConfigDirWrapper(Executable* pe)
-        :  ExeNodeWrapper(pe) { wrap(); }
+        :  DataDirEntryWrapper(pe, pe::DIR_LOAD_CONFIG) { wrap(); }
 
     bool wrap();
 

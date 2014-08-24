@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../ExeNodeWrapper.h"
-#include "pe_formats.h"
+#include "DataDirEntryWrapper.h"
 
-class ExportDirWrapper : public ExeNodeWrapper
+class ExportDirWrapper : public DataDirEntryWrapper
 {
 public:
 
@@ -24,7 +23,7 @@ public:
     };
 
     ExportDirWrapper(Executable *pe)
-        : ExeNodeWrapper(pe) { wrap(); }
+        : DataDirEntryWrapper(pe, pe::DIR_EXPORT) { wrap(); }
 
     bool wrap();
 

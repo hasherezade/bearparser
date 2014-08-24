@@ -11,7 +11,7 @@ public:
     static uint64_t EntriesLimit;
 
     DelayImpDirWrapper(Executable *pe)
-        : ImportBaseDirWrapper(pe) { wrap(); }
+        : ImportBaseDirWrapper(pe, pe::DIR_DELAY_IMPORT) { wrap(); }
 
     bool wrap();
 

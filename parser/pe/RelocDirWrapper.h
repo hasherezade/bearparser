@@ -1,17 +1,16 @@
 #pragma once
 
-#include "../ExeNodeWrapper.h"
-#include "pe_formats.h"
+#include "DataDirEntryWrapper.h"
 
 class RelocEntryWrapper;
 class RelocBlockWrapper;
 class RelocDirWrapper;
 
-class RelocDirWrapper : public ExeNodeWrapper
+class RelocDirWrapper : public DataDirEntryWrapper
 {
 public:
     RelocDirWrapper(Executable *pe)
-        : ExeNodeWrapper(pe), parsedSize(0) { wrap(); }
+        : DataDirEntryWrapper(pe, pe::DIR_BASERELOC), parsedSize(0) { wrap(); }
 
     bool wrap();
 

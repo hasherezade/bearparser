@@ -1,6 +1,6 @@
 #pragma once
-#include "pe_formats.h"
-#include "../ExeElementWrapper.h"
+
+#include "DataDirEntryWrapper.h"
 
 
 /*
@@ -12,7 +12,7 @@ typedef struct WIN_CERTIFICATE {
 } WIN_CERTIFICATE, *LPWIN_CERTIFICATE;
 */
 
-class SecurityDirWrapper : public ExeElementWrapper
+class SecurityDirWrapper : public DataDirEntryWrapper
 {
 public:
 
