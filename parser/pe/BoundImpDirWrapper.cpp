@@ -22,11 +22,7 @@ typedef struct _IMAGE_BOUND_FORWARDER_REF {
 
 pe::IMAGE_BOUND_IMPORT_DESCRIPTOR* BoundImpDirWrapper::boundImp()
 {
-    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return NULL;
-
-    uint32_t rva = d[pe::DIR_BOUND_IMPORT].VirtualAddress;
-    if (rva == 0) return NULL;
+    offset_t rva = getDirEntryAddress();
 
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_BOUND_IMPORT_DESCRIPTOR));
     if (ptr == NULL) return NULL;
@@ -38,7 +34,7 @@ bool BoundImpDirWrapper::wrap()
     clear();
 
     uint64_t cntr = 0;
-    if (!m_Exe || !getDataDirectory(m_Exe)) {
+    if (!getDataDirectory()) {
         if (this->importsCount == cntr) return false;
         this->importsCount = cntr;
         return true;

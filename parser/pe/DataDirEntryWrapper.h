@@ -8,7 +8,7 @@ using namespace pe;
 class DataDirEntryWrapper : public ExeNodeWrapper
 {
 public:
-    static pe::IMAGE_DATA_DIRECTORY* getDataDirectory(Executable *exe);
+    pe::IMAGE_DATA_DIRECTORY* getDataDirectory();
 
     offset_t getDirEntryAddress();
     bufsize_t getDirEntrySize();

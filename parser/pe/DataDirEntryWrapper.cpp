@@ -4,9 +4,9 @@
 using namespace pe;
 
 //-------------
-pe::IMAGE_DATA_DIRECTORY* DataDirEntryWrapper::getDataDirectory(Executable *exe)
+pe::IMAGE_DATA_DIRECTORY* DataDirEntryWrapper::getDataDirectory()
 {
-    PEFile *pe = dynamic_cast<PEFile*> (exe);
+    PEFile *pe = dynamic_cast<PEFile*> (m_Exe);
     if (pe == NULL) return NULL;
 
     IMAGE_DATA_DIRECTORY *d = pe->getDataDirectory();
@@ -17,7 +17,7 @@ offset_t DataDirEntryWrapper::getDirEntryAddress()
 {
     if (this->entryType >= pe::DIR_ENTRIES_COUNT) return INVALID_ADDR;
 
-    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
+    IMAGE_DATA_DIRECTORY *d = getDataDirectory();
     if (!d) return INVALID_ADDR;
 
     offset_t rva = static_cast<offset_t>(d[this->entryType].VirtualAddress);
@@ -29,7 +29,7 @@ bufsize_t DataDirEntryWrapper::getDirEntrySize()
 {
     if (this->entryType >= pe::DIR_ENTRIES_COUNT) return 0;
 
-    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
+    IMAGE_DATA_DIRECTORY *d = getDataDirectory();
     if (!d) return 0;
 
     bufsize_t size = static_cast<bufsize_t>(d[this->entryType].Size);

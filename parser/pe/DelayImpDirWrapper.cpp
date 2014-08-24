@@ -34,7 +34,7 @@ bool DelayImpDirWrapper::wrap()
     clear();
 
     uint64_t cntr = 0;
-    if (!m_Exe || !getDataDirectory(m_Exe)) {
+    if (!getDataDirectory()) {
         if (this->importsCount == cntr) return false;
         this->importsCount = cntr;
         return true;
