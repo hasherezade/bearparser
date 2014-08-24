@@ -32,8 +32,10 @@ pe::IMAGE_BOUND_IMPORT_DESCRIPTOR* BoundImpDirWrapper::boundImp()
 bool BoundImpDirWrapper::loadNextEntry(size_t entryNum)
 {
     BoundEntryWrapper* imp = new BoundEntryWrapper(m_Exe, this, entryNum);
-    if (!imp || !imp->getPtr()) return false;
-
+    if (!imp || !imp->getPtr()) {
+        delete imp;
+        return false;
+    }
     // TODO! do it in proper way!
     bool isOk = false;
     uint64_t offset = imp->getNumValue(BoundEntryWrapper::MODULE_NAME_OFFSET, &isOk);
