@@ -6,6 +6,7 @@
 #include "OptHdrWrapper.h"
 #include "SectHdrsWrapper.h"
 
+#include "DataDirWrapper.h"
 #include "ImportDirWrapper.h"
 #include "DelayImpDirWrapper.h"
 #include "BoundImpDirWrapper.h"
