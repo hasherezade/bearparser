@@ -108,7 +108,7 @@ void* ImportedFuncWrapper::getDataPtr(ImportEntryWrapper::FieldID fId)
     void* thunkPtr = getValuePtr(fId);
     if (!thunkPtr) return NULL;
 
-    bool is64 = (m_Exe->getBitMode() == 64) ? true : false;
+    bool is64 = (m_Exe->getBitMode() == Executable::BITS_64) ? true : false;
     uint64_t thunkValVA = 0; //TODO
     if (is64) {
         uint64_t *ptr = (uint64_t*) thunkPtr;
@@ -143,7 +143,7 @@ void* ImportedFuncWrapper::getDataPtr(ImportEntryWrapper::FieldID fId)
 uint64_t ImportedFuncWrapper::getThunkValue()
 {
     bool isOk = false;
-    bool is64 = (m_Exe->getBitMode() == 64) ? true : false;
+    bool is64 = (m_Exe->getBitMode() == Executable::BITS_64) ? true : false;
 
     uint64_t ordinal = 0;
     void* thunkPtr = getPtr();
@@ -166,7 +166,7 @@ uint64_t ImportedFuncWrapper::getThunkValue()
 bool ImportedFuncWrapper::isByOrdinal()
 {
     bool isOk = false;
-    bool is64 = (m_Exe->getBitMode() == 64) ? true : false;
+    bool is64 = (m_Exe->getBitMode() == Executable::BITS_64) ? true : false;
 
     void *p = getValuePtr(ImportEntryWrapper::ORIG_FIRST_THUNK);
     if (!p) p = getValuePtr(ImportEntryWrapper::FIRST_THUNK);
@@ -225,7 +225,7 @@ void* ImportedFuncWrapper::getFieldPtr(size_t fId, size_t subField)
 bufsize_t ImportedFuncWrapper::getFieldSize(size_t fieldId, size_t subField)
 {
     if (fieldId == HINT) return sizeof (WORD);
-    bool is64 = (m_Exe->getBitMode() == 64) ? true : false;
+    bool is64 = (m_Exe->getBitMode() == Executable::BITS_64) ? true : false;
     uint32_t entrySize = (is64) ? sizeof(uint64_t) : sizeof(uint32_t);
     return entrySize;
 }

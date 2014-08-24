@@ -37,11 +37,7 @@ bool RelocDirWrapper::wrap()
 {
     clear();
     parsedSize = 0;
-
-    pe::IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return false;
-
-    size_t maxSize = d[pe::DIR_BASERELOC].Size;
+    bufsize_t maxSize = getDirEntrySize();
 
     for (int i = 0; i < RelocDirWrapper::EntriesLimit && parsedSize < maxSize; i++) {
         RelocBlockWrapper* entry = new RelocBlockWrapper(this->m_Exe, this, i);

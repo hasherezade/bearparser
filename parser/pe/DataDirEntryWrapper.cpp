@@ -25,3 +25,13 @@ offset_t DataDirEntryWrapper::getDirEntryAddress()
     return rva;
 }
 
+bufsize_t DataDirEntryWrapper::getDirEntrySize()
+{
+    if (this->entryType >= pe::DIR_ENTRIES_COUNT) return 0;
+
+    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
+    if (!d) return 0;
+
+    bufsize_t size = static_cast<bufsize_t>(d[this->entryType].Size);
+    return size;
+}

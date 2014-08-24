@@ -15,11 +15,9 @@ bool ExceptionDirWrapper::wrap()
 {
     clear();
     parsedSize = 0;
+    bufsize_t maxSize = getDirEntrySize();
+    if (maxSize == 0) return false; // nothing to parse
 
-    pe::IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return false;
-
-    size_t maxSize = d[pe::DIR_EXCEPTION].Size;
     if (!exceptFunc64()) return false;
 
     //printf("maxSize = %x\n", maxSize);
@@ -47,12 +45,7 @@ bool ExceptionDirWrapper::wrap()
 
 pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* ExceptionDirWrapper::exceptFunc64()
 {
-    pe::IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return NULL;
-
-    uint32_t rva = d[pe::DIR_EXCEPTION].VirtualAddress;
-    if (rva == 0) return NULL;
-
+    offset_t rva = getDirEntryAddress();
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY));
     if (ptr == NULL) return NULL;
 

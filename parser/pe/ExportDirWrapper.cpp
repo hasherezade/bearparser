@@ -24,9 +24,6 @@ typedef struct _IMAGE_EXPORT_DIRECTORY {
 
 pe::IMAGE_EXPORT_DIRECTORY* ExportDirWrapper::exportDir()
 {
-    IMAGE_DATA_DIRECTORY *d = getDataDirectory(m_Exe);
-    if (!d) return NULL;
-
     offset_t rva = getDirEntryAddress();
     BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_EXPORT_DIRECTORY));
     if (ptr == NULL) return NULL;
@@ -47,7 +44,7 @@ size_t ExportDirWrapper::mapNames()
 
     size_t maxNames = exp->NumberOfNames;
 
-    uint64_t nameOrdRVA = exp->AddressOfNameOrdinals;
+    offset_t nameOrdRVA = exp->AddressOfNameOrdinals;
     //uint64_t nameRVA = exp->AddressOfNames;
     int i = 0;
     for (i = 0; i < maxNames; i++) {

@@ -11,6 +11,7 @@ public:
     static pe::IMAGE_DATA_DIRECTORY* getDataDirectory(Executable *exe);
 
     offset_t getDirEntryAddress();
+    bufsize_t getDirEntrySize();
     pe:: dir_entry getDirEntryType() { return this->entryType; }
 
 protected:
