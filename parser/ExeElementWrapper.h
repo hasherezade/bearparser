@@ -11,8 +11,6 @@
 class ExeElementWrapper : public AbstractByteBuffer
 {
 public:
-
-
     ExeElementWrapper(Executable *exe);
     virtual ~ExeElementWrapper() {}
 
@@ -56,6 +54,9 @@ public:
     bool setStringValue(char* textPtr, QString newTextVal);
 
     Executable* getExe() { return m_Exe; }
+
+    inline bool isBit64() { return Executable::isBit32(m_Exe); }
+    inline bool isBit32() { return Executable::isBit64(m_Exe); }
 
 protected:
     virtual bool canCopyToOffset(offset_t rawOffset);
