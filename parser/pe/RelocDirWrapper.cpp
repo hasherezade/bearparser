@@ -200,6 +200,14 @@ Executable::addr_type RelocBlockWrapper::containsAddrType(size_t fieldId, size_t
     return Executable::NOT_ADDR;
 }
 
+WrappedValue::data_type RelocBlockWrapper::containsDataType(size_t fieldId, size_t subField)
+{
+    if (fieldId == ENTRIES_PTR){
+        return WrappedValue::COMPLEX;
+    }
+    return WrappedValue::INT;
+}
+
 void* RelocBlockWrapper::getEntriesPtr()
 {
     void *entriesPtr = getFieldPtr(ENTRIES_PTR);

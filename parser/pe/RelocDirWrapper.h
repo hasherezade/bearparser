@@ -21,6 +21,7 @@ public:
     virtual size_t getFieldsCount() { return entries.size(); }
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField) { return getSubfieldPtr(fieldId, subField ); }
+    virtual bufsize_t getFieldSize(size_t fieldId, size_t subField) { return getSubfieldSize(fieldId, subField ); }
     virtual QString getFieldName(size_t fieldId) { return "Relocation Block"; }
     virtual QString getFieldName(size_t fieldId, size_t subField) { return getSubfieldName(fieldId, subField ); }
 
@@ -63,6 +64,7 @@ public:
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField);
+    virtual WrappedValue::data_type containsDataType(size_t fieldId, size_t subField);
 
     void* getEntriesPtr();
     size_t maxEntriesNumInBlock();
