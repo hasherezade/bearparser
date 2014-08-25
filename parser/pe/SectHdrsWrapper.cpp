@@ -277,13 +277,13 @@ bufsize_t SectHdrsWrapper::getSize()
     }
     return bufsize_t (endOffset - hdrOffset);
 }
-
+/*
 void* SectHdrsWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
     if (fieldId >= entries.size()) return NULL;
     return entries[fieldId]->getFieldPtr(subField);
 }
-
+*/
 QString SectHdrsWrapper::getFieldName(size_t fieldId)
 {
     if (fieldId >= entries.size()) return NULL;

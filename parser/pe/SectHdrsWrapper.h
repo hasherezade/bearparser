@@ -72,11 +72,11 @@ public:
     virtual bufsize_t getSize();
     virtual QString getName() { return "Section Hdrs"; }
     virtual size_t getFieldsCount();
-    virtual size_t getSubFieldsCount() { return 1; }
 
     // specific field boundatries
-    virtual void* getFieldPtr(size_t fieldId, size_t subField);
-    virtual QString getFieldName(size_t fieldId);
+    virtual void* getFieldPtr(size_t fieldId, size_t subField) { return getSubfieldPtr(fieldId, subField ); }
+    virtual bufsize_t getFieldSize(size_t fieldId, size_t subField) { return getSubfieldSize(fieldId, subField ); }
+    virtual QString getFieldName(size_t fieldId);// { return getSubFieldName(fieldId); }
 
     SectionHdrWrapper* getSecHdr(size_t secNum) { return (secNum >= entries.size())? NULL : dynamic_cast<SectionHdrWrapper*>(entries[secNum]); }
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool roundup, bool verbose = false);
