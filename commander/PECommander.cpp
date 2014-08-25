@@ -66,6 +66,15 @@ void cmd_util::dumpResourcesInfo(PEFile *pe, pe::resource_type type, size_t wrap
     cmd_util::dumpNodeInfo(dynamic_cast<ExeNodeWrapper*>(wrapper));
 }
 
+void cmd_util::listDataDirs(PEFile *pe)
+{
+    for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
+        DataDirEntryWrapper* entry = pe->getDataDirEntry(pe::dir_entry(i));
+        if (entry == NULL) continue;
+        printf("[%d] %s\n", i, entry->getName().toStdString().c_str());
+    }
+}
+
 //------------------------------------------
 void PECommander::initCommands()
 {
@@ -76,6 +85,7 @@ void PECommander::initCommands()
     this->addCommand("rstrings", new PrintStringsCommand("Print Strings from resources"));
     this->addCommand("rsrcs", new PrintWrapperTypesCommand("List Resource Types"));
     this->addCommand("rs", new WrapperInfoCommand("Resource Info"));
-    //WrapperInfoCommand
+
+    this->addCommand("dir_mv", new MoveDataDirEntryCommand("Move DataDirectory"));
 }
 

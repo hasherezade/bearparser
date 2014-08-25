@@ -20,5 +20,7 @@ protected:
     DataDirEntryWrapper(PEFile* pe, pe:: dir_entry v_entryType);
 
     pe::dir_entry entryType;
+
+friend class PEFile;
 };
 

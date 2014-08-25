@@ -7,6 +7,7 @@ namespace cmd_util {
     void printResourceTypes(PEFile *pe);
     void printStrings(PEFile *pe, size_t limit);
     void dumpResourcesInfo(PEFile *pe, pe::resource_type type, size_t wrapperId);
+    void listDataDirs(PEFile *pe);
 };
 
 //----------------------------------------------
@@ -152,4 +153,31 @@ public:
     }
 };
 
+class MoveDataDirEntryCommand : public Command
+{
+public:
+    MoveDataDirEntryCommand(std::string desc)
+        : Command(desc) {}
 
+    virtual void execute(CmdParams *params, CmdContext  *context)
+    {
+        Executable *exe = cmd_util::getExeFromContext(context);
+        PEFile *pe = dynamic_cast<PEFile*>(exe);
+
+        printf("Available DataDirs: \n");
+        cmd_util::listDataDirs(pe);
+
+        pe::dir_entry entryId = static_cast<pe::dir_entry> (cmd_util::readNumber("DataDir id"));
+        if (pe->getDataDirEntry(entryId) == NULL) {
+            printf("No such wrapper\n");
+            return;
+        }
+
+        offset_t offset = cmd_util::readOffset(Executable::RAW);
+        if (pe->moveDataDirEntry(entryId, offset) == false) {
+            printf("Failed\n");
+            return;
+        }
+        printf("Done!\n");
+    }
+};

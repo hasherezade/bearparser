@@ -96,6 +96,11 @@ public:
     {
         return (this->album == NULL) ? NULL : album->getResourcesOfType(typeId);
     }
+     DataDirEntryWrapper* getDataDirEntry(pe::dir_entry eType);
+    //---
+    //modifications:
+    bool moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addType = Executable::RAW);
+
 
 protected:
     virtual void clearWrappers();

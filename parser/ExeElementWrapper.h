@@ -63,5 +63,7 @@ protected:
     bool copyToOffset(offset_t rawOffset);
 
     Executable *m_Exe;
+
+friend class Executable;
 };
 
