@@ -109,3 +109,13 @@ QString DebugDirWrapper::translateType(int type)
     return "";
 }
 
+QString DebugDirWrapper::translateFieldContent(size_t fieldId)
+{
+    if (fieldId != TYPE) return "";
+
+    pe::IMAGE_DEBUG_DIRECTORY* d = debugDir();
+    if (d == NULL) return NULL;
+
+    return translateType(d->Type);
+}
+

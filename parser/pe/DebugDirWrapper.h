@@ -30,12 +30,14 @@ public:
     virtual bufsize_t getSize();
     virtual QString getName();
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
+    virtual size_t getSubFieldsCount() { return 1; }
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
 
     QString translateType(int type);
+    QString translateFieldContent(size_t fieldId);
 
 private:
     pe::IMAGE_DEBUG_DIRECTORY* debugDir();
