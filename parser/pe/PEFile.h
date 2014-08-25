@@ -58,8 +58,8 @@ public:
     virtual void wrap();
 
     // FileAddr <-> RVA
-    virtual offset_t fileAddrToRva(offset_t raw, bool getClosestIfInCave = false);
-    virtual offset_t rvaToFileAddr(offset_t rva, bool getClosestIfInCave = false);
+    virtual offset_t fileAddrToRva(offset_t raw);
+    virtual offset_t rvaToFileAddr(offset_t rva);
 
     virtual bufsize_t getMappedSize(Executable::addr_type aType);
     virtual bufsize_t getAlignment(Executable::addr_type aType){ return core.getAlignment(aType); }

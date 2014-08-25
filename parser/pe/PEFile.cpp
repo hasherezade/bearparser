@@ -165,7 +165,7 @@ bool PEFile::setHdrSectionsNum(size_t newNum)
 }
 
 
-offset_t PEFile::fileAddrToRva(offset_t raw, bool getClosestIfInCave)
+offset_t PEFile::fileAddrToRva(offset_t raw)
 {
     if (raw >= this->getMappedSize(Executable::RAW)) return INVALID_ADDR;
 
@@ -188,7 +188,7 @@ offset_t PEFile::fileAddrToRva(offset_t raw, bool getClosestIfInCave)
     return raw;
 }
 
-offset_t PEFile::rvaToFileAddr(offset_t rva, bool getClosestIfInCave)
+offset_t PEFile::rvaToFileAddr(offset_t rva)
 {
     if (rva >= this->getMappedSize(Executable::RVA)) return INVALID_ADDR;
 

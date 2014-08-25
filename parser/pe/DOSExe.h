@@ -29,8 +29,8 @@ public:
     // inherited from Executable:
     //
     // FileAddr <-> RVA
-    virtual offset_t fileAddrToRva(offset_t raw, bool getClosestIfInCave = false) { return raw; } //TODO
-    virtual offset_t rvaToFileAddr(offset_t rva, bool getClosestIfInCave = false) { return rva; } //TODO
+    virtual offset_t fileAddrToRva(offset_t raw) { return raw; } //TODO
+    virtual offset_t rvaToFileAddr(offset_t rva) { return rva; } //TODO
 
     virtual bufsize_t getMappedSize(Executable::addr_type aType) { return this->getContentSize(); }
     virtual bufsize_t getAlignment(Executable::addr_type aType) { return 0x1000; } //TODO
