@@ -37,7 +37,7 @@ friend class ImportBaseEntryWrapper;
 };
 
 
-class ImportBaseEntryWrapper : public ExeNodeWrapper
+class ImportBaseEntryWrapper : public PENodeWrapper
 {
 public:
     static size_t EntriesLimit;
@@ -47,8 +47,8 @@ public:
     virtual size_t getSubFieldsCount() { return 1; }
 
 protected:
-    ImportBaseEntryWrapper(Executable *pe, ImportBaseDirWrapper *importsDir, size_t entryNumber)
-        : ExeNodeWrapper(pe, importsDir, entryNumber), impDir(importsDir) { wrap(); }
+    ImportBaseEntryWrapper(PEFile *pe, ImportBaseDirWrapper *importsDir, size_t entryNumber)
+        : PENodeWrapper(pe, importsDir, entryNumber), impDir(importsDir) { wrap(); }
 
     void addFuncMapping(ImportBaseFuncWrapper *func) { if (impDir) impDir->addFuncMapping(func); }
 
@@ -58,11 +58,11 @@ protected:
 friend class ImportBaseDirWrapper;
 };
 
-class ImportBaseFuncWrapper : public ExeNodeWrapper
+class ImportBaseFuncWrapper : public PENodeWrapper
 {
 public:
-    ImportBaseFuncWrapper(Executable *pe, ImportBaseEntryWrapper* parentLib, size_t entryNumber)
-        : ExeNodeWrapper(pe, parentLib, entryNumber) { }
+    ImportBaseFuncWrapper(PEFile *pe, ImportBaseEntryWrapper* parentLib, size_t entryNumber)
+        : PENodeWrapper(pe, parentLib, entryNumber) { }
 
     virtual QString getName();
 

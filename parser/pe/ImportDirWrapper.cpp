@@ -224,7 +224,7 @@ bool ImportEntryWrapper::wrap()
         return false;
     }
     for (cntr = 0; cntr < LIMIT; cntr++) {
-        ImportedFuncWrapper* func = new ImportedFuncWrapper(m_Exe, this, cntr);
+        ImportedFuncWrapper* func = new ImportedFuncWrapper(m_PE, this, cntr);
         offset_t thunk = func->getThunkValue();
         //printf( "%s\n", func->getName().c_str());
         //printf ("Thunk = %llx\n", thunk);
@@ -243,10 +243,8 @@ bool ImportEntryWrapper::wrap()
 
 void* ImportEntryWrapper::getPtr()
 {
-    PEFile *pe = dynamic_cast<PEFile*>(m_Exe);
-    if (pe == NULL) return NULL;
-
-    IMAGE_DATA_DIRECTORY *d = pe->getDataDirectory();
+    if (m_PE == NULL) return NULL;
+    IMAGE_DATA_DIRECTORY *d = m_PE->getDataDirectory();
     if (!d) return NULL;
 
     offset_t importRva = static_cast<offset_t>(d[pe::DIR_IMPORT].VirtualAddress);
@@ -384,7 +382,7 @@ pe::IMAGE_IMPORT_DESCRIPTOR* ImportDirWrapper::firstDescriptor()
 
 bool ImportDirWrapper::loadNextEntry(size_t cntr)
 {
-    ImportEntryWrapper* imp = new ImportEntryWrapper(m_Exe, this, cntr);
+    ImportEntryWrapper* imp = new ImportEntryWrapper(m_PE, this, cntr);
     if (!imp || !imp->getPtr()) {
         delete imp;
         return false;

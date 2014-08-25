@@ -29,7 +29,7 @@ void* DelayImpDirWrapper::firstDelayLd(bufsize_t size)
 
 bool DelayImpDirWrapper::loadNextEntry(size_t cntr)
 {
-    DelayImpEntryWrapper* imp = new DelayImpEntryWrapper(m_Exe, this, cntr);
+    DelayImpEntryWrapper* imp = new DelayImpEntryWrapper(m_PE, this, cntr);
     if (!imp || !imp->getPtr()) {
         delete imp;
         return false;
@@ -90,7 +90,7 @@ bool DelayImpEntryWrapper::wrap()
 
     for (size_t i = 0; i < ImportBaseEntryWrapper::EntriesLimit;  i++) { //
 
-        DelayImpFuncWrapper* entry = new DelayImpFuncWrapper(this->m_Exe, this, i);
+        DelayImpFuncWrapper* entry = new DelayImpFuncWrapper(this->m_PE, this, i);
         if (entry->getPtr() == NULL) {
             delete entry;
             break;

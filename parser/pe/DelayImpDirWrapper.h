@@ -42,7 +42,7 @@ public:
         FIELD_COUNTER
     };
 
-    DelayImpEntryWrapper(Executable *pe, DelayImpDirWrapper *importsDir, size_t entryNumber)
+    DelayImpEntryWrapper(PEFile *pe, DelayImpDirWrapper *importsDir, size_t entryNumber)
         : ImportBaseEntryWrapper(pe, importsDir, entryNumber) { wrap(); }
     bool wrap();
 
@@ -78,7 +78,7 @@ public:
         FIELD_COUNTER
     };
 
-    DelayImpFuncWrapper(Executable *pe, DelayImpEntryWrapper *parentDir, size_t entryNumber)
+    DelayImpFuncWrapper(PEFile *pe, DelayImpEntryWrapper *parentDir, size_t entryNumber)
         : ImportBaseFuncWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
     // full structure boundatries
