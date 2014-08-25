@@ -52,7 +52,7 @@ public:
 
     PEFile(AbstractByteBuffer *v_buf);
     virtual ~PEFile() { TRACE(); clearWrappers(); delete album; }
-
+    virtual void wrap();
     virtual void clearWrappers();
 
     exe_bits getHdrBitMode();

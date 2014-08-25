@@ -61,10 +61,15 @@ void PEFile::clearWrappers()
     }
 }
 
-void  PEFile::wrap(AbstractByteBuffer *v_buf)
+void PEFile::wrap()
 {
     clearWrappers();
+    DOSExe::wrap(this->buf);
+    PEFile::wrap(this->buf);
+}
 
+void  PEFile::wrap(AbstractByteBuffer *v_buf)
+{
     core.wrap(v_buf);
 
     this->fHdr = new FileHdrWrapper(this);
