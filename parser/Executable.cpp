@@ -24,11 +24,6 @@ bool Executable::isValidAddr(offset_t addr, addr_type addrType)
    return (addr >= mappedFrom && addr < mappedTo) ? true : false;
 }
 
-bool Executable::isValidVA(offset_t va)
-{
-    return isValidAddr(va, Executable::VA);
-}
-
 offset_t Executable::VaToRva(offset_t va, bool autodetect)
 {
     offset_t mappedFrom = this->getImageBase();
@@ -41,7 +36,6 @@ offset_t Executable::VaToRva(offset_t va, bool autodetect)
 
     offset_t rva = va - mappedFrom;
     return rva;
-
 }
 
 offset_t Executable::convertAddr(offset_t inAddr, Executable::addr_type inType, Executable::addr_type outType)

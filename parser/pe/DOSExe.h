@@ -26,22 +26,21 @@ public:
     DOSExe(AbstractByteBuffer *v_buf);
     virtual ~DOSExe() { TRACE(); }
 
+    // inherited from Executable:
+    //
+    // FileAddr <-> RVA
+    virtual offset_t fileAddrToRva(offset_t raw, bool getClosestIfInCave = false) { return raw; } //TODO
+    virtual offset_t rvaToFileAddr(offset_t rva, bool getClosestIfInCave = false) { return rva; } //TODO
+
     virtual bufsize_t getMappedSize(Executable::addr_type aType) { return this->getContentSize(); }
     virtual bufsize_t getAlignment(Executable::addr_type aType) { return 0x1000; } //TODO
     virtual offset_t getImageBase() { return 0; } //TODO
     virtual offset_t getEntryPoint() { return 0; } //TODO
 
-    virtual offset_t dosHeaderOffset() { return 0; } //wrapper's mount point
     Executable::addr_type detectAddrType(offset_t addr, Executable::addr_type hintType) { return Executable::RAW; }
-
-    // returns INVALID_ADDR if failed
-    virtual offset_t fileAddrToRva(offset_t raw, bool getClosestIfInCave = false) { return raw; }
-
-    virtual offset_t VaToRva(offset_t va, bool autodetect = true) const { return va; }
-    virtual offset_t VaToFileAddr(offset_t rva, bool getClosestIfInCave = false) { return rva; }
-    virtual offset_t rvaToFileAddr(offset_t rva, bool getClosestIfInCave = false) { return rva; }
-    virtual offset_t rvaToVa(offset_t rva) { return rva; }
-
+    //---
+    // DOS Exe only:
+    virtual offset_t dosHeaderOffset() { return 0; } //wrapper's mount point
     offset_t peSignatureOffset();
 
 protected:

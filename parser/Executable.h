@@ -61,7 +61,7 @@ public:
 
     /* conversions */
     virtual bool isValidAddr(offset_t addr, addr_type addrType);
-    virtual bool isValidVA(offset_t va); // wrapper
+    virtual bool isValidVA(offset_t va) { return isValidAddr(va, Executable::VA); }
 
     virtual offset_t convertAddr(offset_t inAddr, Executable::addr_type inType, Executable::addr_type outType);
 
@@ -69,12 +69,20 @@ public:
     Executable::addr_type detectAddrType(offset_t addr, Executable::addr_type hintType); //TODO
 
     // returns INVALID_ADDR if failed
+    // FileAddr <-> RVA
     virtual offset_t fileAddrToRva(offset_t raw, bool getClosestIfInCave = false) = 0;
-
-    virtual offset_t VaToRva(offset_t va, bool autodetect);
-    virtual offset_t VaToFileAddr(offset_t rva, bool getClosestIfInCave = false) = 0;
     virtual offset_t rvaToFileAddr(offset_t rva, bool getClosestIfInCave = false) = 0;
-    virtual offset_t rvaToVa(offset_t rva) = 0;
+
+    // VA <-> RVA
+    virtual offset_t VaToRva(offset_t va, bool autodetect);
+    virtual offset_t rvaToVa(offset_t rva) { return rva + this->getImageBase(); }
+
+    // VA -> FileAddr
+    virtual offset_t vaToFileAddr(offset_t va, bool getClosestIfInCave = false)
+    {
+        offset_t rva = this->VaToRva(va, true);
+        return rvaToFileAddr(rva, getClosestIfInCave);
+    }
 
 protected:
     Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode);

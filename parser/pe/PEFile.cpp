@@ -110,26 +110,6 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     }
 }
 
-offset_t PEFile::peHdrOffset()
-{
-    return core.peFileHdrOffset();
-}
-
-offset_t PEFile::peNtHdrOffset()
-{
-    return core.peSignatureOffset();
-}
-
-offset_t PEFile::secHdrsOffset()
-{
-    return core.secHdrsOffset();
-}
-
-offset_t PEFile::peOptHdrOffset()
-{
-    return core.peOptHdrOffset();
-}
-
 offset_t PEFile::peDataDirOffset()
 {
     if (this->optHdr == NULL) return INVALID_ADDR;
@@ -140,11 +120,6 @@ IMAGE_DATA_DIRECTORY* PEFile::getDataDirectory()
 {
     if (this->wrappers[WR_DATADIR] == NULL) return NULL;
     return static_cast<IMAGE_DATA_DIRECTORY*>(this->wrappers[WR_DATADIR]->getPtr());
-}
-
-Executable::exe_bits PEFile::getHdrBitMode()
-{
-    return core.getHdrBitMode();
 }
 
 bufsize_t PEFile::getMappedSize(Executable::addr_type aType)
@@ -159,38 +134,14 @@ bufsize_t PEFile::getMappedSize(Executable::addr_type aType)
     return 0;
 }
 
-bufsize_t PEFile::getAlignment(Executable::addr_type aType)
-{
-    return core.getAlignment(aType);
-}
-
-offset_t PEFile::getImageBase()
-{
-    return core.getImageBase();
-}
-
 offset_t PEFile::getEntryPoint()
 {
-    if (optHdr == NULL) return 0;
+    if (optHdr == NULL) return INVALID_ADDR;
 
     bool isOk = false;
     offset_t entryPoint = static_cast<offset_t> (optHdr->getNumValue(OptHdrWrapper::EP, &isOk));
     if (isOk == false) return INVALID_ADDR;
     return entryPoint;
-}
-
-offset_t PEFile::getWrapperRawOffset(int wrapperId)
-{
-    if (wrapperId <= WR_NONE || wrapperId >= COUNT_WRAPPERS ) return INVALID_ADDR;
-
-    switch (wrapperId) {
-        case WR_DOS_HDR : return 0;
-        case WR_FILE_HDR: return this->peHdrOffset();
-        case WR_OPTIONAL_HDR: return this->peNtHdrOffset();
-        case WR_DATADIR : return this->peDataDirOffset();
-        case WR_SECTIONS : return this->secHdrsOffset();
-    }
-    return INVALID_ADDR;
 }
 
 size_t PEFile::hdrSectionsNum()
@@ -231,23 +182,23 @@ offset_t PEFile::fileAddrToRva(offset_t raw, bool getClosestIfInCave)
             //address out of section. return last addr of the section.
             return bgnVA + vSize;
         }
-        return bgnVA+ curr;
+        return bgnVA + curr;
     }
     //TODO...
     return raw;
 }
 
-offset_t PEFile::VaToFileAddr(offset_t va, bool getClosestIfInCave)
+offset_t PEFile::rvaToFileAddr(offset_t rva, bool getClosestIfInCave)
 {
-    if (va >= this->getMappedSize(Executable::VA)) return INVALID_ADDR;
+    if (rva >= this->getMappedSize(Executable::RVA)) return INVALID_ADDR;
 
-    SectionHdrWrapper* sec = this->getSecHdrAtOffset(va, Executable::VA, true);
+    SectionHdrWrapper* sec = this->getSecHdrAtOffset(rva, Executable::RVA, true);
     if (sec) {
-        offset_t bgnVA = sec->getContentOffset(Executable::VA);
+        offset_t bgnRVA = sec->getContentOffset(Executable::RVA);
         offset_t bgnRaw = sec->getContentOffset(Executable::RAW);
-        if (bgnVA  == INVALID_ADDR || bgnRaw == INVALID_ADDR) return INVALID_ADDR;
+        if (bgnRVA  == INVALID_ADDR || bgnRaw == INVALID_ADDR) return INVALID_ADDR;
 
-        bufsize_t curr = (va - bgnVA);
+        bufsize_t curr = (rva - bgnRVA);
         bufsize_t rawSize = sec->getContentSize(Executable::RAW, true);
         if (curr >= rawSize) {
             //address out of section. return last addr of the section.
@@ -256,14 +207,7 @@ offset_t PEFile::VaToFileAddr(offset_t va, bool getClosestIfInCave)
         return bgnRaw + curr;
     }
     //TODO...
-    return va;
+    return rva;
 }
 
-offset_t PEFile::rvaToFileAddr(offset_t rva, bool getClosestIfInCave)
-{
-    offset_t va = rva;
-    return VaToFileAddr(va, getClosestIfInCave);
-}
-
-offset_t PEFile::rvaToVa(offset_t rva) { return rva; }
 

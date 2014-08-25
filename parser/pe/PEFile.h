@@ -52,37 +52,35 @@ public:
 
     PEFile(AbstractByteBuffer *v_buf);
     virtual ~PEFile() { TRACE(); clearWrappers(); delete album; }
+    //---
+    // inherited from Executable:
+    //
     virtual void wrap();
-    virtual void clearWrappers();
 
-    exe_bits getHdrBitMode();
-    virtual exe_bits getBitMode() { return getHdrBitMode(); }
-    Executable::addr_type detectAddrType(offset_t addr, Executable::addr_type hintType) { return Executable::RAW; }
+    // FileAddr <-> RVA
+    virtual offset_t fileAddrToRva(offset_t raw, bool getClosestIfInCave = false);
+    virtual offset_t rvaToFileAddr(offset_t rva, bool getClosestIfInCave = false);
 
     virtual bufsize_t getMappedSize(Executable::addr_type aType);
-    virtual bufsize_t getAlignment(Executable::addr_type aType);
-    virtual offset_t getImageBase();
-    virtual offset_t getEntryPoint();
+    virtual bufsize_t getAlignment(Executable::addr_type aType){ return core.getAlignment(aType); }
+    virtual offset_t getImageBase() { return core.getImageBase(); }
+    virtual offset_t getEntryPoint(); // returns INVALID_ADDR if failed
 
-    // returns INVALID_ADDR if failed
-    virtual offset_t fileAddrToRva(offset_t raw, bool getClosestIfInCave = false);
+    virtual exe_bits getBitMode() { return getHdrBitMode(); }
+    //---
+    // PEFile only:
+    offset_t peHdrOffset() { return core.peFileHdrOffset(); }
+    offset_t peNtHdrOffset() { return core.peSignatureOffset(); }
+    offset_t peOptHdrOffset() { return core.peOptHdrOffset(); }
+    offset_t secHdrsOffset() { return core.secHdrsOffset(); }
 
-    //virtual offset_t VaToRva(offset_t va, bool autodetect = true) const;
-    virtual offset_t VaToFileAddr(offset_t rva, bool getClosestIfInCave = false);
-    virtual offset_t rvaToFileAddr(offset_t rva, bool getClosestIfInCave = false);
-    virtual offset_t rvaToVa(offset_t rva);
-
-    virtual offset_t getWrapperRawOffset(int wrapperId);
-
-    offset_t peHdrOffset();
-    offset_t peNtHdrOffset();
-    offset_t peOptHdrOffset();
-    offset_t peDataDirOffset();
-    offset_t secHdrsOffset();
+    ResourcesAlbum* getResourcesAlbum() const { return this->album; }
 
     pe::IMAGE_DATA_DIRECTORY* getDataDirectory();
+    offset_t peDataDirOffset();
 
     size_t hdrSectionsNum();
+    exe_bits getHdrBitMode() { return core.getHdrBitMode(); }
 
     SectionHdrWrapper* getSecHdr(size_t secNum)
     {
@@ -93,14 +91,19 @@ public:
     {
         return (sects == NULL) ? NULL : sects->getSecHdrAtOffset(offset, aType, roundup, verbose);
     }
-    ResourcesAlbum* getResourcesAlbum() const { return this->album; }
-    ResourcesContainer*  getResourcesOfType(pe::resource_type typeId) { return (this->album == NULL) ? NULL : album->getResourcesOfType(typeId); }
+
+    ResourcesContainer*  getResourcesOfType(pe::resource_type typeId)
+    {
+        return (this->album == NULL) ? NULL : album->getResourcesOfType(typeId);
+    }
 
 protected:
-    PECore core;
-
+    virtual void clearWrappers();
     virtual void wrap(AbstractByteBuffer *v_buf);
+
+    PECore core;
     //---
+    //modifications:
     bool setHdrSectionsNum(size_t newNum);
 
     FileHdrWrapper *fHdr;
