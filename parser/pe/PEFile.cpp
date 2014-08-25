@@ -51,8 +51,20 @@ PEFile::PEFile(AbstractByteBuffer *v_buf)
     wrap(v_buf);
 }
 
+void PEFile::clearWrappers()
+{
+    MappedExe::clearWrappers();
+    TRACE();
+    // unmap DirEntries
+    for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
+        dataDirEntries[pe::DIR_ENTRIES_COUNT] = NULL;
+    }
+}
+
 void  PEFile::wrap(AbstractByteBuffer *v_buf)
 {
+    clearWrappers();
+
     core.wrap(v_buf);
 
     this->fHdr = new FileHdrWrapper(this);
@@ -71,24 +83,22 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
         sects = new SectHdrsWrapper(this);
         this->wrappers[WR_SECTIONS] = sects;
     }
-    wrapDataDirs(this);
-}
+    // map Data Dirs
+    dataDirEntries[pe::DIR_IMPORT] = new ImportDirWrapper(this);
+    dataDirEntries[pe::DIR_DELAY_IMPORT] = new DelayImpDirWrapper(this);
+    dataDirEntries[pe::DIR_BOUND_IMPORT] = new BoundImpDirWrapper(this);
+    dataDirEntries[pe::DIR_DEBUG] = new DebugDirWrapper(this);
+    dataDirEntries[pe::DIR_EXPORT] = new ExportDirWrapper(this);
+    dataDirEntries[pe::DIR_SECURITY] = new SecurityDirWrapper(this);
+    dataDirEntries[pe::DIR_TLS] = new TlsDirWrapper(this);
+    dataDirEntries[pe::DIR_LOAD_CONFIG] = new LdConfigDirWrapper(this);
+    dataDirEntries[pe::DIR_BASERELOC] = new RelocDirWrapper(this);
+    dataDirEntries[pe::DIR_EXCEPTION] = new ExceptionDirWrapper(this);
+    dataDirEntries[pe::DIR_RESOURCE] = new ResourceDirWrapper(this, album);
 
-void PEFile::wrapDataDirs(AbstractByteBuffer *v_buf)
-{
-    importDir = new ImportDirWrapper(this);
-    this->wrappers[WR_IMPORTS] = importDir;
-
-    this->wrappers[WR_DELAYIMPORTS] = new DelayImpDirWrapper(this);
-    this->wrappers[WR_BOUNDIMPORTS] = new BoundImpDirWrapper(this);
-    this->wrappers[WR_DEBUG] = new DebugDirWrapper(this);
-    this->wrappers[WR_EXPORTS] = new ExportDirWrapper(this);
-    this->wrappers[WR_SECURITY] = new SecurityDirWrapper(this);
-    this->wrappers[WR_TLS] = new TlsDirWrapper(this);
-    this->wrappers[WR_LDCONF] = new LdConfigDirWrapper(this); //WR_BASERELOC
-    this->wrappers[WR_BASERELOC] = new RelocDirWrapper(this);
-    this->wrappers[WR_EXCEPTION] = new ExceptionDirWrapper(this);
-    this->wrappers[WR_RESOURCES] = new ResourceDirWrapper(this, album);
+    for (size_t i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
+        this->wrappers[WR_DIR_ENTRY + i] = dataDirEntries[i];
+    }
 
     if (this->album) {
         this->album->wrapLeafsContent();

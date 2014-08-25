@@ -1,12 +1,14 @@
 #pragma once
+
+#include "pe_formats.h"
 #include "PECore.h"
 
 #include "DOSExe.h"
 #include "FileHdrWrapper.h"
 #include "OptHdrWrapper.h"
 #include "SectHdrsWrapper.h"
-
 #include "DataDirWrapper.h"
+
 #include "ImportDirWrapper.h"
 #include "DelayImpDirWrapper.h"
 #include "BoundImpDirWrapper.h"
@@ -18,8 +20,8 @@
 #include "RelocDirWrapper.h"
 #include "ExceptionDirWrapper.h"
 #include "ResourceDirWrapper.h"
+
 #include "rsrc/ResourcesAlbum.h"
-#include "pe_formats.h"
 
 class PEFile;
 
@@ -43,22 +45,15 @@ public:
         WR_OPTIONAL_HDR,
         WR_DATADIR,
         WR_SECTIONS,
-        WR_IMPORTS,
-        WR_DELAYIMPORTS,
-        WR_BOUNDIMPORTS,
-        WR_DEBUG,
-        WR_EXPORTS,
-        WR_SECURITY,
-        WR_TLS,
-        WR_LDCONF,
-        WR_BASERELOC,
-        WR_EXCEPTION,
-        WR_RESOURCES,
+        WR_DIR_ENTRY,
+        WR_DIR_ENTRY_END = WR_DIR_ENTRY + pe::DIR_ENTRIES_COUNT,
         COUNT_WRAPPERS
     };
 
     PEFile(AbstractByteBuffer *v_buf);
-    virtual ~PEFile() { TRACE(); delete album; }
+    virtual ~PEFile() { TRACE(); clearWrappers(); delete album; }
+
+    virtual void clearWrappers();
 
     exe_bits getHdrBitMode();
     virtual exe_bits getBitMode() { return getHdrBitMode(); }
@@ -103,16 +98,17 @@ public:
 
 protected:
     PECore core;
+
     virtual void wrap(AbstractByteBuffer *v_buf);
-    virtual void wrapDataDirs(AbstractByteBuffer *v_buf);
     //---
     bool setHdrSectionsNum(size_t newNum);
 
     FileHdrWrapper *fHdr;
     OptHdrWrapper *optHdr;
     SectHdrsWrapper *sects;
-    ImportDirWrapper *importDir;
+
     ResourcesAlbum *album;
+    DataDirEntryWrapper* dataDirEntries[pe::DIR_ENTRIES_COUNT];
 
 friend class SectHdrsWrapper;
 };
