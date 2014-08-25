@@ -243,9 +243,10 @@ bool ImportEntryWrapper::wrap()
 
 void* ImportEntryWrapper::getPtr()
 {
-    if (m_PE == NULL) return NULL;
+    PEFile *pe = dynamic_cast<PEFile*>(m_Exe);
+    if (pe == NULL) return NULL;
 
-    IMAGE_DATA_DIRECTORY *d = m_PE->getDataDirectory();
+    IMAGE_DATA_DIRECTORY *d = pe->getDataDirectory();
     if (!d) return NULL;
 
     offset_t importRva = static_cast<offset_t>(d[pe::DIR_IMPORT].VirtualAddress);
