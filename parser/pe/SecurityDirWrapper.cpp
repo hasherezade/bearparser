@@ -75,13 +75,31 @@ QString SecurityDirWrapper::getFieldName(size_t fieldId)
     return getName();
 }
 
+WrappedValue::data_type SecurityDirWrapper::containsDataType(size_t fieldId, size_t subField)
+{
+    if (fieldId == CERT_CONTENT){
+        return WrappedValue::COMPLEX;
+    }
+    return WrappedValue::INT;
+}
+
 QString SecurityDirWrapper::translateType(int type)
 {
     switch (type) {
         case WIN_CERT_TYPE_X509  : return "X.509 certificate";
-        case WIN_CERT_TYPE_PKCS_SIGNED_DATA : return "PKCS SignedData structure";
+        case WIN_CERT_TYPE_PKCS_SIGNED_DATA : return "PKCS Signed Data";
         case WIN_CERT_TYPE_RESERVED_1 : return "Reserved";
-        case WIN_CERT_TYPE_PKCS1_SIGN : return "contains PKCS1_MODULE_SIGN fields";
+        case WIN_CERT_TYPE_PKCS1_SIGN : return "PKCS1 Module Sign Fields";
     }
     return "";
+}
+
+QString SecurityDirWrapper::translateFieldContent(size_t fieldId)
+{
+    if (fieldId != TYPE) return "";
+
+    pe::WIN_CERTIFICATE* cert = getCert();
+    if (cert == NULL) return "";
+
+    return translateType(cert->wCertificateType);
 }

@@ -40,11 +40,14 @@ public:
     virtual bufsize_t getSize();
     virtual QString getName() { return "Security"; }
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
+    virtual size_t getSubFieldsCount() { return 1; }
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
+    virtual WrappedValue::data_type containsDataType(size_t fieldId, size_t subField = FIELD_NONE);
 
     QString translateType(int type);
+    virtual QString translateFieldContent(size_t fieldId);
 
 private:
     pe::WIN_CERTIFICATE* getCert();
