@@ -52,7 +52,7 @@ IMAGE_IMPORT_BY_NAME* ImportedFuncWrapper::getImportByNamePtr()
 uint64_t ImportedFuncWrapper::getFieldRVA(ImportEntryWrapper::FieldID fId)
 {
     if (!parentNode) return 0;
-    bool is64 = (m_Exe->getBitMode() == 64) ? true : false;
+    bool is64 = isBit64();
 
     bool isOk;
     uint64_t thunkRva = parentNode->getNumValue(fId, &isOk);
@@ -61,8 +61,8 @@ uint64_t ImportedFuncWrapper::getFieldRVA(ImportEntryWrapper::FieldID fId)
     if (!is64) thunkRva = (int32_t)(thunkRva);
     if (thunkRva == 0 ||  thunkRva == (-1)) return 0; //TODO
 
-    uint32_t thunkValSize = (is64) ? sizeof(uint64_t) : sizeof(uint32_t);
-    uint64_t offset = this->entryNum * thunkValSize;
+    size_t thunkValSize = (is64) ? sizeof(uint64_t) : sizeof(uint32_t);
+    offset_t offset = this->entryNum * thunkValSize;
 
     return thunkRva + offset;
 }
@@ -84,60 +84,9 @@ void* ImportedFuncWrapper::getValuePtr(ImportEntryWrapper::FieldID fId)
     size_t thunkValSize = (is64) ? sizeof(uint64_t) : sizeof(uint32_t);
     offset_t offset = static_cast<offset_t>(this->entryNum) * thunkValSize;
 
-    void* thunkPtr = NULL;
-    BYTE *content =  m_Exe->getContent();
-    offset_t fileSize = m_Exe->getRawSize();
-    if (!content) return NULL;
-
-    try {
-        offset_t thunkAddr = 0;
-        thunkAddr = m_Exe->rvaToFileAddr(thunkRva + offset);
-        if (thunkAddr + thunkValSize > fileSize) {
-            //printf("FuncWrapper: Pointer out of File boundaries!\n");
-            return NULL;
-        }
-        thunkPtr = (void*) &content[thunkAddr];
-    } catch (CustomException e) {
-        return NULL;
-    }
+    offset_t thunkAddr = m_Exe->toRaw(thunkRva + offset, Executable::RVA);
+    void* thunkPtr = m_Exe->getContentAt(thunkAddr, thunkValSize);
     return thunkPtr;
-}
-
-void* ImportedFuncWrapper::getDataPtr(ImportEntryWrapper::FieldID fId)
-{
-    void* thunkPtr = getValuePtr(fId);
-    if (!thunkPtr) return NULL;
-
-    bool is64 = (m_Exe->getBitMode() == Executable::BITS_64) ? true : false;
-    uint64_t thunkValVA = 0; //TODO
-    if (is64) {
-        uint64_t *ptr = (uint64_t*) thunkPtr;
-        thunkValVA = (*ptr);
-    } else {
-        uint32_t *ptr = (uint32_t*) thunkPtr;
-        thunkValVA = (*ptr);
-    }
-    if (thunkValVA == 0 || thunkValVA == (-1) ) return NULL;
-    //---
-    size_t entrySize = (is64) ? sizeof(IMAGE_THUNK_DATA64) : sizeof(IMAGE_THUNK_DATA32);
-
-    // convert VA to RAW:
-    BYTE *content =  m_Exe->getContent();
-    uint64_t cSize = m_Exe->getRawSize();
-    if (!content || cSize == 0) return NULL;
-
-    void *entryPtr = NULL;
-    try {
-        uint32_t entryAddr = 0;
-        thunkValVA = m_Exe->VaToRva(thunkValVA, false);
-        entryAddr = m_Exe->rvaToFileAddr(thunkValVA);
-
-        if (entryAddr + entrySize > cSize) return NULL;
-        entryPtr = (void*) &content[entryAddr];
-    } catch (CustomException e) {
-        return NULL;
-    }
-    return entryPtr;
 }
 
 uint64_t ImportedFuncWrapper::getThunkValue()
@@ -166,13 +115,12 @@ uint64_t ImportedFuncWrapper::getThunkValue()
 bool ImportedFuncWrapper::isByOrdinal()
 {
     bool isOk = false;
-    bool is64 = (m_Exe->getBitMode() == Executable::BITS_64) ? true : false;
 
     void *p = getValuePtr(ImportEntryWrapper::ORIG_FIRST_THUNK);
     if (!p) p = getValuePtr(ImportEntryWrapper::FIRST_THUNK);
     if (!p) return NULL;
 
-    if (is64) {
+    if (isBit64()) {
         uint64_t* ptr =  (uint64_t*) p;
         if ((*ptr) & ORDINAL_FLAG64) return true;
 
@@ -196,14 +144,14 @@ char* ImportedFuncWrapper::getFunctionName()
 
 bufsize_t ImportedFuncWrapper::getSize()
 {
-    bool is64 = (m_Exe->getBitMode() == 64) ? true : false;
+    bool is64 = isBit64();
     uint32_t entrySize = (is64) ? sizeof(uint64_t) : sizeof(uint32_t);
     return entrySize;
 }
 
 void* ImportedFuncWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    bool is64 = (m_Exe->getBitMode() == 64) ? true : false;
+    bool is64 = isBit64();
     void *entryPtr = this->getPtr();
     IMAGE_THUNK_DATA32* en32 = is64 ? NULL : (IMAGE_THUNK_DATA32*) entryPtr;
     IMAGE_THUNK_DATA64* en64 = is64 ? (IMAGE_THUNK_DATA64*) entryPtr : NULL;
@@ -225,8 +173,7 @@ void* ImportedFuncWrapper::getFieldPtr(size_t fId, size_t subField)
 bufsize_t ImportedFuncWrapper::getFieldSize(size_t fieldId, size_t subField)
 {
     if (fieldId == HINT) return sizeof (WORD);
-    bool is64 = (m_Exe->getBitMode() == Executable::BITS_64) ? true : false;
-    uint32_t entrySize = (is64) ? sizeof(uint64_t) : sizeof(uint32_t);
+    uint32_t entrySize = (isBit64()) ? sizeof(uint64_t) : sizeof(uint32_t);
     return entrySize;
 }
 
@@ -296,10 +243,9 @@ bool ImportEntryWrapper::wrap()
 
 void* ImportEntryWrapper::getPtr()
 {
-    PEFile *pe = dynamic_cast<PEFile*> (this->m_Exe);
-    if (pe == NULL) return NULL;
+    if (m_PE == NULL) return NULL;
 
-    IMAGE_DATA_DIRECTORY *d = pe->getDataDirectory();
+    IMAGE_DATA_DIRECTORY *d = m_PE->getDataDirectory();
     if (!d) return NULL;
 
     offset_t importRva = static_cast<offset_t>(d[pe::DIR_IMPORT].VirtualAddress);
@@ -386,20 +332,13 @@ char* ImportEntryWrapper::getLibraryName()
     if (!desc) {
         return NULL;
     }
-    offset_t nAddr = 0;
+
     offset_t nameRVA = desc->Name;
-    try {
-        nAddr = m_Exe->rvaToFileAddr(nameRVA);
-    } catch (CustomException e) {
+    offset_t nAddr = m_Exe->toRaw(nameRVA, Executable::RVA);
+    if (nAddr == INVALID_ADDR) return NULL;
 
-        return NULL;
-    }
-    if (nAddr >= m_Exe->getRawSize()) return NULL;
-
-    BYTE *content =  m_Exe->getContent();
-    if (!content) return NULL;
-
-    char *name = (char*) &content[nAddr];
+    //TODO: reimplement it:
+    char *name = (char*) m_Exe->getContentAt(nAddr, sizeof(char));
     offset_t peSize = m_Exe->getRawSize();
 
     uint64_t upperLimit = getUpperLimit(m_Exe, name);

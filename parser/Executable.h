@@ -70,18 +70,18 @@ public:
 
     // returns INVALID_ADDR if failed
     // FileAddr <-> RVA
-    virtual offset_t fileAddrToRva(offset_t raw) = 0;
-    virtual offset_t rvaToFileAddr(offset_t rva) = 0;
+    virtual offset_t rawToRva(offset_t raw) = 0;
+    virtual offset_t rvaToRaw(offset_t rva) = 0;
 
     // VA <-> RVA
     virtual offset_t VaToRva(offset_t va, bool autodetect);
     virtual offset_t rvaToVa(offset_t rva) { return rva + this->getImageBase(); }
 
     // VA -> FileAddr
-    virtual offset_t vaToFileAddr(offset_t va)
+    virtual offset_t vaToRaw(offset_t va)
     {
         offset_t rva = this->VaToRva(va, true);
-        return rvaToFileAddr(rva);
+        return rvaToRaw(rva);
     }
 
 protected:

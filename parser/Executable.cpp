@@ -48,10 +48,10 @@ offset_t Executable::convertAddr(offset_t inAddr, Executable::addr_type inType, 
     }
     if (inType == outType) return inAddr;
     if (inType == Executable::RAW && outType == Executable::RVA) {
-        return this->fileAddrToRva(inAddr);
+        return this->rawToRva(inAddr);
     }
     if (inType == Executable::RAW && outType == Executable::VA) {
-        return this->fileAddrToRva(inAddr) + this->getImageBase();
+        return this->rawToRva(inAddr) + this->getImageBase();
     }
     if (outType == Executable::RAW) {
         bool allowExceptions = false;
@@ -79,7 +79,7 @@ offset_t Executable::toRaw(offset_t offset, addr_type aT, bool allowExceptions)
         offset = VaToRva(offset, false);
     }
     try {
-        offset = this->rvaToFileAddr(offset);
+        offset = this->rvaToRaw(offset);
     } catch (CustomException e) {
         if (allowExceptions) throw e;
         return INVALID_ADDR;

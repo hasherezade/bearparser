@@ -126,9 +126,6 @@ public:
     virtual uint64_t getOrdinal() { return getThunkValue(); }
     char* getFunctionName();
 
-protected:
-    void* getDataPtr(ImportEntryWrapper::FieldID fId);
-
 friend class ImportDirWrapper;
 };
 
