@@ -3,8 +3,6 @@
 
 #define DEFAULT_PADDING 2
 
-class ByteSubBuffer;
-
 class ByteBuffer : public AbstractByteBuffer
 {
 public:
