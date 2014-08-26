@@ -70,7 +70,10 @@ public:
     virtual uint64_t getOrdinal() = 0;
     virtual char* getFunctionName() = 0;
 
-    virtual uint64_t callVia() = 0;
+    virtual offset_t callVia() = 0;
+
+    inline size_t getAddrSize() {return (isBit64()) ? sizeof(uint64_t) : sizeof(uint32_t); }
+    inline size_t getThunkValSize() {return getAddrSize(); }
 
 friend class ImportBaseDirWrapper;
 };

@@ -118,10 +118,10 @@ public:
 
     uint64_t getThunkValue();
 
-    uint64_t getFieldRVA(ImportEntryWrapper::FieldID fId);
+    offset_t getFieldRVA(ImportEntryWrapper::FieldID fId);
     void* getValuePtr(ImportEntryWrapper::FieldID fId);
 
-    virtual uint64_t callVia() { return getFieldRVA(ImportEntryWrapper::FIRST_THUNK); }
+    virtual offset_t callVia() { return getFieldRVA(ImportEntryWrapper::FIRST_THUNK); }
     bool isByOrdinal();
     virtual uint64_t getOrdinal() { return getThunkValue(); }
     char* getFunctionName();

@@ -99,7 +99,7 @@ public:
     uint16_t getHint();
     bool isByOrdinal();
     virtual uint64_t getOrdinal();
-    uint64_t callVia();
+    offset_t callVia();
 
 private:
     size_t ptrLen() { return (m_Exe->getBitMode() == Executable::BITS_64) ?  sizeof(uint64_t) : sizeof(uint32_t); }

@@ -7,8 +7,8 @@ inline uint64_t getUpperLimit(Executable *pe, void* fieldPtr)
 {
     if (!pe || ! fieldPtr) return 0;
 
-    int64_t nameOffset = (uint64_t)fieldPtr - (uint64_t)(pe->getContent());
-    if (nameOffset < 0) return 0;
+    offset_t nameOffset = pe->getOffset((BYTE*)fieldPtr);
+    if (nameOffset == INVALID_ADDR) return 0;
 
     int64_t upperLimit = pe->getRawSize() - nameOffset;
     if (upperLimit < 0) return 0;
@@ -49,22 +49,23 @@ IMAGE_IMPORT_BY_NAME* ImportedFuncWrapper::getImportByNamePtr()
     return (IMAGE_IMPORT_BY_NAME*) ptr;
 }
 
-uint64_t ImportedFuncWrapper::getFieldRVA(ImportEntryWrapper::FieldID fId)
+offset_t ImportedFuncWrapper::getFieldRVA(ImportEntryWrapper::FieldID fId)
 {
     if (!parentNode) return 0;
-    bool is64 = isBit64();
+    bool is32 = isBit32();
 
     bool isOk;
     uint64_t thunkRva = parentNode->getNumValue(fId, &isOk);
     if (!isOk) return 0; //TODO
 
-    if (!is64) thunkRva = (int32_t)(thunkRva);
+    if (is32) thunkRva = (int32_t)(thunkRva);
     if (thunkRva == 0 ||  thunkRva == (-1)) return 0; //TODO
 
-    size_t thunkValSize = (is64) ? sizeof(uint64_t) : sizeof(uint32_t);
+    size_t thunkValSize = this->getThunkValSize();
     offset_t offset = this->entryNum * thunkValSize;
 
-    return thunkRva + offset;
+    offset_t fieldRVA = thunkRva + offset;
+    return fieldRVA;
 }
 
 void* ImportedFuncWrapper::getValuePtr(ImportEntryWrapper::FieldID fId)
@@ -81,7 +82,7 @@ void* ImportedFuncWrapper::getValuePtr(ImportEntryWrapper::FieldID fId)
     if (!is64) thunkRva = (int32_t)(thunkRva);
     if (thunkRva == 0 || thunkRva == -1) return NULL;
 
-    size_t thunkValSize = (is64) ? sizeof(uint64_t) : sizeof(uint32_t);
+    size_t thunkValSize = this->getThunkValSize();
     offset_t offset = static_cast<offset_t>(this->entryNum) * thunkValSize;
 
     offset_t thunkAddr = m_Exe->toRaw(thunkRva + offset, Executable::RVA);
@@ -144,9 +145,7 @@ char* ImportedFuncWrapper::getFunctionName()
 
 bufsize_t ImportedFuncWrapper::getSize()
 {
-    bool is64 = isBit64();
-    uint32_t entrySize = (is64) ? sizeof(uint64_t) : sizeof(uint32_t);
-    return entrySize;
+    return getAddrSize();
 }
 
 void* ImportedFuncWrapper::getFieldPtr(size_t fId, size_t subField)
@@ -173,7 +172,7 @@ void* ImportedFuncWrapper::getFieldPtr(size_t fId, size_t subField)
 bufsize_t ImportedFuncWrapper::getFieldSize(size_t fieldId, size_t subField)
 {
     if (fieldId == HINT) return sizeof (WORD);
-    uint32_t entrySize = (isBit64()) ? sizeof(uint64_t) : sizeof(uint32_t);
+    bufsize_t entrySize = (isBit64()) ? sizeof(uint64_t) : sizeof(uint32_t);
     return entrySize;
 }
 

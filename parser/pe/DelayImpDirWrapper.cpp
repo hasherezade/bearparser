@@ -330,7 +330,7 @@ void* DelayImpFuncWrapper::getFieldPtr(size_t fId, size_t subField)
     return NULL;
 }
 
-uint64_t DelayImpFuncWrapper::callVia()
+offset_t DelayImpFuncWrapper::callVia()
 {
     bool isOk = false;
     uint64_t offset = parentDir->getNumValue(DelayImpEntryWrapper::IAT, &isOk);
