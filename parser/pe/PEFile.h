@@ -99,7 +99,7 @@ public:
      DataDirEntryWrapper* getDataDirEntry(pe::dir_entry eType);
     //---
     //modifications:
-    bool moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addType = Executable::RAW);
+    bool moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addType = Executable::RAW); //throws CustomException
 
 
 protected:

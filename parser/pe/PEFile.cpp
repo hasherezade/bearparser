@@ -221,23 +221,32 @@ DataDirEntryWrapper* PEFile::getDataDirEntry(pe::dir_entry eType)
 
 bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addrType)
 {
+    bool allowExceptions = true; //TODO: configure exception mode outside...
+
     DataDirEntryWrapper *entry = getDataDirEntry(id);
     if (entry == NULL) {
+        if (allowExceptions) throw ExeException("No such Data Directory");
         return false;
     }
     DataDirWrapper* ddirWrapper = dynamic_cast<DataDirWrapper*> (this->wrappers[WR_DATADIR]);
     IMAGE_DATA_DIRECTORY *ddir = this->getDataDirectory();
     if (ddirWrapper == NULL || ddir == NULL) {
+        if (allowExceptions) throw ExeException("Cannot fetch DataDirTable");
         return false;
     }
     Executable::addr_type dataDirAddrType = ddirWrapper->containsAddrType(id, DataDirWrapper::ADDRESS);
     offset_t dataDirAddr = this-> convertAddr(newOffset, addrType, dataDirAddrType);
     if (dataDirAddr == INVALID_ADDR) {
+        if (allowExceptions) throw ExeException("Invalid new offset");
         return false;
     }
     offset_t targetRaw = this->toRaw(newOffset, addrType);
+    if (entry->canCopyToOffset(targetRaw) == false) {
+        if (allowExceptions) throw ExeException("Cannot copy: no space at such offset");
+        return false;
+    }
     if (entry->copyToOffset(targetRaw) == false) {
-        if (DBG_LVL) printf("Cannot copy!\n");
+        if (allowExceptions) throw ExeException("Cannot copy: error occured");
         return false;
     }
     entry->fillContent(0);

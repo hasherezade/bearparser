@@ -174,10 +174,14 @@ public:
         }
 
         offset_t offset = cmd_util::readOffset(Executable::RAW);
-        if (pe->moveDataDirEntry(entryId, offset) == false) {
-            printf("Failed\n");
-            return;
+        try {
+            if (pe->moveDataDirEntry(entryId, offset) == false) {
+                printf("Failed\n");
+                return;
+            }
+            printf("Done!\n");
+        } catch (CustomException e){
+            std::cerr << "[ERROR] "<< e.what() << std::endl;
         }
-        printf("Done!\n");
     }
 };
