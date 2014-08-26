@@ -22,11 +22,11 @@ public:
 };
 
 
-class FileMap : public AbstractByteBuffer, public FileBuffer
+class FileView : public AbstractByteBuffer, public FileBuffer
 {
 public:
-    FileMap(QString &fileName); //throws exceptions
-    virtual ~FileMap();
+    FileView(QString &fileName); //throws exceptions
+    virtual ~FileView();
 
     virtual bufsize_t getContentSize() { return mappedSize; }
     virtual BYTE* getContent() { return mappedContent; }

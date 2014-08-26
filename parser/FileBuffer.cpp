@@ -1,6 +1,6 @@
 #include "FileBuffer.h"
 
-FileMap::FileMap(QString &path)
+FileView::FileView(QString &path)
     : fIn (path)
 {
     if (fIn.open(QFile::ReadOnly | QFile::Truncate) == false) {
@@ -17,16 +17,16 @@ FileMap::FileMap(QString &path)
     this->mappedContent = (BYTE*) pData;
 }
 
-FileMap::~FileMap()
+FileView::~FileView()
 {
     fIn.unmap((uchar*)this->mappedContent);
     fIn.close();
 }
-
+//----------------------------------------------------------------
 
 ByteBuffer* FileBuffer::read(QString &path, bufsize_t minBufSize)
 {
-    FileMap fileMap(path);
+    FileView fileMap(path);
     bufsize_t readableSize = fileMap.getContentSize();
 
     bufsize_t allocSize = (readableSize < minBufSize) ? minBufSize : readableSize;

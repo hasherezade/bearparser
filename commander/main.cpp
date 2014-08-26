@@ -49,8 +49,8 @@ int main(int argc, char *argv[])
         fName = QString(argv[1]);
     }
     try {
-        FileMap *fileMap = new FileMap(fName);
-        ExeFactory::exe_type exeType = ExeFactory::findMatching(fileMap);
+        FileView *fileView = new FileView(fName);
+        ExeFactory::exe_type exeType = ExeFactory::findMatching(fileView);
 
         if (exeType == ExeFactory::NONE) {
            fprintf(stderr, "Type not supported\n");
@@ -59,12 +59,12 @@ int main(int argc, char *argv[])
         }
         printf("Type: %s\n", ExeFactory::getTypeName(exeType).toStdString().c_str());
         const bufsize_t MINBUF = 0x200;
-        bufsize_t readableSize = fileMap->getContentSize();
+        bufsize_t readableSize = fileView->getContentSize();
         bufsize_t allocSize = (readableSize < MINBUF) ? MINBUF : readableSize;
 
         printf("Buffering...\n");
-        ByteBuffer *buf= new ByteBuffer(fileMap, 0, allocSize);
-        delete fileMap;
+        ByteBuffer *buf = new ByteBuffer(fileView, 0, allocSize);
+        delete fileView;
 
         printf("Parsing executable...\n");
         Executable *exe = ExeFactory::build(buf, exeType);
