@@ -109,8 +109,7 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
     for (int i = 0; i < fields; i++) {
         offset_t offset = w->getFieldOffset(i);
         if (offset == INVALID_ADDR) continue;
-
-        printf("[%04X] %s :\t", offset, w->getFieldName(i).toStdString().c_str());
+        printf("[%04llX] %s :\t", offset, w->getFieldName(i).toStdString().c_str());
 
         QString translated = w->translateFieldContent(i);
         if (translated.size() > 0) {
