@@ -105,6 +105,7 @@ protected:
     virtual void clearWrappers();
     virtual void wrap(AbstractByteBuffer *v_buf);
 
+    void initDirEntries();
     PECore core;
     //---
     //modifications:

@@ -52,11 +52,15 @@ PEFile::PEFile(AbstractByteBuffer *v_buf)
 
 void PEFile::clearWrappers()
 {
+    initDirEntries();
     MappedExe::clearWrappers();
     TRACE();
-    // unmap DirEntries
+}
+
+void PEFile::initDirEntries()
+{
     for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
-        dataDirEntries[pe::DIR_ENTRIES_COUNT] = NULL;
+        dataDirEntries[i] = NULL;
     }
 }
 
@@ -89,6 +93,7 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
         this->wrappers[WR_SECTIONS] = sects;
     }
     // map Data Dirs
+    initDirEntries();
     dataDirEntries[pe::DIR_IMPORT] = new ImportDirWrapper(this);
     dataDirEntries[pe::DIR_DELAY_IMPORT] = new DelayImpDirWrapper(this);
     dataDirEntries[pe::DIR_BOUND_IMPORT] = new BoundImpDirWrapper(this);
