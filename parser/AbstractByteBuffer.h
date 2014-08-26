@@ -33,7 +33,7 @@ public:
 
     AbstractByteBuffer() { }
     virtual ~AbstractByteBuffer() { }
-//-----
+
     virtual bufsize_t getContentSize() = 0;
     virtual BYTE* getContent() = 0;
 
@@ -55,4 +55,24 @@ public:
     uint64_t getNumValue(offset_t offset, bufsize_t size, bool* isOk);
     bool setNumValue(offset_t offset, bufsize_t size, uint64_t newVal);
 };
+
+//--------------------------------------------
+
+class BufferView : public AbstractByteBuffer
+{
+public:
+    BufferView(AbstractByteBuffer *parent, offset_t offset, bufsize_t size);
+    virtual ~BufferView() { }
+
+    virtual bufsize_t getContentSize();
+    virtual BYTE* getContent();
+
+    bufsize_t getRequestedSize() const { return size; }
+
+protected:
+    AbstractByteBuffer *parent;
+    offset_t offset;
+    bufsize_t size;
+};
+
 

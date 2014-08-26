@@ -248,3 +248,29 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
     }
     return true;
 }
+
+//--------------------------------------------
+
+BufferView::BufferView(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_t v_size)
+    : parent(v_parent), offset(v_offset), size(v_size)
+{
+    if (v_parent == NULL) throw BufferException("Cannot make subBuffer for NULL buffer!");
+}
+
+bufsize_t BufferView::getContentSize()
+{
+    bufsize_t maxSize = this->parent->getContentSize();
+    if (offset > maxSize) {
+        return 0;
+    }
+    if (offset + size > maxSize) {
+        bufsize_t trimedSize = maxSize - offset;
+        return trimedSize;
+    }
+    return size;
+}
+
+BYTE* BufferView::getContent()
+{
+    return this->parent->getContentAt(offset, getContentSize());
+}

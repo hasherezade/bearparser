@@ -24,21 +24,3 @@ protected:
     bufsize_t padding;
 };
 
-
-class ByteSubBuffer : public AbstractByteBuffer
-{
-public:
-    ByteSubBuffer(AbstractByteBuffer *parent, offset_t offset, bufsize_t size);
-    virtual ~ByteSubBuffer() { }
-
-    virtual bufsize_t getContentSize();
-    virtual BYTE* getContent();
-
-    bufsize_t getRequestedSize() const { return size; }
-
-protected:
-    AbstractByteBuffer *parent;
-    offset_t offset;
-    bufsize_t size;
-};
-

@@ -63,7 +63,7 @@ void cmd_util::fetch(Executable *peExe, offset_t offset, Executable::addr_type a
         return;
     }
 
-    ByteSubBuffer *sub = new ByteSubBuffer(peExe, offset, 100);
+    BufferView *sub = new BufferView(peExe, offset, 100);
 
     if (sub->getContent() == NULL) {
         cout << "Cannot fetch" << endl;
