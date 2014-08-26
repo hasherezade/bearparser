@@ -7,6 +7,22 @@ class PEFile;
 
 using namespace pe;
 
+class PEElementWrapper : public ExeElementWrapper
+{
+public:
+    PEElementWrapper(PEFile* pe);
+    virtual ~PEElementWrapper() {}
+
+    PEFile* getPE() { return m_PE; }
+
+protected:
+    PEFile *m_PE;
+
+friend class PEFile;
+};
+
+//----
+
 class PENodeWrapper : public ExeNodeWrapper
 {
 public:
@@ -21,4 +37,6 @@ public:
 protected:
     PEFile *m_PE;
     PENodeWrapper *peParentNode;
+
+friend class PEFile;
 };

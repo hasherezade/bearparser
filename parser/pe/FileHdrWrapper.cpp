@@ -4,12 +4,12 @@
 void* FileHdrWrapper::getPtr()
 {
     if (this->hdr != NULL) {
+        // use cached
         return (void*) hdr;
     }
-    PEFile *pe = dynamic_cast<PEFile*> (m_Exe);
-    if (pe == NULL) return NULL;
+    if (m_PE == NULL) return NULL;
 
-    offset_t myOff = pe->peHdrOffset();
+    offset_t myOff = m_PE->peHdrOffset();
     IMAGE_FILE_HEADER* hdr = (IMAGE_FILE_HEADER*) m_Exe->getContentAt(myOff, sizeof(IMAGE_FILE_HEADER));
     if (!hdr) return NULL; //error
 

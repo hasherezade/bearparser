@@ -118,33 +118,28 @@ bool OptHdrWrapper::wrap()
 
 Executable::exe_bits OptHdrWrapper::getHdrBitMode()
 {
-    PEFile* m_ExeFile = dynamic_cast<PEFile*> (this->m_Exe);
-    if (m_ExeFile == NULL) {
+    if (m_PE == NULL) {
         return Executable::BITS_32; // default
     }
-    return m_ExeFile->getHdrBitMode();
+    return m_PE->getHdrBitMode();
 }
 
 pe::IMAGE_NT_HEADERS32* OptHdrWrapper::nt32()
 {
+    if (m_PE == NULL) return NULL;
     if (getHdrBitMode() != Executable::BITS_32) return NULL;
 
-    PEFile *pe = dynamic_cast<PEFile*> (m_Exe);
-    if (pe == NULL) return NULL;
-
-    offset_t myOff = pe->peNtHdrOffset();
+    offset_t myOff = m_PE->peNtHdrOffset();
     IMAGE_NT_HEADERS32* hdr = (IMAGE_NT_HEADERS32*) m_Exe->getContentAt(myOff, sizeof(IMAGE_NT_HEADERS32));
     return hdr;
 }
 
 pe::IMAGE_NT_HEADERS64* OptHdrWrapper::nt64()
 {
+    if (m_PE == NULL) return NULL;
     if (getHdrBitMode() != Executable::BITS_64) return NULL;
 
-    PEFile *pe = dynamic_cast<PEFile*> (m_Exe);
-    if (pe == NULL) return NULL;
-
-    offset_t myOff = pe->peNtHdrOffset();
+    offset_t myOff = m_PE->peNtHdrOffset();
     IMAGE_NT_HEADERS64* hdr = (IMAGE_NT_HEADERS64*) m_Exe->getContentAt(myOff, sizeof(IMAGE_NT_HEADERS64));
     return hdr;
 }

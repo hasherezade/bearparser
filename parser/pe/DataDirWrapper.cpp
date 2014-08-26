@@ -5,24 +5,23 @@ using namespace pe;
 
 void* DataDirWrapper::getPtr()
 {
-    PEFile *pe = dynamic_cast<PEFile*> (m_Exe);
-    if (pe == NULL) return NULL;
+    if (m_PE == NULL) return NULL;
 
-    offset_t myOff = pe->peDataDirOffset();
+    offset_t myOff = m_PE->peDataDirOffset();
     pe::IMAGE_DATA_DIRECTORY* ptr = (pe::IMAGE_DATA_DIRECTORY*) m_Exe->getContentAt(myOff, getSize());
     return ptr;
 }
 
 bufsize_t DataDirWrapper::getSize()
 {
-    size_t size = sizeof(pe::IMAGE_DATA_DIRECTORY) * DIRECTORY_ENTRIES_NUM;
-    return (uint32_t) size;
+    bufsize_t size = sizeof(pe::IMAGE_DATA_DIRECTORY) * DIRECTORY_ENTRIES_NUM;
+    return size;
 }
 
 void* DataDirWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
     if (fieldId >= DIRECTORY_ENTRIES_NUM) {
-        return getPtr(); // invalid fieldID!
+        return getPtr(); // invalid fieldID, give default
     }
 
     IMAGE_DATA_DIRECTORY* dataDir = (IMAGE_DATA_DIRECTORY*) getPtr();

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../ExeElementWrapper.h"
+#include "PENodeWrapper.h"
 
 #include "pe_formats.h"
 using namespace pe;
 
-class FileHdrWrapper : public ExeElementWrapper
+class FileHdrWrapper : public PEElementWrapper
 {
 public:
     /* fields :*/
@@ -21,7 +21,7 @@ public:
         FIELD_COUNTER
     };
 
-    FileHdrWrapper(Executable *pe) : ExeElementWrapper(pe), hdr(NULL) {}
+    FileHdrWrapper(PEFile *pe) : PEElementWrapper(pe), hdr(NULL) {}
     bool wrap() { hdr = NULL; getPtr(); return true; }
 
     /* full structure boundatries */

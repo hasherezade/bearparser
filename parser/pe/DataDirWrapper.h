@@ -4,7 +4,7 @@
 
 using namespace pe;
 
-class DataDirWrapper : public ExeElementWrapper
+class DataDirWrapper : public PEElementWrapper
 {
 public:
     enum DataDirSID {
@@ -14,8 +14,8 @@ public:
         COUNTER
     };
 
-    DataDirWrapper(Executable *pe) : ExeElementWrapper(pe) {}
-    virtual size_t getSubFieldsCount() { return 2; }
+    DataDirWrapper(PEFile *pe) : PEElementWrapper(pe) {}
+    virtual size_t getSubFieldsCount() { return COUNTER; }
 
     /* full structure boundatries */
     virtual void* getPtr();
@@ -29,5 +29,4 @@ public:
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
 
-friend class PEFile;
 };

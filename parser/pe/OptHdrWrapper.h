@@ -1,11 +1,10 @@
 #pragma once
 
-#include "../ExeElementWrapper.h"
-#include "pe_formats.h"
+#include "PENodeWrapper.h"
 
 using namespace pe;
 
-class OptHdrWrapper : public ExeElementWrapper
+class OptHdrWrapper : public PEElementWrapper
 {
 public:
     /* fields :*/
@@ -59,7 +58,7 @@ public:
     static QString translateSubsystem(DWORD subsystem);
     //----
 
-    OptHdrWrapper(Executable *pe) : ExeElementWrapper(pe), opt32(NULL), opt64(NULL) { wrap(); }
+    OptHdrWrapper(PEFile *pe) : PEElementWrapper(pe), opt32(NULL), opt64(NULL) { wrap(); }
     bool wrap();// { opt32 = NULL; opt64 = NULL; getPtr(); return true; }
 
     /* full structure boundatries */
