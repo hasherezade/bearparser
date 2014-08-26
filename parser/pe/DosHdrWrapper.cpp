@@ -3,10 +3,11 @@
 
 void* DosHdrWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
+/*
     DOSExe *dosExe = dynamic_cast<DOSExe*> (m_Exe);
     if (dosExe == NULL) return NULL;
-
-    offset_t myOff = dosExe->dosHeaderOffset();
+*/
+    offset_t myOff = 0;//dosExe->dosHeaderOffset();
     IMAGE_DOS_HEADER* dosHdr = (IMAGE_DOS_HEADER*) m_Exe->getContentAt(myOff, sizeof(IMAGE_DOS_HEADER));
     if (dosHdr == NULL) return NULL; //error
 

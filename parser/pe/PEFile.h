@@ -35,7 +35,7 @@ public:
 
 //-------------------------------------------------------------
 
-class PEFile : public DOSExe
+class PEFile : public MappedExe
 {
 public:
     enum WRAPPERS {
@@ -101,7 +101,6 @@ public:
     //modifications:
     bool moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addType = Executable::RAW); //throws CustomException
 
-
 protected:
     virtual void clearWrappers();
     virtual void wrap(AbstractByteBuffer *v_buf);
@@ -110,6 +109,8 @@ protected:
     //---
     //modifications:
     bool setHdrSectionsNum(size_t newNum);
+
+    DosHdrWrapper *dosHdrWrapper;
 
     FileHdrWrapper *fHdr;
     OptHdrWrapper *optHdr;

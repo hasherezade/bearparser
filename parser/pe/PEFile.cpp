@@ -43,10 +43,9 @@ Executable* PEFileBuilder::build(AbstractByteBuffer *buf)
 //-------------------------------------------------------------
 
 PEFile::PEFile(AbstractByteBuffer *v_buf)
-    : DOSExe(v_buf), fHdr(NULL), optHdr(NULL), sects(NULL),
+    : MappedExe(v_buf, Executable::BITS_32), dosHdrWrapper(NULL), fHdr(NULL), optHdr(NULL), sects(NULL),
     album(NULL)
 {
-    bitMode = Executable::BITS_32;
     album = new ResourcesAlbum(this);
     wrap(v_buf);
 }
@@ -64,13 +63,14 @@ void PEFile::clearWrappers()
 void PEFile::wrap()
 {
     clearWrappers();
-    DOSExe::wrap(this->buf);
     PEFile::wrap(this->buf);
 }
 
 void  PEFile::wrap(AbstractByteBuffer *v_buf)
 {
     core.wrap(v_buf);
+    this->dosHdrWrapper = new DosHdrWrapper(this);
+    this->wrappers[WR_DOS_HDR] = this->dosHdrWrapper;
 
     this->fHdr = new FileHdrWrapper(this);
     if (fHdr->getPtr() == NULL) throw ExeException("Cannot parse FileHdr: It is not PE File!");
@@ -85,7 +85,7 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     bool isOk = false;
     size_t secNum = fHdr->getNumValue(FileHdrWrapper::SEC_NUM, &isOk);
     if (isOk){
-        sects = new SectHdrsWrapper(this);
+        this->sects = new SectHdrsWrapper(this);
         this->wrappers[WR_SECTIONS] = sects;
     }
     // map Data Dirs
@@ -253,4 +253,3 @@ bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::
     ddir[id].VirtualAddress = static_cast<DWORD> (dataDirAddr);
     return true;
 }
-

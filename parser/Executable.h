@@ -40,6 +40,9 @@ public:
     static bool isBit64(Executable *exe) { return (!exe || exe->getBitMode() != Executable::BITS_64) ? false: true; }
     static bool isBit32(Executable *exe) { return (!exe || exe->getBitMode() != Executable::BITS_32) ? false: true; }
 
+    bool isBit64() { return isBit64(this); }
+    bool isBit32() { return isBit32(this); }
+
     virtual ~Executable(void) {}
 
     virtual exe_bits getBitMode() { return this->bitMode; }

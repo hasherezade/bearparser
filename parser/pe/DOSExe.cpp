@@ -40,7 +40,7 @@ void DOSExe::wrap(AbstractByteBuffer *v_buf)
 {
     this->dosHdrWrapper = new DosHdrWrapper(this);
 
-     WORD* magic = (WORD*) this->dosHdrWrapper->getFieldPtr(DosHdrWrapper::MAGIC);
+    WORD* magic = (WORD*) this->dosHdrWrapper->getFieldPtr(DosHdrWrapper::MAGIC);
 
     if (this->dosHdrWrapper->getPtr() == NULL || magic == NULL) {
         throw ExeException("Could not Wrap!");
