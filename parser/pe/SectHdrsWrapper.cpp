@@ -142,6 +142,10 @@ offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType)
 //TODO: move to util...
 offset_t roundupToUnit(offset_t size, offset_t unit)
 {
+    if (unit == 0) {
+        printf("Invalid roundup unit!\n");
+        return 0;
+    }
     size_t unitsNum = size / unit;
     offset_t roundDown = unitsNum * unit;
     if (roundDown < size) unitsNum ++;
