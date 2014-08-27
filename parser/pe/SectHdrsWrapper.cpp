@@ -138,14 +138,14 @@ offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType)
     return offset;
 }
 //TODO: move to util...
-offset_t roundupToUnit(offset_t size, offset_t unit)
+bufsize_t roundupToUnit(bufsize_t size, bufsize_t unit)
 {
     if (unit == 0) {
         printf("Invalid roundup unit!\n");
         return 0;
     }
-    size_t unitsNum = size / unit;
-    offset_t roundDown = unitsNum * unit;
+    bufsize_t unitsNum = size / unit;
+    bufsize_t roundDown = unitsNum * unit;
     if (roundDown < size) unitsNum ++;
     return unitsNum * unit;
 }
@@ -187,7 +187,7 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
         return 0; // no changes
     }
 
-    offset_t unit = m_PE->getAlignment(aType);
+    bufsize_t unit = m_PE->getAlignment(aType);
     if (unit == 0) {
         return dRawSize; // do not roundup
     }
@@ -214,7 +214,7 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
     bufsize_t mRawSize = getMappedRawSize();
     bufsize_t mVirtualSize = (dVirtualSize > mRawSize) ? dVirtualSize : mRawSize;
 
-    offset_t unit = m_PE->getAlignment(aType);
+    bufsize_t unit = m_PE->getAlignment(aType);
     if (unit == 0) {
         return mRawSize; // do not roundup
     }
