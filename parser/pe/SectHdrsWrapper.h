@@ -43,12 +43,14 @@ public:
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
     virtual WrappedValue::data_type containsDataType(size_t fieldId, size_t subField = FIELD_NONE);
 
-    offset_t getContentOffset(Executable::addr_type aType);
-    offset_t getContentEndOffset(Executable::addr_type aType, bool roundup);
+    offset_t getContentOffset(Executable::addr_type aType, bool useMapped = true);
+    offset_t getContentEndOffset(Executable::addr_type aType, bool roundup); //always useMapped startOFfset
 
     bufsize_t getContentSize(Executable::addr_type aType, bool roundup);
 
 protected:
+    bufsize_t getContentDeclaredOffset(Executable::addr_type aType);
+
     bufsize_t getContentDeclaredSize(Executable::addr_type aType);
     bufsize_t getMappedRawSize();
     bufsize_t getMappedVirtualSize();

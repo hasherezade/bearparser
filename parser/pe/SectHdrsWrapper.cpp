@@ -122,11 +122,11 @@ WrappedValue::data_type SectionHdrWrapper::containsDataType(size_t fieldId, size
     return WrappedValue::INT;
 }
 
-offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType)
+
+// offset that is declared in header
+bufsize_t SectionHdrWrapper::getContentDeclaredOffset(Executable::addr_type aType)
 {
     if (this->header == NULL) return INVALID_ADDR;
-
-    //bool isOk = false;
     offset_t offset = INVALID_ADDR;
 
     if (aType == Executable::RAW) {
@@ -134,9 +134,19 @@ offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType)
     } else if (aType == Executable::VA || aType == Executable::RVA) {
         offset = static_cast<offset_t>(this->header->VirtualAddress);//this->getNumValue(VPTR, &isOk));
     }
-    //if (!isOk) return INVALID_ADDR;
     return offset;
 }
+
+offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType, bool useMapped)
+{
+    offset_t offset = getContentDeclaredOffset(aType);
+    if (useMapped == false) return offset;
+
+    const offset_t MIN_RAW = 0x200;
+    if (offset < MIN_RAW) offset = 0;
+    return offset;
+}
+
 //TODO: move to util...
 bufsize_t roundupToUnit(bufsize_t size, bufsize_t unit)
 {
@@ -152,7 +162,8 @@ bufsize_t roundupToUnit(bufsize_t size, bufsize_t unit)
 
 offset_t SectionHdrWrapper::getContentEndOffset(Executable::addr_type addrType, bool roundup)
 {
-    offset_t startOffset = getContentOffset(addrType);
+    const bool useMapped = true;
+    offset_t startOffset = getContentOffset(addrType, useMapped);
     if (startOffset == INVALID_ADDR) return INVALID_ADDR;
 
     offset_t endOffset = static_cast<offset_t>(getContentSize(addrType, roundup)) + startOffset;
