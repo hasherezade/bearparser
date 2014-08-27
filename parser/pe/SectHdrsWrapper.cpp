@@ -21,13 +21,11 @@ void* SectionHdrWrapper::getPtr()
     }
     if (this->sectNum >= m_PE->hdrSectionsNum()) return NULL;
 
-    offset_t hdrOffset = m_PE->secHdrsOffset();
-    offset_t secOffset = hdrOffset + (this->sectNum * sizeof(pe::IMAGE_SECTION_HEADER));
-    if ( (secOffset + sizeof(IMAGE_SECTION_HEADER)) > m_Exe->getRawSize()) return NULL;
-    BYTE* content = m_PE->getContent();
-    if (!content) return NULL;
+    offset_t firstSecOffset = m_PE->secHdrsOffset();
+    offset_t secOffset = firstSecOffset + (this->sectNum * sizeof(pe::IMAGE_SECTION_HEADER));
 
-    this->header = (pe::IMAGE_SECTION_HEADER*) ((uint64_t)content + secOffset);
+    //cache the header:
+    this->header = (pe::IMAGE_SECTION_HEADER*) m_PE->getContentAt(secOffset, sizeof(pe::IMAGE_SECTION_HEADER));
     return (void*) this->header;
 }
 
