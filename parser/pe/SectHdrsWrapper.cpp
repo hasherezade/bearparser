@@ -142,8 +142,10 @@ offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType, bool u
     offset_t offset = getContentDeclaredOffset(aType);
     if (useMapped == false) return offset;
 
-    const offset_t MIN_RAW = 0x200;
-    if (offset < MIN_RAW) offset = 0;
+    if (aType == Executable::RAW){
+        const offset_t MIN_RAW = 0x200;
+        if (offset < MIN_RAW) offset = 0;
+    }
     return offset;
 }
 
