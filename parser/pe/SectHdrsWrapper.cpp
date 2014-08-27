@@ -159,11 +159,10 @@ offset_t SectionHdrWrapper::getContentEndOffset(Executable::addr_type addrType, 
     return endOffset;
 }
 
-bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool roundup)
+// size that is declared in header
+bufsize_t SectionHdrWrapper::getContentDeclaredSize(Executable::addr_type aType)
 {
     if (this->header == NULL) return 0;
-    if (m_PE == NULL) return 0;
-
     bufsize_t size = 0;
 
     if (aType == Executable::RAW) {
@@ -171,17 +170,79 @@ bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool ro
     } else if (aType == Executable::VA || aType == Executable::RVA) {
         size = static_cast<bufsize_t>(this->header->Misc.VirtualSize);//this->getNumValue(VSIZE, &isOk));
     }
+    return size;
+}
 
-    if (roundup) {
-        offset_t unit = m_PE->getAlignment(aType);
-        offset_t startOffset = getContentOffset(aType);
-        //TODO: check it!
-        if (aType == Executable::RAW) {
-            bufsize_t maxSize = m_PE->getRawSize() - startOffset; //round down only for Raw
-            size = roundupToUnit(size, unit);
-            if (size > maxSize) size = maxSize;
-        }
+//RAW size that is really mapped
+bufsize_t SectionHdrWrapper::getMappedRawSize()
+{
+    const Executable::addr_type aType = Executable::RAW;
+
+    const offset_t startOffset = getContentOffset(aType);
+    if (startOffset == INVALID_ADDR) {
+        return 0; //invalid addr, nothing is mapped
     }
+    bufsize_t dRawSize = getContentDeclaredSize(aType);
+    if (dRawSize == 0) {
+        return 0; // no changes
+    }
+
+    offset_t unit = m_PE->getAlignment(aType);
+    if (unit == 0) {
+        return dRawSize; // do not roundup
+    }
+    bufsize_t size = roundupToUnit(dRawSize, unit);
+
+    const bufsize_t maxSize = m_PE->getRawSize() - startOffset;
+    if (size > maxSize) {
+        size = maxSize; // trunc to file size
+    }
+    return size;
+}
+
+//VirtualSize that is really mapped
+bufsize_t SectionHdrWrapper::getMappedVirtualSize()
+{
+    const Executable::addr_type aType = Executable::RVA;
+
+    const offset_t startOffset = getContentOffset(aType);
+    if (startOffset == INVALID_ADDR) {
+        return 0; //invalid addr, nothing is mapped
+    }
+
+    bufsize_t dVirtualSize = getContentDeclaredSize(aType);
+    bufsize_t mRawSize = getMappedRawSize();
+    bufsize_t mVirtualSize = (dVirtualSize > mRawSize) ? dVirtualSize : mRawSize;
+
+    offset_t unit = m_PE->getAlignment(aType);
+    if (unit == 0) {
+        return mRawSize; // do not roundup
+    }
+    bufsize_t size = roundupToUnit(mVirtualSize, unit);
+    return size;
+}
+
+bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool roundup)
+{
+    if (this->header == NULL) return 0;
+    if (m_PE == NULL) return 0;
+
+    bufsize_t size = 0;
+    if (roundup == false) {
+        size = getContentDeclaredSize(aType);
+        //printf("Declared size = %llx\n---\n", size);
+        return size;
+    }
+    //---
+    if (aType == Executable::RAW) {
+        //printf ("R: ");
+        size = getMappedRawSize();
+    }
+    if (aType == Executable::RVA || aType == Executable::VA) {
+        size = getMappedVirtualSize();
+        //printf ("V: ");
+    }
+    //printf("Mapped size = %llx\n", size);
     return size;
 }
 
