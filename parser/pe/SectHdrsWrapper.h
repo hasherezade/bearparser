@@ -25,7 +25,7 @@ public:
         FIELD_COUNTER
     };
 
-    SectionHdrWrapper(PEFile *pe, uint32_t sectionNumber)
+    SectionHdrWrapper(PEFile *pe, size_t sectionNumber)
         : PENodeWrapper(pe), sectNum(sectionNumber), name(NULL), header(NULL) { wrap(); }
     bool wrap();
 
@@ -58,7 +58,7 @@ protected:
     bool reloadName();
 
     char *name;
-    uint32_t sectNum;
+    size_t sectNum;
 
 private:
     pe::IMAGE_SECTION_HEADER *header;
@@ -84,7 +84,7 @@ public:
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField) { return getSubfieldSize(fieldId, subField ); }
     virtual QString getFieldName(size_t fieldId);// { return getSubFieldName(fieldId); }
 
-    SectionHdrWrapper* getSecHdr(size_t secNum) { return (secNum >= entries.size())? NULL : dynamic_cast<SectionHdrWrapper*>(entries[secNum]); }
+    SectionHdrWrapper* getSecHdr(size_t secNum) { return (secNum >= entries.size()) ? NULL : dynamic_cast<SectionHdrWrapper*>(entries[secNum]); }
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool roundup, bool verbose = false);
 
     void printSectionsMapping(Executable::addr_type aType);

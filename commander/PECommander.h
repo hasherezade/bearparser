@@ -163,6 +163,7 @@ public:
     {
         Executable *exe = cmd_util::getExeFromContext(context);
         PEFile *pe = dynamic_cast<PEFile*>(exe);
+        if (!pe) return;
 
         printf("Available DataDirs: \n");
         cmd_util::listDataDirs(pe);
@@ -184,4 +185,50 @@ public:
             std::cerr << "[ERROR] "<< e.what() << std::endl;
         }
     }
+};
+
+class SectionDumpCommand : public Command
+{
+public:
+    SectionDumpCommand(std::string desc)
+        : Command(desc)
+    {
+        fileName = "sec_dump.txt";
+    }
+
+    virtual void execute(CmdParams *params, CmdContext  *context)
+    {
+        Executable *exe = cmd_util::getExeFromContext(context);
+        PEFile *pe = dynamic_cast<PEFile*>(exe);
+        if (!pe) return;
+
+        size_t sectHdrCount = pe->getSectionsCount(false);
+        size_t sectCount = pe->getSectionsCount(true);
+        printf("Sections count = %d\n", sectCount);
+
+        size_t secId = cmd_util::readNumber("chose the section by index:");
+
+        SectionHdrWrapper *sec = pe->getSecHdr(secId);
+        if (sec == NULL) {
+            printf("No such section\n");
+            return;
+        }
+        Executable::addr_type aType = Executable::RAW;
+        offset_t hdrStart = sec->getContentOffset(aType, false);
+        bufsize_t hdrSize = sec->getContentSize(aType, false);
+
+        offset_t start = sec->getContentOffset(aType, true);
+        bufsize_t size = sec->getContentSize(aType, true);
+
+        printf("Section %s\n", sec->getName().toStdString().c_str());
+
+        printf("In Hdr vs Mapped:\n");
+        printf(" [RAW]\n Offset: %lld vs %lld\n Size:   %ld vs %ld\n", hdrStart, start, hdrSize, size);
+        printf("RAW: [%lld - %lld], size = %ld\n", start, start + size, size);
+        BufferView secView(pe,start,size);
+        bufsize_t dSize = FileBuffer::dump(fileName, secView, true);
+        printf("Dumped size: %ld into: %s\n", dSize, fileName.toStdString().c_str());
+    }
+protected:
+    QString fileName;
 };

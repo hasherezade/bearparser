@@ -87,5 +87,6 @@ void PECommander::initCommands()
     this->addCommand("rs", new WrapperInfoCommand("Resource Info"));
 
     this->addCommand("dir_mv", new MoveDataDirEntryCommand("Move DataDirectory"));
+    this->addCommand("secdump", new SectionDumpCommand("Dump chosen Section into a file"));
 }
 

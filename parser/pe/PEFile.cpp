@@ -169,6 +169,13 @@ bool PEFile::setHdrSectionsNum(size_t newNum)
     return true;
 }
 
+size_t PEFile::getSectionsCount(bool useMapped)
+{
+    if (useMapped == false) {
+        return hdrSectionsNum();
+    }
+    return this->sects->getEntriesCount();
+}
 
 offset_t PEFile::rawToRva(offset_t raw)
 {

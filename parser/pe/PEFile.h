@@ -80,6 +80,7 @@ public:
     offset_t peDataDirOffset();
 
     size_t hdrSectionsNum();
+    size_t getSectionsCount(bool useMapped = true);
     exe_bits getHdrBitMode() { return core.getHdrBitMode(); }
 
     SectionHdrWrapper* getSecHdr(size_t secNum)
