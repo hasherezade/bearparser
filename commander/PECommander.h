@@ -4,6 +4,8 @@
 
 
 namespace cmd_util {
+    PEFile* getPEFromContext(CmdContext *ctx);
+    void printSectionMapping(SectionHdrWrapper *sec, Executable::addr_type aType);
     void printResourceTypes(PEFile *pe);
     void printStrings(PEFile *pe, size_t limit);
     void dumpResourcesInfo(PEFile *pe, pe::resource_type type, size_t wrapperId);
@@ -205,8 +207,12 @@ public:
         size_t sectHdrCount = pe->getSectionsCount(false);
         size_t sectCount = pe->getSectionsCount(true);
         printf("Sections count = %d\n", sectCount);
-
-        size_t secId = cmd_util::readNumber("chose the section by index:");
+        if (sectCount == 0) {
+            printf("No sections!\n");
+            return;
+        }
+        printf("Available indexes: %d-%d\n", 0, sectCount - 1);
+        size_t secId = cmd_util::readNumber("Chose the section by index");
 
         SectionHdrWrapper *sec = pe->getSecHdr(secId);
         if (sec == NULL) {
@@ -214,17 +220,13 @@ public:
             return;
         }
         Executable::addr_type aType = Executable::RAW;
-        offset_t hdrStart = sec->getContentOffset(aType, false);
-        bufsize_t hdrSize = sec->getContentSize(aType, false);
-
         offset_t start = sec->getContentOffset(aType, true);
         bufsize_t size = sec->getContentSize(aType, true);
 
         printf("Section %s\n", sec->getName().toStdString().c_str());
+        cmd_util::printSectionMapping(sec, Executable::RAW);
+        cmd_util::printSectionMapping(sec, Executable::RVA);
 
-        printf("In Hdr vs Mapped:\n");
-        printf(" [RAW]\n Offset: %lld vs %lld\n Size:   %ld vs %ld\n", hdrStart, start, hdrSize, size);
-        printf("RAW: [%lld - %lld], size = %ld\n", start, start + size, size);
         BufferView secView(pe,start,size);
         bufsize_t dSize = FileBuffer::dump(fileName, secView, true);
         printf("Dumped size: %ld into: %s\n", dSize, fileName.toStdString().c_str());

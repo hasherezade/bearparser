@@ -8,6 +8,7 @@ namespace cmd_util {
     inline MappedExe* getMappedExeFromContext(CmdContext *ctx) { return dynamic_cast<MappedExe*>(getExeFromContext(ctx)); }
 
     char addrTypeToChar(Executable::addr_type type);
+    std::string addrTypeToStr(Executable::addr_type type);
 
     offset_t readOffset(Executable::addr_type aType);
     size_t readNumber(std::string prompt);

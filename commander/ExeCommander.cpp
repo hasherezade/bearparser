@@ -17,6 +17,16 @@ char cmd_util::addrTypeToChar(Executable::addr_type type)
     return '_';
 }
 
+std::string cmd_util::addrTypeToStr(Executable::addr_type type)
+{
+    switch (type) {
+        case Executable::RAW: return "raw";
+        case Executable::RVA: return "RVA";
+        case Executable::VA: return "VA";
+    }
+    return "";
+}
+
 Executable* cmd_util::getExeFromContext(CmdContext *context)
 {
     ExeCmdContext *exeContext = dynamic_cast<ExeCmdContext*>(context);
@@ -30,18 +40,10 @@ Executable* cmd_util::getExeFromContext(CmdContext *context)
 offset_t cmd_util::readOffset(Executable::addr_type aType)
 {
     offset_t offset = 0;
-    std::string prompt = "";
 
-    switch (aType) {
-        case Executable::RAW :
-            prompt = "raw"; break;
-        case Executable::RVA :
-            prompt = "RVA"; break;
-        case Executable::VA :
-            prompt = "VA"; break;
-        default:
-            return INVALID_ADDR;
-    }
+    if (aType == Executable::NOT_ADDR) return INVALID_ADDR;
+    std::string prompt = addrTypeToStr(aType);
+
     printf("%s: ", prompt.c_str());
     scanf("%llx", &offset);
     return offset;

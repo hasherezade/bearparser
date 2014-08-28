@@ -3,6 +3,31 @@
 
 using namespace std;
 
+PEFile* cmd_util::getPEFromContext(CmdContext *ctx)
+{
+    Executable* exe =  cmd_util::getExeFromContext(ctx);
+    return dynamic_cast<PEFile*>(exe);
+}
+
+void cmd_util::printSectionMapping(SectionHdrWrapper *sec, Executable::addr_type aType)
+{
+    if (sec == NULL) return;
+
+    offset_t hdrStart = sec->getContentOffset(aType, false);
+    bufsize_t hdrSize = sec->getContentSize(aType, false);
+
+    offset_t start = sec->getContentOffset(aType, true);
+    bufsize_t size = sec->getContentSize(aType, true);
+
+    std::string typeStr = cmd_util::addrTypeToStr(aType);
+    printf("[%s]\n",typeStr.c_str());
+    printf(" ------------[In Hdr]------[Mapped]\n");
+    printf(" Offset:  %10llX \t%10llX\n", hdrStart, start);
+    printf(" Size:    %10lX \t%10lX\n", hdrSize, size);
+    printf(" Scope:  [%10llX - %10llX], size = %lX\n", start, start + size, size);
+    printf(" \n");
+}
+
 void cmd_util::printResourceTypes(PEFile *pe)
 {
     if (pe == NULL || pe->getResourcesAlbum() == NULL) return;
