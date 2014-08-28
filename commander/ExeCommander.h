@@ -104,13 +104,14 @@ public:
     virtual void execute(CmdParams *params, CmdContext  *context)
     {
         Executable *exe = cmd_util::getExeFromContext(context);
-        printf("Bit mode: \t%d\n", exe->getBitMode());
-        printf("Entry point: \t%#llx%c\n", exe->getEntryPoint(), cmd_util::addrTypeToChar(Executable::RVA));
-        printf("Raw size: \t%#lx\n", exe->getMappedSize(Executable::RAW));
-        printf("Virtual size: \t%#lx\n", exe->getMappedSize(Executable::RVA));
+        printf("Bit mode: \t%10d\n", exe->getBitMode());
+        offset_t entryPoint = exe->getEntryPoint();
+        printf("Entry point: \t[%10llX %c]\n", entryPoint, cmd_util::addrTypeToChar(Executable::RVA));
+        printf("Raw size: \t[%10lX]\n", exe->getMappedSize(Executable::RAW));
+        printf("Raw align.: \t[%10lX]\n", exe->getAlignment(Executable::RAW));
 
-        printf("Raw align.: \t%#lx\n", exe->getAlignment(Executable::RAW));
-        printf("Virtual align.:\t%#lx\n", exe->getAlignment(Executable::RVA));
+        printf("Virtual size: \t[%10lX]\n", exe->getMappedSize(Executable::RVA));
+        printf("Virtual align.:\t[%10lX]\n", exe->getAlignment(Executable::RVA));
         MappedExe *mappedExe = cmd_util::getMappedExeFromContext(context);
         if (mappedExe) {
             printf("Contains:\n");

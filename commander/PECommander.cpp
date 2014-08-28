@@ -108,10 +108,11 @@ void PECommander::initCommands()
     this->addCommand("secR", new SectionByAddrCommand(Executable::RAW, "Section by RAW"));
 
     this->addCommand("rstrings", new PrintStringsCommand("Print Strings from resources"));
-    this->addCommand("rsrcs", new PrintWrapperTypesCommand("List Resource Types"));
+    this->addCommand("rsl", new PrintWrapperTypesCommand("List Resource Types"));
     this->addCommand("rs", new WrapperInfoCommand("Resource Info"));
 
     this->addCommand("dir_mv", new MoveDataDirEntryCommand("Move DataDirectory"));
-    this->addCommand("secdump", new SectionDumpCommand("Dump chosen Section into a file"));
+    this->addCommand("secdump", new SectionDumpCommand("Dump chosen Section info"));
+    this->addCommand("secfdump", new SectionDumpCommand("Dump chosen Section Content into a file", true));
 }
 

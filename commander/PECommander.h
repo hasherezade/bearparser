@@ -192,8 +192,8 @@ public:
 class SectionDumpCommand : public Command
 {
 public:
-    SectionDumpCommand(std::string desc)
-        : Command(desc)
+    SectionDumpCommand(std::string desc, bool v_saveToFile = false)
+        : Command(desc), saveToFile(v_saveToFile)
     {
         fileName = "sec_dump.txt";
     }
@@ -227,10 +227,13 @@ public:
         cmd_util::printSectionMapping(sec, Executable::RAW);
         cmd_util::printSectionMapping(sec, Executable::RVA);
 
-        BufferView secView(pe,start,size);
-        bufsize_t dSize = FileBuffer::dump(fileName, secView, true);
-        printf("Dumped size: %ld into: %s\n", dSize, fileName.toStdString().c_str());
+        if (saveToFile) {
+            BufferView secView(pe,start,size);
+            bufsize_t dSize = FileBuffer::dump(fileName, secView, true);
+            printf("Dumped size: %ld into: %s\n", dSize, fileName.toStdString().c_str());
+        }
     }
 protected:
     QString fileName;
+    bool saveToFile;
 };

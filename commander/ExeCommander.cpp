@@ -166,8 +166,8 @@ void ExeCommander::initCommands()
     this->addCommand("printx", new FetchCommand(true, Executable::RAW, "Print content by Raw address - HEX"));
     //this->addCommand("hV", new FetchCommand(true, Executable::RVA, "Fetch content by Virtual address - HEX"));
 
-    this->addCommand("cl", new ClearWrapperCommand("Clear chosen wrapper"));
-    this->addCommand("fdump", new DumpWrapperToFileCommand("Dump chosen wrapper into a file"));
+    this->addCommand("cl", new ClearWrapperCommand("Clear chosen wrapper Content"));
+    this->addCommand("fdump", new DumpWrapperToFileCommand("Dump chosen wrapper Content into a file"));
     this->addCommand("dump", new DumpWrapperCommand("Dump chosen wrapper info"));
     this->addCommand("edump", new DumpWrapperEntriesCommand("Dump wrapper entries"));
 
