@@ -157,14 +157,14 @@ void ExeCommander::initCommands()
 {
     this->addCommand("info", new ExeInfoCommand());
 
-    this->addCommand("Rv", new ConvertAddrCommand(Executable::RAW, Executable::RVA, "Convert: RAW -> RVA"));
-    this->addCommand("Vr", new ConvertAddrCommand(Executable::RVA, Executable::RAW, "Convert: RVA -> RAW"));
+    this->addCommand("r-v", new ConvertAddrCommand(Executable::RAW, Executable::RVA, "Convert: RAW -> RVA"));
+    this->addCommand("v-r", new ConvertAddrCommand(Executable::RVA, Executable::RAW, "Convert: RVA -> RAW"));
 
-    this->addCommand("cR", new FetchCommand(false, Executable::RAW, "Fetch content by Raw address"));
-    this->addCommand("cV", new FetchCommand(false, Executable::RVA, "Fetch content by Virtual address"));
+    this->addCommand("printc", new FetchCommand(false, Executable::RAW, "Print content by Raw address"));
+    //this->addCommand("cV", new FetchCommand(false, Executable::RVA, "Fetch content by Virtual address"));
 
-    this->addCommand("hR", new FetchCommand(true, Executable::RAW, "Fetch content by Raw address - HEX"));
-    this->addCommand("hV", new FetchCommand(true, Executable::RVA, "Fetch content by Virtual address - HEX"));
+    this->addCommand("printx", new FetchCommand(true, Executable::RAW, "Print content by Raw address - HEX"));
+    //this->addCommand("hV", new FetchCommand(true, Executable::RVA, "Fetch content by Virtual address - HEX"));
 
     this->addCommand("cl", new ClearWrapperCommand("Clear chosen wrapper"));
     this->addCommand("fdump", new DumpWrapperToFileCommand("Dump chosen wrapper into a file"));

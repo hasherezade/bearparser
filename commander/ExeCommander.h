@@ -61,7 +61,14 @@ public:
         offset_t offset = cmd_util::readOffset(addrFrom);
 
         offset_t outOffset = exe->convertAddr(offset, addrFrom, addrTo);
-        printf("%llx -> %llx\n", offset, outOffset);
+        if (outOffset == INVALID_ADDR) {
+            std::cerr << "This address cannot be mapped" << std::endl;
+            return;
+        }
+        std::string inAddr = cmd_util::addrTypeToStr(addrFrom);
+        std::string outAddr = cmd_util::addrTypeToStr(addrTo);
+        printf("[%s]\t->\t[%s]:\n", inAddr.c_str(), outAddr.c_str());
+        printf(" %llX\t->\t%llX\n", offset, outOffset);
     }
 
 protected:
