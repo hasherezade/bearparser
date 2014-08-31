@@ -32,9 +32,9 @@ ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_
 BYTE* ByteBuffer::allocContent(bufsize_t v_size, bufsize_t v_padding)
 {
     if (v_size == 0) throw BufferException("Zero size requested");
-
-    BYTE* content =  (BYTE*) calloc(sizeof(BYTE), v_size + v_padding);
-    if (content == NULL) throw BufferException("Cannot allocate buffer");
+    bufsize_t allocSize = v_size + v_padding;
+    BYTE* content =  (BYTE*) calloc(sizeof(BYTE), allocSize);
+    if (content == NULL) throw BufferException("Cannot allocate buffer of size: 0x" + QString::number(allocSize, 16));
 
     return content;
 }

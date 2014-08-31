@@ -25,7 +25,7 @@ public:
 class FileView : public AbstractByteBuffer, public FileBuffer
 {
 public:
-    FileView(QString &fileName); //throws exceptions
+    FileView(QString &fileName, bufsize_t maxSize = FILE_MAXSIZE); //throws exceptions
     virtual ~FileView();
 
     virtual bufsize_t getContentSize() { return mappedSize; }

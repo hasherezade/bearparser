@@ -1,6 +1,6 @@
 #include "FileBuffer.h"
 
-FileView::FileView(QString &path)
+FileView::FileView(QString &path, bufsize_t maxSize)
     : fIn (path)
 {
     if (fIn.open(QFile::ReadOnly | QFile::Truncate) == false) {
@@ -8,11 +8,12 @@ FileView::FileView(QString &path)
     }
     this->fileSize = fIn.size();
     if (DBG_LVL) printf("File of size:\t%lld\n", fileSize);
+    bufsize_t readableSize = getReadableSize(fIn);
+    this->mappedSize = (readableSize > maxSize) ? maxSize : readableSize;
 
-    this->mappedSize = getReadableSize(fIn);
     uchar *pData = fIn.map(0, this->mappedSize);
     if (pData == NULL) {
-        throw BufferException("Cannot map the file: " + path);
+        throw BufferException("Cannot map the file: " + path + " of size: 0x" + QString::number(this->mappedSize, 16));
     }
     this->mappedContent = (BYTE*) pData;
 }
