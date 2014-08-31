@@ -49,14 +49,26 @@ int main(int argc, char *argv[])
         fName = QString(argv[1]);
     }
     try {
-        FileView *fileView = new FileView(fName);
-        ExeFactory::exe_type exeType = ExeFactory::findMatching(fileView);
+        FileView *fileView = NULL;
+        bufsize_t maxMapSize = FILE_MAXSIZE;
+        do {
+            try {
+                fileView = new FileView(fName, maxMapSize);
+            
+            } catch (BufferException &e1) {
+                fprintf(stderr, "[ERROR] %s\n", e1.what());
+                printf("Try again with size (hex): ");
+                scanf("%lX", &maxMapSize);
+            }
+        } while (fileView == NULL);
 
+        ExeFactory::exe_type exeType = ExeFactory::findMatching(fileView);
         if (exeType == ExeFactory::NONE) {
            fprintf(stderr, "Type not supported\n");
            ExeFactory::destroy();
            return 1;
         }
+
         printf("Type: %s\n", ExeFactory::getTypeName(exeType).toStdString().c_str());
         const bufsize_t MINBUF = 0x200;
         bufsize_t readableSize = fileView->getContentSize();
