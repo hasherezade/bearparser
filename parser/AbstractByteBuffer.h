@@ -13,7 +13,7 @@
 #define LOG(msg) if (DBG_LVL) printf("%s: %s\n", __FUNCTION__,msg);
 //------------------------------------------------
 
-typedef size_t bufsize_t;
+typedef uint32_t bufsize_t;
 const bufsize_t BUFSIZE_MAX = bufsize_t(-1);
 
 typedef uint64_t offset_t;
