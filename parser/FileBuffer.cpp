@@ -52,16 +52,18 @@ ByteBuffer* FileBuffer::read(QString &path, bufsize_t minBufSize)
     if (content == NULL) throw FileBufferException("Cannot allocate buffer");
     //printf("Reading...%lx , BUFSIZE_MAX = %lx\n", allocSize, BUFSIZE_MAX);
 
-    readableSize = contentSize;
-
     bufsize_t redSize = 0;
     offset_t prevOffset = 0;
-    offset_t maxOffset = readableSize - 1;
+    offset_t maxOffset = contentSize - 1;
 
     while (fIn.pos() < maxOffset) {
-        redSize += fIn.read(content + redSize,  FILEVIEW_MAXSIZE);
+
+        bufsize_t maxSize = contentSize - redSize;
+        if (maxSize > FILEVIEW_MAXSIZE) maxSize = FILEVIEW_MAXSIZE;
+
+        redSize += fIn.read(content + redSize,  maxSize);
         if (prevOffset == fIn.pos()) break; //cannot read more!
-        printf("pos = %llx redSize = %llx\n", fIn.pos(), redSize);
+        printf("redSize = %lx\n", redSize);
         prevOffset = fIn.pos();
     }
     //printf("Red size...%lx\n", redSize);
