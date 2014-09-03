@@ -3,7 +3,8 @@
 
 #include "ByteBuffer.h"
 
-#define FILE_MAXSIZE BUFSIZE_MAX
+const bufsize_t FILE_MAXSIZE = BUFSIZE_MAX;
+const bufsize_t FILEVIEW_MAXSIZE = (1024*1024*400); //419mb
 
 class FileBufferException : public CustomException
 {
@@ -30,6 +31,7 @@ public:
 
     virtual bufsize_t getContentSize() { return mappedSize; }
     virtual BYTE* getContent() { return mappedContent; }
+    bufsize_t getMappableSize(QFile &fIn);
 
 protected:
     QFile fIn;
