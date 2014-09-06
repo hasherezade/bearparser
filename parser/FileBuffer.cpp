@@ -1,7 +1,7 @@
 #include "FileBuffer.h"
 
 FileView::FileView(QString &path, bufsize_t maxSize)
-    : fIn (path)
+    : AbstractFileBuffer(path), fIn (path)
 {
     if (fIn.open(QFile::ReadOnly | QFile::Truncate) == false) {
         throw FileBufferException("Cannot open the file: " + path);
@@ -34,13 +34,20 @@ bufsize_t FileView::getMappableSize(QFile &fIn)
 }
 //----------------------------------------------------------------
 
-ByteBuffer* FileBuffer::read(QString &path, bufsize_t minBufSize)
+ByteBuffer* AbstractFileBuffer::read(QString &path, bufsize_t minBufSize)
 {
     //printf("reading file...");
     QFile fIn(path);
     if (fIn.open(QFile::ReadOnly | QFile::Truncate) == false) {
         throw FileBufferException("Cannot open the file: " + path);
     }
+    ByteBuffer *bufferedFile = read(fIn, minBufSize);
+    fIn.close();
+    return bufferedFile;
+}
+
+ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize) //throws exceptions
+{
     bufsize_t readableSize = getReadableSize(fIn);
     bufsize_t allocSize = (readableSize < minBufSize) ? minBufSize : readableSize;
     //printf("Alloc size: %lx\n", allocSize);
@@ -67,12 +74,10 @@ ByteBuffer* FileBuffer::read(QString &path, bufsize_t minBufSize)
         prevOffset = fIn.pos();
     }
     //printf("Red size...%lx\n", redSize);
-    
-    fIn.close();
     return bufferedFile;
 }
 
-bufsize_t FileBuffer::getReadableSize(QFile &fIn)
+bufsize_t AbstractFileBuffer::getReadableSize(QFile &fIn)
 {
     qint64 fileSize = fIn.size();
     bufsize_t size = static_cast<bufsize_t> (fileSize);
@@ -83,7 +88,7 @@ bufsize_t FileBuffer::getReadableSize(QFile &fIn)
     return size;
 }
 
-bufsize_t FileBuffer::getReadableSize(QString &path)
+bufsize_t AbstractFileBuffer::getReadableSize(QString &path)
 {
     if (path.length() == 0) return 0;
 
@@ -94,7 +99,7 @@ bufsize_t FileBuffer::getReadableSize(QString &path)
     return size;
 }
 
-bufsize_t FileBuffer::dump(QString path, AbstractByteBuffer &bBuf, bool allowExceptions)
+bufsize_t AbstractFileBuffer::dump(QString path, AbstractByteBuffer &bBuf, bool allowExceptions)
 {
     BYTE* buf = bBuf.getContent();
     bufsize_t bufSize  = bBuf.getContentSize();
