@@ -1,9 +1,14 @@
 #include "Executable.h"
+#include "FileBuffer.h"
 
 Executable::Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode)
     : buf(v_buf), bitMode(v_bitMode)
 {
     if (v_buf == NULL) throw ExeException("Cannot make Exe from NULL buffer");
+    FileBuffer *fileBuf = dynamic_cast<FileBuffer*>(buf);
+    if (fileBuf) {
+        this->fileName = fileBuf->getFileName();
+    }
 }
 
 BYTE* Executable::getContentAt(offset_t offset, Executable::addr_type aType, bufsize_t size, bool allowExceptions)

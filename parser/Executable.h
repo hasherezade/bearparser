@@ -87,10 +87,13 @@ public:
         return rvaToRaw(rva);
     }
 
+    QString getFileName() { return fileName; }
+
 protected:
     Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode);
 
     exe_bits bitMode;
     AbstractByteBuffer *buf;
+    QString fileName;
 };
 
