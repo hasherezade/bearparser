@@ -124,7 +124,7 @@ WrappedValue::data_type SectionHdrWrapper::containsDataType(size_t fieldId, size
 
 
 // offset that is declared in header
-bufsize_t SectionHdrWrapper::getContentDeclaredOffset(Executable::addr_type aType)
+offset_t SectionHdrWrapper::getContentDeclaredOffset(Executable::addr_type aType)
 {
     if (this->header == NULL) return INVALID_ADDR;
     offset_t offset = INVALID_ADDR;

@@ -49,7 +49,7 @@ public:
     bufsize_t getContentSize(Executable::addr_type aType, bool roundup);
 
 protected:
-    bufsize_t getContentDeclaredOffset(Executable::addr_type aType);
+    offset_t getContentDeclaredOffset(Executable::addr_type aType);
 
     bufsize_t getContentDeclaredSize(Executable::addr_type aType);
     bufsize_t getMappedRawSize();
