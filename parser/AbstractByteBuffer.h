@@ -26,6 +26,10 @@ public:
     BufferException(const QString info) : CustomException(info) {}
 };
 
+namespace buf_util {
+    bufsize_t roundupToUnit(bufsize_t size, bufsize_t unit);
+};
+
 class AbstractByteBuffer
 {
 public:

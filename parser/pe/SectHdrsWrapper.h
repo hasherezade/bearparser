@@ -47,8 +47,14 @@ public:
     offset_t getContentEndOffset(Executable::addr_type aType, bool roundup); //always useMapped startOFfset
 
     bufsize_t getContentSize(Executable::addr_type aType, bool roundup);
+    
+protected: 
+    SectionHdrWrapper(PEFile *pe, pe::IMAGE_SECTION_HEADER *v_header) //standalone entry
+        : PENodeWrapper(pe), sectNum(INVALID_ENTRYNUM), name(NULL), header(v_header)
+    {
+        reloadName();
+    }
 
-protected:
     offset_t getContentDeclaredOffset(Executable::addr_type aType);
 
     bufsize_t getContentDeclaredSize(Executable::addr_type aType);
@@ -62,6 +68,8 @@ protected:
 
 private:
     pe::IMAGE_SECTION_HEADER *header;
+
+friend class PEFile;
 };
 
 //----

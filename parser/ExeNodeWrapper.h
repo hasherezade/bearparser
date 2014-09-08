@@ -3,6 +3,8 @@
 #include "ExeElementWrapper.h"
 #include <vector>
 
+const size_t INVALID_ENTRYNUM = (-1);
+
 class ExeNodeWrapper : public ExeElementWrapper
 {
 public:

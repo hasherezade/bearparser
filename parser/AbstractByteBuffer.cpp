@@ -1,5 +1,17 @@
 #include "AbstractByteBuffer.h"
 
+bufsize_t buf_util::roundupToUnit(bufsize_t size, bufsize_t unit)
+{   
+    if (unit == 0) {
+        printf("Invalid roundup unit!\n");
+        return 0;
+    }
+    bufsize_t unitsNum = size / unit;
+    bufsize_t roundDown = unitsNum * unit;
+    if (roundDown < size) unitsNum ++;
+    return unitsNum * unit;
+}
+
 //--------------------------------------------------
 bool AbstractByteBuffer::isValid(AbstractByteBuffer *buf)
 {

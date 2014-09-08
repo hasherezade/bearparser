@@ -1,6 +1,8 @@
 #include "SectHdrsWrapper.h"
 #include "PEFile.h"
 
+using namespace buf_util;
+
 const size_t SECNAME_LEN = 8;
 
 bool SectionHdrWrapper::wrap()
@@ -148,19 +150,6 @@ offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType, bool u
         if (offset < MIN_RAW) offset = 0;
     }
     return offset;
-}
-
-//TODO: move to util...
-bufsize_t roundupToUnit(bufsize_t size, bufsize_t unit)
-{
-    if (unit == 0) {
-        printf("Invalid roundup unit!\n");
-        return 0;
-    }
-    bufsize_t unitsNum = size / unit;
-    bufsize_t roundDown = unitsNum * unit;
-    if (roundDown < size) unitsNum ++;
-    return unitsNum * unit;
 }
 
 offset_t SectionHdrWrapper::getContentEndOffset(Executable::addr_type addrType, bool roundup)

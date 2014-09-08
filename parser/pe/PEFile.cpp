@@ -265,3 +265,40 @@ bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::
     ddir[id].VirtualAddress = static_cast<DWORD> (dataDirAddr);
     return true;
 }
+
+
+bool PEFile::addNewSection(QString name, bufsize_t size)
+{
+    ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
+    if (sec == NULL) {
+        return false;
+    }
+   
+    if (sec->canAddEntry() == false) {
+        return false;
+    }
+    pe::IMAGE_SECTION_HEADER secHdr;
+    memset(&secHdr, 0, sizeof(pe::IMAGE_SECTION_HEADER));
+
+    //name copy:
+    std::string nameStr = name.toStdString();
+    const char *nameChar = nameStr.c_str();
+    size_t copySize = sizeof(secHdr.Name);
+    size_t nameLen = strlen(nameChar);
+    if (nameLen < copySize) copySize = nameLen;
+    memcpy(secHdr.Name, nameChar, copySize);
+
+    bufsize_t roundedRawEnd = buf_util::roundupToUnit(getMappedSize(Executable::RAW), getAlignment(Executable::RAW));
+    bufsize_t roundedVirtualEnd = buf_util::roundupToUnit(getMappedSize(Executable::RVA), getAlignment(Executable::RVA));
+
+    secHdr.PointerToRawData = static_cast<DWORD>(roundedRawEnd);
+    secHdr.VirtualAddress = static_cast<DWORD>(roundedVirtualEnd);
+    secHdr.SizeOfRawData = size;
+    secHdr.Misc.VirtualSize = size;
+
+    SectionHdrWrapper wr(this, &secHdr);
+    if (sec->addEntry(&wr) == false) {
+        return false;
+    }
+    return true;
+}
