@@ -6,6 +6,7 @@ const size_t SECNAME_LEN = 8;
 bool SectionHdrWrapper::wrap()
 {
     this->clear();
+
     this->header = NULL;
     getPtr();
     reloadName();
@@ -285,6 +286,13 @@ bool SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
     return true;
 }
 
+void SectHdrsWrapper::clear()
+{
+    ExeNodeWrapper::clear();
+    this->rSec.clear();
+    this->vSec.clear();
+}
+    
 bool SectHdrsWrapper::wrap()
 {
     this->clear();
@@ -316,8 +324,10 @@ bool SectHdrsWrapper::wrap()
         offset_t endRaw = sec->getContentEndOffset(Executable::RAW, roundup);
         vSec[endRVA] = sec;
 
-        if (rSec[endRaw] != NULL) {
-            if (rSec[endRaw]->getContentOffset(Executable::RAW) < sec->getContentOffset(Executable::RAW)) {
+        if (rSec.find(endRaw) != rSec.end()) { //already exist
+            SectionHdrWrapper* prevSec = rSec[endRaw];
+            if (prevSec == NULL) continue;
+            if (prevSec->getContentOffset(Executable::RAW) < sec->getContentOffset(Executable::RAW)) {
                 //printf("endRaw = %llX - SKIP\n", endRaw);
                 continue; //skip
             }

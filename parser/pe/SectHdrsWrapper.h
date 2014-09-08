@@ -92,6 +92,8 @@ public:
     bool addEntry(ExeNodeWrapper *entry);
 
 protected:
+    void clear();
+
     bool isMyEntryType(ExeNodeWrapper *entry); // is it an entry of appropriate type
 
     std::map<offset_t, SectionHdrWrapper*> vSec;
