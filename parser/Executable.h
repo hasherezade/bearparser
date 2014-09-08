@@ -43,7 +43,7 @@ public:
     bool isBit64() { return isBit64(this); }
     bool isBit32() { return isBit32(this); }
 
-    virtual ~Executable(void) {}
+    virtual ~Executable(void) { }
 
     virtual exe_bits getBitMode() { return this->bitMode; }
 

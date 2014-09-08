@@ -10,7 +10,7 @@ bufsize_t ImportBaseEntryWrapper::NameLenLimit = 0xFF;
 
 void ImportBaseDirWrapper::addFuncMapping(ImportBaseFuncWrapper *func)
 {
-    uint64_t via = func->callVia();
+    offset_t via = func->callVia();
     if (via == INVALID_ADDR) return;
     /*
     if (m_Exe->isValidVA(via)) {
@@ -19,6 +19,7 @@ void ImportBaseDirWrapper::addFuncMapping(ImportBaseFuncWrapper *func)
     ImportBaseEntryWrapper* lib = dynamic_cast<ImportBaseEntryWrapper*>(func->getParentNode());
     if (!lib) return;
 
+    this->thunksList.push_back(via);
     size_t num = lib->getEntryId();
     thunkToLibMap[via] = num;
 
@@ -26,27 +27,47 @@ void ImportBaseDirWrapper::addFuncMapping(ImportBaseFuncWrapper *func)
     lib->thunkToFuncMap[via] = num;
 }
 
-QString ImportBaseDirWrapper::thunkToFuncName(offset_t thunk)
+ImportBaseEntryWrapper* ImportBaseDirWrapper::thunkToLib(offset_t thunk)
 {
     std::map<offset_t, size_t>::iterator libItr = thunkToLibMap.find(thunk);
-    if (libItr == thunkToLibMap.end()) return "";
+    if (libItr == thunkToLibMap.end()) return NULL;
 
     size_t libId = libItr->second;
     ImportBaseEntryWrapper* lib = dynamic_cast<ImportBaseEntryWrapper*>(this->getEntryAt(libId));
-    if (!lib) return "?";
+    return lib;
+}
+
+ImportBaseFuncWrapper* ImportBaseDirWrapper::thunkToFunction(offset_t thunk)
+{
+    ImportBaseEntryWrapper* lib = thunkToLib(thunk);
+    if (!lib) return NULL;
 
     std::map<offset_t, size_t>::iterator funcItr = lib->thunkToFuncMap.find(thunk);
-    if (funcItr == lib->thunkToFuncMap.end()) return "";
+    if (funcItr == lib->thunkToFuncMap.end()) return NULL;
 
     ImportBaseFuncWrapper* func = dynamic_cast<ImportBaseFuncWrapper*>(lib->getEntryAt(funcItr->second));
-    if (!func) return "";
+    return func;
+}
 
-    return func->getName();
+QString ImportBaseDirWrapper::thunkToFuncName(offset_t thunk)
+{
+    ImportBaseFuncWrapper* func = thunkToFunction(thunk);
+    if (func == NULL) return "";
+
+    return func->getShortName();
+}
+
+QString ImportBaseDirWrapper::thunkToLibName(offset_t thunk)
+{
+    ImportBaseEntryWrapper* lib = thunkToLib(thunk);
+    if (!lib) return "";
+    return lib->getName();
 }
 
 bool ImportBaseDirWrapper::wrap()
 {
     clear();
+    thunksList.clear();
     thunkToLibMap.clear();
 
     size_t oldCount = this->importsCount;
@@ -68,9 +89,7 @@ bool ImportBaseDirWrapper::wrap()
 }
 
 //--------------------------------------------------------------------------------------------------------------
-
-
-QString ImportBaseFuncWrapper::getName()
+QString ImportBaseFuncWrapper::getShortName()
 {
     QString functionName;
     if (isByOrdinal()) {
@@ -83,6 +102,12 @@ QString ImportBaseFuncWrapper::getName()
         if (!fName) return "";
         functionName = fName;
     }
+    return functionName;
+}
+
+QString ImportBaseFuncWrapper::getName()
+{
+    QString functionName = getShortName();
     ImportBaseEntryWrapper *p = dynamic_cast<ImportBaseEntryWrapper*>(this->getParentNode());
     if (!p) return functionName;
 

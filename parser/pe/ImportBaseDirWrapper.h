@@ -20,6 +20,9 @@ public:
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE) { return getSubfieldSize(fieldId, subField); }
 
     QString thunkToFuncName(offset_t thunk);
+    QString thunkToLibName(offset_t thunk);
+
+    QList<offset_t> getThunksList() { return this->thunksList; }
 
 protected:
     ImportBaseDirWrapper(PEFile *pe, pe:: dir_entry v_entryType)
@@ -29,8 +32,12 @@ protected:
     virtual bool loadNextEntry(size_t entryNum) = 0;
 
     void addFuncMapping(ImportBaseFuncWrapper *func);
+    ImportBaseEntryWrapper* thunkToLib(offset_t thunk);
+    ImportBaseFuncWrapper* thunkToFunction(offset_t thunk);
     //---
     std::map<offset_t, size_t> thunkToLibMap;
+    QList<offset_t> thunksList;
+
     size_t importsCount;
 
 friend class ImportBaseEntryWrapper;
@@ -65,6 +72,7 @@ public:
         : PENodeWrapper(pe, parentLib, entryNumber) { }
 
     virtual QString getName();
+    QString getShortName();
 
     virtual bool isByOrdinal() = 0;
     virtual uint64_t getOrdinal() = 0;
