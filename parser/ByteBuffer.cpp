@@ -41,6 +41,8 @@ BYTE* ByteBuffer::allocContent(bufsize_t v_size, bufsize_t v_padding)
 
 bool ByteBuffer::resize(bufsize_t newSize)
 {
+    if (newSize == this->contentSize) return true;
+
     BYTE *newContent = NULL;
     try {
         newContent = allocContent(newSize, this->padding);
@@ -58,6 +60,7 @@ bool ByteBuffer::resize(bufsize_t newSize)
     this->content =  newContent;
     this->contentSize = newSize;
     delete [] oldContent;
+    return true;
 }
 
 ByteBuffer::~ByteBuffer()
