@@ -39,6 +39,27 @@ BYTE* ByteBuffer::allocContent(bufsize_t v_size, bufsize_t v_padding)
     return content;
 }
 
+bool ByteBuffer::resize(bufsize_t newSize)
+{
+    BYTE *newContent = NULL;
+    try {
+        newContent = allocContent(newSize, this->padding);
+    } catch(BufferException &e) {
+        newContent = NULL;
+    }
+    if (newContent == NULL) return false;
+
+    BYTE *oldContent = this->content;
+    bufsize_t oldSize = this->contentSize;
+    bufsize_t copySize = newSize < oldSize ? newSize : oldSize;
+
+    memcpy(newContent, oldContent, copySize);
+    
+    this->content =  newContent;
+    this->contentSize = newSize;
+    delete [] oldContent;
+}
+
 ByteBuffer::~ByteBuffer()
 {
     free(this->content);

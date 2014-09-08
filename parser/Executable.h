@@ -88,6 +88,7 @@ public:
     }
 
     QString getFileName() { return fileName; }
+    virtual bool resize(bufsize_t newSize) { return buf->resize(newSize); }
 
 protected:
     Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode);

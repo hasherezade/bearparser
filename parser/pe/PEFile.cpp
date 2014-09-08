@@ -169,6 +169,17 @@ bool PEFile::setHdrSectionsNum(size_t newNum)
     return true;
 }
 
+bool PEFile::setVitualSize(bufsize_t newSize)
+{
+    uint64_t size = newSize;
+    bool canSet = optHdr->setNumValue(OptHdrWrapper::IMAGE_SIZE, 0, size);
+    if (canSet == false) {
+        if (DBG_LVL) printf("Can not change OptHdr!\n");
+        return false;
+    }
+    return true;
+}
+
 size_t PEFile::getSectionsCount(bool useMapped)
 {
     if (useMapped == false) {
@@ -277,6 +288,27 @@ bool PEFile::addNewSection(QString name, bufsize_t size)
     if (sec->canAddEntry() == false) {
         return false;
     }
+
+    bufsize_t roundedRawEnd = buf_util::roundupToUnit(getMappedSize(Executable::RAW), getAlignment(Executable::RAW));
+    bufsize_t roundedVirtualEnd = buf_util::roundupToUnit(getMappedSize(Executable::RVA), getAlignment(Executable::RVA));
+    bufsize_t newSize = roundedRawEnd + size;
+    bufsize_t newVirtualSize = roundedVirtualEnd + size;
+
+    if (setVitualSize(newVirtualSize) == false) {
+        printf("Failed to change virtual size");
+        return false;
+    }
+
+    if (resize(newSize) == false) {
+        printf("Failed to resize");
+        return false;
+    }
+
+    sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
+    if (sec == NULL) {
+        return false;
+    }
+
     pe::IMAGE_SECTION_HEADER secHdr;
     memset(&secHdr, 0, sizeof(pe::IMAGE_SECTION_HEADER));
 
@@ -287,9 +319,6 @@ bool PEFile::addNewSection(QString name, bufsize_t size)
     size_t nameLen = strlen(nameChar);
     if (nameLen < copySize) copySize = nameLen;
     memcpy(secHdr.Name, nameChar, copySize);
-
-    bufsize_t roundedRawEnd = buf_util::roundupToUnit(getMappedSize(Executable::RAW), getAlignment(Executable::RAW));
-    bufsize_t roundedVirtualEnd = buf_util::roundupToUnit(getMappedSize(Executable::RVA), getAlignment(Executable::RVA));
 
     secHdr.PointerToRawData = static_cast<DWORD>(roundedRawEnd);
     secHdr.VirtualAddress = static_cast<DWORD>(roundedVirtualEnd);

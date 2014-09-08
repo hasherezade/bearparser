@@ -13,7 +13,7 @@ public:
 
     virtual bufsize_t getContentSize() { return contentSize; }
     virtual BYTE* getContent() { return content; }
-
+    virtual bool resize(bufsize_t newSize); 
 protected:
     BYTE* allocContent(bufsize_t v_size, bufsize_t padding);
 

@@ -38,4 +38,13 @@ protected:
     virtual ~MappedExe(void) { }
 
     virtual void wrap(AbstractByteBuffer *v_buf) = 0;
+    virtual bool resize(bufsize_t newSize) 
+    { 
+        if (Executable::resize(newSize)) {
+            wrap(); 
+            printf("Resize and rewrap...");
+            return true;
+        }
+        return false;
+    }
 };
