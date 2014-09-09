@@ -56,10 +56,10 @@ bool ByteBuffer::resize(bufsize_t newSize)
     bufsize_t copySize = newSize < oldSize ? newSize : oldSize;
 
     memcpy(newContent, oldContent, copySize);
-    
+
     this->content =  newContent;
     this->contentSize = newSize;
-    delete [] oldContent;
+    free(oldContent);
     return true;
 }
 
