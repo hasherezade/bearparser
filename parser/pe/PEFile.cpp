@@ -293,7 +293,7 @@ bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::
 }
 
 
-bool PEFile::addNewSection(QString name, bufsize_t size)
+bool PEFile::addNewSection(QString name, bufsize_t size, DWORD characteristics)
 {
     ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
     if (sec == NULL) {
@@ -339,6 +339,7 @@ bool PEFile::addNewSection(QString name, bufsize_t size)
     secHdr.VirtualAddress = static_cast<DWORD>(roundedVirtualEnd);
     secHdr.SizeOfRawData = size;
     secHdr.Misc.VirtualSize = size;
+    secHdr.Characteristics = characteristics;
 
     SectionHdrWrapper wr(this, &secHdr);
     if (sec->addEntry(&wr) == false) {
