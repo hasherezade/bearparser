@@ -97,7 +97,8 @@ public:
     {
         return (this->album == NULL) ? NULL : album->getResourcesOfType(typeId);
     }
-     DataDirEntryWrapper* getDataDirEntry(pe::dir_entry eType);
+    DataDirEntryWrapper* getDataDirEntry(pe::dir_entry eType);
+    BufferView* createSectionView(size_t secNum);
     //---
     //modifications:
     bool moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addType = Executable::RAW); //throws CustomException

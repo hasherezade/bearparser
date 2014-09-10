@@ -241,6 +241,21 @@ DataDirEntryWrapper* PEFile::getDataDirEntry(pe::dir_entry eType)
     return dataDirEntries[eType];
 }
 
+BufferView* PEFile::createSectionView(size_t secId)
+{
+    SectionHdrWrapper *sec = this->getSecHdr(secId);
+    if (sec == NULL) {
+        printf("No such section\n");
+        return NULL;
+    }
+    Executable::addr_type aType = Executable::RAW;
+    offset_t start = sec->getContentOffset(aType, true);
+    bufsize_t size = sec->getContentSize(aType, true);
+    if (start == INVALID_ADDR || size == 0) return NULL;
+
+    BufferView *secView = new BufferView(this, start, size);
+    return secView;
+}
 
 bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addrType)
 {

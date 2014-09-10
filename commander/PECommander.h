@@ -228,9 +228,11 @@ public:
         cmd_util::printSectionMapping(sec, Executable::RVA);
 
         if (saveToFile) {
-            BufferView secView(pe,start,size);
-            bufsize_t dSize = FileBuffer::dump(fileName, secView, true);
+            BufferView *secView = pe->createSectionView(secId);
+            if (secView == NULL) return;
+            bufsize_t dSize = FileBuffer::dump(fileName, *secView, true);
             printf("Dumped size: %ld into: %s\n", dSize, fileName.toStdString().c_str());
+            delete secView;
         }
     }
 protected:
