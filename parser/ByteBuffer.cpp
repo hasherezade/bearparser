@@ -9,6 +9,16 @@ ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
     this->contentSize = v_size;
 }
 
+ByteBuffer::ByteBuffer(BYTE *v_content, bufsize_t v_size, bufsize_t v_padding)
+    : content(NULL), contentSize(v_size), padding(v_padding)
+{
+    if (v_size == 0) throw BufferException("Zero size requested");
+
+    this->content =  allocContent(v_size, v_padding);
+    this->contentSize = v_size;
+    memcpy(this->content, v_content, v_size);
+}
+
 ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_t v_size, bufsize_t v_padding)
 {
     if (v_parent == NULL) throw BufferException("Cannot make subBuffer for NULL buffer!");

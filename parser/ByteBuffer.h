@@ -7,6 +7,7 @@ class ByteBuffer : public AbstractByteBuffer
 {
 public:
     ByteBuffer(bufsize_t v_size, bufsize_t padding = DEFAULT_PADDING);
+    ByteBuffer(BYTE *v_content,bufsize_t v_size, bufsize_t padding = DEFAULT_PADDING);
     ByteBuffer(AbstractByteBuffer *sourceBuf, offset_t offset, bufsize_t size, bufsize_t padding = DEFAULT_PADDING);
 
     virtual ~ByteBuffer();
