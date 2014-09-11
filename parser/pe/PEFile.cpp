@@ -149,6 +149,15 @@ offset_t PEFile::getEntryPoint()
     return entryPoint;
 }
 
+bool PEFile::setEntryPoint(offset_t entry, Executable::addr_type aType)
+{
+    if (optHdr == NULL) return false;
+
+    offset_t epRva = this->convertAddr(entry, aType, Executable::RVA);
+    bool isOk = optHdr->setNumValue(OptHdrWrapper::EP, epRva);
+    return isOk;
+}
+
 size_t PEFile::hdrSectionsNum()
 {
     bool isOk = false;
