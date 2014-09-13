@@ -136,23 +136,23 @@ bool AbstractByteBuffer::fillContent(BYTE filling)
 bool AbstractByteBuffer::pasteBuffer(offset_t rawOffset, AbstractByteBuffer *buf, bool allowTrunc)
 {
     if (isValid(buf) == false || isValid(this) == false) return false;
-    offset_t mySize = this->getContentSize();
+    if (buf == NULL || buf->getContent() == NULL) return false;
+    BYTE* source = buf->getContent();
+    bufsize_t sizeToFill = buf->getContentSize();
 
-    if (mySize <= rawOffset) {
+    bufsize_t mySize = this->getContentSize();
+    if (static_cast<offset_t>(mySize) <= rawOffset) {
         if (DBG_LVL) printf("Too far offset requested: %llX while mySize: %llX\n", rawOffset, mySize);
         return false;
     }
-    bufsize_t sizeToFill = buf->getContentSize();
-
     BYTE *target = this->getContentAt(rawOffset, sizeToFill);
     if (target == NULL) {
         if (allowTrunc == false) return false;
-        sizeToFill =  mySize -rawOffset;
+        sizeToFill =  mySize - rawOffset;
         target = this->getContentAt(rawOffset, sizeToFill);
     }
     if (target == NULL) return false;
-
-    memcpy(target, buf->getContent(), sizeToFill);
+    memcpy(target, source, sizeToFill);
     return true;
 }
 
