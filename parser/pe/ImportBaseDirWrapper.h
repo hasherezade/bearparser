@@ -7,11 +7,15 @@ class ImportBaseDirWrapper;
 class ImportBaseEntryWrapper;
 class ImportBaseFuncWrapper;
 
+
+
 class ImportBaseDirWrapper : public DataDirEntryWrapper
 {
 public:
     static size_t EntriesLimit;
+    static bufsize_t thunkSize(Executable::exe_bits bits);
 
+    virtual bool wrap();
     virtual size_t getFieldsCount() { return this->importsCount; }
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField) { return getSubfieldPtr(fieldId, subField ); }
@@ -28,7 +32,6 @@ protected:
     ImportBaseDirWrapper(PEFile *pe, pe:: dir_entry v_entryType)
         : DataDirEntryWrapper(pe, v_entryType), importsCount(0) { }
 
-    virtual bool wrap();
     virtual bool loadNextEntry(size_t entryNum) = 0;
 
     void addFuncMapping(ImportBaseFuncWrapper *func);
