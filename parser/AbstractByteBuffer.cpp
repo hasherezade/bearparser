@@ -35,7 +35,6 @@ const BYTE AbstractByteBuffer::operator[](std::size_t idx)
 offset_t AbstractByteBuffer::getOffset(BYTE *ptr,  bool allowExceptions)
 {
     if (ptr == NULL) return INVALID_ADDR;
-
     BYTE* buf = this->getContent();
     bufsize_t bufSize = this->getContentSize();
 
@@ -43,7 +42,6 @@ offset_t AbstractByteBuffer::getOffset(BYTE *ptr,  bool allowExceptions)
         if (allowExceptions) throw BufferException("Buffer if empty!");
         return INVALID_ADDR;
     }
-
     if (ptr < buf) {
         if (allowExceptions) throw BufferException("Pointer before buffer begining!");
         return INVALID_ADDR;
@@ -88,19 +86,19 @@ bool AbstractByteBuffer::setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t 
     if (dstPtr == srcPtr) return false;
     if (dstPtr == NULL || srcPtr == NULL) return false;
 
-    offset_t srcStart = getOffset(srcPtr);
-    if (srcStart == INVALID_ADDR) {
+    offset_t dstStart = getOffset(dstPtr);
+    if (dstStart == INVALID_ADDR) {
+        printf("Invalid copy destination!");
         if (allowExceptions) throw BufferException("Invalid copy destination!");
         return false;
     }
-    bufsize_t size = srcSize + paddingSize;
 
-    bufsize_t dstMaxSize = static_cast<bufsize_t>(getContentSize() - srcStart);
+    bufsize_t size = srcSize + paddingSize;
+    bufsize_t dstMaxSize = static_cast<bufsize_t>(getContentSize() - dstStart);
     if (dstMaxSize < size) {
         //throw BufferException("Cannot copy: too big content size!");
         size = dstMaxSize;
     }
-
     if (memcmp(dstPtr, srcPtr, size) == 0) {
         return false; //no changes required
     }
