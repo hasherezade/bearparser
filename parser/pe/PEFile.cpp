@@ -302,15 +302,11 @@ bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::
 }
 
 
-bool PEFile::addNewSection(QString name, bufsize_t size, DWORD characteristics)
+SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size, DWORD characteristics)
 {
     ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
-    if (sec == NULL) {
-        return false;
-    }
-   
-    if (sec->canAddEntry() == false) {
-        return false;
+    if (sec == NULL || sec->canAddEntry() == false) {
+        return NULL;
     }
 
     bufsize_t roundedRawEnd = buf_util::roundupToUnit(getMappedSize(Executable::RAW), getAlignment(Executable::RAW));
@@ -320,17 +316,17 @@ bool PEFile::addNewSection(QString name, bufsize_t size, DWORD characteristics)
 
     if (setVitualSize(newVirtualSize) == false) {
         printf("Failed to change virtual size");
-        return false;
+        return NULL;
     }
 
     if (resize(newSize) == false) {
         printf("Failed to resize");
-        return false;
+        return NULL;
     }
-
+    // fetch again after resize:
     sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
     if (sec == NULL) {
-        return false;
+        return NULL;
     }
 
     pe::IMAGE_SECTION_HEADER secHdr;
@@ -351,8 +347,6 @@ bool PEFile::addNewSection(QString name, bufsize_t size, DWORD characteristics)
     secHdr.Characteristics = characteristics;
 
     SectionHdrWrapper wr(this, &secHdr);
-    if (sec->addEntry(&wr) == false) {
-        return false;
-    }
-    return true;
+    SectionHdrWrapper* secHdrWr = dynamic_cast<SectionHdrWrapper*>(sec->addEntry(&wr));
+    return secHdrWr;
 }

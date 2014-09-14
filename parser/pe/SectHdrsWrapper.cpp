@@ -261,18 +261,18 @@ bool SectHdrsWrapper::isMyEntryType(ExeNodeWrapper *entry)
     return true;
 }
 
-bool SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
+ExeNodeWrapper* SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
 {
-    if (m_PE == NULL) return false;
+    if (m_PE == NULL) return NULL;
 
-    if (ExeNodeWrapper::addEntry(entry) == false) return false;
+    if (ExeNodeWrapper::addEntry(entry) == false) return NULL;
 
     size_t count = m_PE->hdrSectionsNum() + 1;
     if (m_PE->setHdrSectionsNum(count) == false) {
-        return false;
+        return NULL;
     }
     this->wrap();
-    return true;
+    return getLastEntry();
 }
 
 void SectHdrsWrapper::clear()

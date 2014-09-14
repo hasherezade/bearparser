@@ -75,12 +75,12 @@ bool ExeNodeWrapper::isMyEntryType(ExeNodeWrapper *entry)
     return true; //type cast check in inherited wrappers
 }
 
-bool ExeNodeWrapper::addEntry(ExeNodeWrapper *entry)
+ExeNodeWrapper* ExeNodeWrapper::addEntry(ExeNodeWrapper *entry)
 {
-    if (canAddEntry() == false) return false;
+    if (canAddEntry() == false) return NULL;
 
     ExeNodeWrapper *lastEntry = this->getEntryAt(this->entries.size() - 1);
-    if (lastEntry == NULL) return false;
+    if (lastEntry == NULL) return NULL;
 
     offset_t lastOffset = lastEntry->getOffset();
     bufsize_t entrySize = lastEntry->getSize();
@@ -91,13 +91,14 @@ bool ExeNodeWrapper::addEntry(ExeNodeWrapper *entry)
         // if no entry supplied, duplicate the last entry...
         entry = lastEntry;
     }
-    if (isMyEntryType(entry) == false) return false;
-    if (entrySize != entry->getSize()) return false;
+    if (isMyEntryType(entry) == false) return NULL;
+    if (entrySize != entry->getSize()) return NULL;
 
     if (m_Exe->pasteBuffer(nextOffset, entry, false) == false) {
-        return false;
+        return  NULL;
     }
     this->clear();
-    return this->wrap();
+    this->wrap();
+    return getLastEntry();
 }
 

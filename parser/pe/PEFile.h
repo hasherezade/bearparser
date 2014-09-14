@@ -103,7 +103,7 @@ public:
     //modifications:
     bool setEntryPoint(offset_t entry, Executable::addr_type aType);
     bool moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addType = Executable::RAW); //throws CustomException
-    bool addNewSection(QString name, bufsize_t size, DWORD characteristics = 0xE0000000);
+    SectionHdrWrapper* addNewSection(QString name, bufsize_t size, DWORD characteristics = 0xE0000000);
 
 protected:
     virtual void clearWrappers();

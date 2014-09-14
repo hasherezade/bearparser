@@ -29,8 +29,12 @@ public:
     virtual QString getFieldName(size_t fieldId) = 0;
     //---
     virtual bool canAddEntry();
-    virtual bool addEntry(ExeNodeWrapper *entry);
-
+    virtual ExeNodeWrapper * addEntry(ExeNodeWrapper *entry);
+    ExeNodeWrapper* getLastEntry() 
+    {
+        size_t lastId = this->getEntriesCount() - 1;
+        return this->getEntryAt(lastId);
+    }
 protected:
     virtual void clear();
     virtual bool isMyEntryType(ExeNodeWrapper *entry); // is it an entry of appropriate type

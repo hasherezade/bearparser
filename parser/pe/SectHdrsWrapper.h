@@ -97,7 +97,7 @@ public:
 
     void printSectionsMapping(Executable::addr_type aType);
     //---
-    bool addEntry(ExeNodeWrapper *entry);
+    ExeNodeWrapper *addEntry(ExeNodeWrapper *entry);
 
 protected:
     void clear();
