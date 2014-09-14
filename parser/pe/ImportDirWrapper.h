@@ -80,6 +80,31 @@ public:
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
 
+    bufsize_t geEntrySize()
+    {
+        if (m_Exe == NULL) return 0;
+        return ImportBaseDirWrapper::thunkSize(m_Exe->getBitMode());
+    }
+
+    virtual offset_t getNextEntryOffset()
+    {
+         offset_t nextOffset = INVALID_ADDR;
+        //get after existing entries:
+        if (this->getEntriesCount() > 0) {
+            return ExeNodeWrapper::getNextEntryOffset();
+        }
+        //get by thunk:
+        IMAGE_IMPORT_DESCRIPTOR* desc = (IMAGE_IMPORT_DESCRIPTOR*) this->getPtr();
+        if (!desc) return INVALID_ADDR;
+
+        offset_t firstThunk = desc->FirstThunk;
+        if (firstThunk == 0) {
+            firstThunk = desc->OriginalFirstThunk;
+        }
+        nextOffset = m_Exe->convertAddr(desc->FirstThunk, Executable::RVA, Executable::RAW);
+        return nextOffset;
+    }
+
     char* getLibraryName();
 
 friend class ImportDirWrapper;

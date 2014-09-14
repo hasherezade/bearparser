@@ -32,10 +32,11 @@ public:
     
     virtual ExeNodeWrapper* addEntry(ExeNodeWrapper *entry);
     ExeNodeWrapper* getLastEntry();
+    virtual offset_t getNextEntryOffset();
+    virtual bufsize_t geEntrySize();
 
 protected:
     virtual void clear();
-    virtual offset_t getNextEntryOffset();
     virtual ExeNodeWrapper* addEntryAt(ExeNodeWrapper *entry, offset_t nextOffset);
 
     virtual bool isMyEntryType(ExeNodeWrapper *entry); // is it an entry of appropriate type

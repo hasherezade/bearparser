@@ -254,7 +254,6 @@ bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool ro
 bool SectHdrsWrapper::isMyEntryType(ExeNodeWrapper *entry)
 {
     SectionHdrWrapper* sEntry = dynamic_cast<SectionHdrWrapper*> (entry);
-    TRACE();
     if (sEntry == NULL) {
         return false;
     }
@@ -265,7 +264,7 @@ ExeNodeWrapper* SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
 {
     if (m_PE == NULL) return NULL;
 
-    if (ExeNodeWrapper::addEntry(entry) == false) return NULL;
+    if (ExeNodeWrapper::addEntry(entry) == NULL) return NULL;
 
     size_t count = m_PE->hdrSectionsNum() + 1;
     if (m_PE->setHdrSectionsNum(count) == false) {

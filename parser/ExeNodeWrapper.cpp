@@ -17,7 +17,6 @@ ExeNodeWrapper* ExeNodeWrapper::getEntryAt(size_t fieldId)
     return (fieldId < this->entries.size()) ? this->entries[fieldId] : NULL;
 }
 
-
 void ExeNodeWrapper::clear()
 {
     size_t entriesCount = this->entries.size();
@@ -53,16 +52,10 @@ QString ExeNodeWrapper::getSubfieldName(size_t fieldId, size_t subField)
 
 bool ExeNodeWrapper::canAddEntry()
 {
-    size_t entriesCount = this->entries.size();
-    if (entriesCount == 0) {
-        if (DBG_LVL) printf("Cannot add enty after the existing entries: no entries at all...\n");
-        return false; //do not have any entiries
-    }
-    ExeNodeWrapper *lastEntry = this->getEntryAt(entriesCount - 1);
-    offset_t lastOffset = lastEntry->getOffset();
-    bufsize_t entrySize = lastEntry->getSize();
+    offset_t nextOffset = getNextEntryOffset();
+    bufsize_t entrySize = geEntrySize();
+    if (entrySize == 0) return false;
 
-    offset_t nextOffset = lastOffset + entrySize;
     bufsize_t paddedSize = entrySize * 2;
     bool haveSpace = this->m_Exe->isAreaEmpty(nextOffset, paddedSize);
     if (DBG_LVL) printf("nextOffset = %llX size = %lX, canAdd: %d\n", nextOffset, entrySize, haveSpace);
@@ -87,24 +80,34 @@ offset_t ExeNodeWrapper::getNextEntryOffset()
     if (lastEntry == NULL) return INVALID_ADDR;
 
     offset_t lastOffset = lastEntry->getOffset();
-    bufsize_t entrySize = lastEntry->getSize();
+    if (lastOffset == INVALID_ADDR) return INVALID_ADDR;
 
+    bufsize_t entrySize = lastEntry->getSize();
     offset_t nextOffset = lastOffset + entrySize;
     return nextOffset;
+}
+
+bufsize_t ExeNodeWrapper::geEntrySize()
+{
+    ExeNodeWrapper *lastEntry = getLastEntry();
+    if (lastEntry == NULL) return 0;
+
+    bufsize_t entrySize = lastEntry->getSize();
+    return entrySize;
 }
 
 ExeNodeWrapper* ExeNodeWrapper::addEntryAt(ExeNodeWrapper *entry, offset_t nextOffset)
 {
     if (canAddEntry() == false) return NULL;
-    if (nextOffset == INVALID_ADDR) return NULL;
 
+    if (nextOffset == INVALID_ADDR) return NULL;
     if (entry == NULL) {
         // if no entry supplied, duplicate the last entry...
         entry = this->getLastEntry();
     }
+
     if (isMyEntryType(entry) == false) return NULL;
 //  if (entrySize != entry->getSize()) return NULL;
-
     if (m_Exe->pasteBuffer(nextOffset, entry, false) == false) {
         return  NULL;
     }
@@ -115,6 +118,7 @@ ExeNodeWrapper* ExeNodeWrapper::addEntryAt(ExeNodeWrapper *entry, offset_t nextO
 
 ExeNodeWrapper* ExeNodeWrapper::addEntry(ExeNodeWrapper *entry)
 {
-    return addEntryAt(entry, getNextEntryOffset());
+    offset_t offset = getNextEntryOffset();
+    return addEntryAt(entry, offset);
 }
 
