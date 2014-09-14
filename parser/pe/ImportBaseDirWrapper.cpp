@@ -9,7 +9,7 @@ bufsize_t ImportBaseEntryWrapper::NameLenLimit = 0xFF;
 
 bufsize_t ImportBaseDirWrapper::thunkSize(Executable::exe_bits bits) {
     if (bits == Executable::BITS_32) return sizeof (uint32_t);
-    else if (bits == Executable::BITS_32) return sizeof (uint64_t);
+    else if (bits == Executable::BITS_64) return sizeof (uint64_t);
     return 0;
 }
 //---------------------------------
