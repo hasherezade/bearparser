@@ -29,16 +29,17 @@ public:
     virtual QString getFieldName(size_t fieldId) = 0;
     //---
     virtual bool canAddEntry();
-    virtual ExeNodeWrapper * addEntry(ExeNodeWrapper *entry);
-    ExeNodeWrapper* getLastEntry() 
-    {
-        size_t lastId = this->getEntriesCount() - 1;
-        return this->getEntryAt(lastId);
-    }
+    
+    virtual ExeNodeWrapper* addEntry(ExeNodeWrapper *entry);
+    ExeNodeWrapper* getLastEntry();
+
 protected:
     virtual void clear();
-    virtual bool isMyEntryType(ExeNodeWrapper *entry); // is it an entry of appropriate type
+    virtual offset_t getNextEntryOffset();
+    virtual ExeNodeWrapper* addEntryAt(ExeNodeWrapper *entry, offset_t nextOffset);
 
+    virtual bool isMyEntryType(ExeNodeWrapper *entry); // is it an entry of appropriate type
+    
     ExeNodeWrapper* parentNode;
     size_t entryNum;
 
