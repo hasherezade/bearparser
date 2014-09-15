@@ -14,6 +14,8 @@ public:
     virtual ~ExeNodeWrapper() { clear(); }
 
     virtual bool wrap() { return true; }
+    virtual void reloadMapping() {}
+
     virtual ExeNodeWrapper* getEntryAt(size_t fieldId);
     virtual size_t getEntriesCount() { return entries.size(); }
     virtual size_t getEntriesNum() { return entries.size(); }
@@ -37,6 +39,7 @@ public:
 
 protected:
     virtual void clear();
+    virtual void addMapping(ExeNodeWrapper *entry) {}
     virtual bool loadNextEntry(size_t entryNum) { return false; } //TODO!
     virtual ExeNodeWrapper* addEntryAt(ExeNodeWrapper *entry, offset_t nextOffset);
 

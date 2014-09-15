@@ -114,6 +114,7 @@ ExeNodeWrapper* ExeNodeWrapper::addEntryAt(ExeNodeWrapper *entry, offset_t nextO
         return  NULL;
     } 
     if (loadNextEntry(entryNum) == false) return NULL;
+    reloadMapping();
 //  printf("ENTRIES NUM  %d\n", this->getEntriesCount());
     return getLastEntry();
 }
