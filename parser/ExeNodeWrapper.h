@@ -37,6 +37,7 @@ public:
 
 protected:
     virtual void clear();
+    virtual bool loadNextEntry(size_t entryNum) { return false; } //TODO!
     virtual ExeNodeWrapper* addEntryAt(ExeNodeWrapper *entry, offset_t nextOffset);
 
     virtual bool isMyEntryType(ExeNodeWrapper *entry); // is it an entry of appropriate type

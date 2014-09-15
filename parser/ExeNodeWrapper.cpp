@@ -100,6 +100,8 @@ ExeNodeWrapper* ExeNodeWrapper::addEntryAt(ExeNodeWrapper *entry, offset_t nextO
 {
     if (canAddEntry() == false) return NULL;
 
+    size_t entryNum = this->getEntriesCount();
+
     if (nextOffset == INVALID_ADDR) return NULL;
     if (entry == NULL) {
         // if no entry supplied, duplicate the last entry...
@@ -110,9 +112,9 @@ ExeNodeWrapper* ExeNodeWrapper::addEntryAt(ExeNodeWrapper *entry, offset_t nextO
 //  if (entrySize != entry->getSize()) return NULL;
     if (m_Exe->pasteBuffer(nextOffset, entry, false) == false) {
         return  NULL;
-    }
-    this->clear();
-    this->wrap();
+    } 
+    if (loadNextEntry(entryNum) == false) return NULL;
+//  printf("ENTRIES NUM  %d\n", this->getEntriesCount());
     return getLastEntry();
 }
 
