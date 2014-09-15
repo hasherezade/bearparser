@@ -22,7 +22,8 @@ void* SectionHdrWrapper::getPtr()
     if (header != NULL) {
         return (void*) this->header;
     }
-    if (this->sectNum >= m_PE->hdrSectionsNum()) return NULL;
+    //validate it above, not here...
+    //if (this->sectNum >= m_PE->hdrSectionsNum()) return NULL;
 
     offset_t firstSecOffset = m_PE->secHdrsOffset();
     offset_t secOffset = firstSecOffset + (this->sectNum * sizeof(pe::IMAGE_SECTION_HEADER));
@@ -265,12 +266,11 @@ ExeNodeWrapper* SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
     if (m_PE == NULL) return NULL;
 
     if (ExeNodeWrapper::addEntry(entry) == NULL) return NULL;
-
+    
     size_t count = m_PE->hdrSectionsNum() + 1;
     if (m_PE->setHdrSectionsNum(count) == false) {
         return NULL;
     }
-    this->wrap();
     return getLastEntry();
 }
 
@@ -279,6 +279,62 @@ void SectHdrsWrapper::clear()
     ExeNodeWrapper::clear();
     this->rSec.clear();
     this->vSec.clear();
+}
+
+bool SectHdrsWrapper::loadNextEntry(size_t entryNum)
+{
+    SectionHdrWrapper *sec = new SectionHdrWrapper(this->m_PE, entryNum);
+    if (sec == NULL) return false;
+    if (sec->getPtr() == NULL) {
+        printf("deleting invalid section..\n");
+        delete sec;
+        sec = NULL;
+        return false;
+    }
+    this->entries.push_back(sec);
+    addMapping(sec);
+    return true;
+}
+
+void SectHdrsWrapper::addMapping(SectionHdrWrapper *sec)
+{
+    if (sec == NULL) return;
+
+    bool roundup = true;
+    if (sec->getContentSize(Executable::RAW, true) == 0) {
+        //printf("skipping empty section..\n");
+        return;
+    }
+    offset_t RVA =sec->getContentOffset(Executable::RVA);
+    offset_t raw =sec->getContentOffset(Executable::RAW);
+
+    offset_t endRVA = sec->getContentEndOffset(Executable::RVA, roundup);
+    offset_t endRaw = sec->getContentEndOffset(Executable::RAW, roundup);
+    vSec[endRVA] = sec;
+
+    if (rSec.find(endRaw) != rSec.end()) { //already exist
+        SectionHdrWrapper* prevSec = rSec[endRaw];
+        if (prevSec == NULL) return;
+        if (prevSec->getContentOffset(Executable::RAW) < sec->getContentOffset(Executable::RAW)) {
+            //printf("endRaw = %llX - SKIP\n", endRaw);
+            return; //skip
+        }
+    }
+    rSec[endRaw] = sec;
+    return;
+}
+
+void SectHdrsWrapper::reloadMapping()
+{
+    this->rSec.clear();
+    this->vSec.clear();
+
+    size_t count = this->getEntriesCount();
+    for (int i = 0; i < count; i++) {
+        SectionHdrWrapper* sec = dynamic_cast<SectionHdrWrapper*>(this->getEntryAt(i));
+        if (sec == NULL) continue;
+        addMapping(sec);
+    }
 }
     
 bool SectHdrsWrapper::wrap()
@@ -289,38 +345,7 @@ bool SectHdrsWrapper::wrap()
     size_t count = this->m_PE->hdrSectionsNum();
 
     for (int i = 0; i < count; i++) {
-        SectionHdrWrapper *sec = new SectionHdrWrapper(this->m_PE, i);
-        if (sec == NULL) break;
-        if (sec->getPtr() == NULL) {
-            printf("deleting invalid section..\n");
-            delete sec;
-            sec = NULL;
-            break;
-        }
-        this->entries.push_back(sec);
-
-        bool roundup = true;
-        if (sec->getContentSize(Executable::RAW, true) == 0) {
-            //printf("skipping empty section..\n");
-            continue;
-        }
-
-        offset_t RVA =sec->getContentOffset(Executable::RVA);
-        offset_t raw =sec->getContentOffset(Executable::RAW);
-
-        offset_t endRVA = sec->getContentEndOffset(Executable::RVA, roundup);
-        offset_t endRaw = sec->getContentEndOffset(Executable::RAW, roundup);
-        vSec[endRVA] = sec;
-
-        if (rSec.find(endRaw) != rSec.end()) { //already exist
-            SectionHdrWrapper* prevSec = rSec[endRaw];
-            if (prevSec == NULL) continue;
-            if (prevSec->getContentOffset(Executable::RAW) < sec->getContentOffset(Executable::RAW)) {
-                //printf("endRaw = %llX - SKIP\n", endRaw);
-                continue; //skip
-            }
-        }
-        rSec[endRaw] = sec;
+        if (this->loadNextEntry(i) == false) break;
     }
     return true;
 }

@@ -80,6 +80,7 @@ public:
     // fields :
     SectHdrsWrapper(PEFile *pe) : PENodeWrapper(pe) { wrap(); }
     bool wrap();
+    virtual void reloadMapping();
 
     // full structure boundatries
     virtual void* getPtr();
@@ -101,7 +102,8 @@ public:
 
 protected:
     void clear();
-
+    void addMapping(SectionHdrWrapper *sec);
+    virtual bool loadNextEntry(size_t entryNum);
     bool isMyEntryType(ExeNodeWrapper *entry); // is it an entry of appropriate type
 
     std::map<offset_t, SectionHdrWrapper*> vSec;
