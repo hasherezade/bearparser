@@ -7,7 +7,10 @@ class ImportBaseDirWrapper;
 class ImportBaseEntryWrapper;
 class ImportBaseFuncWrapper;
 
-
+namespace imports_util {
+    inline uint64_t getUpperLimit(Executable *pe, void* fieldPtr);
+    inline bool isNameValid(Executable *pe, char* myName);
+};
 
 class ImportBaseDirWrapper : public DataDirEntryWrapper
 {
@@ -16,6 +19,8 @@ public:
     static bufsize_t thunkSize(Executable::exe_bits bits);
 
     virtual bool wrap();
+    virtual void clearMapping();
+    virtual void reloadMapping();
     virtual size_t getFieldsCount() { return this->importsCount; }
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField) { return getSubfieldPtr(fieldId, subField ); }
@@ -32,9 +37,9 @@ protected:
     ImportBaseDirWrapper(PEFile *pe, pe:: dir_entry v_entryType)
         : DataDirEntryWrapper(pe, v_entryType), importsCount(0) { }
 
-    virtual bool loadNextEntry(size_t entryNum) = 0;
+    //virtual bool loadNextEntry(size_t entryNum) = 0;
 
-    void addFuncMapping(ImportBaseFuncWrapper *func);
+    void addMapping(ExeNodeWrapper *func);
     ImportBaseEntryWrapper* thunkToLib(offset_t thunk);
     ImportBaseFuncWrapper* thunkToFunction(offset_t thunk);
     //---
@@ -55,15 +60,19 @@ public:
 
     virtual char* getLibraryName() = 0;
     virtual size_t getSubFieldsCount() { return 1; }
+    bool wrap();
 
 protected:
     ImportBaseEntryWrapper(PEFile *pe, ImportBaseDirWrapper *importsDir, size_t entryNumber)
-        : PENodeWrapper(pe, importsDir, entryNumber), impDir(importsDir) { wrap(); }
+        : PENodeWrapper(pe, importsDir, entryNumber), impDir(importsDir) { }//wrap(); }
 
-    void addFuncMapping(ImportBaseFuncWrapper *func) { if (impDir) impDir->addFuncMapping(func); }
+    void addMapping(ExeNodeWrapper *func) { if (impDir) impDir->addMapping(func); }
 
     std::map<offset_t, size_t> thunkToFuncMap;
     ImportBaseDirWrapper* impDir;
+
+protected:
+    bool isValid();
 
 friend class ImportBaseDirWrapper;
 };

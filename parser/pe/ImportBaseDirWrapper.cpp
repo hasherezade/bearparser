@@ -6,16 +6,47 @@ size_t ImportBaseEntryWrapper::EntriesLimit = 1000;
 
 bufsize_t ImportBaseEntryWrapper::NameLenLimit = 0xFF;
 
+using namespace imports_util;
 
 bufsize_t ImportBaseDirWrapper::thunkSize(Executable::exe_bits bits) {
     if (bits == Executable::BITS_32) return sizeof (uint32_t);
     else if (bits == Executable::BITS_64) return sizeof (uint64_t);
     return 0;
 }
+
+//TODO: refector it!
+inline uint64_t imports_util::getUpperLimit(Executable *pe, void* fieldPtr)
+{
+    if (!pe || ! fieldPtr) return 0;
+
+    offset_t nameOffset = pe->getOffset((BYTE*)fieldPtr);
+    if (nameOffset == INVALID_ADDR) return 0;
+
+    int64_t upperLimit = pe->getRawSize() - nameOffset;
+    if (upperLimit < 0) return 0;
+    return upperLimit;
+}
+
+inline bool imports_util::isNameValid(Executable *pe, char* myName)
+{
+    if (!myName) return false; // do not parse, invalid entry
+
+    uint64_t upperLimit = getUpperLimit(pe, myName);
+    if (upperLimit == 0) return false;
+
+    bool isInvalid = pe_util::hasNonPrintable(myName, upperLimit);
+    if (isInvalid) return false;
+    if (pe_util::noWhiteCount(myName) == 0) return false;
+
+    return true;
+}
 //---------------------------------
 
-void ImportBaseDirWrapper::addFuncMapping(ImportBaseFuncWrapper *func)
+void ImportBaseDirWrapper::addMapping(ExeNodeWrapper *funcNode)
 {
+    ImportBaseFuncWrapper* func = dynamic_cast<ImportBaseFuncWrapper*> (funcNode);
+    if (func == NULL) return;
+
     offset_t via = func->callVia();
     if (via == INVALID_ADDR) return;
     /*
@@ -31,6 +62,30 @@ void ImportBaseDirWrapper::addFuncMapping(ImportBaseFuncWrapper *func)
 
     num = func->getEntryId();
     lib->thunkToFuncMap[via] = num;
+}
+
+void ImportBaseDirWrapper::clearMapping()
+{
+    thunksList.clear();
+    thunkToLibMap.clear();
+}
+
+
+void ImportBaseDirWrapper::reloadMapping()
+{
+    clearMapping();
+    size_t entriesCount = this->entries.size();
+
+    for (int i = 0; i < entriesCount; i++) {
+        ImportBaseEntryWrapper* lib = dynamic_cast<ImportBaseEntryWrapper*> (this->getEntryAt(i));
+        if (lib == NULL) continue;
+        size_t libId = lib->entryNum;
+
+        size_t funcCount = lib->getEntriesCount();
+        for (int fI = 0; fI < funcCount; fI++) {
+            addMapping(lib->getEntryAt(fI));
+        }
+    }
 }
 
 ImportBaseEntryWrapper* ImportBaseDirWrapper::thunkToLib(offset_t thunk)
@@ -72,9 +127,8 @@ QString ImportBaseDirWrapper::thunkToLibName(offset_t thunk)
 
 bool ImportBaseDirWrapper::wrap()
 {
+    clearMapping();
     clear();
-    thunksList.clear();
-    thunkToLibMap.clear();
 
     size_t oldCount = this->importsCount;
     this->importsCount = 0;
@@ -92,6 +146,35 @@ bool ImportBaseDirWrapper::wrap()
 
     this->importsCount = cntr;
     return (oldCount != this->importsCount); //has count changed
+}
+
+//--------------------------------------------------------------------------------------------------------------
+
+bool ImportBaseEntryWrapper::isValid()
+{
+    char *libName = this->getLibraryName();
+    bool isValid = imports_util::isNameValid(m_Exe, libName);
+    return isValid;
+}
+
+bool ImportBaseEntryWrapper::wrap()
+{
+    clear();
+    thunkToFuncMap.clear();
+
+    const size_t LIMIT = ImportBaseEntryWrapper::EntriesLimit;
+   if (!isValid()) {
+        return false;
+    }
+    size_t cntr = 0;
+    if (this->getPtr() == NULL) {
+        return false;
+    }
+    for (cntr = 0; cntr < LIMIT; cntr++) {
+        if (loadNextEntry(cntr) == false) break;
+    }
+    //printf("Entries: %d\n", entries.size());
+    return true;
 }
 
 //--------------------------------------------------------------------------------------------------------------

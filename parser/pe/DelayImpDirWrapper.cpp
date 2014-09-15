@@ -84,31 +84,37 @@ pe::IMAGE_IMPORT_BY_NAME* DelayImpEntryWrapper::getFirstImpByNamePtr()
     return (pe::IMAGE_IMPORT_BY_NAME*) ptr;
 }
 
+bool DelayImpEntryWrapper::loadNextEntry(size_t entryNum)
+ {
+    DelayImpFuncWrapper* entry = new DelayImpFuncWrapper(this->m_PE, this, entryNum);
+    if (entry->getPtr() == NULL) {
+        delete entry;
+        return false;
+    }
+    bool isOk = false;
+    uint64_t thunk = entry->getNumValue(DelayImpFuncWrapper::NAMETHUNK_ADDR, &isOk);
+    if (!isOk || thunk == INVALID_ADDR || thunk == 0) {
+        delete entry;
+        return false;
+    }
+    this->entries.push_back(entry);
+
+    DelayImpDirWrapper *impDir = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
+    if (impDir) impDir->addMapping(entry);
+    return true;
+ }
+/*
 bool DelayImpEntryWrapper::wrap()
 {
     clear();
 
     for (size_t i = 0; i < ImportBaseEntryWrapper::EntriesLimit;  i++) { //
+        loadNextEntry(i);
 
-        DelayImpFuncWrapper* entry = new DelayImpFuncWrapper(this->m_PE, this, i);
-        if (entry->getPtr() == NULL) {
-            delete entry;
-            break;
-        }
-        bool isOk = false;
-        uint64_t val = entry->getNumValue(DelayImpFuncWrapper::NAMETHUNK_ADDR, &isOk);
-        if (!isOk || val == INVALID_ADDR || val == 0) {
-            delete entry;
-            break;
-        }
-        this->entries.push_back(entry);
-
-        DelayImpDirWrapper *impDir = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
-        if (impDir) impDir->addFuncMapping(entry);
     }
     return true;
 }
-
+*/
 pe::IMAGE_DELAY_LOAD32* DelayImpEntryWrapper::dl32()
 {
     if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;

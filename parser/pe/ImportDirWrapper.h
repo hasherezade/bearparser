@@ -64,8 +64,8 @@ public:
     ImportEntryWrapper(PEFile *pe, ImportDirWrapper *importsDir, size_t entryNumber)
         : ImportBaseEntryWrapper(pe, importsDir, entryNumber) { wrap(); }
 
-    virtual bool wrap();
-    bool isValid();
+    //virtual bool wrap();
+    //bool isValid();
 
     /* full structure boundatries */
     virtual void* getPtr();
@@ -106,6 +106,9 @@ public:
     }
 
     char* getLibraryName();
+
+protected:
+     bool loadNextEntry(size_t entryNum);
 
 friend class ImportDirWrapper;
 };

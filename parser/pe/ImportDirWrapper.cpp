@@ -2,33 +2,7 @@
 #include "PEFile.h"
 
 using namespace pe;
-
-inline uint64_t getUpperLimit(Executable *pe, void* fieldPtr)
-{
-    if (!pe || ! fieldPtr) return 0;
-
-    offset_t nameOffset = pe->getOffset((BYTE*)fieldPtr);
-    if (nameOffset == INVALID_ADDR) return 0;
-
-    int64_t upperLimit = pe->getRawSize() - nameOffset;
-    if (upperLimit < 0) return 0;
-    return upperLimit;
-}
-
-inline bool isNameValid(Executable *pe, char* myName)
-{
-    if (!myName) return false; // do not parse, invalid entry
-
-    uint64_t upperLimit = getUpperLimit(pe, myName);
-    if (upperLimit == 0) return false;
-
-    bool isInvalid = pe_util::hasNonPrintable(myName, upperLimit);
-    if (isInvalid) return false;
-    if (pe_util::noWhiteCount(myName) == 0) return false;
-
-    return true;
-}
-//----------------------------------
+using namespace imports_util;
 
 void* ImportedFuncWrapper::getPtr()
 {
@@ -201,44 +175,23 @@ Executable::addr_type ImportedFuncWrapper::containsAddrType(size_t fId, size_t s
 }
 //-------------------------------------------------------------------------------
 
-bool ImportEntryWrapper::isValid()
-{
-    char *libName = this->getLibraryName();
-    bool isValid = isNameValid(m_Exe, libName);
-    return isValid;
-}
 
-bool ImportEntryWrapper::wrap()
-{
-    clear();
-    thunkToFuncMap.clear();
+ bool ImportEntryWrapper::loadNextEntry(size_t entryNum)
+ {
+    ImportedFuncWrapper* func = new ImportedFuncWrapper(m_PE, this, entryNum);
+    offset_t thunk = func->getThunkValue();
 
-    ImportedFuncWrapper* func = NULL;
-    const size_t LIMIT = ImportBaseEntryWrapper::EntriesLimit;
-    if (!isValid()) {
+    if (thunk == 0 || thunk == INVALID_ADDR) {
+        delete func;
+        func = NULL;
         return false;
+    } else {
+        entries.push_back(func);
+        addMapping(func);
     }
-    size_t cntr = 0;
-    if (this->getPtr() == NULL) {
-        return false;
-    }
-    for (cntr = 0; cntr < LIMIT; cntr++) {
-        ImportedFuncWrapper* func = new ImportedFuncWrapper(m_PE, this, cntr);
-        offset_t thunk = func->getThunkValue();
-        //printf( "%s\n", func->getName().c_str());
-        //printf ("Thunk = %llx\n", thunk);
-        if (thunk == 0 || thunk == INVALID_ADDR) {
-            delete func;
-            func = NULL;
-            break;
-        } else {
-            entries.push_back(func);
-            addFuncMapping(func);
-        }
-    }
-    //printf("Entries: %d\n", entries.size());
     return true;
-}
+ }
+
 
 void* ImportEntryWrapper::getPtr()
 {

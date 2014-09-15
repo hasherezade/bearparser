@@ -44,7 +44,8 @@ public:
 
     DelayImpEntryWrapper(PEFile *pe, DelayImpDirWrapper *importsDir, size_t entryNumber)
         : ImportBaseEntryWrapper(pe, importsDir, entryNumber) { wrap(); }
-    bool wrap();
+    
+    //bool wrap();
 
     virtual void* getPtr();
     virtual bufsize_t getSize();
@@ -57,6 +58,8 @@ public:
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
 
 protected:
+    bool loadNextEntry(size_t entryNum);
+
     pe::IMAGE_DELAY_LOAD32* dl32();
     pe::IMAGE_DELAY_LOAD64* dl64();
     virtual pe::IMAGE_IMPORT_BY_NAME* getFirstImpByNamePtr();
