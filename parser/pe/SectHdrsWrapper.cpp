@@ -261,6 +261,17 @@ bool SectHdrsWrapper::isMyEntryType(ExeNodeWrapper *entry)
     return true;
 }
 
+bool SectHdrsWrapper::canAddEntry()
+{
+    offset_t nextOffset = getNextEntryOffset();
+    bufsize_t entrySize = geEntrySize();
+    if (entrySize == 0) return false;
+
+    bufsize_t paddedSize = entrySize;
+    bool haveSpace = this->m_Exe->isAreaEmpty(nextOffset, paddedSize);
+    return haveSpace;
+}
+
 ExeNodeWrapper* SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
 {
     if (m_PE == NULL) return NULL;
