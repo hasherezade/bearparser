@@ -48,6 +48,7 @@ public:
     virtual BYTE* getContentAtPtr(BYTE *ptr, bufsize_t size, bool allowExceptions = false);
 
     virtual bool setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t srcSize, bufsize_t paddingSize, bool allowExceptions = false);
+    bool setStringValue(offset_t rawOffset, QString newText);
 
     bool isAreaEmpty(offset_t rawOffset, bufsize_t size);
     bool fillContent(BYTE filling);

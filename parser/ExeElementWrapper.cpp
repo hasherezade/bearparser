@@ -90,16 +90,6 @@ bool ExeElementWrapper::setNumValue(size_t fId, size_t subField, uint64_t newVal
     return this->m_Exe->setNumValue(offset, size, newVal);
 }
 
-//TODO: check it!!
-bool ExeElementWrapper::setStringValue(char* dstPtr, QString newText)
-{
-    std::string newTextStr = newText.toStdString();
-    const char* newTextC = newTextStr.c_str();
-    bufsize_t newTextLen = static_cast<bufsize_t>(strlen(newTextC));
-    bool isOk = m_Exe->setBufferedValue((BYTE*)dstPtr, (BYTE*)newTextC, newTextLen, 1);
-    return isOk;
-}
-
 bool ExeElementWrapper::canCopyToOffset(offset_t rawOffset)
 {
     if (this->m_Exe == NULL) return false;

@@ -109,6 +109,19 @@ bool AbstractByteBuffer::setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t 
     return true;
 }
 
+ bool AbstractByteBuffer::setStringValue(offset_t rawOffset, QString newText)
+ {
+     std::string newTextStr = newText.toStdString();
+
+     BYTE *dstPtr = this->getContentAt(rawOffset, newTextStr.length() + 1);
+     if (dstPtr == NULL) return false;
+     
+     const char* newTextC = newTextStr.c_str();
+     bufsize_t newTextLen = static_cast<bufsize_t>(strlen(newTextC));
+     bool isOk = setBufferedValue(dstPtr, (BYTE*)newTextC, newTextLen, 1);
+     return isOk;
+ }
+
 bool AbstractByteBuffer::isAreaEmpty(offset_t rawOffset, bufsize_t size)
 {
     BYTE * area = this->getContentAt(rawOffset, size);

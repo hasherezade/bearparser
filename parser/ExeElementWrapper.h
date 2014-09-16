@@ -51,7 +51,6 @@ public:
 
     virtual bool setNumValue(size_t fieldId, size_t subField, uint64_t val);
     bool setNumValue(size_t fieldId, uint64_t val) { return setNumValue(fieldId, FIELD_NONE, val); }
-    bool setStringValue(char* textPtr, QString newTextVal);
 
     Executable* getExe() { return m_Exe; }
 
