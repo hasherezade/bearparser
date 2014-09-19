@@ -47,8 +47,24 @@ public:
     offset_t getContentEndOffset(Executable::addr_type aType, bool roundup); //always useMapped startOFfset
 
     bufsize_t getContentSize(Executable::addr_type aType, bool roundup);
-    
-protected: 
+
+    DWORD getCharacteristics()
+    {
+        if (header == NULL) return 0;
+        return header->Characteristics;
+    }
+
+//modifications:
+    bool setCharacteristics(DWORD newCharacteristics)
+    {
+        if (header == NULL) return false;
+        //TODO: validate newCharacteristics
+
+        header->Characteristics = newCharacteristics;
+        return true;
+    }
+
+protected:
     SectionHdrWrapper(PEFile *pe, pe::IMAGE_SECTION_HEADER *v_header) //standalone entry
         : PENodeWrapper(pe), sectNum(INVALID_ENTRYNUM), name(NULL), header(v_header)
     {
