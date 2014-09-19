@@ -8,7 +8,7 @@ class ImportBaseEntryWrapper;
 class ImportBaseFuncWrapper;
 
 namespace imports_util {
-    inline uint64_t getUpperLimit(Executable *pe, void* fieldPtr);
+//    inline uint64_t getUpperLimit(Executable *pe, void* fieldPtr);
     inline bool isNameValid(Executable *pe, char* myName);
 };
 

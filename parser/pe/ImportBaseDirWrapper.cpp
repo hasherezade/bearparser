@@ -6,32 +6,10 @@ size_t ImportBaseEntryWrapper::EntriesLimit = 1000;
 
 bufsize_t ImportBaseEntryWrapper::NameLenLimit = 0xFF;
 
-using namespace imports_util;
-
-bufsize_t ImportBaseDirWrapper::thunkSize(Executable::exe_bits bits) {
-    if (bits == Executable::BITS_32) return sizeof (uint32_t);
-    else if (bits == Executable::BITS_64) return sizeof (uint64_t);
-    return 0;
-}
-
-//TODO: refector it!
-inline uint64_t imports_util::getUpperLimit(Executable *pe, void* fieldPtr)
-{
-    if (!pe || ! fieldPtr) return 0;
-
-    offset_t nameOffset = pe->getOffset((BYTE*)fieldPtr);
-    if (nameOffset == INVALID_ADDR) return 0;
-
-    int64_t upperLimit = pe->getRawSize() - nameOffset;
-    if (upperLimit < 0) return 0;
-    return upperLimit;
-}
-
-inline bool imports_util::isNameValid(Executable *pe, char* myName)
+bool imports_util::isNameValid(Executable *pe, char* myName)
 {
     if (!myName) return false; // do not parse, invalid entry
-
-    uint64_t upperLimit = getUpperLimit(pe, myName);
+    bufsize_t upperLimit = pe->getMaxSizeFromPtr((BYTE*) myName);
     if (upperLimit == 0) return false;
 
     bool isInvalid = pe_util::hasNonPrintable(myName, upperLimit);
@@ -41,6 +19,16 @@ inline bool imports_util::isNameValid(Executable *pe, char* myName)
     return true;
 }
 //---------------------------------
+
+using namespace imports_util;
+
+bufsize_t ImportBaseDirWrapper::thunkSize(Executable::exe_bits bits) {
+    if (bits == Executable::BITS_32) return sizeof (uint32_t);
+    else if (bits == Executable::BITS_64) return sizeof (uint64_t);
+    return 0;
+}
+
+
 
 void ImportBaseDirWrapper::addMapping(ExeNodeWrapper *funcNode)
 {

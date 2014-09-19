@@ -82,6 +82,18 @@ BYTE* AbstractByteBuffer::getContentAt(offset_t offset, bufsize_t size, bool all
     return cntnt;
 }
 
+bufsize_t AbstractByteBuffer::getMaxSizeFromOffset(offset_t startOffset)
+{
+    if (startOffset == INVALID_ADDR) return 0;
+
+    offset_t contentSize = getContentSize();
+    if (contentSize < startOffset) return 0;
+
+    bufsize_t limit = static_cast<bufsize_t>(contentSize - startOffset);
+    return limit;
+}
+
+
 BYTE* AbstractByteBuffer::getContentAtPtr(BYTE *ptr, bufsize_t size, bool allowExceptions)
 {
     offset_t offset = getOffset(ptr, allowExceptions);

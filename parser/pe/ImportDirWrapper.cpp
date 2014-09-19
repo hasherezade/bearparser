@@ -292,7 +292,7 @@ char* ImportEntryWrapper::getLibraryName()
     char *name = (char*) m_Exe->getContentAt(nAddr, sizeof(char));
     offset_t peSize = m_Exe->getRawSize();
 
-    uint64_t upperLimit = getUpperLimit(m_Exe, name);
+    bufsize_t upperLimit = m_Exe->getMaxSizeFromPtr((BYTE*) name);
     uint32_t HARD_LIMIT = ImportEntryWrapper::NameLenLimit;
     int32_t limit = (uint32_t) upperLimit < HARD_LIMIT ? upperLimit : HARD_LIMIT;
 

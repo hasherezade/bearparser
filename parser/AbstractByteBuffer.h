@@ -50,6 +50,9 @@ public:
     virtual bool setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t srcSize, bufsize_t paddingSize, bool allowExceptions = false);
     bool setStringValue(offset_t rawOffset, QString newText);
 
+    bufsize_t getMaxSizeFromOffset(offset_t startOffset);
+    bufsize_t getMaxSizeFromPtr(BYTE *ptr) { return getMaxSizeFromOffset(getOffset(ptr)); }
+
     bool isAreaEmpty(offset_t rawOffset, bufsize_t size);
     bool fillContent(BYTE filling);
     bool pasteBuffer(offset_t rawOffset, AbstractByteBuffer *buf, bool allowTrunc);
