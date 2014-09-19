@@ -371,9 +371,15 @@ SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
 {
     SectionHdrWrapper* secHdr = getLastSection();
     if (secHdr == NULL) return NULL;
+    
+    //TODO: check overlay...
+    bufsize_t fullSize = getContentSize();
+    bufsize_t newSize = fullSize + addedSize;
 
+    offset_t secROffset = secHdr->getContentOffset(Executable::RAW, true);
     bufsize_t secRSize = secHdr->getContentSize(Executable::RAW, true);
-    bufsize_t secNewRSize = secRSize + addedSize;
+    bufsize_t secNewRSize = newSize - secROffset; //include overlay in section
+
     secHdr->setNumValue(SectionHdrWrapper::RSIZE, uint64_t(secNewRSize));
 
     offset_t secVOffset = secHdr->getContentOffset(Executable::RVA, true);
@@ -385,9 +391,6 @@ SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
     }
 
     bufsize_t prevVSize = this->getMappedSize(Executable::RVA);
-    //TODO: check overlay...
-    bufsize_t fullSize = getContentSize();
-    bufsize_t newSize = fullSize + addedSize;
 
     this->resize(newSize);
 
