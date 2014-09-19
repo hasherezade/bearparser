@@ -301,13 +301,22 @@ bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::
     return true;
 }
 
-
-SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
+bool PEFile::canAddNewSection()
 {
     ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
     if (sec == NULL || sec->canAddEntry() == false) {
-        return NULL;
+        return false;
     }
+    //TODO: some more checks? overlay?
+    return true;
+}
+
+
+SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
+{
+    if (canAddNewSection() == false) return NULL;
+
+    ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
 
     bufsize_t roundedRawEnd = buf_util::roundupToUnit(getMappedSize(Executable::RAW), getAlignment(Executable::RAW));
     bufsize_t roundedVirtualEnd = buf_util::roundupToUnit(getMappedSize(Executable::RVA), getAlignment(Executable::RVA));

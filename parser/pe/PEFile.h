@@ -105,6 +105,7 @@ public:
     bool moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addType = Executable::RAW); //throws CustomException
 
     SectionHdrWrapper* getLastSection();
+    bool canAddNewSection();
     SectionHdrWrapper* addNewSection(QString name, bufsize_t size);
     SectionHdrWrapper* extendLastSection(bufsize_t addedSize);
 
