@@ -350,3 +350,42 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size, DWORD cha
     SectionHdrWrapper* secHdrWr = dynamic_cast<SectionHdrWrapper*>(sec->addEntry(&wr));
     return secHdrWr;
 }
+
+SectionHdrWrapper* PEFile::getLastSection()
+{
+    size_t secCount = this->getSectionsCount(true);
+    if (secCount == 0) return NULL;
+    SectionHdrWrapper* secHdr = this->getSecHdr(secCount - 1);
+    return secHdr;
+}
+
+SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
+{
+    SectionHdrWrapper* secHdr = getLastSection();
+    if (secHdr == NULL) return NULL;
+
+    bufsize_t secRSize = secHdr->getContentSize(Executable::RAW, true);
+    bufsize_t secNewRSize = secRSize + addedSize;
+    secHdr->setNumValue(SectionHdrWrapper::RSIZE, uint64_t(secNewRSize));
+
+    offset_t secVOffset = secHdr->getContentOffset(Executable::RVA, true);
+    bufsize_t secVSize = secHdr->getContentSize(Executable::RVA, true);
+    bufsize_t secNewVSize = secVSize;
+    if (secNewVSize < secNewRSize) {
+        secNewVSize = secNewRSize;
+        secHdr->setNumValue(SectionHdrWrapper::VSIZE, uint64_t(secNewVSize));
+    }
+
+    bufsize_t prevVSize = this->getMappedSize(Executable::RVA);
+    //TODO: check overlay...
+    bufsize_t fullSize = getContentSize();
+    bufsize_t newSize = fullSize + addedSize;
+
+    this->resize(newSize);
+
+    bufsize_t newVSize = secVOffset + secNewVSize;
+    this->setVitualSize(newVSize);
+
+    secHdr = getLastSection();
+    return secHdr;
+}
