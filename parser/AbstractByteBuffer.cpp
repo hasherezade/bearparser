@@ -1,7 +1,7 @@
 #include "AbstractByteBuffer.h"
 
 bufsize_t buf_util::roundupToUnit(bufsize_t size, bufsize_t unit)
-{   
+{
     if (unit == 0) {
         printf("Invalid roundup unit!\n");
         return 0;
@@ -56,6 +56,15 @@ offset_t AbstractByteBuffer::getOffset(BYTE *ptr,  bool allowExceptions)
 
 BYTE* AbstractByteBuffer::getContentAt(offset_t offset, bufsize_t size, bool allowExceptions)
 {
+    if (offset == INVALID_ADDR) {
+        if (allowExceptions) throw BufferException("Invalid address requested!");
+        return NULL;
+    }
+    if (size == 0) {
+        if (allowExceptions) throw BufferException("Zero size requested!");
+        return NULL;
+    }
+
     bufsize_t fileSize = this->getContentSize();
     BYTE* buf = this->getContent();
     if (buf == NULL) return NULL;
@@ -115,7 +124,7 @@ bool AbstractByteBuffer::setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t 
 
      BYTE *dstPtr = this->getContentAt(rawOffset, newTextStr.length() + 1);
      if (dstPtr == NULL) return false;
-     
+
      const char* newTextC = newTextStr.c_str();
      bufsize_t newTextLen = static_cast<bufsize_t>(strlen(newTextC));
      bool isOk = setBufferedValue(dstPtr, (BYTE*)newTextC, newTextLen, 1);
