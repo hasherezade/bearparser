@@ -12,6 +12,7 @@ void ExeWrappersContainer::clearWrappers()
 
 ExeElementWrapper* ExeWrappersContainer::getWrapper(int wrapperId)
 {
+    if (wrappers.find(wrapperId) == wrappers.end()) return NULL;
     return wrappers[wrapperId];
 }
 
