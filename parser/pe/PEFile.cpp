@@ -245,8 +245,6 @@ offset_t PEFile::rvaToRaw(offset_t rva)
 DataDirEntryWrapper* PEFile::getDataDirEntry(pe::dir_entry eType)
 {
     if (eType >= pe::DIR_ENTRIES_COUNT) return NULL;
-    if (dataDirEntries[eType] == NULL) return NULL;
-    if (dataDirEntries[eType]->getPtr() == NULL) return NULL;
     return dataDirEntries[eType];
 }
 
@@ -399,4 +397,23 @@ SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
 
     secHdr = getLastSection();
     return secHdr;
+}
+
+bool PEFile::unbindImports()
+{
+    pe::IMAGE_DATA_DIRECTORY* ddir = this->getDataDirectory();
+    if (ddir[pe::DIR_BOUND_IMPORT].VirtualAddress == 0  && ddir[pe::DIR_BOUND_IMPORT].Size == 0) {
+        // No bound imports already, nothing to do here!
+        return true;
+    }
+    ddir[pe::DIR_BOUND_IMPORT].VirtualAddress = 0;
+    ddir[pe::DIR_BOUND_IMPORT].Size = 0;
+    DataDirEntryWrapper *bImp = this->getDataDirEntry(pe::DIR_BOUND_IMPORT);
+    if (bImp == NULL) {
+        //printf("No Bound imports wrapper!\n");
+        return false; // todo: throw error?
+    }
+    bool isOk = bImp->wrap();
+    //TODO: change timestamp for all library entries from (-1 : BOUND) to 0 : NOT BOUND
+    return isOk;
 }

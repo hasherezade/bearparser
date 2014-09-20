@@ -108,7 +108,7 @@ public:
     bool canAddNewSection();
     SectionHdrWrapper* addNewSection(QString name, bufsize_t size);
     SectionHdrWrapper* extendLastSection(bufsize_t addedSize);
-
+    bool unbindImports();
 
 protected:
     virtual void clearWrappers();
