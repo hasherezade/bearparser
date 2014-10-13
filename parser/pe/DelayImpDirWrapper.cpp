@@ -262,11 +262,13 @@ bool DelayImpFuncWrapper::isByOrdinal()
     uint64_t addr = this->getNumValue(NAMETHUNK_ADDR, &isOk);
     if (!isOk || addr == INVALID_ADDR) return false;
 
-    uint64_t shiftedVal = getOrdinal();
-    if (shiftedVal == addr) {
-        return false;
+    if (isBit64()) {
+        if (addr & ORDINAL_FLAG64) return true;
+
+    } else {
+        if (addr & ORDINAL_FLAG32) return true;
     }
-    return true;
+    return false;
 }
 
 uint64_t DelayImpFuncWrapper::getOrdinal()
