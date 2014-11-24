@@ -45,7 +45,7 @@ offset_t ImportedFuncWrapper::getFieldRVA(ImportEntryWrapper::FieldID fId)
 void* ImportedFuncWrapper::getValuePtr(ImportEntryWrapper::FieldID fId)
 {
     if (!parentNode) return NULL;
-    bool is64 = (m_Exe->getBitMode() == 64) ? true : false;
+    bool is64 = isBit64();
 
     bool isOk;
     uint64_t thunkRva = parentNode->getNumValue(fId, &isOk);
@@ -126,6 +126,8 @@ void* ImportedFuncWrapper::getFieldPtr(size_t fId, size_t subField)
 {
     bool is64 = isBit64();
     void *entryPtr = this->getPtr();
+    if (entryPtr == NULL) return NULL;
+
     IMAGE_THUNK_DATA32* en32 = is64 ? NULL : (IMAGE_THUNK_DATA32*) entryPtr;
     IMAGE_THUNK_DATA64* en64 = is64 ? (IMAGE_THUNK_DATA64*) entryPtr : NULL;
 
@@ -324,7 +326,7 @@ pe::IMAGE_IMPORT_DESCRIPTOR* ImportDirWrapper::firstDescriptor()
     uint32_t importRva = d[pe::DIR_IMPORT].VirtualAddress;
     if (importRva == 0) return NULL;
 
-    uint64_t descAddr = this->m_Exe->toRaw(importRva, Executable::RVA);
+    offset_t descAddr = this->m_Exe->toRaw(importRva, Executable::RVA);
     if (descAddr == INVALID_ADDR) return NULL; // address invalid
 
     BYTE *dirPtr = this->m_Exe->getContentAt(descAddr, Executable::RAW, sizeof(IMAGE_IMPORT_DESCRIPTOR));
