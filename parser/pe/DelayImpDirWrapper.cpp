@@ -17,6 +17,19 @@ typedef struct _IMAGE_DELAY_LOAD {
 
 */
 
+bool DelayImpDirWrapper::is64()
+{
+    if (m_Exe->isBit32()) return false;
+    size_t size = sizeof(pe::IMAGE_DELAY_LOAD64);
+
+    pe::IMAGE_DELAY_LOAD64* ld64 = firstDelayLd64();
+    if (ld64) {
+        if (this->m_Exe->toRaw(ld64->szName, Executable::RVA) == INVALID_ADDR) return false;
+        if (this->m_Exe->toRaw(ld64->phmod, Executable::RVA) == INVALID_ADDR) return false;
+    }
+    return true;
+}
+
 void* DelayImpDirWrapper::firstDelayLd(bufsize_t size)
 {
     offset_t rva = getDirEntryAddress();
@@ -60,12 +73,11 @@ bufsize_t DelayImpDirWrapper::getSize()
 
 bufsize_t DelayImpDirWrapper::getEntrySize()
 {
-    Executable::exe_bits bitMode = m_Exe->getBitMode();
     size_t size = 0;
 
-    if (bitMode == Executable::BITS_64) {
+    if (is64()) {
         size = sizeof(pe::IMAGE_DELAY_LOAD64);
-    } else if (bitMode == Executable::BITS_32) {
+    } else {
         size = sizeof(pe::IMAGE_DELAY_LOAD32);
     }
     return static_cast<bufsize_t>(size);
@@ -117,10 +129,9 @@ bool DelayImpEntryWrapper::wrap()
 */
 pe::IMAGE_DELAY_LOAD32* DelayImpEntryWrapper::dl32()
 {
-    if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
-
     DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
     if (!parent) return NULL;
+
 
     const size_t DL_SIZE = sizeof(pe::IMAGE_DELAY_LOAD32);
     pe::IMAGE_DELAY_LOAD32* first = (pe::IMAGE_DELAY_LOAD32*) parent->firstDelayLd(DL_SIZE);
@@ -140,8 +151,6 @@ pe::IMAGE_DELAY_LOAD32* DelayImpEntryWrapper::dl32()
 
 pe::IMAGE_DELAY_LOAD64* DelayImpEntryWrapper::dl64()
 {
-    if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
-
     DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
     if (!parent) return NULL;
 
@@ -163,17 +172,23 @@ pe::IMAGE_DELAY_LOAD64* DelayImpEntryWrapper::dl64()
 
 void* DelayImpEntryWrapper::getPtr()
 {
-    void *ptr = dl64();
-    if (ptr) return ptr;
+    DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
+    if (!parent) return NULL;
 
-    ptr = dl32();
-    return ptr;
+    if (parent->is64()) {
+        return dl64();
+    }
+    return dl32();
 }
 
 bufsize_t DelayImpEntryWrapper::getSize()
 {
     if (getPtr() == NULL) return 0;
-    if (m_Exe->getBitMode() == Executable::BITS_64) {
+
+    DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
+    if (!parent) return NULL;
+
+    if (parent->is64()) {
         return sizeof(pe::IMAGE_DELAY_LOAD64);
     }
     return sizeof(pe::IMAGE_DELAY_LOAD32);

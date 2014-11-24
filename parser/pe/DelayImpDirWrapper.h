@@ -18,6 +18,9 @@ public:
 protected:
     virtual bool loadNextEntry(size_t cntr);
 
+    bool is64(); // autodetect! 64bit PE may use IMAGE_DELAY_LOAD32!
+    bool is32() { return !is64(); }
+
     pe::IMAGE_DELAY_LOAD32* firstDelayLd32() { return (pe::IMAGE_DELAY_LOAD32*) firstDelayLd(sizeof(pe::IMAGE_DELAY_LOAD32)); }
     pe::IMAGE_DELAY_LOAD64* firstDelayLd64() { return (pe::IMAGE_DELAY_LOAD64*) firstDelayLd(sizeof(pe::IMAGE_DELAY_LOAD64)); }
     void* firstDelayLd(bufsize_t size);
@@ -44,7 +47,7 @@ public:
 
     DelayImpEntryWrapper(PEFile *pe, DelayImpDirWrapper *importsDir, size_t entryNumber)
         : ImportBaseEntryWrapper(pe, importsDir, entryNumber) { wrap(); }
-    
+
     //bool wrap();
 
     virtual void* getPtr();
