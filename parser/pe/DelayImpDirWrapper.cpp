@@ -186,7 +186,7 @@ bufsize_t DelayImpEntryWrapper::getSize()
     if (getPtr() == NULL) return 0;
 
     DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
-    if (!parent) return NULL;
+    if (!parent) return 0;
 
     if (parent->is64()) {
         return sizeof(pe::IMAGE_DELAY_LOAD64);
