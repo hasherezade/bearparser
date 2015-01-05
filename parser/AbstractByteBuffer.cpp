@@ -143,6 +143,18 @@ bool AbstractByteBuffer::setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t 
      return isOk;
  }
 
+QString AbstractByteBuffer::getStringValue(offset_t rawOffset, bufsize_t size)
+ {
+    if (size == BUFSIZE_MAX) {
+        size = this->getContentSize() - rawOffset;
+    }
+    char *name = (char*) this->getContentAt(rawOffset, size);
+    if (name == NULL) return "";
+    //TODO: finish it!
+    return QString(name);
+
+ }
+
 bool AbstractByteBuffer::isAreaEmpty(offset_t rawOffset, bufsize_t size)
 {
     BYTE * area = this->getContentAt(rawOffset, size);
