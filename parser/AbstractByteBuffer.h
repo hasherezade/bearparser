@@ -43,13 +43,15 @@ public:
 
     const BYTE operator[](size_t idx);
 
-    virtual offset_t getOffset(BYTE *ptr, bool allowExceptions = false); // validates
+    virtual offset_t getOffset(void *ptr, bool allowExceptions = false); // validates
     virtual BYTE* getContentAt(offset_t offset, bufsize_t size, bool allowExceptions = false);
     virtual BYTE* getContentAtPtr(BYTE *ptr, bufsize_t size, bool allowExceptions = false);
 
     virtual bool setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t srcSize, bufsize_t paddingSize, bool allowExceptions = false);
     bool setStringValue(offset_t rawOffset, QString newText);
+
     QString getStringValue(offset_t rawOffset, bufsize_t len = BUFSIZE_MAX);
+    QString getWStringValue(offset_t rawOffset, bufsize_t len);
 
     bufsize_t getMaxSizeFromOffset(offset_t startOffset);
     bufsize_t getMaxSizeFromPtr(BYTE *ptr) { return getMaxSizeFromOffset(getOffset(ptr)); }

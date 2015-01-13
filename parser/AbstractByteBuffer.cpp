@@ -32,7 +32,7 @@ const BYTE AbstractByteBuffer::operator[](std::size_t idx)
     return this->getContent()[idx];
 }
 
-offset_t AbstractByteBuffer::getOffset(BYTE *ptr,  bool allowExceptions)
+offset_t AbstractByteBuffer::getOffset(void *ptr,  bool allowExceptions)
 {
     if (ptr == NULL) return INVALID_ADDR;
     BYTE* buf = this->getContent();
@@ -46,7 +46,7 @@ offset_t AbstractByteBuffer::getOffset(BYTE *ptr,  bool allowExceptions)
         if (allowExceptions) throw BufferException("Pointer before buffer begining!");
         return INVALID_ADDR;
     }
-    offset_t offset = ptr - buf;
+    offset_t offset = static_cast<BYTE*>(ptr) - buf;
     if (offset >= bufSize) {
         if (allowExceptions) throw BufferException("Pointer does not belong to buffer!");
         return INVALID_ADDR;
@@ -152,8 +152,21 @@ QString AbstractByteBuffer::getStringValue(offset_t rawOffset, bufsize_t size)
     if (name == NULL) return "";
     //TODO: finish it!
     return QString(name);
+}
 
- }
+QString AbstractByteBuffer::getWStringValue(offset_t rawOffset, bufsize_t len)
+{
+    const size_t unitSize = sizeof(WORD);
+    WORD* content = NULL;
+    size_t size = unitSize;
+    if (len != BUFSIZE_MAX && len != -1) {
+        size = len * unitSize;
+    }
+    content = (WORD*) this->getContentAt(rawOffset, size);
+    if (content == NULL) return "";
+
+    return QString::fromUtf16(content, len);
+}
 
 bool AbstractByteBuffer::isAreaEmpty(offset_t rawOffset, bufsize_t size)
 {
