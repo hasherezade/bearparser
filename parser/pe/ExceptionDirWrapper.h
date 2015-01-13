@@ -47,7 +47,7 @@ public:
         FIELD_COUNTER
     };
 
-    ExceptionEntryWrapper(Executable *pe, ExceptionDirWrapper *parentDir, uint32_t entryNumber)
+    ExceptionEntryWrapper(Executable *pe, ExceptionDirWrapper *parentDir, size_t entryNumber)
         : ExeNodeWrapper(pe, parentDir, entryNumber), cachedRaw(INVALID_ADDR) { this->parentDir = parentDir;}
 
     bool wrap() { return true; }

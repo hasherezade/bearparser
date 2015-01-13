@@ -21,7 +21,7 @@ class ResourceLeafWrapper : public ExeNodeWrapper
         FIELD_COUNTER
     };
 
-    ResourceLeafWrapper(Executable *pe, uint64_t rawOffset, long topEntryId)
+    ResourceLeafWrapper(Executable *pe, offset_t rawOffset, long topEntryId)
         : ExeNodeWrapper(pe), offset(rawOffset), topEntryID(topEntryId){ }
 
     virtual ~ResourceLeafWrapper() { }
@@ -41,7 +41,7 @@ class ResourceLeafWrapper : public ExeNodeWrapper
     Executable* getExe() { return this->m_Exe; }
 
 protected:
-    uint64_t offset;
+    offset_t offset;
     long topEntryID;
     //ResourceEntryWrapper* parentEntry;
 };

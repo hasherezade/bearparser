@@ -56,7 +56,7 @@ public:
         FIELD_COUNTER
     };
 
-    TlsEntryWrapper(Executable *pe, TlsDirWrapper *parentDir, uint32_t entryNumber)
+    TlsEntryWrapper(Executable *pe, TlsDirWrapper *parentDir, size_t entryNumber)
         : ExeNodeWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
     // full structure boundatries

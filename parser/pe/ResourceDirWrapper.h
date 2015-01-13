@@ -28,7 +28,7 @@ public:
         FIELD_COUNTER
     };
 
-    ResourceDirWrapper(PEFile* pe, ResourcesAlbum *resAlbum = NULL, uint64_t rawOffset = 0, long depth = 0, long topEntryId = TOP_ENTRY_ROOT)
+    ResourceDirWrapper(PEFile* pe, ResourcesAlbum *resAlbum = NULL, offset_t rawOffset = 0, long depth = 0, long topEntryId = TOP_ENTRY_ROOT)
         : DataDirEntryWrapper(pe, pe::DIR_RESOURCE), rawOff(rawOffset), dirDepth(depth), album(resAlbum), topEntryID(topEntryId) { wrap(); }
 
     bool wrap();
@@ -70,7 +70,7 @@ public:
 
     static QString translateType(WORD id);
 
-    ResourceEntryWrapper(PEFile *pe, ResourceDirWrapper *parentDir, uint32_t entryNumber, long topEntryId, ResourcesAlbum *resAlbum)
+    ResourceEntryWrapper(PEFile *pe, ResourceDirWrapper *parentDir, size_t entryNumber, long topEntryId, ResourcesAlbum *resAlbum)
         : PENodeWrapper(pe, parentDir, entryNumber), topEntryID(topEntryId), album(resAlbum), childDir(NULL), childLeaf(NULL) { this->parentDir = parentDir; wrap(); }
 
     virtual ~ResourceEntryWrapper() { clear(); }

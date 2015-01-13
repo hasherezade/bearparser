@@ -161,7 +161,7 @@ bool ResourceEntryWrapper::wrap()
 {
     clear();
     //---
-    uint64_t childRaw = getChildAddress();
+    offset_t childRaw = getChildAddress();
     if (childRaw == 0 || childRaw == INVALID_ADDR) return false;
 
     if (this->isDir()) {

@@ -57,6 +57,4 @@ public:
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
-
 };
-
