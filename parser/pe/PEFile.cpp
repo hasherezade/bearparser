@@ -305,6 +305,9 @@ bool PEFile::canAddNewSection()
     if (sec == NULL || sec->canAddEntry() == false) {
         return false;
     }
+    size_t secCount = hdrSectionsNum();
+    if (secCount == SectHdrsWrapper::SECT_COUNT_MAX) return false; //limit exceeded
+
     //TODO: some more checks? overlay?
     return true;
 }

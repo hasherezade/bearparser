@@ -2,10 +2,11 @@
 
 #include "PENodeWrapper.h"
 
+
 class SectionHdrWrapper : public PENodeWrapper
 {
 public:
-
+    
     /* fields :*/
     enum SecFieldId {
         NAME = 0,
@@ -93,6 +94,8 @@ friend class PEFile;
 class SectHdrsWrapper : public PENodeWrapper
 {
 public:
+    static size_t SECT_COUNT_MAX;
+
     // fields :
     SectHdrsWrapper(PEFile *pe) : PENodeWrapper(pe) { wrap(); }
     bool wrap();

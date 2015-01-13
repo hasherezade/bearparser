@@ -4,6 +4,7 @@
 using namespace buf_util;
 
 const size_t SECNAME_LEN = 8;
+size_t SectHdrsWrapper::SECT_COUNT_MAX = 0x2000;
 
 bool SectionHdrWrapper::wrap()
 {
@@ -276,9 +277,12 @@ ExeNodeWrapper* SectHdrsWrapper::addEntry(ExeNodeWrapper *entry)
 {
     if (m_PE == NULL) return NULL;
 
+    size_t secCount = m_PE->hdrSectionsNum();
+    if (secCount == SECT_COUNT_MAX) return NULL; //limit exceeded
+
     if (ExeNodeWrapper::addEntry(entry) == NULL) return NULL;
     
-    size_t count = m_PE->hdrSectionsNum() + 1;
+    size_t count = secCount + 1;
     if (m_PE->setHdrSectionsNum(count) == false) {
         return NULL;
     }
