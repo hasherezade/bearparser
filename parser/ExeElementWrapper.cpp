@@ -46,7 +46,7 @@ offset_t ExeElementWrapper::getOffset()
 offset_t ExeElementWrapper::getOffset(void *ptr)
 {
     if (!m_Exe) return INVALID_ADDR;
-    return m_Exe->getOffset((BYTE*) ptr);
+    return m_Exe->getOffset(ptr);
 }
 
 offset_t ExeElementWrapper::getFieldOffset(size_t fieldId, size_t subField)
