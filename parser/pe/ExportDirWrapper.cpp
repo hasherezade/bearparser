@@ -179,7 +179,7 @@ void* ExportEntryWrapper::getFieldPtr(size_t fieldId, size_t subField)
     return getPtr();
 }
 
-void* ExportEntryWrapper::getFuncRvaPtr()
+DWORD* ExportEntryWrapper::getFuncRvaPtr()
 {
     if (this->parentDir == NULL) return NULL;
     pe::IMAGE_EXPORT_DIRECTORY* exp = parentDir->exportDir();
@@ -188,7 +188,7 @@ void* ExportEntryWrapper::getFuncRvaPtr()
     uint64_t funcRva = exp->AddressOfFunctions;
     funcRva += (this->entryNum * sizeof(DWORD));
 
-    BYTE *ptr =  m_Exe->getContentAt(funcRva, Executable::RVA, sizeof(DWORD));
+    DWORD *ptr =  (DWORD*) m_Exe->getContentAt(funcRva, Executable::RVA, sizeof(DWORD));
     return ptr;
 }
 
@@ -227,6 +227,14 @@ QString ExportEntryWrapper::getFieldName(size_t fieldId)
         case NAME_RVA: return "FuncNameRva";
     }
     return "";
+}
+
+offset_t ExportEntryWrapper::getFuncRva()
+{
+    DWORD *ptr = this->getFuncRvaPtr();
+    if (ptr == NULL) return INVALID_ADDR;
+    offset_t addr = static_cast<offset_t>(*ptr);
+    return addr;
 }
 
 uint32_t ExportEntryWrapper::getOrdinal()

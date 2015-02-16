@@ -80,15 +80,15 @@ public:
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField) { return Executable::RVA; }
 
-    //DWORD getFuncRva();
+    offset_t getFuncRva();
     uint32_t getOrdinal();
     offset_t getFuncNameRva();
 
-    void* getFuncRvaPtr();
     char* getFuncName();
     char* getForwarder(); // NULL if not forwarded
 
 private:
+    DWORD* getFuncRvaPtr();
     uint32_t getFuncNameId();
     void* getFuncNameRvaPtr();
 
