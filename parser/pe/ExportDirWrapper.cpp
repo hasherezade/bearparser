@@ -200,23 +200,25 @@ bufsize_t ExportEntryWrapper::getSize()
     return sizeof(DWORD);
 }
 
+bool ExportEntryWrapper::isByOrdinal()
+{
+    if (getFuncName() == NULL) return true;
+    return false;
+}
+
 QString ExportEntryWrapper::getName()
 {
-    char *entryName = getFuncName();
-
-    if (entryName == NULL) {
+    if (isByOrdinal()) {
         uint64_t val = getOrdinal();
         static char buf[0xFF];
         snprintf(buf, 0xFF, "<ord: %llX>", val);
-        entryName = buf;
+        return QString(buf);
     }
-
-    QString name = entryName;
+    QString name = getFuncName();
     char *forwarder = getForwarder();
     if ( forwarder != NULL) {
         name += " -> " + QString(forwarder);
     }
-
     return name;
 }
 
