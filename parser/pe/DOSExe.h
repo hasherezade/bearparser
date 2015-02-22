@@ -35,7 +35,7 @@ public:
     virtual bufsize_t getMappedSize(Executable::addr_type aType) { return this->getContentSize(); }
     virtual bufsize_t getAlignment(Executable::addr_type aType) { return 0x1000; } //TODO
     virtual offset_t getImageBase() { return 0; } //TODO
-    virtual offset_t getEntryPoint() { return 0; } //TODO
+    virtual offset_t getEntryPoint(Executable::addr_type aType = Executable::RVA) { return 0; } //TODO
 
     Executable::addr_type detectAddrType(offset_t addr, Executable::addr_type hintType) { return Executable::RAW; }
     //---

@@ -64,7 +64,7 @@ public:
     virtual bufsize_t getMappedSize(Executable::addr_type aType);
     virtual bufsize_t getAlignment(Executable::addr_type aType){ return core.getAlignment(aType); }
     virtual offset_t getImageBase() { return core.getImageBase(); }
-    virtual offset_t getEntryPoint(); // returns INVALID_ADDR if failed
+    virtual offset_t getEntryPoint(Executable::addr_type addrType = Executable::RVA); // returns INVALID_ADDR if failed
 
     virtual exe_bits getBitMode() { return getHdrBitMode(); }
     //---

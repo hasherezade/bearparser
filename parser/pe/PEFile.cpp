@@ -139,13 +139,18 @@ bufsize_t PEFile::getMappedSize(Executable::addr_type aType)
     return 0;
 }
 
-offset_t PEFile::getEntryPoint()
+offset_t PEFile::getEntryPoint(Executable::addr_type addrType)
 {
     if (optHdr == NULL) return INVALID_ADDR;
 
     bool isOk = false;
     offset_t entryPoint = static_cast<offset_t> (optHdr->getNumValue(OptHdrWrapper::EP, &isOk));
     if (isOk == false) return INVALID_ADDR;
+
+    const Executable::addr_type epType = Executable::RVA;
+    if (addrType != epType) {
+        entryPoint = this->convertAddr(entryPoint, epType, addrType);
+    }
     return entryPoint;
 }
 
