@@ -60,7 +60,7 @@ public:
     virtual bufsize_t getMappedSize(Executable::addr_type aType) = 0;
     virtual bufsize_t getAlignment(Executable::addr_type aType) = 0;
     virtual offset_t getImageBase() = 0;
-    virtual offset_t getEntryPoint(Executable::addr_type aType) = 0;
+    virtual offset_t getEntryPoint(Executable::addr_type aType = Executable::RVA) = 0;
 
     /* conversions */
     virtual bool isValidAddr(offset_t addr, addr_type addrType);
