@@ -214,12 +214,9 @@ QString ExportEntryWrapper::getName()
         snprintf(buf, 0xFF, "<ord: %llX>", val);
         return QString(buf);
     }
-    QString name = getFuncName();
-    char *forwarder = getForwarder();
-    if ( forwarder != NULL) {
-        name += " -> " + QString(forwarder);
-    }
-    return name;
+    char* name = getFuncName();
+    if (name == NULL) return "";
+    return QString(name);
 }
 
 QString ExportEntryWrapper::getFieldName(size_t fieldId)
