@@ -82,11 +82,14 @@ public:
 
     bool isByOrdinal();
     uint32_t getOrdinal();
+
     offset_t getFuncRva();
     offset_t getFuncNameRva();
 
     char* getFuncName();
+    QString getuncNameStr() { char* name = getFuncName(); return name ? name : ""; }
     char* getForwarder(); // NULL if not forwarded
+    QString getForwarderStr() { char* forwarder = getForwarder(); return forwarder ? forwarder : ""; }
 
 private:
     DWORD* getFuncRvaPtr();
