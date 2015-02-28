@@ -98,6 +98,12 @@ public:
         return (this->album == NULL) ? NULL : album->getResourcesOfType(typeId);
     }
     DataDirEntryWrapper* getDataDirEntry(pe::dir_entry eType);
+
+    ImportDirWrapper* getImports()
+    {
+        return dynamic_cast<ImportDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_IMPORT));
+    }
+
     BufferView* createSectionView(size_t secNum);
     //---
     //modifications:
