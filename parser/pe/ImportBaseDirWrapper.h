@@ -42,6 +42,12 @@ protected:
     void addMapping(ExeNodeWrapper *func);
     ImportBaseEntryWrapper* thunkToLib(offset_t thunk);
     ImportBaseFuncWrapper* thunkToFunction(offset_t thunk);
+
+    bool hasThunk(offset_t thunk) {
+        std::map<offset_t, size_t>::iterator libItr = thunkToLibMap.find(thunk);
+        return (libItr == thunkToLibMap.end());
+    }
+
     //---
     std::map<offset_t, size_t> thunkToLibMap;
     QList<offset_t> thunksList;
