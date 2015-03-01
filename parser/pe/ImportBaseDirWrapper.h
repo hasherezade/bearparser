@@ -35,7 +35,7 @@ public:
 
     bool hasThunk(offset_t thunk) {
         std::map<offset_t, size_t>::iterator libItr = thunkToLibMap.find(thunk);
-        return (libItr == thunkToLibMap.end());
+        return (libItr != thunkToLibMap.end());
     }
 
 protected:
