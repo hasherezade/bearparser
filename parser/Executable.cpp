@@ -55,8 +55,9 @@ offset_t Executable::convertAddr(offset_t inAddr, Executable::addr_type inType, 
     if (inType == Executable::RAW && outType == Executable::RVA) {
         return this->rawToRva(inAddr);
     }
-    if (inType == Executable::RAW && outType == Executable::VA) {
-        return this->rawToRva(inAddr) + this->getImageBase();
+    if (outType == Executable::VA) {
+        if (inType == Executable::RAW) inAddr = rawToRva(inAddr);
+        return inAddr + this->getImageBase();
     }
     if (outType == Executable::RAW) {
         bool allowExceptions = false;
