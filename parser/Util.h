@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <QtCore>
 #include "win_hdrs/win_types.h"
 
 #define DEFAULT_BUFSIZE 0xFF
@@ -13,7 +14,7 @@ namespace pe_util {
     inline bool isPrintable(char c) { return IS_PRINTABLE(c); }
 
     bool isStrLonger(const char *inp, int maxLen);
-    std::string getString(const char *ptr, size_t maxInp, size_t maxBuf = DEFAULT_BUFSIZE);
+    QString getString(const char *ptr, size_t maxInp, size_t maxBuf = DEFAULT_BUFSIZE);
     bool hasNonPrintable(const char *ptr, size_t maxInp);
 
     size_t noWhiteCount(char *buf, size_t bufSize);

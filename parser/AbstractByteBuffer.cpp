@@ -1,4 +1,5 @@
 #include "AbstractByteBuffer.h"
+#include "Util.h"
 
 bufsize_t buf_util::roundupToUnit(bufsize_t size, bufsize_t unit)
 {
@@ -130,8 +131,8 @@ bool AbstractByteBuffer::setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t 
     return true;
 }
 
- bool AbstractByteBuffer::setStringValue(offset_t rawOffset, QString newText)
- {
+bool AbstractByteBuffer::setStringValue(offset_t rawOffset, QString newText)
+{
      std::string newTextStr = newText.toStdString();
 
      BYTE *dstPtr = this->getContentAt(rawOffset, newTextStr.length() + 1);
@@ -141,17 +142,20 @@ bool AbstractByteBuffer::setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t 
      bufsize_t newTextLen = static_cast<bufsize_t>(strlen(newTextC));
      bool isOk = setBufferedValue(dstPtr, (BYTE*)newTextC, newTextLen, 1);
      return isOk;
- }
+}
 
 QString AbstractByteBuffer::getStringValue(offset_t rawOffset, bufsize_t size)
- {
+{
     if (size == BUFSIZE_MAX) {
         size = this->getContentSize() - rawOffset;
     }
-    char *name = (char*) this->getContentAt(rawOffset, size);
-    if (name == NULL) return "";
+    //size = sizeof(DWORD);
+    //this->m_ExeHandler->getExe()->getContentAt(target, Executable::RAW, sizeof(DWORD));
     //TODO: finish it!
-    return QString(name);
+    char *name = (char*) getContentAt(rawOffset, size);
+    if (!name) return "";
+
+    return pe_util::getString(name, size, 100);
 }
 
 QString AbstractByteBuffer::getWStringValue(offset_t rawOffset, bufsize_t len)

@@ -10,22 +10,21 @@ bool pe_util::isStrLonger(const char *inp, int maxLen)
     return true;
 }
 
-
-std::string pe_util::getString(const char *inp, size_t maxInp, size_t maxBuf)
+QString pe_util::getString(const char *inp, size_t maxInp, size_t maxBuf)
 {
     if (maxInp < maxBuf) maxBuf = maxInp;
-
+    
     char *buf = new char[maxBuf + 1];
     unsigned int i = 0, j = 0;
     for ( i = 0, j = 0; i <maxInp && j < maxBuf ; i++) {
-        char c = inp[i];
-        if (IS_PRINTABLE(c)) {
+    char c = inp[i];
+    if (IS_PRINTABLE(c)) {
             buf[j] = c;
             j++;
         } else break;
     }
     buf[j] = '\0';
-    std::string str = buf;
+    QString str = QString::fromUtf8(buf);
     delete []buf;
     return str;
 }
