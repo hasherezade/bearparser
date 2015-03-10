@@ -52,16 +52,31 @@ offset_t Executable::convertAddr(offset_t inAddr, Executable::addr_type inType, 
         return INVALID_ADDR;
     }
     if (inType == outType) return inAddr;
-    if (inType == Executable::RAW && outType == Executable::RVA) {
-        return this->rawToRva(inAddr);
+    const offset_t imgBase = this->getImageBase();
+
+    if (outType == Executable::RAW) {
+        if (inType == Executable::VA) {
+            if (inAddr < imgBase) return INVALID_ADDR;
+            inAddr = inAddr - imgBase;
+            inType = Executable::RVA;
+        }
+        return this->rvaToRaw(inAddr);
+    }
+    if (inType == Executable::RAW) {
+        offset_t out = this->rawToRva(inAddr);
+        if (out == INVALID_ADDR) return INVALID_ADDR;
+
+        if (outType == Executable::VA) {
+            return out + getImageBase();
+        }
+        return out;
+    }
+    if (outType == Executable::RVA) {
+        if (inAddr < imgBase) return INVALID_ADDR;
+        return inAddr - this->getImageBase();
     }
     if (outType == Executable::VA) {
-        if (inType == Executable::RAW) inAddr = rawToRva(inAddr);
         return inAddr + this->getImageBase();
-    }
-    if (outType == Executable::RAW) {
-        bool allowExceptions = false;
-        return toRaw(inAddr, inType, allowExceptions);
     }
     return INVALID_ADDR;
 }
