@@ -52,6 +52,7 @@ public:
 
     QString getStringValue(offset_t rawOffset, bufsize_t len = BUFSIZE_MAX);
     QString getWStringValue(offset_t rawOffset, bufsize_t len);
+    QString getWAsciiStringValue(offset_t rawOffset, bufsize_t len);
 
     bufsize_t getMaxSizeFromOffset(offset_t startOffset);
     bufsize_t getMaxSizeFromPtr(BYTE *ptr) { return getMaxSizeFromOffset(getOffset(ptr)); }

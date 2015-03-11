@@ -149,27 +149,37 @@ QString AbstractByteBuffer::getStringValue(offset_t rawOffset, bufsize_t size)
     if (size == BUFSIZE_MAX) {
         size = this->getContentSize() - rawOffset;
     }
-    //size = sizeof(DWORD);
-    //this->m_ExeHandler->getExe()->getContentAt(target, Executable::RAW, sizeof(DWORD));
-    //TODO: finish it!
-    char *name = (char*) getContentAt(rawOffset, size);
-    if (!name) return "";
+    char *ptr = (char*) getContentAt(rawOffset, size);
+    if (!ptr) return "";
+    size_t asciiLen = pe_util::getAsciiLen(ptr, size);
 
-    return pe_util::getString(name, size, 100);
+    return QString::fromUtf8(ptr, asciiLen);
 }
 
 QString AbstractByteBuffer::getWStringValue(offset_t rawOffset, bufsize_t len)
 {
     const size_t unitSize = sizeof(WORD);
-    WORD* content = NULL;
     size_t size = unitSize;
     if (len != BUFSIZE_MAX && len != -1) {
         size = len * unitSize;
     }
-    content = (WORD*) this->getContentAt(rawOffset, size);
-    if (content == NULL) return "";
+    WORD* ptr = (WORD*) this->getContentAt(rawOffset, size);
+    if (ptr == NULL) return "";
+    return QString::fromUtf16(ptr, len);
+}
 
-    return QString::fromUtf16(content, len);
+QString AbstractByteBuffer::getWAsciiStringValue(offset_t rawOffset, bufsize_t len)
+{
+    const size_t unitSize = sizeof(WORD);
+    size_t size = unitSize;
+    if (len != BUFSIZE_MAX && len != -1) {
+        size = len * unitSize;
+    }
+    WORD* ptr = (WORD*) getContentAt(rawOffset, size);
+    if (!ptr) return "";
+
+    size_t asciiLen = pe_util::getAsciiLenW(ptr, len);
+    return QString::fromUtf16(ptr, asciiLen);
 }
 
 bool AbstractByteBuffer::isAreaEmpty(offset_t rawOffset, bufsize_t size)

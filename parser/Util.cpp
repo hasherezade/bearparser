@@ -10,23 +10,37 @@ bool pe_util::isStrLonger(const char *inp, int maxLen)
     return true;
 }
 
+/*
 QString pe_util::getString(const char *inp, size_t maxInp, size_t maxBuf)
 {
     if (maxInp < maxBuf) maxBuf = maxInp;
-    
-    char *buf = new char[maxBuf + 1];
-    unsigned int i = 0, j = 0;
-    for ( i = 0, j = 0; i <maxInp && j < maxBuf ; i++) {
-    char c = inp[i];
-    if (IS_PRINTABLE(c)) {
-            buf[j] = c;
-            j++;
-        } else break;
+    if (!inp) return "";
+    size_t asciiLen = pe_util::getAsciiLen(inp, maxBuf);
+    return QString::fromUtf8(inp, asciiLen);
+}*/
+
+size_t pe_util::getAsciiLen(const char *inp, size_t maxInp, bool acceptNotTerminated)
+{
+    size_t i = 0;
+    for (; i < maxInp; i++) {
+        const char c = inp[i];
+        if (c == '\0') return i; //end of string
+        if (!IS_PRINTABLE(c)) return 0;
     }
-    buf[j] = '\0';
-    QString str = QString::fromUtf8(buf);
-    delete []buf;
-    return str;
+    if (acceptNotTerminated) return i;
+    return 0;
+}
+
+size_t pe_util::getAsciiLenW(const WORD *inp, size_t maxInp, bool acceptNotTerminated)
+{
+    size_t i = 0;
+    for (; i < maxInp; i++) {
+        const WORD w = inp[i];
+        if (w == 0) return i; //end of string
+        if (!IS_PRINTABLE(w)) return 0;
+    }
+    if (acceptNotTerminated) return i;
+    return 0;
 }
 
 bool pe_util::hasNonPrintable(const char *inp, size_t maxInp)
