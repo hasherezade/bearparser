@@ -206,7 +206,7 @@ offset_t PEFile::rawToRva(offset_t raw)
 {
     if (raw >= this->getMappedSize(Executable::RAW)) return INVALID_ADDR;
 
-    SectionHdrWrapper* sec = this->getSecHdrAtOffset(raw, Executable::RAW, false);
+    SectionHdrWrapper* sec = this->getSecHdrAtOffset(raw, Executable::RAW, true);
     if (sec) {
         offset_t bgnVA = sec->getContentOffset(Executable::VA);
         offset_t bgnRaw = sec->getContentOffset(Executable::RAW);
@@ -214,7 +214,7 @@ offset_t PEFile::rawToRva(offset_t raw)
 
         bufsize_t curr = (raw - bgnRaw);
        
-        bufsize_t vSize = sec->getContentSize(Executable::VA, false);
+        bufsize_t vSize = sec->getContentSize(Executable::VA, true);
         if (curr >= vSize) {
             //address out of section
             return INVALID_ADDR;
@@ -230,16 +230,16 @@ offset_t PEFile::rvaToRaw(offset_t rva)
 {
     if (rva >= this->getMappedSize(Executable::RVA)) return INVALID_ADDR;
 
-    SectionHdrWrapper* sec = this->getSecHdrAtOffset(rva, Executable::RVA, false);
+    SectionHdrWrapper* sec = this->getSecHdrAtOffset(rva, Executable::RVA, true);
     if (sec) {
         offset_t bgnRVA = sec->getContentOffset(Executable::RVA);
         offset_t bgnRaw = sec->getContentOffset(Executable::RAW);
         if (bgnRVA  == INVALID_ADDR || bgnRaw == INVALID_ADDR) return INVALID_ADDR;
 
         bufsize_t curr = (rva - bgnRVA);
-        bufsize_t rawSize = sec->getContentSize(Executable::RAW, false);
+        bufsize_t rawSize = sec->getContentSize(Executable::RAW, true);
         if (curr >= rawSize) {
-            //address out of section. return last addr of the section.
+            //address out of section
             return INVALID_ADDR;
         }
         return bgnRaw + curr;
