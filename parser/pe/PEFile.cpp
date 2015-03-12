@@ -223,6 +223,7 @@ offset_t PEFile::rawToRva(offset_t raw)
     }
     //TODO...
     if (this->getSectionsCount() == 0) return raw;
+    if (raw < this->getAlignment(Executable::RVA)) return raw;
     return INVALID_ADDR;
 }
 
@@ -245,6 +246,7 @@ offset_t PEFile::rvaToRaw(offset_t rva)
         return bgnRaw + curr;
     }
     if (this->getSectionsCount() == 0) return rva;
+    if (rva < this->getAlignment(Executable::RAW)) return rva;
     return INVALID_ADDR;
 }
 
