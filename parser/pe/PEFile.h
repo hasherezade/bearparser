@@ -122,7 +122,7 @@ public:
         return dynamic_cast<DelayImpDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_DELAY_IMPORT));
     }
 
-    ExportDirWrapper* getExports(Executable* exe)
+    ExportDirWrapper* getExports()
     {
         return dynamic_cast<ExportDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_EXPORT));
     }
