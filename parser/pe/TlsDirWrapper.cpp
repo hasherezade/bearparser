@@ -45,7 +45,7 @@ bufsize_t TlsDirWrapper::getSize()
 
 void* TlsDirWrapper::getTlsDirPtr()
 {
-    size_t dirSize = 0;
+    bufsize_t dirSize = 0;
 
     if (m_Exe->getBitMode() == Executable::BITS_32) {
         dirSize = sizeof(pe::IMAGE_TLS_DIRECTORY32);

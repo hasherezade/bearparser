@@ -99,16 +99,6 @@ public:
     }
     DataDirEntryWrapper* getDataDirEntry(pe::dir_entry eType);
 
-    ImportDirWrapper* getImports()
-    {
-        return dynamic_cast<ImportDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_IMPORT));
-    }
-    
-    DelayImpDirWrapper* getDelayedImports()
-    {
-        return dynamic_cast<DelayImpDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_DELAY_IMPORT));
-    }
-
     BufferView* createSectionView(size_t secNum);
     //---
     //modifications:
@@ -120,6 +110,22 @@ public:
     SectionHdrWrapper* addNewSection(QString name, bufsize_t size);
     SectionHdrWrapper* extendLastSection(bufsize_t addedSize);
     bool unbindImports();
+
+    /* wrappers for fetching commonly used directories */
+    ImportDirWrapper* getImports()
+    {
+        return dynamic_cast<ImportDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_IMPORT));
+    }
+    
+    DelayImpDirWrapper* getDelayedImports()
+    {
+        return dynamic_cast<DelayImpDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_DELAY_IMPORT));
+    }
+
+    ExportDirWrapper* getExports(Executable* exe)
+    {
+        return dynamic_cast<ExportDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_EXPORT));
+    }
 
 protected:
     virtual void clearWrappers();
