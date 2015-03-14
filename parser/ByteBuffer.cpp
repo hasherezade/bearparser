@@ -43,7 +43,8 @@ BYTE* ByteBuffer::allocContent(bufsize_t v_size, bufsize_t v_padding)
 {
     if (v_size == 0) throw BufferException("Zero size requested");
     bufsize_t allocSize = v_size + v_padding;
-    BYTE* content =  (BYTE*) calloc(sizeof(BYTE), allocSize);
+    BYTE* content =  new BYTE[allocSize];
+    memset(content, 0, allocSize);
     if (content == NULL) throw BufferException("Cannot allocate buffer of size: 0x" + QString::number(allocSize, 16));
 
     return content;
@@ -67,15 +68,15 @@ bool ByteBuffer::resize(bufsize_t newSize)
 
     memcpy(newContent, oldContent, copySize);
 
-    this->content =  newContent;
+    this->content = newContent;
     this->contentSize = newSize;
-    free(oldContent);
+    delete []this->content;
     return true;
 }
 
 ByteBuffer::~ByteBuffer()
 {
-    free(this->content);
+    delete []this->content;
     TRACE();
 }
 
