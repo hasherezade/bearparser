@@ -40,6 +40,9 @@ void DOSExe::wrap(AbstractByteBuffer *v_buf)
 {
     this->dosHdrWrapper = new DosHdrWrapper(this);
 
+    m_dosHdr = (IMAGE_DOS_HEADER*) getContentAt(0, sizeof(IMAGE_DOS_HEADER));
+    if (m_dosHdr == NULL) throw ExeException("Could not Wrap!");
+
     WORD* magic = (WORD*) this->dosHdrWrapper->getFieldPtr(DosHdrWrapper::MAGIC);
 
     if (this->dosHdrWrapper->getPtr() == NULL || magic == NULL) {
