@@ -5,7 +5,6 @@
 
 #define DOS_PARAGRAPH 0x10
 
-
 class DOSExeBuilder: public ExeBuilder {
 public:
     DOSExeBuilder() : ExeBuilder() {}
@@ -26,7 +25,7 @@ public:
     };
 
     DOSExe(AbstractByteBuffer *v_buf);
-    virtual ~DOSExe() { TRACE(); }
+    virtual ~DOSExe() { }
 
     // inherited from Executable:
     //
@@ -34,12 +33,17 @@ public:
     virtual offset_t rawToRva(offset_t raw) { return raw - codeOffset(); } //TODO
     virtual offset_t rvaToRaw(offset_t rva) { return rva + codeOffset();  } //TODO
 
-    virtual bufsize_t getMappedSize(Executable::addr_type aType) { return this->getContentSize(); }//TODO
+    virtual bufsize_t getMappedSize(Executable::addr_type aType)
+    {
+        if (aType == Executable::RAW)
+            return getContentSize();
+        return moduleSize() - codeOffset();
+    }
+
     virtual bufsize_t getAlignment(Executable::addr_type aType) { return 0; } //TODO
     virtual offset_t getImageBase() { return m_dosHdr->e_cs; }
-    virtual offset_t getEntryPoint(Executable::addr_type aType = Executable::RVA) { return codeOffset() + m_dosHdr->e_ip; } //TODO
+    virtual offset_t getEntryPoint(Executable::addr_type aType = Executable::RVA) { return codeOffset() + m_dosHdr->e_ip; }
 
-    Executable::addr_type detectAddrType(offset_t addr, Executable::addr_type hintType) { return Executable::RAW; }
     //---
     // DOS Exe only:
     virtual offset_t dosHeaderOffset() { return 0; } //wrapper's mount point
@@ -47,9 +51,19 @@ public:
 
 protected:
     offset_t codeOffset() { return static_cast<offset_t> (m_dosHdr->e_cparhdr) * DOS_PARAGRAPH; }
+    bufsize_t moduleSize()
+    {
+        const size_t PAGE_SIZE = 0x200;
+        WORD size = m_dosHdr->e_cp * PAGE_SIZE;
+        if (m_dosHdr->e_cblp ) {
+            WORD trimSize = PAGE_SIZE - m_dosHdr->e_cblp;
+            size -= trimSize;
+        }
+        return static_cast<bufsize_t> (size);
+    }
+
     virtual void wrap(AbstractByteBuffer *v_buf);
 
     DosHdrWrapper *dosHdrWrapper;
     IMAGE_DOS_HEADER* m_dosHdr;
 };
-
