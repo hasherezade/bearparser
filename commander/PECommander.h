@@ -2,7 +2,6 @@
 
 #include "ExeCommander.h"
 
-
 namespace cmd_util {
     PEFile* getPEFromContext(CmdContext *ctx);
     void printSectionMapping(SectionHdrWrapper *sec, Executable::addr_type aType);
@@ -35,11 +34,8 @@ public:
 
     virtual void execute(CmdParams *params, CmdContext  *context)
     {
-        PEFile *peExe = dynamic_cast<PEFile*> (cmd_util::getExeFromContext(context));
-        if (peExe == NULL) {
-            std::cerr << "Invalid PEFile" << std::endl;
-            return;
-        }
+        PEFile *peExe = cmd_util::getPEFromContext(context);
+        if (!peExe) return;
 
         offset_t offset = cmd_util::readOffset(addrType);
 
@@ -80,8 +76,9 @@ public:
 
     virtual void execute(CmdParams *params, CmdContext  *context)
     {
-        Executable *exe = cmd_util::getExeFromContext(context);
-        PEFile *pe = dynamic_cast<PEFile*>(exe);
+        PEFile *pe = cmd_util::getPEFromContext(context);
+        if (!pe) return;
+
         ResourcesContainer* container = pe->getResourcesOfType(pe::RT_STRING);
         if (container == NULL) {
             printf("No such resource type!\n");
@@ -108,10 +105,10 @@ public:
 
     virtual void execute(CmdParams *params, CmdContext  *context)
     {
-        Executable *exe = cmd_util::getExeFromContext(context);
-        PEFile *pe = dynamic_cast<PEFile*>(exe);
+        PEFile *pe = cmd_util::getPEFromContext(context);
+        if (!pe) return;
         ResourcesAlbum *album = pe->getResourcesAlbum();
-        if (album == NULL) return;
+        if (!album) return;
 
         cmd_util::printResourceTypes(pe);
     }
@@ -125,8 +122,9 @@ public:
 
     virtual void execute(CmdParams *params, CmdContext  *context)
     {
-        Executable *exe = cmd_util::getExeFromContext(context);
-        PEFile *pe = dynamic_cast<PEFile*>(exe);
+        PEFile *pe = cmd_util::getPEFromContext(context);
+        if (!pe) return;
+
         ResourcesAlbum *album = pe->getResourcesAlbum();
         if (album == NULL) return;
 
@@ -163,8 +161,7 @@ public:
 
     virtual void execute(CmdParams *params, CmdContext  *context)
     {
-        Executable *exe = cmd_util::getExeFromContext(context);
-        PEFile *pe = dynamic_cast<PEFile*>(exe);
+        PEFile *pe = cmd_util::getPEFromContext(context);
         if (!pe) return;
 
         printf("Available DataDirs: \n");
@@ -200,8 +197,7 @@ public:
 
     virtual void execute(CmdParams *params, CmdContext  *context)
     {
-        Executable *exe = cmd_util::getExeFromContext(context);
-        PEFile *pe = dynamic_cast<PEFile*>(exe);
+        PEFile *pe = cmd_util::getPEFromContext(context);
         if (!pe) return;
 
         size_t sectHdrCount = pe->getSectionsCount(false);
@@ -235,6 +231,7 @@ public:
             delete secView;
         }
     }
+
 protected:
     QString fileName;
     bool saveToFile;

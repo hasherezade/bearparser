@@ -6,7 +6,11 @@ using namespace std;
 PEFile* cmd_util::getPEFromContext(CmdContext *ctx)
 {
     Executable* exe =  cmd_util::getExeFromContext(ctx);
-    return dynamic_cast<PEFile*>(exe);
+    PEFile *pe = dynamic_cast<PEFile*>(exe);
+    if (!pe) {
+        std::cerr << "It's not a PE file" << std::endl;
+    }
+    return pe;
 }
 
 void cmd_util::printSectionMapping(SectionHdrWrapper *sec, Executable::addr_type aType)
