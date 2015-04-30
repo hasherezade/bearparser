@@ -30,7 +30,7 @@ public:
     // inherited from Executable:
     //
     // FileAddr <-> RVA
-    virtual offset_t rawToRva(offset_t raw) { return raw - codeOffset(); } //TODO
+    virtual offset_t rawToRva(offset_t raw) { return (raw < codeOffset()) ? INVALID_ADDR : raw - codeOffset(); }
     virtual offset_t rvaToRaw(offset_t rva) { return rva + codeOffset();  } //TODO
 
     virtual bufsize_t getMappedSize(Executable::addr_type aType)
