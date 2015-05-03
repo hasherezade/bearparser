@@ -40,6 +40,7 @@ public:
 
     virtual bufsize_t getContentSize() = 0;
     virtual BYTE* getContent() = 0;
+    virtual bool isTruncated() { return false; }
 
     const BYTE operator[](size_t idx);
 

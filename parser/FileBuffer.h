@@ -21,6 +21,7 @@ public:
     static bufsize_t getReadableSize(QString &path);
     static bufsize_t dump(QString fileName, AbstractByteBuffer &buf, bool allowExceptions = false);
     QString getFileName() { return this->fileName; }
+
 protected:
     static ByteBuffer* read(QFile &fIn, bufsize_t minBufSize); //throws exceptions
 
@@ -40,6 +41,7 @@ public:
     virtual bufsize_t getContentSize() { return mappedSize; }
     virtual BYTE* getContent() { return mappedContent; }
     bufsize_t getMappableSize(QFile &fIn);
+    virtual bool isTruncated() { return fIn.size() > mappedSize; }
 
 protected:
     BYTE *mappedContent;
@@ -69,6 +71,7 @@ public:
     virtual BYTE* getContent() { return (m_Buf == NULL) ? NULL : m_Buf->getContent(); }
     uint64_t getFileSize() { return static_cast<uint64_t>(fileSize); }
     bool resize(bufsize_t newSize) { return m_Buf->resize(newSize); }
+    virtual bool isTruncated() { return fileSize > this->m_Buf->getContentSize(); }
 
 protected:
     ByteBuffer* m_Buf;
