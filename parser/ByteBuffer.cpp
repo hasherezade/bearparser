@@ -36,7 +36,6 @@ ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_
     this->contentSize = allocSize;
 
     memcpy(this->content, bContent, copySize);
-    TRACE();
 }
 
 BYTE* ByteBuffer::allocContent(bufsize_t v_size, bufsize_t v_padding)
@@ -79,7 +78,6 @@ bool ByteBuffer::resize(bufsize_t newSize)
 ByteBuffer::~ByteBuffer()
 {
     delete []this->content;
-    TRACE();
 }
 
 

@@ -45,15 +45,15 @@ offset_t cmd_util::readOffset(Executable::addr_type aType)
     std::string prompt = addrTypeToStr(aType);
 
     printf("%s: ", prompt.c_str());
-    scanf("%llx", &offset);
+    scanf("%lx", &offset);
     return offset;
 }
 
 size_t cmd_util::readNumber(std::string prompt)
 {
-    size_t num = 0;
+    unsigned int num = 0;
     printf("%s: ", prompt.c_str());
-    scanf("%d", &num);
+    scanf("%u", &num);
     return num;
 }
 
@@ -97,7 +97,10 @@ void cmd_util::printWrapperNames(MappedExe *exe) {
     for (size_t i = 0; i < count; i++) {
         ExeElementWrapper *wr = exe->getWrapper(i);
         if (wr == NULL || wr->getPtr() == NULL) continue;
-        printf("[%2d] %s\n", i, exe->getWrapperName(i).toStdString().c_str());
+        printf("[%2lu] %s\n",
+            static_cast<unsigned long>(i),
+            exe->getWrapperName(i).toStdString().c_str()
+        );
     }
 }
 
@@ -106,12 +109,12 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
     if (w == NULL) return;
     printf("------\n");
     size_t fields = w->getFieldsCount();
-    printf("\t[%s] size: %#x fieldsCount: %d\n\n", w->getName().toStdString().c_str(), w->getSize(), fields);
+    printf("\t[%s] size: %#x fieldsCount: %lu\n\n", w->getName().toStdString().c_str(), w->getSize(), fields);
 
     for (int i = 0; i < fields; i++) {
         offset_t offset = w->getFieldOffset(i);
         if (offset == INVALID_ADDR) continue;
-        printf("[%04llX] %s :\t", offset, w->getFieldName(i).toStdString().c_str());
+        printf("[%04lX] %s :\t", offset, w->getFieldName(i).toStdString().c_str());
 
         QString translated = w->translateFieldContent(i);
         if (translated.size() > 0) {
@@ -137,7 +140,7 @@ void cmd_util::dumpNodeInfo(ExeNodeWrapper *w)
     if (w == NULL) return;
     printf("------\n");
     size_t entriesCnt = w->getEntriesCount();
-    printf("\t[%s] entriesCount: %d\n\n", w->getName().toStdString().c_str(), entriesCnt);
+    printf("\t[%s] entriesCount: %lu\n\n", w->getName().toStdString().c_str(), entriesCnt);
 
     for (int i = 0; i < entriesCnt; i++) {
         ExeNodeWrapper* entry = w->getEntryAt(i);
@@ -146,7 +149,7 @@ void cmd_util::dumpNodeInfo(ExeNodeWrapper *w)
         dumpEntryInfo(entry);
         size_t subEntries = entry->getEntriesCount();
         if (subEntries > 0) {
-            printf("Have entries: %d\n" , subEntries);
+            printf("Have entries: %lu\n" , subEntries);
         }
         printf("\n");
     }

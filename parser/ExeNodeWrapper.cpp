@@ -58,7 +58,7 @@ bool ExeNodeWrapper::canAddEntry()
 
     bufsize_t paddedSize = entrySize * 2;
     bool haveSpace = this->m_Exe->isAreaEmpty(nextOffset, paddedSize);
-    if (DBG_LVL) printf("nextOffset = %llX size = %lX, canAdd: %d\n", nextOffset, entrySize, haveSpace);
+    Logger::append(Logger::INFO,"NextOffset = %lX size = %X, canAdd: %d", nextOffset, entrySize, haveSpace);
     return haveSpace;
 }
 
@@ -115,7 +115,7 @@ ExeNodeWrapper* ExeNodeWrapper::addEntryAt(ExeNodeWrapper *entry, offset_t nextO
     } 
     if (loadNextEntry(entryNum) == false) return NULL;
     reloadMapping();
-//  printf("ENTRIES NUM  %d\n", this->getEntriesCount());
+    Logger::append(Logger::INFO,"Entries count: %lu", this->getEntriesCount());
     return getLastEntry();
 }
 

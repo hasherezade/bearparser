@@ -105,11 +105,11 @@ bool ExeElementWrapper::copyToOffset(offset_t rawOffset)
     if (this->m_Exe == NULL) return false;
 
     if (canCopyToOffset(rawOffset) == false) {
-        if (DBG_LVL) printf("The area is not empty!\n");
+        Logger::append(Logger::ERROR,"The area is not empty!");
         return false;
     }
     if (m_Exe->pasteBuffer(rawOffset, this, false) == false) {
-        if (DBG_LVL) printf("Cannot paste the buffer!\n");
+        Logger::append(Logger::ERROR,"Cannot paste the buffer!");
         return false;
     }
     return true;

@@ -59,21 +59,20 @@ ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize) //throws 
     if (content == NULL) throw FileBufferException("Cannot allocate buffer");
     //printf("Reading...%lx , BUFSIZE_MAX = %lx\n", allocSize, BUFSIZE_MAX);
 
-    bufsize_t redSize = 0;
+    bufsize_t readSize = 0;
     offset_t prevOffset = 0;
     offset_t maxOffset = contentSize - 1;
 
     while (fIn.pos() < maxOffset) {
 
-        bufsize_t maxSize = contentSize - redSize;
+        bufsize_t maxSize = contentSize - readSize;
         if (maxSize > FILEVIEW_MAXSIZE) maxSize = FILEVIEW_MAXSIZE;
 
-        redSize += fIn.read(content + redSize,  maxSize);
+        readSize += fIn.read(content + readSize,  maxSize);
         if (prevOffset == fIn.pos()) break; //cannot read more!
-        printf("redSize = %lx\n", redSize);
         prevOffset = fIn.pos();
     }
-    //printf("Red size...%lx\n", redSize);
+    Logger::append(Logger::INFO, "Read size: %lx", readSize);
     return bufferedFile;
 }
 

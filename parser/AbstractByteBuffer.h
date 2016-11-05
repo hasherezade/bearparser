@@ -2,15 +2,13 @@
 
 #include "win_hdrs/win_types.h"
 #include "CustomException.h"
+#include "Util.h"
 
 #include <QtCore>
 
 #include <iostream>
 #include <stdlib.h>
 
-#define DBG_LVL 0
-#define TRACE() if (DBG_LVL) printf(">%s line:  %d [%s]\n", __FUNCTION__, __LINE__, __FILE__);
-#define LOG(msg) if (DBG_LVL) printf("%s: %s\n", __FUNCTION__,msg);
 //------------------------------------------------
 
 typedef uint32_t bufsize_t;

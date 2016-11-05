@@ -26,9 +26,9 @@ void cmd_util::printSectionMapping(SectionHdrWrapper *sec, Executable::addr_type
     std::string typeStr = cmd_util::addrTypeToStr(aType);
     printf("[%s]\n",typeStr.c_str());
     printf(" ------------[In Hdr]------[Mapped]\n");
-    printf(" Offset:  %10llX \t%10llX\n", hdrStart, start);
-    printf(" Size:    %10lX \t%10lX\n", hdrSize, size);
-    printf(" Scope:  [%10llX - %10llX], size = %lX\n", start, start + size, size);
+    printf(" Offset:  %10lX \t%10lX\n", hdrStart, start);
+    printf(" Size:    %10X \t%10X\n", hdrSize, size);
+    printf(" Scope:  [%10lX - %10lX], size = %X\n", start, start + size, size);
     printf(" \n");
 }
 
@@ -69,7 +69,7 @@ void cmd_util::printStrings(PEFile *pe, size_t limit)
 
             ResString *resStr = wrapper->getResStringAt(i);
             if (resStr != NULL) {
-                printf("[%8llx] [%d] %s\n", resStr->offset, resStr->getSize(), resStr->getQString().toStdString().c_str());
+                printf("[%8lx] [%d] %s\n", resStr->offset, resStr->getSize(), resStr->getQString().toStdString().c_str());
                 limCount++;
             }
         }
@@ -85,7 +85,7 @@ void cmd_util::dumpResourcesInfo(PEFile *pe, pe::resource_type type, size_t wrap
         return;
     }
     size_t wrappersCount = wrappers->count();
-    printf ("Found in Resources: %d, wrappers: %d\n", wrappers->entriesCount(), wrappersCount);
+    printf ("Found in Resources: %lu, wrappers: %lu\n", wrappers->entriesCount(), wrappersCount);
     int limCount = 0;
     std::vector<ResourceContentWrapper*>::iterator itr;
     if (wrapperId >= wrappersCount) return;
@@ -100,7 +100,7 @@ void cmd_util::listDataDirs(PEFile *pe)
     for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
         DataDirEntryWrapper* entry = pe->getDataDirEntry(pe::dir_entry(i));
         if (entry == NULL) continue;
-        printf("[%d] %s\n", i, entry->getName().toStdString().c_str());
+        printf("[%lu] %s\n", i, entry->getName().toStdString().c_str());
     }
 }
 
