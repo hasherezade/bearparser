@@ -41,7 +41,7 @@ public:
 
         SectionHdrWrapper* sec = peExe->getSecHdrAtOffset(offset, addrType, true, true);
         if (sec == NULL) {
-            printf("NOT found addr [0x%lX] in any section!\n", 
+            printf("NOT found addr [0x%llX] in any section!\n", 
                 static_cast<unsigned long long>(offset)
             );
             printf("----------------------------\n");
