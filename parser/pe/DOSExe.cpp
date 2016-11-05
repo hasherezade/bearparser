@@ -50,7 +50,7 @@ void DOSExe::wrap(AbstractByteBuffer *v_buf)
     }
 
     if ((*magic) != S_DOS && (*magic) != S_DOS2) {
-        printf("It is not a DOS file!\n");
+        Logger::append(Logger::WARNING, "It is not a DOS file!\n");
         throw ExeException("It is not a DOS file!");
     }
     this->wrappers[WR_DOS_HDR] = this->dosHdrWrapper;
