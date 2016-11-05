@@ -12,7 +12,12 @@
 #define IS_ENDLINE(c) (c == 0x0A || c == 0xD)
 
 //----
+#ifdef _DEBUG
 #define DBG_LVL 2
+#else
+#define DBG_LVL 0
+#endif
+
 #define TRACE() if (DBG_LVL) printf(">%s line:  %d [%s]\n", __FUNCTION__, __LINE__, __FILE__);
 #define LOG(msg) if (DBG_LVL) printf("%s: %s\n", __FUNCTION__,msg);
 
