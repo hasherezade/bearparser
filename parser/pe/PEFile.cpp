@@ -48,13 +48,13 @@ PEFile::PEFile(AbstractByteBuffer *v_buf)
 {
     album = new ResourcesAlbum(this);
     wrap(v_buf);
+    Logger::append(Logger::INFO,"Wrapped");
 }
 
 void PEFile::clearWrappers()
 {
     initDirEntries();
     MappedExe::clearWrappers();
-    TRACE();
 }
 
 void PEFile::initDirEntries()
@@ -177,7 +177,7 @@ bool PEFile::setHdrSectionsNum(size_t newNum)
     uint64_t count = newNum;
     bool canSet = fHdr->setNumValue(FileHdrWrapper::SEC_NUM , count);
     if (canSet == false) {
-        if (DBG_LVL) printf("Can not change FileHdr!\n");
+        Logger::append(Logger::ERROR,"Can not change FileHdr!\n");
         return false;
     }
     return true;
@@ -188,7 +188,7 @@ bool PEFile::setVitualSize(bufsize_t newSize)
     uint64_t size = newSize;
     bool canSet = optHdr->setNumValue(OptHdrWrapper::IMAGE_SIZE, 0, size);
     if (canSet == false) {
-        if (DBG_LVL) printf("Can not change OptHdr!\n");
+        Logger::append(Logger::ERROR, "Can not change OptHdr!\n");
         return false;
     }
     return true;
@@ -260,7 +260,7 @@ BufferView* PEFile::createSectionView(size_t secId)
 {
     SectionHdrWrapper *sec = this->getSecHdr(secId);
     if (sec == NULL) {
-        printf("No such section\n");
+        Logger::append(Logger::WARNING, "No such section\n");
         return NULL;
     }
     Executable::addr_type aType = Executable::RAW;
@@ -333,12 +333,12 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
     bufsize_t newVirtualSize = roundedVirtualEnd + size;
 
     if (setVitualSize(newVirtualSize) == false) {
-        printf("Failed to change virtual size");
+        Logger::append(Logger::ERROR, "Failed to change virtual size");
         return NULL;
     }
 
     if (resize(newSize) == false) {
-        printf("Failed to resize");
+        Logger::append(Logger::ERROR, "Failed to resize");
         return NULL;
     }
     // fetch again after resize:

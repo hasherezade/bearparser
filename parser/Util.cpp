@@ -5,8 +5,11 @@ using namespace pe_util;
 
 #define MAX_LINE 255
 
-bool Logger::append(const char* format, ...)
+bool Logger::append(dbg_level lvl, const char* format, ...)
 {
+    if (lvl > DBG_LVL) {
+        return false;
+    }
     if (format == NULL) {
         return false;
     }
@@ -23,9 +26,12 @@ bool Logger::append(const char* format, ...)
     va_end(argptr);
     if (printed <= 0) return false;
 	
-	const char prefix[] = "*";
+	const char *prefixes[LVL_COUNT] = {"ERROR", "WARNING", "INFO"};
+    if (static_cast<unsigned>(lvl) > static_cast<unsigned>(LVL_COUNT)) {
+        lvl = ERROR;
+    }
 
-	fprintf(stderr, "[%s] %s", prefix, line);
+	fprintf(stderr, "[%s] %s\n", prefixes[lvl], line);
     return true;
 }
 

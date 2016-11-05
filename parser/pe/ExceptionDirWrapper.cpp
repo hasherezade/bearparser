@@ -37,9 +37,8 @@ bool ExceptionDirWrapper::wrap()
             entry->getNumValue(ExceptionEntryWrapper::PAGE_VA, &isOk),
             entry->getNumValue(ExceptionEntryWrapper::BLOCK_SIZE, &isOk)
         );*/
-
     }
-    //printf("entries num = %d, parsedSize = %x\n", entries.size(), parsedSize);
+    Logger::append(Logger::INFO, "Entries num = %lu, parsedSize = %x\n", entries.size(), parsedSize);
     return true;
 }
 
@@ -104,9 +103,9 @@ QString ExceptionEntryWrapper::getFieldName(size_t fieldId)
 Executable::addr_type ExceptionEntryWrapper::containsAddrType(size_t fieldId, size_t subField)
 {
     switch (fieldId) {
-    case BEGIN_ADDR :
-    case END_ADDR :
-    case UNWIND_INFO_ADDR :
+        case BEGIN_ADDR :
+        case END_ADDR :
+        case UNWIND_INFO_ADDR :
             return Executable::RVA;
     }
     return Executable::NOT_ADDR;

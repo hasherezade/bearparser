@@ -51,7 +51,7 @@ public:
     };
 
     PEFile(AbstractByteBuffer *v_buf);
-    virtual ~PEFile() { TRACE(); clearWrappers(); delete album; }
+    virtual ~PEFile() { clearWrappers(); delete album; }
     //---
     // inherited from Executable:
     //
