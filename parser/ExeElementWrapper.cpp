@@ -32,7 +32,6 @@ bufsize_t ExeElementWrapper::getFieldSize(size_t fieldId, size_t subField)
     BYTE *bgnPtr =  (BYTE*) getPtr();
     BYTE *endPtr = bgnPtr + fullSize;
     offset_t dif =  (offset_t) endPtr - (offset_t) ptr;
-    if (dif < 0) return 0;
 
     return (bufsize_t) dif;
 }
