@@ -177,7 +177,7 @@ bool PEFile::setHdrSectionsNum(size_t newNum)
     uint64_t count = newNum;
     bool canSet = fHdr->setNumValue(FileHdrWrapper::SEC_NUM , count);
     if (canSet == false) {
-        Logger::append(Logger::ERROR,"Can not change FileHdr!\n");
+        Logger::append(Logger::ERROR,"Can not change FileHdr!");
         return false;
     }
     return true;
@@ -188,7 +188,7 @@ bool PEFile::setVitualSize(bufsize_t newSize)
     uint64_t size = newSize;
     bool canSet = optHdr->setNumValue(OptHdrWrapper::IMAGE_SIZE, 0, size);
     if (canSet == false) {
-        Logger::append(Logger::ERROR, "Can not change OptHdr!\n");
+        Logger::append(Logger::ERROR, "Can not change OptHdr!");
         return false;
     }
     return true;
@@ -260,7 +260,7 @@ BufferView* PEFile::createSectionView(size_t secId)
 {
     SectionHdrWrapper *sec = this->getSecHdr(secId);
     if (sec == NULL) {
-        Logger::append(Logger::WARNING, "No such section\n");
+        Logger::append(Logger::WARNING, "No such section");
         return NULL;
     }
     Executable::addr_type aType = Executable::RAW;

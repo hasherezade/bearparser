@@ -38,7 +38,7 @@ bool ExceptionDirWrapper::wrap()
             entry->getNumValue(ExceptionEntryWrapper::BLOCK_SIZE, &isOk)
         );*/
     }
-    Logger::append(Logger::INFO, "Entries num = %lu, parsedSize = %x\n", entries.size(), parsedSize);
+    Logger::append(Logger::INFO, "Entries num = %lu, parsedSize = %x", entries.size(), parsedSize);
     return true;
 }
 
