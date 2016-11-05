@@ -93,7 +93,7 @@ bool ImportedFuncWrapper::isByOrdinal()
 
     void *p = getValuePtr(ImportEntryWrapper::ORIG_FIRST_THUNK);
     if (!p) p = getValuePtr(ImportEntryWrapper::FIRST_THUNK);
-    if (!p) return NULL;
+    if (!p) return false;
 
     if (isBit64()) {
         uint64_t* ptr =  (uint64_t*) p;
