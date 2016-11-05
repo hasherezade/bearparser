@@ -68,7 +68,7 @@ public:
         std::string inAddr = cmd_util::addrTypeToStr(addrFrom);
         std::string outAddr = cmd_util::addrTypeToStr(addrTo);
         printf("[%s]\t->\t[%s]:\n", inAddr.c_str(), outAddr.c_str());
-        printf(" %llX\t->\t%llX\n", offset, outOffset);
+        printf(" %lX\t->\t%lX\n", offset, outOffset);
     }
 
 protected:
@@ -106,12 +106,12 @@ public:
         Executable *exe = cmd_util::getExeFromContext(context);
         printf("Bit mode: \t%10d\n", exe->getBitMode());
         offset_t entryPoint = exe->getEntryPoint();
-        printf("Entry point: \t[%10llX %c]\n", entryPoint, cmd_util::addrTypeToChar(Executable::RVA));
-        printf("Raw size: \t[%10lX]\n", exe->getMappedSize(Executable::RAW));
-        printf("Raw align.: \t[%10lX]\n", exe->getAlignment(Executable::RAW));
+        printf("Entry point: \t[%10lX %c]\n", entryPoint, cmd_util::addrTypeToChar(Executable::RVA));
+        printf("Raw size: \t[%10X]\n", exe->getMappedSize(Executable::RAW));
+        printf("Raw align.: \t[%10X]\n", exe->getAlignment(Executable::RAW));
 
-        printf("Virtual size: \t[%10lX]\n", exe->getMappedSize(Executable::RVA));
-        printf("Virtual align.:\t[%10lX]\n", exe->getAlignment(Executable::RVA));
+        printf("Virtual size: \t[%10X]\n", exe->getMappedSize(Executable::RVA));
+        printf("Virtual align.:\t[%10X]\n", exe->getAlignment(Executable::RVA));
         MappedExe *mappedExe = cmd_util::getMappedExeFromContext(context);
         if (mappedExe) {
             printf("Contains:\n");
@@ -212,9 +212,9 @@ public:
 
         cmd_util::dumpEntryInfo(nWrapper);
 
-        size_t num = 0;
+        unsigned int num = 0;
         printf("Dump subentries of Index: ");
-        scanf("%d", &num);
+        scanf("%u", &num);
 
         ExeNodeWrapper* lib = nWrapper->getEntryAt(num);
         cmd_util::dumpEntryInfo(lib);
@@ -261,7 +261,7 @@ public:
     virtual void wrapperAction(ExeElementWrapper *wrapper)
     {
         bufsize_t dSize = FileBuffer::dump(fileName, *wrapper, true);
-        printf("Dumped size: %ld into: %s\n", dSize, fileName.toStdString().c_str());
+        printf("Dumped size: %u into: %s\n", dSize, fileName.toStdString().c_str());
     }
 protected:
     QString fileName;
@@ -281,7 +281,7 @@ public:
         Executable *exe = cmd_util::getExeFromContext(context);
 
         bufsize_t dSize = FileBuffer::dump(fileName, *exe, true);
-        printf("Dumped size: %ld into: %s\n", dSize, fileName.toStdString().c_str());
+        printf("Dumped size: %u into: %s\n", dSize, fileName.toStdString().c_str());
     }
 protected:
     QString fileName;

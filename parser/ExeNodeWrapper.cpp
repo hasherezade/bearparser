@@ -58,7 +58,7 @@ bool ExeNodeWrapper::canAddEntry()
 
     bufsize_t paddedSize = entrySize * 2;
     bool haveSpace = this->m_Exe->isAreaEmpty(nextOffset, paddedSize);
-    if (DBG_LVL) printf("nextOffset = %llX size = %lX, canAdd: %d\n", nextOffset, entrySize, haveSpace);
+    if (DBG_LVL) printf("nextOffset = %lX size = %X, canAdd: %d\n", nextOffset, entrySize, haveSpace);
     return haveSpace;
 }
 

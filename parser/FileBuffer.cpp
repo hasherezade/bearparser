@@ -70,7 +70,6 @@ ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize) //throws 
 
         redSize += fIn.read(content + redSize,  maxSize);
         if (prevOffset == fIn.pos()) break; //cannot read more!
-        printf("redSize = %lx\n", redSize);
         prevOffset = fIn.pos();
     }
     //printf("Red size...%lx\n", redSize);

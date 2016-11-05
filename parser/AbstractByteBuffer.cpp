@@ -213,7 +213,7 @@ bool AbstractByteBuffer::pasteBuffer(offset_t rawOffset, AbstractByteBuffer *buf
 
     bufsize_t mySize = this->getContentSize();
     if (static_cast<offset_t>(mySize) <= rawOffset) {
-        if (DBG_LVL) printf("Too far offset requested: %llX while mySize: %llX\n", rawOffset, mySize);
+        if (DBG_LVL) printf("Too far offset requested: %lX while mySize: %X\n", rawOffset, mySize);
         return false;
     }
     BYTE *target = this->getContentAt(rawOffset, sizeToFill);
@@ -298,7 +298,7 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
     if (size == 0 || offset == INVALID_ADDR) return false;
     void* ptr = this->getContentAt(offset, size);
     if (ptr == NULL) {
-        if (DBG_LVL) printf("Cannot get Ptr at: %llX of size: %lx!\n", offset, size);
+        if (DBG_LVL) printf("Cannot get Ptr at: %lX of size: %x!\n", offset, size);
         return false;
     }
 

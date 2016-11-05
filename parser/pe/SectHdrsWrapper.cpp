@@ -421,7 +421,12 @@ SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executabl
     for (itr = found; itr != secMap->end(); itr++) {
         SectionHdrWrapper* sec = itr->second;
         if (sec == NULL) continue; //TODO: check it
-        if (verbose) printf("found [%llX] key: %llX sec: %llX %llX\n", offset, itr->first, sec->getContentOffset(addrType), sec->getContentEndOffset(addrType, false));
+        if (verbose) {
+            printf("found [%lX] key: %lX sec: %lX %lX\n", 
+            offset, itr->first, 
+            sec->getContentOffset(addrType), 
+            sec->getContentEndOffset(addrType, false));
+        }
 
         offset_t startOffset = sec->getContentOffset(addrType);
         if (startOffset == INVALID_ADDR) continue;
@@ -452,7 +457,11 @@ void SectHdrsWrapper::printSectionsMapping(Executable::addr_type aType)
         SectionHdrWrapper* sec = itr->second;
         offset_t secEnd = itr->first;
 
-        printf("[%llX] %s %llX %llX\n", secEnd, sec->getName().toStdString().c_str(), sec->getContentOffset(aType), sec->getContentEndOffset(aType, true));
+        printf("[%lX] %s %lX %lX\n", 
+            secEnd, sec->getName().toStdString().c_str(), 
+            sec->getContentOffset(aType), 
+            sec->getContentEndOffset(aType, true)
+        );
     }
     printf("---\n\n");
 }

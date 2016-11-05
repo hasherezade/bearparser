@@ -172,7 +172,7 @@ QString ImportBaseFuncWrapper::getShortName()
     if (isByOrdinal()) {
         uint64_t val = getOrdinal();
         static char buf[0xFF];
-        snprintf(buf, 0xFF, "<ord: %llX>", val);
+        snprintf(buf, 0xFF, "<ord: %lX>", val);
         functionName = buf;
     } else {
         char *fName = this->getFunctionName();

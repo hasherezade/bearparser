@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
             } catch (BufferException &e1) {
                 fprintf(stderr, "[ERROR] %s\n", e1.what());
                 printf("Try again with size (hex): ");
-                scanf("%lX", &maxMapSize);
+                scanf("%X", &maxMapSize);
             }
         } while (fileView == NULL);
 

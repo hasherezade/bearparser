@@ -41,20 +41,20 @@ public:
 
         SectionHdrWrapper* sec = peExe->getSecHdrAtOffset(offset, addrType, true, true);
         if (sec == NULL) {
-            printf("NOT found addr [0x%llX] in any section!\n", offset);
+            printf("NOT found addr [0x%lX] in any section!\n", offset);
             printf("----------------------------\n");
             return;
         }
         offset_t delta = offset - sec->getContentOffset(addrType);
-        printf("Found addr [0x%llX] in section:\n", offset);
-        printf("F: %8llX\n", offset);
-        printf("offset from the sec. bgn: %8llX\n", delta);
-        printf ("V: %8llX - %8llX (%llX)\n",
+        printf("Found addr [0x%lX] in section:\n", offset);
+        printf("F: %8lX\n", offset);
+        printf("offset from the sec. bgn: %8lX\n", delta);
+        printf ("V: %8lX - %8lX (%lX)\n",
             sec->getContentOffset(Executable::RVA),
             sec->getContentEndOffset(Executable::RVA, false),
             sec->getContentEndOffset(Executable::RVA, true)
         );
-        printf ("R: %8llX - %8llX (%llX)\n",
+        printf ("R: %8lX - %8lX (%lX)\n",
             sec->getContentOffset(Executable::RAW),
             sec->getContentEndOffset(Executable::RAW, false),
             sec->getContentEndOffset(Executable::RAW, true)
@@ -85,7 +85,7 @@ public:
             return;
         }
         size_t max = container->entriesCount();
-        printf("Total: %d\n", max);
+        printf("Total: %lu\n", static_cast<unsigned long>(max));
         size_t limit = 0;
         if (max > 100) {
             limit = cmd_util::readNumber("max");
@@ -146,7 +146,7 @@ public:
         size_t wrapperIndx = 0;
 
         if (wrappersCount > 1) {
-            printf("Wrappers count: %d\n", wrappersCount);
+            printf("Wrappers count: %lu\n", wrappersCount);
             wrapperIndx = cmd_util::readNumber("wrapperIndex");
         }
         cmd_util::dumpResourcesInfo(pe, type, wrapperIndx);
@@ -202,12 +202,12 @@ public:
 
         size_t sectHdrCount = pe->getSectionsCount(false);
         size_t sectCount = pe->getSectionsCount(true);
-        printf("Sections count = %d\n", sectCount);
+        printf("Sections count = %lu\n", sectCount);
         if (sectCount == 0) {
             printf("No sections!\n");
             return;
         }
-        printf("Available indexes: %d-%d\n", 0, sectCount - 1);
+        printf("Available indexes: %lu-%lu\n", 0UL, sectCount - 1);
         size_t secId = cmd_util::readNumber("Chose the section by index");
 
         SectionHdrWrapper *sec = pe->getSecHdr(secId);
@@ -227,7 +227,7 @@ public:
             BufferView *secView = pe->createSectionView(secId);
             if (secView == NULL) return;
             bufsize_t dSize = FileBuffer::dump(fileName, *secView, true);
-            printf("Dumped size: %ld into: %s\n", dSize, fileName.toStdString().c_str());
+            printf("Dumped size: %u into: %s\n", dSize, fileName.toStdString().c_str());
             delete secView;
         }
     }

@@ -1,6 +1,33 @@
 #include "Util.h"
+#include <stdarg.h>
 
 using namespace pe_util;
+
+#define MAX_LINE 255
+
+bool Logger::append(const char* format, ...)
+{
+    if (format == NULL) {
+        return false;
+    }
+    va_list argptr;                     
+    // Initializing arguments to store all values after format
+    va_start(argptr, format);
+
+    char line[MAX_LINE+1];
+	memset(line, 0, MAX_LINE+1);
+	
+    int printed = vsnprintf(line, MAX_LINE, format, argptr);
+
+    //cleaning up the list:
+    va_end(argptr);
+    if (printed <= 0) return false;
+	
+	const char prefix[] = "*";
+
+	fprintf(stderr, "[%s] %s", prefix, line);
+    return true;
+}
 
 bool pe_util::isStrLonger(const char *inp, int maxLen)
 {

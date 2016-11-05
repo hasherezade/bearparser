@@ -11,6 +11,11 @@
 #define IS_PRINTABLE(c) (c >= 0x20 && c < 0x7f)
 #define IS_ENDLINE(c) (c == 0x0A || c == 0xD)
 
+
+namespace Logger {
+	bool append(const char* format, ...);
+};
+
 namespace pe_util {
     inline bool isPrintable(char c) { return IS_PRINTABLE(c); }
 
