@@ -33,8 +33,8 @@ QString getFileName()
 
 int main(int argc, char *argv[])
 {
-    printf("Starting...\n");
-
+    printf("Bearparser version: %s\n", BEARPARSER_VERSION);
+    printf("[READY]\n");
     QCoreApplication app(argc, argv);
 
     ExeFactory::init();
