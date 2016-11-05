@@ -68,7 +68,7 @@ QString DataDirWrapper::getFieldName(size_t fieldId)
         case DIR_GLOBALPTR : return "RVA of GlobalPtr";
         case DIR_TLS: return "TLS Directory";
         case DIR_LOAD_CONFIG: return "Load Configuration Directory";
-        case DIR_BOUND_IMPORT: return "Bound Import Directory in headers";
+        case DIR_BOUND_IMPORT: return "Bound Import Directory";
         case DIR_IAT: return "Import Address Table";
         case DIR_DELAY_IMPORT: return "Delay Load Import Descriptors";
         case DIR_COM_DESCRIPTOR : return "COM Runtime descriptor";
