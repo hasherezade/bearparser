@@ -13,6 +13,8 @@ char cmd_util::addrTypeToChar(Executable::addr_type type)
         case Executable::RAW: return 'r';
         case Executable::RVA: return 'v';
         case Executable::VA: return 'V';
+        default:
+            return '_';
     }
     return '_';
 }
@@ -23,6 +25,8 @@ std::string cmd_util::addrTypeToStr(Executable::addr_type type)
         case Executable::RAW: return "raw";
         case Executable::RVA: return "RVA";
         case Executable::VA: return "VA";
+        default:
+            return "";
     }
     return "";
 }
