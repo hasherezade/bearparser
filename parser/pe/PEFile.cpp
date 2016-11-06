@@ -145,10 +145,15 @@ bufsize_t PEFile::getMappedSize(Executable::addr_type aType)
         return this->getContentSize();
     }
     //TODO...
+    const size_t PAGE_SIZE = 0x1000;
+    bufsize_t vSize = 0;
     if (aType == Executable::VA || aType == Executable::RVA) {
-        return core.getImageSize();
+        vSize = core.getImageSize();
     }
-    return 0;
+    if (vSize < PAGE_SIZE) {
+        return PAGE_SIZE;
+    }
+    return vSize;
 }
 
 offset_t PEFile::getEntryPoint(Executable::addr_type addrType)
@@ -257,10 +262,7 @@ offset_t PEFile::rvaToRaw(offset_t rva)
         }
         return bgnRaw + curr;
     }
-    if (this->getSectionsCount() == 0) return rva;
-    if (rva < this->getAlignment(Executable::RAW)) return rva;
-    if (rva < this->getMinSecRVA()) return rva;
-    return INVALID_ADDR;
+    return rva;
 }
 
 DataDirEntryWrapper* PEFile::getDataDirEntry(pe::dir_entry eType)
