@@ -144,7 +144,6 @@ bufsize_t PEFile::getMappedSize(Executable::addr_type aType)
     if (aType == Executable::RAW) {
         return this->getContentSize();
     }
-    //TODO...
     const size_t PAGE_SIZE = 0x1000;
     bufsize_t vSize = 0;
     if (aType == Executable::VA || aType == Executable::RVA) {
@@ -238,9 +237,9 @@ offset_t PEFile::rawToRva(offset_t raw)
         }
         return bgnVA + curr;
     }
-    //TODO...
+    //TODO: make more tests
     if (this->getSectionsCount() == 0) return raw;
-    if (raw < this->getAlignment(Executable::RVA)) return raw;
+    if (raw < this->getMinSecRVA()) return raw;
     return INVALID_ADDR;
 }
 
@@ -257,11 +256,12 @@ offset_t PEFile::rvaToRaw(offset_t rva)
         bufsize_t curr = (rva - bgnRVA);
         bufsize_t rawSize = sec->getContentSize(Executable::RAW, true);
         if (curr >= rawSize) {
-            //address out of section
+            // the address might be in a virtual cave that is not related to any raw address
             return INVALID_ADDR;
         }
         return bgnRaw + curr;
     }
+    // at this point we are sure that the address is within the mapped size:
     return rva;
 }
 
@@ -328,7 +328,7 @@ bool PEFile::canAddNewSection()
     if (sec == NULL || sec->canAddEntry() == false) {
         return false;
     }
-    size_t secCount = hdrSectionsNum();
+    const size_t secCount = hdrSectionsNum();
     if (secCount == SectHdrsWrapper::SECT_COUNT_MAX) return false; //limit exceeded
 
     //TODO: some more checks? overlay?
