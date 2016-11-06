@@ -73,6 +73,8 @@ public:
     offset_t peNtHdrOffset() { return core.peSignatureOffset(); }
     offset_t peOptHdrOffset() { return core.peOptHdrOffset(); }
     offset_t secHdrsOffset() { return core.secHdrsOffset(); }
+    bufsize_t hdrsSize() { return core.hdrsSize(); }
+    offset_t getMinSecRVA();
 
     ResourcesAlbum* getResourcesAlbum() const { return this->album; }
 

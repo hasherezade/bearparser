@@ -115,6 +115,18 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     }
 }
 
+offset_t PEFile::getMinSecRVA()
+{
+    if (this->getSectionsCount() < 1) {
+        return INVALID_ADDR;
+    }
+    SectionHdrWrapper* sec = this->getSecHdr(0);
+    if (!sec) {
+        return INVALID_ADDR;
+    }
+    return sec->getContentOffset(Executable::RVA);
+}
+
 offset_t PEFile::peDataDirOffset()
 {
     if (this->optHdr == NULL) return INVALID_ADDR;
@@ -247,6 +259,7 @@ offset_t PEFile::rvaToRaw(offset_t rva)
     }
     if (this->getSectionsCount() == 0) return rva;
     if (rva < this->getAlignment(Executable::RAW)) return rva;
+    if (rva < this->getMinSecRVA()) return rva;
     return INVALID_ADDR;
 }
 
