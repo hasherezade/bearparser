@@ -52,6 +52,7 @@ offset_t Executable::convertAddr(offset_t inAddr, Executable::addr_type inType, 
         return INVALID_ADDR;
     }
     if (inType == outType) return inAddr;
+
     const offset_t imgBase = this->getImageBase();
 
     if (outType == Executable::RAW) {
@@ -67,16 +68,16 @@ offset_t Executable::convertAddr(offset_t inAddr, Executable::addr_type inType, 
         if (out == INVALID_ADDR) return INVALID_ADDR;
 
         if (outType == Executable::VA) {
-            return out + getImageBase();
+            return out + imgBase;
         }
         return out;
     }
     if (outType == Executable::RVA) {
         if (inAddr < imgBase) return INVALID_ADDR;
-        return inAddr - this->getImageBase();
+        return inAddr - imgBase;
     }
     if (outType == Executable::VA) {
-        return inAddr + this->getImageBase();
+        return inAddr + imgBase;
     }
     return INVALID_ADDR;
 }
