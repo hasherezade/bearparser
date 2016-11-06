@@ -112,7 +112,7 @@ bufsize_t PECore::getAlignment(Executable::addr_type aType)
 
 bufsize_t PECore::getImageSize()
 {
-    offset_t imgSize = 0;
+    bufsize_t imgSize = 0;
     if (this->opt32) {
         imgSize = opt32->SizeOfImage;
     }
@@ -120,6 +120,18 @@ bufsize_t PECore::getImageSize()
         imgSize = opt64->SizeOfImage;
     }
     return imgSize;
+}
+
+bufsize_t PECore::hdrsSize()
+{
+    bufsize_t hdrsSize = 0;
+    if (this->opt32) {
+        hdrsSize = opt32->SizeOfHeaders;
+    }
+    if (this->opt64) {
+        hdrsSize = opt64->SizeOfHeaders;
+    }
+    return hdrsSize;
 }
 
 offset_t PECore::getImageBase()

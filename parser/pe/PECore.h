@@ -31,6 +31,7 @@ public:
     offset_t peFileHdrOffset();
     offset_t secHdrsOffset();
     offset_t peOptHdrOffset();
+    bufsize_t hdrsSize();
 
 protected:
     void reset();
