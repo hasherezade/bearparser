@@ -211,7 +211,7 @@ QString ExportEntryWrapper::getName()
     if (isByOrdinal()) {
         uint64_t val = getOrdinal();
         static char buf[0xFF];
-        snprintf(buf, 0xFF, "<ord: %lX>", val);
+        snprintf(buf, 0xFF, "<ord: %llX>", static_cast<unsigned long long>(val));
         return QString(buf);
     }
     char* name = getFuncName();
