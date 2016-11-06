@@ -188,7 +188,7 @@ public:
             std::cout << "Added!" << std::endl;
             return;
         }
-        std::cout << "Failed!" << endl;
+        std::cout << "Failed!" << std::endl;
     }
 };
 
