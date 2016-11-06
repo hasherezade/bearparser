@@ -239,7 +239,9 @@ offset_t PEFile::rawToRva(offset_t raw)
     }
     //TODO: make more tests
     if (this->getSectionsCount() == 0) return raw;
-    if (raw < this->getMinSecRVA()) return raw;
+    if (raw < this->hdrsSize()) {
+        return raw;
+    } //else: content that is between the end of sections headers and the first virtual section is not mapped
     return INVALID_ADDR;
 }
 
@@ -261,7 +263,8 @@ offset_t PEFile::rvaToRaw(offset_t rva)
         }
         return bgnRaw + curr;
     }
-    // at this point we are sure that the address is within the mapped size:
+    if (rva >= this->getMappedSize(Executable::RAW)) return INVALID_ADDR;
+    // at this point we are sure that the address is within the raw size:
     return rva;
 }
 
