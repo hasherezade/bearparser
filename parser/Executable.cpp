@@ -83,33 +83,35 @@ offset_t Executable::convertAddr(offset_t inAddr, Executable::addr_type inType, 
 
 offset_t Executable::toRaw(offset_t offset, addr_type aT, bool allowExceptions)
 {
-    if (offset == INVALID_ADDR) return INVALID_ADDR;
+    if (offset == INVALID_ADDR) {
+        return INVALID_ADDR;
+    }
 
-    if (this->isValidAddr(offset, aT) == false) {
-        Logger::append(Logger::ERROR,
+    offset_t convertedOffset = INVALID_ADDR;
+
+    if (aT == Executable::RAW) {
+        //no need to convert
+        convertedOffset = offset;
+    } else if (aT == Executable::VA) {
+        convertedOffset = VaToRva(offset, false);
+    } else if (aT == Executable::RVA){
+        try {
+            convertedOffset = this->rvaToRaw(offset);
+        } catch (CustomException e) {
+            if (allowExceptions) throw e;
+        }  
+    }
+    //---
+    if (convertedOffset == INVALID_ADDR) {
+        Logger::append(Logger::WARNING,
             "Address out of bounds: offset = %llX addrType = %u",
             static_cast<unsigned long long>(offset),
             static_cast<unsigned int>(aT)
         );
         if (allowExceptions) throw CustomException("Address out of bounds!");
-        return INVALID_ADDR;
     }
-
-    if (aT == Executable::RAW) {
-        //no need to convert
-        return offset;
-    }
-
-    if (aT == Executable::VA) {
-        offset = VaToRva(offset, false);
-    }
-    try {
-        offset = this->rvaToRaw(offset);
-    } catch (CustomException e) {
-        if (allowExceptions) throw e;
-        return INVALID_ADDR;
-    }
-    return offset;
+    //---
+    return convertedOffset;
 }
 
 Executable::addr_type Executable::detectAddrType(offset_t offset, Executable::addr_type hintType)
