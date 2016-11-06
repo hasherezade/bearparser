@@ -3,8 +3,6 @@
 #include "../parser/Formatter.h"
 #include "../parser/FileBuffer.h"
 
-using namespace std;
-
 //------------------------------------------
 
 char cmd_util::addrTypeToChar(Executable::addr_type type)
@@ -65,14 +63,14 @@ void cmd_util::fetch(Executable *peExe, offset_t offset, Executable::addr_type a
 {
     offset = peExe->toRaw(offset, aType);
     if (offset == INVALID_ADDR) {
-        std::cerr << "ERROR: Invalid Address suplied" << endl;
+        std::cerr << "ERROR: Invalid Address suplied" << std::endl;
         return;
     }
 
     BufferView *sub = new BufferView(peExe, offset, 100);
 
     if (sub->getContent() == NULL) {
-        cout << "Cannot fetch" << endl;
+        std::cout << "Cannot fetch" << std::endl;
         delete sub;
         return;
     }
@@ -85,7 +83,7 @@ void cmd_util::fetch(Executable *peExe, offset_t offset, Executable::addr_type a
             formatter = new Formatter(sub);
             separator = "";
     }
-    cout << "Fetched:" << endl;
+    std::cout << "Fetched:" << std::endl;
     for (bufsize_t i = 0; i < sub->getContentSize(); i++) {
         printf("%s%s", (*formatter)[i].toStdString().c_str(), separator.c_str());
     }
