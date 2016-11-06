@@ -86,7 +86,11 @@ offset_t Executable::toRaw(offset_t offset, addr_type aT, bool allowExceptions)
     if (offset == INVALID_ADDR) return INVALID_ADDR;
 
     if (this->isValidAddr(offset, aT) == false) {
-        Logger::append(Logger::ERROR, "Address out of bounds: offset = %lX addrType = %d", offset, aT);
+        Logger::append(Logger::ERROR,
+            "Address out of bounds: offset = %llX addrType = %u",
+            static_cast<unsigned long long>(offset),
+            static_cast<unsigned int>(aT)
+        );
         if (allowExceptions) throw CustomException("Address out of bounds!");
         return INVALID_ADDR;
     }

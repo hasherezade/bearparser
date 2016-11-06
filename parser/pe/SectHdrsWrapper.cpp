@@ -301,7 +301,7 @@ bool SectHdrsWrapper::loadNextEntry(size_t entryNum)
     SectionHdrWrapper *sec = new SectionHdrWrapper(this->m_PE, entryNum);
     if (sec == NULL) return false;
     if (sec->getPtr() == NULL) {
-        printf("deleting invalid section..\n");
+        Logger::append(Logger::WARNING, "Deleting invalid section...");
         delete sec;
         sec = NULL;
         return false;
@@ -422,10 +422,12 @@ SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executabl
         SectionHdrWrapper* sec = itr->second;
         if (sec == NULL) continue; //TODO: check it
         if (verbose) {
-            printf("found [%lX] key: %lX sec: %lX %lX\n", 
-            offset, itr->first, 
-            sec->getContentOffset(addrType), 
-            sec->getContentEndOffset(addrType, false));
+            printf("found [%llX] key: %llX sec: %llX %llX\n", 
+                static_cast<unsigned long long>(offset), 
+                static_cast<unsigned long long>(itr->first), 
+                static_cast<unsigned long long>(sec->getContentOffset(addrType)), 
+                static_cast<unsigned long long>(sec->getContentEndOffset(addrType, false))
+            );
         }
 
         offset_t startOffset = sec->getContentOffset(addrType);
@@ -457,10 +459,11 @@ void SectHdrsWrapper::printSectionsMapping(Executable::addr_type aType)
         SectionHdrWrapper* sec = itr->second;
         offset_t secEnd = itr->first;
 
-        printf("[%lX] %s %lX %lX\n", 
-            secEnd, sec->getName().toStdString().c_str(), 
-            sec->getContentOffset(aType), 
-            sec->getContentEndOffset(aType, true)
+        printf("[%llX] %s %llX %llX\n", 
+            static_cast<unsigned long long>(secEnd), 
+            sec->getName().toStdString().c_str(), 
+            static_cast<unsigned long long>(sec->getContentOffset(aType)), 
+            static_cast<unsigned long long>(sec->getContentEndOffset(aType, true))
         );
     }
     printf("---\n\n");

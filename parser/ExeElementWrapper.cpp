@@ -3,7 +3,7 @@
 ExeElementWrapper::ExeElementWrapper(Executable *v_exe)
 {
     if (v_exe == NULL) {
-        printf("Cannot initialize with Exe == NULL!");
+        Logger::append(Logger::ERROR, "Cannot initialize with Exe == NULL!");
         throw CustomException("Cannot initialize with Exe == NULL!");
     }
     this->m_Exe = v_exe;
@@ -22,7 +22,7 @@ bufsize_t ExeElementWrapper::getFieldSize(size_t fieldId, size_t subField)
 
     if (nextFID < fieldsCount ) nextPtr = this->getFieldPtr(nextFID, subField);
     if (nextPtr != NULL) {
-        int64_t dif = (offset_t) nextPtr - (offset_t) ptr;
+        int64_t dif = offset_t (nextPtr) - offset_t (ptr);
         if (dif < 0) return 0;
 
         return (bufsize_t) dif;
@@ -31,7 +31,7 @@ bufsize_t ExeElementWrapper::getFieldSize(size_t fieldId, size_t subField)
     offset_t fullSize = this->getSize();
     BYTE *bgnPtr =  (BYTE*) getPtr();
     BYTE *endPtr = bgnPtr + fullSize;
-    offset_t dif =  (offset_t) endPtr - (offset_t) ptr;
+    offset_t dif =  offset_t (endPtr) - offset_t (ptr);
 
     return (bufsize_t) dif;
 }

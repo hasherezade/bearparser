@@ -41,23 +41,31 @@ public:
 
         SectionHdrWrapper* sec = peExe->getSecHdrAtOffset(offset, addrType, true, true);
         if (sec == NULL) {
-            printf("NOT found addr [0x%lX] in any section!\n", offset);
+            printf("NOT found addr [0x%llX] in any section!\n", 
+                static_cast<unsigned long long>(offset)
+            );
             printf("----------------------------\n");
             return;
         }
         offset_t delta = offset - sec->getContentOffset(addrType);
-        printf("Found addr [0x%lX] in section:\n", offset);
-        printf("F: %8lX\n", offset);
-        printf("offset from the sec. bgn: %8lX\n", delta);
-        printf ("V: %8lX - %8lX (%lX)\n",
-            sec->getContentOffset(Executable::RVA),
-            sec->getContentEndOffset(Executable::RVA, false),
-            sec->getContentEndOffset(Executable::RVA, true)
+        printf("Found addr [0x%llX] in section:\n",
+            static_cast<unsigned long long>(offset)
         );
-        printf ("R: %8lX - %8lX (%lX)\n",
-            sec->getContentOffset(Executable::RAW),
-            sec->getContentEndOffset(Executable::RAW, false),
-            sec->getContentEndOffset(Executable::RAW, true)
+        printf("F: %8llX\n",
+            static_cast<unsigned long long>(offset)
+        );
+        printf("offset from the sec. bgn: %8llX\n",
+            static_cast<unsigned long long>(delta)
+        );
+        printf ("V: %8llX - %8llX (%llX)\n",
+            static_cast<unsigned long long>(sec->getContentOffset(Executable::RVA)),
+            static_cast<unsigned long long>(sec->getContentEndOffset(Executable::RVA, false)),
+            static_cast<unsigned long long>(sec->getContentEndOffset(Executable::RVA, true))
+        );
+        printf ("R: %8llX - %8llX (%llX)\n",
+            static_cast<unsigned long long>(sec->getContentOffset(Executable::RAW)),
+            static_cast<unsigned long long>(sec->getContentEndOffset(Executable::RAW, false)),
+            static_cast<unsigned long long>(sec->getContentEndOffset(Executable::RAW, true))
         );
 
         cmd_util::dumpEntryInfo(sec);
@@ -146,7 +154,9 @@ public:
         size_t wrapperIndx = 0;
 
         if (wrappersCount > 1) {
-            printf("Wrappers count: %lu\n", wrappersCount);
+            printf("Wrappers count: %lu\n",
+                static_cast<unsigned long>(wrappersCount)
+            );
             wrapperIndx = cmd_util::readNumber("wrapperIndex");
         }
         cmd_util::dumpResourcesInfo(pe, type, wrapperIndx);
@@ -202,12 +212,14 @@ public:
 
         size_t sectHdrCount = pe->getSectionsCount(false);
         size_t sectCount = pe->getSectionsCount(true);
-        printf("Sections count = %lu\n", sectCount);
+        printf("Sections count = %lu\n",
+            static_cast<unsigned long>(sectCount)
+        );
         if (sectCount == 0) {
             printf("No sections!\n");
             return;
         }
-        printf("Available indexes: %lu-%lu\n", 0UL, sectCount - 1);
+        printf("Available indexes: %lu-%lu\n", 0UL, static_cast<unsigned long>(sectCount - 1));
         size_t secId = cmd_util::readNumber("Chose the section by index");
 
         SectionHdrWrapper *sec = pe->getSecHdr(secId);
@@ -226,8 +238,12 @@ public:
         if (saveToFile) {
             BufferView *secView = pe->createSectionView(secId);
             if (secView == NULL) return;
+
             bufsize_t dSize = FileBuffer::dump(fileName, *secView, true);
-            printf("Dumped size: %u into: %s\n", dSize, fileName.toStdString().c_str());
+            printf("Dumped size: %lu into: %s\n",
+                static_cast<unsigned long>(dSize),
+                fileName.toStdString().c_str()
+            );
             delete secView;
         }
     }

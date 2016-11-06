@@ -72,7 +72,10 @@ ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize) //throws 
         if (prevOffset == fIn.pos()) break; //cannot read more!
         prevOffset = fIn.pos();
     }
-    Logger::append(Logger::INFO, "Read size: %lx", readSize);
+    Logger::append(Logger::INFO,
+        "Read size: %lX",
+        static_cast<unsigned long>(readSize)
+    );
     return bufferedFile;
 }
 

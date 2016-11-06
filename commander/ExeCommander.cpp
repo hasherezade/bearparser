@@ -3,8 +3,6 @@
 #include "../parser/Formatter.h"
 #include "../parser/FileBuffer.h"
 
-using namespace std;
-
 //------------------------------------------
 
 char cmd_util::addrTypeToChar(Executable::addr_type type)
@@ -13,6 +11,8 @@ char cmd_util::addrTypeToChar(Executable::addr_type type)
         case Executable::RAW: return 'r';
         case Executable::RVA: return 'v';
         case Executable::VA: return 'V';
+        default:
+            return '_';
     }
     return '_';
 }
@@ -23,6 +23,8 @@ std::string cmd_util::addrTypeToStr(Executable::addr_type type)
         case Executable::RAW: return "raw";
         case Executable::RVA: return "RVA";
         case Executable::VA: return "VA";
+        default:
+            return "";
     }
     return "";
 }
@@ -39,14 +41,14 @@ Executable* cmd_util::getExeFromContext(CmdContext *context)
 
 offset_t cmd_util::readOffset(Executable::addr_type aType)
 {
-    offset_t offset = 0;
+    unsigned long long offset = 0;
 
     if (aType == Executable::NOT_ADDR) return INVALID_ADDR;
     std::string prompt = addrTypeToStr(aType);
 
     printf("%s: ", prompt.c_str());
-    scanf("%lx", &offset);
-    return offset;
+    scanf("%llX", &offset);
+    return static_cast<offset_t>(offset);
 }
 
 size_t cmd_util::readNumber(std::string prompt)
@@ -61,14 +63,14 @@ void cmd_util::fetch(Executable *peExe, offset_t offset, Executable::addr_type a
 {
     offset = peExe->toRaw(offset, aType);
     if (offset == INVALID_ADDR) {
-        std::cerr << "ERROR: Invalid Address suplied" << endl;
+        std::cerr << "ERROR: Invalid Address suplied" << std::endl;
         return;
     }
 
     BufferView *sub = new BufferView(peExe, offset, 100);
 
     if (sub->getContent() == NULL) {
-        cout << "Cannot fetch" << endl;
+        std::cout << "Cannot fetch" << std::endl;
         delete sub;
         return;
     }
@@ -81,7 +83,7 @@ void cmd_util::fetch(Executable *peExe, offset_t offset, Executable::addr_type a
             formatter = new Formatter(sub);
             separator = "";
     }
-    cout << "Fetched:" << endl;
+    std::cout << "Fetched:" << std::endl;
     for (bufsize_t i = 0; i < sub->getContentSize(); i++) {
         printf("%s%s", (*formatter)[i].toStdString().c_str(), separator.c_str());
     }
@@ -109,12 +111,19 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
     if (w == NULL) return;
     printf("------\n");
     size_t fields = w->getFieldsCount();
-    printf("\t[%s] size: %#x fieldsCount: %lu\n\n", w->getName().toStdString().c_str(), w->getSize(), fields);
+    printf("\t[%s] size: %#lX fieldsCount: %lu\n\n", 
+        w->getName().toStdString().c_str(), 
+        static_cast<unsigned long>(w->getSize()),
+        static_cast<unsigned long>(fields)
+    );
 
     for (int i = 0; i < fields; i++) {
         offset_t offset = w->getFieldOffset(i);
         if (offset == INVALID_ADDR) continue;
-        printf("[%04lX] %s :\t", offset, w->getFieldName(i).toStdString().c_str());
+        printf("[%04llX] %s :\t",
+            static_cast<unsigned long long>(offset),
+            w->getFieldName(i).toStdString().c_str()
+        );
 
         QString translated = w->translateFieldContent(i);
         if (translated.size() > 0) {

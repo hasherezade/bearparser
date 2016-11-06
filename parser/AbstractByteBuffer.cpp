@@ -212,7 +212,11 @@ bool AbstractByteBuffer::pasteBuffer(offset_t rawOffset, AbstractByteBuffer *buf
 
     bufsize_t mySize = this->getContentSize();
     if (static_cast<offset_t>(mySize) <= rawOffset) {
-        Logger::append(Logger::ERROR, "Too far offset requested: %lX while mySize: %X", rawOffset, mySize);
+        Logger::append(Logger::ERROR,
+            "Too far offset requested: %llX while mySize: %lX", 
+            static_cast<unsigned long long>(rawOffset), 
+            static_cast<unsigned long>(mySize)
+        );
         return false;
     }
     BYTE *target = this->getContentAt(rawOffset, sizeToFill);
@@ -260,11 +264,20 @@ bool AbstractByteBuffer::intersectsBlock(offset_t rawOffset, bufsize_t size)
 
     offset_t srchdEnd = rawOffset + size;
     if (rawOffset >= startOffset && rawOffset <= endOffset) {
-        Logger::append(Logger::INFO, "Found in bounds: %lx - %lx end: %lx", startOffset, endOffset, rawOffset);
+        Logger::append(Logger::INFO,
+            "Found in bounds: %llX - %llX end: %llX", 
+            static_cast<unsigned long long>(startOffset),
+            static_cast<unsigned long long>(endOffset),
+            static_cast<unsigned long long>(rawOffset)
+        );
         return true;
     }
     if (srchdEnd >= startOffset && srchdEnd <= endOffset) {
-        Logger::append(Logger::INFO, "Found in bounds: %lx - %lx end: %lx", startOffset, endOffset, endOffset);
+        Logger::append(Logger::INFO,
+            "Found in bounds: %llX - %llX",
+            static_cast<unsigned long long>(startOffset),
+            static_cast<unsigned long long>(endOffset)
+        );
         return true;
     }
     return false;
@@ -297,7 +310,11 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
     if (size == 0 || offset == INVALID_ADDR) return false;
     void* ptr = this->getContentAt(offset, size);
     if (ptr == NULL) {
-        Logger::append(Logger::ERROR,"Cannot get Ptr at: %lX of size: %x!", offset, size);
+        Logger::append(Logger::ERROR,
+            "Cannot get Ptr at: %llX of size: %lX!", 
+            static_cast<unsigned long long>(offset), 
+            static_cast<unsigned long>(size)
+        );
         return false;
     }
 

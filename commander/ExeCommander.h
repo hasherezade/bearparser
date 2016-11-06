@@ -68,7 +68,10 @@ public:
         std::string inAddr = cmd_util::addrTypeToStr(addrFrom);
         std::string outAddr = cmd_util::addrTypeToStr(addrTo);
         printf("[%s]\t->\t[%s]:\n", inAddr.c_str(), outAddr.c_str());
-        printf(" %lX\t->\t%lX\n", offset, outOffset);
+        printf(" %llX\t->\t%llX\n", 
+            static_cast<unsigned long long>(offset),
+            static_cast<unsigned long long>(outOffset)
+        );
     }
 
 protected:
@@ -104,14 +107,25 @@ public:
     virtual void execute(CmdParams *params, CmdContext  *context)
     {
         Executable *exe = cmd_util::getExeFromContext(context);
-        printf("Bit mode: \t%10d\n", exe->getBitMode());
+        printf("Bit mode: \t%10d\n", static_cast<unsigned>(exe->getBitMode()));
         offset_t entryPoint = exe->getEntryPoint();
-        printf("Entry point: \t[%10lX %c]\n", entryPoint, cmd_util::addrTypeToChar(Executable::RVA));
-        printf("Raw size: \t[%10X]\n", exe->getMappedSize(Executable::RAW));
-        printf("Raw align.: \t[%10X]\n", exe->getAlignment(Executable::RAW));
+        printf("Entry point: \t[%10llX %c]\n",
+            static_cast<unsigned long long>(entryPoint),
+            cmd_util::addrTypeToChar(Executable::RVA)
+        );
+        printf("Raw size: \t[%10lX]\n",
+            static_cast<unsigned long>(exe->getMappedSize(Executable::RAW))
+        );
+        printf("Raw align.: \t[%10lX]\n",
+            static_cast<unsigned long>(exe->getAlignment(Executable::RAW))
+        );
 
-        printf("Virtual size: \t[%10X]\n", exe->getMappedSize(Executable::RVA));
-        printf("Virtual align.:\t[%10X]\n", exe->getAlignment(Executable::RVA));
+        printf("Virtual size: \t[%10lX]\n",
+            static_cast<unsigned long>(exe->getMappedSize(Executable::RVA))
+        );
+        printf("Virtual align.:\t[%10lX]\n",
+            static_cast<unsigned long>(exe->getAlignment(Executable::RVA))
+        );
         MappedExe *mappedExe = cmd_util::getMappedExeFromContext(context);
         if (mappedExe) {
             printf("Contains:\n");
@@ -174,7 +188,7 @@ public:
             std::cout << "Added!" << std::endl;
             return;
         }
-        std::cout << "Failed!" << endl;
+        std::cout << "Failed!" << std::endl;
     }
 };
 
@@ -261,7 +275,10 @@ public:
     virtual void wrapperAction(ExeElementWrapper *wrapper)
     {
         bufsize_t dSize = FileBuffer::dump(fileName, *wrapper, true);
-        printf("Dumped size: %u into: %s\n", dSize, fileName.toStdString().c_str());
+        printf("Dumped size: %lu into: %s\n",
+            static_cast<unsigned long>(dSize),
+            fileName.toStdString().c_str()
+        );
     }
 protected:
     QString fileName;
@@ -281,7 +298,10 @@ public:
         Executable *exe = cmd_util::getExeFromContext(context);
 
         bufsize_t dSize = FileBuffer::dump(fileName, *exe, true);
-        printf("Dumped size: %u into: %s\n", dSize, fileName.toStdString().c_str());
+        printf("Dumped size: %lu into: %s\n",
+            static_cast<unsigned long>(dSize),
+            fileName.toStdString().c_str()
+        );
     }
 protected:
     QString fileName;
