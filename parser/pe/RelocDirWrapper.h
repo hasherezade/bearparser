@@ -26,7 +26,7 @@ public:
     virtual QString getFieldName(size_t fieldId, size_t subField) { return getSubfieldName(fieldId, subField ); }
 
 protected:
-    pe::IMAGE_BASE_RELOCATION* reloc();
+    IMAGE_BASE_RELOCATION* reloc();
 
 private:
     static size_t EntriesLimit;
@@ -69,7 +69,7 @@ public:
     void* getEntriesPtr();
     size_t maxEntriesNumInBlock();
 
-    pe::IMAGE_BASE_RELOCATION* myReloc() { return (pe::IMAGE_BASE_RELOCATION*) getPtr(); }
+    IMAGE_BASE_RELOCATION* myReloc() { return (IMAGE_BASE_RELOCATION*) getPtr(); }
 
 private:
     static size_t EntriesLimit;

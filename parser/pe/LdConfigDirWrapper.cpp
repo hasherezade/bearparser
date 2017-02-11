@@ -6,9 +6,9 @@ bufsize_t LdConfigDirWrapper::getLdConfigDirSize()
     bufsize_t dirSize = 0;
 
     if (m_Exe->getBitMode() == Executable::BITS_32) {
-        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_DIRECTORY32);
+        dirSize = sizeof(IMAGE_LOAD_CONFIG_DIRECTORY32);
     } else if (m_Exe->getBitMode() == Executable::BITS_64) {
-        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_DIRECTORY64);
+        dirSize = sizeof(IMAGE_LOAD_CONFIG_DIRECTORY64);
     }
     return dirSize;
 }
@@ -18,9 +18,9 @@ bufsize_t LdConfigDirWrapper::getW81partSize()
     bufsize_t dirSize = 0;
 
     if (m_Exe->getBitMode() == Executable::BITS_32) {
-        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_D32_W81);
+        dirSize = sizeof(IMAGE_LOAD_CONFIG_D32_W81);
     } else if (m_Exe->getBitMode() == Executable::BITS_64) {
-        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_D64_W81);
+        dirSize = sizeof(IMAGE_LOAD_CONFIG_D64_W81);
     }
     return dirSize;
 }
@@ -34,16 +34,16 @@ void* LdConfigDirWrapper::getLdConfigDirPtr()
     return ptr;
 }
 
-pe::IMAGE_LOAD_CONFIG_DIRECTORY32* LdConfigDirWrapper::ldConf32()
+IMAGE_LOAD_CONFIG_DIRECTORY32* LdConfigDirWrapper::ldConf32()
 {
     if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
-    return (pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) getLdConfigDirPtr();
+    return (IMAGE_LOAD_CONFIG_DIRECTORY32*) getLdConfigDirPtr();
 }
 
-pe::IMAGE_LOAD_CONFIG_DIRECTORY64* LdConfigDirWrapper::ldConf64()
+IMAGE_LOAD_CONFIG_DIRECTORY64* LdConfigDirWrapper::ldConf64()
 {
     if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
-    return (pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) getLdConfigDirPtr();
+    return (IMAGE_LOAD_CONFIG_DIRECTORY64*) getLdConfigDirPtr();
 }
 
 void* LdConfigDirWrapper::getW81part()
@@ -55,10 +55,10 @@ void* LdConfigDirWrapper::getW81part()
 
     size_t realSize = 0;
     if (m_Exe->getBitMode() == Executable::BITS_32) {
-        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) ldPtr)->Size;
+        realSize = ((IMAGE_LOAD_CONFIG_DIRECTORY32*) ldPtr)->Size;
 
     } else if (m_Exe->getBitMode() == Executable::BITS_64) {
-        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) ldPtr)->Size;
+        realSize = ((IMAGE_LOAD_CONFIG_DIRECTORY64*) ldPtr)->Size;
     }
 
     if (realSize <= dirSize) return NULL;
@@ -73,16 +73,16 @@ void* LdConfigDirWrapper::getW81part()
     return NULL;
 }
 
-pe::IMAGE_LOAD_CONFIG_D32_W81* LdConfigDirWrapper::getW81part32()
+IMAGE_LOAD_CONFIG_D32_W81* LdConfigDirWrapper::getW81part32()
 {
     if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
-    return (pe::IMAGE_LOAD_CONFIG_D32_W81*) getW81part();
+    return (IMAGE_LOAD_CONFIG_D32_W81*) getW81part();
 }
 
-pe::IMAGE_LOAD_CONFIG_D64_W81* LdConfigDirWrapper::getW81part64()
+IMAGE_LOAD_CONFIG_D64_W81* LdConfigDirWrapper::getW81part64()
 {
     if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
-    return (pe::IMAGE_LOAD_CONFIG_D64_W81*) getW81part();
+    return (IMAGE_LOAD_CONFIG_D64_W81*) getW81part();
 }
 
 bool LdConfigDirWrapper::wrap()
@@ -139,12 +139,12 @@ bufsize_t LdConfigDirWrapper::getSize()
 
 void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    pe::IMAGE_LOAD_CONFIG_DIRECTORY32* ld32 = ldConf32();
-    pe::IMAGE_LOAD_CONFIG_DIRECTORY64* ld64 = ldConf64();
+    IMAGE_LOAD_CONFIG_DIRECTORY32* ld32 = ldConf32();
+    IMAGE_LOAD_CONFIG_DIRECTORY64* ld64 = ldConf64();
     if (ld64 == NULL && ld32 == NULL) return NULL;
 
-    pe::IMAGE_LOAD_CONFIG_D32_W81* p32 = getW81part32();
-    pe::IMAGE_LOAD_CONFIG_D64_W81* p64 = getW81part64();
+    IMAGE_LOAD_CONFIG_D32_W81* p32 = getW81part32();
+    IMAGE_LOAD_CONFIG_D64_W81* p64 = getW81part64();
     if (p32 == NULL && p64 == NULL) {
         if (fId > SEH_COUNT) this->getPtr();
     }

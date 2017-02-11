@@ -57,14 +57,14 @@ bool RelocDirWrapper::wrap()
 }
 
 
-pe::IMAGE_BASE_RELOCATION* RelocDirWrapper::reloc()
+IMAGE_BASE_RELOCATION* RelocDirWrapper::reloc()
 {
     offset_t rva = getDirEntryAddress();
 
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_BASE_RELOCATION));
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(IMAGE_BASE_RELOCATION));
     if (ptr == NULL) return NULL;
 
-    pe::IMAGE_BASE_RELOCATION *reloc = (pe::IMAGE_BASE_RELOCATION*) ptr;
+    IMAGE_BASE_RELOCATION *reloc = (IMAGE_BASE_RELOCATION*) ptr;
     return reloc;
 }
 
@@ -75,7 +75,7 @@ bool RelocBlockWrapper::wrap()
     clear();
     parsedSize = 0;
 
-    pe::IMAGE_BASE_RELOCATION* reloc = myReloc();
+    IMAGE_BASE_RELOCATION* reloc = myReloc();
     if (!reloc) return false;
 
     size_t maxSize = reloc->SizeOfBlock;
@@ -101,7 +101,7 @@ bool RelocBlockWrapper::wrap()
 void* RelocBlockWrapper::getPtr()
 {
     if (this->parentDir == NULL) return NULL;
-    pe::IMAGE_BASE_RELOCATION* reloc = this->parentDir->reloc();
+    IMAGE_BASE_RELOCATION* reloc = this->parentDir->reloc();
     if (!reloc) return NULL;
 
     offset_t raw = INVALID_ADDR;
@@ -109,7 +109,7 @@ void* RelocBlockWrapper::getPtr()
 
     // use my cached:
     if (this->cachedRaw != INVALID_ADDR) {
-        ptr = m_Exe->getContentAt(this->cachedRaw, Executable::RAW, sizeof(pe::IMAGE_BASE_RELOCATION));
+        ptr = m_Exe->getContentAt(this->cachedRaw, Executable::RAW, sizeof(IMAGE_BASE_RELOCATION));
         return ptr;
     }
 
@@ -120,11 +120,11 @@ void* RelocBlockWrapper::getPtr()
     if (prevEntry) {
         offset_t prevRaw = prevEntry->cachedRaw;
 
-        pe::IMAGE_BASE_RELOCATION* prevReloc = (pe::IMAGE_BASE_RELOCATION*) prevEntry->getPtr();
+        IMAGE_BASE_RELOCATION* prevReloc = (IMAGE_BASE_RELOCATION*) prevEntry->getPtr();
         raw = prevRaw + prevReloc->SizeOfBlock;
 
         if (prevRaw != INVALID_ADDR) {
-            ptr = m_Exe->getContentAt(raw, Executable::RAW, sizeof(pe::IMAGE_BASE_RELOCATION));
+            ptr = m_Exe->getContentAt(raw, Executable::RAW, sizeof(IMAGE_BASE_RELOCATION));
 
             if (ptr != NULL) {
                 this->cachedRaw = raw;
@@ -142,10 +142,10 @@ void* RelocBlockWrapper::getPtr()
     for ( int i = 0; i < this->entryNum; i++) { //TODO: make caching
         raw += blockSize;
 
-        ptr = m_Exe->getContentAt(raw, Executable::RAW, sizeof(pe::IMAGE_BASE_RELOCATION));
+        ptr = m_Exe->getContentAt(raw, Executable::RAW, sizeof(IMAGE_BASE_RELOCATION));
         if (!ptr) return NULL;
 
-        reloc = (pe::IMAGE_BASE_RELOCATION*) ptr;
+        reloc = (IMAGE_BASE_RELOCATION*) ptr;
         blockSize = reloc->SizeOfBlock;
     }
 
@@ -156,17 +156,17 @@ void* RelocBlockWrapper::getPtr()
 bufsize_t RelocBlockWrapper::getSize()
 {
     if (this->parentDir == NULL) return 0;
-    pe::IMAGE_BASE_RELOCATION* reloc = (pe::IMAGE_BASE_RELOCATION*) this->getPtr();
+    IMAGE_BASE_RELOCATION* reloc = (IMAGE_BASE_RELOCATION*) this->getPtr();
     if (!reloc) return 0;
 
     if (reloc->SizeOfBlock > 0) return reloc->SizeOfBlock;
 
-    return sizeof(pe::IMAGE_BASE_RELOCATION);
+    return sizeof(IMAGE_BASE_RELOCATION);
 }
 
 void* RelocBlockWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
-    pe::IMAGE_BASE_RELOCATION* reloc = (pe::IMAGE_BASE_RELOCATION*) this->getPtr();
+    IMAGE_BASE_RELOCATION* reloc = (IMAGE_BASE_RELOCATION*) this->getPtr();
     if (!reloc) return NULL;
 
     switch (fieldId) {
@@ -225,7 +225,7 @@ size_t RelocBlockWrapper::maxEntriesNumInBlock()
 {
     if (this->cachedMaxNum > 0) return this->cachedMaxNum;
 
-    pe::IMAGE_BASE_RELOCATION* reloc = (pe::IMAGE_BASE_RELOCATION*) this->getPtr();
+    IMAGE_BASE_RELOCATION* reloc = (IMAGE_BASE_RELOCATION*) this->getPtr();
     if (!reloc) return 0;
 
     bufsize_t entriesSize = getFieldSize(ENTRIES_PTR);
@@ -240,7 +240,7 @@ size_t RelocBlockWrapper::maxEntriesNumInBlock()
 
     bufsize_t entriesNum = 0;
     if (ptr) {
-        entriesNum = entriesSize / sizeof(WORD); //sizeof(pe::BASE_RELOCATION_ENTRY);
+        entriesNum = entriesSize / sizeof(WORD); //sizeof(BASE_RELOCATION_ENTRY);
     }
     this->cachedMaxNum = entriesNum;
     return entriesNum;
@@ -269,13 +269,13 @@ bufsize_t RelocEntryWrapper::getSize()
 
 WORD RelocEntryWrapper::getType(WORD relocEntryVal)
 {
-    pe::BASE_RELOCATION_ENTRY* entry = (pe::BASE_RELOCATION_ENTRY*) &relocEntryVal;
+   BASE_RELOCATION_ENTRY* entry = (BASE_RELOCATION_ENTRY*) &relocEntryVal;
     return entry->Type;
 }
 
 WORD RelocEntryWrapper::getDelta(WORD relocEntryVal)
 {
-    pe::BASE_RELOCATION_ENTRY* entry = (pe::BASE_RELOCATION_ENTRY*) &relocEntryVal;
+    BASE_RELOCATION_ENTRY* entry = (BASE_RELOCATION_ENTRY*) &relocEntryVal;
     return entry->Offset;
 }
 
@@ -299,7 +299,7 @@ offset_t RelocEntryWrapper::deltaToRVA(WORD delta)
 {
     if (this->parentDir == NULL) return INVALID_ADDR;
 
-    pe::IMAGE_BASE_RELOCATION* reloc = parentDir->myReloc();
+    IMAGE_BASE_RELOCATION* reloc = parentDir->myReloc();
     if (reloc == NULL) return INVALID_ADDR;
 
     offset_t offset = static_cast<offset_t>(reloc->VirtualAddress + delta);

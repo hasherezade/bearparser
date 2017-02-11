@@ -58,7 +58,7 @@ bool ExeNodeWrapper::canAddEntry()
 
     bufsize_t paddedSize = entrySize * 2;
     bool haveSpace = this->m_Exe->isAreaEmpty(nextOffset, paddedSize);
-    Logger::append(Logger::INFO,
+    Logger::append(Logger::D_INFO,
         "NextOffset = %llX size = %lX, canAdd: %u", 
         static_cast<unsigned long long>(nextOffset),
         static_cast<unsigned long>(entrySize),
@@ -120,7 +120,7 @@ ExeNodeWrapper* ExeNodeWrapper::addEntryAt(ExeNodeWrapper *entry, offset_t nextO
     } 
     if (loadNextEntry(entryNum) == false) return NULL;
     reloadMapping();
-    Logger::append(Logger::INFO,
+    Logger::append(Logger::D_INFO,
         "Entries count: %lu",
         static_cast<unsigned long>(this->getEntriesCount())
     );

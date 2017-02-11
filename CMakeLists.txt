@@ -15,7 +15,7 @@ set (COMMANDER_DIR "${CMAKE_SOURCE_DIR}/${M_COMMANDER}" CACHE PATH "BearCommande
 
 add_subdirectory (parser)
 include_directories(parser)
-#get_property (parser_location TARGET bearparser PROPERTY LOCATION)
+
 set (PARSER_LIB bearparser CACHE FILE "BearParser library path")
 
 # executables

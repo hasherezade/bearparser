@@ -1,21 +1,21 @@
 #include "SecurityDirWrapper.h"
 #include "PEFile.h"
 
-pe::WIN_CERTIFICATE* SecurityDirWrapper::getCert()
+WIN_CERTIFICATE* SecurityDirWrapper::getCert()
 {
     offset_t rva = getDirEntryAddress();
 
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RAW, sizeof(pe::WIN_CERTIFICATE));
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RAW, sizeof(WIN_CERTIFICATE));
     if (ptr == NULL) return NULL;
 
-    return (pe::WIN_CERTIFICATE*) ptr;
+    return (WIN_CERTIFICATE*) ptr;
 }
 
 bool SecurityDirWrapper::wrap()
 {
     this->sizeOk = false;
 
-    pe::WIN_CERTIFICATE* cert = getCert();
+    WIN_CERTIFICATE* cert = getCert();
     if (cert == NULL) return false;
 
     offset_t offset = this->getFieldOffset(SecurityDirWrapper::CERT_CONTENT);
@@ -39,10 +39,10 @@ void* SecurityDirWrapper::getPtr()
 
 bufsize_t SecurityDirWrapper::getSize()
 {
-    pe::WIN_CERTIFICATE* cert = getCert();
+    WIN_CERTIFICATE* cert = getCert();
     if (cert == NULL) return 0;
 
-    bufsize_t fullSize = static_cast<bufsize_t>(sizeof(pe::WIN_CERTIFICATE)); // TODO: check it
+    bufsize_t fullSize = static_cast<bufsize_t>(sizeof(WIN_CERTIFICATE)); // TODO: check it
     if (this->sizeOk) {
         fullSize = static_cast<bufsize_t>(cert->dwLength);
     }
@@ -52,7 +52,7 @@ bufsize_t SecurityDirWrapper::getSize()
 
 void* SecurityDirWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    pe::WIN_CERTIFICATE* cert = getCert();
+    WIN_CERTIFICATE* cert = getCert();
     if (cert == NULL) return 0;
 
     switch (fId) {
@@ -98,7 +98,7 @@ QString SecurityDirWrapper::translateFieldContent(size_t fieldId)
 {
     if (fieldId != TYPE) return "";
 
-    pe::WIN_CERTIFICATE* cert = getCert();
+    WIN_CERTIFICATE* cert = getCert();
     if (cert == NULL) return "";
 
     return translateType(cert->wCertificateType);

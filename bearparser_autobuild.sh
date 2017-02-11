@@ -3,12 +3,12 @@ echo "Trying to autobuild bearparser..."
 
 #QT check
 QT_VER=`qmake -v`
-QTV="version 4."
+QTV="version 5."
 if echo "$QT_VER" | grep -q "$QTV"; then
-    echo "[+] Qt4 found!"
+    echo "[+] Qt5 found!"
 else
-    echo "[-] Qt4 NOT found!"
-    echo "Install qt-sdk first"
+    echo "[-] Qt5 NOT found!"
+    echo "Install Qt5 SDK (qt5-default) first"
     exit -1
 fi
 
@@ -27,6 +27,9 @@ cd bearparser
 git clone https://github.com/hasherezade/bearparser.git
 echo "[+] bearparser cloned"
 echo $$
+cd bearparser
+git checkout qt5
+cd ..
 mv bearparser src
 mkdir build
 echo "[+] build directory created"

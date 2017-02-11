@@ -28,11 +28,11 @@ bool PECore::wrap(AbstractByteBuffer *v_buf)
     if (dos == NULL) throw ExeException("Could not wrap PECore: invalid DOS Header!");
 
     offset = dos->e_lfanew + sizeof(DWORD); //skip 'PE' signature
-    this->fHdr = (IMAGE_FILE_HEADER*) buf->getContentAt(offset, sizeof(pe::IMAGE_FILE_HEADER), allowExceptions);
+    this->fHdr = (IMAGE_FILE_HEADER*) buf->getContentAt(offset, sizeof(IMAGE_FILE_HEADER), allowExceptions);
     if (fHdr == NULL)  throw ExeException("Could not wrap PECore!");
 
 
-    offset = offset + sizeof(pe::IMAGE_FILE_HEADER);
+    offset = offset + sizeof(IMAGE_FILE_HEADER);
     WORD *magic = (WORD*) buf->getContentAt(offset, sizeof(WORD), allowExceptions);
     if (magic == NULL)  throw ExeException("Could not wrap PECore: invalid FileHeader");
 
@@ -42,10 +42,10 @@ bool PECore::wrap(AbstractByteBuffer *v_buf)
     }
 
     if (mode == Executable::BITS_32) {
-        this->opt32 = (pe::IMAGE_OPTIONAL_HEADER32*) buf->getContentAt(offset, sizeof(pe::IMAGE_OPTIONAL_HEADER32), allowExceptions);
+        this->opt32 = (IMAGE_OPTIONAL_HEADER32*) buf->getContentAt(offset, sizeof(IMAGE_OPTIONAL_HEADER32), allowExceptions);
 
     } else if (mode == Executable::BITS_64) {
-        this->opt64 = (pe::IMAGE_OPTIONAL_HEADER64*) buf->getContentAt(offset, sizeof(pe::IMAGE_OPTIONAL_HEADER64), allowExceptions);
+        this->opt64 = (IMAGE_OPTIONAL_HEADER64*) buf->getContentAt(offset, sizeof(IMAGE_OPTIONAL_HEADER64), allowExceptions);
     }
     if ( this->opt32 == NULL && this->opt64 == NULL) {
         throw ExeException("Could not wrap PECore : invalid OptionalHeader");

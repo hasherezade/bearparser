@@ -87,7 +87,7 @@ public:
         PEFile *pe = cmd_util::getPEFromContext(context);
         if (!pe) return;
 
-        ResourcesContainer* container = pe->getResourcesOfType(pe::RT_STRING);
+        ResourcesContainer* container = pe->getResourcesOfType(pe::RESTYPE_STRING);
         if (container == NULL) {
             printf("No such resource type!\n");
             return;

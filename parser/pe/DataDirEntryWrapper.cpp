@@ -9,7 +9,7 @@ DataDirEntryWrapper::DataDirEntryWrapper(PEFile* pe, pe:: dir_entry v_entryType)
     wrap();
 }
 
-pe::IMAGE_DATA_DIRECTORY* DataDirEntryWrapper::getDataDirectory()
+IMAGE_DATA_DIRECTORY* DataDirEntryWrapper::getDataDirectory()
 {
 
     if (m_PE == NULL) return NULL;

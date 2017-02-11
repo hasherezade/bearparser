@@ -3,7 +3,6 @@
 #include "PENodeWrapper.h"
 
 #include "pe_formats.h"
-using namespace pe;
 
 class FileHdrWrapper : public PEElementWrapper
 {

@@ -37,11 +37,10 @@ protected:
     void reset();
     AbstractByteBuffer *buf;
 
-    pe::IMAGE_DOS_HEADER *dos;
-    pe::IMAGE_FILE_HEADER* fHdr;
-    pe::IMAGE_OPTIONAL_HEADER32* opt32;
-    pe::IMAGE_OPTIONAL_HEADER64* opt64;
-
+    IMAGE_DOS_HEADER *dos;
+    IMAGE_FILE_HEADER* fHdr;
+    IMAGE_OPTIONAL_HEADER32* opt32;
+    IMAGE_OPTIONAL_HEADER64* opt64;
 //cached:
     offset_t signatureOff;
     offset_t fileHdrOff;

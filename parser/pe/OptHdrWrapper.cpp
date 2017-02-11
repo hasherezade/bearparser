@@ -124,7 +124,7 @@ Executable::exe_bits OptHdrWrapper::getHdrBitMode()
     return m_PE->getHdrBitMode();
 }
 
-pe::IMAGE_NT_HEADERS32* OptHdrWrapper::nt32()
+IMAGE_NT_HEADERS32* OptHdrWrapper::nt32()
 {
     if (m_PE == NULL) return NULL;
     if (getHdrBitMode() != Executable::BITS_32) return NULL;
@@ -134,7 +134,7 @@ pe::IMAGE_NT_HEADERS32* OptHdrWrapper::nt32()
     return hdr;
 }
 
-pe::IMAGE_NT_HEADERS64* OptHdrWrapper::nt64()
+IMAGE_NT_HEADERS64* OptHdrWrapper::nt64()
 {
     if (m_PE == NULL) return NULL;
     if (getHdrBitMode() != Executable::BITS_64) return NULL;
@@ -148,11 +148,11 @@ pe::IMAGE_NT_HEADERS64* OptHdrWrapper::nt64()
 void* OptHdrWrapper::getPtr()
 {
     if (opt32 == NULL && opt64 == NULL) {
-        pe::IMAGE_NT_HEADERS32* ntHdr32 = nt32();
+        IMAGE_NT_HEADERS32* ntHdr32 = nt32();
         if (ntHdr32 != NULL) {
             this->opt32 = ntHdr32 ? &(ntHdr32->OptionalHeader) : NULL;
         } else {
-            pe::IMAGE_NT_HEADERS64* ntHdr64 = nt64();
+            IMAGE_NT_HEADERS64* ntHdr64 = nt64();
             this->opt64 = (ntHdr64) ? &(ntHdr64->OptionalHeader) : NULL;
         }
     }

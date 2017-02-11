@@ -48,7 +48,7 @@ PEFile::PEFile(AbstractByteBuffer *v_buf)
 {
     album = new ResourcesAlbum(this);
     wrap(v_buf);
-    Logger::append(Logger::INFO,"Wrapped");
+    Logger::append(Logger::D_INFO,"Wrapped");
 }
 
 void PEFile::clearWrappers()
@@ -106,7 +106,7 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     dataDirEntries[pe::DIR_EXCEPTION] = new ExceptionDirWrapper(this);
     dataDirEntries[pe::DIR_RESOURCE] = new ResourceDirWrapper(this, album);
 
-    for (size_t i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
+    for (int i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
         this->wrappers[WR_DIR_ENTRY + i] = dataDirEntries[i];
     }
 
@@ -193,7 +193,7 @@ bool PEFile::setHdrSectionsNum(size_t newNum)
     uint64_t count = newNum;
     bool canSet = fHdr->setNumValue(FileHdrWrapper::SEC_NUM , count);
     if (canSet == false) {
-        Logger::append(Logger::ERROR,"Can not change FileHdr!");
+        Logger::append(Logger::D_ERROR,"Can not change FileHdr!");
         return false;
     }
     return true;
@@ -204,7 +204,7 @@ bool PEFile::setVitualSize(bufsize_t newSize)
     uint64_t size = newSize;
     bool canSet = optHdr->setNumValue(OptHdrWrapper::IMAGE_SIZE, 0, size);
     if (canSet == false) {
-        Logger::append(Logger::ERROR, "Can not change OptHdr!");
+        Logger::append(Logger::D_ERROR, "Can not change OptHdr!");
         return false;
     }
     return true;
@@ -278,7 +278,7 @@ BufferView* PEFile::createSectionView(size_t secId)
 {
     SectionHdrWrapper *sec = this->getSecHdr(secId);
     if (sec == NULL) {
-        Logger::append(Logger::WARNING, "No such section");
+        Logger::append(Logger::D_WARNING, "No such section");
         return NULL;
     }
     Executable::addr_type aType = Executable::RAW;
@@ -351,12 +351,12 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
     bufsize_t newVirtualSize = roundedVirtualEnd + size;
 
     if (setVitualSize(newVirtualSize) == false) {
-        Logger::append(Logger::ERROR, "Failed to change virtual size");
+        Logger::append(Logger::D_ERROR, "Failed to change virtual size");
         return NULL;
     }
 
     if (resize(newSize) == false) {
-        Logger::append(Logger::ERROR, "Failed to resize");
+        Logger::append(Logger::D_ERROR, "Failed to resize");
         return NULL;
     }
     // fetch again after resize:
@@ -365,8 +365,8 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
         return NULL;
     }
 
-    pe::IMAGE_SECTION_HEADER secHdr;
-    memset(&secHdr, 0, sizeof(pe::IMAGE_SECTION_HEADER));
+    IMAGE_SECTION_HEADER secHdr;
+    memset(&secHdr, 0, sizeof(IMAGE_SECTION_HEADER));
 
     //name copy:
     std::string nameStr = name.toStdString();
@@ -430,7 +430,7 @@ SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
 
 bool PEFile::unbindImports()
 {
-    pe::IMAGE_DATA_DIRECTORY* ddir = this->getDataDirectory();
+    IMAGE_DATA_DIRECTORY* ddir = this->getDataDirectory();
     if (ddir[pe::DIR_BOUND_IMPORT].VirtualAddress == 0  && ddir[pe::DIR_BOUND_IMPORT].Size == 0) {
         // No bound imports already, nothing to do here!
         return true;

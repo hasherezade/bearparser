@@ -1,6 +1,11 @@
+#pragma once
+#if _MSC_VER
+#define USE_WINNT
+#include <windows.h>
+#endif
 #ifndef USE_WINNT
 
-#ifndef __WIN_TYPES__
+#ifndef __WIN_TYPES
 #define __WIN_TYPES__
 
 /*

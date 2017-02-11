@@ -1,7 +1,7 @@
 #include "ResourceVersionWrapper.h"
 
 ResourceVersionWrapper::ResourceVersionWrapper(Executable *pe, ResourceLeafWrapper* v_leaf)
-    : ResourceContentWrapper(pe, v_leaf, pe::RT_VERSION)
+    : ResourceContentWrapper(pe, v_leaf, pe::RESTYPE_VERSION)
 {
 //TEST
 /*    printf("Version: %s\n", getVersionText().toStdString().c_str());
@@ -86,21 +86,21 @@ void* ResourceVersionWrapper::getFieldPtr(size_t fId, size_t subField)
         case STRUCT_TYPE: return &(ptr->type);
         case INFO: return &(ptr->key);
 
-        case SIGNATURE: return &(ptr->Value.signature);
-        case STRUCT_VER: return &(ptr->Value.strucVersion);
-        case FILE_VER_0: return &(ptr->Value.fileVersionMS);
-        case FILE_VER_1: return &(ptr->Value.fileVersionLS);
+        case SIGNATURE: return &(ptr->Value.dwSignature);
+        case STRUCT_VER: return &(ptr->Value.dwStrucVersion);
+        case FILE_VER_0: return &(ptr->Value.dwFileVersionMS);
+        case FILE_VER_1: return &(ptr->Value.dwFileVersionLS);
 
-        case PRODUCT_VER_0: return &(ptr->Value.productVersionMS);
-        case PRODUCT_VER_1: return &(ptr->Value.productVersionLS);
+        case PRODUCT_VER_0: return &(ptr->Value.dwProductVersionMS);
+        case PRODUCT_VER_1: return &(ptr->Value.dwProductVersionLS);
 
-        case FLAGS_MASK: return &(ptr->Value.fileFlagsMask);
-        case FLAGS: return &(ptr->Value.fileFlags);
-        case OS: return &(ptr->Value.fileOS);
-        case TYPE: return &(ptr->Value.fileType);
-        case SUBTYPE: return &(ptr->Value.fileSubtype);
-        case TIMESTAMP_0: return &(ptr->Value.fileDateMS);
-        case TIMESTAMP_1: return &(ptr->Value.fileDateLS);
+        case FLAGS_MASK: return &(ptr->Value.dwFileFlagsMask);
+        case FLAGS: return &(ptr->Value.dwFileFlags);
+        case OS: return &(ptr->Value.dwFileOS);
+        case TYPE: return &(ptr->Value.dwFileType);
+        case SUBTYPE: return &(ptr->Value.dwFileSubtype);
+        case TIMESTAMP_0: return &(ptr->Value.dwFileDateMS);
+        case TIMESTAMP_1: return &(ptr->Value.dwFileDateLS);
 
         //case PADDING2: return &(ptr->padding2);
         case CHILDREN: return &(ptr->children);

@@ -41,8 +41,8 @@ private:
     static size_t EntriesLimit;
 
     inline void* getTlsDirPtr();
-    pe::IMAGE_TLS_DIRECTORY64* tls64();
-    pe::IMAGE_TLS_DIRECTORY32* tls32();
+    IMAGE_TLS_DIRECTORY64* tls64();
+    IMAGE_TLS_DIRECTORY32* tls32();
 };
 
 
