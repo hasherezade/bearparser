@@ -26,7 +26,7 @@ public:
 protected:
     bool loadNextEntry(size_t entryNum);
 
-    pe::IMAGE_BOUND_IMPORT_DESCRIPTOR* boundImp();
+    IMAGE_BOUND_IMPORT_DESCRIPTOR* boundImp();
     size_t importsCount;
 
 friend class BoundEntryWrapper;

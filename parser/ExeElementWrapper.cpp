@@ -3,7 +3,7 @@
 ExeElementWrapper::ExeElementWrapper(Executable *v_exe)
 {
     if (v_exe == NULL) {
-        Logger::append(Logger::ERROR, "Cannot initialize with Exe == NULL!");
+        Logger::append(Logger::D_ERROR, "Cannot initialize with Exe == NULL!");
         throw CustomException("Cannot initialize with Exe == NULL!");
     }
     this->m_Exe = v_exe;
@@ -104,11 +104,11 @@ bool ExeElementWrapper::copyToOffset(offset_t rawOffset)
     if (this->m_Exe == NULL) return false;
 
     if (canCopyToOffset(rawOffset) == false) {
-        Logger::append(Logger::ERROR,"The area is not empty!");
+        Logger::append(Logger::D_ERROR,"The area is not empty!");
         return false;
     }
     if (m_Exe->pasteBuffer(rawOffset, this, false) == false) {
-        Logger::append(Logger::ERROR,"Cannot paste the buffer!");
+        Logger::append(Logger::D_ERROR,"Cannot paste the buffer!");
         return false;
     }
     return true;

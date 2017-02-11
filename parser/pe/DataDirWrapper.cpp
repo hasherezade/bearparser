@@ -8,13 +8,13 @@ void* DataDirWrapper::getPtr()
     if (m_PE == NULL) return NULL;
 
     offset_t myOff = m_PE->peDataDirOffset();
-    pe::IMAGE_DATA_DIRECTORY* ptr = (pe::IMAGE_DATA_DIRECTORY*) m_Exe->getContentAt(myOff, getSize());
+    IMAGE_DATA_DIRECTORY* ptr = (IMAGE_DATA_DIRECTORY*) m_Exe->getContentAt(myOff, getSize());
     return ptr;
 }
 
 bufsize_t DataDirWrapper::getSize()
 {
-    bufsize_t size = sizeof(pe::IMAGE_DATA_DIRECTORY) * DIRECTORY_ENTRIES_NUM;
+    bufsize_t size = sizeof(IMAGE_DATA_DIRECTORY) * DIRECTORY_ENTRIES_NUM;
     return size;
 }
 
@@ -40,10 +40,10 @@ bufsize_t DataDirWrapper::getFieldSize(size_t fieldId, size_t subField)
 {
     if (fieldId >= DIRECTORY_ENTRIES_NUM) return getSize();
 
-    pe::IMAGE_DATA_DIRECTORY* dir = (IMAGE_DATA_DIRECTORY*) getPtr();
+    IMAGE_DATA_DIRECTORY* dir = (IMAGE_DATA_DIRECTORY*) getPtr();
     if (dir == NULL) return 0;
 
-    pe::IMAGE_DATA_DIRECTORY record = dir[fieldId];
+    IMAGE_DATA_DIRECTORY record = dir[fieldId];
 
     switch (subField) {
         case ADDRESS :

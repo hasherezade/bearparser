@@ -309,7 +309,7 @@ char* ImportEntryWrapper::getLibraryName()
 
 //---------------------------------
 
-pe::IMAGE_DATA_DIRECTORY* ImportDirWrapper::getDataDirectory()
+IMAGE_DATA_DIRECTORY* ImportDirWrapper::getDataDirectory()
 {
     PEFile *pe = dynamic_cast<PEFile*> (this->m_Exe);
     if (pe == NULL) return NULL;
@@ -318,7 +318,7 @@ pe::IMAGE_DATA_DIRECTORY* ImportDirWrapper::getDataDirectory()
     return d;
 }
 
-pe::IMAGE_IMPORT_DESCRIPTOR* ImportDirWrapper::firstDescriptor()
+IMAGE_IMPORT_DESCRIPTOR* ImportDirWrapper::firstDescriptor()
 {
     IMAGE_DATA_DIRECTORY *d = getDataDirectory();
     if (!d) return NULL;
@@ -331,7 +331,7 @@ pe::IMAGE_IMPORT_DESCRIPTOR* ImportDirWrapper::firstDescriptor()
 
     BYTE *dirPtr = this->m_Exe->getContentAt(descAddr, Executable::RAW, sizeof(IMAGE_IMPORT_DESCRIPTOR));
     if (dirPtr == NULL) return NULL; // address invalid
-    return (pe::IMAGE_IMPORT_DESCRIPTOR*) dirPtr;
+    return (IMAGE_IMPORT_DESCRIPTOR*) dirPtr;
 }
 
 bool ImportDirWrapper::loadNextEntry(size_t cntr)

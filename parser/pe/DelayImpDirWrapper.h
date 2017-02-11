@@ -21,8 +21,8 @@ protected:
     bool is64(); // autodetect! 64bit PE may use IMAGE_DELAY_LOAD32!
     bool is32() { return !is64(); }
 
-    pe::IMAGE_DELAY_LOAD32* firstDelayLd32() { return (pe::IMAGE_DELAY_LOAD32*) firstDelayLd(sizeof(pe::IMAGE_DELAY_LOAD32)); }
-    pe::IMAGE_DELAY_LOAD64* firstDelayLd64() { return (pe::IMAGE_DELAY_LOAD64*) firstDelayLd(sizeof(pe::IMAGE_DELAY_LOAD64)); }
+    IMAGE_DELAY_LOAD32* firstDelayLd32() { return (IMAGE_DELAY_LOAD32*) firstDelayLd(sizeof(IMAGE_DELAY_LOAD32)); }
+    IMAGE_DELAY_LOAD64* firstDelayLd64() { return (IMAGE_DELAY_LOAD64*) firstDelayLd(sizeof(IMAGE_DELAY_LOAD64)); }
     void* firstDelayLd(bufsize_t size);
     bufsize_t getEntrySize();
 
@@ -63,9 +63,9 @@ public:
 protected:
     bool loadNextEntry(size_t entryNum);
 
-    pe::IMAGE_DELAY_LOAD32* dl32();
-    pe::IMAGE_DELAY_LOAD64* dl64();
-    virtual pe::IMAGE_IMPORT_BY_NAME* getFirstImpByNamePtr();
+    IMAGE_DELAY_LOAD32* dl32();
+    IMAGE_DELAY_LOAD64* dl64();
+    virtual IMAGE_IMPORT_BY_NAME* getFirstImpByNamePtr();
 
 friend class DelayImpFuncWrapper;
 friend class DelayImpDirWrapper;
@@ -109,7 +109,7 @@ public:
 
 private:
     size_t ptrLen() { return (m_Exe->getBitMode() == Executable::BITS_64) ?  sizeof(uint64_t) : sizeof(uint32_t); }
-    virtual pe::IMAGE_IMPORT_BY_NAME* getImportByNamePtr();
+    virtual IMAGE_IMPORT_BY_NAME* getImportByNamePtr();
     DelayImpEntryWrapper* parentDir;
 };
 

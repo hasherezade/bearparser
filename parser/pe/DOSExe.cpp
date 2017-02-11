@@ -49,8 +49,8 @@ void DOSExe::wrap(AbstractByteBuffer *v_buf)
         throw ExeException("Could not Wrap!");
     }
 
-    if ((*magic) != S_DOS && (*magic) != S_DOS2) {
-        Logger::append(Logger::WARNING, "It is not a DOS file!\n");
+    if ((*magic) != pe::S_DOS && (*magic) != pe::S_DOS2) {
+        Logger::append(Logger::D_WARNING, "It is not a DOS file!\n");
         throw ExeException("It is not a DOS file!");
     }
     this->wrappers[WR_DOS_HDR] = this->dosHdrWrapper;

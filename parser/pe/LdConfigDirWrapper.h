@@ -59,13 +59,13 @@ public:
 private:
     inline bufsize_t getLdConfigDirSize();
     inline void* getLdConfigDirPtr();
-    pe::IMAGE_LOAD_CONFIG_DIRECTORY32* ldConf32();
-    pe::IMAGE_LOAD_CONFIG_DIRECTORY64* ldConf64();
+    IMAGE_LOAD_CONFIG_DIRECTORY32* ldConf32();
+    IMAGE_LOAD_CONFIG_DIRECTORY64* ldConf64();
 
     inline bufsize_t getW81partSize();
     void* getW81part();
-    pe::IMAGE_LOAD_CONFIG_D32_W81* getW81part32();
-    pe::IMAGE_LOAD_CONFIG_D64_W81* getW81part64();
+    IMAGE_LOAD_CONFIG_D32_W81* getW81part32();
+    IMAGE_LOAD_CONFIG_D64_W81* getW81part64();
 };
 
 

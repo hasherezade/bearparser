@@ -9,6 +9,8 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Core REQUIRED)
 get_target_property(QtCore_location Qt5::Core LOCATION)
 
+find_package(Qt5Widgets)
+
 set (imps_srcs
     main.cpp
     Commander.cpp
@@ -23,5 +25,5 @@ set (imps_hdrs
 )
 
 add_executable (bearcommander ${imps_hdrs} ${imps_srcs} )
-target_link_libraries(bearcommander ${PARSER_LIB}  Qt5::Core)
+target_link_libraries(bearcommander ${PARSER_LIB}  Qt5::Core Qt5::Widgets)
 

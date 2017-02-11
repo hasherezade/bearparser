@@ -43,14 +43,14 @@ public:
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
 
-    bufsize_t getEntriesAreaSize() { return static_cast<bufsize_t>(this->getEntriesCount()) * sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY); }
+    bufsize_t getEntriesAreaSize() { return static_cast<bufsize_t>(this->getEntriesCount()) * sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY); }
     long getDepth() { return this->dirDepth; }
 
-    pe::IMAGE_RESOURCE_DIRECTORY* mainResourceDir();
+    IMAGE_RESOURCE_DIRECTORY* mainResourceDir();
     ResourcesAlbum* getAlbumPtr() { return album; }
 
 private:
-    pe::IMAGE_RESOURCE_DIRECTORY* resourceDir();
+    IMAGE_RESOURCE_DIRECTORY* resourceDir();
     offset_t rawOff;
     long dirDepth;
     ResourcesAlbum *album;
@@ -78,7 +78,7 @@ public:
     bool wrap();
     // full structure boundatries
     virtual void* getPtr() { return getEntryPtr(); }
-    virtual bufsize_t getSize() { return sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY); }
+    virtual bufsize_t getSize() { return sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY); }
 
     virtual QString getName() { return "Resource entry: "+ translateType(getID());}
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
@@ -96,10 +96,10 @@ public:
     DWORD getChildOffsetToDirectory(); //relative offset!
     offset_t getNameOffset();
 
-    pe::IMAGE_RESOURCE_DIRECTORY_STRING* getNameStr();
+    IMAGE_RESOURCE_DIRECTORY_STRING* getNameStr();
     offset_t getChildAddress();
 
-    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY *getEntryPtr();
+    IMAGE_RESOURCE_DIRECTORY_ENTRY *getEntryPtr();
     ResourcesAlbum* getAlbumPtr() { return album; }
     long getTopEntryID() { return topEntryID; }
 

@@ -56,20 +56,20 @@ typedef struct _IMAGE_RESOURCE_DIRECTORY_ENTRY {
 */
 //-------------
 
-pe::IMAGE_RESOURCE_DIRECTORY* ResourceDirWrapper::mainResourceDir()
+IMAGE_RESOURCE_DIRECTORY* ResourceDirWrapper::mainResourceDir()
 {
     offset_t rva = getDirEntryAddress();
 
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_RESOURCE_DIRECTORY));
-    return (pe::IMAGE_RESOURCE_DIRECTORY*) ptr;
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(IMAGE_RESOURCE_DIRECTORY));
+    return (IMAGE_RESOURCE_DIRECTORY*) ptr;
 }
 
-pe::IMAGE_RESOURCE_DIRECTORY* ResourceDirWrapper::resourceDir()
+IMAGE_RESOURCE_DIRECTORY* ResourceDirWrapper::resourceDir()
 {
     if (this->rawOff == 0) return mainResourceDir();
 
-    BYTE *ptr = m_Exe->getContentAt(this->rawOff, Executable::RAW, sizeof(pe::IMAGE_RESOURCE_DIRECTORY));
-    return (pe::IMAGE_RESOURCE_DIRECTORY*) ptr;
+    BYTE *ptr = m_Exe->getContentAt(this->rawOff, Executable::RAW, sizeof(IMAGE_RESOURCE_DIRECTORY));
+    return (IMAGE_RESOURCE_DIRECTORY*) ptr;
 }
 
 bool ResourceDirWrapper::wrap()
@@ -78,7 +78,7 @@ bool ResourceDirWrapper::wrap()
     if (this->topEntryID == TOP_ENTRY_ROOT && this->album != NULL) {
         this->album->clear();
     }
-    pe::IMAGE_RESOURCE_DIRECTORY* dir = resourceDir();
+    IMAGE_RESOURCE_DIRECTORY* dir = resourceDir();
     if (dir == NULL) return false;
     size_t namesNum = dir->NumberOfNamedEntries;
     size_t idsNum = dir->NumberOfIdEntries;
@@ -96,7 +96,7 @@ bool ResourceDirWrapper::wrap()
             break;
         }
         if (this->topEntryID == TOP_ENTRY_ROOT && this->album != NULL) {
-            pe::resource_type typeId = static_cast<pe::resource_type>(entry->getID());
+            resource_type typeId = static_cast<resource_type>(entry->getID());
             this->album->mapIdToLeafType(i, typeId);
         }
         //this->parsedSize += val;
@@ -110,14 +110,14 @@ bool ResourceDirWrapper::wrap()
 bufsize_t ResourceDirWrapper::getSize()
 {
     if (getPtr() == NULL) return 0;
-    bufsize_t size = sizeof(pe::IMAGE_RESOURCE_DIRECTORY);
+    bufsize_t size = sizeof(IMAGE_RESOURCE_DIRECTORY);
     size += getEntriesAreaSize();
     return size;
 }
 
 void* ResourceDirWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    pe::IMAGE_RESOURCE_DIRECTORY* d = resourceDir();
+    IMAGE_RESOURCE_DIRECTORY* d = resourceDir();
     if (d == NULL) return NULL;
 
     switch (fId) {
@@ -226,7 +226,7 @@ bool ResourceEntryWrapper::isByName()
 {
     IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return false;
-    if (entry->name.NameIsString == 1) return true;
+    if (entry->NameIsString == 1) return true;
     return false;
 }
 
@@ -234,7 +234,7 @@ bool ResourceEntryWrapper::isDir()
 {
     IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return false;
-    if (entry->dir.DataIsDirectory == 1) return true;
+    if (entry->DataIsDirectory == 1) return true;
     return false;
 }
 
@@ -247,8 +247,8 @@ offset_t ResourceEntryWrapper::getNameOffset()
     offset_t fOff = this->parentDir->getOffset(this->parentDir->getPtr());
     if (fOff == INVALID_ADDR) return INVALID_ADDR;
 
-    if (entry->name.NameIsString != 1) return INVALID_ADDR;
-    return fOff + entry->name.NameOffset;
+    if (entry->NameIsString != 1) return INVALID_ADDR;
+    return fOff + entry->NameOffset;
 }
 
 IMAGE_RESOURCE_DIRECTORY_STRING* ResourceEntryWrapper::getNameStr()
@@ -303,7 +303,7 @@ DWORD ResourceEntryWrapper::getChildOffsetToDirectory()
 {
     IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return 0;
-    return entry->dir.OffsetToDirectory;
+    return entry->OffsetToDirectory;
 }
 
 offset_t ResourceEntryWrapper::getChildAddress()

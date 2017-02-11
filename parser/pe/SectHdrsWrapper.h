@@ -66,7 +66,7 @@ public:
     }
 
 protected:
-    SectionHdrWrapper(PEFile *pe, pe::IMAGE_SECTION_HEADER *v_header) //standalone entry
+    SectionHdrWrapper(PEFile *pe, IMAGE_SECTION_HEADER *v_header) //standalone entry
         : PENodeWrapper(pe), sectNum(INVALID_ENTRYNUM), name(NULL), header(v_header)
     {
         reloadName();
@@ -84,7 +84,7 @@ protected:
     size_t sectNum;
 
 private:
-    pe::IMAGE_SECTION_HEADER *header;
+    IMAGE_SECTION_HEADER *header;
 
 friend class PEFile;
 };

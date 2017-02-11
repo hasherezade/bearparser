@@ -51,7 +51,7 @@ public:
 
 protected:
     ReourceManifestWrapper(Executable *pe, ResourceLeafWrapper* v_leaf)
-        : ResourceContentWrapper(pe, v_leaf, pe::RT_MANIFEST) {}
+        : ResourceContentWrapper(pe, v_leaf, pe::RESTYPE_MANIFEST) {}
 
 friend class ResourceContentFactory;
 };
@@ -63,7 +63,7 @@ public:
 
 protected:
     ReourceHTMLWrapper(Executable *pe, ResourceLeafWrapper* v_leaf)
-        : ResourceContentWrapper(pe, v_leaf, pe::RT_HTML
+        : ResourceContentWrapper(pe, v_leaf, pe::RESTYPE_HTML
         ) {}
 
 friend class ResourceContentFactory;

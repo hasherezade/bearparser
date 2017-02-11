@@ -78,7 +78,7 @@ public:
 
     ResourcesAlbum* getResourcesAlbum() const { return this->album; }
 
-    pe::IMAGE_DATA_DIRECTORY* getDataDirectory();
+    IMAGE_DATA_DIRECTORY* getDataDirectory();
     offset_t peDataDirOffset();
 
     size_t hdrSectionsNum();
@@ -147,7 +147,7 @@ protected:
     SectHdrsWrapper *sects;
 
     ResourcesAlbum *album;
-    DataDirEntryWrapper* dataDirEntries[pe::DIR_ENTRIES_COUNT];
+    DataDirEntryWrapper* dataDirEntries[DIR_ENTRIES_COUNT];
 
 friend class SectHdrsWrapper;
 };

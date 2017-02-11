@@ -5,8 +5,6 @@
 
 class PEFile;
 
-using namespace pe;
-
 class PEElementWrapper : public ExeElementWrapper
 {
 public:

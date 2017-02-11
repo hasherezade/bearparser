@@ -21,7 +21,7 @@ bool ExceptionDirWrapper::wrap()
     if (!exceptFunc64()) return false;
 
     //printf("maxSize = %x\n", maxSize);
-    const size_t ENTRY_SIZE = sizeof(pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY);
+    const size_t ENTRY_SIZE = sizeof(IMAGE_IA64_RUNTIME_FUNCTION_ENTRY);
 
     for (int i = 0; i < ExceptionDirWrapper::EntriesLimit && parsedSize < maxSize; i++) {
         ExceptionEntryWrapper* entry = new ExceptionEntryWrapper(this->m_Exe, this, i);
@@ -38,7 +38,7 @@ bool ExceptionDirWrapper::wrap()
             entry->getNumValue(ExceptionEntryWrapper::BLOCK_SIZE, &isOk)
         );*/
     }
-    Logger::append(Logger::INFO,
+    Logger::append(Logger::D_INFO,
         "Entries num = %lu, parsedSize = %lX",
         static_cast<unsigned long>(entries.size()),
         static_cast<unsigned long>(parsedSize)
@@ -46,13 +46,13 @@ bool ExceptionDirWrapper::wrap()
     return true;
 }
 
-pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* ExceptionDirWrapper::exceptFunc64()
+IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* ExceptionDirWrapper::exceptFunc64()
 {
     offset_t rva = getDirEntryAddress();
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY));
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(IMAGE_IA64_RUNTIME_FUNCTION_ENTRY));
     if (ptr == NULL) return NULL;
 
-    pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exc = (pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY*) ptr;
+    IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exc = (IMAGE_IA64_RUNTIME_FUNCTION_ENTRY*) ptr;
     return exc;
 }
 
@@ -61,10 +61,10 @@ pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* ExceptionDirWrapper::exceptFunc64()
 void* ExceptionEntryWrapper::getPtr()
 {
     if (this->parentDir == NULL) return NULL;
-    pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* first =  this->parentDir->exceptFunc64();
+    IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* first =  this->parentDir->exceptFunc64();
     if (!first) return NULL;
 
-    const size_t ENTRY_SIZE = sizeof(pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY);
+    const size_t ENTRY_SIZE = sizeof(IMAGE_IA64_RUNTIME_FUNCTION_ENTRY);
 
     uint64_t firstOffset = this->getOffset(first);
     uint64_t myOffset = firstOffset + this->entryNum * ENTRY_SIZE;
@@ -78,12 +78,12 @@ bufsize_t ExceptionEntryWrapper::getSize()
     if (this->parentDir == NULL) return 0;
     if (this->getPtr() == NULL) return 0;
 
-    return sizeof(pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY);
+    return sizeof(IMAGE_IA64_RUNTIME_FUNCTION_ENTRY);
 }
 
 void* ExceptionEntryWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
-    pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exc = (pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY*) this->getPtr();
+    IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exc = (IMAGE_IA64_RUNTIME_FUNCTION_ENTRY*) this->getPtr();
     if (!exc) return NULL;
 
     switch (fieldId) {

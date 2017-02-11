@@ -1,16 +1,23 @@
-#ifndef _PE_FORMATS_H_
-#define _PE_FORMATS_H_
+#pragma once
 
 #ifndef UNALIGNED
 #define UNALIGNED
 #endif
 
 #include "../win_hdrs/win_types.h"
+#if _MSC_VER
+#define USE_WINNT
+#include <windows.h>
+#include <winnt.h>
+#endif
 
+/*
+ * Directory Entries
+ */
+
+#ifndef USE_WINNT
 //additional : WIN_CERTIFICATE
 //additional : VS_VERSIONINFO
-namespace pe
-{
 
 /*
  * Platform independent definitions
@@ -19,17 +26,6 @@ namespace pe
  * their serialization/deserialization should be handled by memio.h
  * primitives when required
  */
-enum signature {
-    S_LX = 0x584C ,
-    S_W3_WIN386 = 0x3357,
-    S_W4_VMM32 = 0x3457,
-    S_OS2 = 0x454E,
-    S_VXD = 0x454C,
-    S_NT = 0x00004550,
-    S_OS2_LE = S_VXD,
-    S_DOS = 0x5A4D, // MZ
-    S_DOS2 = 0x4D5A //ZM
-};
 
 /*
  * Platform independent definitions (for gcc, vxd, sys ...)
@@ -225,7 +221,6 @@ typedef struct _IMAGE_DATA_DIRECTORY {
     DWORD   Size;
 } IMAGE_DATA_DIRECTORY, *PIMAGE_DATA_DIRECTORY;
 
-#define DIRECTORY_ENTRIES_NUM 16
 
 /*
  * Optional header format.
@@ -320,12 +315,6 @@ typedef struct _IMAGE_OPTIONAL_HEADER64 {
     IMAGE_DATA_DIRECTORY DataDirectory[DIRECTORY_ENTRIES_NUM];
 } IMAGE_OPTIONAL_HEADER64, *PIMAGE_OPTIONAL_HEADER64;
 
-enum opt_hdr_magic {
-    OH_NT32 = 0x10b,
-    OH_NT64 = 0x20b,
-    OH_ROM = 0x107
-};
-
 typedef struct _IMAGE_NT_HEADERS64 {
     DWORD Signature;
     IMAGE_FILE_HEADER FileHeader;
@@ -354,71 +343,6 @@ typedef struct _IMAGE_ROM_HEADERS {
      FIELD_OFFSET( PE_IMAGE_NT_HEADERS32, OptionalHeader ) +    \
      ((PE_PIMAGE_NT_HEADERS32)(ntheader))->FileHeader.SizeOfOptionalHeader    \
     ))
-
-/*
- * Subsystem Values
- */
-
-enum subsystem {
-    SUB_UNKNOWN = 0,   // Unknown subsystem.
-    SUB_NATIVE =  1,   // Image doesn't require a subsystem.
-    SUB_WINDOWS_GUI = 2,   // Image runs in the Windows GUI subsystem.
-    SUB_WINDOWS_CUI = 3,   // Image runs in the Windows character subsystem.
-    SUB_OS2_CUI = 5,   // image runs in the OS/2 character subsystem.
-    SUB_POSIX_CUI =   7,   // image runs in the Posix character subsystem.
-    SUB_NATIVE_WINDOWS = 8,   // image is a native Win9x driver.
-    SUB_WINDOWS_CE_GUI = 9,   // Image runs in the Windows CE subsystem.
-    SUB_EFI_APPLICATION = 10,  //
-    SUB_EFI_BOOT_SERVICE_DRIVER = 11,   //
-    SUB_EFI_RUNTIME_DRIVER = 12,  //
-    SUB_EFI_ROM = 13,
-    SUB_XBOX = 14,
-    SUB_WINDOWS_BOOT_APP = 16
-};
-
-/*
- * DllCharacteristics Entries
- */
-enum dll_charact {
-    // DLL_PROCESS_INIT           0x0001     // Reserved.
-    // DLL_PROCESS_TERM           0x0002     // Reserved.
-    // DLL_THREAD_INIT            0x0004     // Reserved.
-    // DLL_THREAD_TERM            0x0008     // Reserved.
-    DLL_DYNAMIC_BASE = 0x0040,     // DLL can move.
-    DLL_FORCE_INTEGRITY = 0x0080,     // Code Integrity Image
-    DLL_NX_COMPAT = 0x0100,     // Image is NX compatible
-    DLL_NO_ISOLATION = 0x0200,     // Image understands isolation and doesn't want it
-    DLL_NO_SEH = 0x0400,     // Image does not use SEH.  No SE handler may reside in this image
-    DLL_NO_BIND = 0x0800,     // Do not bind this image.
-    DLL_APPCONTAINER = 0x1000, // AppContainer (W8)
-    DLL_WDM_DRIVER = 0x2000,     // Driver uses WDM model
-    DLL_GUARD_CF = 0x4000, // Guard CF (W8.1)
-    DLL_TERMINAL_SERVER_AWARE = 0x8000
-
-};
-
-/*
- * Directory Entries
- */
-enum dir_entry {
-    DIR_EXPORT = 0,   // Export Directory
-    DIR_IMPORT = 1,   // Import Directory
-    DIR_RESOURCE = 2,   // Resource Directory
-    DIR_EXCEPTION = 3,   // Exception Directory
-    DIR_SECURITY = 4,   // Security Directory
-    DIR_BASERELOC = 5,   // Base Relocation Table
-    DIR_DEBUG = 6,   // Debug Directory
-    //      IMAGE_DIRECTORY_ENTRY_COPYRIGHT = 7,   // (X86 usage)
-    DIR_ARCHITECTURE = 7,   // Architecture Specific Data
-    DIR_GLOBALPTR = 8,   // RVA of GP
-    DIR_TLS = 9,   // TLS Directory
-    DIR_LOAD_CONFIG = 10,   // Load Configuration Directory
-    DIR_BOUND_IMPORT = 11,   // Bound Import Directory in headers
-    DIR_IAT = 12,   // Import Address Table
-    DIR_DELAY_IMPORT = 13,   // Delay Load Import Descriptors
-    DIR_COM_DESCRIPTOR = 14,   // COM Runtime descriptor
-    DIR_ENTRIES_COUNT // counter - convinience field
-};
 
 /*
  * Non-COFF Object file header
@@ -1212,6 +1136,7 @@ typedef struct _IMAGE_THUNK_DATA32 {
     } u1;
 } IMAGE_THUNK_DATA32;
 typedef IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;
+#endif
 
 #define ORDINAL_FLAG64 0x8000000000000000ULL
 #define ORDINAL_FLAG32 0x80000000
@@ -1220,7 +1145,7 @@ typedef IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;
 #define SNAP_BY_ORDINAL64(Ordinal) ((Ordinal & ORDINAL_FLAG64) != 0)
 #define SNAP_BY_ORDINAL32(Ordinal) ((Ordinal & ORDINAL_FLAG32) != 0)
 
-
+#ifndef USE_WINNT
 /*
  * Thread Local Storage
  * (reference)
@@ -1456,6 +1381,7 @@ typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY64{
     // if Size > sizeof(IMAGE_LOAD_CONFIG_DIRECTORY64)
     // IMAGE_LOAD_CONFIG_D64_W81 ldc_W81_part;
 } IMAGE_LOAD_CONFIG_DIRECTORY64, *PIMAGE_LOAD_CONFIG_DIRECTORY64;
+#endif
 
 // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W8.1 :
 typedef struct _IMAGE_LOAD_CONFIG_D32_W81 {
@@ -1475,6 +1401,7 @@ typedef struct _IMAGE_LOAD_CONFIG_D64_W81 {
     DWORD       GuardFlags;
 } IMAGE_LOAD_CONFIG_D64_W81, *PIMAGE_LOAD_CONFIG_D64_W81;
 
+#ifndef USE_WINNT
 /*
  * WIN CE Exception table format
  *
@@ -1542,22 +1469,6 @@ typedef struct _IMAGE_DEBUG_DIRECTORY {
     DWORD   AddressOfRawData;
     DWORD   PointerToRawData;
 } IMAGE_DEBUG_DIRECTORY, *PIMAGE_DEBUG_DIRECTORY;
-
-enum debug_type
-{
-    DT_UNKNOWN = 0,
-    DT_COFF = 1,
-    DT_CODEVIEW = 2,
-    DT_FPO = 3,
-    DT_MISC = 4,
-    DT_EXCEPTION = 5,
-    DT_FIXUP = 6,
-    DT_OMAP_TO_SRC = 7,
-    DT_OMAP_FROM_SRC = 8,
-    DT_BORLAND = 9,
-    DT_RESERVED10 = 10,
-    DT_CLSID = 11
-};
 
 
 typedef struct _IMAGE_COFF_SYMBOLS_HEADER {
@@ -1757,6 +1668,7 @@ typedef enum IMPORT_OBJECT_NAME_TYPE
 /* additional PE structures  - from other headers */
 
 #include "../win_hdrs/pshpack4.h"                   // 4 byte packing (DWORD alligned)
+#endif
 
 typedef struct _WIN_CERTIFICATE {
     DWORD dwLength;
@@ -1797,6 +1709,7 @@ typedef struct _IMAGE_DELAY_LOAD64 {
     ULONGLONG dwTimestamp;
 } IMAGE_DELAY_LOAD64, *LPIMAGE_DELAY_LOAD64;
 
+#ifndef USE_WINNT
 // DIR_EXCEPTION -> RUNTIME_FUNCTION -> UNWIND_INFO
 
 typedef struct _UNWIND_CODE {
@@ -1836,6 +1749,7 @@ ExceptionHandlerAddress:
 #include "../win_hdrs/poppack.h"                // Back to the initial value
 
 #include "../win_hdrs/pshpack2.h"                   // 2 byte packing (WORD alligned)
+#endif
 
 // IMAGE_BASE_RELOCATION -> Entry:
 typedef struct _BASE_RELOCATION_ENTRY {
@@ -1843,78 +1757,37 @@ typedef struct _BASE_RELOCATION_ENTRY {
     WORD Type: 4;
 } BASE_RELOCATION_ENTRY;
 
-
+#ifndef USE_WINNT
 //From winuser.h:
 #define DIFFERENCE 11
 
-enum resource_type {
-    RT_CURSOR = 1,
-    RT_FONT = 8,
-    RT_BITMAP = 2,
-    RT_ICON = 3,
-    RT_MENU = 4,
-    RT_DIALOG = 5,
-    RT_STRING = 6,
-    RT_FONTDIR = 7,
-    RT_ACCELERATOR = 9,
-    RT_RCDATA = 10,
-    RT_MESSAGETABLE = 11,
+#define CREATEPROCESS_MANIFEST_RESOURCE_ID 1
+#define ISOLATIONAWARE_MANIFEST_RESOURCE_ID 2
+#define ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID 3
 
-    RT_GROUP_CURSOR = (DWORD)RT_CURSOR + DIFFERENCE,
-    RT_GROUP_ICON = (DWORD)RT_ICON + DIFFERENCE,
-    RT_VERSION = 16,
-    RT_DLGINCLUDE = 17,
-    RT_PLUGPLAY = 19,
-    RT_VXD = 20,
-    RT_ANICURSOR = 21,
-    RT_ANIICON = 22,
-    RT_HTML = 23,
-    RT_MANIFEST = 24,
-
-    CREATEPROCESS_MANIFEST_RESOURCE_ID = 1,
-    ISOLATIONAWARE_MANIFEST_RESOURCE_ID = 2,
-    ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID = 3
-};
 //#include "../win_hdrs/poppack.h"                // Back to the initial value
 //#include "../win_hdrs/pshpack4.h"                   // 4 byte packing (DWORD alligned)
 
-typedef struct tagVS_FIXEDFILEINFO {
-    DWORD signature;
-    DWORD strucVersion;
-    DWORD fileVersionMS;
-    DWORD fileVersionLS;
-    DWORD productVersionMS;
-    DWORD productVersionLS;
-    DWORD fileFlagsMask;
-    DWORD fileFlags;
-    DWORD fileOS;
-    DWORD fileType;
-    DWORD fileSubtype;
-    DWORD fileDateMS;
-    DWORD fileDateLS;
+typedef struct tagVS_FIXEDFILEINFO
+{
+    DWORD   dwSignature;            /* e.g. 0xfeef04bd */
+    DWORD   dwStrucVersion;         /* e.g. 0x00000042 = "0.42" */
+    DWORD   dwFileVersionMS;        /* e.g. 0x00030075 = "3.75" */
+    DWORD   dwFileVersionLS;        /* e.g. 0x00000031 = "0.31" */
+    DWORD   dwProductVersionMS;     /* e.g. 0x00030010 = "3.10" */
+    DWORD   dwProductVersionLS;     /* e.g. 0x00000031 = "0.31" */
+    DWORD   dwFileFlagsMask;        /* = 0x3F for version "0.42" */
+    DWORD   dwFileFlags;            /* e.g. VFF_DEBUG | VFF_PRERELEASE */
+    DWORD   dwFileOS;               /* e.g. VOS_DOS_WINDOWS16 */
+    DWORD   dwFileType;             /* e.g. VFT_DRIVER */
+    DWORD   dwFileSubtype;          /* e.g. VFT2_DRV_KEYBOARD */
+    DWORD   dwFileDateMS;           /* e.g. 0 */
+    DWORD   dwFileDateLS;           /* e.g. 0 */
 } VS_FIXEDFILEINFO;
 
 //#include "../win_hdrs/poppack.h"                // Back to the initial value
 //#include "../win_hdrs/pshpack2.h"                   // 2 byte packing (WORD alligned)
 
-#define INFOTEXT_LEN 17
-
-typedef struct version_info {
-    WORD  length;
-    WORD valueLength;
-    WORD type; //0 -bin, 1-text
-    WORD key[INFOTEXT_LEN];
-    VS_FIXEDFILEINFO Value;
-    WORD children; //VS_VERSIONCHILD in array
-} VS_VERSIONINFO;
-
-typedef struct version_child {
-    WORD  wLength;
-    WORD  wValueLength;
-    WORD  wType;
-    WCHAR szKey[INFOTEXT_LEN];
-    WORD subVal; // String or Var, depending on wType
-} VS_VERSIONCHILD;
 
 typedef struct {
     WORD  wLength;
@@ -1965,6 +1838,143 @@ typedef struct {
 #include "../win_hdrs/poppack.h"                // Back to the initial value
 
 
-}; /* namespace pe */
+#endif //USE_WINNT
 
-#endif /* _PE_FORMATS_H_ */
+namespace pe {
+
+    enum opt_hdr_magic {
+        OH_NT32 = 0x10b,
+        OH_NT64 = 0x20b,
+        OH_ROM = 0x107
+    };
+
+    enum resource_type {
+        RESTYPE_CURSOR = 1,
+        RESTYPE_FONT = 8,
+        RESTYPE_BITMAP = 2,
+        RESTYPE_ICON = 3,
+        RESTYPE_MENU = 4,
+        RESTYPE_DIALOG = 5,
+        RESTYPE_STRING = 6,
+        RESTYPE_FONTDIR = 7,
+        RESTYPE_ACCELERATOR = 9,
+        RESTYPE_RCDATA = 10,
+        RESTYPE_MESSAGETABLE = 11,
+
+        RESTYPE_GROUP_CURSOR = (DWORD)RESTYPE_CURSOR + DIFFERENCE,
+        RESTYPE_GROUP_ICON = (DWORD)RESTYPE_ICON + DIFFERENCE,
+        RESTYPE_VERSION = 16,
+        RESTYPE_DLGINCLUDE = 17,
+        RESTYPE_PLUGPLAY = 19,
+        RESTYPE_VXD = 20,
+        RESTYPE_ANICURSOR = 21,
+        RESTYPE_ANIICON = 22,
+        RESTYPE_HTML = 23,
+        RESTYPE_MANIFEST = 24,
+    };
+
+    enum dir_entry {
+        DIR_EXPORT = 0,   // Export Directory
+        DIR_IMPORT = 1,   // Import Directory
+        DIR_RESOURCE = 2,   // Resource Directory
+        DIR_EXCEPTION = 3,   // Exception Directory
+        DIR_SECURITY = 4,   // Security Directory
+        DIR_BASERELOC = 5,   // Base Relocation Table
+        DIR_DEBUG = 6,   // Debug Directory//      IMAGE_DIRECTORY_ENTRY_COPYRIGHT = 7,   // (X86 usage)
+        DIR_ARCHITECTURE = 7,   // Architecture Specific Data
+        DIR_GLOBALPTR = 8,   // RVA of GP
+        DIR_TLS = 9,   // TLS Directory
+        DIR_LOAD_CONFIG = 10,   // Load Configuration Directory
+        DIR_BOUND_IMPORT = 11,   // Bound Import Directory in headers
+        DIR_IAT = 12,   // Import Address Table
+        DIR_DELAY_IMPORT = 13,   // Delay Load Import Descriptors
+        DIR_COM_DESCRIPTOR = 14,   // COM Runtime descriptor
+        DIR_ENTRIES_COUNT // counter - convinience field
+    };
+
+    enum signature {
+        S_LX = 0x584C,
+        S_W3_WIN386 = 0x3357,
+        S_W4_VMM32 = 0x3457,
+        S_OS2 = 0x454E,
+        S_VXD = 0x454C,
+        S_NT = 0x00004550,
+        S_OS2_LE = S_VXD,
+        S_DOS = 0x5A4D, // MZ
+        S_DOS2 = 0x4D5A //ZM
+    };
+
+    enum debug_type
+    {
+        DT_UNKNOWN = 0,
+        DT_COFF = 1,
+        DT_CODEVIEW = 2,
+        DT_FPO = 3,
+        DT_MISC = 4,
+        DT_EXCEPTION = 5,
+        DT_FIXUP = 6,
+        DT_OMAP_TO_SRC = 7,
+        DT_OMAP_FROM_SRC = 8,
+        DT_BORLAND = 9,
+        DT_RESERVED10 = 10,
+        DT_CLSID = 11
+    };
+
+    enum subsystem {
+        SUB_UNKNOWN = 0,   // Unknown subsystem.
+        SUB_NATIVE = 1,   // Image doesn't require a subsystem.
+        SUB_WINDOWS_GUI = 2,   // Image runs in the Windows GUI subsystem.
+        SUB_WINDOWS_CUI = 3,   // Image runs in the Windows character subsystem.
+        SUB_OS2_CUI = 5,   // image runs in the OS/2 character subsystem.
+        SUB_POSIX_CUI = 7,   // image runs in the Posix character subsystem.
+        SUB_NATIVE_WINDOWS = 8,   // image is a native Win9x driver.
+        SUB_WINDOWS_CE_GUI = 9,   // Image runs in the Windows CE subsystem.
+        SUB_EFI_APPLICATION = 10,  //
+        SUB_EFI_BOOT_SERVICE_DRIVER = 11,   //
+        SUB_EFI_RUNTIME_DRIVER = 12,  //
+        SUB_EFI_ROM = 13,
+        SUB_XBOX = 14,
+        SUB_WINDOWS_BOOT_APP = 16
+    };
+
+    /*
+    * DllCharacteristics Entries
+    */
+    enum dll_charact {
+        // DLL_PROCESS_INIT           0x0001     // Reserved.
+        // DLL_PROCESS_TERM           0x0002     // Reserved.
+        // DLL_THREAD_INIT            0x0004     // Reserved.
+        // DLL_THREAD_TERM            0x0008     // Reserved.
+        DLL_DYNAMIC_BASE = 0x0040,     // DLL can move.
+        DLL_FORCE_INTEGRITY = 0x0080,     // Code Integrity Image
+        DLL_NX_COMPAT = 0x0100,     // Image is NX compatible
+        DLL_NO_ISOLATION = 0x0200,     // Image understands isolation and doesn't want it
+        DLL_NO_SEH = 0x0400,     // Image does not use SEH.  No SE handler may reside in this image
+        DLL_NO_BIND = 0x0800,     // Do not bind this image.
+        DLL_APPCONTAINER = 0x1000, // AppContainer (W8)
+        DLL_WDM_DRIVER = 0x2000,     // Driver uses WDM model
+        DLL_GUARD_CF = 0x4000, // Guard CF (W8.1)
+        DLL_TERMINAL_SERVER_AWARE = 0x8000
+    };
+
+    #define INFOTEXT_LEN 17
+
+    typedef struct version_info {
+        WORD  length;
+        WORD valueLength;
+        WORD type; //0 -bin, 1-text
+        WORD key[INFOTEXT_LEN];
+        VS_FIXEDFILEINFO Value;
+        WORD children; //VS_VERSIONCHILD in array
+    } VS_VERSIONINFO;
+
+    typedef struct version_child {
+        WORD  wLength;
+        WORD  wValueLength;
+        WORD  wType;
+        WCHAR szKey[INFOTEXT_LEN];
+        WORD subVal; // String or Var, depending on wType
+    } VS_VERSIONCHILD;
+}
+
+#define DIRECTORY_ENTRIES_NUM 16

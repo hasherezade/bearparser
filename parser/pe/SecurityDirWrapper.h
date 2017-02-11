@@ -50,7 +50,7 @@ public:
     virtual QString translateFieldContent(size_t fieldId);
 
 private:
-    pe::WIN_CERTIFICATE* getCert();
+    WIN_CERTIFICATE* getCert();
     void clear() {}
 
     bool sizeOk;

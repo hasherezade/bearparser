@@ -212,7 +212,7 @@ bool AbstractByteBuffer::pasteBuffer(offset_t rawOffset, AbstractByteBuffer *buf
 
     bufsize_t mySize = this->getContentSize();
     if (static_cast<offset_t>(mySize) <= rawOffset) {
-        Logger::append(Logger::ERROR,
+        Logger::append(Logger::D_ERROR,
             "Too far offset requested: %llX while mySize: %lX", 
             static_cast<unsigned long long>(rawOffset), 
             static_cast<unsigned long>(mySize)
@@ -264,7 +264,7 @@ bool AbstractByteBuffer::intersectsBlock(offset_t rawOffset, bufsize_t size)
 
     offset_t srchdEnd = rawOffset + size;
     if (rawOffset >= startOffset && rawOffset <= endOffset) {
-        Logger::append(Logger::INFO,
+        Logger::append(Logger::D_INFO,
             "Found in bounds: %llX - %llX end: %llX", 
             static_cast<unsigned long long>(startOffset),
             static_cast<unsigned long long>(endOffset),
@@ -273,7 +273,7 @@ bool AbstractByteBuffer::intersectsBlock(offset_t rawOffset, bufsize_t size)
         return true;
     }
     if (srchdEnd >= startOffset && srchdEnd <= endOffset) {
-        Logger::append(Logger::INFO,
+        Logger::append(Logger::D_INFO,
             "Found in bounds: %llX - %llX",
             static_cast<unsigned long long>(startOffset),
             static_cast<unsigned long long>(endOffset)
@@ -310,7 +310,7 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
     if (size == 0 || offset == INVALID_ADDR) return false;
     void* ptr = this->getContentAt(offset, size);
     if (ptr == NULL) {
-        Logger::append(Logger::ERROR,
+        Logger::append(Logger::D_ERROR,
             "Cannot get Ptr at: %llX of size: %lX!", 
             static_cast<unsigned long long>(offset), 
             static_cast<unsigned long>(size)
@@ -342,7 +342,7 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
         if ((*valPtr) == nVal) return false;
         (*valPtr) = nVal;
     } else {
-        Logger::append(Logger::ERROR, "Wrong size!");
+        Logger::append(Logger::D_ERROR, "Wrong size!");
         return false;
     }
     return true;

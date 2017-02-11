@@ -26,9 +26,9 @@ bool Logger::append(dbg_level lvl, const char* format, ...)
     va_end(argptr);
     if (printed <= 0) return false;
 	
-	const char *prefixes[LVL_COUNT] = {"ERROR", "WARNING", "INFO"};
-    if (static_cast<unsigned>(lvl) > static_cast<unsigned>(LVL_COUNT)) {
-        lvl = ERROR;
+	const char *prefixes[D_LVL_COUNT] = {"ERROR", "WARNING", "INFO"};
+    if (static_cast<unsigned>(lvl) > static_cast<unsigned>(D_LVL_COUNT)) {
+        lvl = Logger::D_ERROR;
     }
 
 	fprintf(stderr, "[%s] %s\n", prefixes[lvl], line);

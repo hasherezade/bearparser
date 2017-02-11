@@ -20,9 +20,9 @@ typedef struct _IMAGE_DELAY_LOAD {
 bool DelayImpDirWrapper::is64()
 {
     if (m_Exe->isBit32()) return false;
-    size_t size = sizeof(pe::IMAGE_DELAY_LOAD64);
+    size_t size = sizeof(IMAGE_DELAY_LOAD64);
 
-    pe::IMAGE_DELAY_LOAD64* ld64 = firstDelayLd64();
+    IMAGE_DELAY_LOAD64* ld64 = firstDelayLd64();
     if (ld64) {
         if (this->m_Exe->toRaw(ld64->szName, Executable::RVA) == INVALID_ADDR) return false;
         if (this->m_Exe->toRaw(ld64->phmod, Executable::RVA) == INVALID_ADDR) return false;
@@ -76,24 +76,24 @@ bufsize_t DelayImpDirWrapper::getEntrySize()
     size_t size = 0;
 
     if (is64()) {
-        size = sizeof(pe::IMAGE_DELAY_LOAD64);
+        size = sizeof(IMAGE_DELAY_LOAD64);
     } else {
-        size = sizeof(pe::IMAGE_DELAY_LOAD32);
+        size = sizeof(IMAGE_DELAY_LOAD32);
     }
     return static_cast<bufsize_t>(size);
 }
 
 //---------------------------------------------------------------------------
 
-pe::IMAGE_IMPORT_BY_NAME* DelayImpEntryWrapper::getFirstImpByNamePtr()
+IMAGE_IMPORT_BY_NAME* DelayImpEntryWrapper::getFirstImpByNamePtr()
 {
     bool isOk = false;
     uint64_t value = this->getNumValue(INT, &isOk);
     if(!isOk) return NULL;
 
     Executable::addr_type aT = containsAddrType(INT);
-    BYTE *ptr = m_Exe->getContentAt(value, aT, sizeof(pe::IMAGE_IMPORT_BY_NAME));
-    return (pe::IMAGE_IMPORT_BY_NAME*) ptr;
+    BYTE *ptr = m_Exe->getContentAt(value, aT, sizeof(IMAGE_IMPORT_BY_NAME));
+    return (IMAGE_IMPORT_BY_NAME*) ptr;
 }
 
 bool DelayImpEntryWrapper::loadNextEntry(size_t entryNum)
@@ -127,14 +127,14 @@ bool DelayImpEntryWrapper::wrap()
     return true;
 }
 */
-pe::IMAGE_DELAY_LOAD32* DelayImpEntryWrapper::dl32()
+IMAGE_DELAY_LOAD32* DelayImpEntryWrapper::dl32()
 {
     DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
     if (!parent) return NULL;
 
 
-    const size_t DL_SIZE = sizeof(pe::IMAGE_DELAY_LOAD32);
-    pe::IMAGE_DELAY_LOAD32* first = (pe::IMAGE_DELAY_LOAD32*) parent->firstDelayLd(DL_SIZE);
+    const size_t DL_SIZE = sizeof(IMAGE_DELAY_LOAD32);
+    IMAGE_DELAY_LOAD32* first = (IMAGE_DELAY_LOAD32*) parent->firstDelayLd(DL_SIZE);
     if (!first) return NULL;
 
     uint64_t descAddr = parent->getOffset(first);
@@ -146,16 +146,16 @@ pe::IMAGE_DELAY_LOAD32* DelayImpEntryWrapper::dl32()
     BYTE *content =  this->m_Exe->getContentAt(entryOffset, Executable::RAW, DL_SIZE);
     if (!content) return NULL;
 
-    return (pe::IMAGE_DELAY_LOAD32*)content;
+    return (IMAGE_DELAY_LOAD32*)content;
 }
 
-pe::IMAGE_DELAY_LOAD64* DelayImpEntryWrapper::dl64()
+IMAGE_DELAY_LOAD64* DelayImpEntryWrapper::dl64()
 {
     DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
     if (!parent) return NULL;
 
-    const size_t DL_SIZE = sizeof(pe::IMAGE_DELAY_LOAD64);
-    pe::IMAGE_DELAY_LOAD64* first = (pe::IMAGE_DELAY_LOAD64*) parent->firstDelayLd(DL_SIZE);
+    const size_t DL_SIZE = sizeof(IMAGE_DELAY_LOAD64);
+    IMAGE_DELAY_LOAD64* first = (IMAGE_DELAY_LOAD64*) parent->firstDelayLd(DL_SIZE);
     if (!first) return NULL;
 
     uint64_t descAddr = parent->getOffset(first);
@@ -167,7 +167,7 @@ pe::IMAGE_DELAY_LOAD64* DelayImpEntryWrapper::dl64()
     BYTE *content =  this->m_Exe->getContentAt(entryOffset, Executable::RAW, DL_SIZE);
     if (!content) return NULL;
 
-    return (pe::IMAGE_DELAY_LOAD64*)content;
+    return (IMAGE_DELAY_LOAD64*)content;
 }
 
 void* DelayImpEntryWrapper::getPtr()
@@ -189,9 +189,9 @@ bufsize_t DelayImpEntryWrapper::getSize()
     if (!parent) return 0;
 
     if (parent->is64()) {
-        return sizeof(pe::IMAGE_DELAY_LOAD64);
+        return sizeof(IMAGE_DELAY_LOAD64);
     }
-    return sizeof(pe::IMAGE_DELAY_LOAD32);
+    return sizeof(IMAGE_DELAY_LOAD32);
 }
 
 QString DelayImpEntryWrapper::getName()
@@ -218,7 +218,7 @@ char* DelayImpEntryWrapper::getLibraryName()
 
 void* DelayImpEntryWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    pe::IMAGE_DELAY_LOAD32* dLd = (pe::IMAGE_DELAY_LOAD32*) this->getPtr();
+    IMAGE_DELAY_LOAD32* dLd = (IMAGE_DELAY_LOAD32*) this->getPtr();
     if (dLd == NULL) return NULL;
 
     switch (fId) {
@@ -324,8 +324,8 @@ void* DelayImpFuncWrapper::getFieldPtr(size_t fId, size_t subField)
 {
     if (this->parentDir == NULL) return NULL;
 
-    pe::IMAGE_DELAY_LOAD32* dLd32 = parentDir->dl32();
-    pe::IMAGE_DELAY_LOAD64* dLd64 = parentDir->dl64();
+    IMAGE_DELAY_LOAD32* dLd32 = parentDir->dl32();
+    IMAGE_DELAY_LOAD64* dLd64 = parentDir->dl64();
 
     if (dLd32 == NULL && dLd64 == NULL) return NULL;
 
@@ -400,7 +400,7 @@ IMAGE_IMPORT_BY_NAME* DelayImpFuncWrapper::getImportByNamePtr()
     if (!isOk || addr == INVALID_ADDR) return NULL;
 
     Executable::addr_type aT = m_Exe->detectAddrType(addr, Executable::RVA);
-    BYTE *ptr = m_Exe->getContentAt(addr, aT, sizeof(pe::IMAGE_IMPORT_BY_NAME));
-    return (pe::IMAGE_IMPORT_BY_NAME*) ptr;
+    BYTE *ptr = m_Exe->getContentAt(addr, aT, sizeof(IMAGE_IMPORT_BY_NAME));
+    return (IMAGE_IMPORT_BY_NAME*) ptr;
 }
 

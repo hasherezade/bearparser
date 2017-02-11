@@ -56,7 +56,7 @@ void cmd_util::printResourceTypes(PEFile *pe)
 
 void cmd_util::printStrings(PEFile *pe, size_t limit)
 {
-    ResourcesContainer *allStrings = pe->getResourcesOfType(pe::RT_STRING);
+    ResourcesContainer *allStrings = pe->getResourcesOfType(pe::RESTYPE_STRING);
     if (allStrings == NULL) return;
 
     size_t wrappersCount = allStrings->count();
