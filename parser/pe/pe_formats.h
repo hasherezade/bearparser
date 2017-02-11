@@ -11,13 +11,10 @@
 #include <winnt.h>
 #endif
 
-/*
- * Directory Entries
- */
-
-#ifndef USE_WINNT
 //additional : WIN_CERTIFICATE
 //additional : VS_VERSIONINFO
+
+#ifndef USE_WINNT
 
 /*
  * Platform independent definitions
@@ -221,10 +218,10 @@ typedef struct _IMAGE_DATA_DIRECTORY {
     DWORD   Size;
 } IMAGE_DATA_DIRECTORY, *PIMAGE_DATA_DIRECTORY;
 
-
 /*
  * Optional header format.
  */
+#define DIRECTORY_ENTRIES_NUM 16
 
 typedef struct _IMAGE_OPTIONAL_HEADER {
 /*
@@ -1277,19 +1274,19 @@ typedef struct _IMAGE_RESOURCE_DIRECTORY {
 typedef struct _IMAGE_RESOURCE_DIRECTORY_ENTRY {
     union {
         struct {
-            DWORD NameOffset:31;
-            DWORD NameIsString:1;
-        } name;
+            DWORD NameOffset : 31;
+            DWORD NameIsString : 1;
+        } DUMMYSTRUCTNAME;
         DWORD   Name;
         WORD    Id;
-    };
+    } DUMMYUNIONNAME;
     union {
         DWORD   OffsetToData;
         struct {
-            DWORD   OffsetToDirectory:31;
-            DWORD   DataIsDirectory:1;
-        } dir;
-    };
+            DWORD   OffsetToDirectory : 31;
+            DWORD   DataIsDirectory : 1;
+        } DUMMYSTRUCTNAME2;
+    } DUMMYUNIONNAME2;
 } IMAGE_RESOURCE_DIRECTORY_ENTRY, *PIMAGE_RESOURCE_DIRECTORY_ENTRY;
 
 /*
@@ -1977,4 +1974,3 @@ namespace pe {
     } VS_VERSIONCHILD;
 }
 
-#define DIRECTORY_ENTRIES_NUM 16
