@@ -43,7 +43,7 @@ public:
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
 
-    bufsize_t getEntriesAreaSize() { return static_cast<bufsize_t>(this->getEntriesCount()) * sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY); }
+    bufsize_t getEntriesAreaSize() { return static_cast<bufsize_t>(this->getEntriesCount()) * sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY); }
     long getDepth() { return this->dirDepth; }
 
     IMAGE_RESOURCE_DIRECTORY* mainResourceDir();
@@ -78,7 +78,7 @@ public:
     bool wrap();
     // full structure boundatries
     virtual void* getPtr() { return getEntryPtr(); }
-    virtual bufsize_t getSize() { return sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY); }
+    virtual bufsize_t getSize() { return sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY); }
 
     virtual QString getName() { return "Resource entry: "+ translateType(getID());}
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
@@ -99,7 +99,7 @@ public:
     IMAGE_RESOURCE_DIRECTORY_STRING* getNameStr();
     offset_t getChildAddress();
 
-    IMAGE_RESOURCE_DIRECTORY_ENTRY *getEntryPtr();
+    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY *getEntryPtr();
     ResourcesAlbum* getAlbumPtr() { return album; }
     long getTopEntryID() { return topEntryID; }
 

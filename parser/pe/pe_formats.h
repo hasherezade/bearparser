@@ -11,10 +11,13 @@
 #include <winnt.h>
 #endif
 
-//additional : WIN_CERTIFICATE
-//additional : VS_VERSIONINFO
+/*
+ * Directory Entries
+ */
 
 #ifndef USE_WINNT
+//additional : WIN_CERTIFICATE
+//additional : VS_VERSIONINFO
 
 /*
  * Platform independent definitions
@@ -217,11 +220,15 @@ typedef struct _IMAGE_DATA_DIRECTORY {
     DWORD   VirtualAddress;
     DWORD   Size;
 } IMAGE_DATA_DIRECTORY, *PIMAGE_DATA_DIRECTORY;
+#endif
+
+#define DIRECTORY_ENTRIES_NUM 16
+
+#ifndef USE_WINNT
 
 /*
  * Optional header format.
  */
-#define DIRECTORY_ENTRIES_NUM 16
 
 typedef struct _IMAGE_OPTIONAL_HEADER {
 /*
@@ -1255,7 +1262,7 @@ typedef struct _IMAGE_RESOURCE_DIRECTORY {
 
 #define RESOURCE_NAME_IS_STRING        0x80000000
 #define RESOURCE_DATA_IS_DIRECTORY     0x80000000
-
+#endif
 /*
  * Each directory contains the 32-bit Name of the entry and an offset,
  * relative to the beginning of the resource directory of the data associated
@@ -1270,25 +1277,27 @@ typedef struct _IMAGE_RESOURCE_DIRECTORY {
  * set to indicate this.  Otherwise the high bit is clear and the offset
  * field points to a resource data entry.
  */
+namespace pe {
+    typedef struct _IMAGE_RESOURCE_DIRECTORY_ENTRY {
+        union {
+            struct {
+                DWORD NameOffset : 31;
+                DWORD NameIsString : 1;
+            } name;
+            DWORD   Name;
+            WORD    Id;
+        };
+        union {
+            DWORD   OffsetToData;
+            struct {
+                DWORD   OffsetToDirectory : 31;
+                DWORD   DataIsDirectory : 1;
+            } dir;
+        };
+    } IMAGE_RESOURCE_DIRECTORY_ENTRY, *PIMAGE_RESOURCE_DIRECTORY_ENTRY;
+};
 
-typedef struct _IMAGE_RESOURCE_DIRECTORY_ENTRY {
-    union {
-        struct {
-            DWORD NameOffset : 31;
-            DWORD NameIsString : 1;
-        } DUMMYSTRUCTNAME;
-        DWORD   Name;
-        WORD    Id;
-    } DUMMYUNIONNAME;
-    union {
-        DWORD   OffsetToData;
-        struct {
-            DWORD   OffsetToDirectory : 31;
-            DWORD   DataIsDirectory : 1;
-        } DUMMYSTRUCTNAME2;
-    } DUMMYUNIONNAME2;
-} IMAGE_RESOURCE_DIRECTORY_ENTRY, *PIMAGE_RESOURCE_DIRECTORY_ENTRY;
-
+#ifndef USE_WINNT
 /*
  * For resource directory entries that have actual string names, the Name
  * field of the directory entry points to an object of the following type.
@@ -1973,4 +1982,3 @@ namespace pe {
         WORD subVal; // String or Var, depending on wType
     } VS_VERSIONCHILD;
 }
-

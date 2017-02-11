@@ -4,8 +4,6 @@
 #define MAX_ENTRIES 50
 #define MAX_DEPTH 5
 
-using namespace pe;
-
 /*
 typedef struct _IMAGE_RESOURCE_DIRECTORY {
     DWORD   Characteristics;
@@ -182,7 +180,7 @@ bool ResourceEntryWrapper::wrap()
 }
 
 
-IMAGE_RESOURCE_DIRECTORY_ENTRY* ResourceEntryWrapper::getEntryPtr()
+pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* ResourceEntryWrapper::getEntryPtr()
 {
     if (this->parentDir == NULL) return NULL;
     uint64_t offset = parentDir->getFieldOffset(ResourceDirWrapper::ID_ENTRIES_NUM);
@@ -190,16 +188,16 @@ IMAGE_RESOURCE_DIRECTORY_ENTRY* ResourceEntryWrapper::getEntryPtr()
 
     size_t lastSize = parentDir->getFieldSize(ResourceDirWrapper::ID_ENTRIES_NUM, FIELD_NONE);
     offset += lastSize;
-    offset += (this->entryNum * sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY));
+    offset += (this->entryNum * sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY));
 
-    void *ptr = m_Exe->getContentAt(offset, Executable::RAW, sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY));
-    return (IMAGE_RESOURCE_DIRECTORY_ENTRY*) ptr;
+    void *ptr = m_Exe->getContentAt(offset, Executable::RAW, sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY));
+    return (pe::IMAGE_RESOURCE_DIRECTORY_ENTRY*) ptr;
 }
 
 //IMAGE_RESOURCE_DIRECTORY_ENTRY
 void* ResourceEntryWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
-    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return NULL;
 
     switch (fieldId) {
@@ -224,31 +222,31 @@ QString ResourceEntryWrapper::getFieldName(size_t fieldId)
 
 bool ResourceEntryWrapper::isByName()
 {
-    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return false;
-    if (entry->NameIsString == 1) return true;
+    if (entry->name.NameIsString == 1) return true;
     return false;
 }
 
 bool ResourceEntryWrapper::isDir()
 {
-    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return false;
-    if (entry->DataIsDirectory == 1) return true;
+    if (entry->dir.DataIsDirectory == 1) return true;
     return false;
 }
 
 offset_t ResourceEntryWrapper::getNameOffset()
 {
-    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return INVALID_ADDR;
 
     if (this->parentDir == NULL) return INVALID_ADDR;
     offset_t fOff = this->parentDir->getOffset(this->parentDir->getPtr());
     if (fOff == INVALID_ADDR) return INVALID_ADDR;
 
-    if (entry->NameIsString != 1) return INVALID_ADDR;
-    return fOff + entry->NameOffset;
+    if (entry->name.NameIsString != 1) return INVALID_ADDR;
+    return fOff + entry->name.NameOffset;
 }
 
 IMAGE_RESOURCE_DIRECTORY_STRING* ResourceEntryWrapper::getNameStr()
@@ -264,35 +262,35 @@ IMAGE_RESOURCE_DIRECTORY_STRING* ResourceEntryWrapper::getNameStr()
 QString ResourceEntryWrapper::translateType(WORD id)
 {
     switch (id) {
-        case RT_CURSOR : return "Cursor";
-        case RT_FONT :return "Font";
-        case RT_BITMAP : return "Bitmap";
-        case RT_ICON : return "Icon";
-        case RT_MENU : return "Menu";
-        case RT_DIALOG : return "Dialog";
-        case RT_STRING : return "String";
-        case RT_FONTDIR : return "Font Dir";
-        case RT_ACCELERATOR : return "Accelerator";
-        case RT_RCDATA : return "RC Data";
-        case RT_MESSAGETABLE : return "Message Table";
+        case RESTYPE_CURSOR : return "Cursor";
+        case RESTYPE_FONT :return "Font";
+        case RESTYPE_BITMAP : return "Bitmap";
+        case RESTYPE_ICON : return "Icon";
+        case RESTYPE_MENU : return "Menu";
+        case RESTYPE_DIALOG : return "Dialog";
+        case RESTYPE_STRING : return "String";
+        case RESTYPE_FONTDIR : return "Font Dir";
+        case RESTYPE_ACCELERATOR : return "Accelerator";
+        case RESTYPE_RCDATA : return "RC Data";
+        case RESTYPE_MESSAGETABLE : return "Message Table";
 
-        case RT_GROUP_CURSOR : return "Cursors Group";
-        case RT_GROUP_ICON : return "Icons Group";
-        case RT_VERSION : return "Version";
-        case RT_DLGINCLUDE : return "Dlg Include";
-        case RT_PLUGPLAY : return "Plug & Play";
-        case RT_VXD : return "VXD";
-        case RT_ANICURSOR : return "Animated Cursor";
-        case RT_ANIICON : return "Animated Icon";
-        case RT_HTML : return "HTML";
-        case RT_MANIFEST : return "Manifest";
+        case RESTYPE_GROUP_CURSOR : return "Cursors Group";
+        case RESTYPE_GROUP_ICON : return "Icons Group";
+        case RESTYPE_VERSION : return "Version";
+        case RESTYPE_DLGINCLUDE : return "Dlg Include";
+        case RESTYPE_PLUGPLAY : return "Plug & Play";
+        case RESTYPE_VXD : return "VXD";
+        case RESTYPE_ANICURSOR : return "Animated Cursor";
+        case RESTYPE_ANIICON : return "Animated Icon";
+        case RESTYPE_HTML : return "HTML";
+        case RESTYPE_MANIFEST : return "Manifest";
     }
     return "";
 }
 
 WORD ResourceEntryWrapper::getID()
 {
-    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return 0;
     if (this->isByName()) return 0;
 
@@ -301,9 +299,9 @@ WORD ResourceEntryWrapper::getID()
 
 DWORD ResourceEntryWrapper::getChildOffsetToDirectory()
 {
-    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return 0;
-    return entry->OffsetToDirectory;
+    return entry->dir.OffsetToDirectory;
 }
 
 offset_t ResourceEntryWrapper::getChildAddress()
