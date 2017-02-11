@@ -2,10 +2,8 @@
 #include <bearparser.h>
 
 #include <iostream>
-#include <QtCore>
 #include <QString>
 #include <QtCore/QCoreApplication>
-#include <QtWidgets>
 
 #include "PECommander.h"
 

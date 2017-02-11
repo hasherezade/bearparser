@@ -1,9 +1,5 @@
 #pragma once
 
-#ifndef UNALIGNED
-#define UNALIGNED
-#endif
-
 #include "../win_hdrs/win_types.h"
 #if _MSC_VER
 #define USE_WINNT
@@ -14,10 +10,14 @@
 /*
  * Directory Entries
  */
+ //additional : WIN_CERTIFICATE
+ //additional : VS_VERSIONINFO
 
 #ifndef USE_WINNT
-//additional : WIN_CERTIFICATE
-//additional : VS_VERSIONINFO
+
+#ifndef UNALIGNED
+#define UNALIGNED
+#endif
 
 /*
  * Platform independent definitions

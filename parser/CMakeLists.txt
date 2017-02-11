@@ -5,14 +5,6 @@ project (bearparser)
 set(INSTALL_LIB_DIR lib CACHE PATH "Installation directory for libraries")
 set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
 
-#find_package (Qt4 REQUIRED)
-#include_directories (${QT_INCLUDE_DIR} ${QT_QTCORE_INCLUDE_DIR} )
-
-# Find includes in corresponding build directories
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-# Instruct CMake to run moc automatically when needed.
-set(CMAKE_AUTOMOC ON)
-
 find_package(Qt5Core REQUIRED)
 get_target_property(QtCore_location Qt5::Core LOCATION)
 
@@ -145,8 +137,4 @@ SOURCE_GROUP("Header Files\\pe\\rsrc" FILES ${pe_rsrc_hdrs} )
 
 add_library ( bearparser STATIC ${parser_hdrs} ${parser_srcs} )
 target_link_libraries(bearparser Qt5::Core)
-#target_link_libraries ( bearparser ${QT_QTCORE_LIBRARIES} )
-
-#INCLUDE(${QT_USE_FILE})
-#ADD_DEFINITIONS(${QT_DEFINITIONS})
 
