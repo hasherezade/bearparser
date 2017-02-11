@@ -3,10 +3,16 @@
 #ifndef __WIN_TYPES__
 #define __WIN_TYPES__
 
+/*
 #if _MSC_VER
-    #define snprintf _snprintf
-    #define snscanf _snscanf
+    #ifndef snprintf
+        #define snprintf _snprintf
+    #endif
+    #ifndef snscanf
+        #define snscanf _snscanf
+    #endif
 #endif
+*/
 
 #ifdef _MSC_VER
     #include <stdint.h>
