@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../win_hdrs/win_types.h"
+
 #if _MSC_VER
 #define USE_WINNT
 #include <windows.h>
@@ -1263,21 +1264,24 @@ typedef struct _IMAGE_RESOURCE_DIRECTORY {
 #define RESOURCE_NAME_IS_STRING        0x80000000
 #define RESOURCE_DATA_IS_DIRECTORY     0x80000000
 #endif
-/*
- * Each directory contains the 32-bit Name of the entry and an offset,
- * relative to the beginning of the resource directory of the data associated
- * with this directory entry.  If the name of the entry is an actual text
- * string instead of an integer Id, then the high order bit of the name field
- * is set to one and the low order 31-bits are an offset, relative to the
- * beginning of the resource directory of the string, which is of type
- * IMAGE_RESOURCE_DIRECTORY_STRING.  Otherwise the high bit is clear and the
- * low-order 16-bits are the integer Id that identify this resource directory
- * entry. If the directory entry is yet another resource directory (i.e. a
- * subdirectory), then the high order bit of the offset field will be
- * set to indicate this.  Otherwise the high bit is clear and the offset
- * field points to a resource data entry.
- */
+
 namespace pe {
+
+    /*
+    * Each directory contains the 32-bit Name of the entry and an offset,
+    * relative to the beginning of the resource directory of the data associated
+    * with this directory entry.  If the name of the entry is an actual text
+    * string instead of an integer Id, then the high order bit of the name field
+    * is set to one and the low order 31-bits are an offset, relative to the
+    * beginning of the resource directory of the string, which is of type
+    * IMAGE_RESOURCE_DIRECTORY_STRING.  Otherwise the high bit is clear and the
+    * low-order 16-bits are the integer Id that identify this resource directory
+    * entry. If the directory entry is yet another resource directory (i.e. a
+    * subdirectory), then the high order bit of the offset field will be
+    * set to indicate this.  Otherwise the high bit is clear and the offset
+    * field points to a resource data entry.
+    */
+
     typedef struct _IMAGE_RESOURCE_DIRECTORY_ENTRY {
         union {
             struct {
@@ -1295,7 +1299,8 @@ namespace pe {
             } dir;
         };
     } IMAGE_RESOURCE_DIRECTORY_ENTRY, *PIMAGE_RESOURCE_DIRECTORY_ENTRY;
-};
+
+}; // namespace pe
 
 #ifndef USE_WINNT
 /*
@@ -1334,78 +1339,82 @@ typedef struct _IMAGE_RESOURCE_DATA_ENTRY {
     DWORD   CodePage;
     DWORD   Reserved;
 } IMAGE_RESOURCE_DATA_ENTRY, *PIMAGE_RESOURCE_DATA_ENTRY;
-
-/*
- * Load Configuration Directory Entry
- */
-typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY32 {
-    DWORD   Size;
-    DWORD   TimeDateStamp;
-    WORD    MajorVersion;
-    WORD    MinorVersion;
-    DWORD   GlobalFlagsClear;
-    DWORD   GlobalFlagsSet;
-    DWORD   CriticalSectionDefaultTimeout;
-    DWORD   DeCommitFreeBlockThreshold;
-    DWORD   DeCommitTotalFreeThreshold;
-    DWORD   LockPrefixTable;            // VA
-    DWORD   MaximumAllocationSize;
-    DWORD   VirtualMemoryThreshold;
-    DWORD   ProcessHeapFlags;
-    DWORD   ProcessAffinityMask;
-    WORD    CSDVersion;
-    WORD    Reserved1;
-    DWORD   EditList;                   // VA
-    DWORD   SecurityCookie;             // VA
-    DWORD   SEHandlerTable;             // VA
-    DWORD   SEHandlerCount;
-    //if Size > sizeof(IMAGE_LOAD_CONFIG_DIRECTORY32)
-    // IMAGE_LOAD_CONFIG_D32_W81 ldc_W81_part;
-} IMAGE_LOAD_CONFIG_DIRECTORY32, *PIMAGE_LOAD_CONFIG_DIRECTORY32;
-
-typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY64{
-    DWORD      Size;
-    DWORD      TimeDateStamp;
-    WORD       MajorVersion;
-    WORD       MinorVersion;
-    DWORD      GlobalFlagsClear;
-    DWORD      GlobalFlagsSet;
-    DWORD      CriticalSectionDefaultTimeout;
-    ULONGLONG  DeCommitFreeBlockThreshold;
-    ULONGLONG  DeCommitTotalFreeThreshold;
-    ULONGLONG  LockPrefixTable;         // VA
-    ULONGLONG  MaximumAllocationSize;
-    ULONGLONG  VirtualMemoryThreshold;
-    ULONGLONG  ProcessAffinityMask;
-    DWORD      ProcessHeapFlags;
-    WORD       CSDVersion;
-    WORD       Reserved1;
-    ULONGLONG  EditList;                // VA
-    ULONGLONG  SecurityCookie;          // VA
-    ULONGLONG  SEHandlerTable;          // VA
-    ULONGLONG  SEHandlerCount;
-    // if Size > sizeof(IMAGE_LOAD_CONFIG_DIRECTORY64)
-    // IMAGE_LOAD_CONFIG_D64_W81 ldc_W81_part;
-} IMAGE_LOAD_CONFIG_DIRECTORY64, *PIMAGE_LOAD_CONFIG_DIRECTORY64;
 #endif
 
-// IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W8.1 :
-typedef struct _IMAGE_LOAD_CONFIG_D32_W81 {
-    DWORD   GuardCFCheckFunctionPointer; //VA
-    DWORD   Reserved2;
-    DWORD   GuardCFFunctionTable; //VA
-    DWORD   GuardCFFunctionCount;
-    DWORD   GuardFlags;
-} IMAGE_LOAD_CONFIG_D32_W81, *PIMAGE_LOAD_CONFIG_D32_W81;
+namespace pe {
 
-// IMAGE_LOAD_CONFIG_DIRECTORY64 extension for W8.1 :
-typedef struct _IMAGE_LOAD_CONFIG_D64_W81 {
-    ULONGLONG   GuardCFCheckFunctionPointer; //VA
-    ULONGLONG   Reserved2;
-    ULONGLONG   GuardCFFunctionTable; //VA
-    ULONGLONG   GuardCFFunctionCount;
-    DWORD       GuardFlags;
-} IMAGE_LOAD_CONFIG_D64_W81, *PIMAGE_LOAD_CONFIG_D64_W81;
+    /*
+    * Load Configuration Directory Entry
+    */
+    typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY32 {
+        DWORD   Size;
+        DWORD   TimeDateStamp;
+        WORD    MajorVersion;
+        WORD    MinorVersion;
+        DWORD   GlobalFlagsClear;
+        DWORD   GlobalFlagsSet;
+        DWORD   CriticalSectionDefaultTimeout;
+        DWORD   DeCommitFreeBlockThreshold;
+        DWORD   DeCommitTotalFreeThreshold;
+        DWORD   LockPrefixTable;            // VA
+        DWORD   MaximumAllocationSize;
+        DWORD   VirtualMemoryThreshold;
+        DWORD   ProcessHeapFlags;
+        DWORD   ProcessAffinityMask;
+        WORD    CSDVersion;
+        WORD    Reserved1;
+        DWORD   EditList;                   // VA
+        DWORD   SecurityCookie;             // VA
+        DWORD   SEHandlerTable;             // VA
+        DWORD   SEHandlerCount;
+        //if Size > sizeof(IMAGE_LOAD_CONFIG_DIRECTORY32)
+        // IMAGE_LOAD_CONFIG_D32_W81 ldc_W81_part;
+    } IMAGE_LOAD_CONFIG_DIRECTORY32, *PIMAGE_LOAD_CONFIG_DIRECTORY32;
+
+    typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY64 {
+        DWORD      Size;
+        DWORD      TimeDateStamp;
+        WORD       MajorVersion;
+        WORD       MinorVersion;
+        DWORD      GlobalFlagsClear;
+        DWORD      GlobalFlagsSet;
+        DWORD      CriticalSectionDefaultTimeout;
+        ULONGLONG  DeCommitFreeBlockThreshold;
+        ULONGLONG  DeCommitTotalFreeThreshold;
+        ULONGLONG  LockPrefixTable;         // VA
+        ULONGLONG  MaximumAllocationSize;
+        ULONGLONG  VirtualMemoryThreshold;
+        ULONGLONG  ProcessAffinityMask;
+        DWORD      ProcessHeapFlags;
+        WORD       CSDVersion;
+        WORD       Reserved1;
+        ULONGLONG  EditList;                // VA
+        ULONGLONG  SecurityCookie;          // VA
+        ULONGLONG  SEHandlerTable;          // VA
+        ULONGLONG  SEHandlerCount;
+        // if Size > sizeof(IMAGE_LOAD_CONFIG_DIRECTORY64)
+        // IMAGE_LOAD_CONFIG_D64_W81 ldc_W81_part;
+    } IMAGE_LOAD_CONFIG_DIRECTORY64, *PIMAGE_LOAD_CONFIG_DIRECTORY64;
+
+    // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W8.1 :
+    typedef struct _IMAGE_LOAD_CONFIG_D32_W81 {
+        DWORD   GuardCFCheckFunctionPointer; //VA
+        DWORD   Reserved2;
+        DWORD   GuardCFFunctionTable; //VA
+        DWORD   GuardCFFunctionCount;
+        DWORD   GuardFlags;
+    } IMAGE_LOAD_CONFIG_D32_W81, *PIMAGE_LOAD_CONFIG_D32_W81;
+
+    // IMAGE_LOAD_CONFIG_DIRECTORY64 extension for W8.1 :
+    typedef struct _IMAGE_LOAD_CONFIG_D64_W81 {
+        ULONGLONG   GuardCFCheckFunctionPointer; //VA
+        ULONGLONG   Reserved2;
+        ULONGLONG   GuardCFFunctionTable; //VA
+        ULONGLONG   GuardCFFunctionCount;
+        DWORD       GuardFlags;
+    } IMAGE_LOAD_CONFIG_D64_W81, *PIMAGE_LOAD_CONFIG_D64_W81;
+
+}; //namespace pe
 
 #ifndef USE_WINNT
 /*
@@ -1676,44 +1685,48 @@ typedef enum IMPORT_OBJECT_NAME_TYPE
 #include "../win_hdrs/pshpack4.h"                   // 4 byte packing (DWORD alligned)
 #endif
 
-typedef struct _WIN_CERTIFICATE {
-    DWORD dwLength;
-    WORD wRevision;
-    WORD wCertificateType; // of CERTIFICATE_TYPE
-    BYTE bCertificate[1];
-} WIN_CERTIFICATE, *LPWIN_CERTIFICATE;
+namespace pe {
 
-typedef enum _CERTIFICATE_TYPE {
-    WIN_CERT_TYPE_X509  = 0x0001,     //bCertificate contains an X.509 certificate.
-    WIN_CERT_TYPE_PKCS_SIGNED_DATA = 0x0002,     //bCertificate contains a PKCS SignedData structure.
-    WIN_CERT_TYPE_RESERVED_1 = 0x0003,     //Reserved.
-    WIN_CERT_TYPE_PKCS1_SIGN = 0x0009    //bCertificate contains PKCS1_MODULE_SIGN fields.
-} CERTIFICATE_TYPE;
+    typedef struct _WIN_CERTIFICATE {
+        DWORD dwLength;
+        WORD wRevision;
+        WORD wCertificateType; // of CERTIFICATE_TYPE
+        BYTE bCertificate[1];
+    } WIN_CERTIFICATE, *LPWIN_CERTIFICATE;
+
+    typedef enum _CERTIFICATE_TYPE {
+        WIN_CERT_TYPE_X509 = 0x0001,     //bCertificate contains an X.509 certificate.
+        WIN_CERT_TYPE_PKCS_SIGNED_DATA = 0x0002,     //bCertificate contains a PKCS SignedData structure.
+        WIN_CERT_TYPE_RESERVED_1 = 0x0003,     //Reserved.
+        WIN_CERT_TYPE_PKCS1_SIGN = 0x0009    //bCertificate contains PKCS1_MODULE_SIGN fields.
+    } CERTIFICATE_TYPE;
 
 
-//DELAY_LOAD
+    //DELAY_LOAD
 
-typedef struct _IMAGE_DELAY_LOAD32 {
-    DWORD grAttrs;        //must be 0
-    DWORD szName;        //RVA
-    DWORD phmod;        //RVA
-    DWORD pIAT;            //RVA
-    DWORD pINT;            //RVA
-    DWORD pBoundIAT;    //RVA
-    DWORD pUnloadIAT;    //RVA
-    DWORD dwTimestamp;
-} IMAGE_DELAY_LOAD32, *LPIMAGE_DELAY_LOAD32;
+    typedef struct _IMAGE_DELAY_LOAD32 {
+        DWORD grAttrs;        //must be 0
+        DWORD szName;        //RVA
+        DWORD phmod;        //RVA
+        DWORD pIAT;            //RVA
+        DWORD pINT;            //RVA
+        DWORD pBoundIAT;    //RVA
+        DWORD pUnloadIAT;    //RVA
+        DWORD dwTimestamp;
+    } IMAGE_DELAY_LOAD32, *LPIMAGE_DELAY_LOAD32;
 
-typedef struct _IMAGE_DELAY_LOAD64 {
-    ULONGLONG grAttrs;        //must be 0
-    ULONGLONG szName;        //RVA
-    ULONGLONG phmod;        //RVA
-    ULONGLONG pIAT;            //RVA
-    ULONGLONG pINT;            //RVA
-    ULONGLONG pBoundIAT;    //RVA
-    ULONGLONG pUnloadIAT;    //RVA
-    ULONGLONG dwTimestamp;
-} IMAGE_DELAY_LOAD64, *LPIMAGE_DELAY_LOAD64;
+    typedef struct _IMAGE_DELAY_LOAD64 {
+        ULONGLONG grAttrs;        //must be 0
+        ULONGLONG szName;        //RVA
+        ULONGLONG phmod;        //RVA
+        ULONGLONG pIAT;            //RVA
+        ULONGLONG pINT;            //RVA
+        ULONGLONG pBoundIAT;    //RVA
+        ULONGLONG pUnloadIAT;    //RVA
+        ULONGLONG dwTimestamp;
+    } IMAGE_DELAY_LOAD64, *LPIMAGE_DELAY_LOAD64;
+}; // namespace pe
+
 
 #ifndef USE_WINNT
 // DIR_EXCEPTION -> RUNTIME_FUNCTION -> UNWIND_INFO
@@ -1757,11 +1770,15 @@ ExceptionHandlerAddress:
 #include "../win_hdrs/pshpack2.h"                   // 2 byte packing (WORD alligned)
 #endif
 
-// IMAGE_BASE_RELOCATION -> Entry:
-typedef struct _BASE_RELOCATION_ENTRY {
-    WORD Offset : 12;
-    WORD Type: 4;
-} BASE_RELOCATION_ENTRY;
+namespace pe {
+
+    // IMAGE_BASE_RELOCATION -> Entry:
+    typedef struct _BASE_RELOCATION_ENTRY {
+        WORD Offset : 12;
+        WORD Type : 4;
+    } BASE_RELOCATION_ENTRY;
+
+}; //namespace pe
 
 #ifndef USE_WINNT
 //From winuser.h:
@@ -1981,4 +1998,4 @@ namespace pe {
         WCHAR szKey[INFOTEXT_LEN];
         WORD subVal; // String or Var, depending on wType
     } VS_VERSIONCHILD;
-}
+}; // namespace pe

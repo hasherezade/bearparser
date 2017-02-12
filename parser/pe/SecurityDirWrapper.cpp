@@ -1,21 +1,21 @@
 #include "SecurityDirWrapper.h"
 #include "PEFile.h"
 
-WIN_CERTIFICATE* SecurityDirWrapper::getCert()
+pe::WIN_CERTIFICATE* SecurityDirWrapper::getCert()
 {
     offset_t rva = getDirEntryAddress();
 
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RAW, sizeof(WIN_CERTIFICATE));
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RAW, sizeof(pe::WIN_CERTIFICATE));
     if (ptr == NULL) return NULL;
 
-    return (WIN_CERTIFICATE*) ptr;
+    return (pe::WIN_CERTIFICATE*) ptr;
 }
 
 bool SecurityDirWrapper::wrap()
 {
     this->sizeOk = false;
 
-    WIN_CERTIFICATE* cert = getCert();
+    pe::WIN_CERTIFICATE* cert = getCert();
     if (cert == NULL) return false;
 
     offset_t offset = this->getFieldOffset(SecurityDirWrapper::CERT_CONTENT);
@@ -39,10 +39,10 @@ void* SecurityDirWrapper::getPtr()
 
 bufsize_t SecurityDirWrapper::getSize()
 {
-    WIN_CERTIFICATE* cert = getCert();
+    pe::WIN_CERTIFICATE* cert = getCert();
     if (cert == NULL) return 0;
 
-    bufsize_t fullSize = static_cast<bufsize_t>(sizeof(WIN_CERTIFICATE)); // TODO: check it
+    bufsize_t fullSize = static_cast<bufsize_t>(sizeof(pe::WIN_CERTIFICATE)); // TODO: check it
     if (this->sizeOk) {
         fullSize = static_cast<bufsize_t>(cert->dwLength);
     }
@@ -52,7 +52,7 @@ bufsize_t SecurityDirWrapper::getSize()
 
 void* SecurityDirWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    WIN_CERTIFICATE* cert = getCert();
+    pe::WIN_CERTIFICATE* cert = getCert();
     if (cert == NULL) return 0;
 
     switch (fId) {
@@ -86,10 +86,10 @@ WrappedValue::data_type SecurityDirWrapper::containsDataType(size_t fieldId, siz
 QString SecurityDirWrapper::translateType(int type)
 {
     switch (type) {
-        case WIN_CERT_TYPE_X509  : return "X.509 certificate";
-        case WIN_CERT_TYPE_PKCS_SIGNED_DATA : return "PKCS Signed Data";
-        case WIN_CERT_TYPE_RESERVED_1 : return "Reserved";
-        case WIN_CERT_TYPE_PKCS1_SIGN : return "PKCS1 Module Sign Fields";
+        case pe::WIN_CERT_TYPE_X509  : return "X.509 certificate";
+        case pe::WIN_CERT_TYPE_PKCS_SIGNED_DATA : return "PKCS Signed Data";
+        case pe::WIN_CERT_TYPE_RESERVED_1 : return "Reserved";
+        case pe::WIN_CERT_TYPE_PKCS1_SIGN : return "PKCS1 Module Sign Fields";
     }
     return "";
 }
@@ -98,7 +98,7 @@ QString SecurityDirWrapper::translateFieldContent(size_t fieldId)
 {
     if (fieldId != TYPE) return "";
 
-    WIN_CERTIFICATE* cert = getCert();
+    pe::WIN_CERTIFICATE* cert = getCert();
     if (cert == NULL) return "";
 
     return translateType(cert->wCertificateType);

@@ -8,7 +8,7 @@ bool PEFileBuilder::signatureMatches(AbstractByteBuffer *buf)
     WORD *magic = (WORD*) buf->getContentAt(dosOffset, sizeof(WORD));
     if (magic == NULL) return false;
 
-    if ((*magic) != S_DOS) {
+    if ((*magic) != pe::S_DOS) {
         return false;
     }
     offset_t newOffset = dosOffset + (sizeof(IMAGE_DOS_HEADER) - sizeof(LONG));
