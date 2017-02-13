@@ -4,7 +4,6 @@
 #include "../Executable.h"
 
 #include "pe_formats.h"
-using namespace pe;
 
 class DosHdrWrapper : public ExeElementWrapper
 {

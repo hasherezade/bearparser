@@ -1,7 +1,6 @@
 #include "ImportDirWrapper.h"
 #include "PEFile.h"
 
-using namespace pe;
 using namespace imports_util;
 
 void* ImportedFuncWrapper::getPtr()

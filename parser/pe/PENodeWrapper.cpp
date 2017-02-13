@@ -1,8 +1,6 @@
 #include "PENodeWrapper.h"
 #include "PEFile.h"
 
-using namespace pe;
-
 PEElementWrapper::PEElementWrapper(PEFile* pe)
     : ExeElementWrapper(pe), m_PE(pe)
 {

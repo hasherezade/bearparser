@@ -2,8 +2,6 @@
 
 #include "PENodeWrapper.h"
 
-using namespace pe;
-
 class DataDirWrapper : public PEElementWrapper
 {
 public:

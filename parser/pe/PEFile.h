@@ -147,7 +147,7 @@ protected:
     SectHdrsWrapper *sects;
 
     ResourcesAlbum *album;
-    DataDirEntryWrapper* dataDirEntries[DIR_ENTRIES_COUNT];
+    DataDirEntryWrapper* dataDirEntries[pe::DIR_ENTRIES_COUNT];
 
 friend class SectHdrsWrapper;
 };

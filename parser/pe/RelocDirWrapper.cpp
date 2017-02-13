@@ -269,13 +269,13 @@ bufsize_t RelocEntryWrapper::getSize()
 
 WORD RelocEntryWrapper::getType(WORD relocEntryVal)
 {
-   BASE_RELOCATION_ENTRY* entry = (BASE_RELOCATION_ENTRY*) &relocEntryVal;
+    pe::BASE_RELOCATION_ENTRY* entry = (pe::BASE_RELOCATION_ENTRY*) &relocEntryVal;
     return entry->Type;
 }
 
 WORD RelocEntryWrapper::getDelta(WORD relocEntryVal)
 {
-    BASE_RELOCATION_ENTRY* entry = (BASE_RELOCATION_ENTRY*) &relocEntryVal;
+    pe::BASE_RELOCATION_ENTRY* entry = (pe::BASE_RELOCATION_ENTRY*) &relocEntryVal;
     return entry->Offset;
 }
 

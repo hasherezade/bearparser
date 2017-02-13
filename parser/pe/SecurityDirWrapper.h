@@ -2,7 +2,6 @@
 
 #include "DataDirEntryWrapper.h"
 
-
 /*
 typedef struct WIN_CERTIFICATE {
   DWORD dwLength;
@@ -50,7 +49,7 @@ public:
     virtual QString translateFieldContent(size_t fieldId);
 
 private:
-    WIN_CERTIFICATE* getCert();
+    pe::WIN_CERTIFICATE* getCert();
     void clear() {}
 
     bool sizeOk;

@@ -4,8 +4,6 @@
 #define INVALID_NAME "<invalid>"
 #define INVALID_ID (-1)
 
-using namespace pe;
-
 /*
 typedef struct _IMAGE_EXPORT_DIRECTORY {
     DWORD   Characteristics;

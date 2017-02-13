@@ -1,8 +1,6 @@
 #include "PECore.h"
 #define DEFAULT_IMGBASE 0x10000
 
-using namespace pe;
-
 void PECore::reset()
 {
     dos = NULL;

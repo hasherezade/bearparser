@@ -94,7 +94,7 @@ bool ResourceDirWrapper::wrap()
             break;
         }
         if (this->topEntryID == TOP_ENTRY_ROOT && this->album != NULL) {
-            resource_type typeId = static_cast<resource_type>(entry->getID());
+            pe::resource_type typeId = static_cast<pe::resource_type>(entry->getID());
             this->album->mapIdToLeafType(i, typeId);
         }
         //this->parsedSize += val;
@@ -262,28 +262,28 @@ IMAGE_RESOURCE_DIRECTORY_STRING* ResourceEntryWrapper::getNameStr()
 QString ResourceEntryWrapper::translateType(WORD id)
 {
     switch (id) {
-        case RESTYPE_CURSOR : return "Cursor";
-        case RESTYPE_FONT :return "Font";
-        case RESTYPE_BITMAP : return "Bitmap";
-        case RESTYPE_ICON : return "Icon";
-        case RESTYPE_MENU : return "Menu";
-        case RESTYPE_DIALOG : return "Dialog";
-        case RESTYPE_STRING : return "String";
-        case RESTYPE_FONTDIR : return "Font Dir";
-        case RESTYPE_ACCELERATOR : return "Accelerator";
-        case RESTYPE_RCDATA : return "RC Data";
-        case RESTYPE_MESSAGETABLE : return "Message Table";
+        case pe::RESTYPE_CURSOR : return "Cursor";
+        case pe::RESTYPE_FONT :return "Font";
+        case pe::RESTYPE_BITMAP : return "Bitmap";
+        case pe::RESTYPE_ICON : return "Icon";
+        case pe::RESTYPE_MENU : return "Menu";
+        case pe::RESTYPE_DIALOG : return "Dialog";
+        case pe::RESTYPE_STRING : return "String";
+        case pe::RESTYPE_FONTDIR : return "Font Dir";
+        case pe::RESTYPE_ACCELERATOR : return "Accelerator";
+        case pe::RESTYPE_RCDATA : return "RC Data";
+        case pe::RESTYPE_MESSAGETABLE : return "Message Table";
 
-        case RESTYPE_GROUP_CURSOR : return "Cursors Group";
-        case RESTYPE_GROUP_ICON : return "Icons Group";
-        case RESTYPE_VERSION : return "Version";
-        case RESTYPE_DLGINCLUDE : return "Dlg Include";
-        case RESTYPE_PLUGPLAY : return "Plug & Play";
-        case RESTYPE_VXD : return "VXD";
-        case RESTYPE_ANICURSOR : return "Animated Cursor";
-        case RESTYPE_ANIICON : return "Animated Icon";
-        case RESTYPE_HTML : return "HTML";
-        case RESTYPE_MANIFEST : return "Manifest";
+        case pe::RESTYPE_GROUP_CURSOR : return "Cursors Group";
+        case pe::RESTYPE_GROUP_ICON : return "Icons Group";
+        case pe::RESTYPE_VERSION : return "Version";
+        case pe::RESTYPE_DLGINCLUDE : return "Dlg Include";
+        case pe::RESTYPE_PLUGPLAY : return "Plug & Play";
+        case pe::RESTYPE_VXD : return "VXD";
+        case pe::RESTYPE_ANICURSOR : return "Animated Cursor";
+        case pe::RESTYPE_ANIICON : return "Animated Icon";
+        case pe::RESTYPE_HTML : return "HTML";
+        case pe::RESTYPE_MANIFEST : return "Manifest";
     }
     return "";
 }

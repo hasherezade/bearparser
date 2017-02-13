@@ -1,7 +1,6 @@
 #include "DebugDirWrapper.h"
 #include "PEFile.h"
 
-using namespace pe;
 /*
 typedef struct _IMAGE_DEBUG_DIRECTORY {
     DWORD   Characteristics;
@@ -93,18 +92,18 @@ Executable::addr_type DebugDirWrapper::containsAddrType(size_t fieldId, size_t s
 QString DebugDirWrapper::translateType(int type)
 {
     switch (type) {
-        case DT_UNKNOWN : return "unknown";
-        case DT_COFF : return "COFF";
-        case DT_CODEVIEW : return "Visual C++";
-        case DT_FPO : return "frame pointer omission";
-        case DT_MISC : return "DBG file";
-        case DT_EXCEPTION : return "A copy of .pdata section";
-        case DT_FIXUP : return "Reserved";
-        case DT_OMAP_TO_SRC : return "mapping from an RVA in image to an RVA in source image";
-        case DT_OMAP_FROM_SRC : return "mapping from an RVA in source image to an RVA in image";
-        case DT_BORLAND : return "Borland";
-        case DT_RESERVED10 : return "Reserved";
-        case DT_CLSID : return "CLSID";
+        case pe::DT_UNKNOWN : return "unknown";
+        case pe::DT_COFF : return "COFF";
+        case pe::DT_CODEVIEW : return "Visual C++";
+        case pe::DT_FPO : return "frame pointer omission";
+        case pe::DT_MISC : return "DBG file";
+        case pe::DT_EXCEPTION : return "A copy of .pdata section";
+        case pe::DT_FIXUP : return "Reserved";
+        case pe::DT_OMAP_TO_SRC : return "mapping from an RVA in image to an RVA in source image";
+        case pe::DT_OMAP_FROM_SRC : return "mapping from an RVA in source image to an RVA in image";
+        case pe::DT_BORLAND : return "Borland";
+        case pe::DT_RESERVED10 : return "Reserved";
+        case pe::DT_CLSID : return "CLSID";
     }
     return "";
 }

@@ -1,7 +1,6 @@
 #include "BoundImpDirWrapper.h"
 #include "PEFile.h"
 
-using namespace pe;
 size_t BoundImpDirWrapper::EntriesLimit = 1000;
 
 /*

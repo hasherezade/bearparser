@@ -2,8 +2,6 @@
 #include "ResourceStringsWrapper.h"
 #include "ResourceVersionWrapper.h"
 
-using namespace pe;
-
 ResourceContentWrapper* ResourceContentFactory::makeResContentWrapper(pe::resource_type typeId, ResourceLeafWrapper* leaf)
 {
     if (leaf == NULL) return NULL;
