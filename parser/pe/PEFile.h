@@ -138,7 +138,7 @@ protected:
     //---
     //modifications:
     bool setHdrSectionsNum(size_t newNum);
-    bool setVitualSize(bufsize_t newSize);
+    bool setVirtualSize(bufsize_t newSize);
 
     DosHdrWrapper *dosHdrWrapper;
 

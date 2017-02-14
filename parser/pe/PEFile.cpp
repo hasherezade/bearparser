@@ -199,7 +199,7 @@ bool PEFile::setHdrSectionsNum(size_t newNum)
     return true;
 }
 
-bool PEFile::setVitualSize(bufsize_t newSize)
+bool PEFile::setVirtualSize(bufsize_t newSize)
 {
     uint64_t size = newSize;
     bool canSet = optHdr->setNumValue(OptHdrWrapper::IMAGE_SIZE, 0, size);
@@ -350,7 +350,7 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
     bufsize_t newSize = roundedRawEnd + size;
     bufsize_t newVirtualSize = roundedVirtualEnd + size;
 
-    if (setVitualSize(newVirtualSize) == false) {
+    if (setVirtualSize(newVirtualSize) == false) {
         Logger::append(Logger::D_ERROR, "Failed to change virtual size");
         return NULL;
     }
@@ -398,34 +398,35 @@ SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
 {
     SectionHdrWrapper* secHdr = getLastSection();
     if (secHdr == NULL) return NULL;
-    
+
     //TODO: check overlay...
     bufsize_t fullSize = getContentSize();
     bufsize_t newSize = fullSize + addedSize;
 
-    offset_t secROffset = secHdr->getContentOffset(Executable::RAW, true);
-    bufsize_t secRSize = secHdr->getContentSize(Executable::RAW, true);
+    offset_t secROffset = secHdr->getContentOffset(Executable::RAW, false);
+    bufsize_t secRSize = secHdr->getContentSize(Executable::RAW, false);
     bufsize_t secNewRSize = newSize - secROffset; //include overlay in section
 
     secHdr->setNumValue(SectionHdrWrapper::RSIZE, uint64_t(secNewRSize));
 
-    offset_t secVOffset = secHdr->getContentOffset(Executable::RVA, true);
-    bufsize_t secVSize = secHdr->getContentSize(Executable::RVA, true);
+    offset_t secVOffset = secHdr->getContentOffset(Executable::RVA, false);
+    bufsize_t secVSize = secHdr->getContentSize(Executable::RVA, false);
     bufsize_t secNewVSize = secVSize;
-    if (secNewVSize < secNewRSize) {
+    // if the previous virtual size is smaller than the new raw size, then update it:
+    if (secVSize < secNewRSize) {
         secNewVSize = secNewRSize;
-        secHdr->setNumValue(SectionHdrWrapper::VSIZE, uint64_t(secNewVSize));
+        secHdr->setNumValue(SectionHdrWrapper::VSIZE, uint64_t(secNewRSize));
+
+        // if the virtual size of section has changed,
+        // update the Size of Image (saved in the header):
+        bufsize_t newVSize = secVOffset + secNewVSize;
+        this->setVirtualSize(newVSize);
     }
 
-    bufsize_t prevVSize = this->getMappedSize(Executable::RVA);
-
+    //update raw size:
     this->resize(newSize);
-
-    bufsize_t newVSize = secVOffset + secNewVSize;
-    this->setVitualSize(newVSize);
-
-    secHdr = getLastSection();
-    return secHdr;
+    //finally, retrieve the resized section:
+    return getLastSection();
 }
 
 bool PEFile::unbindImports()
