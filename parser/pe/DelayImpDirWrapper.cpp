@@ -1,8 +1,6 @@
 #include "DelayImpDirWrapper.h"
 #include "PEFile.h"
 
-using namespace pe;
-
 /*
 typedef struct _IMAGE_DELAY_LOAD {
     DWORD grAttrs;        //must be 0
@@ -85,15 +83,15 @@ bufsize_t DelayImpDirWrapper::getEntrySize()
 
 //---------------------------------------------------------------------------
 
-pe::IMAGE_IMPORT_BY_NAME* DelayImpEntryWrapper::getFirstImpByNamePtr()
+IMAGE_IMPORT_BY_NAME* DelayImpEntryWrapper::getFirstImpByNamePtr()
 {
     bool isOk = false;
     uint64_t value = this->getNumValue(INT, &isOk);
     if(!isOk) return NULL;
 
     Executable::addr_type aT = containsAddrType(INT);
-    BYTE *ptr = m_Exe->getContentAt(value, aT, sizeof(pe::IMAGE_IMPORT_BY_NAME));
-    return (pe::IMAGE_IMPORT_BY_NAME*) ptr;
+    BYTE *ptr = m_Exe->getContentAt(value, aT, sizeof(IMAGE_IMPORT_BY_NAME));
+    return (IMAGE_IMPORT_BY_NAME*) ptr;
 }
 
 bool DelayImpEntryWrapper::loadNextEntry(size_t entryNum)
@@ -146,7 +144,7 @@ pe::IMAGE_DELAY_LOAD32* DelayImpEntryWrapper::dl32()
     BYTE *content =  this->m_Exe->getContentAt(entryOffset, Executable::RAW, DL_SIZE);
     if (!content) return NULL;
 
-    return (pe::IMAGE_DELAY_LOAD32*)content;
+    return (pe::IMAGE_DELAY_LOAD32*) content;
 }
 
 pe::IMAGE_DELAY_LOAD64* DelayImpEntryWrapper::dl64()
@@ -400,7 +398,7 @@ IMAGE_IMPORT_BY_NAME* DelayImpFuncWrapper::getImportByNamePtr()
     if (!isOk || addr == INVALID_ADDR) return NULL;
 
     Executable::addr_type aT = m_Exe->detectAddrType(addr, Executable::RVA);
-    BYTE *ptr = m_Exe->getContentAt(addr, aT, sizeof(pe::IMAGE_IMPORT_BY_NAME));
-    return (pe::IMAGE_IMPORT_BY_NAME*) ptr;
+    BYTE *ptr = m_Exe->getContentAt(addr, aT, sizeof(IMAGE_IMPORT_BY_NAME));
+    return (IMAGE_IMPORT_BY_NAME*) ptr;
 }
 

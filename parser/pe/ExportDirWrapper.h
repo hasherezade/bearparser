@@ -44,7 +44,7 @@ protected:
     void clear();
     size_t mapNames();
 
-    pe::IMAGE_EXPORT_DIRECTORY* exportDir();
+    IMAGE_EXPORT_DIRECTORY* exportDir();
     std::map<WORD, DWORD> ordToNameId;
 
 friend class ExportEntryWrapper;

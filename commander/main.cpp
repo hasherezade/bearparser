@@ -2,7 +2,6 @@
 #include <bearparser.h>
 
 #include <iostream>
-#include <QtCore>
 #include <QString>
 #include <QtCore/QCoreApplication>
 
@@ -33,8 +32,6 @@ QString getFileName()
 
 int main(int argc, char *argv[])
 {
-    printf("Bearparser version: %s\n", BEARPARSER_VERSION);
-    printf("[READY]\n");
     QCoreApplication app(argc, argv);
 
     ExeFactory::init();

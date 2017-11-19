@@ -2,8 +2,6 @@
 #include "ResourceStringsWrapper.h"
 #include "ResourceVersionWrapper.h"
 
-using namespace pe;
-
 ResourceContentWrapper* ResourceContentFactory::makeResContentWrapper(pe::resource_type typeId, ResourceLeafWrapper* leaf)
 {
     if (leaf == NULL) return NULL;
@@ -14,16 +12,16 @@ ResourceContentWrapper* ResourceContentFactory::makeResContentWrapper(pe::resour
     ResourceContentWrapper* cw = NULL;
 
     switch (typeId) {
-        case pe::RT_STRING:
+        case pe::RESTYPE_STRING:
             return new ResourceStringsWrapper(pe, leaf);
 
-        case pe::RT_VERSION: 
+        case pe::RESTYPE_VERSION:
             return new ResourceVersionWrapper(pe, leaf);
 
-        case pe::RT_MANIFEST:
+        case pe::RESTYPE_MANIFEST:
             return new ReourceManifestWrapper(pe, leaf);
 
-        case pe::RT_HTML:
+        case pe::RESTYPE_HTML:
             return new ReourceHTMLWrapper(pe, leaf);
 
         default:

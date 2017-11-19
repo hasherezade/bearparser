@@ -2,7 +2,6 @@
 
 #include "DataDirEntryWrapper.h"
 
-
 /*
 typedef struct WIN_CERTIFICATE {
   DWORD dwLength;

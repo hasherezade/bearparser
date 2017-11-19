@@ -2,8 +2,6 @@
 
 #include "PENodeWrapper.h"
 
-using namespace pe;
-
 class OptHdrWrapper : public PEElementWrapper
 {
 public:
@@ -77,8 +75,8 @@ public:
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
 
     Executable::exe_bits getHdrBitMode();
-    pe::IMAGE_NT_HEADERS32* nt32();
-    pe::IMAGE_NT_HEADERS64* nt64();
+    IMAGE_NT_HEADERS32* nt32();
+    IMAGE_NT_HEADERS64* nt64();
 
     //DataDirWrapper dataDir;
 protected:

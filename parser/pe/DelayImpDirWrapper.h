@@ -65,7 +65,7 @@ protected:
 
     pe::IMAGE_DELAY_LOAD32* dl32();
     pe::IMAGE_DELAY_LOAD64* dl64();
-    virtual pe::IMAGE_IMPORT_BY_NAME* getFirstImpByNamePtr();
+    virtual IMAGE_IMPORT_BY_NAME* getFirstImpByNamePtr();
 
 friend class DelayImpFuncWrapper;
 friend class DelayImpDirWrapper;
@@ -109,7 +109,7 @@ public:
 
 private:
     size_t ptrLen() { return (m_Exe->getBitMode() == Executable::BITS_64) ?  sizeof(uint64_t) : sizeof(uint32_t); }
-    virtual pe::IMAGE_IMPORT_BY_NAME* getImportByNamePtr();
+    virtual IMAGE_IMPORT_BY_NAME* getImportByNamePtr();
     DelayImpEntryWrapper* parentDir;
 };
 

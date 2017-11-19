@@ -1,15 +1,13 @@
 #include "DataDirEntryWrapper.h"
 #include "PEFile.h"
 
-using namespace pe;
-
 DataDirEntryWrapper::DataDirEntryWrapper(PEFile* pe, pe:: dir_entry v_entryType)
     :  PENodeWrapper(pe), entryType(v_entryType)
 {
     wrap();
 }
 
-pe::IMAGE_DATA_DIRECTORY* DataDirEntryWrapper::getDataDirectory()
+IMAGE_DATA_DIRECTORY* DataDirEntryWrapper::getDataDirectory()
 {
 
     if (m_PE == NULL) return NULL;

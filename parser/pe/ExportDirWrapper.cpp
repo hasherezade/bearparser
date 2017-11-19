@@ -4,8 +4,6 @@
 #define INVALID_NAME "<invalid>"
 #define INVALID_ID (-1)
 
-using namespace pe;
-
 /*
 typedef struct _IMAGE_EXPORT_DIRECTORY {
     DWORD   Characteristics;
@@ -22,13 +20,13 @@ typedef struct _IMAGE_EXPORT_DIRECTORY {
 } IMAGE_EXPORT_DIRECTORY, *PIMAGE_EXPORT_DIRECTORY;
 */
 
-pe::IMAGE_EXPORT_DIRECTORY* ExportDirWrapper::exportDir()
+IMAGE_EXPORT_DIRECTORY* ExportDirWrapper::exportDir()
 {
     offset_t rva = getDirEntryAddress();
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_EXPORT_DIRECTORY));
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(IMAGE_EXPORT_DIRECTORY));
     if (ptr == NULL) return NULL;
 
-    return (pe::IMAGE_EXPORT_DIRECTORY*) ptr;
+    return (IMAGE_EXPORT_DIRECTORY*) ptr;
 }
 
 void ExportDirWrapper::clear()
@@ -39,7 +37,7 @@ void ExportDirWrapper::clear()
 
 size_t ExportDirWrapper::mapNames()
 {
-    pe::IMAGE_EXPORT_DIRECTORY* exp = exportDir();
+    IMAGE_EXPORT_DIRECTORY* exp = exportDir();
     if (exp == NULL) return 0;
 
     size_t maxNames = exp->NumberOfNames;
@@ -67,7 +65,7 @@ bool ExportDirWrapper::wrap()
     clear();
     size_t mapNum = mapNames();
 
-    pe::IMAGE_EXPORT_DIRECTORY* exp = exportDir();
+    IMAGE_EXPORT_DIRECTORY* exp = exportDir();
     if (exp == NULL) return 0;
 
     size_t maxFunc = exp->NumberOfFunctions;
@@ -87,7 +85,7 @@ bool ExportDirWrapper::wrap()
 bufsize_t ExportDirWrapper::getSize()
 {
     if (getPtr() == NULL) return 0;
-    return sizeof(pe::IMAGE_EXPORT_DIRECTORY);
+    return sizeof(IMAGE_EXPORT_DIRECTORY);
 }
 
 QString ExportDirWrapper::getName()
@@ -105,7 +103,7 @@ QString ExportDirWrapper::getName()
 
 void* ExportDirWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    pe::IMAGE_EXPORT_DIRECTORY* d = exportDir();
+    IMAGE_EXPORT_DIRECTORY* d = exportDir();
     if (d == NULL) return NULL;
 
     switch (fId) {
@@ -182,7 +180,7 @@ void* ExportEntryWrapper::getFieldPtr(size_t fieldId, size_t subField)
 DWORD* ExportEntryWrapper::getFuncRvaPtr()
 {
     if (this->parentDir == NULL) return NULL;
-    pe::IMAGE_EXPORT_DIRECTORY* exp = parentDir->exportDir();
+    IMAGE_EXPORT_DIRECTORY* exp = parentDir->exportDir();
     if (exp == NULL) return NULL;
 
     uint64_t funcRva = exp->AddressOfFunctions;
@@ -239,7 +237,7 @@ offset_t ExportEntryWrapper::getFuncRva()
 uint32_t ExportEntryWrapper::getOrdinal()
 {
     if (this->parentDir == NULL) return 0;
-    pe::IMAGE_EXPORT_DIRECTORY* exp = parentDir->exportDir();
+    IMAGE_EXPORT_DIRECTORY* exp = parentDir->exportDir();
     if (exp == NULL) return 0;
 
     DWORD ordinal = static_cast<DWORD>(this->entryNum) + exp->Base;
@@ -263,7 +261,7 @@ void* ExportEntryWrapper::getFuncNameRvaPtr()
     uint32_t nameId = getFuncNameId();
     if (nameId == INVALID_ID) return NULL;
 
-    pe::IMAGE_EXPORT_DIRECTORY* exp = parentDir->exportDir();
+    IMAGE_EXPORT_DIRECTORY* exp = parentDir->exportDir();
     if (exp == NULL) return NULL;
 
     if (nameId >= exp->NumberOfNames) return NULL;
@@ -295,7 +293,7 @@ char* ExportEntryWrapper::getFuncName()
 char* ExportEntryWrapper::getForwarder()
 {
     if (this->parentDir == NULL) return NULL;
-    pe::IMAGE_EXPORT_DIRECTORY* exp = parentDir->exportDir();
+    IMAGE_EXPORT_DIRECTORY* exp = parentDir->exportDir();
     if (exp == NULL) return NULL;
 
     DWORD* funcRvaPtr = (DWORD*) this->getFuncRvaPtr();

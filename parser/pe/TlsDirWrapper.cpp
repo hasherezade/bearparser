@@ -38,9 +38,9 @@ bufsize_t TlsDirWrapper::getSize()
 {
     if (getPtr() == NULL) return 0;
     if (m_Exe->getBitMode() == Executable::BITS_32) {
-        return sizeof(pe::IMAGE_TLS_DIRECTORY32);
+        return sizeof(IMAGE_TLS_DIRECTORY32);
     }
-    return sizeof(pe::IMAGE_TLS_DIRECTORY64);
+    return sizeof(IMAGE_TLS_DIRECTORY64);
 }
 
 void* TlsDirWrapper::getTlsDirPtr()
@@ -48,9 +48,9 @@ void* TlsDirWrapper::getTlsDirPtr()
     bufsize_t dirSize = 0;
 
     if (m_Exe->getBitMode() == Executable::BITS_32) {
-        dirSize = sizeof(pe::IMAGE_TLS_DIRECTORY32);
+        dirSize = sizeof(IMAGE_TLS_DIRECTORY32);
     } else if (m_Exe->getBitMode() == Executable::BITS_64) {
-        dirSize = sizeof(pe::IMAGE_TLS_DIRECTORY64);
+        dirSize = sizeof(IMAGE_TLS_DIRECTORY64);
     }
 
     offset_t rva = getDirEntryAddress();
@@ -58,22 +58,22 @@ void* TlsDirWrapper::getTlsDirPtr()
     return ptr;
 }
 
-pe::IMAGE_TLS_DIRECTORY32* TlsDirWrapper::tls32()
+IMAGE_TLS_DIRECTORY32* TlsDirWrapper::tls32()
 {
     if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
-    return (pe::IMAGE_TLS_DIRECTORY32*) getTlsDirPtr();
+    return (IMAGE_TLS_DIRECTORY32*) getTlsDirPtr();
 }
 
-pe::IMAGE_TLS_DIRECTORY64* TlsDirWrapper::tls64()
+IMAGE_TLS_DIRECTORY64* TlsDirWrapper::tls64()
 {
     if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
-    return (pe::IMAGE_TLS_DIRECTORY64*) getTlsDirPtr();
+    return (IMAGE_TLS_DIRECTORY64*) getTlsDirPtr();
 }
 
 void* TlsDirWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    pe::IMAGE_TLS_DIRECTORY32* t32 = tls32();
-    pe::IMAGE_TLS_DIRECTORY64* t64 = tls64();
+    IMAGE_TLS_DIRECTORY32* t32 = tls32();
+    IMAGE_TLS_DIRECTORY64* t64 = tls64();
 
     if (t32 == NULL && t64 == NULL) return NULL;
 

@@ -8,7 +8,7 @@ bool PEFileBuilder::signatureMatches(AbstractByteBuffer *buf)
     WORD *magic = (WORD*) buf->getContentAt(dosOffset, sizeof(WORD));
     if (magic == NULL) return false;
 
-    if ((*magic) != S_DOS) {
+    if ((*magic) != pe::S_DOS) {
         return false;
     }
     offset_t newOffset = dosOffset + (sizeof(IMAGE_DOS_HEADER) - sizeof(LONG));
@@ -48,7 +48,7 @@ PEFile::PEFile(AbstractByteBuffer *v_buf)
 {
     album = new ResourcesAlbum(this);
     wrap(v_buf);
-    Logger::append(Logger::INFO,"Wrapped");
+    Logger::append(Logger::D_INFO,"Wrapped");
 }
 
 void PEFile::clearWrappers()
@@ -106,7 +106,7 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     dataDirEntries[pe::DIR_EXCEPTION] = new ExceptionDirWrapper(this);
     dataDirEntries[pe::DIR_RESOURCE] = new ResourceDirWrapper(this, album);
 
-    for (size_t i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
+    for (int i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
         this->wrappers[WR_DIR_ENTRY + i] = dataDirEntries[i];
     }
 
@@ -193,18 +193,18 @@ bool PEFile::setHdrSectionsNum(size_t newNum)
     uint64_t count = newNum;
     bool canSet = fHdr->setNumValue(FileHdrWrapper::SEC_NUM , count);
     if (canSet == false) {
-        Logger::append(Logger::ERROR,"Can not change FileHdr!");
+        Logger::append(Logger::D_ERROR,"Can not change FileHdr!");
         return false;
     }
     return true;
 }
 
-bool PEFile::setVitualSize(bufsize_t newSize)
+bool PEFile::setVirtualSize(bufsize_t newSize)
 {
     uint64_t size = newSize;
     bool canSet = optHdr->setNumValue(OptHdrWrapper::IMAGE_SIZE, 0, size);
     if (canSet == false) {
-        Logger::append(Logger::ERROR, "Can not change OptHdr!");
+        Logger::append(Logger::D_ERROR, "Can not change OptHdr!");
         return false;
     }
     return true;
@@ -278,7 +278,7 @@ BufferView* PEFile::createSectionView(size_t secId)
 {
     SectionHdrWrapper *sec = this->getSecHdr(secId);
     if (sec == NULL) {
-        Logger::append(Logger::WARNING, "No such section");
+        Logger::append(Logger::D_WARNING, "No such section");
         return NULL;
     }
     Executable::addr_type aType = Executable::RAW;
@@ -350,13 +350,13 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
     bufsize_t newSize = roundedRawEnd + size;
     bufsize_t newVirtualSize = roundedVirtualEnd + size;
 
-    if (setVitualSize(newVirtualSize) == false) {
-        Logger::append(Logger::ERROR, "Failed to change virtual size");
+    if (setVirtualSize(newVirtualSize) == false) {
+        Logger::append(Logger::D_ERROR, "Failed to change virtual size");
         return NULL;
     }
 
     if (resize(newSize) == false) {
-        Logger::append(Logger::ERROR, "Failed to resize");
+        Logger::append(Logger::D_ERROR, "Failed to resize");
         return NULL;
     }
     // fetch again after resize:
@@ -365,8 +365,8 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
         return NULL;
     }
 
-    pe::IMAGE_SECTION_HEADER secHdr;
-    memset(&secHdr, 0, sizeof(pe::IMAGE_SECTION_HEADER));
+    IMAGE_SECTION_HEADER secHdr;
+    memset(&secHdr, 0, sizeof(IMAGE_SECTION_HEADER));
 
     //name copy:
     std::string nameStr = name.toStdString();
@@ -398,39 +398,40 @@ SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
 {
     SectionHdrWrapper* secHdr = getLastSection();
     if (secHdr == NULL) return NULL;
-    
+
     //TODO: check overlay...
     bufsize_t fullSize = getContentSize();
     bufsize_t newSize = fullSize + addedSize;
 
-    offset_t secROffset = secHdr->getContentOffset(Executable::RAW, true);
-    bufsize_t secRSize = secHdr->getContentSize(Executable::RAW, true);
+    offset_t secROffset = secHdr->getContentOffset(Executable::RAW, false);
+    bufsize_t secRSize = secHdr->getContentSize(Executable::RAW, false);
     bufsize_t secNewRSize = newSize - secROffset; //include overlay in section
 
     secHdr->setNumValue(SectionHdrWrapper::RSIZE, uint64_t(secNewRSize));
 
-    offset_t secVOffset = secHdr->getContentOffset(Executable::RVA, true);
-    bufsize_t secVSize = secHdr->getContentSize(Executable::RVA, true);
+    offset_t secVOffset = secHdr->getContentOffset(Executable::RVA, false);
+    bufsize_t secVSize = secHdr->getContentSize(Executable::RVA, false);
     bufsize_t secNewVSize = secVSize;
-    if (secNewVSize < secNewRSize) {
+    // if the previous virtual size is smaller than the new raw size, then update it:
+    if (secVSize < secNewRSize) {
         secNewVSize = secNewRSize;
-        secHdr->setNumValue(SectionHdrWrapper::VSIZE, uint64_t(secNewVSize));
+        secHdr->setNumValue(SectionHdrWrapper::VSIZE, uint64_t(secNewRSize));
+
+        // if the virtual size of section has changed,
+        // update the Size of Image (saved in the header):
+        bufsize_t newVSize = secVOffset + secNewVSize;
+        this->setVirtualSize(newVSize);
     }
 
-    bufsize_t prevVSize = this->getMappedSize(Executable::RVA);
-
+    //update raw size:
     this->resize(newSize);
-
-    bufsize_t newVSize = secVOffset + secNewVSize;
-    this->setVitualSize(newVSize);
-
-    secHdr = getLastSection();
-    return secHdr;
+    //finally, retrieve the resized section:
+    return getLastSection();
 }
 
 bool PEFile::unbindImports()
 {
-    pe::IMAGE_DATA_DIRECTORY* ddir = this->getDataDirectory();
+    IMAGE_DATA_DIRECTORY* ddir = this->getDataDirectory();
     if (ddir[pe::DIR_BOUND_IMPORT].VirtualAddress == 0  && ddir[pe::DIR_BOUND_IMPORT].Size == 0) {
         // No bound imports already, nothing to do here!
         return true;

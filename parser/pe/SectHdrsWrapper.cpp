@@ -27,16 +27,16 @@ void* SectionHdrWrapper::getPtr()
     //if (this->sectNum >= m_PE->hdrSectionsNum()) return NULL;
 
     offset_t firstSecOffset = m_PE->secHdrsOffset();
-    offset_t secOffset = firstSecOffset + (this->sectNum * sizeof(pe::IMAGE_SECTION_HEADER));
+    offset_t secOffset = firstSecOffset + (this->sectNum * sizeof(IMAGE_SECTION_HEADER));
 
     //cache the header:
-    this->header = (pe::IMAGE_SECTION_HEADER*) m_PE->getContentAt(secOffset, sizeof(pe::IMAGE_SECTION_HEADER));
+    this->header = (IMAGE_SECTION_HEADER*) m_PE->getContentAt(secOffset, sizeof(IMAGE_SECTION_HEADER));
     return (void*) this->header;
 }
 
 bool SectionHdrWrapper::reloadName()
 {
-    pe::IMAGE_SECTION_HEADER* header = (pe::IMAGE_SECTION_HEADER*) getPtr();
+    IMAGE_SECTION_HEADER* header = (IMAGE_SECTION_HEADER*) getPtr();
     if (!header) return false;
 
     if (this->name) {
@@ -57,7 +57,7 @@ bool SectionHdrWrapper::reloadName()
 bufsize_t SectionHdrWrapper::getSize()
 {
     if (m_PE == NULL) return 0;
-    return sizeof(pe::IMAGE_SECTION_HEADER);
+    return sizeof(IMAGE_SECTION_HEADER);
 }
 
 QString SectionHdrWrapper::getName()
@@ -69,7 +69,7 @@ QString SectionHdrWrapper::getName()
 
 void* SectionHdrWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
-    pe::IMAGE_SECTION_HEADER* sec = (pe::IMAGE_SECTION_HEADER*) getPtr();
+    IMAGE_SECTION_HEADER* sec = (IMAGE_SECTION_HEADER*) getPtr();
     if (!sec) return NULL;
     if (!this->name) return NULL;
     switch (fieldId)
@@ -301,7 +301,7 @@ bool SectHdrsWrapper::loadNextEntry(size_t entryNum)
     SectionHdrWrapper *sec = new SectionHdrWrapper(this->m_PE, entryNum);
     if (sec == NULL) return false;
     if (sec->getPtr() == NULL) {
-        Logger::append(Logger::WARNING, "Deleting invalid section...");
+        Logger::append(Logger::D_WARNING, "Deleting invalid section...");
         delete sec;
         sec = NULL;
         return false;
@@ -384,7 +384,7 @@ bufsize_t SectHdrsWrapper::getSize()
 
     offset_t hdrOffset = m_PE->secHdrsOffset();
     offset_t fileSize = m_PE->getRawSize();
-    offset_t endOffset = hdrOffset + (secCount * sizeof(pe::IMAGE_SECTION_HEADER));
+    offset_t endOffset = hdrOffset + (secCount * sizeof(IMAGE_SECTION_HEADER));
 
     if (endOffset > fileSize) {
         return bufsize_t (fileSize - hdrOffset);

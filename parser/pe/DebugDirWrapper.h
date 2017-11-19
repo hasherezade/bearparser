@@ -40,7 +40,7 @@ public:
     QString translateFieldContent(size_t fieldId);
 
 private:
-    pe::IMAGE_DEBUG_DIRECTORY* debugDir();
+    IMAGE_DEBUG_DIRECTORY* debugDir();
 
     void clear() {}
 };

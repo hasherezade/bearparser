@@ -24,7 +24,7 @@ public:
     virtual QString getFieldName(size_t fieldId, size_t subField) { return getSubfieldName(fieldId, subField); }
 
 protected:
-    pe::IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exceptFunc64();
+    IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exceptFunc64();
 
 private:
     static uint64_t EntriesLimit;

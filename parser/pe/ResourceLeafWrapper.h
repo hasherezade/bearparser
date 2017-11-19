@@ -27,7 +27,7 @@ class ResourceLeafWrapper : public ExeNodeWrapper
     virtual ~ResourceLeafWrapper() { }
 
     virtual void* getPtr() { return leafEntryPtr(); }
-    virtual bufsize_t getSize() { return sizeof(pe::IMAGE_RESOURCE_DATA_ENTRY); }
+    virtual bufsize_t getSize() { return sizeof(IMAGE_RESOURCE_DATA_ENTRY); }
 
     virtual QString getName() { return "Resource Data"; }
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
@@ -36,7 +36,7 @@ class ResourceLeafWrapper : public ExeNodeWrapper
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField) { return (fieldId == OFFSET_TO_DATA) ? Executable::RVA : Executable::NOT_ADDR; }
 
-    pe::IMAGE_RESOURCE_DATA_ENTRY *leafEntryPtr();
+    IMAGE_RESOURCE_DATA_ENTRY *leafEntryPtr();
 
     Executable* getExe() { return this->m_Exe; }
 

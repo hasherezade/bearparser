@@ -1,7 +1,6 @@
 #include "DebugDirWrapper.h"
 #include "PEFile.h"
 
-using namespace pe;
 /*
 typedef struct _IMAGE_DEBUG_DIRECTORY {
     DWORD   Characteristics;
@@ -16,14 +15,14 @@ typedef struct _IMAGE_DEBUG_DIRECTORY {
 
 */
 
-pe::IMAGE_DEBUG_DIRECTORY* DebugDirWrapper::debugDir()
+IMAGE_DEBUG_DIRECTORY* DebugDirWrapper::debugDir()
 {
     offset_t rva = getDirEntryAddress();
 
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(pe::IMAGE_DEBUG_DIRECTORY));
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(IMAGE_DEBUG_DIRECTORY));
     if (ptr == NULL) return NULL;
 
-    return (pe::IMAGE_DEBUG_DIRECTORY*) ptr;
+    return (IMAGE_DEBUG_DIRECTORY*) ptr;
 }
 
 bool DebugDirWrapper::wrap()
@@ -39,7 +38,7 @@ void* DebugDirWrapper::getPtr()
 bufsize_t DebugDirWrapper::getSize()
 {
     if (getPtr() == NULL) return 0;
-    return sizeof(pe::IMAGE_DEBUG_DIRECTORY);
+    return sizeof(IMAGE_DEBUG_DIRECTORY);
 }
 
 QString DebugDirWrapper::getName()
@@ -50,7 +49,7 @@ QString DebugDirWrapper::getName()
 
 void* DebugDirWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    pe::IMAGE_DEBUG_DIRECTORY* d = debugDir();
+    IMAGE_DEBUG_DIRECTORY* d = debugDir();
     if (d == NULL) return NULL;
 
     switch (fId) {
@@ -113,7 +112,7 @@ QString DebugDirWrapper::translateFieldContent(size_t fieldId)
 {
     if (fieldId != TYPE) return "";
 
-    pe::IMAGE_DEBUG_DIRECTORY* d = debugDir();
+    IMAGE_DEBUG_DIRECTORY* d = debugDir();
     if (d == NULL) return NULL;
 
     return translateType(d->Type);

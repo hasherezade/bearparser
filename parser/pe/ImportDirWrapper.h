@@ -40,8 +40,8 @@ public:
 protected:
     virtual bool loadNextEntry(size_t cntr);
 
-    pe::IMAGE_DATA_DIRECTORY* getDataDirectory();
-    pe::IMAGE_IMPORT_DESCRIPTOR *firstDescriptor();
+    IMAGE_DATA_DIRECTORY* getDataDirectory();
+    IMAGE_IMPORT_DESCRIPTOR *firstDescriptor();
 
 friend class ImportEntryWrapper;
 };
@@ -131,7 +131,7 @@ public:
 
     /* full structure boundatries */
     virtual void* getPtr();
-    virtual pe::IMAGE_IMPORT_BY_NAME* getImportByNamePtr();
+    virtual IMAGE_IMPORT_BY_NAME* getImportByNamePtr();
 
     virtual bufsize_t getSize();
     //virtual QString getName();

@@ -46,11 +46,11 @@ public:
     bufsize_t getEntriesAreaSize() { return static_cast<bufsize_t>(this->getEntriesCount()) * sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY); }
     long getDepth() { return this->dirDepth; }
 
-    pe::IMAGE_RESOURCE_DIRECTORY* mainResourceDir();
+    IMAGE_RESOURCE_DIRECTORY* mainResourceDir();
     ResourcesAlbum* getAlbumPtr() { return album; }
 
 private:
-    pe::IMAGE_RESOURCE_DIRECTORY* resourceDir();
+    IMAGE_RESOURCE_DIRECTORY* resourceDir();
     offset_t rawOff;
     long dirDepth;
     ResourcesAlbum *album;
@@ -96,7 +96,7 @@ public:
     DWORD getChildOffsetToDirectory(); //relative offset!
     offset_t getNameOffset();
 
-    pe::IMAGE_RESOURCE_DIRECTORY_STRING* getNameStr();
+    IMAGE_RESOURCE_DIRECTORY_STRING* getNameStr();
     offset_t getChildAddress();
 
     pe::IMAGE_RESOURCE_DIRECTORY_ENTRY *getEntryPtr();

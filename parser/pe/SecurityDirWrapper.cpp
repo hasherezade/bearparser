@@ -86,10 +86,10 @@ WrappedValue::data_type SecurityDirWrapper::containsDataType(size_t fieldId, siz
 QString SecurityDirWrapper::translateType(int type)
 {
     switch (type) {
-        case WIN_CERT_TYPE_X509  : return "X.509 certificate";
-        case WIN_CERT_TYPE_PKCS_SIGNED_DATA : return "PKCS Signed Data";
-        case WIN_CERT_TYPE_RESERVED_1 : return "Reserved";
-        case WIN_CERT_TYPE_PKCS1_SIGN : return "PKCS1 Module Sign Fields";
+        case pe::WIN_CERT_TYPE_X509  : return "X.509 certificate";
+        case pe::WIN_CERT_TYPE_PKCS_SIGNED_DATA : return "PKCS Signed Data";
+        case pe::WIN_CERT_TYPE_RESERVED_1 : return "Reserved";
+        case pe::WIN_CERT_TYPE_PKCS1_SIGN : return "PKCS1 Module Sign Fields";
     }
     return "";
 }

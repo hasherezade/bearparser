@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.11)
 project (re-bear)
 
 # modules:
@@ -12,9 +12,11 @@ set (COMMANDER_DIR "${CMAKE_SOURCE_DIR}/${M_COMMANDER}" CACHE PATH "BearCommande
 # Add sub-directories
 #
 # libs
+
 add_subdirectory (parser)
-get_property (parser_location TARGET bearparser PROPERTY LOCATION)
-set (PARSER_LIB ${parser_location} CACHE FILE "BearParser library path")
+include_directories(parser)
+
+set (PARSER_LIB bearparser CACHE FILE "BearParser library path")
 
 # executables
 add_subdirectory(commander)

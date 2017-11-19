@@ -78,7 +78,7 @@ public:
 
     ResourcesAlbum* getResourcesAlbum() const { return this->album; }
 
-    pe::IMAGE_DATA_DIRECTORY* getDataDirectory();
+    IMAGE_DATA_DIRECTORY* getDataDirectory();
     offset_t peDataDirOffset();
 
     size_t hdrSectionsNum();
@@ -138,7 +138,7 @@ protected:
     //---
     //modifications:
     bool setHdrSectionsNum(size_t newNum);
-    bool setVitualSize(bufsize_t newSize);
+    bool setVirtualSize(bufsize_t newSize);
 
     DosHdrWrapper *dosHdrWrapper;
 

@@ -104,7 +104,7 @@ offset_t Executable::toRaw(offset_t offset, addr_type aT, bool allowExceptions)
     }
     //---
     if (convertedOffset == INVALID_ADDR) {
-        Logger::append(Logger::WARNING,
+        Logger::append(Logger::D_WARNING,
             "Address out of bounds: offset = %llX addrType = %u",
             static_cast<unsigned long long>(offset),
             static_cast<unsigned int>(aT)
