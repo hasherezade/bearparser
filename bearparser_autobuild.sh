@@ -27,9 +27,6 @@ cd bearparser
 git clone https://github.com/hasherezade/bearparser.git
 echo "[+] bearparser cloned"
 echo $$
-cd bearparser
-git checkout qt5
-cd ..
 mv bearparser src
 mkdir build
 echo "[+] build directory created"
