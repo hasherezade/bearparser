@@ -32,10 +32,10 @@ QString getFileName()
 
 int main(int argc, char *argv[])
 {
+    printf("Bearparser version: %s\n", BEARPARSER_VERSION);
     QCoreApplication app(argc, argv);
 
     ExeFactory::init();
-
     ExeCmdContext exeContext;
     PECommander commander(&exeContext);
 
