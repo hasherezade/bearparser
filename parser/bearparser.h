@@ -17,4 +17,4 @@
 //supported formats:
 #include "pe/PEFile.h"
 
-#define BEARPARSER_VERSION "0.1.3"
+#define BEARPARSER_VERSION "0.2"
