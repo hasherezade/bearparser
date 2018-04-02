@@ -21,8 +21,7 @@ protected:
     bool is64(); // autodetect! 64bit PE may use IMAGE_DELAY_LOAD32!
     bool is32() { return !is64(); }
 
-    pe::IMAGE_DELAY_LOAD32* firstDelayLd32() { return (pe::IMAGE_DELAY_LOAD32*) firstDelayLd(sizeof(pe::IMAGE_DELAY_LOAD32)); }
-    pe::IMAGE_DELAY_LOAD64* firstDelayLd64() { return (pe::IMAGE_DELAY_LOAD64*) firstDelayLd(sizeof(pe::IMAGE_DELAY_LOAD64)); }
+    pe::IMAGE_DELAY_LOAD* firstDelayLd() { return (pe::IMAGE_DELAY_LOAD*) firstDelayLd(sizeof(pe::IMAGE_DELAY_LOAD)); }
     void* firstDelayLd(bufsize_t size);
     bufsize_t getEntrySize();
 
@@ -63,8 +62,6 @@ public:
 protected:
     bool loadNextEntry(size_t entryNum);
 
-    pe::IMAGE_DELAY_LOAD32* dl32();
-    pe::IMAGE_DELAY_LOAD64* dl64();
     virtual IMAGE_IMPORT_BY_NAME* getFirstImpByNamePtr();
 
 friend class DelayImpFuncWrapper;
@@ -97,7 +94,7 @@ public:
 
     // specific field boundatries
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
-    virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE) { return sizeof(DWORD); }
+    virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE);
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField);
 
@@ -112,4 +109,3 @@ private:
     virtual IMAGE_IMPORT_BY_NAME* getImportByNamePtr();
     DelayImpEntryWrapper* parentDir;
 };
-

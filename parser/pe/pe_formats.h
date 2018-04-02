@@ -1704,7 +1704,7 @@ namespace pe {
 
     //DELAY_LOAD
 
-    typedef struct _IMAGE_DELAY_LOAD32 {
+    typedef struct _IMAGE_DELAY_LOAD {
         DWORD grAttrs;        //must be 0
         DWORD szName;        //RVA
         DWORD phmod;        //RVA
@@ -1713,18 +1713,8 @@ namespace pe {
         DWORD pBoundIAT;    //RVA
         DWORD pUnloadIAT;    //RVA
         DWORD dwTimestamp;
-    } IMAGE_DELAY_LOAD32, *LPIMAGE_DELAY_LOAD32;
+    } IMAGE_DELAY_LOAD, *LPIMAGE_DELAY_LOAD;
 
-    typedef struct _IMAGE_DELAY_LOAD64 {
-        ULONGLONG grAttrs;        //must be 0
-        ULONGLONG szName;        //RVA
-        ULONGLONG phmod;        //RVA
-        ULONGLONG pIAT;            //RVA
-        ULONGLONG pINT;            //RVA
-        ULONGLONG pBoundIAT;    //RVA
-        ULONGLONG pUnloadIAT;    //RVA
-        ULONGLONG dwTimestamp;
-    } IMAGE_DELAY_LOAD64, *LPIMAGE_DELAY_LOAD64;
 }; // namespace pe
 
 
