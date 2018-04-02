@@ -163,9 +163,14 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
         case LOCK_PREFIX : return (ld32) ? (void*) &ld32->LockPrefixTable :  (void*) &ld64->LockPrefixTable ;
         case MAX_ALLOC : return (ld32) ? (void*) &ld32->MaximumAllocationSize :  (void*) &ld64->MaximumAllocationSize ;
         case VIRTUAL_MEM : return (ld32) ? (void*) &ld32->VirtualMemoryThreshold :  (void*) &ld64->VirtualMemoryThreshold ;
-        case PROC_HEAP_FLAGS : return (ld32) ? (void*) &ld32->ProcessHeapFlags :  (void*) &ld64->ProcessHeapFlags ;
-        case PROC_AFF_MASK : return (ld32) ? (void*) &ld32->ProcessAffinityMask :  (void*) &ld64->ProcessAffinityMask ;
-
+        case PROC_HEAP_FLAGS32 : //PROC_AFF_MASK64
+        {
+            return (ld32) ? (void*) &ld32->ProcessHeapFlags : (void*) &ld64->ProcessAffinityMask ;
+        }
+        case PROC_AFF_MASK32 : // PROC_HEAP_FLAGS64
+        {
+            return (ld32) ? (void*) &ld32->ProcessAffinityMask : (void*) &ld64->ProcessHeapFlags ;
+        }
         case CSD_VER : return (ld32) ? (void*) &ld32->CSDVersion :  (void*) &ld64->CSDVersion ;
         case RESERVED1 : return (ld32) ? (void*) &ld32->Reserved1 :  (void*) &ld64->Reserved1 ;
         case EDIT_LIST : return (ld32) ? (void*) &ld32->EditList :  (void*) &ld64->EditList ;
@@ -185,6 +190,8 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
 
 QString LdConfigDirWrapper::getFieldName(size_t fieldId)
 {
+    if (!m_Exe) return "";
+    bool is32bit = (m_Exe->getBitMode() == Executable::BITS_32);
     switch (fieldId) {
         case SIZE : return "Size";
         case TIMEST : return "TimeDateStamp";
@@ -198,8 +205,14 @@ QString LdConfigDirWrapper::getFieldName(size_t fieldId)
         case LOCK_PREFIX : return "LockPrefixTable";
         case MAX_ALLOC : return "MaximumAllocationSize";
         case VIRTUAL_MEM : return "VirtualMemoryThreshold";
-        case PROC_AFF_MASK : return "ProcessAffinityMask";
-        case PROC_HEAP_FLAGS : return "ProcessHeapFlags";
+        case PROC_HEAP_FLAGS32 : //PROC_AFF_MASK64
+        {
+            return (is32bit) ? "ProcessHeapFlags" : "ProcessAffinityMask";
+        }
+        case PROC_AFF_MASK32 : // PROC_HEAP_FLAGS64
+        {
+            return (is32bit) ? "ProcessAffinityMask" : "ProcessHeapFlags";
+        }
         case CSD_VER : return "CSDVersion";
         case RESERVED1 : return "Reserved";
         case EDIT_LIST : return "EditList";

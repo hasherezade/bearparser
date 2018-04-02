@@ -4,7 +4,14 @@
 class LdConfigDirWrapper : public DataDirEntryWrapper
 {
 public:
-
+    /**
+    * For some reason the fields:
+    * 
+    ULONGLONG  ProcessAffinityMask;
+    DWORD      ProcessHeapFlags;
+    * 
+    * are flipped in the 64 bit structure
+    * */
     enum LdConfigDirFID {
         NONE = FIELD_NONE,
         SIZE,
@@ -19,8 +26,8 @@ public:
         LOCK_PREFIX,
         MAX_ALLOC,
         VIRTUAL_MEM,
-        PROC_HEAP_FLAGS,
-        PROC_AFF_MASK,
+        PROC_HEAP_FLAGS32, // PROC_AFF_MASK64
+        PROC_AFF_MASK32, // PROC_HEAP_FLAGS32
         CSD_VER,
         RESERVED1,
         EDIT_LIST,
