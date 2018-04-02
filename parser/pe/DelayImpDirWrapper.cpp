@@ -3,28 +3,21 @@
 
 /*
 typedef struct _IMAGE_DELAY_LOAD {
-    DWORD grAttrs;        //must be 0
-    DWORD szName;        //RVA
-    DWORD phmod;        //RVA
-    DWORD pIAT;            //RVA
-    DWORD pINT;            //RVA
-    DWORD pBoundIAT;    //RVA
-    DWORD pUnloadIAT;    //RVA
-    DWORD dwTimestamp;
+    DWORD           grAttrs;        // attributes - must be 0
+    RVA             rvaDLLName;     // RVA to dll name
+    RVA             rvaHmod;        // RVA of module handle
+    RVA             rvaIAT;         // RVA of the IAT
+    RVA             rvaINT;         // RVA of the INT
+    RVA             rvaBoundIAT;    // RVA of the optional bound IAT
+    RVA             rvaUnloadIAT;   // RVA of optional copy of original IAT
+    DWORD           dwTimeStamp;    // 0 if not bound,
+                                    // O.W. date/time stamp of DLL bound to (Old BIND)
 } IMAGE_DELAY_LOAD, *LPIMAGE_DELAY_LOAD;
-
 */
 
 bool DelayImpDirWrapper::is64()
 {
     if (m_Exe->isBit32()) return false;
-    size_t size = sizeof(pe::IMAGE_DELAY_LOAD64);
-
-    pe::IMAGE_DELAY_LOAD64* ld64 = firstDelayLd64();
-    if (ld64) {
-        if (this->m_Exe->toRaw(ld64->szName, Executable::RVA) == INVALID_ADDR) return false;
-        if (this->m_Exe->toRaw(ld64->phmod, Executable::RVA) == INVALID_ADDR) return false;
-    }
     return true;
 }
 
@@ -52,7 +45,6 @@ bool DelayImpDirWrapper::loadNextEntry(size_t cntr)
         delete imp;
         return false;
     }
-        //printf("Name = %s\n", imp->getName().c_str());
     entries.push_back(imp);
     return true;
 }
@@ -71,14 +63,7 @@ bufsize_t DelayImpDirWrapper::getSize()
 
 bufsize_t DelayImpDirWrapper::getEntrySize()
 {
-    size_t size = 0;
-
-    if (is64()) {
-        size = sizeof(pe::IMAGE_DELAY_LOAD64);
-    } else {
-        size = sizeof(pe::IMAGE_DELAY_LOAD32);
-    }
-    return static_cast<bufsize_t>(size);
+    return sizeof(pe::IMAGE_DELAY_LOAD);
 }
 
 //---------------------------------------------------------------------------
@@ -113,83 +98,34 @@ bool DelayImpEntryWrapper::loadNextEntry(size_t entryNum)
     if (impDir) impDir->addMapping(entry);
     return true;
  }
-/*
-bool DelayImpEntryWrapper::wrap()
-{
-    clear();
-
-    for (size_t i = 0; i < ImportBaseEntryWrapper::EntriesLimit;  i++) { //
-        loadNextEntry(i);
-
-    }
-    return true;
-}
-*/
-pe::IMAGE_DELAY_LOAD32* DelayImpEntryWrapper::dl32()
-{
-    DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
-    if (!parent) return NULL;
-
-
-    const size_t DL_SIZE = sizeof(pe::IMAGE_DELAY_LOAD32);
-    pe::IMAGE_DELAY_LOAD32* first = (pe::IMAGE_DELAY_LOAD32*) parent->firstDelayLd(DL_SIZE);
-    if (!first) return NULL;
-
-    uint64_t descAddr = parent->getOffset(first);
-    if (descAddr == INVALID_ADDR) return NULL;
-
-    uint64_t entryOffset = descAddr + (this->entryNum * DL_SIZE);
-    if (entryOffset == INVALID_ADDR) return NULL;
-
-    BYTE *content =  this->m_Exe->getContentAt(entryOffset, Executable::RAW, DL_SIZE);
-    if (!content) return NULL;
-
-    return (pe::IMAGE_DELAY_LOAD32*) content;
-}
-
-pe::IMAGE_DELAY_LOAD64* DelayImpEntryWrapper::dl64()
-{
-    DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
-    if (!parent) return NULL;
-
-    const size_t DL_SIZE = sizeof(pe::IMAGE_DELAY_LOAD64);
-    pe::IMAGE_DELAY_LOAD64* first = (pe::IMAGE_DELAY_LOAD64*) parent->firstDelayLd(DL_SIZE);
-    if (!first) return NULL;
-
-    uint64_t descAddr = parent->getOffset(first);
-    if (descAddr == INVALID_ADDR) return NULL;
-
-    uint64_t entryOffset = descAddr + (this->entryNum * DL_SIZE);
-    if (entryOffset == INVALID_ADDR) return NULL;
-
-    BYTE *content =  this->m_Exe->getContentAt(entryOffset, Executable::RAW, DL_SIZE);
-    if (!content) return NULL;
-
-    return (pe::IMAGE_DELAY_LOAD64*)content;
-}
 
 void* DelayImpEntryWrapper::getPtr()
 {
     DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
-    if (!parent) return NULL;
-
-    if (parent->is64()) {
-        return dl64();
+    if (!parent) {
+        return NULL;
     }
-    return dl32();
+
+    const size_t DL_SIZE = sizeof(pe::IMAGE_DELAY_LOAD);
+    pe::IMAGE_DELAY_LOAD* first = (pe::IMAGE_DELAY_LOAD*) parent->firstDelayLd(DL_SIZE);
+    if (!first) return NULL;
+
+    uint64_t descAddr = parent->getOffset(first);
+    if (descAddr == INVALID_ADDR) return NULL;
+
+    uint64_t entryOffset = descAddr + (this->entryNum * DL_SIZE);
+    if (entryOffset == INVALID_ADDR) return NULL;
+
+    BYTE *content =  this->m_Exe->getContentAt(entryOffset, Executable::RAW, DL_SIZE);
+    if (!content) return NULL;
+
+    return (pe::IMAGE_DELAY_LOAD*) content;
 }
 
 bufsize_t DelayImpEntryWrapper::getSize()
 {
     if (getPtr() == NULL) return 0;
-
-    DelayImpDirWrapper *parent = dynamic_cast<DelayImpDirWrapper*>(this->parentNode);
-    if (!parent) return 0;
-
-    if (parent->is64()) {
-        return sizeof(pe::IMAGE_DELAY_LOAD64);
-    }
-    return sizeof(pe::IMAGE_DELAY_LOAD32);
+    return sizeof(pe::IMAGE_DELAY_LOAD);
 }
 
 QString DelayImpEntryWrapper::getName()
@@ -216,7 +152,7 @@ char* DelayImpEntryWrapper::getLibraryName()
 
 void* DelayImpEntryWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    pe::IMAGE_DELAY_LOAD32* dLd = (pe::IMAGE_DELAY_LOAD32*) this->getPtr();
+    pe::IMAGE_DELAY_LOAD* dLd = (pe::IMAGE_DELAY_LOAD*) this->getPtr();
     if (dLd == NULL) return NULL;
 
     switch (fId) {
@@ -321,11 +257,8 @@ uint16_t DelayImpFuncWrapper::getHint()
 void* DelayImpFuncWrapper::getFieldPtr(size_t fId, size_t subField)
 {
     if (this->parentDir == NULL) return NULL;
-
-    pe::IMAGE_DELAY_LOAD32* dLd32 = parentDir->dl32();
-    pe::IMAGE_DELAY_LOAD64* dLd64 = parentDir->dl64();
-
-    if (dLd32 == NULL && dLd64 == NULL) return NULL;
+    
+	if (parentDir->getPtr() == NULL) return NULL;
 
     uint64_t offset = INVALID_ADDR;
     bool isOk = false;
@@ -360,7 +293,6 @@ offset_t DelayImpFuncWrapper::callVia()
         return offset;
     }
     return INVALID_ADDR;
-
 }
 
 QString DelayImpFuncWrapper::getFieldName(size_t fId)
@@ -372,6 +304,15 @@ QString DelayImpFuncWrapper::getFieldName(size_t fId)
         case UNLOAD_IAT_ADDR : return "Unload IAT";
     }
     return "";
+}
+
+bufsize_t DelayImpFuncWrapper::getFieldSize(size_t fieldId, size_t subField)
+{
+    if (!m_Exe) return 0;
+    if (m_Exe->getBitMode() == Executable::BITS_64) {
+        return sizeof (ULONGLONG);
+    }
+    return sizeof (DWORD);
 }
 
 Executable::addr_type DelayImpFuncWrapper::containsAddrType(size_t fId, size_t subField)
@@ -401,4 +342,3 @@ IMAGE_IMPORT_BY_NAME* DelayImpFuncWrapper::getImportByNamePtr()
     BYTE *ptr = m_Exe->getContentAt(addr, aT, sizeof(IMAGE_IMPORT_BY_NAME));
     return (IMAGE_IMPORT_BY_NAME*) ptr;
 }
-
