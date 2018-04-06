@@ -70,7 +70,7 @@ bool ExportDirWrapper::wrap()
 
     size_t maxFunc = exp->NumberOfFunctions;
 
-    for (int i = 0; i < maxFunc; i++) {
+    for (size_t i = 0; i < maxFunc; i++) {
         //TODO: build entries...
         ExportEntryWrapper *entry = new ExportEntryWrapper(m_Exe, this, i);
         if (entry->getPtr() == NULL) {

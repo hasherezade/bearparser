@@ -39,7 +39,7 @@ bool RelocDirWrapper::wrap()
     parsedSize = 0;
     bufsize_t maxSize = getDirEntrySize();
 
-    for (int i = 0; i < RelocDirWrapper::EntriesLimit && parsedSize < maxSize; i++) {
+    for (size_t i = 0; i < RelocDirWrapper::EntriesLimit && parsedSize < maxSize; i++) {
         RelocBlockWrapper* entry = new RelocBlockWrapper(this->m_Exe, this, i);
 
         if (entry->getPtr() == NULL) {

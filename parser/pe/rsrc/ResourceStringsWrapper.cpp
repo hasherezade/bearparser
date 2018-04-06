@@ -70,7 +70,7 @@ bool ResourceStringsWrapper::wrap()
     offset_t startRaw = getContentRaw();
     offset_t cRaw = startRaw;
 
-    for (int i = 0; i < ResourceStringsWrapper::EntriesLimit && parsedSize < maxSize; i++) {
+    for (size_t i = 0; i < ResourceStringsWrapper::EntriesLimit && parsedSize < maxSize; i++) {
 
         WORD* stringSize = (WORD*) this->getContentAt(cRaw, Executable::RAW, sizeof(WORD));
         if (stringSize == NULL){

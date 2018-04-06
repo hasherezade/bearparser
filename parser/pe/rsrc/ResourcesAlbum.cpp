@@ -70,7 +70,7 @@ void ResourcesAlbum::wrapLeafsContent()
         std::vector<ResourceLeafWrapper*> &leafVec = itr->second;
         long topEntryId = itr->first;
 
-        for (int i = 0; i < leafVec.size(); i++) {
+        for (size_t i = 0; i < leafVec.size(); i++) {
             ResourceLeafWrapper* leaf = leafVec.at(i);
             pe::resource_type type = idToLeafType[topEntryId];
             //printf("topEntryId %d type: %d\n", topEntryId, type);

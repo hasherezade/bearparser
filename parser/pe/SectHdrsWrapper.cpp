@@ -45,11 +45,14 @@ bool SectionHdrWrapper::reloadName()
         }
     }
     const size_t BUF_LEN = SECNAME_LEN + 2;
+    
     char *buf = new char[BUF_LEN];
     memset(buf, 0, BUF_LEN);
     snprintf(buf, BUF_LEN, "%.8s", (char*) header->Name);
-
+    
+    //delete the previous pointer...
     delete []this->name;
+    //...and set the new:
     this->name = buf;
     return true;
 }
@@ -345,7 +348,7 @@ void SectHdrsWrapper::reloadMapping()
     this->vSec.clear();
 
     size_t count = this->getEntriesCount();
-    for (int i = 0; i < count; i++) {
+    for (size_t i = 0; i < count; i++) {
         SectionHdrWrapper* sec = dynamic_cast<SectionHdrWrapper*>(this->getEntryAt(i));
         if (sec == NULL) continue;
         addMapping(sec);
@@ -359,7 +362,7 @@ bool SectHdrsWrapper::wrap()
 
     size_t count = this->m_PE->hdrSectionsNum();
 
-    for (int i = 0; i < count; i++) {
+    for (size_t i = 0; i < count; i++) {
         if (this->loadNextEntry(i) == false) break;
     }
     return true;

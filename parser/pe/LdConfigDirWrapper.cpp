@@ -94,7 +94,7 @@ bool LdConfigDirWrapper::wrap()
     size_t count = this->getNumValue(SEH_COUNT, &isOk);
     if (!isOk) return false;
 
-    for (int i = 0 ; i < count; i++) {
+    for (size_t i = 0 ; i < count; i++) {
         LdConfigEntryWrapper *entry = new LdConfigEntryWrapper(m_Exe, this, i);
         if (entry->getPtr() == NULL) {
             delete entry;

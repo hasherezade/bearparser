@@ -64,13 +64,13 @@ void ImportBaseDirWrapper::reloadMapping()
     clearMapping();
     size_t entriesCount = this->entries.size();
 
-    for (int i = 0; i < entriesCount; i++) {
+    for (size_t i = 0; i < entriesCount; i++) {
         ImportBaseEntryWrapper* lib = dynamic_cast<ImportBaseEntryWrapper*> (this->getEntryAt(i));
         if (lib == NULL) continue;
         size_t libId = lib->entryNum;
 
         size_t funcCount = lib->getEntriesCount();
-        for (int fI = 0; fI < funcCount; fI++) {
+        for (size_t fI = 0; fI < funcCount; fI++) {
             addMapping(lib->getEntryAt(fI));
         }
     }
