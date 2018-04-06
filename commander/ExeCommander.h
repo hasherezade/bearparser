@@ -2,6 +2,10 @@
 
 #include "Commander.h"
 
+#include <iomanip>
+#define OUT_PADDED_HEX(stream, val) std::cout.fill('0'); stream << std::hex << std::setw(sizeof(val)) << val;
+#define OUT_HEX_FIELD(stream, val) std::cout.fill('0'); stream << "[" << std::hex << std::setw(sizeof(val)) << val << "]";
+
 namespace cmd_util {
 
     Executable* getExeFromContext(CmdContext *ctx);
@@ -11,7 +15,7 @@ namespace cmd_util {
     std::string addrTypeToStr(Executable::addr_type type);
 
     offset_t readOffset(Executable::addr_type aType);
-    size_t readNumber(std::string prompt);
+    size_t readNumber(std::string prompt, bool read_hex=false);
 
     void fetch(Executable *exe, offset_t offset, Executable::addr_type aType, bool hex);
     void printWrapperNames(MappedExe *exe);
@@ -55,24 +59,7 @@ public:
     ConvertAddrCommand(Executable::addr_type v_from, Executable::addr_type v_to, std::string desc)
         : Command(desc), addrFrom(v_from), addrTo(v_to) {}
 
-    virtual void execute(CmdParams *params, CmdContext  *context)
-    {
-        Executable *exe = cmd_util::getExeFromContext(context);
-        offset_t offset = cmd_util::readOffset(addrFrom);
-
-        offset_t outOffset = exe->convertAddr(offset, addrFrom, addrTo);
-        if (outOffset == INVALID_ADDR) {
-            std::cerr << "This address cannot be mapped" << std::endl;
-            return;
-        }
-        std::string inAddr = cmd_util::addrTypeToStr(addrFrom);
-        std::string outAddr = cmd_util::addrTypeToStr(addrTo);
-        printf("[%s]\t->\t[%s]:\n", inAddr.c_str(), outAddr.c_str());
-        printf(" %llX\t->\t%llX\n", 
-            static_cast<unsigned long long>(offset),
-            static_cast<unsigned long long>(outOffset)
-        );
-    }
+    virtual void execute(CmdParams *params, CmdContext  *context);
 
 protected:
     Executable::addr_type addrFrom;
@@ -104,34 +91,7 @@ public:
     ExeInfoCommand(std::string desc = "Exe Info")
         : Command(desc) {}
 
-    virtual void execute(CmdParams *params, CmdContext  *context)
-    {
-        Executable *exe = cmd_util::getExeFromContext(context);
-        printf("Bit mode: \t%10d\n", static_cast<unsigned>(exe->getBitMode()));
-        offset_t entryPoint = exe->getEntryPoint();
-        printf("Entry point: \t[%10llX %c]\n",
-            static_cast<unsigned long long>(entryPoint),
-            cmd_util::addrTypeToChar(Executable::RVA)
-        );
-        printf("Raw size: \t[%10lX]\n",
-            static_cast<unsigned long>(exe->getMappedSize(Executable::RAW))
-        );
-        printf("Raw align.: \t[%10lX]\n",
-            static_cast<unsigned long>(exe->getAlignment(Executable::RAW))
-        );
-
-        printf("Virtual size: \t[%10lX]\n",
-            static_cast<unsigned long>(exe->getMappedSize(Executable::RVA))
-        );
-        printf("Virtual align.:\t[%10lX]\n",
-            static_cast<unsigned long>(exe->getAlignment(Executable::RVA))
-        );
-        MappedExe *mappedExe = cmd_util::getMappedExeFromContext(context);
-        if (mappedExe) {
-            printf("Contains:\n");
-            cmd_util::printWrapperNames(mappedExe);
-        }
-    }
+    virtual void execute(CmdParams *params, CmdContext  *context);
 };
 
 class WrapperCommand : public Command
@@ -150,11 +110,11 @@ public:
         int wrId = wrapperId;
         if (wrId == -1) {
             cmd_util::printWrapperNames(mappedExe);
-            wrId = cmd_util::readNumber("wrapperNum");
+            wrId = cmd_util::readNumber("wrapperNum", false);
         }
         ExeElementWrapper *wrapper = mappedExe->getWrapper(wrId);
         if (wrapper == NULL) {
-            printf("No such wrapper!\n");
+            std::cout << "No such wrapper!" << std::endl;
             return;
         }
         wrapperAction(wrapper);
@@ -172,7 +132,7 @@ public:
     virtual void wrapperAction(ExeElementWrapper *wrapper)
     {
         if (wrapper == NULL) {
-            std::cerr << "Invalid Wrapper" << std::endl;
+            std::cout << "Invalid Wrapper" << std::endl;
             return;
         }
         ExeNodeWrapper* nWrapper = dynamic_cast<ExeNodeWrapper*>(wrapper);
@@ -220,16 +180,14 @@ public:
         }
         ExeNodeWrapper* nWrapper = dynamic_cast<ExeNodeWrapper*>(wrapper);
         if (nWrapper == NULL) {
-            std::cerr << "This wrapper have no entries!" << std::endl;
+            std::cerr << "This wrapper has no entries!" << std::endl;
             return;
         }
 
         cmd_util::dumpEntryInfo(nWrapper);
 
-        unsigned int num = 0;
-        printf("Dump subentries of Index: ");
-        scanf("%u", &num);
-
+        unsigned int num = cmd_util::readNumber("Dump subentries of Index: ");
+        
         ExeNodeWrapper* lib = nWrapper->getEntryAt(num);
         cmd_util::dumpEntryInfo(lib);
         cmd_util::dumpNodeInfo(lib);
@@ -251,9 +209,9 @@ public:
         if (wrapper == NULL) return;
         BYTE filling = 0;
         if (wrapper->fillContent(filling)) {
-            printf("Filled!\n");
+            std::cout << "Filled!" << std::endl;
         } else {
-            printf("Failed to fill...\n");
+            std::cout << "Failed to fill..." << std::endl;
             return;
         }
         MappedExe *mExe = dynamic_cast<MappedExe*>(wrapper->getExe());
@@ -275,10 +233,9 @@ public:
     virtual void wrapperAction(ExeElementWrapper *wrapper)
     {
         bufsize_t dSize = FileBuffer::dump(fileName, *wrapper, true);
-        printf("Dumped size: %lu into: %s\n",
-            static_cast<unsigned long>(dSize),
-            fileName.toStdString().c_str()
-        );
+        std::cout << "Dumped size: " << dSize 
+            << " into: " << fileName.toStdString()
+            << std::endl;
     }
 protected:
     QString fileName;
@@ -298,10 +255,9 @@ public:
         Executable *exe = cmd_util::getExeFromContext(context);
 
         bufsize_t dSize = FileBuffer::dump(fileName, *exe, true);
-        printf("Dumped size: %lu into: %s\n",
-            static_cast<unsigned long>(dSize),
-            fileName.toStdString().c_str()
-        );
+        std::cout << "Dumped size: " << dSize 
+            << " into: " << fileName.toStdString()
+            << std::endl;
     }
 protected:
     QString fileName;

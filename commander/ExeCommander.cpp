@@ -41,21 +41,25 @@ Executable* cmd_util::getExeFromContext(CmdContext *context)
 
 offset_t cmd_util::readOffset(Executable::addr_type aType)
 {
-    unsigned long long offset = 0;
-
-    if (aType == Executable::NOT_ADDR) return INVALID_ADDR;
+    if (aType == Executable::NOT_ADDR) {
+        return INVALID_ADDR;
+    }
     std::string prompt = addrTypeToStr(aType);
-
-    printf("%s: ", prompt.c_str());
-    scanf("%llX", &offset);
-    return static_cast<offset_t>(offset);
+    offset_t offset = 0;
+    std::cout << prompt.c_str() << ": ";
+    std::cin >> std::hex >> offset;
+    return offset;
 }
 
-size_t cmd_util::readNumber(std::string prompt)
+size_t cmd_util::readNumber(std::string prompt, bool read_hex)
 {
     unsigned int num = 0;
-    printf("%s: ", prompt.c_str());
-    scanf("%u", &num);
+    std::cout << prompt.c_str() << ": ";
+    if (read_hex) {
+        std::cin >> std::hex >> num;
+    } else {
+        std::cin >> std::dec >> num;
+    }
     return num;
 }
 
@@ -69,13 +73,13 @@ void cmd_util::fetch(Executable *peExe, offset_t offset, Executable::addr_type a
 
     BufferView *sub = new BufferView(peExe, offset, 100);
 
-    if (sub->getContent() == NULL) {
-        std::cout << "Cannot fetch" << std::endl;
+    if (sub->getContent() == nullptr) {
+        std::cout << "[ERROR] Cannot fetch" << std::endl;
         delete sub;
         return;
     }
 
-    AbstractFormatter *formatter = NULL;
+    AbstractFormatter *formatter = nullptr;
     std::string separator = " ";
 
     if (hex) formatter = new HexFormatter(sub);
@@ -85,49 +89,51 @@ void cmd_util::fetch(Executable *peExe, offset_t offset, Executable::addr_type a
     }
     std::cout << "Fetched:" << std::endl;
     for (bufsize_t i = 0; i < sub->getContentSize(); i++) {
-        printf("%s%s", (*formatter)[i].toStdString().c_str(), separator.c_str());
+        std::cout << (*formatter)[i].toStdString() << separator.c_str();
     }
-    putchar('\n');
+    std::cout << std::endl;
 
     delete formatter;
     delete sub;
 }
 
-void cmd_util::printWrapperNames(MappedExe *exe) {
+void cmd_util::printWrapperNames(MappedExe *exe)
+{
     size_t count = exe->wrappersCount();
-
     for (size_t i = 0; i < count; i++) {
         ExeElementWrapper *wr = exe->getWrapper(i);
-        if (wr == NULL || wr->getPtr() == NULL) continue;
-        printf("[%2lu] %s\n",
-            static_cast<unsigned long>(i),
-            exe->getWrapperName(i).toStdString().c_str()
-        );
+        if (wr == NULL || wr->getPtr() == NULL) {
+            continue;
+        }
+        std::cout << "[" << std::dec << i << "] ";
+        std::cout << exe->getWrapperName(i).toStdString() << std::endl;
     }
 }
 
 void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
 {
-    if (w == NULL) return;
-    printf("------\n");
+    if (w == nullptr) return;
+    
+    std::cout << "\n------\n";
     size_t fields = w->getFieldsCount();
-    printf("\t[%s] size: %#lX fieldsCount: %lu\n\n", 
-        w->getName().toStdString().c_str(), 
-        static_cast<unsigned long>(w->getSize()),
-        static_cast<unsigned long>(fields)
-    );
+    
+    std::cout << "[" << w->getName().toStdString() << "] ";
+    std::cout << "size: ";
+    OUT_PADDED_HEX(std::cout, w->getSize());
+    std::cout << " ";
+    std::cout << "fieldsCount: " << std::dec << fields << "\n" << std::endl;
 
     for (int i = 0; i < fields; i++) {
         offset_t offset = w->getFieldOffset(i);
-        if (offset == INVALID_ADDR) continue;
-        printf("[%04llX] %s :\t",
-            static_cast<unsigned long long>(offset),
-            w->getFieldName(i).toStdString().c_str()
-        );
+        if (offset == INVALID_ADDR) {
+            continue;
+        }
+        OUT_HEX_FIELD(std::cout, offset);
+        std::cout << " " << w->getFieldName(i).toStdString() << "\t";
 
         QString translated = w->translateFieldContent(i);
         if (translated.size() > 0) {
-            printf("%s\t", translated.toStdString().c_str());
+            std::cout << " " << translated.toStdString() << " ";
         }
 
         size_t subfields = w->getSubFieldsCount();
@@ -137,32 +143,38 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
 
             Executable::addr_type aType = w->containsAddrType(i, y);
             char c = addrTypeToChar(aType);
-            printf("[%s %c] ", str.toStdString().c_str(), c );
+            std::cout << "[" << str.toStdString() << " " << c << "]";
         }
-        printf("\n");
+        std::cout << "\n";
     }
-    printf("------\n");
+    std::cout << "------" << std::endl;
 }
 
 void cmd_util::dumpNodeInfo(ExeNodeWrapper *w)
 {
-    if (w == NULL) return;
-    printf("------\n");
+    if (w == nullptr) return;
+    
+    std::cout << "------" << std::endl;
     size_t entriesCnt = w->getEntriesCount();
-    printf("\t[%s] entriesCount: %lu\n\n", w->getName().toStdString().c_str(), entriesCnt);
+    std::cout << "\t [" << w->getName().toStdString() << "] "
+        << "entriesCount" << std::dec << entriesCnt << std::endl;
 
     for (int i = 0; i < entriesCnt; i++) {
         ExeNodeWrapper* entry = w->getEntryAt(i);
         if (entry == NULL) break;
-        printf("Entry %d:\n", i);
+        
+        std::cout << "Entry #" << std::dec << i << "\n";
         dumpEntryInfo(entry);
         size_t subEntries = entry->getEntriesCount();
         if (subEntries > 0) {
-            printf("Have entries: %lu\n" , subEntries);
+            std::cout << "Have entries: " 
+            << std::dec << subEntries
+            << " ( "
+            << std::hex << "0x" << subEntries 
+            << " )";
         }
-        printf("\n");
+        std::cout << "\n";
     }
-    printf("------\n");
 }
 
 void ExeCommander::initCommands()
@@ -180,10 +192,67 @@ void ExeCommander::initCommands()
 
     this->addCommand("cl", new ClearWrapperCommand("Clear chosen wrapper Content"));
     this->addCommand("fdump", new DumpWrapperToFileCommand("Dump chosen wrapper Content into a file"));
-    this->addCommand("dump", new DumpWrapperCommand("Dump chosen wrapper info"));
-    this->addCommand("edump", new DumpWrapperEntriesCommand("Dump wrapper entries"));
+    this->addCommand("winfo", new DumpWrapperCommand("Dump chosen wrapper info"));
+    this->addCommand("einfo", new DumpWrapperEntriesCommand("Dump wrapper entries"));
 
     this->addCommand("e_add", new AddEntryCommand("Add entry to a wrapper"));
     this->addCommand("save", new SaveExeToFileCommand());
 }
 
+//---
+
+void ConvertAddrCommand::execute(CmdParams *params, CmdContext  *context)
+{
+    Executable *exe = cmd_util::getExeFromContext(context);
+    offset_t offset = cmd_util::readOffset(addrFrom);
+
+    offset_t outOffset = exe->convertAddr(offset, addrFrom, addrTo);
+    if (outOffset == INVALID_ADDR) {
+        std::cerr << "[WARNING] This address cannot be mapped" << std::endl;
+        return;
+    }
+    std::cout << "[" << cmd_util::addrTypeToStr(addrFrom) << "]";
+    std::cout << "\t->\t";
+    std::cout << "[" << cmd_util::addrTypeToStr(addrTo) << "]";
+    std::cout << ":\n";
+    OUT_PADDED_HEX(std::cout, offset);
+    std::cout << "\t->\t";
+    OUT_PADDED_HEX(std::cout, outOffset);
+    std::cout << std::endl;
+}
+//---
+
+void ExeInfoCommand::execute(CmdParams *params, CmdContext  *context)
+{
+    Executable *exe = cmd_util::getExeFromContext(context);
+    std::cout << "Bit mode: \t" << exe->getBitMode() << "\n";
+    
+    offset_t entryPoint = exe->getEntryPoint();
+    
+    std::cout << "Entry point: \t";
+    std::cout << "[";
+    OUT_PADDED_HEX(std::cout, entryPoint);
+    std::cout << " " << cmd_util::addrTypeToChar(Executable::RVA);
+    std::cout << "]\n";
+//Raw:
+    std::cout << "Raw size: \t";
+    OUT_HEX_FIELD(std::cout, exe->getMappedSize(Executable::RAW));
+    std::cout << "\n";
+    std::cout << "Raw align. \t";
+    OUT_HEX_FIELD(std::cout, exe->getAlignment(Executable::RAW));
+    std::cout << "\n";
+//Virtual:
+    std::cout << "Virtual size: \t";
+    OUT_HEX_FIELD(std::cout, exe->getMappedSize(Executable::RVA));
+    std::cout << "\n";
+    std::cout << "Virtual align. \t";
+    OUT_HEX_FIELD(std::cout, exe->getAlignment(Executable::RVA));
+    std::cout << "\n";
+    
+    MappedExe *mappedExe = cmd_util::getMappedExeFromContext(context);
+    if (mappedExe) {
+        std::cout << "Contains:\n";
+        cmd_util::printWrapperNames(mappedExe);
+    }
+    std::cout << std::endl;
+}

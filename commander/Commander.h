@@ -59,7 +59,13 @@ class QuitCommand : public Command
 public:
     QuitCommand() : Command("Quit") {}
 
-    virtual void execute(CmdParams *params, CmdContext *context_ptr) { if (context_ptr != NULL) context_ptr->stopProcessing(); }
+    virtual void execute(CmdParams *params, CmdContext *context_ptr)
+    { 
+        if (context_ptr == nullptr) {
+            return;
+        }
+        context_ptr->stopProcessing();
+    }
 
 };
 
