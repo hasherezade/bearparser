@@ -32,7 +32,7 @@ QString getFileName()
 
 int main(int argc, char *argv[])
 {
-    printf("Bearparser version: %s\n", BEARPARSER_VERSION);
+    std::cout << "Bearparser version: " <<  BEARPARSER_VERSION << std::endl;
     QCoreApplication app(argc, argv);
 
     ExeFactory::init();
@@ -53,9 +53,8 @@ int main(int argc, char *argv[])
                 fileView = new FileView(fName, maxMapSize);
             
             } catch (BufferException &e1) {
-                fprintf(stderr, "[ERROR] %s\n", e1.what());
-                printf("Try again with size (hex): ");
-                scanf("%X", &maxMapSize);
+                std::cerr << "[ERROR] " << e1.what() << std::endl;
+                maxMapSize = cmd_util::readNumber("Try again with size (hex): ", true);
             }
         } while (fileView == NULL);
 
@@ -65,17 +64,17 @@ int main(int argc, char *argv[])
            ExeFactory::destroy();
            return 1;
         }
-
-        printf("Type: %s\n", ExeFactory::getTypeName(exeType).toStdString().c_str());
+        
+        std::cout << "Type: " << ExeFactory::getTypeName(exeType).toStdString() << std::endl;
         const bufsize_t MINBUF = 0x200;
         bufsize_t readableSize = fileView->getContentSize();
         bufsize_t allocSize = (readableSize < MINBUF) ? MINBUF : readableSize;
 
-        printf("Buffering...\n");
+        std::cerr << "Buffering..." << std::endl;
         ByteBuffer *buf = new ByteBuffer(fileView, 0, allocSize);
         delete fileView;
 
-        printf("Parsing executable...\n");
+        std::cerr << "Parsing executable..." << std::endl;
         Executable *exe = ExeFactory::build(buf, exeType);
 
         exeContext.setExe(exe);
@@ -85,9 +84,9 @@ int main(int argc, char *argv[])
         delete buf;
 
     } catch (CustomException e) {
-        fprintf(stderr, "[ERROR] %s\n", e.what());
+        std::cerr << "[ERROR] " << e.what() << std::endl;
     }
-    printf("Done!\n");
+    std::cout << "Bye!" << std::endl;
     ExeFactory::destroy();
     return 0;
 }

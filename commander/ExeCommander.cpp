@@ -137,7 +137,7 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
         }
 
         size_t subfields = w->getSubFieldsCount();
-        for (int y = 0; y < subfields; y++) {
+        for (size_t y = 0; y < subfields; y++) {
             WrappedValue value = w->getWrappedValue(i, y);
             QString str = value.toQString();
 
@@ -159,7 +159,7 @@ void cmd_util::dumpNodeInfo(ExeNodeWrapper *w)
     std::cout << "\t [" << w->getName().toStdString() << "] "
         << "entriesCount" << std::dec << entriesCnt << std::endl;
 
-    for (int i = 0; i < entriesCnt; i++) {
+    for (size_t i = 0; i < entriesCnt; i++) {
         ExeNodeWrapper* entry = w->getEntryAt(i);
         if (entry == NULL) break;
         

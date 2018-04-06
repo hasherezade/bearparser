@@ -89,11 +89,11 @@ public:
 
         ResourcesContainer* container = pe->getResourcesOfType(pe::RESTYPE_STRING);
         if (container == NULL) {
-            printf("No such resource type!\n");
+            std::cout << "No such resource type!" << std::endl;
             return;
         }
         size_t max = container->entriesCount();
-        printf("Total: %lu\n", static_cast<unsigned long>(max));
+        std::cout << "Total: " << max << std::endl;
         size_t limit = 0;
         if (max > 100) {
             limit = cmd_util::readNumber("max");
@@ -134,11 +134,11 @@ public:
         if (!pe) return;
 
         ResourcesAlbum *album = pe->getResourcesAlbum();
-        if (album == NULL) return;
+        if (album == nullptr) return;
 
         size_t dirsCount =  album->dirsCount();
         if (dirsCount == 0) {
-            printf("No resources!\n");
+            std::cout << "No resources!" << std::endl;
             return;
         }
         cmd_util::printResourceTypes(pe);
@@ -146,17 +146,17 @@ public:
         pe::resource_type type = (pe::resource_type) cmd_util::readNumber("wrapper type");
 
         ResourcesContainer* wrappers = pe->getResourcesOfType(type);
-        size_t wrappersCount = 0;
-        if (wrappers == NULL || (wrappersCount = wrappers->count()) == 0) {
-            printf("No such resource type!\n");
+        if (wrappers == nullptr) {
+            std::cout << "No such resource type!" << std::endl;
+            return;
+        }
+        size_t wrappersCount = wrappers->count();
+        if (wrappersCount == 0) {
             return;
         }
         size_t wrapperIndx = 0;
-
         if (wrappersCount > 1) {
-            printf("Wrappers count: %lu\n",
-                static_cast<unsigned long>(wrappersCount)
-            );
+            std::cout << "Wrappers count: " << std::dec << wrappersCount << std::endl;
             wrapperIndx = cmd_util::readNumber("wrapperIndex");
         }
         cmd_util::dumpResourcesInfo(pe, type, wrapperIndx);

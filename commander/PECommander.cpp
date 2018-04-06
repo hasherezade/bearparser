@@ -61,33 +61,32 @@ void cmd_util::printStrings(PEFile *pe, size_t limit)
 
     size_t wrappersCount = allStrings->count();
     if (wrappersCount == 0) {
-        printf ("No Strings in Resources!\n");
+        std::cout <<"No Strings in Resources!\n";
         return;
     }
 
-    int limCount = 0;
+    size_t limCount = 0;
     for (size_t i = 0; i < wrappersCount; i++) {
         ResourceStringsWrapper* wrapper = dynamic_cast<ResourceStringsWrapper*>(allStrings->getWrapperAt(i));
         if (wrapper == NULL) {
-            printf("[ERROR] Null wrapper!\n");
+            std::cout << "[ERROR] Null wrapper!\n";
             continue;
         }
         size_t count = wrapper->getResStringsCount();
 
-        for (int i = 0; i < count; i++) {
+        for (size_t i = 0; i < count; i++) {
             if (limit != 0 && limCount >= limit) return;
 
             ResString *resStr = wrapper->getResStringAt(i);
-            if (resStr != NULL) {
-                printf("[%8llX] [%lu] %s\n",
-                    static_cast<unsigned long long>(resStr->offset),
-                    static_cast<unsigned long>(resStr->getSize()),
-                    resStr->getQString().toStdString().c_str()
-                );
+            if (resStr != nullptr) {
+                OUT_HEX_FIELD(std::cout, resStr->offset);
+                std::cout << " [" << std::dec << resStr->getSize() << "]" << std::endl;
+                std::cout << resStr->getQString().toStdString() << "\n";
                 limCount++;
             }
         }
     }
+    std::cout << std::endl;
 }
 
 void cmd_util::dumpResourcesInfo(PEFile *pe, pe::resource_type type, size_t wrapperId)
@@ -95,19 +94,22 @@ void cmd_util::dumpResourcesInfo(PEFile *pe, pe::resource_type type, size_t wrap
     ResourcesContainer* wrappers = pe->getResourcesOfType(type);
 
     if (wrappers == NULL || wrappers->count() == 0) {
-        printf ("No such resource type\n");
+        std::cout << "No such resource type" << std::endl;
         return;
     }
     size_t wrappersCount = wrappers->count();
-    printf ("Found in Resources: %lu, wrappers: %lu\n",
-        static_cast<unsigned long>(wrappers->entriesCount()),
-        static_cast<unsigned long>(wrappersCount)
-    );
-    int limCount = 0;
-    std::vector<ResourceContentWrapper*>::iterator itr;
-    if (wrapperId >= wrappersCount) return;
+    if (wrapperId >= wrappersCount) {
+        return;
+    }
+    std::cout << "Found in Resources:"
+        << std::dec << wrappers->entriesCount()
+        << std::dec << wrappersCount
+        << std::endl;
 
     ResourceContentWrapper* wrapper = wrappers->getWrapperAt(wrapperId);
+    if (wrapper == nullptr) {
+        return;
+    }
     cmd_util::dumpEntryInfo(wrapper);
     cmd_util::dumpNodeInfo(dynamic_cast<ExeNodeWrapper*>(wrapper));
 }
@@ -116,18 +118,18 @@ void cmd_util::listDataDirs(PEFile *pe)
 {
     for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
         DataDirEntryWrapper* entry = pe->getDataDirEntry(pe::dir_entry(i));
-        if (entry == NULL) continue;
-        printf("[%lu] %s\n",
-            static_cast<unsigned long>(i),
-            entry->getName().toStdString().c_str()
-        );
+        if (entry == nullptr) {
+            continue;
+        }
+        std::cout << "[" << i << "]"
+            << entry->getName().toStdString()
+            << std::endl;
     }
 }
 
 //------------------------------------------
 void PECommander::initCommands()
 {
-    //
     this->addCommand("secV", new SectionByAddrCommand(Executable::RVA, "Section by RVA"));
     this->addCommand("secR", new SectionByAddrCommand(Executable::RAW, "Section by RAW"));
 
@@ -136,7 +138,7 @@ void PECommander::initCommands()
     this->addCommand("rs", new WrapperInfoCommand("Resource Info"));
 
     this->addCommand("dir_mv", new MoveDataDirEntryCommand("Move DataDirectory"));
-    this->addCommand("secdump", new SectionDumpCommand("Dump chosen Section info"));
+    this->addCommand("secinfo", new SectionDumpCommand("Dump chosen Section info"));
     this->addCommand("secfdump", new SectionDumpCommand("Dump chosen Section Content into a file", true));
 }
 
