@@ -226,7 +226,7 @@ void ConvertAddrCommand::execute(CmdParams *params, CmdContext  *context)
 void ExeInfoCommand::execute(CmdParams *params, CmdContext  *context)
 {
     Executable *exe = cmd_util::getExeFromContext(context);
-    std::cout << "Bit mode: \t" << exe->getBitMode() << "\n";
+    std::cout << "Bit mode: \t" << std::dec << exe->getBitMode() << "\n";
     
     offset_t entryPoint = exe->getEntryPoint();
     
