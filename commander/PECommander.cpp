@@ -79,7 +79,7 @@ void cmd_util::printStrings(PEFile *pe, size_t limit)
 
             ResString *resStr = wrapper->getResStringAt(i);
             if (resStr != nullptr) {
-                OUT_HEX_FIELD(std::cout, resStr->offset);
+                OUT_PADDED_OFFSET(std::cout, resStr->offset);
                 std::cout << " [" << std::dec << resStr->getSize() << "]" << std::endl;
                 std::cout << resStr->getQString().toStdString() << "\n";
                 limCount++;

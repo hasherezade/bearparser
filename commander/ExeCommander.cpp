@@ -119,7 +119,8 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
     
     std::cout << "[" << w->getName().toStdString() << "] ";
     std::cout << "size: ";
-    OUT_PADDED_HEX(std::cout, w->getSize());
+    
+    OUT_PADDED_HEX(std::cout, w->getSize(), sizeof(bufsize_t));
     std::cout << " ";
     std::cout << "fieldsCount: " << std::dec << fields << "\n" << std::endl;
 
@@ -128,7 +129,7 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
         if (offset == INVALID_ADDR) {
             continue;
         }
-        OUT_HEX_FIELD(std::cout, offset);
+        OUT_PADDED_OFFSET(std::cout, offset);
         std::cout << " " << w->getFieldName(i).toStdString() << "\t";
 
         QString translated = w->translateFieldContent(i);
@@ -157,7 +158,7 @@ void cmd_util::dumpNodeInfo(ExeNodeWrapper *w)
     std::cout << "------" << std::endl;
     size_t entriesCnt = w->getEntriesCount();
     std::cout << "\t [" << w->getName().toStdString() << "] "
-        << "entriesCount" << std::dec << entriesCnt << std::endl;
+        << "entriesCount: " << std::dec << entriesCnt << std::endl;
 
     for (size_t i = 0; i < entriesCnt; i++) {
         ExeNodeWrapper* entry = w->getEntryAt(i);
@@ -215,9 +216,9 @@ void ConvertAddrCommand::execute(CmdParams *params, CmdContext  *context)
     std::cout << "\t->\t";
     std::cout << "[" << cmd_util::addrTypeToStr(addrTo) << "]";
     std::cout << ":\n";
-    OUT_PADDED_HEX(std::cout, offset);
+    OUT_PADDED_OFFSET(std::cout, offset);
     std::cout << "\t->\t";
-    OUT_PADDED_HEX(std::cout, outOffset);
+    OUT_PADDED_OFFSET(std::cout, outOffset);
     std::cout << std::endl;
 }
 //---
@@ -231,22 +232,22 @@ void ExeInfoCommand::execute(CmdParams *params, CmdContext  *context)
     
     std::cout << "Entry point: \t";
     std::cout << "[";
-    OUT_PADDED_HEX(std::cout, entryPoint);
+    OUT_PADDED_OFFSET(std::cout, entryPoint);
     std::cout << " " << cmd_util::addrTypeToChar(Executable::RVA);
     std::cout << "]\n";
 //Raw:
     std::cout << "Raw size: \t";
-    OUT_HEX_FIELD(std::cout, exe->getMappedSize(Executable::RAW));
+    OUT_PADDED_OFFSET(std::cout, exe->getMappedSize(Executable::RAW));
     std::cout << "\n";
     std::cout << "Raw align. \t";
-    OUT_HEX_FIELD(std::cout, exe->getAlignment(Executable::RAW));
+    OUT_PADDED_OFFSET(std::cout, exe->getAlignment(Executable::RAW));
     std::cout << "\n";
 //Virtual:
     std::cout << "Virtual size: \t";
-    OUT_HEX_FIELD(std::cout, exe->getMappedSize(Executable::RVA));
+    OUT_PADDED_OFFSET(std::cout, exe->getMappedSize(Executable::RVA));
     std::cout << "\n";
     std::cout << "Virtual align. \t";
-    OUT_HEX_FIELD(std::cout, exe->getAlignment(Executable::RVA));
+    OUT_PADDED_OFFSET(std::cout, exe->getAlignment(Executable::RVA));
     std::cout << "\n";
     
     MappedExe *mappedExe = cmd_util::getMappedExeFromContext(context);

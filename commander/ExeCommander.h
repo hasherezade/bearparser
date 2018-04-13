@@ -3,8 +3,10 @@
 #include "Commander.h"
 
 #include <iomanip>
-#define OUT_PADDED_HEX(stream, val) std::cout.fill('0'); stream << std::hex << std::setw(sizeof(val)) << val;
-#define OUT_HEX_FIELD(stream, val) std::cout.fill('0'); stream << "[" << std::hex << std::setw(sizeof(val)) << val << "]";
+#define OUT_PADDED_HEX(stream, val, field_size) std::cout.fill('0'); stream << std::hex << std::setw(field_size) << val;
+#define OUT_HEX_FIELD(stream, val, field_size) std::cout.fill('0'); stream << "[" << std::hex << std::setw(field_size) << val << "]";
+#define OUT_PADDED_OFFSET(stream, val) OUT_HEX_FIELD(stream,val, sizeof(offset_t));
+
 
 namespace cmd_util {
 
@@ -186,7 +188,7 @@ public:
 
         cmd_util::dumpEntryInfo(nWrapper);
 
-        unsigned int num = cmd_util::readNumber("Dump subentries of Index: ");
+        size_t num = cmd_util::readNumber("Dump subentries of Index: ");
         
         ExeNodeWrapper* lib = nWrapper->getEntryAt(num);
         cmd_util::dumpEntryInfo(lib);
