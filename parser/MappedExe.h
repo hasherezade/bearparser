@@ -8,23 +8,23 @@ class ExeWrappersContainer
 {
 public:
     enum WRAPPERS {
-        WR_NONE = (-1),
+        WR_NONE = size_t(-1),
         COUNT_WRAPPERS
     };
 
     ExeWrappersContainer() { }
     virtual ~ExeWrappersContainer(void) { clearWrappers(); }
 
-    virtual ExeElementWrapper* getWrapper(int wrapperId);
+    virtual ExeElementWrapper* getWrapper(size_t wrapperId);
 
     size_t wrappersCount() { return wrappers.size(); }
-    QString getWrapperName(int id);
+    QString getWrapperName(size_t id);
 
 protected:
     virtual void wrap(AbstractByteBuffer *v_buf) = 0;
     void clearWrappers();
 
-    std::map<int, ExeElementWrapper*> wrappers;
+    std::map<size_t, ExeElementWrapper*> wrappers;
 };
 
 class MappedExe : public Executable, public ExeWrappersContainer {

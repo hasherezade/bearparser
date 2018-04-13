@@ -139,7 +139,7 @@ void* RelocBlockWrapper::getPtr()
     raw = firstRaw;
     ptr = (BYTE*) reloc;
 
-    for ( int i = 0; i < this->entryNum; i++) { //TODO: make caching
+    for ( size_t i = 0; i < this->entryNum; i++) { //TODO: make caching
         raw += blockSize;
 
         ptr = m_Exe->getContentAt(raw, Executable::RAW, sizeof(IMAGE_BASE_RELOCATION));
@@ -215,7 +215,7 @@ void* RelocBlockWrapper::getEntriesPtr()
 
     if (entriesPtr == NULL || entriesSize == 0) return NULL;
 
-    uint32_t entriesOffset = getFieldOffset(ENTRIES_PTR);
+    offset_t entriesOffset = getFieldOffset(ENTRIES_PTR);
     void *ptr = this->m_Exe->getContentAt(entriesOffset, Executable::RAW, sizeof(WORD));
 
     return ptr;

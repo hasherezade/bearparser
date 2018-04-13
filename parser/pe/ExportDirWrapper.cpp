@@ -44,7 +44,7 @@ size_t ExportDirWrapper::mapNames()
 
     offset_t nameOrdRVA = exp->AddressOfNameOrdinals;
     //uint64_t nameRVA = exp->AddressOfNames;
-    int i = 0;
+    size_t i = 0;
     for (i = 0; i < maxNames; i++) {
 
         WORD* nameOrd = (WORD*) this->m_Exe->getContentAt(nameOrdRVA, Executable::RVA, sizeof(WORD));

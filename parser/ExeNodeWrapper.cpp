@@ -20,7 +20,7 @@ ExeNodeWrapper* ExeNodeWrapper::getEntryAt(size_t fieldId)
 void ExeNodeWrapper::clear()
 {
     size_t entriesCount = this->entries.size();
-    for (int i = 0; i < entriesCount; i++) {
+    for (size_t i = 0; i < entriesCount; i++) {
         delete this->entries[i];
     }
     this->entries.clear();
@@ -69,7 +69,7 @@ bool ExeNodeWrapper::canAddEntry()
 
 bool ExeNodeWrapper::isMyEntryType(ExeNodeWrapper *entry)
 {
-    if (entry == NULL) return false;
+    if (!entry) return false;
     return true; //type cast check in inherited wrappers
 }
 

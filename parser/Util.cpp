@@ -37,7 +37,7 @@ bool Logger::append(dbg_level lvl, const char* format, ...)
 
 bool pe_util::isStrLonger(const char *inp, int maxLen)
 {
-    for (int i = 0; i < maxLen; i++ ) {
+    for (size_t i = 0; i < maxLen; i++ ) {
         if (inp[i] == '\0') return false;
     }
     return true;
@@ -89,7 +89,7 @@ bool pe_util::hasNonPrintable(const char *inp, size_t maxInp)
 
 size_t pe_util::noWhiteCount(char *buf, size_t bufSize) {
     size_t cntr = 0;
-    unsigned int i = 0;
+    size_t i = 0;
     for (i = 0; i < bufSize; i++) {
         if (IS_PRINTABLE(buf[i]) && buf[i] != ' ')
             cntr++;
@@ -101,7 +101,7 @@ size_t pe_util::noWhiteCount(std::string s)
 {
     size_t bufSize = s.length();
     size_t cntr = 0;
-    unsigned int i = 0;
+    size_t i = 0;
     for (i = 0; i < bufSize; i++) {
         if (IS_PRINTABLE(s[i]) && s[i] != ' ')
             cntr++;
@@ -132,7 +132,7 @@ void pe_util::hexdump(BYTE *buf, size_t bufSize, size_t pad)
 {
     if (buf == NULL) return;
     printf("\n---\n");
-    for (int i = 0; i < bufSize; i++) {
+    for (size_t i = 0; i < bufSize; i++) {
         if (i % pad == 0) printf("\n");
         printf("0x%02X ", buf[i]);
     }
