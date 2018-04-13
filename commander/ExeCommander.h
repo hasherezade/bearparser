@@ -111,7 +111,7 @@ public:
         if (mappedExe == NULL) return;
 
         size_t wrId = wrapperId;
-        if (wrId == -1) {
+        if (wrId == INVALID_WRAPPER) {
             cmd_util::printWrapperNames(mappedExe);
             wrId = cmd_util::readNumber("wrapperNum", false);
         }
@@ -123,7 +123,7 @@ public:
         wrapperAction(wrapper);
     }
 protected:
-    int wrapperId; //TODO: fetch it from params!
+    size_t wrapperId; //TODO: fetch it from params!
 };
 
 class AddEntryCommand : public WrapperCommand
