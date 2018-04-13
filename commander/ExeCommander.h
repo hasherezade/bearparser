@@ -7,6 +7,7 @@
 #define OUT_HEX_FIELD(stream, val, field_size) std::cout.fill('0'); stream << "[" << std::hex << std::setw(field_size) << val << "]";
 #define OUT_PADDED_OFFSET(stream, val) OUT_HEX_FIELD(stream,val, sizeof(offset_t));
 
+#define INVALID_WRAPPER size_t(-1)
 
 namespace cmd_util {
 
@@ -99,7 +100,7 @@ public:
 class WrapperCommand : public Command
 {
 public:
-    WrapperCommand(std::string desc, int v_wrapperId = -1)
+    WrapperCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
         : Command(desc), wrapperId(v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper) = 0;
@@ -109,7 +110,7 @@ public:
         MappedExe *mappedExe = cmd_util::getMappedExeFromContext(context);
         if (mappedExe == NULL) return;
 
-        int wrId = wrapperId;
+        size_t wrId = wrapperId;
         if (wrId == -1) {
             cmd_util::printWrapperNames(mappedExe);
             wrId = cmd_util::readNumber("wrapperNum", false);
@@ -128,7 +129,7 @@ protected:
 class AddEntryCommand : public WrapperCommand
 {
 public:
-    AddEntryCommand(std::string desc, int v_wrapperId = -1)
+    AddEntryCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc, v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper)
@@ -157,7 +158,7 @@ public:
 class DumpWrapperCommand : public WrapperCommand
 {
 public:
-    DumpWrapperCommand(std::string desc, int v_wrapperId = -1)
+    DumpWrapperCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc, v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper)
@@ -171,7 +172,7 @@ public:
 class DumpWrapperEntriesCommand : public WrapperCommand
 {
 public:
-    DumpWrapperEntriesCommand(std::string desc, int v_wrapperId = -1)
+    DumpWrapperEntriesCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc), wrapperId(v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper)
@@ -196,14 +197,14 @@ public:
     }
 
 protected:
-    int wrapperId; //TODO: fetch it from params!
+    size_t wrapperId; //TODO: fetch it from params!
 };
 
 
 class ClearWrapperCommand : public WrapperCommand
 {
 public:
-    ClearWrapperCommand(std::string desc, int v_wrapperId = -1)
+    ClearWrapperCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc, v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper)
@@ -226,7 +227,7 @@ public:
 class DumpWrapperToFileCommand : public WrapperCommand
 {
 public:
-    DumpWrapperToFileCommand(std::string desc, int v_wrapperId = -1)
+    DumpWrapperToFileCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc, v_wrapperId)
     {
         fileName = "dumped.txt";
