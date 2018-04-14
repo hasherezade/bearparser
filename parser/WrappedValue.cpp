@@ -16,9 +16,9 @@ QVariant WrappedValue::getQVariant()
     }
     if (this->m_Type == WSTRING) {
 
-        size_t wSize = m_Size / sizeof(WORD);
+        bufsize_t wSize = m_Size / bufsize_t(sizeof(WORD));
         WORD *strPtr = (WORD*) this->m_Owner->getContentAt(m_Offset, m_Size);
-        return QString::fromUtf16(strPtr, wSize);
+        return QString::fromUtf16(strPtr, static_cast<int>(wSize));
     }
     return QVariant("...");
 }

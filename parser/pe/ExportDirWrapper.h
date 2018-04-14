@@ -62,7 +62,7 @@ public:
         FIELD_COUNTER
     };
 
-    ExportEntryWrapper(Executable *pe, ExportDirWrapper *parentDir, uint32_t entryNumber)
+    ExportEntryWrapper(Executable *pe, ExportDirWrapper *parentDir, size_t entryNumber)
         : ExeNodeWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
     // full structure boundatries

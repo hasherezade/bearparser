@@ -133,12 +133,14 @@ bool AbstractByteBuffer::setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t 
 bool AbstractByteBuffer::setStringValue(offset_t rawOffset, QString newText)
 {
      std::string newTextStr = newText.toStdString();
+     const bufsize_t newTextLen = static_cast<bufsize_t>(newTextStr.length());
 
-     BYTE *dstPtr = this->getContentAt(rawOffset, newTextStr.length() + 1);
-     if (dstPtr == NULL) return false;
-
+     BYTE *dstPtr = this->getContentAt(rawOffset, newTextLen + 1); //with terminating '\0'
+     if (!dstPtr) {
+         // cannot get a suitable buffer for the string
+         return false;
+     }
      const char* newTextC = newTextStr.c_str();
-     bufsize_t newTextLen = static_cast<bufsize_t>(strlen(newTextC));
      bool isOk = setBufferedValue(dstPtr, (BYTE*)newTextC, newTextLen, 1);
      return isOk;
 }
@@ -157,20 +159,20 @@ QString AbstractByteBuffer::getStringValue(offset_t rawOffset, bufsize_t size)
 
 QString AbstractByteBuffer::getWStringValue(offset_t rawOffset, bufsize_t len)
 {
-    const size_t unitSize = sizeof(WORD);
-    size_t size = unitSize;
-    if (len != BUFSIZE_MAX && len != -1) {
+    const bufsize_t unitSize = sizeof(WORD);
+    bufsize_t size = unitSize;
+    if (len != BUFSIZE_MAX) {
         size = len * unitSize;
     }
     WORD* ptr = (WORD*) this->getContentAt(rawOffset, size);
     if (ptr == NULL) return "";
-    return QString::fromUtf16(ptr, len);
+    return QString::fromUtf16(ptr, static_cast<int>(len));
 }
 
 QString AbstractByteBuffer::getWAsciiStringValue(offset_t rawOffset, bufsize_t len)
 {
-    const size_t unitSize = sizeof(WORD);
-    size_t size = unitSize;
+    const bufsize_t unitSize = sizeof(WORD);
+    bufsize_t size = unitSize;
     if (len != BUFSIZE_MAX && len != -1) {
         size = len * unitSize;
     }
@@ -178,12 +180,12 @@ QString AbstractByteBuffer::getWAsciiStringValue(offset_t rawOffset, bufsize_t l
     if (!ptr) return "";
 
     size_t asciiLen = pe_util::getAsciiLenW(ptr, len);
-    return QString::fromUtf16(ptr, asciiLen);
+    return QString::fromUtf16(ptr, static_cast<int>(asciiLen));
 }
 
 bool AbstractByteBuffer::isAreaEmpty(offset_t rawOffset, bufsize_t size)
 {
-    BYTE * area = this->getContentAt(rawOffset, size);
+    BYTE* area = this->getContentAt(rawOffset, size);
     if (area == NULL) return false;
 
     for (bufsize_t i = 0; i < size; i++) {

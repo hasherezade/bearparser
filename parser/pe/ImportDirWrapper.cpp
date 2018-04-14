@@ -55,7 +55,7 @@ void* ImportedFuncWrapper::getValuePtr(ImportEntryWrapper::FieldID fId)
     if (!is64) thunkRva = (int32_t)(thunkRva);
     if (thunkRva == 0 || thunkRva == -1) return NULL;
 
-    size_t thunkValSize = this->getThunkValSize();
+    bufsize_t thunkValSize = this->getThunkValSize();
     offset_t offset = static_cast<offset_t>(this->entryNum) * thunkValSize;
 
     offset_t thunkAddr = m_Exe->toRaw(thunkRva + offset, Executable::RVA);

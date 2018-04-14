@@ -97,8 +97,13 @@ public:
 
     virtual offset_t callVia() = 0;
 
-    inline size_t getAddrSize() {return (isBit64()) ? sizeof(uint64_t) : sizeof(uint32_t); }
-    inline size_t getThunkValSize() {return getAddrSize(); }
+    inline bufsize_t getAddrSize()
+    { 
+        size_t val = (isBit64()) ? sizeof(uint64_t) : sizeof(uint32_t);
+        return static_cast<bufsize_t>(val);
+    }
+    
+    inline bufsize_t getThunkValSize() { return getAddrSize(); }
 
 friend class ImportBaseDirWrapper;
 };

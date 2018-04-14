@@ -63,7 +63,7 @@ ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize) //throws 
     offset_t prevOffset = 0;
     offset_t maxOffset = contentSize - 1;
 
-    while (fIn.pos() < maxOffset) {
+    while (offset_t(fIn.pos()) < maxOffset) {
 
         bufsize_t maxSize = contentSize - readSize;
         if (maxSize > FILEVIEW_MAXSIZE) maxSize = FILEVIEW_MAXSIZE;
