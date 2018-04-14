@@ -22,7 +22,7 @@ QString getFileName()
         fName = qtin.readLine();
         if (QFile::exists(fName)) break;
 
-        fprintf(stderr, "No such file! Remaining attempts: %d\n", trials);
+        std::cerr << "No such file! Remaining attempts: " << std::dec << trials << std::endl;
         trials--;
 
     } while (trials);
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
             
             } catch (BufferException &e1) {
                 std::cerr << "[ERROR] " << e1.what() << std::endl;
-                maxMapSize = cmd_util::readNumber("Try again with size (hex): ", true);
+                maxMapSize = static_cast<bufsize_t>(cmd_util::readNumber("Try again with size (hex): ", true));
             }
         } while (fileView == NULL);
 

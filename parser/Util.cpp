@@ -35,7 +35,7 @@ bool Logger::append(dbg_level lvl, const char* format, ...)
     return true;
 }
 
-bool pe_util::isStrLonger(const char *inp, int maxLen)
+bool pe_util::isStrLonger(const char *inp, size_t maxLen)
 {
     for (size_t i = 0; i < maxLen; i++ ) {
         if (inp[i] == '\0') return false;

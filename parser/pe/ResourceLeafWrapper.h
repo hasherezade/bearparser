@@ -1,7 +1,5 @@
 #pragma once
 
-#define TOP_ENTRY_ROOT (-1)
-
 #include "../ExeNodeWrapper.h"
 
 #include <map>
@@ -34,7 +32,10 @@ class ResourceLeafWrapper : public ExeNodeWrapper
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
-    virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField) { return (fieldId == OFFSET_TO_DATA) ? Executable::RVA : Executable::NOT_ADDR; }
+    virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField) 
+    { 
+        return (fieldId == OFFSET_TO_DATA) ? Executable::RVA : Executable::NOT_ADDR;
+    }
 
     IMAGE_RESOURCE_DATA_ENTRY *leafEntryPtr();
 

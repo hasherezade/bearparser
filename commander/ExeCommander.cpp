@@ -124,7 +124,7 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
     std::cout << " ";
     std::cout << "fieldsCount: " << std::dec << fields << "\n" << std::endl;
 
-    for (int i = 0; i < fields; i++) {
+    for (size_t i = 0; i < fields; i++) {
         offset_t offset = w->getFieldOffset(i);
         if (offset == INVALID_ADDR) {
             continue;

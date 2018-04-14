@@ -86,7 +86,7 @@ public:
         FIELD_COUNTER
     };
 
-    LdConfigEntryWrapper(Executable* pe, LdConfigDirWrapper *parentDir, uint32_t entryNumber)
+    LdConfigEntryWrapper(Executable* pe, LdConfigDirWrapper *parentDir, size_t entryNumber)
         : ExeNodeWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
     // full structure boundatries

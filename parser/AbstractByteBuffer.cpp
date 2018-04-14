@@ -154,7 +154,7 @@ QString AbstractByteBuffer::getStringValue(offset_t rawOffset, bufsize_t size)
     if (!ptr) return "";
     size_t asciiLen = pe_util::getAsciiLen(ptr, size);
 
-    return QString::fromUtf8(ptr, asciiLen);
+    return QString::fromUtf8(ptr, static_cast<int>(asciiLen));
 }
 
 QString AbstractByteBuffer::getWStringValue(offset_t rawOffset, bufsize_t len)

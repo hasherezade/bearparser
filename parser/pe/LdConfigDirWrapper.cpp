@@ -96,7 +96,7 @@ bool LdConfigDirWrapper::wrap()
 
     for (size_t i = 0 ; i < count; i++) {
         LdConfigEntryWrapper *entry = new LdConfigEntryWrapper(m_Exe, this, i);
-        if (entry->getPtr() == NULL) {
+        if (!entry->getPtr()) {
             delete entry;
             break;
         }

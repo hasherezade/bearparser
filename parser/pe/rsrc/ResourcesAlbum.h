@@ -1,6 +1,6 @@
 #pragma once
 
-#define TOP_ENTRY_ROOT (-1)
+#define TOP_ENTRY_ROOT long(-1)
 
 #include "../../ExeNodeWrapper.h"
 #include "../ResourceLeafWrapper.h"

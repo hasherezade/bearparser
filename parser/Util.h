@@ -31,7 +31,7 @@ namespace Logger {
 namespace pe_util {
     inline bool isPrintable(char c) { return IS_PRINTABLE(c); }
 
-    bool isStrLonger(const char *inp, int maxLen);
+    bool isStrLonger(const char *inp, size_t maxLen);
     //QString getString(const char *ptr, size_t maxInp, size_t maxBuf = DEFAULT_BUFSIZE);
     bool hasNonPrintable(const char *ptr, size_t maxInp);
     size_t getAsciiLen(const char *ptr, size_t maxCount, bool acceptNotTerminated = false);

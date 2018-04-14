@@ -1,7 +1,5 @@
 #pragma once
 
-#define TOP_ENTRY_ROOT (-1)
-
 #include "DataDirEntryWrapper.h"
 #include "ResourceLeafWrapper.h"
 
@@ -29,7 +27,11 @@ public:
     };
 
     ResourceDirWrapper(PEFile* pe, ResourcesAlbum *resAlbum = NULL, offset_t rawOffset = 0, long depth = 0, long topEntryId = TOP_ENTRY_ROOT)
-        : DataDirEntryWrapper(pe, pe::DIR_RESOURCE), rawOff(rawOffset), dirDepth(depth), album(resAlbum), topEntryID(topEntryId) { wrap(); }
+        : DataDirEntryWrapper(pe, pe::DIR_RESOURCE),
+        rawOff(rawOffset), dirDepth(depth), album(resAlbum), topEntryID(topEntryId)
+    { 
+        wrap();
+    }
 
     bool wrap();
 
@@ -43,7 +45,11 @@ public:
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
 
-    bufsize_t getEntriesAreaSize() { return static_cast<bufsize_t>(this->getEntriesCount()) * sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY); }
+    bufsize_t getEntriesAreaSize()
+    { 
+        return static_cast<bufsize_t>(this->getEntriesCount()) * sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY);
+    }
+    
     long getDepth() { return this->dirDepth; }
 
     IMAGE_RESOURCE_DIRECTORY* mainResourceDir();
@@ -71,7 +77,11 @@ public:
     static QString translateType(WORD id);
 
     ResourceEntryWrapper(PEFile *pe, ResourceDirWrapper *parentDir, size_t entryNumber, long topEntryId, ResourcesAlbum *resAlbum)
-        : PENodeWrapper(pe, parentDir, entryNumber), topEntryID(topEntryId), album(resAlbum), childDir(NULL), childLeaf(NULL) { this->parentDir = parentDir; wrap(); }
+        : PENodeWrapper(pe, parentDir, entryNumber), topEntryID(topEntryId), album(resAlbum), childDir(NULL), childLeaf(NULL)
+    {
+        this->parentDir = parentDir;
+        wrap();
+    }
 
     virtual ~ResourceEntryWrapper() { clear(); }
 

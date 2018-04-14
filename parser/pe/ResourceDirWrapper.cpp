@@ -82,7 +82,7 @@ bool ResourceDirWrapper::wrap()
     size_t idsNum = dir->NumberOfIdEntries;
 
     size_t totalEntries = namesNum + idsNum;
-    for (size_t i = 0; i < totalEntries && i < MAX_ENTRIES; i++ ) {
+    for (long i = 0; i < totalEntries && i < MAX_ENTRIES; i++ ) {
 
         long topDirId = (this->topEntryID != TOP_ENTRY_ROOT) ? this->topEntryID : i ;
 
