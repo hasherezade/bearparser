@@ -16,7 +16,7 @@ QString ResString::getName()
     return getQString();
 }
 
-/* specific field boundatries */
+/* specific field boundaries */
 void* ResString::getFieldPtr(size_t fId, size_t subField)
 {
     switch (fId) {
