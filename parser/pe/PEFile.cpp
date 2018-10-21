@@ -79,6 +79,7 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     this->fHdr = new FileHdrWrapper(this);
     if (fHdr->getPtr() == NULL) throw ExeException("Cannot parse FileHdr: It is not PE File!");
     this->wrappers[WR_FILE_HDR] = fHdr;
+    this->wrappers[WR_RICH_HDR] = new RichHdrWrapper(this);
 
     this->optHdr = new OptHdrWrapper(this);
     if (optHdr->getPtr() == NULL) throw ExeException("Cannot parse OptionalHeader: It is not PE File!");
@@ -114,6 +115,67 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
         this->album->wrapLeafsContent();
     }
 }
+
+RICH_DANS_HEADER* PEFile::getRichHeaderBgn(RICH_SIGNATURE* richSign)
+{
+    if (!richSign) return nullptr;
+
+    DWORD xorkey = richSign->checksum;
+    offset_t richOffset = getOffset(richSign);
+
+    size_t processedSize = 0;
+    RICH_DANS_HEADER* dansHdr = nullptr;
+    while(true) {
+        dansHdr = (RICH_DANS_HEADER*) this->getContentAt(richOffset + processedSize - sizeof(RICH_DANS_HEADER), sizeof(RICH_DANS_HEADER));
+        if (!dansHdr) break;
+        if (dansHdr->dansId == (DANS_HDR_MAGIC ^ xorkey)) break; //got it!
+        processedSize -= sizeof(DWORD);
+    }
+    return dansHdr;
+}
+
+RICH_SIGNATURE* PEFile::getRichHeaderSign()
+{
+    size_t dosStubOffset = this->core.dos->e_lfarlc;
+    size_t dosStubEnd = this->core.dos->e_lfanew;
+    size_t maxSize = dosStubEnd - dosStubOffset;
+    BYTE *dosPtr = this->getContentAt(dosStubOffset, maxSize);
+    if (!dosPtr) {
+        return nullptr;
+    }
+    //remove padding:
+    size_t processedSize = maxSize;
+    RICH_SIGNATURE* richSign = nullptr;
+    while(true) {
+        richSign = (RICH_SIGNATURE*) this->getContentAt(dosStubOffset + processedSize - sizeof(RICH_SIGNATURE), sizeof(RICH_SIGNATURE));
+        if (!richSign) break;
+        if (richSign->richId == RICH_HDR_MAGIC) break; //got it!
+        processedSize -= sizeof(DWORD);
+    }
+    if (!richSign) return nullptr;
+    if (richSign->richId != RICH_HDR_MAGIC) {
+        return nullptr; //invalid
+    }
+    DWORD xorkey = richSign->checksum;
+
+    //search for the beginning now...
+    /*while(true) {
+        rich = (IMAGE_RICH_HEADER*) this->getContentAt(dosStubOffset + processedSize - sizeof(IMAGE_RICH_HEADER), sizeof(IMAGE_RICH_HEADER));
+        if (!rich) break;
+        if (rich->dansId == (DANS_HDR_MAGIC ^ rich->checksum)) break; //got it!
+        processedSize -= sizeof(DWORD);
+    }
+
+    /*if (rich->cPad[0] != rich->checksum) {
+        return nullptr; //invalid
+    }
+    if (!rich) return nullptr;
+    if (rich->dansId != (DANS_HDR_MAGIC ^ xorkey)) {
+        return nullptr; //invalid
+    }*/
+    return richSign;
+}
+
 
 offset_t PEFile::getMinSecRVA()
 {
