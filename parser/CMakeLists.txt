@@ -23,6 +23,7 @@ set (pe_hdrs
     pe/DOSExe.h
     pe/PECore.h
     pe/PEFile.h
+    pe/RichHdrWrapper.h
     pe/FileHdrWrapper.h
     pe/OptHdrWrapper.h
     pe/SectHdrsWrapper.h
@@ -73,6 +74,7 @@ set (pe_srcs
     pe/DOSExe.cpp
     pe/PECore.cpp
     pe/PEFile.cpp
+    pe/RichHdrWrapper.cpp
     pe/FileHdrWrapper.cpp
     pe/OptHdrWrapper.cpp
     pe/SectHdrsWrapper.cpp

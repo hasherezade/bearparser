@@ -132,11 +132,6 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
         OUT_PADDED_OFFSET(std::cout, offset);
         std::cout << " " << w->getFieldName(i).toStdString() << "\t";
 
-        QString translated = w->translateFieldContent(i);
-        if (translated.size() > 0) {
-            std::cout << " " << translated.toStdString() << " ";
-        }
-
         size_t subfields = w->getSubFieldsCount();
         for (size_t y = 0; y < subfields; y++) {
             WrappedValue value = w->getWrappedValue(i, y);
@@ -145,6 +140,11 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
             Executable::addr_type aType = w->containsAddrType(i, y);
             char c = addrTypeToChar(aType);
             std::cout << "[" << str.toStdString() << " " << c << "]";
+        }
+
+        QString translated = w->translateFieldContent(i);
+        if (translated.size() > 0) {
+            std::cout << " " << translated.toStdString() << " ";
         }
         std::cout << "\n";
     }

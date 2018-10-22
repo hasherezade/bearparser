@@ -4,6 +4,7 @@
 #include "PECore.h"
 
 #include "DOSExe.h"
+#include "RichHdrWrapper.h"
 #include "FileHdrWrapper.h"
 #include "OptHdrWrapper.h"
 #include "SectHdrsWrapper.h"
@@ -41,6 +42,7 @@ public:
     enum WRAPPERS {
         WR_NONE = MappedExe::WR_NONE,
         WR_DOS_HDR = DOSExe::WR_DOS_HDR,
+        WR_RICH_HDR,
         WR_FILE_HDR,
         WR_OPTIONAL_HDR,
         WR_DATADIR,
@@ -77,6 +79,10 @@ public:
     offset_t getMinSecRVA();
 
     ResourcesAlbum* getResourcesAlbum() const { return this->album; }
+
+    //get Rich header (if available)
+    RICH_SIGNATURE* getRichHeaderSign();
+    RICH_DANS_HEADER* getRichHeaderBgn(RICH_SIGNATURE* sign);
 
     IMAGE_DATA_DIRECTORY* getDataDirectory();
     offset_t peDataDirOffset();
