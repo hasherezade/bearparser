@@ -28,7 +28,6 @@ before_build:
   - set PATH=%PATH%;C:\Program Files\CMake\bin
   - set PATH=%PATH%;%QTDIR%\bin;%QTDIR%\lib\cmake
   - set Qt5Core_DIR=%QTDIR%
-  - cmd ls %QTDIR%
   
 build_script:
   - mkdir build
