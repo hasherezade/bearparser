@@ -35,8 +35,8 @@ build_script:
   - mkdir build
   - cd build
   - if [%env_arch%]==[x64] (
-      cmake .. -A x64 "-DCMAKE_PREFIX_PATH=%QT5%" )
+      cmake .. -A x64 )
   - if [%env_arch%]==[x86] (
-      cmake .. "-DCMAKE_PREFIX_PATH=%QT5%" )
+      cmake .. )
   - cmake --build .
   - cd ..
