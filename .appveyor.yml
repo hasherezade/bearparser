@@ -10,6 +10,7 @@ branches:
    
 install:
   - cinst cmake
+  - set PATH=%PATH%;C:\Program Files\CMake\bin
 
 build:
   verbosity: detailed
@@ -20,23 +21,22 @@ configuration:
 environment:
   matrix:
     - env_arch: "x64"
-      Qt5_DIR: C:\Qt\5.8\msvc2015_64
-      Qt5Core_DIR: C:\Qt\5.8\msvc2015_64
+      QT5: C:\Qt\5.11\msvc2015_64
     - env_arch: "x86"
-      Qt5_DIR: C:\Qt\5.8\msvc2015
-      Qt5Core_DIR: C:\Qt\5.8\msvc2015
+      QT5: C:\Qt\5.11\msvc2015
 
 before_build:
-  - set PATH=%PATH%;C:\Program Files\CMake\bin
-  - set PATH=%PATH%;%Qt5_DIR%\bin;%Qt5_DIR%\lib\cmake
+  - set PATH=%PATH%;%QT5%\bin;%QT5%\lib\cmake
+  - set Qt5Core_DIR=%QT5%
   
 build_script:
   - cmake --version
+  - qmake -v
   - mkdir build
   - cd build
   - if [%env_arch%]==[x64] (
-      cmake .. -A x64 )
+      cmake .. -A x64 "-DCMAKE_PREFIX_PATH=%QT5%" )
   - if [%env_arch%]==[x86] (
-      cmake .. )
+      cmake .. "-DCMAKE_PREFIX_PATH=%QT5%" )
   - cmake --build .
   - cd ..
