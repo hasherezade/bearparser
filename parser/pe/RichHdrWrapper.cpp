@@ -60,7 +60,9 @@ void* RichHdrWrapper::getFieldPtr(size_t fieldId, size_t subField)
     const size_t cnt = this->compIdCounter - 1;
     switch (fieldId) {
          case DANS_ID: return (void*) &dansHdr->dansId;
-         case CPAD: return (void*) &dansHdr->cPad;
+         case CPAD0: return (void*) &dansHdr->cPad[0];
+         case CPAD1: return (void*) &dansHdr->cPad[1];
+         case CPAD2: return (void*) &dansHdr->cPad[2];
          //case COMP_ID_1: return (void*) &dansHdr->compId;
          //case RICH_ID: return (void*) &richSign->richId;
          //case CHECKSUM: return (void*) &richSign->checksum;
@@ -84,7 +86,7 @@ QString RichHdrWrapper::getFieldName(size_t fieldId)
 
     switch (fieldId) {
          case DANS_ID: return("DanS ID");
-         case CPAD: return ("Checksumed padding");
+         case CPAD0: case CPAD1: case CPAD2:  return ("Checksumed padding");
     }
     if (fieldId >= COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
     {
@@ -112,9 +114,12 @@ QString RichHdrWrapper::translateFieldContent(size_t fieldId)
     if (!isOk) {
         return "";
     }
-    if (fieldId == DANS_ID) {
-        uint32_t my_num = static_cast<uint32_t>(num) ^ xorVal;
-        return QString::number(my_num, 16);
+    switch (fieldId) {
+        case DANS_ID:
+        case CPAD0: case CPAD1: case CPAD2: {
+            uint32_t my_num = static_cast<uint32_t>(num) ^ xorVal;
+            return QString::number(my_num, 16);
+        }
     }
     if (fieldId >= COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
     {

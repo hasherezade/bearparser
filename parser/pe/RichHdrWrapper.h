@@ -9,7 +9,9 @@ public:
     enum FieldID {
         NONE = -1,
         DANS_ID = 0,
-        CPAD,
+        CPAD0,
+        CPAD1,
+        CPAD2,
         COMP_ID_1,
         RICH_ID,
         CHECKSUM,
