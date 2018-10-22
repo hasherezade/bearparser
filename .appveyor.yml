@@ -20,16 +20,18 @@ configuration:
 environment:
   matrix:
     - env_arch: "x64"
-      QTDIR: C:\Qt\5.8\msvc2015_64
+      Qt5_DIR: C:\Qt\5.8\msvc2015_64
+      Qt5Core_DIR: C:\Qt\5.8\msvc2015_64
     - env_arch: "x86"
-      QTDIR: C:\Qt\5.8\msvc2015
+      Qt5_DIR: C:\Qt\5.8\msvc2015
+      Qt5Core_DIR: C:\Qt\5.8\msvc2015
 
 before_build:
   - set PATH=%PATH%;C:\Program Files\CMake\bin
-  - set PATH=%PATH%;%QTDIR%\bin;%QTDIR%\lib\cmake
-  - set Qt5Core_DIR=%QTDIR%
+  - set PATH=%PATH%;%Qt5_DIR%\bin;%Qt5_DIR%\lib\cmake
   
 build_script:
+  - cmake --version
   - mkdir build
   - cd build
   - if [%env_arch%]==[x64] (
