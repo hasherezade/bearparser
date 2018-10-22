@@ -109,15 +109,17 @@ QString RichHdrWrapper::translateFieldContent(size_t fieldId)
     }
     const uint32_t xorVal = this->richSign->checksum;
     const size_t cnt = this->compIdCounter - 1;
+
     bool isOk = isOk;
     uint64_t num = this->getNumValue(fieldId, &isOk);
     if (!isOk) {
-        return "";
+        return "?";
     }
     switch (fieldId) {
         case DANS_ID:
         case CPAD0: case CPAD1: case CPAD2: {
             uint32_t my_num = static_cast<uint32_t>(num) ^ xorVal;
+            if (my_num == DANS_HDR_MAGIC) return "DanS";
             return QString::number(my_num, 16);
         }
     }
@@ -127,6 +129,9 @@ QString RichHdrWrapper::translateFieldContent(size_t fieldId)
         uint64_t my_num = static_cast<uint64_t>(num) ^ (xorVal2);
         RICH_COMP_ID* myCompId = reinterpret_cast<RICH_COMP_ID*>(&my_num);
         return QString::number(myCompId->CV, 10) + "." + QString::number(myCompId->prodId, 10) + "." + QString::number(myCompId->count, 10);
+    }
+    if (fieldId == RICH_ID + cnt) {
+        if (static_cast<uint32_t>(num) == RICH_HDR_MAGIC) return "Rich";
     }
     return "";
 }
