@@ -47,6 +47,7 @@ bufsize_t RichHdrWrapper::getSize()
 
 size_t RichHdrWrapper::getFieldsCount()
 {
+    if (getSize() == 0) return 0;
     return this->compIdCounter + FIELD_COUNTER - 1;
 }
 
