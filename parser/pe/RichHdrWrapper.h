@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PENodeWrapper.h"
+#include "pe_formats.h"
 
 class RichHdrWrapper : public PEElementWrapper
 {
