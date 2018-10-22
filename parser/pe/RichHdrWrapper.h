@@ -16,18 +16,27 @@ public:
         FIELD_COUNTER
     };
 
-    RichHdrWrapper(PEFile *pe) : PEElementWrapper(pe) { }
+    RichHdrWrapper(PEFile *pe)
+        : PEElementWrapper(pe), richSign(nullptr), dansHdr(nullptr), compIdCounter(0) { wrap(); }
 
+    size_t compIdCount();
+
+    virtual bool wrap();
     /* full structure boundatries */
     virtual void* getPtr();
-    virtual bufsize_t getSize() { return getPtr() ? sizeof(IMAGE_RICH_HEADER) : 0; }
+    virtual bufsize_t getSize();
     virtual QString getName() { return "Rich Hdr"; }
-    virtual size_t getFieldsCount() { return FIELD_COUNTER; }
+    virtual size_t getFieldsCount();
 
     /* specific field boundatries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
-    virtual bufsize_t getFieldSize(size_t fieldId, size_t subField);
+    //virtual bufsize_t getFieldSize(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(uint32_t fieldId, uint32_t subField = FIELD_NONE);
+
+protected:
+    RICH_SIGNATURE* richSign;
+    RICH_DANS_HEADER* dansHdr;
+    size_t compIdCounter;
 };
 
