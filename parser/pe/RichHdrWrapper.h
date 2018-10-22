@@ -31,6 +31,7 @@ public:
     /* specific field boundatries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
     //virtual bufsize_t getFieldSize(size_t fieldId, size_t subField);
+    virtual QString translateFieldContent(size_t fieldId);
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(uint32_t fieldId, uint32_t subField = FIELD_NONE);
 

@@ -61,11 +61,11 @@ void* RichHdrWrapper::getFieldPtr(size_t fieldId, size_t subField)
     switch (fieldId) {
          case DANS_ID: return (void*) &dansHdr->dansId;
          case CPAD: return (void*) &dansHdr->cPad;
-         case COMP_ID_1: return (void*) &dansHdr->compId;
+         //case COMP_ID_1: return (void*) &dansHdr->compId;
          //case RICH_ID: return (void*) &richSign->richId;
          //case CHECKSUM: return (void*) &richSign->checksum;
     }
-    if (fieldId > COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
+    if (fieldId >= COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
     {
         size_t compIdNum = fieldId - COMP_ID_1;
         return (void*)(ULONGLONG(&dansHdr->compId) + (sizeof(RICH_COMP_ID)*compIdNum));
@@ -85,11 +85,8 @@ QString RichHdrWrapper::getFieldName(size_t fieldId)
     switch (fieldId) {
          case DANS_ID: return("DanS ID");
          case CPAD: return ("Checksumed padding");
-         case COMP_ID_1: return("Comp ID");
-         //case RICH_ID: return("Rich ID");
-         //case CHECKSUM: return("Checksum");
     }
-    if (fieldId > COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
+    if (fieldId >= COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
     {
         return("Comp ID");
     }
@@ -101,4 +98,30 @@ QString RichHdrWrapper::getFieldName(size_t fieldId)
 Executable::addr_type RichHdrWrapper::containsAddrType(uint32_t fieldId, uint32_t subField)
 {
     return Executable::NOT_ADDR;
+}
+
+QString RichHdrWrapper::translateFieldContent(size_t fieldId)
+{
+    if (!this->richSign || !this->dansHdr) {
+        return "";
+    }
+    const uint32_t xorVal = this->richSign->checksum;
+    const size_t cnt = this->compIdCounter - 1;
+    bool isOk = isOk;
+    uint64_t num = this->getNumValue(fieldId, &isOk);
+    if (!isOk) {
+        return "";
+    }
+    if (fieldId == DANS_ID) {
+        uint32_t my_num = static_cast<uint32_t>(num) ^ xorVal;
+        return QString::number(my_num, 16);
+    }
+    if (fieldId >= COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
+    {
+        uint64_t xorVal2 = xorVal | ((uint64_t)xorVal << sizeof(uint32_t)*8);
+        uint64_t my_num = static_cast<uint64_t>(num) ^ (xorVal2);
+        RICH_COMP_ID* myCompId = reinterpret_cast<RICH_COMP_ID*>(&my_num);
+        return QString::number(myCompId->CV, 10) + "." + QString::number(myCompId->prodId, 10) + "." + QString::number(myCompId->count, 10);
+    }
+    return "";
 }
