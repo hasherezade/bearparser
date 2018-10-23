@@ -110,7 +110,7 @@ QString RichHdrWrapper::translateFieldContent(size_t fieldId)
     const uint32_t xorVal = this->richSign->checksum;
     const size_t cnt = this->compIdCounter - 1;
 
-    bool isOk = isOk;
+    bool isOk = false;
     uint64_t num = this->getNumValue(fieldId, &isOk);
     if (!isOk) {
         return "?";
