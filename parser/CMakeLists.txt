@@ -19,6 +19,7 @@ set (win_hdrs
 
 set (pe_hdrs
     pe/pe_formats.h
+    pe/pe_undoc.h
     pe/DosHdrWrapper.h
     pe/DOSExe.h
     pe/PECore.h

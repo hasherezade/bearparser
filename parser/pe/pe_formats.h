@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../win_hdrs/win_types.h"
+#include "pe_undoc.h"
 
 #if _MSC_VER
 #define USE_WINNT
@@ -149,35 +150,6 @@ typedef struct _IMAGE_VXD_HEADER {      // Windows VXD header
 } IMAGE_VXD_HEADER, *PIMAGE_VXD_HEADER;
 
 #include "../win_hdrs/poppack.h"                    // Back to 4 byte packing
-
-/*
- * Rich header format.
- */
-
-#define RICH_HDR_MAGIC 0x68636952 //"Rich"
-#define DANS_HDR_MAGIC 0x536E6144 //"DanS"
-
-typedef struct _RICH_COMP_ID {
-	WORD CV;
-	WORD prodId;
-	DWORD count;
-} RICH_COMP_ID, *PRICH_COMP_ID;
-
-typedef struct _RICH_SIGNATURE {
-	DWORD   richId;
-	DWORD   checksum;
-} RICH_SIGNATURE, *PRICH_SIGNATURE;
-
-typedef struct _RICH_DANS_HEADER {
-	DWORD   dansId;
-	DWORD   cPad[3];
-	RICH_COMP_ID compId[1]; //several instances possible
-} RICH_DANS_HEADER, *PRICH_DANS_HEADER;
-
-typedef struct _IMAGE_RICH_HEADER {
-	RICH_DANS_HEADER dansHdr;
-	RICH_SIGNATURE richSign;
-} IMAGE_RICH_HEADER, *PIMAGE_RICH_HEADER;
 
 /*
  * File header format.
