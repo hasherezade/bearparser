@@ -82,11 +82,11 @@ bool ResourceDirWrapper::wrap()
     size_t idsNum = dir->NumberOfIdEntries;
 
     size_t totalEntries = namesNum + idsNum;
-    for (long i = 0; i < totalEntries && i < MAX_ENTRIES; i++ ) {
+    for (size_t i = 0; i < totalEntries && i < MAX_ENTRIES; i++ ) {
 
-        long topDirId = (this->topEntryID != TOP_ENTRY_ROOT) ? this->topEntryID : i ;
+        long topDirId = (this->topEntryID != TOP_ENTRY_ROOT) ? this->topEntryID : long(i) ;
 
-        //(PEFileBase *pe, ResourceDirWrapper *parentDir, uint32_t entryNumber, long topEntryId, ResourcesAlbum *resAlbum = NULL)
+        //ResourceEntryWrapper(PEFile *pe, ResourceDirWrapper *parentDir, size_t entryNumber, long topEntryId, ResourcesAlbum *resAlbum)
         ResourceEntryWrapper* entry = new ResourceEntryWrapper(this->m_PE, this, i, topDirId, this->album);
 
         if (entry->getPtr() == NULL) {
