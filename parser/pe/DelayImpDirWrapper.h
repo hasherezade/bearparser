@@ -84,7 +84,7 @@ public:
     DelayImpFuncWrapper(PEFile *pe, DelayImpEntryWrapper *parentDir, size_t entryNumber)
         : ImportBaseFuncWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
-    // full structure boundatries
+    // full structure boundaries
     virtual void* getPtr() { return getFieldPtr(IAT_ADDR); }
     virtual bufsize_t getSize() { return sizeof(DWORD); }
 
@@ -92,7 +92,7 @@ public:
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
     virtual size_t getSubFieldsCount() { return 1; }
 
-    // specific field boundatries
+    // specific field boundaries
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE);
     virtual QString getFieldName(size_t fieldId);

@@ -65,7 +65,7 @@ public:
     ExportEntryWrapper(Executable *pe, ExportDirWrapper *parentDir, size_t entryNumber)
         : ExeNodeWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
-    // full structure boundatries
+    // full structure boundaries
     virtual void* getPtr() { return getFuncRvaPtr(); }
     virtual bufsize_t getSize();
     virtual QString getName();
@@ -73,7 +73,7 @@ public:
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
     virtual size_t getSubFieldsCount() { return 1; }
 
-    // specific field boundatries
+    // specific field boundaries
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);// { return getPtr();  }
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE) { return sizeof(DWORD);  }
 

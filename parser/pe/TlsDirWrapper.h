@@ -59,7 +59,7 @@ public:
     TlsEntryWrapper(Executable *pe, TlsDirWrapper *parentDir, size_t entryNumber)
         : ExeNodeWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
-    // full structure boundatries
+    // full structure boundaries
     virtual void* getPtr();
     virtual bufsize_t getSize();
 
@@ -67,7 +67,7 @@ public:
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
     virtual size_t getSubFieldsCount() { return 1; }
 
-    // specific field boundatries
+    // specific field boundaries
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE) { return getPtr();  }
     virtual QString getFieldName(size_t fieldId) { return getName(); }
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField) { return Executable::VA; }

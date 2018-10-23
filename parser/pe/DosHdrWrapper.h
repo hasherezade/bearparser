@@ -35,13 +35,13 @@ public:
 
     DosHdrWrapper(Executable *dosExe) : ExeElementWrapper(dosExe) { }
 
-    /* full structure boundatries */
+    /* full structure boundaries */
     virtual void* getPtr() { return m_Exe->getContent(); }
     virtual bufsize_t getSize() { return sizeof(IMAGE_DOS_HEADER); }
     virtual QString getName() { return "DOS Hdr"; }
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
 
-    /* specific field boundatries */
+    /* specific field boundaries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);

@@ -67,7 +67,7 @@ public:
     //virtual bool wrap();
     //bool isValid();
 
-    /* full structure boundatries */
+    /* full structure boundaries */
     virtual void* getPtr();
 
     virtual bufsize_t getSize();
@@ -75,7 +75,7 @@ public:
     virtual QString getName();
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
 
-    /* specific field boundatries */
+    /* specific field boundaries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
@@ -129,7 +129,7 @@ public:
     ImportedFuncWrapper(PEFile *pe, ImportEntryWrapper* parentLib, size_t entryNumber)
         : ImportBaseFuncWrapper(pe, parentLib, entryNumber) {}// this->parentLib = parentLib; }
 
-    /* full structure boundatries */
+    /* full structure boundaries */
     virtual void* getPtr();
     virtual IMAGE_IMPORT_BY_NAME* getImportByNamePtr();
 
@@ -138,7 +138,7 @@ public:
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
     virtual size_t getSubFieldsCount() { return 1; }
 
-    /* specific field boundatries */
+    /* specific field boundaries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE);
     virtual QString getFieldName(size_t fieldId);

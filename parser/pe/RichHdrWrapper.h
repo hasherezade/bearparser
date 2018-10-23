@@ -25,13 +25,13 @@ public:
     size_t compIdCount();
 
     virtual bool wrap();
-    /* full structure boundatries */
+    /* full structure boundaries */
     virtual void* getPtr();
     virtual bufsize_t getSize();
     virtual QString getName() { return "Rich Hdr"; }
     virtual size_t getFieldsCount();
 
-    /* specific field boundatries */
+    /* specific field boundaries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
     //virtual bufsize_t getFieldSize(size_t fieldId, size_t subField);
     virtual QString translateFieldContent(size_t fieldId);

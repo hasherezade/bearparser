@@ -57,15 +57,15 @@ public:
     //----
 
     OptHdrWrapper(PEFile *pe) : PEElementWrapper(pe), opt32(NULL), opt64(NULL) { wrap(); }
-    bool wrap();// { opt32 = NULL; opt64 = NULL; getPtr(); return true; }
+    bool wrap();
 
-    /* full structure boundatries */
+    /* full structure boundaries */
     virtual void* getPtr();
     virtual bufsize_t getSize();
     virtual QString getName() { return "Optional Hdr"; }
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
 
-    /* specific field boundatries */
+    /* specific field boundaries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE);
 

@@ -20,7 +20,7 @@ public:
     virtual bufsize_t getContentSize() { return getSize(); }
     virtual BYTE* getContent() { return static_cast<BYTE*>(getPtr()); }
 
-    /* full structure boundatries */
+    /* full structure boundaries */
     virtual void* getPtr() = 0;
     virtual bufsize_t getSize() = 0;
     virtual QString getName() = 0;
@@ -31,7 +31,7 @@ public:
     offset_t getOffset();
     offset_t getOffset(void *ptr);
 
-    /* specific field boundatries */
+    /* specific field boundaries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField) = 0;
     void* getFieldPtr(size_t fieldId) { return getFieldPtr(fieldId, FIELD_NONE); }
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE);

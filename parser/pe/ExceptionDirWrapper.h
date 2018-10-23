@@ -52,7 +52,7 @@ public:
 
     bool wrap() { return true; }
 
-    // full structure boundatries
+    // full structure boundaries
     virtual void* getPtr();
 
     virtual bufsize_t getSize();
@@ -60,7 +60,7 @@ public:
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
     virtual size_t getSubFieldsCount() { return 1; }
 
-    // specific field boundatries
+    // specific field boundaries
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField);

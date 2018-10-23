@@ -30,14 +30,14 @@ public:
         : PENodeWrapper(pe), sectNum(sectionNumber), name(NULL), header(NULL) { wrap(); }
     bool wrap();
 
-    /* full structure boundatries */
+    /* full structure boundaries */
     virtual void* getPtr();
     virtual bufsize_t getSize();
     virtual QString getName();
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
     virtual size_t getSubFieldsCount() { return 1; }
 
-    /* specific field boundatries */
+    /* specific field boundaries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
     virtual QString getFieldName(size_t fieldId);
 
@@ -101,16 +101,16 @@ public:
     bool wrap();
     virtual void reloadMapping();
 
-    // full structure boundatries
+    // full structure boundaries
     virtual void* getPtr();
     virtual bufsize_t getSize();
     virtual QString getName() { return "Section Hdrs"; }
     virtual size_t getFieldsCount();
 
-    // specific field boundatries
+    // specific field boundaries
     virtual void* getFieldPtr(size_t fieldId, size_t subField) { return getSubfieldPtr(fieldId, subField ); }
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField) { return getSubfieldSize(fieldId, subField ); }
-    virtual QString getFieldName(size_t fieldId);// { return getSubFieldName(fieldId); }
+    virtual QString getFieldName(size_t fieldId);
 
     SectionHdrWrapper* getSecHdr(size_t secNum) { return (secNum >= entries.size()) ? NULL : dynamic_cast<SectionHdrWrapper*>(entries[secNum]); }
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool roundup, bool verbose = false);
