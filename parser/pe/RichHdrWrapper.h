@@ -39,8 +39,8 @@ public:
     virtual Executable::addr_type containsAddrType(uint32_t fieldId, uint32_t subField = FIELD_NONE);
 
 protected:
-    RICH_SIGNATURE* richSign;
-    RICH_DANS_HEADER* dansHdr;
+    pe::RICH_SIGNATURE* richSign;
+    pe::RICH_DANS_HEADER* dansHdr;
     size_t compIdCounter;
 };
 

@@ -116,7 +116,7 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     }
 }
 
-RICH_DANS_HEADER* PEFile::getRichHeaderBgn(RICH_SIGNATURE* richSign)
+pe::RICH_DANS_HEADER* PEFile::getRichHeaderBgn(pe::RICH_SIGNATURE* richSign)
 {
     if (!richSign) return nullptr;
 
@@ -124,17 +124,17 @@ RICH_DANS_HEADER* PEFile::getRichHeaderBgn(RICH_SIGNATURE* richSign)
     offset_t richOffset = getOffset(richSign);
 
     size_t processedSize = 0;
-    RICH_DANS_HEADER* dansHdr = nullptr;
+    pe::RICH_DANS_HEADER* dansHdr = nullptr;
     while(true) {
-        dansHdr = (RICH_DANS_HEADER*) this->getContentAt(richOffset + processedSize - sizeof(RICH_DANS_HEADER), sizeof(RICH_DANS_HEADER));
+        dansHdr = (pe::RICH_DANS_HEADER*) this->getContentAt(richOffset + processedSize - sizeof(pe::RICH_DANS_HEADER), sizeof(pe::RICH_DANS_HEADER));
         if (!dansHdr) break;
-        if (dansHdr->dansId == (DANS_HDR_MAGIC ^ xorkey)) break; //got it!
+        if (dansHdr->dansId == (pe::DANS_HDR_MAGIC ^ xorkey)) break; //got it!
         processedSize -= sizeof(DWORD);
     }
     return dansHdr;
 }
 
-RICH_SIGNATURE* PEFile::getRichHeaderSign()
+pe::RICH_SIGNATURE* PEFile::getRichHeaderSign()
 {
     size_t dosStubOffset = this->core.dos->e_lfarlc;
     size_t dosStubEnd = this->core.dos->e_lfanew;
@@ -145,34 +145,17 @@ RICH_SIGNATURE* PEFile::getRichHeaderSign()
     }
     //remove padding:
     size_t processedSize = maxSize;
-    RICH_SIGNATURE* richSign = nullptr;
+    pe::RICH_SIGNATURE* richSign = nullptr;
     while(true) {
-        richSign = (RICH_SIGNATURE*) this->getContentAt(dosStubOffset + processedSize - sizeof(RICH_SIGNATURE), sizeof(RICH_SIGNATURE));
+        richSign = (pe::RICH_SIGNATURE*) this->getContentAt(dosStubOffset + processedSize - sizeof(pe::RICH_SIGNATURE), sizeof(pe::RICH_SIGNATURE));
         if (!richSign) break;
-        if (richSign->richId == RICH_HDR_MAGIC) break; //got it!
+        if (richSign->richId == pe::RICH_HDR_MAGIC) break; //got it!
         processedSize -= sizeof(DWORD);
     }
     if (!richSign) return nullptr;
-    if (richSign->richId != RICH_HDR_MAGIC) {
+    if (richSign->richId != pe::RICH_HDR_MAGIC) {
         return nullptr; //invalid
     }
-    DWORD xorkey = richSign->checksum;
-
-    //search for the beginning now...
-    /*while(true) {
-        rich = (IMAGE_RICH_HEADER*) this->getContentAt(dosStubOffset + processedSize - sizeof(IMAGE_RICH_HEADER), sizeof(IMAGE_RICH_HEADER));
-        if (!rich) break;
-        if (rich->dansId == (DANS_HDR_MAGIC ^ rich->checksum)) break; //got it!
-        processedSize -= sizeof(DWORD);
-    }
-
-    /*if (rich->cPad[0] != rich->checksum) {
-        return nullptr; //invalid
-    }
-    if (!rich) return nullptr;
-    if (rich->dansId != (DANS_HDR_MAGIC ^ xorkey)) {
-        return nullptr; //invalid
-    }*/
     return richSign;
 }
 

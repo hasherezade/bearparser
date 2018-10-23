@@ -81,8 +81,8 @@ public:
     ResourcesAlbum* getResourcesAlbum() const { return this->album; }
 
     //get Rich header (if available)
-    RICH_SIGNATURE* getRichHeaderSign();
-    RICH_DANS_HEADER* getRichHeaderBgn(RICH_SIGNATURE* sign);
+    pe::RICH_SIGNATURE* getRichHeaderSign();
+    pe::RICH_DANS_HEADER* getRichHeaderBgn(pe::RICH_SIGNATURE* sign);
 
     IMAGE_DATA_DIRECTORY* getDataDirectory();
     offset_t peDataDirOffset();

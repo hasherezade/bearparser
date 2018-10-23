@@ -2,6 +2,7 @@
 #include "PEFile.h"
 #include <iostream>
 
+
 bool RichHdrWrapper::wrap()
 {
     this->richSign = m_PE->getRichHeaderSign();
@@ -10,18 +11,12 @@ bool RichHdrWrapper::wrap()
     return true;
 }
 
-
 void* RichHdrWrapper::getPtr()
 {
-    RICH_SIGNATURE* richSign = m_PE->getRichHeaderSign();
-    if (!richSign) {
-        return nullptr;
+    if (!this->dansHdr) {
+        wrap();
     }
-    RICH_DANS_HEADER* dansHdr = m_PE->getRichHeaderBgn(richSign);
-    if (!dansHdr) {
-        return nullptr;
-    }
-    return (void*)dansHdr;
+    return (void*)this->dansHdr;
 }
 
 size_t RichHdrWrapper::compIdCount()
@@ -29,9 +24,9 @@ size_t RichHdrWrapper::compIdCount()
     if (!this->richSign || !this->dansHdr) {
         return 0;
     }
-    const RICH_DANS_HEADER dans_empty = { 0 };
+    const pe::RICH_DANS_HEADER dans_empty = { 0 };
     const bufsize_t dif = ((ULONGLONG)richSign - (ULONGLONG)dansHdr) - (sizeof(dans_empty.dansId) + sizeof(dans_empty.cPad));
-    bufsize_t count = dif / sizeof(RICH_COMP_ID);
+    bufsize_t count = dif / sizeof(pe::RICH_COMP_ID);
     return (size_t) count;
 }
 
@@ -41,7 +36,7 @@ bufsize_t RichHdrWrapper::getSize()
         return 0;
     }
     const size_t cnt = this->compIdCounter - 1;
-    const bufsize_t dif = sizeof(RICH_DANS_HEADER) + sizeof(RICH_SIGNATURE) + (sizeof(RICH_COMP_ID) * cnt);
+    const bufsize_t dif = sizeof(pe::RICH_DANS_HEADER) + sizeof(pe::RICH_SIGNATURE) + (sizeof(pe::RICH_COMP_ID) * cnt);
     return dif;
 }
 
@@ -63,14 +58,11 @@ void* RichHdrWrapper::getFieldPtr(size_t fieldId, size_t subField)
          case CPAD0: return (void*) &dansHdr->cPad[0];
          case CPAD1: return (void*) &dansHdr->cPad[1];
          case CPAD2: return (void*) &dansHdr->cPad[2];
-         //case COMP_ID_1: return (void*) &dansHdr->compId;
-         //case RICH_ID: return (void*) &richSign->richId;
-         //case CHECKSUM: return (void*) &richSign->checksum;
     }
     if (fieldId >= COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
     {
         size_t compIdNum = fieldId - COMP_ID_1;
-        return (void*)(ULONGLONG(&dansHdr->compId) + (sizeof(RICH_COMP_ID)*compIdNum));
+        return (void*)(ULONGLONG(&dansHdr->compId) + (sizeof(pe::RICH_COMP_ID)*compIdNum));
     }
     if (fieldId == RICH_ID + cnt) return (void*) &richSign->richId;
     if (fieldId == CHECKSUM + cnt) return (void*) &richSign->checksum;
@@ -119,7 +111,7 @@ QString RichHdrWrapper::translateFieldContent(size_t fieldId)
         case DANS_ID:
         case CPAD0: case CPAD1: case CPAD2: {
             uint32_t my_num = static_cast<uint32_t>(num) ^ xorVal;
-            if (my_num == DANS_HDR_MAGIC) return "DanS";
+            if (my_num == pe::DANS_HDR_MAGIC) return "DanS";
             return QString::number(my_num, 16);
         }
     }
@@ -127,11 +119,11 @@ QString RichHdrWrapper::translateFieldContent(size_t fieldId)
     {
         uint64_t xorVal2 = xorVal | ((uint64_t)xorVal << sizeof(uint32_t)*8);
         uint64_t my_num = static_cast<uint64_t>(num) ^ (xorVal2);
-        RICH_COMP_ID* myCompId = reinterpret_cast<RICH_COMP_ID*>(&my_num);
+        pe::RICH_COMP_ID* myCompId = reinterpret_cast<pe::RICH_COMP_ID*>(&my_num);
         return QString::number(myCompId->CV, 10) + "." + QString::number(myCompId->prodId, 10) + "." + QString::number(myCompId->count, 10);
     }
     if (fieldId == RICH_ID + cnt) {
-        if (static_cast<uint32_t>(num) == RICH_HDR_MAGIC) return "Rich";
+        if (static_cast<uint32_t>(num) == pe::RICH_HDR_MAGIC) return "Rich";
     }
     return "";
 }
