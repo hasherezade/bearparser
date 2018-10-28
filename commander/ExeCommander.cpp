@@ -232,7 +232,7 @@ void ExeInfoCommand::execute(CmdParams *params, CmdContext  *context)
     
     std::cout << "Entry point: \t";
     std::cout << "[";
-    OUT_PADDED_OFFSET(std::cout, entryPoint);
+    OUT_PADDED_HEX(std::cout, entryPoint, sizeof(entryPoint));
     std::cout << " " << cmd_util::addrTypeToChar(Executable::RVA);
     std::cout << "]\n";
 //Raw:
