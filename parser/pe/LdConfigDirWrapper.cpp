@@ -256,7 +256,7 @@ void* LdConfigEntryWrapper::getPtr()
     if (offset == INVALID_ADDR) return NULL;
 
     offset += (this->entryNum * size);
-    void *ptr = m_Exe->getContentAt(offset, Executable::RAW, size);
+    void *ptr = m_Exe->getContentAt(offset, Executable::RVA, size);
     return ptr;
 }
 
