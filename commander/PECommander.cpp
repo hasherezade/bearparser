@@ -78,7 +78,7 @@ void cmd_util::printStrings(PEFile *pe, size_t limit)
             if (limit != 0 && limCount >= limit) return;
 
             ResString *resStr = wrapper->getResStringAt(i);
-            if (resStr != nullptr) {
+            if (resStr != NULL) {
                 OUT_PADDED_OFFSET(std::cout, resStr->offset);
                 std::cout << " [" << std::dec << resStr->getSize() << "]" << std::endl;
                 std::cout << resStr->getQString().toStdString() << "\n";
@@ -107,7 +107,7 @@ void cmd_util::dumpResourcesInfo(PEFile *pe, pe::resource_type type, size_t wrap
         << std::endl;
 
     ResourceContentWrapper* wrapper = wrappers->getWrapperAt(wrapperId);
-    if (wrapper == nullptr) {
+    if (wrapper == NULL) {
         return;
     }
     cmd_util::dumpEntryInfo(wrapper);
@@ -118,7 +118,7 @@ void cmd_util::listDataDirs(PEFile *pe)
 {
     for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
         DataDirEntryWrapper* entry = pe->getDataDirEntry(pe::dir_entry(i));
-        if (entry == nullptr) {
+        if (entry == NULL) {
             continue;
         }
         std::cout << "[" << i << "]"

@@ -73,13 +73,13 @@ void cmd_util::fetch(Executable *peExe, offset_t offset, Executable::addr_type a
 
     BufferView *sub = new BufferView(peExe, offset, 100);
 
-    if (sub->getContent() == nullptr) {
+    if (sub->getContent() == NULL) {
         std::cout << "[ERROR] Cannot fetch" << std::endl;
         delete sub;
         return;
     }
 
-    AbstractFormatter *formatter = nullptr;
+    AbstractFormatter *formatter = NULL;
     std::string separator = " ";
 
     if (hex) formatter = new HexFormatter(sub);
@@ -112,7 +112,7 @@ void cmd_util::printWrapperNames(MappedExe *exe)
 
 void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
 {
-    if (w == nullptr) return;
+    if (w == NULL) return;
     
     std::cout << "\n------\n";
     size_t fields = w->getFieldsCount();
@@ -153,7 +153,7 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
 
 void cmd_util::dumpNodeInfo(ExeNodeWrapper *w)
 {
-    if (w == nullptr) return;
+    if (w == NULL) return;
     
     std::cout << "------" << std::endl;
     size_t entriesCnt = w->getEntriesCount();

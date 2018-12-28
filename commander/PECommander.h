@@ -134,7 +134,7 @@ public:
         if (!pe) return;
 
         ResourcesAlbum *album = pe->getResourcesAlbum();
-        if (album == nullptr) return;
+        if (album == NULL) return;
 
         size_t dirsCount =  album->dirsCount();
         if (dirsCount == 0) {
@@ -146,7 +146,7 @@ public:
         pe::resource_type type = (pe::resource_type) cmd_util::readNumber("wrapper type");
 
         ResourcesContainer* wrappers = pe->getResourcesOfType(type);
-        if (wrappers == nullptr) {
+        if (wrappers == NULL) {
             std::cout << "No such resource type!" << std::endl;
             return;
         }
