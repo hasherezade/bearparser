@@ -22,9 +22,9 @@ addons:
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt5 ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; brew link --force qt5 ; fi  
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; ln -s /usr/local/Cellar/qt5/5.12.0/mkspecs /usr/local/mkspecs ; fi  
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; ln -s /usr/local/Cellar/qt5/5.12.0/plugins /usr/local/plugins ; fi  
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --force qt5 ; fi  
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ln -s /usr/local/Cellar/qt5/5.12.0/mkspecs /usr/local/mkspecs ; fi  
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ln -s /usr/local/Cellar/qt5/5.12.0/plugins /usr/local/plugins ; fi  
 
 before_script:
   - cmake --version
