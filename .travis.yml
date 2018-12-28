@@ -5,6 +5,10 @@ os:
   - linux
   - osx
   
+matrix:
+  allow_failures:
+    - os: osx
+    
 compiler:
   - gcc
   - clang
@@ -22,6 +26,7 @@ before_install:
 
 before_script:
   - cmake --version
+  - qmake -v
 
 script:
   - mkdir build
