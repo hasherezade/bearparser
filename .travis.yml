@@ -3,7 +3,8 @@ sudo: true
 
 os:
   - linux
-
+  - osx
+  
 compiler:
   - gcc
   - clang
@@ -14,6 +15,10 @@ addons:
       - qt5-default
       - qt5-qmake
       
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt5 ; fi
+  
 before_script:
   - cmake --version
 
