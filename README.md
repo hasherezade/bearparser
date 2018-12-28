@@ -1,7 +1,7 @@
 bearparser
 ==========
 [![Build status](https://ci.appveyor.com/api/projects/status/8p6wp0bcq2mx8208?svg=true)](https://ci.appveyor.com/project/hasherezade/bearparser)
-[![Build status](https://travis-ci.org/hasherezade/bearparser.svg?branch=master)](https://travis-ci.org/hasherezade/bearparser.svg?branch=master)
+[![Build status](https://travis-ci.org/hasherezade/bearparser.svg?branch=master)](https://travis-ci.org/hasherezade/bearparser)
 
 
 Portable Executable parsing library<br/>
