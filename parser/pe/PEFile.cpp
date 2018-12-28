@@ -118,13 +118,13 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
 
 pe::RICH_DANS_HEADER* PEFile::getRichHeaderBgn(pe::RICH_SIGNATURE* richSign)
 {
-    if (!richSign) return nullptr;
+    if (!richSign) return NULL;
 
     DWORD xorkey = richSign->checksum;
     offset_t richOffset = getOffset(richSign);
 
     size_t processedSize = 0;
-    pe::RICH_DANS_HEADER* dansHdr = nullptr;
+    pe::RICH_DANS_HEADER* dansHdr = NULL;
     while(true) {
         dansHdr = (pe::RICH_DANS_HEADER*) this->getContentAt(richOffset + processedSize - sizeof(pe::RICH_DANS_HEADER), sizeof(pe::RICH_DANS_HEADER));
         if (!dansHdr) break;
@@ -141,7 +141,7 @@ pe::RICH_SIGNATURE* PEFile::getRichHeaderSign()
     size_t maxSize = dosStubEnd - dosStubOffset;
     BYTE *dosPtr = this->getContentAt(dosStubOffset, maxSize);
     if (!dosPtr) {
-        return nullptr;
+        return NULL;
     }
     //remove padding:
     size_t processedSize = maxSize;
@@ -152,9 +152,9 @@ pe::RICH_SIGNATURE* PEFile::getRichHeaderSign()
         if (richSign->richId == pe::RICH_HDR_MAGIC) break; //got it!
         processedSize -= sizeof(DWORD);
     }
-    if (!richSign) return nullptr;
+    if (!richSign) return NULL;
     if (richSign->richId != pe::RICH_HDR_MAGIC) {
-        return nullptr; //invalid
+        return NULL; //invalid
     }
     return richSign;
 }
