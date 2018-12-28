@@ -9,7 +9,7 @@ class ExeWrappersContainer
 public:
     enum WRAPPERS {
         WR_NONE = size_t(-1),
-        COUNT_WRAPPERS
+        COUNT_WRAPPERS = 0
     };
 
     ExeWrappersContainer() { }
