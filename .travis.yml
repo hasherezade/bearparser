@@ -1,10 +1,19 @@
 language: cpp
 sudo: true
 
-install:
-  - sudo apt-get update
-  - sudo apt-get install qt5-default qt5-qmake
+os:
+  - linux
 
+compiler:
+  - gcc
+  - clang
+
+addons:
+  apt:
+    packages:
+      - qt5-default
+      - qt5-qmake
+      
 before_script:
   - cmake --version
 
@@ -14,10 +23,3 @@ script:
   - cmake ..
   - cmake --build .
   - cd ..
-
-compiler:
-  - gcc
-  - clang
-os:
-  - linux
-  
