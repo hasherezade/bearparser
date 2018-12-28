@@ -145,7 +145,7 @@ pe::RICH_SIGNATURE* PEFile::getRichHeaderSign()
     }
     //remove padding:
     size_t processedSize = maxSize;
-    pe::RICH_SIGNATURE* richSign = nullptr;
+    pe::RICH_SIGNATURE* richSign = NULL;
     while(true) {
         richSign = (pe::RICH_SIGNATURE*) this->getContentAt(dosStubOffset + processedSize - sizeof(pe::RICH_SIGNATURE), sizeof(pe::RICH_SIGNATURE));
         if (!richSign) break;
