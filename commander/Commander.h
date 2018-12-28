@@ -61,7 +61,7 @@ public:
 
     virtual void execute(CmdParams *params, CmdContext *context_ptr)
     { 
-        if (context_ptr == nullptr) {
+        if (context_ptr == NULL) {
             return;
         }
         context_ptr->stopProcessing();
