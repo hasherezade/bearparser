@@ -16,7 +16,6 @@ script:
   - cd ..
 
 compiler:
-  - clang
   - gcc
 os:
   - linux
