@@ -1,0 +1,19 @@
+language: cpp
+sudo: false
+
+before_script:
+  - cmake --version
+
+script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - cmake --build .
+  - cd ..
+
+compiler:
+  - clang
+  - gcc
+os:
+  - linux
+  
