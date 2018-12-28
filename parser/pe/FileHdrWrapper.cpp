@@ -31,7 +31,7 @@ void* FileHdrWrapper::getPtr()
 void* FileHdrWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
     IMAGE_FILE_HEADER * hdr = reinterpret_cast<IMAGE_FILE_HEADER*>(getPtr());
-    if (!hdr) return nullptr;
+    if (!hdr) return NULL;
 
     IMAGE_FILE_HEADER &fileHeader = (*hdr);
     switch (fieldId) {
