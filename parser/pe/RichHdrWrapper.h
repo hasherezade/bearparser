@@ -20,7 +20,7 @@ public:
     };
 
     RichHdrWrapper(PEFile *pe)
-        : PEElementWrapper(pe), richSign(nullptr), dansHdr(nullptr), compIdCounter(0) { wrap(); }
+        : PEElementWrapper(pe), richSign(NULL), dansHdr(NULL), compIdCounter(0) { wrap(); }
 
     size_t compIdCount();
 
