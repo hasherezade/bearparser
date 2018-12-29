@@ -8,6 +8,8 @@ set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
 find_package(Qt5Core REQUIRED)
 get_target_property(QtCore_location Qt5::Core LOCATION)
 
+include_directories (include)
+
 set (win_hdrs
     win_hdrs/poppack.h
     win_hdrs/pshpack1.h
@@ -55,7 +57,7 @@ set (pe_rsrc_hdrs
 )
 
 set (parser_hdrs
-    bearparser.h
+    include/bearparser.h
     Util.h
     CustomException.h
     AbstractByteBuffer.h
