@@ -172,7 +172,7 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
             return (ld32) ? (void*) &ld32->ProcessAffinityMask : (void*) &ld64->ProcessHeapFlags ;
         }
         case CSD_VER : return (ld32) ? (void*) &ld32->CSDVersion :  (void*) &ld64->CSDVersion ;
-        case RESERVED1 : return (ld32) ? (void*) &ld32->Reserved1 :  (void*) &ld64->Reserved1 ;
+        case DEPENDENT_LOAD_FLAGS : return (ld32) ? (void*) &ld32->DependentLoadFlags :  (void*) &ld64->DependentLoadFlags ;
         case EDIT_LIST : return (ld32) ? (void*) &ld32->EditList :  (void*) &ld64->EditList ;
         case SEC_COOKIE : return (ld32) ? (void*) &ld32->SecurityCookie :  (void*) &ld64->SecurityCookie ;
         case SEH_TABLE : return (ld32) ? (void*) &ld32->SEHandlerTable :  (void*) &ld64->SEHandlerTable ;
@@ -180,7 +180,7 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
 
         // W8.1 part:
         case GUARD_CHECK : return (p32) ? (void*) &p32->GuardCFCheckFunctionPointer :  (void*) &p64->GuardCFCheckFunctionPointer;
-        case RESERVED2 : return (p32) ? (void*) &p32->Reserved2 :  (void*) &p64->Reserved2;
+        case GUARD_DISPATCH : return (p32) ? (void*) &p32->GuardCFDispatchFunctionPointer :  (void*) &p64->GuardCFDispatchFunctionPointer;
         case GUARD_TABLE: return (p32) ? (void*) &p32->GuardCFFunctionTable :  (void*) &p64->GuardCFFunctionTable;
         case GUARD_COUNT: return (p32) ? (void*) &p32->GuardCFFunctionCount :  (void*) &p64->GuardCFFunctionCount;
         case GUARD_FLAGS: return (p32) ? (void*) &p32->GuardFlags:  (void*) &p64->GuardFlags;
@@ -214,14 +214,14 @@ QString LdConfigDirWrapper::getFieldName(size_t fieldId)
             return (is32bit) ? "ProcessAffinityMask" : "ProcessHeapFlags";
         }
         case CSD_VER : return "CSDVersion";
-        case RESERVED1 : return "Reserved";
+        case DEPENDENT_LOAD_FLAGS : return "DependentLoadFlags";
         case EDIT_LIST : return "EditList";
         case SEC_COOKIE : return "SecurityCookie";
         case SEH_TABLE : return "SEHandlerTable";
         case SEH_COUNT : return "SEHandlerCount";
         // W8.1 part :
         case GUARD_CHECK : return "GuardCFCheckFunctionPtr";
-        case RESERVED2 : return "Reserved2";
+        case GUARD_DISPATCH : return "GuardCFDispatchFunctionPointer";
         case GUARD_TABLE: return "GuardCFFunctionTable";
         case GUARD_COUNT: return "GuardCFFunctionCount";
         case GUARD_FLAGS: return "GuardFlags";

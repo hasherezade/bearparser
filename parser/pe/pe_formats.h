@@ -1363,7 +1363,7 @@ namespace pe {
         DWORD   ProcessHeapFlags;
         DWORD   ProcessAffinityMask;
         WORD    CSDVersion;
-        WORD    Reserved1;
+        WORD    DependentLoadFlags;
         DWORD   EditList;                   // VA
         DWORD   SecurityCookie;             // VA
         DWORD   SEHandlerTable;             // VA
@@ -1388,7 +1388,7 @@ namespace pe {
         ULONGLONG  ProcessAffinityMask;
         DWORD      ProcessHeapFlags;
         WORD       CSDVersion;
-        WORD       Reserved1;
+        WORD       DependentLoadFlags;
         ULONGLONG  EditList;                // VA
         ULONGLONG  SecurityCookie;          // VA
         ULONGLONG  SEHandlerTable;          // VA
@@ -1400,7 +1400,7 @@ namespace pe {
     // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W8.1 :
     typedef struct _IMAGE_LOAD_CONFIG_D32_W81 {
         DWORD   GuardCFCheckFunctionPointer; //VA
-        DWORD   Reserved2;
+        DWORD   GuardCFDispatchFunctionPointer;
         DWORD   GuardCFFunctionTable; //VA
         DWORD   GuardCFFunctionCount;
         DWORD   GuardFlags;
@@ -1409,7 +1409,7 @@ namespace pe {
     // IMAGE_LOAD_CONFIG_DIRECTORY64 extension for W8.1 :
     typedef struct _IMAGE_LOAD_CONFIG_D64_W81 {
         ULONGLONG   GuardCFCheckFunctionPointer; //VA
-        ULONGLONG   Reserved2;
+        ULONGLONG   GuardCFDispatchFunctionPointer;
         ULONGLONG   GuardCFFunctionTable; //VA
         ULONGLONG   GuardCFFunctionCount;
         DWORD       GuardFlags;

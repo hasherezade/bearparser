@@ -29,14 +29,14 @@ public:
         PROC_HEAP_FLAGS32, // PROC_AFF_MASK64
         PROC_AFF_MASK32, // PROC_HEAP_FLAGS32
         CSD_VER,
-        RESERVED1,
+        DEPENDENT_LOAD_FLAGS,
         EDIT_LIST,
         SEC_COOKIE,
         SEH_TABLE,
         SEH_COUNT,
         FIELD_COUNTER,
         GUARD_CHECK = FIELD_COUNTER,
-        RESERVED2 = GUARD_CHECK + 1,
+        GUARD_DISPATCH = GUARD_CHECK + 1,
         GUARD_TABLE,
         GUARD_COUNT,
         GUARD_FLAGS,
