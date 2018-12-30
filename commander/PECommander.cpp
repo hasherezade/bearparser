@@ -1,5 +1,5 @@
 #include "PECommander.h"
-#include "pe/rsrc/ResourceStringsWrapper.h"
+#include <bearparser/pefile.h>
 
 using namespace std;
 
