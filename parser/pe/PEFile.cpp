@@ -143,20 +143,24 @@ pe::RICH_DANS_HEADER* PEFile::getRichHeaderBgn(pe::RICH_SIGNATURE* richSign)
 pe::RICH_SIGNATURE* PEFile::getRichHeaderSign()
 {
     size_t dosStubOffset = this->core.dos->e_lfarlc;
-    size_t dosStubEnd = this->core.dos->e_lfanew;
-    size_t maxSize = dosStubEnd - dosStubOffset;
+    size_t dosStubEnd = this->core.dos->e_lfanew; // PE header start
+    const size_t maxSize = dosStubEnd - dosStubOffset; // Rich Header is somewhere in the space between DOS and PE headers
     BYTE *dosPtr = this->getContentAt(dosStubOffset, maxSize);
     if (!dosPtr) {
         return NULL;
     }
-    //remove padding:
-    size_t processedSize = maxSize;
+
     pe::RICH_SIGNATURE* richSign = NULL;
-    while(true) {
-        richSign = (pe::RICH_SIGNATURE*) this->getContentAt(dosStubOffset + processedSize - sizeof(pe::RICH_SIGNATURE), sizeof(pe::RICH_SIGNATURE));
+    size_t toSearchSize = maxSize;
+    const offset_t startOffset = dosStubOffset; //we are starting from the beginning of DOS stub
+    const size_t step = sizeof(DWORD); //RichHeader is padded by DWORDS
+
+    while (toSearchSize > 0) {
+        richSign = (pe::RICH_SIGNATURE*) this->getContentAt(startOffset + toSearchSize, sizeof(pe::RICH_SIGNATURE));
         if (!richSign) break;
         if (richSign->richId == pe::RICH_HDR_MAGIC) break; //got it!
-        processedSize -= sizeof(DWORD);
+        // the search goes backward. 
+        toSearchSize -= step;
     }
     if (!richSign) return NULL;
     if (richSign->richId != pe::RICH_HDR_MAGIC) {
