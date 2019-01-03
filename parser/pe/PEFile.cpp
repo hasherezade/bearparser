@@ -121,15 +121,21 @@ pe::RICH_DANS_HEADER* PEFile::getRichHeaderBgn(pe::RICH_SIGNATURE* richSign)
     if (!richSign) return NULL;
 
     DWORD xorkey = richSign->checksum;
-    offset_t richOffset = getOffset(richSign);
+    const offset_t richOffset = this->getOffset(richSign);
 
-    size_t processedSize = 0;
     pe::RICH_DANS_HEADER* dansHdr = NULL;
-    while(true) {
-        dansHdr = (pe::RICH_DANS_HEADER*) this->getContentAt(richOffset + processedSize - sizeof(pe::RICH_DANS_HEADER), sizeof(pe::RICH_DANS_HEADER));
-        if (!dansHdr) break;
-        if (dansHdr->dansId == (pe::DANS_HDR_MAGIC ^ xorkey)) break; //got it!
-        processedSize -= sizeof(DWORD);
+
+    offset_t offset = richOffset - sizeof(pe::RICH_DANS_HEADER);
+    while (offset > 0) {
+        dansHdr = (pe::RICH_DANS_HEADER*) this->getContentAt(offset, sizeof(pe::RICH_DANS_HEADER));
+        if (!dansHdr) {
+            break;
+        }
+        if (dansHdr->dansId == (pe::DANS_HDR_MAGIC ^ xorkey)) {
+            break; //got it!
+        }
+        //walking back
+        offset -= sizeof(DWORD);
     }
     return dansHdr;
 }
