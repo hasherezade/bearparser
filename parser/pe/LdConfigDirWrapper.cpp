@@ -341,6 +341,7 @@ Executable::addr_type LdConfigDirWrapper::containsAddrType(size_t fieldId, size_
         case SEC_COOKIE :
         case SEH_TABLE :
         case GUARD_CHECK :
+        case GUARD_DISPATCH :
         case GUARD_TABLE :
         case GUARD_ADDR_IAT_ENTRY_TABLE:
         case GUARD_LONG_JUMP_TABLE:
