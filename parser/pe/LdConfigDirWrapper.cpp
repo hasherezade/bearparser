@@ -25,6 +25,18 @@ bufsize_t LdConfigDirWrapper::getW81partSize()
     return dirSize;
 }
 
+bufsize_t LdConfigDirWrapper::getW10partSize()
+{
+    bufsize_t dirSize = 0;
+
+    if (m_Exe->getBitMode() == Executable::BITS_32) {
+        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_D32_W10);
+    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
+        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_D64_W10);
+    }
+    return dirSize;
+}
+
 void* LdConfigDirWrapper::getLdConfigDirPtr()
 {
     offset_t rva = getDirEntryAddress();
@@ -83,6 +95,48 @@ pe::IMAGE_LOAD_CONFIG_D64_W81* LdConfigDirWrapper::getW81part64()
 {
     if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
     return (pe::IMAGE_LOAD_CONFIG_D64_W81*) getW81part();
+}
+
+void* LdConfigDirWrapper::getW10part()
+{
+    void *ldPtr = getLdConfigDirPtr();
+    if (ldPtr == NULL) return NULL;
+
+    size_t dirSize = getLdConfigDirSize();
+
+    //the size defined in the header:
+    size_t realSize = 0;
+    if (m_Exe->getBitMode() == Executable::BITS_32) {
+        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) ldPtr)->Size;
+
+    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
+        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) ldPtr)->Size;
+    }
+
+    if (realSize <= dirSize) return NULL;
+    dirSize += getW81partSize(); // add the 8.1 part
+    if (realSize <= dirSize) return NULL;
+    // is there something more?
+    if (realSize > dirSize) {
+        offset_t offset = this->getOffset(ldPtr);
+        if (offset == INVALID_ADDR) return NULL;
+        offset += dirSize;
+        //fetch the remaining part:
+        return m_Exe->getContentAt(offset, getW10partSize());
+    }
+    return NULL;
+}
+
+pe::IMAGE_LOAD_CONFIG_D32_W10* LdConfigDirWrapper::getW10part32()
+{
+    if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
+    return (pe::IMAGE_LOAD_CONFIG_D32_W10*) getW10part();
+}
+
+pe::IMAGE_LOAD_CONFIG_D64_W10* LdConfigDirWrapper::getW10part64()
+{
+    if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
+    return (pe::IMAGE_LOAD_CONFIG_D64_W10*) getW10part();
 }
 
 bool LdConfigDirWrapper::wrap()
@@ -146,7 +200,13 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
     pe::IMAGE_LOAD_CONFIG_D32_W81* p32 = getW81part32();
     pe::IMAGE_LOAD_CONFIG_D64_W81* p64 = getW81part64();
     if (p32 == NULL && p64 == NULL) {
-        if (fId > SEH_COUNT) this->getPtr();
+        if (fId > SEH_COUNT) return this->getPtr();
+    }
+
+    pe::IMAGE_LOAD_CONFIG_D32_W10* p10_32 = getW10part32();
+    pe::IMAGE_LOAD_CONFIG_D64_W10* p10_64 = getW10part64();
+    if (p10_32 == NULL && p10_64 == NULL) {
+        if (fId > GUARD_FLAGS) return this->getPtr();
     }
 
     switch (fId) {
@@ -179,11 +239,32 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
         case SEH_COUNT : return (ld32) ? (void*) &ld32->SEHandlerCount :  (void*) &ld64->SEHandlerCount ;
 
         // W8.1 part:
-        case GUARD_CHECK : return (p32) ? (void*) &p32->GuardCFCheckFunctionPointer :  (void*) &p64->GuardCFCheckFunctionPointer;
+        case GUARD_CHECK : return (p32) ? (void*) &p32->GuardCFCheckFunctionPointer : (void*) &p64->GuardCFCheckFunctionPointer;
         case GUARD_DISPATCH : return (p32) ? (void*) &p32->GuardCFDispatchFunctionPointer :  (void*) &p64->GuardCFDispatchFunctionPointer;
         case GUARD_TABLE: return (p32) ? (void*) &p32->GuardCFFunctionTable :  (void*) &p64->GuardCFFunctionTable;
         case GUARD_COUNT: return (p32) ? (void*) &p32->GuardCFFunctionCount :  (void*) &p64->GuardCFFunctionCount;
         case GUARD_FLAGS: return (p32) ? (void*) &p32->GuardFlags:  (void*) &p64->GuardFlags;
+
+	// W10 part:
+	case CODE_INTEGRITY_FLAGS: return (p10_32) ? (void*) &p10_32->CodeIntegrity.Flags : (void*) &p10_64->CodeIntegrity.Flags;
+	case CODE_INTEGRITY_CATALOG: return (p10_32) ? (void*) &p10_32->CodeIntegrity.Catalog : (void*) &p10_64->CodeIntegrity.Catalog;  //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.Catalog
+	case CODE_INTEGRITY_CATALOG_OFFSET:  return (p10_32) ? (void*) &p10_32->CodeIntegrity.CatalogOffset : (void*) &p10_64->CodeIntegrity.CatalogOffset;  //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.CatalogOffset
+	case CODE_INTEGRITY_RESERVED: return (p10_32) ? (void*) &p10_32->CodeIntegrity.Reserved : (void*) &p10_64->CodeIntegrity.Reserved; //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.Reserved
+	case GUARD_ADDR_IAT_ENTRY_TABLE: return (p10_32) ? (void*) &p10_32->GuardAddressTakenIatEntryTable : (void*) &p10_64->GuardAddressTakenIatEntryTable; //
+	case GUARD_ADDR_IAT_ENTRY_COUNT: return (p10_32) ? (void*) &p10_32->GuardAddressTakenIatEntryCount : (void*) &p10_64->GuardAddressTakenIatEntryCount; // return "GuardAddressTakenIatEntryCount";
+	case GUARD_LONG_JUMP_TABLE:  return (p10_32) ? (void*) &p10_32->GuardLongJumpTargetTable : (void*) &p10_64->GuardLongJumpTargetTable; //GuardLongJumpTargetTable";
+	case GUARD_LONG_JUMP_COUNT:  return (p10_32) ? (void*) &p10_32->GuardLongJumpTargetCount : (void*) &p10_64->GuardLongJumpTargetCount; // "GuardLongJumpTargetCount";
+	case DYNAMIC_VAL_RELOC:  return (p10_32) ? (void*) &p10_32->DynamicValueRelocTable : (void*) &p10_64->DynamicValueRelocTable; // "DynamicValueRelocTable";
+	case CHPE_METADATA_PTR:  return (p10_32) ? (void*) &p10_32->CHPEMetadataPointer : (void*) &p10_64->CHPEMetadataPointer; // "CHPEMetadataPointer";
+	case GUARD_FAILURE_ROUTINE:  return (p10_32) ? (void*) &p10_32->GuardRFFailureRoutine : (void*) &p10_64->GuardRFFailureRoutine; // "GuardRFFailureRoutine";
+	case GUARD_FAILURE_ROUTINE_FUNC_PTR: return (p10_32) ? (void*) &p10_32->GuardRFFailureRoutineFunctionPointer : (void*) &p10_64->GuardRFFailureRoutineFunctionPointer;
+	case DYNAMIC_VAL_RELOC_TABLE_OFFSET: return (p10_32) ? (void*) &p10_32->DynamicValueRelocTableOffset : (void*) &p10_64->DynamicValueRelocTableOffset; // "DynamicValueRelocTableOffset";
+	case DYNAMIC_VAL_RELOC_TABLE_SECTION: return (p10_32) ? (void*) &p10_32->DynamicValueRelocTableSection : (void*) &p10_64->DynamicValueRelocTableSection; // "DynamicValueRelocTableSection";
+	case RESERVED2:  return (p10_32) ? (void*) &p10_32->Reserved2 : (void*) &p10_64->Reserved2; // "Reserved2";
+	case GUARD_VERIFY_STACK_PTR:  return (p10_32) ? (void*) &p10_32->GuardRFVerifyStackPointerFunctionPointer : (void*) &p10_64->GuardRFVerifyStackPointerFunctionPointer;
+	case HOT_PATCH_TABLE_OFFSET:  return (p10_32) ? (void*) &p10_32->HotPatchTableOffset : (void*) &p10_64->HotPatchTableOffset; // "HotPatchTableOffset";
+	case RESERVED3:  return (p10_32) ? (void*) &p10_32->Reserved3 : (void*) &p10_64->Reserved3; // "Reserved3";
+	case ENCLAVE_CONFIG_PTR:  return (p10_32) ? (void*) &p10_32->EnclaveConfigurationPointer : (void*) &p10_64->EnclaveConfigurationPointer; // "EnclaveConfigurationPointer";
     }
     return this->getPtr();
 }
@@ -225,6 +306,26 @@ QString LdConfigDirWrapper::getFieldName(size_t fieldId)
         case GUARD_TABLE: return "GuardCFFunctionTable";
         case GUARD_COUNT: return "GuardCFFunctionCount";
         case GUARD_FLAGS: return "GuardFlags";
+	// W10 part:
+	case CODE_INTEGRITY_FLAGS: return "CodeIntegrity.Flags"; //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.Flags
+	case CODE_INTEGRITY_CATALOG:  return "CodeIntegrity.Catalog";  //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.Catalog
+	case CODE_INTEGRITY_CATALOG_OFFSET:  return "CodeIntegrity.CatalogOffset"; //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.CatalogOffset
+	case CODE_INTEGRITY_RESERVED:  return "CodeIntegrity.Reserved"; //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.Reserved
+	case GUARD_ADDR_IAT_ENTRY_TABLE:  return "GuardAddressTakenIatEntryTable";
+	case GUARD_ADDR_IAT_ENTRY_COUNT:  return "GuardAddressTakenIatEntryCount";
+	case GUARD_LONG_JUMP_TABLE:  return "GuardLongJumpTargetTable";
+	case GUARD_LONG_JUMP_COUNT:  return "GuardLongJumpTargetCount";
+	case DYNAMIC_VAL_RELOC:  return "DynamicValueRelocTable";
+	case CHPE_METADATA_PTR:  return "CHPEMetadataPointer";
+	case GUARD_FAILURE_ROUTINE:  return "GuardRFFailureRoutine";
+	case GUARD_FAILURE_ROUTINE_FUNC_PTR:  return "GuardRFFailureRoutineFunctionPointer";
+	case DYNAMIC_VAL_RELOC_TABLE_OFFSET:  return "DynamicValueRelocTableOffset";
+	case DYNAMIC_VAL_RELOC_TABLE_SECTION: return "DynamicValueRelocTableSection";
+	case RESERVED2:  return "Reserved2";
+	case GUARD_VERIFY_STACK_PTR:  return "GuardRFVerifyStackPointerFunctionPointer";
+	case HOT_PATCH_TABLE_OFFSET:  return "HotPatchTableOffset";
+	case RESERVED3:  return "Reserved3";
+	case ENCLAVE_CONFIG_PTR:  return "EnclaveConfigurationPointer";
     }
     return getName();
 }

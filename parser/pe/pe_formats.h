@@ -1415,6 +1415,53 @@ namespace pe {
         DWORD       GuardFlags;
     } IMAGE_LOAD_CONFIG_D64_W81, *PIMAGE_LOAD_CONFIG_D64_W81;
 
+    typedef struct _IMAGE_LOAD_CONFIG_CODE_INTEGRITY {
+        WORD    Flags;          // Flags to indicate if CI information is available, etc.
+        WORD    Catalog;        // 0xFFFF means not available
+        DWORD   CatalogOffset;
+        DWORD   Reserved;       // Additional bitmask to be defined later
+    } IMAGE_LOAD_CONFIG_CODE_INTEGRITY, *PIMAGE_LOAD_CONFIG_CODE_INTEGRITY;
+
+    // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W10 :
+    typedef struct _IMAGE_LOAD_CONFIG_D32_W10 {
+        IMAGE_LOAD_CONFIG_CODE_INTEGRITY CodeIntegrity;
+        DWORD   GuardAddressTakenIatEntryTable; // VA
+        DWORD   GuardAddressTakenIatEntryCount;
+        DWORD   GuardLongJumpTargetTable;       // VA
+        DWORD   GuardLongJumpTargetCount;
+        DWORD   DynamicValueRelocTable;         // VA
+        DWORD   CHPEMetadataPointer;
+        DWORD   GuardRFFailureRoutine;          // VA
+        DWORD   GuardRFFailureRoutineFunctionPointer; // VA
+        DWORD   DynamicValueRelocTableOffset;
+        WORD    DynamicValueRelocTableSection;
+        WORD    Reserved2;
+        DWORD   GuardRFVerifyStackPointerFunctionPointer; // VA
+        DWORD   HotPatchTableOffset;
+        DWORD   Reserved3;
+        DWORD   EnclaveConfigurationPointer;    // VA
+    } IMAGE_LOAD_CONFIG_D32_W10, *PIMAGE_LOAD_CONFIG_D32_W10;
+
+    // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W10 :
+    typedef struct _IMAGE_LOAD_CONFIG_D64_W10 {
+        IMAGE_LOAD_CONFIG_CODE_INTEGRITY CodeIntegrity;
+        ULONGLONG  GuardAddressTakenIatEntryTable; // VA
+        ULONGLONG  GuardAddressTakenIatEntryCount;
+        ULONGLONG  GuardLongJumpTargetTable;       // VA
+        ULONGLONG  GuardLongJumpTargetCount;
+        ULONGLONG  DynamicValueRelocTable;         // VA
+        ULONGLONG  CHPEMetadataPointer;            // VA
+        ULONGLONG  GuardRFFailureRoutine;          // VA
+        ULONGLONG  GuardRFFailureRoutineFunctionPointer; // VA
+        DWORD      DynamicValueRelocTableOffset;
+        WORD       DynamicValueRelocTableSection;
+        WORD       Reserved2;
+        ULONGLONG  GuardRFVerifyStackPointerFunctionPointer; // VA
+        DWORD      HotPatchTableOffset;
+        DWORD      Reserved3;
+        ULONGLONG  EnclaveConfigurationPointer;     // VA
+    } IMAGE_LOAD_CONFIG_D64_W10, *PIMAGE_LOAD_CONFIG_D64_W10;
+
 }; //namespace pe
 
 #ifndef USE_WINNT
