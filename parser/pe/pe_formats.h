@@ -1344,9 +1344,12 @@ typedef struct _IMAGE_RESOURCE_DATA_ENTRY {
 
 namespace pe {
 
-    /*
-    * Load Configuration Directory Entry
-    */
+/*
+ * Load Configuration Directory Entry
+ */
+
+ #include "../win_hdrs/pshpack4.h"                       // Use align 4
+
     typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY32 {
         DWORD   Size;
         DWORD   TimeDateStamp;
@@ -1400,7 +1403,7 @@ namespace pe {
     // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W8.1 :
     typedef struct _IMAGE_LOAD_CONFIG_D32_W81 {
         DWORD   GuardCFCheckFunctionPointer; //VA
-        DWORD   GuardCFDispatchFunctionPointer;
+        DWORD   GuardCFDispatchFunctionPointer; //VA
         DWORD   GuardCFFunctionTable; //VA
         DWORD   GuardCFFunctionCount;
         DWORD   GuardFlags;
@@ -1409,7 +1412,7 @@ namespace pe {
     // IMAGE_LOAD_CONFIG_DIRECTORY64 extension for W8.1 :
     typedef struct _IMAGE_LOAD_CONFIG_D64_W81 {
         ULONGLONG   GuardCFCheckFunctionPointer; //VA
-        ULONGLONG   GuardCFDispatchFunctionPointer;
+        ULONGLONG   GuardCFDispatchFunctionPointer; //VA
         ULONGLONG   GuardCFFunctionTable; //VA
         ULONGLONG   GuardCFFunctionCount;
         DWORD       GuardFlags;
@@ -1461,6 +1464,8 @@ namespace pe {
         DWORD      Reserved3;
         ULONGLONG  EnclaveConfigurationPointer;     // VA
     } IMAGE_LOAD_CONFIG_D64_W10, *PIMAGE_LOAD_CONFIG_D64_W10;
+
+#include "../win_hdrs/poppack.h"                        // Back to the previous packing
 
 }; //namespace pe
 
