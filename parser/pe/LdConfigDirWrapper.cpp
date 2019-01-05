@@ -112,19 +112,20 @@ void* LdConfigDirWrapper::getW10part()
     } else if (m_Exe->getBitMode() == Executable::BITS_64) {
         realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) ldPtr)->Size;
     }
-
     if (realSize <= dirSize) return NULL;
+
     dirSize += getW81partSize(); // add the 8.1 part
     if (realSize <= dirSize) return NULL;
+    void* ptr = NULL;
     // is there something more?
-    if (realSize > dirSize) {
+    if (realSize >= dirSize) {
         offset_t offset = this->getOffset(ldPtr);
         if (offset == INVALID_ADDR) return NULL;
         offset += dirSize;
         //fetch the remaining part:
-        return m_Exe->getContentAt(offset, getW10partSize());
+        ptr = m_Exe->getContentAt(offset, getW10partSize());
     }
-    return NULL;
+    return ptr;
 }
 
 pe::IMAGE_LOAD_CONFIG_D32_W10* LdConfigDirWrapper::getW10part32()
@@ -188,6 +189,7 @@ bufsize_t LdConfigDirWrapper::getSize()
     bufsize_t totalSize = getLdConfigDirSize();
 
     if (this->isW81()) totalSize += this->getW81partSize();
+    if (this->isW10()) totalSize += this->getW10partSize();
     return totalSize;
 }
 
