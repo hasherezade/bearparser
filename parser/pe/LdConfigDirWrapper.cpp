@@ -313,10 +313,12 @@ QString LdConfigDirWrapper::getFieldName(size_t fieldId)
 	case CODE_INTEGRITY_CATALOG:  return "CodeIntegrity.Catalog";  //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.Catalog
 	case CODE_INTEGRITY_CATALOG_OFFSET:  return "CodeIntegrity.CatalogOffset"; //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.CatalogOffset
 	case CODE_INTEGRITY_RESERVED:  return "CodeIntegrity.Reserved"; //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.Reserved
+
 	case GUARD_ADDR_IAT_ENTRY_TABLE:  return "GuardAddressTakenIatEntryTable";
 	case GUARD_ADDR_IAT_ENTRY_COUNT:  return "GuardAddressTakenIatEntryCount";
 	case GUARD_LONG_JUMP_TABLE:  return "GuardLongJumpTargetTable";
 	case GUARD_LONG_JUMP_COUNT:  return "GuardLongJumpTargetCount";
+
 	case DYNAMIC_VAL_RELOC:  return "DynamicValueRelocTable";
 	case CHPE_METADATA_PTR:  return "CHPEMetadataPointer";
 	case GUARD_FAILURE_ROUTINE:  return "GuardRFFailureRoutine";
@@ -341,6 +343,13 @@ Executable::addr_type LdConfigDirWrapper::containsAddrType(size_t fieldId, size_
         case SEH_TABLE :
         case GUARD_CHECK :
         case GUARD_TABLE :
+        case GUARD_ADDR_IAT_ENTRY_TABLE:
+        case GUARD_LONG_JUMP_TABLE:
+        case DYNAMIC_VAL_RELOC:
+        case GUARD_FAILURE_ROUTINE:
+        case GUARD_FAILURE_ROUTINE_FUNC_PTR:
+        case GUARD_VERIFY_STACK_PTR:
+        case ENCLAVE_CONFIG_PTR:
             return Executable::VA;
     }
     return Executable::NOT_ADDR;
