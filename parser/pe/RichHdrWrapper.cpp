@@ -7,6 +7,10 @@ bool RichHdrWrapper::wrap()
 {
     this->richSign = m_PE->getRichHeaderSign();
     this->dansHdr = m_PE->getRichHeaderBgn(richSign);
+    if (!this->richSign || !this->dansHdr) {
+        this->compIdCounter = 0;
+        return false;
+    }
     this->compIdCounter = this->compIdCount();
     return true;
 }

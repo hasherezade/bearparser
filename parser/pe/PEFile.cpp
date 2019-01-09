@@ -137,6 +137,9 @@ pe::RICH_DANS_HEADER* PEFile::getRichHeaderBgn(pe::RICH_SIGNATURE* richSign)
         //walking back
         offset -= sizeof(DWORD);
     }
+    if (dansHdr->dansId != (pe::DANS_HDR_MAGIC ^ xorkey)) {
+        return NULL; //not found
+    }
     return dansHdr;
 }
 
