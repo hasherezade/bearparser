@@ -39,9 +39,13 @@ bufsize_t RichHdrWrapper::getSize()
     if (!this->richSign || !this->dansHdr) {
         return 0;
     }
-    const size_t cnt = this->compIdCounter - 1;
-    const bufsize_t dif = sizeof(pe::RICH_DANS_HEADER) + sizeof(pe::RICH_SIGNATURE) + (sizeof(pe::RICH_COMP_ID) * cnt);
-    return dif;
+    const offset_t dansOffset = getOffset(this->dansHdr);
+    const offset_t richOffset = getOffset(this->richSign);
+    offset_t diff = richOffset - dansOffset;
+
+    pe::RICH_SIGNATURE rich1 = { 0 };
+    diff += sizeof(rich1);
+    return diff;
 }
 
 size_t RichHdrWrapper::getFieldsCount()
@@ -71,6 +75,32 @@ void* RichHdrWrapper::getFieldPtr(size_t fieldId, size_t subField)
     if (fieldId == RICH_ID + cnt) return (void*) &richSign->richId;
     if (fieldId == CHECKSUM + cnt) return (void*) &richSign->checksum;
     return (void*) dansHdr;
+}
+
+bufsize_t RichHdrWrapper::getFieldSize(size_t fieldId, size_t subField)
+{
+    if (!this->richSign || !this->dansHdr) {
+        return 0;
+    }
+    if (this->compIdCounter == 0) {
+        return 0;
+    }
+    const size_t cnt = this->compIdCounter - 1;
+    switch (fieldId) {
+        case DANS_ID: 
+            return sizeof(dansHdr->dansId);
+        case CPAD0: 
+        case CPAD1:
+        case CPAD2:
+            return sizeof(dansHdr->cPad[0]);
+    }
+    if (fieldId >= COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
+    {
+        return sizeof(pe::RICH_COMP_ID);
+    }
+    if (fieldId == RICH_ID + cnt) return sizeof(richSign->richId);
+    if (fieldId == CHECKSUM + cnt) return sizeof(richSign->checksum);
+    return 0;
 }
 
 QString RichHdrWrapper::getFieldName(size_t fieldId)
