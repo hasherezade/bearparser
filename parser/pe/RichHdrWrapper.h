@@ -3,6 +3,9 @@
 #include "PENodeWrapper.h"
 #include "pe_undoc.h"
 
+const QString RichHdr_ProdIdToVSversion(WORD prodId);
+const QString RichHdr_translateProdId(WORD prodId);
+
 class RichHdrWrapper : public PEElementWrapper
 {
 public:
@@ -47,4 +50,5 @@ protected:
     pe::RICH_DANS_HEADER* dansHdr;
     size_t compIdCounter;
 };
+
 
