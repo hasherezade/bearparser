@@ -123,6 +123,63 @@ QString RichHdrWrapper::getFieldName(size_t fieldId)
     return "";
 }
 
+pe::RICH_COMP_ID RichHdrWrapper::getCompId(size_t fieldId)
+{
+    pe::RICH_COMP_ID emptyId = { 0 };
+    if (!this->richSign || !this->dansHdr) {
+        return emptyId;
+    }
+    const uint32_t xorVal = this->richSign->checksum;
+    const size_t cnt = this->compIdCounter - 1;
+    bool isOk = false;
+    uint64_t num = this->getNumValue(fieldId, &isOk);
+    if (!isOk) {
+        return emptyId;
+    }
+    if (fieldId >= COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
+    {
+        uint64_t xorVal2 = xorVal | ((uint64_t)xorVal << sizeof(uint32_t)*8);
+        uint64_t my_num = static_cast<uint64_t>(num) ^ (xorVal2);
+        pe::RICH_COMP_ID* myCompId = reinterpret_cast<pe::RICH_COMP_ID*>(&my_num);
+        return *myCompId;
+    }
+    return emptyId;
+}
+
+
+inline DWORD rol32(DWORD temp, DWORD i)
+{
+    return ((temp << (i%32)) | (temp >> (32-(i%32))));
+}
+
+DWORD RichHdrWrapper::calcChecksum()
+{
+    BYTE *data = m_Exe->getContent();
+    const size_t dataSize = m_Exe->getContentSize();
+    const size_t dansOffset = getOffset(this->dansHdr);
+
+    DWORD cksum = dansOffset;
+    for (size_t i = 0; i < dansOffset && i < dataSize; i++) {
+        //skip e_lfanew
+        if (i >= 0x3c && i < 0x40) {
+            continue;
+        }
+        BYTE temp = data[i];
+        cksum += rol32(temp,i);
+        cksum &= 0xffffffff;
+    }
+    size_t compKeys = compIdCount();
+    for (size_t k = COMP_ID_1; k < (COMP_ID_1 + compKeys); k++) {
+        pe::RICH_COMP_ID compId = this->getCompId(k);
+        
+        DWORD temp = compId.prodId << 16 | compId.CV;
+        DWORD roled = rol32(temp, compId.count);
+        cksum += roled;
+        cksum &=0xffffffff;
+    }
+    return cksum;
+}
+
 Executable::addr_type RichHdrWrapper::containsAddrType(uint32_t fieldId, uint32_t subField)
 {
     return Executable::NOT_ADDR;

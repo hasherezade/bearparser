@@ -38,6 +38,10 @@ public:
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(uint32_t fieldId, uint32_t subField = FIELD_NONE);
 
+    /* only for this wrapper type */
+    pe::RICH_COMP_ID getCompId(size_t fieldId);
+    DWORD calcChecksum();
+
 protected:
     pe::RICH_SIGNATURE* richSign;
     pe::RICH_DANS_HEADER* dansHdr;
