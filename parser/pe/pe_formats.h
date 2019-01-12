@@ -1983,7 +1983,12 @@ namespace pe {
         DT_OMAP_FROM_SRC = 8,
         DT_BORLAND = 9,
         DT_RESERVED10 = 10,
-        DT_CLSID = 11
+        DT_CLSID = 11,
+        DT_VC_FEATURE = 12,
+        DT_POGO = 13,
+        DT_ILTCG = 14,
+        DT_MPX = 15,
+        DT_REPRO = 16
     };
 
     enum subsystem {

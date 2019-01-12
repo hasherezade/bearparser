@@ -1,5 +1,4 @@
 #include "DebugDirWrapper.h"
-#include "PEFile.h"
 
 /*
 typedef struct _IMAGE_DEBUG_DIRECTORY {
@@ -94,7 +93,7 @@ QString DebugDirWrapper::translateType(int type)
     switch (type) {
         case pe::DT_UNKNOWN : return "unknown";
         case pe::DT_COFF : return "COFF";
-        case pe::DT_CODEVIEW : return "Visual C++";
+        case pe::DT_CODEVIEW : return "Visual C++ (CodeView)";
         case pe::DT_FPO : return "frame pointer omission";
         case pe::DT_MISC : return "DBG file";
         case pe::DT_EXCEPTION : return "A copy of .pdata section";
@@ -104,6 +103,11 @@ QString DebugDirWrapper::translateType(int type)
         case pe::DT_BORLAND : return "Borland";
         case pe::DT_RESERVED10 : return "Reserved";
         case pe::DT_CLSID : return "CLSID";
+        case pe::DT_VC_FEATURE : return "VC Feature";
+        case pe::DT_POGO : return "POGO";
+        case pe::DT_ILTCG : return "ILTCG";
+        case pe::DT_MPX : return "MPX";
+        case pe::DT_REPRO : return "REPRO";
     }
     return "";
 }
