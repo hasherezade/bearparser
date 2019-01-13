@@ -157,6 +157,8 @@ DWORD RichHdrWrapper::calcChecksum()
     BYTE *data = m_Exe->getContent();
     const size_t dataSize = m_Exe->getContentSize();
     const size_t dansOffset = getOffset(this->dansHdr);
+    
+    if (!data || dansOffset == INVALID_ADDR) return 0;
 
     DWORD cksum = dansOffset;
     for (size_t i = 0; i < dansOffset && i < dataSize; i++) {
@@ -166,7 +168,6 @@ DWORD RichHdrWrapper::calcChecksum()
         }
         BYTE temp = data[i];
         cksum += rol32(temp,i);
-        cksum &= 0xffffffff;
     }
     size_t compKeys = compIdCount();
     for (size_t k = COMP_ID_1; k < (COMP_ID_1 + compKeys); k++) {
@@ -175,7 +176,6 @@ DWORD RichHdrWrapper::calcChecksum()
         DWORD temp = compId.prodId << 16 | compId.CV;
         DWORD roled = rol32(temp, compId.count);
         cksum += roled;
-        cksum &=0xffffffff;
     }
     return cksum;
 }
