@@ -2,7 +2,7 @@ bearparser
 ==========
 [![Build status](https://ci.appveyor.com/api/projects/status/8p6wp0bcq2mx8208?svg=true)](https://ci.appveyor.com/project/hasherezade/bearparser)
 [![Build status](https://travis-ci.org/hasherezade/bearparser.svg?branch=master)](https://travis-ci.org/hasherezade/bearparser)
-
+[![Rawsec's CyberSecurity Inventory](https://inventory.rawsec.ml/img/badges/Rawsec-inventoried-FF5050_flat.svg)](https://inventory.rawsec.ml/)
 
 Portable Executable parsing library<br/>
 WARNING: this is an early beta version, some elements are unfinished!<br/>
