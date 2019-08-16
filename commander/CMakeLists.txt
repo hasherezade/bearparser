@@ -1,8 +1,17 @@
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.11)
 project (bearcommander)
 
-find_package(Qt5Core REQUIRED)
-get_target_property(QtCore_location Qt5::Core LOCATION)
+if(USE_QT5)
+    add_compile_definitions(WITH_QT5)
+    find_package(Qt5Core REQUIRED)
+    get_target_property(QtCore_location Qt5::Core LOCATION)
+else()
+    add_compile_definitions(WITH_QT4)
+    find_package (Qt4 REQUIRED)
+    include_directories( ${QT_INCLUDE_DIR} ${QT_QTCORE_INCLUDE_DIR} )
+    INCLUDE( ${QT_USE_FILE} )
+    ADD_DEFINITIONS( ${QT_DEFINITIONS} )
+endif()
 
 set (imps_srcs
     main.cpp
@@ -18,5 +27,11 @@ set (imps_hdrs
 )
 
 add_executable (bearcommander ${imps_hdrs} ${imps_srcs} )
-target_link_libraries(bearcommander ${PARSER_LIB}  Qt5::Core)
+target_link_libraries(bearcommander ${PARSER_LIB})
+
+if(USE_QT5)
+    target_link_libraries(bearcommander Qt5::Core)
+else()
+    target_link_libraries (bearcommander ${QT_QTCORE_LIBRARIES} )
+endif()
 

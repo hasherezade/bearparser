@@ -5,6 +5,8 @@ project (re-bear)
 set ( M_BEARPARSER "parser" )
 set ( M_COMMANDER "commander" )
 
+option( USE_QT5 "Use Qt5 (Qt4 by default)" ON )
+
 # modules paths:
 set (PARSER_INC "${M_BEARPARSER}/include")
 set (PARSER_DIR "${CMAKE_SOURCE_DIR}/${M_BEARPARSER}" CACHE PATH "BearParser main path")
