@@ -5,15 +5,15 @@ echo "Trying to autobuild bearparser..."
 QT_VER=`qmake -v`
 QTV="version"
 if echo "$QT_VER" | grep -q "$QTV"; then
-    QT_FOUND=`whereis qt5`
+    QT_FOUND=`whereis qt4`
     if echo "$QT_FOUND" | grep -q "lib"; then
-        echo "[+] Qt5 found!"
+        echo "[+] Qt4 found!"
     else
-        echo "Install Qt5 SDK first"
+        echo "Install Qt4 SDK first"
         exit -2
     fi
 else
-    echo "Install Qt5 SDK first"
+    echo "Install Qt4 SDK first"
     exit -1
 fi
 
@@ -27,12 +27,12 @@ else
     exit -1
 fi
 
-mkdir build
+mkdir build_qt4
 echo "[+] build directory created"
-cd build
-cmake -G "CodeLite - Unix Makefiles" -D USE_QT4=OFF ../
+cd build_qt4
+cmake -G "CodeLite - Unix Makefiles" -D USE_QT4=ON ../
 make
 cd ..
-cp build/commander/bearcommander ./build/
+cp build_qt4/commander/bearcommander ./build_qt4/
 echo "[+] Success! You can check the executable here:"
 pwd

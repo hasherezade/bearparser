@@ -5,8 +5,17 @@ project (bearparser)
 set(INSTALL_LIB_DIR lib CACHE PATH "Installation directory for libraries")
 set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
 
-find_package(Qt5Core REQUIRED)
-get_target_property(QtCore_location Qt5::Core LOCATION)
+if(USE_QT4)
+    add_compile_definitions(WITH_QT4)
+    find_package (Qt4 REQUIRED)
+    include_directories( ${QT_INCLUDE_DIR} ${QT_QTCORE_INCLUDE_DIR} )
+    INCLUDE( ${QT_USE_FILE} )
+    ADD_DEFINITIONS( ${QT_DEFINITIONS} )
+else()
+    add_compile_definitions(WITH_QT5)
+    find_package(Qt5Core REQUIRED)
+    get_target_property(QtCore_location Qt5::Core LOCATION)
+endif()
 
 include_directories (include)
 
@@ -141,5 +150,12 @@ SOURCE_GROUP("Source Files\\pe\\rsrc" FILES ${pe_rsrc_srcs} )
 SOURCE_GROUP("Header Files\\pe\\rsrc" FILES ${pe_rsrc_hdrs} )
 
 add_library ( bearparser STATIC ${parser_hdrs} ${parser_srcs} )
-target_link_libraries(bearparser Qt5::Core)
+
+if(USE_QT4)
+    target_link_libraries (bearparser ${QT_QTCORE_LIBRARIES} )
+else()
+    target_link_libraries(bearparser Qt5::Core)
+endif()
+
+
 
