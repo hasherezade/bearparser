@@ -13,7 +13,12 @@ Requires:
 + Qt5 Core<br/>
 + cmake http://www.cmake.org/<br/>
 
-<b>WARNING:</b> If you need the Qt4 version it is still available at: https://github.com/hasherezade/bearparser/tree/qt4 - but it is no longer maintained!
+<b>Possible to build with Qt4 (instead of Qt5) by setting a CMake flag: USE_QT4</b><br/>
+Example:
+```
+cmake -G "Unix Makefiles" -D USE_QT4=ON ../
+```
+
 
 Read more on Wiki:
 ===
