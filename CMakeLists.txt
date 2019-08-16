@@ -5,7 +5,7 @@ project (re-bear)
 set ( M_BEARPARSER "parser" )
 set ( M_COMMANDER "commander" )
 
-option( USE_QT5 "Use Qt5 (Qt4 by default)" ON )
+option( USE_QT5 "Use Qt4 (Qt5 by default)" OFF )
 
 # modules paths:
 set (PARSER_INC "${M_BEARPARSER}/include")

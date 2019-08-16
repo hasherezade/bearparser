@@ -30,7 +30,7 @@ fi
 mkdir build
 echo "[+] build directory created"
 cd build
-cmake -G "CodeLite - Unix Makefiles" -D USE_QT5=ON ../
+cmake -G "CodeLite - Unix Makefiles" -D USE_QT4=OFF ../
 make
 cd ..
 cp build/commander/bearcommander ./build/

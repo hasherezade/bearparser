@@ -30,9 +30,9 @@ fi
 mkdir build_qt4
 echo "[+] build directory created"
 cd build_qt4
-cmake -G "CodeLite - Unix Makefiles" -D USE_QT5=OFF ../
+cmake -G "CodeLite - Unix Makefiles" -D USE_QT4=ON ../
 make
 cd ..
-cp build/commander/bearcommander ./build_qt4/
+cp build_qt4/commander/bearcommander ./build_qt4/
 echo "[+] Success! You can check the executable here:"
 pwd
