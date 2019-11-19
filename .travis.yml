@@ -3,6 +3,7 @@ sudo: true
 
 os:
   - linux
+  - osx
     
 compiler:
   - gcc
@@ -11,6 +12,7 @@ compiler:
 addons:
   apt:
     packages:
+      - cmake
       - qt5-default
       - qt5-qmake
 
