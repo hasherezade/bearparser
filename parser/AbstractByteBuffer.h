@@ -40,7 +40,7 @@ public:
     virtual BYTE* getContent() = 0;
     virtual bool isTruncated() { return false; }
 
-    const BYTE operator[](size_t idx);
+    BYTE operator[](size_t idx);
 
     virtual offset_t getOffset(void *ptr, bool allowExceptions = false); // validates
     virtual BYTE* getContentAt(offset_t offset, bufsize_t size, bool allowExceptions = false);

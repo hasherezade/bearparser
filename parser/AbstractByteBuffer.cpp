@@ -23,7 +23,7 @@ bool AbstractByteBuffer::isValid(AbstractByteBuffer *buf)
 }
 //---
 
-const BYTE AbstractByteBuffer::operator[](std::size_t idx)
+BYTE AbstractByteBuffer::operator[](std::size_t idx)
 {
     bufsize_t offset = static_cast<bufsize_t>(idx);
     if (offset >= getContentSize() ) {

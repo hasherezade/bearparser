@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
         delete exe;
         delete buf;
 
-    } catch (CustomException e) {
+    } catch (CustomException &e) {
         std::cerr << "[ERROR] " << e.what() << std::endl;
     }
     std::cout << "Bye!" << std::endl;

@@ -190,7 +190,7 @@ public:
                 return;
             }
             printf("Done!\n");
-        } catch (CustomException e){
+        } catch (CustomException &e){
             std::cerr << "[ERROR] "<< e.what() << std::endl;
         }
     }

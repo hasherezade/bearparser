@@ -78,7 +78,7 @@ void Commander::parseCommands()
         try {
             CmdParams *params = cmd->fetchParams(line);
             cmd->execute(params, this->context);
-        } catch (CustomException e) {
+        } catch (CustomException &e) {
             std::cerr << "ERROR: " << e.what() << endl;
         }
     }

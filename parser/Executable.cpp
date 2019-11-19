@@ -98,7 +98,7 @@ offset_t Executable::toRaw(offset_t offset, addr_type aT, bool allowExceptions)
     } else if (aT == Executable::RVA){
         try {
             convertedOffset = this->rvaToRaw(offset);
-        } catch (CustomException e) {
+        } catch (CustomException &e) {
             if (allowExceptions) throw e;
         }  
     }
