@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 project (re-bear)
 
+option(CMD_BUILD_TESTING "Enable testing for bearcommander" ON)
+
 # modules:
 set ( M_BEARPARSER "parser" )
 set ( M_COMMANDER "commander" )
@@ -26,4 +28,13 @@ add_subdirectory(commander)
 
 # dependencies
 add_dependencies(bearcommander bearparser)
+
+# Setup testing
+if(CMD_BUILD_TESTING)
+	enable_testing()
+	
+	# 0) does the application run
+	add_test (TestRuns ${CMAKE_BINARY_DIR}/${M_COMMANDER}/bearcommander)
+	set_tests_properties(TestRuns PROPERTIES PASS_REGULAR_EXPRESSION "Bearparser")
+endif()
 
