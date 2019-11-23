@@ -29,10 +29,11 @@ before_install:
 before_script:
   - cmake --version
   - qmake -v
-
-script:
   - mkdir build
   - cd build
+
+script:
   - cmake ..
-  - cmake --build .
+  - cmake --build . --install
+  - ctest -V
   
