@@ -3,16 +3,19 @@
 FileView::FileView(QString &path, bufsize_t maxSize)
     : AbstractFileBuffer(path), fIn (path)
 {
-    if (fIn.open(QFile::ReadOnly | QFile::Truncate) == false) {
+    if (fIn.open(QFileDevice::ReadOnly) == false) {
         throw FileBufferException("Cannot open the file: " + path);
     }
     this->fileSize = fIn.size();
-    //if (DBG_LVL) printf("File of size:\t%lld\n", fileSize);
+    if (fileSize == 0) {
+        std::cerr << fIn.errorString().toStdString() << std::endl;
+        throw FileBufferException("The file is empty");
+    }
     bufsize_t readableSize = getMappableSize(fIn);
     this->mappedSize = (readableSize > maxSize) ? maxSize : readableSize;
-    //printf("Mapping size: %lx = %ld\n", this->mappedSize, this->mappedSize);
+
     uchar *pData = fIn.map(0, this->mappedSize);
-    if (pData == NULL) {
+    if (!pData) {
         throw BufferException("Cannot map the file: " + path + " of size: 0x" + QString::number(this->mappedSize, 16));
     }
     this->mappedContent = (BYTE*) pData;

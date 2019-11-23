@@ -35,8 +35,6 @@ before_script:
 script:
   - cmake -DCMAKE_INSTALL_PREFIX:PATH=$(pwd) ..
   - cmake --build . --target install
-  - |
-    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      ctest -V
-    fi
+  - ctest -V
+
 

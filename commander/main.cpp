@@ -14,19 +14,23 @@ using namespace std;
 
 FileView* tryLoading(QString &fName)
 {
-	FileView *fileView = NULL;
+    FileView *fileView = NULL;
     bufsize_t maxMapSize = FILE_MAXSIZE;
     do {
-		try {
-			fileView = new FileView(fName, maxMapSize);
-		} catch (BufferException &e1) {
-			std::cerr << "[ERROR] " << e1.what() << std::endl;
-			maxMapSize = static_cast<bufsize_t>(cmd_util::readNumber("Try again with size (hex): ", true));
-			if (maxMapSize == 0) break;
-		}
-	} while (!fileView);
-	
-	return fileView;
+        if (!QFile::exists(fName)) {
+            std::cerr << "[ERROR] " << "The file does not exist" << std::endl;
+            break;
+        }
+        try {
+            fileView = new FileView(fName, maxMapSize);
+        } catch (BufferException &e1) {
+            std::cerr << "[ERROR] " << e1.what() << std::endl;
+            maxMapSize = static_cast<bufsize_t>(cmd_util::readNumber("Try again with size (hex): ", true));
+            if (maxMapSize == 0) break;
+        }
+    } while (!fileView);
+    
+    return fileView;
 }
 
 int main(int argc, char *argv[])
