@@ -202,7 +202,7 @@ public:
     SectionDumpCommand(std::string desc, bool v_saveToFile = false)
         : Command(desc), saveToFile(v_saveToFile)
     {
-        fileName = "sec_dump.txt";
+        fileName = "sec_dump.bin";
     }
 
     virtual void execute(CmdParams *params, CmdContext  *context)
