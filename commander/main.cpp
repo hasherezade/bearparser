@@ -41,20 +41,19 @@ int main(int argc, char *argv[])
     ExeCmdContext exeContext;
     PECommander commander(&exeContext);
 
-	if (argc < 2) {
-		std::cout << "Bearparser version: " <<  BEARPARSER_VERSION << "\n";
-		std::cout << "Args: <PE file>\n";
-		commander.printHelp();
-		return 0;
-	}
-	
-	
-	int status = 0;
-	QString fName = QString(argv[1]);
-	
+    if (argc < 2) {
+        std::cout << "Bearparser version: " <<  BEARPARSER_VERSION << "\n";
+        std::cout << "Args: <PE file>\n";
+        commander.printHelp();
+        return 0;
+    }
+
+    int status = 0;
+    QString fName = QString(argv[1]);
+    
     try {
         FileView* fileView = tryLoading(fName);
-		if (!fileView) return -1;
+        if (!fileView) return -1;
 
         ExeFactory::exe_type exeType = ExeFactory::findMatching(fileView);
         if (exeType == ExeFactory::NONE) {
