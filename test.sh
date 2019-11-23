@@ -5,12 +5,9 @@ cd "$SOURCE_DIR"
 echo "Source Dir: ""$SOURCE_DIR"
 
 rm -rf test_cases
-mkdir test_cases
-cd test_cases
-wget "https://drive.google.com/uc?export=download&id=1johP6rf7iS8-mi6xrT5mCX4wnbKk8rq8" -O test_cases.zip
-unzip test_cases.zip
-rm *.zip
-cd ..
+git clone https://github.com/hasherezade/bearparser_tests.git
+mv bearparser_tests test_cases
+
 BCMD_DIR=$(pwd)/build/
 
 cd test_cases
