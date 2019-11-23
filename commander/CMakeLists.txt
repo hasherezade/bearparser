@@ -26,12 +26,15 @@ set (imps_hdrs
     PECommander.h
 )
 
-add_executable (bearcommander ${imps_hdrs} ${imps_srcs} )
-target_link_libraries(bearcommander ${PARSER_LIB})
+add_executable (${PROJECT_NAME} ${imps_hdrs} ${imps_srcs} )
+target_link_libraries(${PROJECT_NAME} ${PARSER_LIB})
 
 if(USE_QT4)
-    target_link_libraries (bearcommander ${QT_QTCORE_LIBRARIES} )
+    target_link_libraries (${PROJECT_NAME} ${QT_QTCORE_LIBRARIES} )
 else()
-    target_link_libraries(bearcommander Qt5::Core)
+    target_link_libraries(${PROJECT_NAME} Qt5::Core)
 endif()
+
+#install
+INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR} COMPONENT ${PROJECT_NAME} )
 
