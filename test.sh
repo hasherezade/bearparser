@@ -8,7 +8,7 @@ rm -rf test_cases
 mkdir test_cases
 cd test_cases
 wget "https://drive.google.com/uc?export=download&id=1johP6rf7iS8-mi6xrT5mCX4wnbKk8rq8" -O test_cases.zip
-7z x test_cases.zip
+unzip test_cases.zip
 rm *.zip
 cd ..
 BCMD_DIR=$(pwd)/build/
