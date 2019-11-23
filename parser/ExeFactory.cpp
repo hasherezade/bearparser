@@ -26,6 +26,8 @@ void ExeFactory::destroy()
 
 ExeFactory::exe_type ExeFactory::findMatching(AbstractByteBuffer *buf)
 {
+	if (!buf) return NONE;
+	
     std::map<exe_type, ExeBuilder*>::iterator itr;
     for (itr = builders.begin(); itr != builders.end(); itr++) {
 
