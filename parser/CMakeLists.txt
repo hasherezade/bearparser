@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 3.12)
 project (bearparser)
 
 # Offer the user the choice of overriding the installation directories
@@ -156,6 +156,5 @@ if(USE_QT4)
 else()
     target_link_libraries(bearparser Qt5::Core)
 endif()
-
 
 
