@@ -34,7 +34,7 @@ if(CMD_BUILD_TESTING)
 	enable_testing()
 	
 	# 0) does the application run
-	add_test (TestRuns ${CMAKE_BINARY_DIR}/${M_COMMANDER}/bearcommander)
+	add_test (TestRuns ${CMAKE_BINARY_DIR}/bearcommander)
 	set_tests_properties(TestRuns PROPERTIES PASS_REGULAR_EXPRESSION "Bearparser")
 endif()
 

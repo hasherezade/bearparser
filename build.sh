@@ -30,9 +30,6 @@ fi
 mkdir build
 echo "[+] build directory created"
 cd build
-cmake -G "CodeLite - Unix Makefiles" -D USE_QT4=OFF ../
-make
-cd ..
-cp build/commander/bearcommander ./build/
-echo "[+] Success! You can check the executable here:"
-pwd
+cmake -G "CodeLite - Unix Makefiles" -DUSE_QT4=OFF -DCMAKE_INSTALL_PREFIX:PATH=$(pwd) ..
+cmake --build . --target install
+

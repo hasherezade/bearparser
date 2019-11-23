@@ -33,7 +33,7 @@ before_script:
   - cd build
 
 script:
-  - cmake ..
+  - cmake -DCMAKE_INSTALL_PREFIX:PATH=$(pwd) ..
   - cmake --build . --target install
   - ctest -V
   
