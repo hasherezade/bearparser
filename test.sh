@@ -34,6 +34,31 @@ fi
 if [[ "$?" != 0 ]]; then
 	FAILED=$FAILED+1
 fi
+#./test1.sh "$BCMD_DIR" "secinfo" "x86/overlapping_sec"
+#if [[ "$?" != 0 ]]; then
+#	FAILED=$FAILED+1
+#fi
+
+./test1.sh "$BCMD_DIR" "info" "tinype/tiny.128/tiny"
+if [[ "$?" != 0 ]]; then
+	FAILED=$FAILED+1
+fi
+./test1.sh "$BCMD_DIR" "winfo3" "tinype/tiny.128/tiny"
+if [[ "$?" != 0 ]]; then
+	FAILED=$FAILED+1
+fi
+
+./test1.sh "$BCMD_DIR" "winfo7" "x86/ghost_crackme"
+if [[ "$?" != 0 ]]; then
+	FAILED=$FAILED+1
+fi
+
+./test1.sh "$BCMD_DIR" "rstrings" "x86/ghost_crackme"
+if [[ "$?" != 0 ]]; then
+	FAILED=$FAILED+1
+fi
+
+
 if [[ "$FAILED" == 0 ]]; then
 	echo "All passed"
 fi
