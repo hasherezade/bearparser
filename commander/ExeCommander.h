@@ -2,6 +2,7 @@
 
 #include "Commander.h"
 
+#include <sstream>
 #include <iomanip>
 #define OUT_PADDED_HEX(stream, val, field_size) std::cout.fill('0'); stream << std::hex << std::setw(field_size) << val;
 #define OUT_HEX_FIELD(stream, val, field_size) std::cout.fill('0'); stream << "[" << std::hex << std::setw(field_size) << val << "]";
@@ -230,18 +231,31 @@ public:
     DumpWrapperToFileCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc, v_wrapperId)
     {
-        fileName = "dumped.txt";
     }
 
     virtual void wrapperAction(ExeElementWrapper *wrapper)
     {
+        if (!wrapper) {
+            return;
+        }
+        QString fileName = makeFileName(wrapper->getOffset());
         bufsize_t dSize = FileBuffer::dump(fileName, *wrapper, true);
-        std::cout << "Dumped size: " << dSize 
+        std::cout << "Dumped size: " << std::hex << "0x" << dSize 
             << " into: " << fileName.toStdString()
             << std::endl;
     }
+    
 protected:
-    QString fileName;
+    QString makeFileName(const offset_t wrapperOffset) 
+    {
+        std::stringstream sstr;
+        sstr << "wrapper";
+        if (wrapperOffset != INVALID_ADDR) {
+            sstr << "_at_" << std::hex << wrapperOffset;
+        }
+        sstr << ".bin";
+        return QString(sstr.str().c_str());
+    }
 };
 
 class SaveExeToFileCommand : public Command
@@ -250,18 +264,16 @@ public:
     SaveExeToFileCommand(std::string desc = "Save exe to file")
         : Command(desc)
     {
-        fileName = "dumped.exe";
     }
 
     virtual void execute(CmdParams *params, CmdContext  *context)
     {
+        QString fileName = "dumped.exe";
         Executable *exe = cmd_util::getExeFromContext(context);
 
         bufsize_t dSize = FileBuffer::dump(fileName, *exe, true);
-        std::cout << "Dumped size: " << dSize 
+        std::cout << "Dumped size: " << std::hex << "0x" << dSize 
             << " into: " << fileName.toStdString()
             << std::endl;
     }
-protected:
-    QString fileName;
 };
