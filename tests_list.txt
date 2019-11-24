@@ -5,7 +5,7 @@ x64/QtGui4 secinfo
 x64/QtGui4 implist
 x64/QtGui4 explist
 
-# x86/overlapping_sec secinfo
+x86/overlapping_sec secinfo
 x86/overlapping_sec implist
 
 tinype/tiny.128/tiny info

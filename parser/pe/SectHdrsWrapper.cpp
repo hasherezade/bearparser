@@ -186,8 +186,8 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
 {
     const Executable::addr_type aType = Executable::RAW;
 
-    const offset_t startOffset = getContentOffset(aType);
-    if (startOffset == INVALID_ADDR) {
+    const offset_t secOffset = getContentOffset(aType);
+    if (secOffset == INVALID_ADDR) {
         return 0; //invalid addr, nothing is mapped
     }
     bufsize_t dRawSize = getContentDeclaredSize(aType);
@@ -199,13 +199,20 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
     if (unit == 0) {
         return dRawSize; // do not roundup
     }
-    bufsize_t size = roundupToUnit(dRawSize, unit);
-
-    const bufsize_t maxSize = m_PE->getRawSize() - startOffset;
-    if (size > maxSize) {
-        size = maxSize; // trunc to file size
+    const bufsize_t roundedUpSize = roundupToUnit(dRawSize, unit);
+    const bufsize_t secEnd = secOffset + roundedUpSize;
+    const bufsize_t peSize = m_PE->getRawSize();
+    //trim to the file size:
+    if (secEnd > peSize) {
+        bufsize_t trimmedSize = peSize - secOffset; // trim to the file size
+        
+        const bufsize_t virtualSize = getContentDeclaredSize(Executable::RVA);
+        if (trimmedSize > virtualSize) {
+            return virtualSize;
+        }
+        return trimmedSize;
     }
-    return size;
+    return roundedUpSize;
 }
 
 //VirtualSize that is really mapped
