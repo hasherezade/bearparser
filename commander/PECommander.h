@@ -271,7 +271,7 @@ public:
         if (libName) {
             std::cout << "Lib Name: " << libName << "\n";
         }
-        size_t entriesCnt = exports->getEntriesCount();
+        const size_t entriesCnt = exports->getEntriesCount();
         std::cout << "Entries:  " << entriesCnt << "\n";
         if (entriesCnt == 0) return;
         
@@ -303,7 +303,13 @@ public:
        ImportDirWrapper* imports = dynamic_cast<ImportDirWrapper*>(peExe->getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_IMPORT));
         if (!imports) return;
         
+        const size_t librariesCount = imports->getEntriesCount();
+        std::cout << "Libraries Count: " << librariesCount << "\n";
+        
         QList<offset_t> thunks = imports->getThunksList();
+        const size_t functionsCount = thunks.size();
+        std::cout << "Functions Count: " << functionsCount << "\n";
+        
         for (int i = 0; i < thunks.size(); i++) {
             offset_t thunk = thunks[i];
             if (thunk == 0 || thunk == INVALID_ADDR) continue;
