@@ -1,0 +1,13 @@
+x64/QtGui4 info
+x64/QtGui4 winfo0
+x64/QtGui4 winfo1
+x64/QtGui4 secinfo
+
+# x86/overlapping_sec secinfo
+
+tinype/tiny.128/tiny info
+tinype/tiny.128/tiny winfo3
+
+x86/ghost_crackme winfo7
+x86/ghost_crackme rstrings
+
