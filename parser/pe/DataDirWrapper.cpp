@@ -69,7 +69,7 @@ QString DataDirWrapper::getFieldName(size_t fieldId)
         case pe::DIR_BOUND_IMPORT: return "Bound Import Directory";
         case pe::DIR_IAT: return "Import Address Table";
         case pe::DIR_DELAY_IMPORT: return "Delay Load Import Descriptors";
-        case pe::DIR_COM_DESCRIPTOR : return "COM Runtime descriptor";
+        case pe::DIR_COM_DESCRIPTOR : return ".NET header";
     }
     return "";
 }

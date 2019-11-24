@@ -16,7 +16,7 @@ const bufsize_t BUFSIZE_MAX = bufsize_t(-1);
 
 typedef uint64_t offset_t;
 const offset_t INVALID_ADDR = offset_t(-1);
-const offset_t  OFFSET_MAX = INVALID_ADDR - 1;
+const offset_t  OFFSET_MAX = (INVALID_ADDR - 1);
 
 class BufferException : public CustomException
 {
