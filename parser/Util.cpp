@@ -87,6 +87,37 @@ bool pe_util::hasNonPrintable(const char *inp, size_t maxInp)
     return false;
 }
 
+size_t pe_util::forwarderNameLen(const char* fPtr, size_t bufSize)
+{
+    if (!fPtr || bufSize == 0) return 0;
+    
+    // names can be also mangled, i.e. MSVCRT.??0__non_rtti_object@std@@QAE@ABV01@@Z
+    bool has_dot = false;
+    size_t len = 0;
+    while ((*fPtr >= 'a' && *fPtr <= 'z')
+            || (*fPtr >= 'A' && *fPtr <= 'Z')
+            || (*fPtr >= '0' && *fPtr <= '9')
+            || (*fPtr == '.')
+            || (*fPtr == '_')
+            || (*fPtr == '#') 
+            || (*fPtr == '@')
+            || (*fPtr == '?')
+            || (*fPtr == '-'))
+    {
+        if (*fPtr == '.') has_dot = true;
+        len++;
+        if ((--bufSize) == 0) break;
+        fPtr++;
+    }
+    if (*fPtr == '\0') {
+        if (!has_dot) {
+            return 0; //this is not a valid forwarder
+        }
+        return len;
+    }
+    return 0;
+}
+
 size_t pe_util::noWhiteCount(char *buf, size_t bufSize) {
     size_t cntr = 0;
     size_t i = 0;

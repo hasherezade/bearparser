@@ -39,6 +39,7 @@ namespace pe_util {
 
     size_t noWhiteCount(char *buf, size_t bufSize);
     size_t noWhiteCount(std::string);
+    size_t forwarderNameLen(const char *ptr, size_t max_len);
 
     void hexdump(BYTE *buf, size_t bufSize, size_t pad);
     inline uint64_t roundup(uint64_t value, uint64_t unit) { return unit == 0 ? 0 : ((value + unit - 1) / unit) * unit; }

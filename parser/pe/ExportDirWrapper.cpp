@@ -306,8 +306,8 @@ char* ExportEntryWrapper::getForwarder()
     if (offset == INVALID_ADDR) return NULL;
 
     size_t maxLen = m_Exe->getRawSize() - offset;
-    bool isAsciiStr = (pe_util::hasNonPrintable(strPtr, maxLen) == true) ? false : true;
-    if (isAsciiStr) {
+    size_t forwarderNameLen = pe_util::forwarderNameLen(strPtr, maxLen);
+    if (forwarderNameLen > 0) {
         return strPtr;
     }
     return NULL;
