@@ -294,7 +294,7 @@ public:
             std::cout << "Lib Name: " << libName << "\n";
         }
         const size_t entriesCnt = exports->getEntriesCount();
-        std::cout << "Entries:  " << entriesCnt << "\n";
+        std::cout << "Entries:  " << std::dec << entriesCnt << "\n";
         if (entriesCnt == 0) return;
         
         for(int i = 0; i < entriesCnt; i++) {
