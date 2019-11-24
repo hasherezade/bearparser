@@ -202,7 +202,6 @@ public:
     SectionDumpCommand(std::string desc, bool v_saveToFile = false)
         : Command(desc), saveToFile(v_saveToFile)
     {
-        fileName = "sec_dump.bin";
     }
 
     virtual void execute(CmdParams *params, CmdContext  *context)
@@ -238,6 +237,8 @@ public:
         if (saveToFile) {
             BufferView *secView = pe->createSectionView(secId);
             if (secView == NULL) return;
+            
+            QString fileName = makeFileName(secId);
 
             bufsize_t dSize = FileBuffer::dump(fileName, *secView, true);
             printf("Dumped size: %lu into: %s\n",
@@ -249,7 +250,13 @@ public:
     }
 
 protected:
-    QString fileName;
+    QString makeFileName(const size_t secId) 
+    {
+        std::stringstream sstr;
+        sstr << "section" << "_" << std::hex << secId << ".bin";
+        return QString(sstr.str().c_str());
+    }
+    
     bool saveToFile;
 };
 
