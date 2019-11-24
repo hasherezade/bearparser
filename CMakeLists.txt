@@ -36,10 +36,11 @@ if(CMD_BUILD_TESTING)
 	# 0) does the application run
 	add_test (TestRuns ${CMAKE_BINARY_DIR}/bearcommander)
 	set_tests_properties(TestRuns PROPERTIES PASS_REGULAR_EXPRESSION "Bearparser")
-
-	# 1) regression tests for the commander
-	add_test (TestRegression ${CMAKE_SOURCE_DIR}/test.sh ${CMAKE_SOURCE_DIR})
-	set_tests_properties(TestRegression PROPERTIES PASS_REGULAR_EXPRESSION "All passed")
+	IF (NOT WIN32)
+		# 1) external tests
+		add_test (TestExternal ${CMAKE_SOURCE_DIR}/test.sh ${CMAKE_SOURCE_DIR})
+		set_tests_properties(TestExternal PROPERTIES PASS_REGULAR_EXPRESSION "All passed")
+	ENDIF()
 endif()
 
 
