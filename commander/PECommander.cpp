@@ -142,5 +142,6 @@ void PECommander::initCommands()
     this->addCommand("secfdump", new SectionDumpCommand("Dump chosen Section Content into a file", true));
     
     this->addCommand("explist", new ExportsListCommand("List all exports"));
+    this->addCommand("implist", new ImportsListCommand("List all imports"));
 }
 

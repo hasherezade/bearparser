@@ -285,7 +285,30 @@ public:
             std::cout <<  "\n";
         }
     }
-    
-protected:
-    
+};
+
+class ImportsListCommand : public Command
+{
+public:
+    ImportsListCommand(std::string desc)
+        : Command(desc) {}
+
+    virtual void execute(CmdParams *params, CmdContext  *context)
+    {
+        PEFile *peExe = cmd_util::getPEFromContext(context);
+        if (!peExe) return;
+                
+       ImportDirWrapper* imports = dynamic_cast<ImportDirWrapper*>(peExe->getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_IMPORT));
+        if (!imports) return;
+        
+        QList<offset_t> thunks = imports->getThunksList();
+        for (int i = 0; i < thunks.size(); i++) {
+            offset_t thunk = thunks[i];
+            if (thunk == 0 || thunk == INVALID_ADDR) continue;
+
+            QString lib =  imports->thunkToLibName(thunk);
+            QString func = imports->thunkToFuncName(thunk);
+            std::cout << std::hex << thunk << " : " << lib.toStdString() << "." << func.toStdString() << "\n";
+        }
+    }
 };
