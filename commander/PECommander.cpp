@@ -140,5 +140,7 @@ void PECommander::initCommands()
     this->addCommand("dir_mv", new MoveDataDirEntryCommand("Move DataDirectory"));
     this->addCommand("secinfo", new SectionDumpCommand("Dump chosen Section info"));
     this->addCommand("secfdump", new SectionDumpCommand("Dump chosen Section Content into a file", true));
+    
+    this->addCommand("explist", new ExportsListCommand("List all exports"));
 }
 

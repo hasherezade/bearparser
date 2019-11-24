@@ -252,3 +252,40 @@ protected:
     QString fileName;
     bool saveToFile;
 };
+
+class ExportsListCommand : public Command
+{
+public:
+    ExportsListCommand(std::string desc)
+        : Command(desc) {}
+
+    virtual void execute(CmdParams *params, CmdContext  *context)
+    {
+        PEFile *peExe = cmd_util::getPEFromContext(context);
+        if (!peExe) return;
+                
+        ExportDirWrapper* exports = dynamic_cast<ExportDirWrapper*>(peExe->getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_EXPORT));
+        if (!exports) return;
+        
+        std::cout << "Lib Name: " << exports->getLibraryName() << "\n";
+        
+        size_t entriesCnt = exports->getEntriesCount();
+        std::cout << "Entries:  " << entriesCnt << "\n";
+        if (entriesCnt == 0) return;
+        
+        for(int i = 0; i < entriesCnt; i++) {
+            ExportEntryWrapper* entry = dynamic_cast<ExportEntryWrapper*>(exports->getEntryAt(i));
+            if (!entry) continue;
+
+            QString forwarder = entry->getForwarderStr();
+            std::cout << std::hex << entry->getFuncRva() << " : " << entry->getName().toStdString();
+            if (forwarder.length()) {
+                std::cout << " : " << forwarder.toStdString();
+            }
+            std::cout <<  "\n";
+        }
+    }
+    
+protected:
+    
+};
