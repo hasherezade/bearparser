@@ -3,6 +3,10 @@ START_DIR=$(pwd)
 SOURCE_DIR=$1
 TESTS_DIR="test_cases"
 
+if [[ "$SOURCE_DIR" == "" ]]; then
+	SOURCE_DIR=$(pwd)
+fi
+
 echo "Source Dir: ""$SOURCE_DIR"
 cd "$SOURCE_DIR"
 
