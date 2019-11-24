@@ -174,22 +174,23 @@ public:
         PEFile *pe = cmd_util::getPEFromContext(context);
         if (!pe) return;
 
-        printf("Available DataDirs: \n");
+        std::cout << "Available DataDirs: \n";
         cmd_util::listDataDirs(pe);
 
         pe::dir_entry entryId = static_cast<pe::dir_entry> (cmd_util::readNumber("DataDir id"));
         if (pe->getDataDirEntry(entryId) == NULL) {
-            printf("No such wrapper\n");
+            std::cout << "No such wrapper\n";
             return;
         }
 
         offset_t offset = cmd_util::readOffset(Executable::RAW);
         try {
             if (pe->moveDataDirEntry(entryId, offset) == false) {
-                printf("Failed\n");
+                std::cout << "Failed\n";
                 return;
             }
-            printf("Done!\n");
+            std::cout << "Done!\n";
+            
         } catch (CustomException &e){
             std::cerr << "[ERROR] "<< e.what() << std::endl;
         }
@@ -211,45 +212,59 @@ public:
 
         size_t sectHdrCount = pe->getSectionsCount(false);
         size_t sectCount = pe->getSectionsCount(true);
-        printf("Sections count = %lu\n",
-            static_cast<unsigned long>(sectCount)
-        );
+        std:: cout << "Sections count = " << std::dec << sectCount << "\n";
         if (sectCount == 0) {
-            printf("No sections!\n");
+            //no sections, cannot list
             return;
         }
         printf("Available indexes: %lu-%lu\n", 0UL, static_cast<unsigned long>(sectCount - 1));
         size_t secId = cmd_util::readNumber("Chose the section by index");
-
-        SectionHdrWrapper *sec = pe->getSecHdr(secId);
-        if (sec == NULL) {
-            printf("No such section\n");
+        if (secId < sectCount) {
+            dumpSectionById(pe, secId, saveToFile);
             return;
+        }
+        //dump all
+        for (size_t i = 0; i < sectCount; i++) {
+            std::cout <<  "#" << std::dec << i << "\n";
+            dumpSectionById(pe, i, saveToFile);
+        }
+    }
+
+protected:
+    bool dumpSectionById(PEFile *pe, size_t secId, bool saveToFile)
+    {
+        if (!pe) return false;
+        
+        SectionHdrWrapper *sec = pe->getSecHdr(secId);
+        if (!sec) {
+            std:: cout << "No such section\n";
+            return false;
         }
         Executable::addr_type aType = Executable::RAW;
         offset_t start = sec->getContentOffset(aType, true);
         bufsize_t size = sec->getContentSize(aType, true);
 
-        printf("Section %s\n", sec->getName().toStdString().c_str());
+        std::cout << "Section " << sec->getName().toStdString() << "\n";
         cmd_util::printSectionMapping(sec, Executable::RAW);
         cmd_util::printSectionMapping(sec, Executable::RVA);
 
         if (saveToFile) {
             BufferView *secView = pe->createSectionView(secId);
-            if (secView == NULL) return;
+            if (!secView) return false;
             
             QString fileName = makeFileName(secId);
-
+            
             bufsize_t dSize = FileBuffer::dump(fileName, *secView, true);
-            printf("Dumped size: %lu into: %s\n",
-                static_cast<unsigned long>(dSize),
-                fileName.toStdString().c_str()
-            );
+            std::cout << "Dumped size: "
+                << std::dec << dSize
+                << " into: " << fileName.toStdString()
+                << "\n";
+
             delete secView;
         }
+        return true;
     }
-
-protected:
+    
     QString makeFileName(const size_t secId) 
     {
         std::stringstream sstr;
