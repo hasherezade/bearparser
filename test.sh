@@ -14,18 +14,29 @@ else
 fi
 
 BCMD_DIR=$(pwd)/build/
-TEST_CASES_PATH=$(pwd)/test_cases/
+FAILED=0
 
 cd $TESTS_DIR
 chmod +x test1.sh
-./test1.sh "$BCMD_DIR" "info" $TEST_CASES_PATH/"x64/QtGui4"
+./test1.sh "$BCMD_DIR" "info" "x64/QtGui4"
 if [[ "$?" != 0 ]]; then
-	exit 1
+	FAILED=$FAILED+1
 fi
-./test1.sh "$BCMD_DIR" "winfo0" $TEST_CASES_PATH/"x64/QtGui4"
+./test1.sh "$BCMD_DIR" "winfo0" "x64/QtGui4"
 if [[ "$?" != 0 ]]; then
-	exit 1
+	FAILED=$FAILED+1
 fi
-echo "All passed"
+./test1.sh "$BCMD_DIR" "winfo1" "x64/QtGui4"
+if [[ "$?" != 0 ]]; then
+	FAILED=$FAILED+1
+fi
+./test1.sh "$BCMD_DIR" "secinfo" "x64/QtGui4"
+if [[ "$?" != 0 ]]; then
+	FAILED=$FAILED+1
+fi
+if [[ "$FAILED" == 0 ]]; then
+	echo "All passed"
+fi
+
 cd "$START_DIR"
 
