@@ -267,8 +267,10 @@ public:
         ExportDirWrapper* exports = dynamic_cast<ExportDirWrapper*>(peExe->getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_EXPORT));
         if (!exports) return;
         
-        std::cout << "Lib Name: " << exports->getLibraryName() << "\n";
-        
+        char* libName = exports->getLibraryName();
+        if (libName) {
+            std::cout << "Lib Name: " << libName << "\n";
+        }
         size_t entriesCnt = exports->getEntriesCount();
         std::cout << "Entries:  " << entriesCnt << "\n";
         if (entriesCnt == 0) return;
