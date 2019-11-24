@@ -148,11 +148,15 @@ offset_t SectionHdrWrapper::getContentDeclaredOffset(Executable::addr_type aType
 offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType, bool useMapped)
 {
     offset_t offset = getContentDeclaredOffset(aType);
-    if (useMapped == false) return offset;
-
-    if (aType == Executable::RAW){
-        const offset_t MIN_RAW = 0x200;
-        if (offset < MIN_RAW) offset = 0;
+    if (!useMapped) {
+        return offset; //returning as is
+    }
+    if (aType == Executable::RAW) {
+        const size_t peSize = m_PE->getMappedSize(aType);
+        const offset_t minAlign = m_PE->getAlignment(aType);
+        if (offset < minAlign || offset > peSize) {
+            offset = INVALID_ADDR;
+        }
     }
     return offset;
 }
@@ -190,23 +194,28 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
     if (secOffset == INVALID_ADDR) {
         return 0; //invalid addr, nothing is mapped
     }
-    bufsize_t dRawSize = getContentDeclaredSize(aType);
+    const bufsize_t dRawSize = getContentDeclaredSize(aType);
     if (dRawSize == 0) {
         return 0; // no changes
     }
 
-    bufsize_t unit = m_PE->getAlignment(aType);
-    if (unit == 0) {
-        return dRawSize; // do not roundup
-    }
-    const bufsize_t roundedUpSize = roundupToUnit(dRawSize, unit);
-    const bufsize_t secEnd = secOffset + roundedUpSize;
     const bufsize_t peSize = m_PE->getRawSize();
+    if (secOffset > peSize) {
+        return 0; //out of scope
+    }
+    bufsize_t roundedUpSize = dRawSize;
+    bufsize_t unit = m_PE->getAlignment(aType);
+    if (unit != 0) {
+        roundedUpSize = roundupToUnit(dRawSize, unit);
+    }
+    const bufsize_t secEnd = secOffset + roundedUpSize;
+    
     //trim to the file size:
     if (secEnd > peSize) {
-        bufsize_t trimmedSize = peSize - secOffset; // trim to the file size
         
+        const bufsize_t trimmedSize = peSize - secOffset; // trim to the file size
         const bufsize_t virtualSize = getContentDeclaredSize(Executable::RVA);
+
         if (trimmedSize > virtualSize) {
             return virtualSize;
         }
