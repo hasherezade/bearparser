@@ -10,9 +10,14 @@ x86/overlapping_sec implist
 
 tinype/tiny.128/tiny info
 tinype/tiny.128/tiny winfo3
+tinype/tiny.128/tiny secinfo
+tinype/tiny.168/tiny secinfo
 tinype/tiny.97/tiny implist
 tinype/tiny.import.209/tiny implist
 
 x86/ghost_crackme winfo7
 x86/ghost_crackme rstrings
+
+x86/kernel32 implist
+x86/kernel32 explist
 
