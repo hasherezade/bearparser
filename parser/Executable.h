@@ -1,5 +1,6 @@
 #pragma once
 #include <map>
+#include <QMap>
 
 #include "AbstractByteBuffer.h"
 class Executable;
@@ -61,6 +62,14 @@ public:
     virtual bufsize_t getAlignment(Executable::addr_type aType) = 0;
     virtual offset_t getImageBase() = 0;
     virtual offset_t getEntryPoint(Executable::addr_type aType = Executable::RVA) = 0;
+    
+    /* All Entry Points of the application, including: main EP, Exports, TLS Callbacks */
+    virtual size_t getAllEntryPoints(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA) 
+    {
+        offset_t mainEP = getEntryPoint(aType);
+        entrypoints.insert(mainEP, "_start");
+        return 1;
+    }
 
     /* conversions */
     virtual bool isValidAddr(offset_t addr, addr_type addrType);

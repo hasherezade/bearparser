@@ -135,7 +135,20 @@ public:
         return dynamic_cast<ExportDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_EXPORT));
     }
 
+    /* All Entry Points of the application, including: main EP, Exports, TLS Callbacks */
+    virtual size_t getAllEntryPoints(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA) 
+    {
+        size_t initialSize = entrypoints.size();
+        
+        Executable::getAllEntryPoints(entrypoints, aType);
+        this->getExportsMap(entrypoints, aType);
+        
+        return entrypoints.size() - initialSize;
+    }
+    
 protected:
+    size_t getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA);
+    
     virtual void clearWrappers();
     virtual void wrap(AbstractByteBuffer *v_buf);
 

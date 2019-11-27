@@ -505,3 +505,34 @@ bool PEFile::unbindImports()
     //TODO: change timestamp for all library entries from (-1 : BOUND) to 0 : NOT BOUND
     return isOk;
 }
+
+//protected:
+size_t PEFile::getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType)
+{
+    size_t initialSize = entrypoints.size();
+
+    ExportDirWrapper* exports = dynamic_cast<ExportDirWrapper*>(this->getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_EXPORT));
+    if (!exports) return 0;
+        
+    const size_t entriesCnt = exports->getEntriesCount();
+    if (entriesCnt == 0) return 0;
+
+    for(int i = 0; i < entriesCnt; i++) {
+        ExportEntryWrapper* entry = dynamic_cast<ExportEntryWrapper*>(exports->getEntryAt(i));
+        if (!entry) continue;
+
+        QString forwarder = entry->getForwarderStr();
+        if (forwarder.length()) {
+            continue;
+        }
+        offset_t rva = entry->getFuncRva();
+        offset_t offset = this->convertAddr(rva, Executable::RVA, aType);
+        if (offset == INVALID_ADDR) {
+            continue;
+        }
+            
+        entrypoints.insert(offset, entry->getName());
+    }
+    return entrypoints.size() - initialSize;
+}
+    
