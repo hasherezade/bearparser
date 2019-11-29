@@ -17,18 +17,28 @@ protected:
 
 class Formatter : public AbstractFormatter{
 public:
-    Formatter(AbstractByteBuffer *buf) : AbstractFormatter(buf) {}
-
+    Formatter(AbstractByteBuffer *buf, bool _isHex = false, bool _isSkipNonprintable = false)
+        : AbstractFormatter(buf),
+        isHex(_isHex),isSkipNonprintable(_isSkipNonprintable)
+    {
+    }
+    
+    void setHex(bool isEnabled) { isHex = isEnabled; }
+    void setSkipNonPrintable(bool isEnabled) { isSkipNonprintable = isEnabled; }
+    
     const QString operator[](std::size_t idx) const;
+    
+protected:
+    bool isHex;
+    bool isSkipNonprintable;
 };
 
-class HexFormatter :public AbstractFormatter
+class HexFormatter : public Formatter
 {
 public:
-    HexFormatter(AbstractByteBuffer *buf) : AbstractFormatter(buf) {}
-
-    const QString operator[](std::size_t idx) const;
+    HexFormatter(AbstractByteBuffer *buf) : Formatter(buf, true, false) {}
 };
+
 /*
 class BufferPrinter
 {

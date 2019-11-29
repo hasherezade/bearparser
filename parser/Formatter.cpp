@@ -12,16 +12,18 @@ AbstractFormatter::AbstractFormatter(AbstractByteBuffer *v_buf)
 const QString Formatter::operator[](std::size_t idx) const
 {
     BYTE b = (*buf)[idx];
-    if (pe_util::isPrintable(b) == false)
+    if (isHex) {
+        return QString::number(b, 16).leftJustified(2,'0');
+    }
+    if (pe_util::isPrintable(b) == false) {
+        if (isSkipNonprintable) {
+            return "..";
+        }
         return "\\x"+ QString::number(b, 16).leftJustified(2,'0');
+    }
     return QString(b);
 }
 
-const QString HexFormatter::operator[](std::size_t idx) const
-{
-    BYTE b = (*buf)[idx];
-    return QString::number(b, 16).leftJustified(2,'0');
-}
 /*
 
 BufferPrinter::BufferPrinter()
