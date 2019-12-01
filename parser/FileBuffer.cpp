@@ -1,9 +1,10 @@
 #include "FileBuffer.h"
 
+
 FileView::FileView(QString &path, bufsize_t maxSize)
     : AbstractFileBuffer(path), fIn (path)
 {
-    if (fIn.open(QFileDevice::ReadOnly) == false) {
+    if (fIn.open(QIODevice::ReadOnly) == false) {
         throw FileBufferException("Cannot open the file: " + path);
     }
     this->fileSize = fIn.size();
@@ -39,9 +40,8 @@ bufsize_t FileView::getMappableSize(QFile &fIn)
 
 ByteBuffer* AbstractFileBuffer::read(QString &path, bufsize_t minBufSize)
 {
-    //printf("reading file...");
     QFile fIn(path);
-    if (fIn.open(QFileDevice::ReadOnly) == false) {
+    if (fIn.open(QIODevice::ReadOnly) == false) {
         throw FileBufferException("Cannot open the file: " + path);
     }
     ByteBuffer *bufferedFile = read(fIn, minBufSize);
@@ -96,9 +96,8 @@ bufsize_t AbstractFileBuffer::getReadableSize(QFile &fIn)
 bufsize_t AbstractFileBuffer::getReadableSize(QString &path)
 {
     if (path.length() == 0) return 0;
-
     QFile fIn(path);
-    if (fIn.open(QFileDevice::ReadOnly) == false) return 0;
+    if (fIn.open(QIODevice::ReadOnly) == false) return 0;
     bufsize_t size = getReadableSize(fIn);
     fIn.close();
     return size;
