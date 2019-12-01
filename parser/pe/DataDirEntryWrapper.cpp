@@ -1,5 +1,5 @@
-#include "DataDirEntryWrapper.h"
-#include "PEFile.h"
+#include "pe/DataDirEntryWrapper.h"
+#include "pe/PEFile.h"
 
 DataDirEntryWrapper::DataDirEntryWrapper(PEFile* pe, pe:: dir_entry v_entryType)
     :  PENodeWrapper(pe), entryType(v_entryType)

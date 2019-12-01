@@ -1,5 +1,5 @@
-#include "BoundImpDirWrapper.h"
-#include "PEFile.h"
+#include "pe/BoundImpDirWrapper.h"
+#include "pe/PEFile.h"
 
 size_t BoundImpDirWrapper::EntriesLimit = 1000;
 

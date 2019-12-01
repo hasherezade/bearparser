@@ -1,6 +1,6 @@
-#include "ResourceContentFactory.h"
-#include "ResourceStringsWrapper.h"
-#include "ResourceVersionWrapper.h"
+#include "pe/rsrc/ResourceContentFactory.h"
+#include "pe/rsrc/ResourceStringsWrapper.h"
+#include "pe/rsrc/ResourceVersionWrapper.h"
 
 ResourceContentWrapper* ResourceContentFactory::makeResContentWrapper(pe::resource_type typeId, ResourceLeafWrapper* leaf)
 {

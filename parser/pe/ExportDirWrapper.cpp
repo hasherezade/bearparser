@@ -1,5 +1,5 @@
-#include "ExportDirWrapper.h"
-#include "PEFile.h"
+#include "pe/ExportDirWrapper.h"
+#include "pe/PEFile.h"
 
 #define INVALID_NAME "<invalid>"
 #define INVALID_ID (-1)

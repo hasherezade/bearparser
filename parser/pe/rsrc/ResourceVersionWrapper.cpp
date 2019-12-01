@@ -1,4 +1,4 @@
-#include "ResourceVersionWrapper.h"
+#include "pe/rsrc/ResourceVersionWrapper.h"
 
 ResourceVersionWrapper::ResourceVersionWrapper(Executable *pe, ResourceLeafWrapper* v_leaf)
     : ResourceContentWrapper(pe, v_leaf, pe::RESTYPE_VERSION)

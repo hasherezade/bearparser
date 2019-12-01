@@ -1,5 +1,5 @@
-#include "RichHdrWrapper.h"
-#include "PEFile.h"
+#include "pe/RichHdrWrapper.h"
+#include "pe/PEFile.h"
 #include <iostream>
 
 

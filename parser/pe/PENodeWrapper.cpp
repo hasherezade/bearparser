@@ -1,5 +1,5 @@
-#include "PENodeWrapper.h"
-#include "PEFile.h"
+#include "pe/PENodeWrapper.h"
+#include "pe/PEFile.h"
 
 PEElementWrapper::PEElementWrapper(PEFile* pe)
     : ExeElementWrapper(pe), m_PE(pe)

@@ -19,8 +19,6 @@ endif()
 
 include_directories (include)
 include_directories (include/bearparser)
-include_directories (include/bearparser/pe)
-include_directories (include/bearparser/pe/rsrc)
 
 set (win_hdrs
     include/bearparser/win_hdrs/poppack.h

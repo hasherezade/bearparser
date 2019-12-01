@@ -1,5 +1,5 @@
-#include "TlsDirWrapper.h"
-#include "PEFile.h"
+#include "pe/TlsDirWrapper.h"
+#include "pe/PEFile.h"
 
 size_t TlsDirWrapper::EntriesLimit = 10000;
 

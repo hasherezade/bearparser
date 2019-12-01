@@ -1,5 +1,5 @@
-#include "OptHdrWrapper.h"
-#include "PEFile.h"
+#include "pe/OptHdrWrapper.h"
+#include "pe/PEFile.h"
 
 using namespace std;
 

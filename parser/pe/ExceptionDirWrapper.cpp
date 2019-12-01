@@ -1,5 +1,5 @@
-#include "ExceptionDirWrapper.h"
-#include "PEFile.h"
+#include "pe/ExceptionDirWrapper.h"
+#include "pe/PEFile.h"
 
 uint64_t ExceptionDirWrapper::EntriesLimit = 10000;
 
