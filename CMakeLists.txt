@@ -23,7 +23,7 @@ include_directories( ${BEARPARSER_INC} )
 # libs
 
 add_subdirectory ( ${M_BEARPARSER} )
-#set (PARSER_LIB bearparser CACHE FILE "BearParser library path")
+set (PARSER_LIB bearparser CACHE FILE "BearParser library path")
 
 # executables
 add_subdirectory( ${M_BEARCOMMANDER} )
