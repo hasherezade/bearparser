@@ -1,4 +1,4 @@
-#include "LdConfigDirWrapper.h"
+#include "pe/LdConfigDirWrapper.h"
 
 bufsize_t LdConfigDirWrapper::getLdConfigDirSize()
 {

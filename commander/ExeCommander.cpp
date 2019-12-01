@@ -1,7 +1,5 @@
 #include "ExeCommander.h"
-#include "../parser/ExeNodeWrapper.h"
-#include "../parser/Formatter.h"
-#include "../parser/FileBuffer.h"
+#include <bearparser/core.h>
 
 //------------------------------------------
 

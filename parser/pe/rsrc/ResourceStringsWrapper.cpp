@@ -1,4 +1,4 @@
-#include "ResourceStringsWrapper.h"
+#include "pe/rsrc/ResourceStringsWrapper.h"
 
 void* ResString::getPtr()
 {

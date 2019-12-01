@@ -1,5 +1,5 @@
-#include "ResourcesAlbum.h"
-#include "ResourceStringsWrapper.h"
+#include "pe/rsrc/ResourcesAlbum.h"
+#include "pe/rsrc/ResourceStringsWrapper.h"
 
 
 void ResourcesContainer::putWrapper(ResourceContentWrapper* wrapper)

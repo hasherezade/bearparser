@@ -1,4 +1,4 @@
-#include "PEFile.h"
+#include "pe/PEFile.h"
 
 bool PEFileBuilder::signatureMatches(AbstractByteBuffer *buf)
 {

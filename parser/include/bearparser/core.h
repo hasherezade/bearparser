@@ -1,15 +1,17 @@
-#pragma once
-
+#ifndef BEARPARSER_CORE_H
+#define BEARPARSER_CORE_H
 //core:
-#include "../../Util.h"
-#include "../../CustomException.h"
-#include "../../AbstractByteBuffer.h"
-#include "../../ByteBuffer.h"
-#include "../../FileBuffer.h"
-#include "../../Executable.h"
-#include "../../MappedExe.h"
-#include "../../ExeElementWrapper.h"
-#include "../../ExeNodeWrapper.h"
-#include "../../Formatter.h"
-#include "../../ExeFactory.h"
+#include <bearparser/Util.h>
+#include <bearparser/CustomException.h>
+#include <bearparser/AbstractByteBuffer.h>
+#include <bearparser/ByteBuffer.h>
+#include <bearparser/FileBuffer.h>
+#include <bearparser/Executable.h>
+#include <bearparser/MappedExe.h>
+#include <bearparser/ExeElementWrapper.h>
+#include <bearparser/ExeNodeWrapper.h>
+#include <bearparser/Formatter.h>
+#include <bearparser/ExeFactory.h>
+
+#endif //BEARPARSER_CORE_H
 

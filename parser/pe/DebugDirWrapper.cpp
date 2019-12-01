@@ -1,4 +1,4 @@
-#include "DebugDirWrapper.h"
+#include "pe/DebugDirWrapper.h"
 
 /*
 typedef struct _IMAGE_DEBUG_DIRECTORY {

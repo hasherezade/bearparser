@@ -1,5 +1,5 @@
-#include "DataDirWrapper.h"
-#include "PEFile.h"
+#include "pe/DataDirWrapper.h"
+#include "pe/PEFile.h"
 
 void* DataDirWrapper::getPtr()
 {

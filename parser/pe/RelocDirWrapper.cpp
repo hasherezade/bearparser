@@ -1,5 +1,5 @@
-#include "RelocDirWrapper.h"
-#include "PEFile.h"
+#include "pe/RelocDirWrapper.h"
+#include "pe/PEFile.h"
 
 size_t RelocDirWrapper::EntriesLimit = 10000;
 

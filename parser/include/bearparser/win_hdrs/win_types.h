@@ -70,3 +70,4 @@ typedef unsigned char BYTE;
 
 #endif // __WIN_TYPES__
 #endif // #ifndef USE_WINNT
+

@@ -1,5 +1,5 @@
-#include "SectHdrsWrapper.h"
-#include "PEFile.h"
+#include "pe/SectHdrsWrapper.h"
+#include "pe/PEFile.h"
 
 using namespace buf_util;
 

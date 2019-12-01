@@ -1,5 +1,5 @@
-#include "DelayImpDirWrapper.h"
-#include "PEFile.h"
+#include "pe/DelayImpDirWrapper.h"
+#include "pe/PEFile.h"
 
 /*
 typedef struct _IMAGE_DELAY_LOAD {

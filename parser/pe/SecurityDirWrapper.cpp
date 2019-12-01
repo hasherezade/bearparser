@@ -1,5 +1,5 @@
-#include "SecurityDirWrapper.h"
-#include "PEFile.h"
+#include "pe/SecurityDirWrapper.h"
+#include "pe/PEFile.h"
 
 pe::WIN_CERTIFICATE* SecurityDirWrapper::getCert()
 {

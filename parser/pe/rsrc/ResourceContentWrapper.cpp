@@ -1,4 +1,4 @@
-#include "ResourceContentWrapper.h"
+#include "pe/rsrc/ResourceContentWrapper.h"
 
 QString ResourceContentWrapper::translateType(pe::resource_type type)
 {

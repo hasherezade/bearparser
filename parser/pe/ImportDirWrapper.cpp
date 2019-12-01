@@ -1,5 +1,5 @@
-#include "ImportDirWrapper.h"
-#include "PEFile.h"
+#include "pe/ImportDirWrapper.h"
+#include "pe/PEFile.h"
 
 using namespace imports_util;
 

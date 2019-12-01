@@ -17,68 +17,68 @@ else()
     get_target_property(QtCore_location Qt5::Core LOCATION)
 endif()
 
-include_directories (include)
+include_directories (include/bearparser)
 
 set (win_hdrs
-    win_hdrs/poppack.h
-    win_hdrs/pshpack1.h
-    win_hdrs/pshpack2.h
-    win_hdrs/pshpack4.h
-    win_hdrs/pshpack8.h
-    win_hdrs/win_types.h
+    include/bearparser/win_hdrs/poppack.h
+    include/bearparser/win_hdrs/pshpack1.h
+    include/bearparser/win_hdrs/pshpack2.h
+    include/bearparser/win_hdrs/pshpack4.h
+    include/bearparser/win_hdrs/pshpack8.h
+    include/bearparser/win_hdrs/win_types.h
 )
 
 set (pe_hdrs
-    pe/pe_formats.h
-    pe/pe_undoc.h
-    pe/DosHdrWrapper.h
-    pe/DOSExe.h
-    pe/PECore.h
-    pe/PEFile.h
-    pe/RichHdrWrapper.h
-    pe/FileHdrWrapper.h
-    pe/OptHdrWrapper.h
-    pe/SectHdrsWrapper.h
-    pe/DataDirWrapper.h
-    pe/PENodeWrapper.h
-    pe/DataDirEntryWrapper.h
-    pe/ImportBaseDirWrapper.h
-    pe/ImportDirWrapper.h
-    pe/DelayImpDirWrapper.h
-    pe/BoundImpDirWrapper.h
-    pe/DebugDirWrapper.h
-    pe/ExportDirWrapper.h
-    pe/SecurityDirWrapper.h
-    pe/TlsDirWrapper.h
-    pe/LdConfigDirWrapper.h
-    pe/RelocDirWrapper.h
-    pe/ExceptionDirWrapper.h
-    pe/ResourceDirWrapper.h
-    pe/ResourceLeafWrapper.h
+    include/bearparser/pe/pe_formats.h
+    include/bearparser/pe/pe_undoc.h
+    include/bearparser/pe/DosHdrWrapper.h
+    include/bearparser/pe/DOSExe.h
+    include/bearparser/pe/PECore.h
+    include/bearparser/pe/PEFile.h
+    include/bearparser/pe/RichHdrWrapper.h
+    include/bearparser/pe/FileHdrWrapper.h
+    include/bearparser/pe/OptHdrWrapper.h
+    include/bearparser/pe/SectHdrsWrapper.h
+    include/bearparser/pe/DataDirWrapper.h
+    include/bearparser/pe/PENodeWrapper.h
+    include/bearparser/pe/DataDirEntryWrapper.h
+    include/bearparser/pe/ImportBaseDirWrapper.h
+    include/bearparser/pe/ImportDirWrapper.h
+    include/bearparser/pe/DelayImpDirWrapper.h
+    include/bearparser/pe/BoundImpDirWrapper.h
+    include/bearparser/pe/DebugDirWrapper.h
+    include/bearparser/pe/ExportDirWrapper.h
+    include/bearparser/pe/SecurityDirWrapper.h
+    include/bearparser/pe/TlsDirWrapper.h
+    include/bearparser/pe/LdConfigDirWrapper.h
+    include/bearparser/pe/RelocDirWrapper.h
+    include/bearparser/pe/ExceptionDirWrapper.h
+    include/bearparser/pe/ResourceDirWrapper.h
+    include/bearparser/pe/ResourceLeafWrapper.h
 )
 
 set (pe_rsrc_hdrs
-    pe/rsrc/ResourcesAlbum.h
-    pe/rsrc/ResourceContentFactory.h
-    pe/rsrc/ResourceContentWrapper.h
-    pe/rsrc/ResourceStringsWrapper.h
-    pe/rsrc/ResourceVersionWrapper.h
+    include/bearparser/pe/rsrc/ResourcesAlbum.h
+    include/bearparser/pe/rsrc/ResourceContentFactory.h
+    include/bearparser/pe/rsrc/ResourceContentWrapper.h
+    include/bearparser/pe/rsrc/ResourceStringsWrapper.h
+    include/bearparser/pe/rsrc/ResourceVersionWrapper.h
 )
 
 set (parser_hdrs
-    include/bearparser.h
-    Util.h
-    CustomException.h
-    AbstractByteBuffer.h
-    WrappedValue.h
-    ByteBuffer.h
-    FileBuffer.h
-    Executable.h
-    MappedExe.h
-    ExeElementWrapper.h
-    ExeNodeWrapper.h
-    ExeFactory.h
-    Formatter.h
+    include/bearparser/bearparser.h
+    include/bearparser/Util.h
+    include/bearparser/CustomException.h
+    include/bearparser/AbstractByteBuffer.h
+    include/bearparser/WrappedValue.h
+    include/bearparser/ByteBuffer.h
+    include/bearparser/FileBuffer.h
+    include/bearparser/Executable.h
+    include/bearparser/MappedExe.h
+    include/bearparser/ExeElementWrapper.h
+    include/bearparser/ExeNodeWrapper.h
+    include/bearparser/ExeFactory.h
+    include/bearparser/Formatter.h
 )
 
 set (pe_srcs

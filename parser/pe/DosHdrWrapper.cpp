@@ -1,5 +1,5 @@
-#include "DosHdrWrapper.h"
-#include "DOSExe.h"
+#include "pe/DosHdrWrapper.h"
+#include "pe/DOSExe.h"
 
 void* DosHdrWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {

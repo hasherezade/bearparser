@@ -1,5 +1,5 @@
-#include "FileHdrWrapper.h"
-#include "PEFile.h"
+#include "pe/FileHdrWrapper.h"
+#include "pe/PEFile.h"
 
 #include <time.h>
 #include <QDateTime>
