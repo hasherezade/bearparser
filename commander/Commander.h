@@ -5,7 +5,7 @@
 #include <string>
 #include <map>
 
-#include <bearparser.h>
+#include <bearparser/bearparser.h>
 
 class Commander;
 

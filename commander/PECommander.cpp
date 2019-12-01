@@ -1,5 +1,5 @@
 #include "PECommander.h"
-#include <bearparser.h>
+#include <bearparser/pefile.h>
 
 using namespace std;
 

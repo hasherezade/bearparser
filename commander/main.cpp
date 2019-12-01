@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <bearparser.h>
+#include <bearparser/bearparser.h>
 
 #include <iostream>
 #include <QString>

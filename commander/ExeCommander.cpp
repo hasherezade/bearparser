@@ -1,5 +1,5 @@
 #include "ExeCommander.h"
-#include <bearparser.h>
+#include <bearparser/core.h>
 
 //------------------------------------------
 

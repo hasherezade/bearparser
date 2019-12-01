@@ -17,7 +17,6 @@ else()
     get_target_property(QtCore_location Qt5::Core LOCATION)
 endif()
 
-include_directories (include)
 include_directories (include/bearparser)
 
 set (win_hdrs
@@ -67,7 +66,7 @@ set (pe_rsrc_hdrs
 )
 
 set (parser_hdrs
-    include/bearparser.h
+    include/bearparser/bearparser.h
     include/bearparser/Util.h
     include/bearparser/CustomException.h
     include/bearparser/AbstractByteBuffer.h
