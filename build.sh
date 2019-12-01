@@ -27,9 +27,11 @@ else
     exit -1
 fi
 
-mkdir build
+BUILD_DIR=build
+
+mkdir $BUILD_DIR
 echo "[+] build directory created"
-cd build
+cd $BUILD_DIR
 cmake -G "CodeLite - Unix Makefiles" -DUSE_QT4=OFF -DCMAKE_INSTALL_PREFIX:PATH=$(pwd) ..
 cmake --build . --target install
 

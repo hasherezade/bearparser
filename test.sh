@@ -1,6 +1,7 @@
 #!/bin/bash
 START_DIR=$(pwd)
 SOURCE_DIR=$1
+BUILD_DIR=$2
 TESTS_DIR="test_cases"
 
 if [[ "$SOURCE_DIR" == "" ]]; then
@@ -17,7 +18,12 @@ else
 	mv bearparser_tests $TESTS_DIR
 fi
 
-BCMD_DIR=$(pwd)/build/
+if [[ "$BUILD_DIR" == "" ]]; then
+	BUILD_DIR=build
+fi
+echo "Build Dir: ""$BUILD_DIR"
+
+BCMD_DIR=$(pwd)/$BUILD_DIR/
 FAILED=0
 
 tests_list=$SOURCE_DIR/"tests_list.txt"

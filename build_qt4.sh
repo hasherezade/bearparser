@@ -27,12 +27,11 @@ else
     exit -1
 fi
 
-mkdir build_qt4
+BUILD_DIR=build_qt4
+
+mkdir $BUILD_DIR
 echo "[+] build directory created"
-cd build_qt4
-cmake -G "CodeLite - Unix Makefiles" -D USE_QT4=ON ../
-make
-cd ..
-cp build_qt4/commander/bearcommander ./build_qt4/
-echo "[+] Success! You can check the executable here:"
-pwd
+cd $BUILD_DIR
+cmake -G "CodeLite - Unix Makefiles" -DUSE_QT4=ON -DCMAKE_INSTALL_PREFIX:PATH=$(pwd) ..
+cmake --build . --target install
+
