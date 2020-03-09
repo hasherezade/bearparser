@@ -57,7 +57,7 @@ public:
         : AbstractFileBuffer(fileName)
     {
         QFile fIn(fileName);
-        if (fIn.open(QFile::ReadOnly | QFile::Truncate) == false) {
+        if (fIn.open(QFile::ReadOnly) == false) {
             throw FileBufferException("Cannot open the file: " + fileName);
         }
         fileSize = fIn.size();
