@@ -123,7 +123,9 @@ void* TlsEntryWrapper::getPtr()
     if (!isOk) return NULL;
 
     offset_t firstRaw = m_Exe->toRaw(firstVA, Executable::VA);
-    if (firstRaw == INVALID_ADDR) return NULL;
+    if (firstRaw == INVALID_ADDR) {
+        return NULL;
+    }
 
     bufsize_t addrSize = this->parentDir->getFieldSize(TlsDirWrapper::CALLBACKS_ADDR);
     offset_t myRaw = firstRaw + (addrSize * this->entryNum);

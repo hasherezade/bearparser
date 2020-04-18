@@ -148,11 +148,13 @@ offset_t PECore::getImageBase()
         imgBase = DEFAULT_IMGBASE;
     }
 
-    //can be any value as long as ImageBase + 'SizeOfImage' < 80000000h
+    //in 32 bit PEs: it can be any value as long as ImageBase + 'SizeOfImage' < 80000000h
     //if the ImageBase is bigger than that, the binary will be relocated to 10000h
-    offset_t maxOffset = this->getImageSize() + imgBase;
-    if (maxOffset >= 0x80000000) {
-        imgBase = DEFAULT_IMGBASE;
+    if (this->opt32) {
+        offset_t maxOffset = this->getImageSize() + imgBase;
+        if (maxOffset >= 0x80000000) {
+            imgBase = DEFAULT_IMGBASE;
+        }
     }
     return imgBase;
 }

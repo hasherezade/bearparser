@@ -31,8 +31,8 @@ bool Executable::isValidAddr(offset_t addr, addr_type addrType)
 
 offset_t Executable::VaToRva(offset_t va, bool autodetect)
 {
-    offset_t mappedFrom = this->getImageBase();
-    offset_t mappedTo = mappedFrom + this->getMappedSize(Executable::RVA);
+    const offset_t mappedFrom = this->getImageBase();
+    const offset_t mappedTo = mappedFrom + this->getMappedSize(Executable::RVA);
 
     if (autodetect && !isValidAddr(va, Executable::VA)) {
         return va;
@@ -92,10 +92,14 @@ offset_t Executable::toRaw(offset_t offset, addr_type aT, bool allowExceptions)
 
     if (aT == Executable::RAW) {
         //no need to convert
-        convertedOffset = offset;
-    } else if (aT == Executable::VA) {
-        convertedOffset = VaToRva(offset, false);
-    } else if (aT == Executable::RVA){
+        return offset;
+    } 
+
+    if (aT == Executable::VA) {
+        offset = VaToRva(offset, false);
+        aT = Executable::RVA;
+    } 
+    if (aT == Executable::RVA){
         try {
             convertedOffset = this->rvaToRaw(offset);
         } catch (CustomException &e) {
