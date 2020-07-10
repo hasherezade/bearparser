@@ -12,13 +12,13 @@ void* DataDirWrapper::getPtr()
 
 bufsize_t DataDirWrapper::getSize()
 {
-    bufsize_t size = sizeof(IMAGE_DATA_DIRECTORY) * DIRECTORY_ENTRIES_NUM;
+    bufsize_t size = sizeof(IMAGE_DATA_DIRECTORY) * pe::DIR_ENTRIES_COUNT;
     return size;
 }
 
 void* DataDirWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
-    if (fieldId >= DIRECTORY_ENTRIES_NUM) {
+    if (fieldId >= pe::DIR_ENTRIES_COUNT) {
         return getPtr(); // invalid fieldID, give default
     }
 
@@ -36,7 +36,7 @@ void* DataDirWrapper::getFieldPtr(size_t fieldId, size_t subField)
 
 bufsize_t DataDirWrapper::getFieldSize(size_t fieldId, size_t subField)
 {
-    if (fieldId >= DIRECTORY_ENTRIES_NUM) return getSize();
+    if (fieldId >= pe::DIR_ENTRIES_COUNT) return getSize();
 
     IMAGE_DATA_DIRECTORY* dir = (IMAGE_DATA_DIRECTORY*) getPtr();
     if (dir == NULL) return 0;

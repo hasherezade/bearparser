@@ -19,7 +19,7 @@ public:
     virtual void* getPtr();
     virtual bufsize_t getSize();
     virtual QString getName() { return "Data Directory"; }
-    virtual size_t getFieldsCount() { return DIRECTORY_ENTRIES_NUM; }
+    virtual size_t getFieldsCount() { return pe::DIR_ENTRIES_COUNT; }
 
     /* specific field boundaries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
