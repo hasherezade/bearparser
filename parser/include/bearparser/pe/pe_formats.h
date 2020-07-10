@@ -350,37 +350,7 @@ enum file_machine {
 		 FIELD_OFFSET( PE_IMAGE_NT_HEADERS32, OptionalHeader ) +    \
 		 ((PE_PIMAGE_NT_HEADERS32)(ntheader))->FileHeader.SizeOfOptionalHeader    \
 		))
-	/*
-	/*
-	 * Non-COFF Object file header
-	 */
-	/*
-	#if 0
-		// XXX disabled for now, due to CLSID type inconsistency
-		typedef struct ANON_OBJECT_HEADER {
-			WORD    Sig1;            // Must be IMAGE_FILE_MACHINE_UNKNOWN
-			WORD    Sig2;            // Must be 0xffff
-			WORD    Version;         // >= 1 (implies the CLSID field is present)
-			WORD    Machine;
-			DWORD   TimeDateStamp;
-			CLSID   ClassID;         // Used to invoke CoCreateInstance
-			DWORD   SizeOfData;      // Size of data that follows the header
-		} ANON_OBJECT_HEADER;
 
-		typedef struct ANON_OBJECT_HEADER_V2 {
-			WORD    Sig1;            // Must be IMAGE_FILE_MACHINE_UNKNOWN
-			WORD    Sig2;            // Must be 0xffff
-			WORD    Version;         // >= 2 (implies the Flags field is present - otherwise V1)
-			WORD    Machine;
-			DWORD   TimeDateStamp;
-			CLSID   ClassID;         // Used to invoke CoCreateInstance
-			DWORD   SizeOfData;      // Size of data that follows the header
-			DWORD   Flags;           // 0x1 -> contains metadata
-			DWORD   MetaDataSize;    // Size of CLR metadata
-			DWORD   MetaDataOffset;  // Offset of CLR metadata
-		} ANON_OBJECT_HEADER_V2;
-	#endif //#if 0
-	*/
 	/*
 	 * Section header format.
 	 */
