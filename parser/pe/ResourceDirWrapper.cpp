@@ -180,7 +180,7 @@ bool ResourceEntryWrapper::wrap()
 }
 
 
-pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* ResourceEntryWrapper::getEntryPtr()
+IMAGE_RESOURCE_DIRECTORY_ENTRY* ResourceEntryWrapper::getEntryPtr()
 {
     if (this->parentDir == NULL) return NULL;
     uint64_t offset = parentDir->getFieldOffset(ResourceDirWrapper::ID_ENTRIES_NUM);
@@ -188,16 +188,16 @@ pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* ResourceEntryWrapper::getEntryPtr()
 
     size_t lastSize = parentDir->getFieldSize(ResourceDirWrapper::ID_ENTRIES_NUM, FIELD_NONE);
     offset += lastSize;
-    offset += (this->entryNum * sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY));
+    offset += (this->entryNum * sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY));
 
-    void *ptr = m_Exe->getContentAt(offset, Executable::RAW, sizeof(pe::IMAGE_RESOURCE_DIRECTORY_ENTRY));
-    return (pe::IMAGE_RESOURCE_DIRECTORY_ENTRY*) ptr;
+    void *ptr = m_Exe->getContentAt(offset, Executable::RAW, sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY));
+    return (IMAGE_RESOURCE_DIRECTORY_ENTRY*) ptr;
 }
 
 //IMAGE_RESOURCE_DIRECTORY_ENTRY
 void* ResourceEntryWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
-    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return NULL;
 
     switch (fieldId) {
@@ -222,31 +222,31 @@ QString ResourceEntryWrapper::getFieldName(size_t fieldId)
 
 bool ResourceEntryWrapper::isByName()
 {
-    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return false;
-    if (entry->name.NameIsString == 1) return true;
+    if (entry->NameIsString == 1) return true;
     return false;
 }
 
 bool ResourceEntryWrapper::isDir()
 {
-    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return false;
-    if (entry->dir.DataIsDirectory == 1) return true;
+    if (entry->DataIsDirectory == 1) return true;
     return false;
 }
 
 offset_t ResourceEntryWrapper::getNameOffset()
 {
-    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return INVALID_ADDR;
 
     if (this->parentDir == NULL) return INVALID_ADDR;
     offset_t fOff = this->parentDir->getOffset(this->parentDir->getPtr());
     if (fOff == INVALID_ADDR) return INVALID_ADDR;
 
-    if (entry->name.NameIsString != 1) return INVALID_ADDR;
-    return fOff + entry->name.NameOffset;
+    if (entry->NameIsString != 1) return INVALID_ADDR;
+    return fOff + entry->NameOffset;
 }
 
 IMAGE_RESOURCE_DIRECTORY_STRING* ResourceEntryWrapper::getNameStr()
@@ -290,7 +290,7 @@ QString ResourceEntryWrapper::translateType(WORD id)
 
 WORD ResourceEntryWrapper::getID()
 {
-    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return 0;
     if (this->isByName()) return 0;
 
@@ -299,9 +299,9 @@ WORD ResourceEntryWrapper::getID()
 
 DWORD ResourceEntryWrapper::getChildOffsetToDirectory()
 {
-    pe::IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
     if (entry == NULL) return 0;
-    return entry->dir.OffsetToDirectory;
+    return entry->OffsetToDirectory;
 }
 
 offset_t ResourceEntryWrapper::getChildAddress()

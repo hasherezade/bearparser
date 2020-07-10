@@ -165,6 +165,8 @@ typedef struct _IMAGE_FILE_HEADER {
     WORD    Characteristics;
 } IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;
 
+#endif //#ifndef USE_WINNT
+
 enum file {
     F_RELOCS_STRIPPED = 0x0001, // Relocation info stripped from file.
     F_EXECUTABLE_IMAGE = 0x0002,  // File is executable  (i.e. no unresolved external references).
@@ -215,192 +217,194 @@ enum file_machine {
     M_CEE = 0xC0EE
 };
 
-/*
- * Directory format.
- */
-typedef struct _IMAGE_DATA_DIRECTORY {
-    DWORD   VirtualAddress;
-    DWORD   Size;
-} IMAGE_DATA_DIRECTORY, *PIMAGE_DATA_DIRECTORY;
-#endif
-
-#define DIRECTORY_ENTRIES_NUM 16
-
 #ifndef USE_WINNT
 
-/*
- * Optional header format.
- */
+	/*
+	 * Directory format.
+	 */
+	typedef struct _IMAGE_DATA_DIRECTORY {
+		DWORD   VirtualAddress;
+		DWORD   Size;
+	} IMAGE_DATA_DIRECTORY, *PIMAGE_DATA_DIRECTORY;
 
-typedef struct _IMAGE_OPTIONAL_HEADER {
-/*
- * Standard fields.
- */
-    WORD    Magic;
-    BYTE    MajorLinkerVersion;
-    BYTE    MinorLinkerVersion;
-    DWORD   SizeOfCode;
-    DWORD   SizeOfInitializedData;
-    DWORD   SizeOfUninitializedData;
-    DWORD   AddressOfEntryPoint;
-    DWORD   BaseOfCode;
-    DWORD   BaseOfData;
-/*
- * NT additional fields.
- */
-    DWORD   ImageBase;
-    DWORD   SectionAlignment;
-    DWORD   FileAlignment;
-    WORD    MajorOperatingSystemVersion;
-    WORD    MinorOperatingSystemVersion;
-    WORD    MajorImageVersion;
-    WORD    MinorImageVersion;
-    WORD    MajorSubsystemVersion;
-    WORD    MinorSubsystemVersion;
-    DWORD   Win32VersionValue;
-    DWORD   SizeOfImage;
-    DWORD   SizeOfHeaders;
-    DWORD   CheckSum;
-    WORD    Subsystem;
-    WORD    DllCharacteristics;
-    DWORD   SizeOfStackReserve;
-    DWORD   SizeOfStackCommit;
-    DWORD   SizeOfHeapReserve;
-    DWORD   SizeOfHeapCommit;
-    DWORD   LoaderFlags;
-    DWORD   NumberOfRvaAndSizes;
-    IMAGE_DATA_DIRECTORY DataDirectory[DIRECTORY_ENTRIES_NUM];
-} IMAGE_OPTIONAL_HEADER32, *PIMAGE_OPTIONAL_HEADER32;
+	#define DIRECTORY_ENTRIES_NUM 16
 
-typedef struct _IMAGE_ROM_OPTIONAL_HEADER {
-    WORD   Magic;
-    BYTE   MajorLinkerVersion;
-    BYTE   MinorLinkerVersion;
-    DWORD  SizeOfCode;
-    DWORD  SizeOfInitializedData;
-    DWORD  SizeOfUninitializedData;
-    DWORD  AddressOfEntryPoint;
-    DWORD  BaseOfCode;
-    DWORD  BaseOfData;
-    DWORD  BaseOfBss;
-    DWORD  GprMask;
-    DWORD  CprMask[4];
-    DWORD  GpValue;
-} IMAGE_ROM_OPTIONAL_HEADER, *PIMAGE_ROM_OPTIONAL_HEADER;
+	/*
+	 * Optional header format.
+	 */
 
-typedef struct _IMAGE_OPTIONAL_HEADER64 {
-    WORD        Magic;
-    BYTE        MajorLinkerVersion;
-    BYTE        MinorLinkerVersion;
-    DWORD       SizeOfCode;
-    DWORD       SizeOfInitializedData;
-    DWORD       SizeOfUninitializedData;
-    DWORD       AddressOfEntryPoint;
-    DWORD       BaseOfCode;
-    ULONGLONG   ImageBase;
-    DWORD       SectionAlignment;
-    DWORD       FileAlignment;
-    WORD        MajorOperatingSystemVersion;
-    WORD        MinorOperatingSystemVersion;
-    WORD        MajorImageVersion;
-    WORD        MinorImageVersion;
-    WORD        MajorSubsystemVersion;
-    WORD        MinorSubsystemVersion;
-    DWORD       Win32VersionValue;
-    DWORD       SizeOfImage;
-    DWORD       SizeOfHeaders;
-    DWORD       CheckSum;
-    WORD        Subsystem;
-    WORD        DllCharacteristics;
-    ULONGLONG   SizeOfStackReserve;
-    ULONGLONG   SizeOfStackCommit;
-    ULONGLONG   SizeOfHeapReserve;
-    ULONGLONG   SizeOfHeapCommit;
-    DWORD       LoaderFlags;
-    DWORD       NumberOfRvaAndSizes;
-    IMAGE_DATA_DIRECTORY DataDirectory[DIRECTORY_ENTRIES_NUM];
-} IMAGE_OPTIONAL_HEADER64, *PIMAGE_OPTIONAL_HEADER64;
+	typedef struct _IMAGE_OPTIONAL_HEADER {
+	/*
+	 * Standard fields.
+	 */
+		WORD    Magic;
+		BYTE    MajorLinkerVersion;
+		BYTE    MinorLinkerVersion;
+		DWORD   SizeOfCode;
+		DWORD   SizeOfInitializedData;
+		DWORD   SizeOfUninitializedData;
+		DWORD   AddressOfEntryPoint;
+		DWORD   BaseOfCode;
+		DWORD   BaseOfData;
+	/*
+	 * NT additional fields.
+	 */
+		DWORD   ImageBase;
+		DWORD   SectionAlignment;
+		DWORD   FileAlignment;
+		WORD    MajorOperatingSystemVersion;
+		WORD    MinorOperatingSystemVersion;
+		WORD    MajorImageVersion;
+		WORD    MinorImageVersion;
+		WORD    MajorSubsystemVersion;
+		WORD    MinorSubsystemVersion;
+		DWORD   Win32VersionValue;
+		DWORD   SizeOfImage;
+		DWORD   SizeOfHeaders;
+		DWORD   CheckSum;
+		WORD    Subsystem;
+		WORD    DllCharacteristics;
+		DWORD   SizeOfStackReserve;
+		DWORD   SizeOfStackCommit;
+		DWORD   SizeOfHeapReserve;
+		DWORD   SizeOfHeapCommit;
+		DWORD   LoaderFlags;
+		DWORD   NumberOfRvaAndSizes;
+		IMAGE_DATA_DIRECTORY DataDirectory[DIRECTORY_ENTRIES_NUM];
+	} IMAGE_OPTIONAL_HEADER32, *PIMAGE_OPTIONAL_HEADER32;
 
-typedef struct _IMAGE_NT_HEADERS64 {
-    DWORD Signature;
-    IMAGE_FILE_HEADER FileHeader;
-    IMAGE_OPTIONAL_HEADER64 OptionalHeader;
-} IMAGE_NT_HEADERS64, *PIMAGE_NT_HEADERS64, PE_IMAGE_NT_HEADERS64, *PE_PIMAGE_NT_HEADERS64;
+	typedef struct _IMAGE_ROM_OPTIONAL_HEADER {
+		WORD   Magic;
+		BYTE   MajorLinkerVersion;
+		BYTE   MinorLinkerVersion;
+		DWORD  SizeOfCode;
+		DWORD  SizeOfInitializedData;
+		DWORD  SizeOfUninitializedData;
+		DWORD  AddressOfEntryPoint;
+		DWORD  BaseOfCode;
+		DWORD  BaseOfData;
+		DWORD  BaseOfBss;
+		DWORD  GprMask;
+		DWORD  CprMask[4];
+		DWORD  GpValue;
+	} IMAGE_ROM_OPTIONAL_HEADER, *PIMAGE_ROM_OPTIONAL_HEADER;
 
-typedef struct _IMAGE_NT_HEADERS {
-    DWORD Signature;
-    IMAGE_FILE_HEADER FileHeader;
-    IMAGE_OPTIONAL_HEADER32 OptionalHeader;
-} IMAGE_NT_HEADERS32, *PIMAGE_NT_HEADERS32, PE_IMAGE_NT_HEADERS32, *PE_PIMAGE_NT_HEADERS32;
+	typedef struct _IMAGE_OPTIONAL_HEADER64 {
+		WORD        Magic;
+		BYTE        MajorLinkerVersion;
+		BYTE        MinorLinkerVersion;
+		DWORD       SizeOfCode;
+		DWORD       SizeOfInitializedData;
+		DWORD       SizeOfUninitializedData;
+		DWORD       AddressOfEntryPoint;
+		DWORD       BaseOfCode;
+		ULONGLONG   ImageBase;
+		DWORD       SectionAlignment;
+		DWORD       FileAlignment;
+		WORD        MajorOperatingSystemVersion;
+		WORD        MinorOperatingSystemVersion;
+		WORD        MajorImageVersion;
+		WORD        MinorImageVersion;
+		WORD        MajorSubsystemVersion;
+		WORD        MinorSubsystemVersion;
+		DWORD       Win32VersionValue;
+		DWORD       SizeOfImage;
+		DWORD       SizeOfHeaders;
+		DWORD       CheckSum;
+		WORD        Subsystem;
+		WORD        DllCharacteristics;
+		ULONGLONG   SizeOfStackReserve;
+		ULONGLONG   SizeOfStackCommit;
+		ULONGLONG   SizeOfHeapReserve;
+		ULONGLONG   SizeOfHeapCommit;
+		DWORD       LoaderFlags;
+		DWORD       NumberOfRvaAndSizes;
+		IMAGE_DATA_DIRECTORY DataDirectory[DIRECTORY_ENTRIES_NUM];
+	} IMAGE_OPTIONAL_HEADER64, *PIMAGE_OPTIONAL_HEADER64;
 
-typedef struct _IMAGE_ROM_HEADERS {
-    IMAGE_FILE_HEADER FileHeader;
-    IMAGE_ROM_OPTIONAL_HEADER OptionalHeader;
-} IMAGE_ROM_HEADERS, *PIMAGE_ROM_HEADERS;
+	typedef struct _IMAGE_NT_HEADERS64 {
+		DWORD Signature;
+		IMAGE_FILE_HEADER FileHeader;
+		IMAGE_OPTIONAL_HEADER64 OptionalHeader;
+	} IMAGE_NT_HEADERS64, *PIMAGE_NT_HEADERS64, PE_IMAGE_NT_HEADERS64, *PE_PIMAGE_NT_HEADERS64;
 
-#define PE_FIRST_SECTION64( ntheader ) ((PE_PIMAGE_SECTION_HEADER)    \
-    ((UINT_PTR)ntheader +    \
-     FIELD_OFFSET( PE_IMAGE_NT_HEADERS64, OptionalHeader ) +    \
-     ((PE_PIMAGE_NT_HEADERS64)(ntheader))->FileHeader.SizeOfOptionalHeader    \
-    ))
+	typedef struct _IMAGE_NT_HEADERS {
+		DWORD Signature;
+		IMAGE_FILE_HEADER FileHeader;
+		IMAGE_OPTIONAL_HEADER32 OptionalHeader;
+	} IMAGE_NT_HEADERS32, *PIMAGE_NT_HEADERS32, PE_IMAGE_NT_HEADERS32, *PE_PIMAGE_NT_HEADERS32;
 
-#define PE_FIRST_SECTION32( ntheader ) ((PE_PIMAGE_SECTION_HEADER)    \
-    ((UINT_PTR)ntheader +    \
-     FIELD_OFFSET( PE_IMAGE_NT_HEADERS32, OptionalHeader ) +    \
-     ((PE_PIMAGE_NT_HEADERS32)(ntheader))->FileHeader.SizeOfOptionalHeader    \
-    ))
+	typedef struct _IMAGE_ROM_HEADERS {
+		IMAGE_FILE_HEADER FileHeader;
+		IMAGE_ROM_OPTIONAL_HEADER OptionalHeader;
+	} IMAGE_ROM_HEADERS, *PIMAGE_ROM_HEADERS;
 
-/*
- * Non-COFF Object file header
- */
-#if 0
-// XXX disabled for now, due to CLSID type inconsistency
-typedef struct ANON_OBJECT_HEADER {
-    WORD    Sig1;            // Must be IMAGE_FILE_MACHINE_UNKNOWN
-    WORD    Sig2;            // Must be 0xffff
-    WORD    Version;         // >= 1 (implies the CLSID field is present)
-    WORD    Machine;
-    DWORD   TimeDateStamp;
-    CLSID   ClassID;         // Used to invoke CoCreateInstance
-    DWORD   SizeOfData;      // Size of data that follows the header
-} ANON_OBJECT_HEADER;
+	#define PE_FIRST_SECTION64( ntheader ) ((PE_PIMAGE_SECTION_HEADER)    \
+		((UINT_PTR)ntheader +    \
+		 FIELD_OFFSET( PE_IMAGE_NT_HEADERS64, OptionalHeader ) +    \
+		 ((PE_PIMAGE_NT_HEADERS64)(ntheader))->FileHeader.SizeOfOptionalHeader    \
+		))
 
-typedef struct ANON_OBJECT_HEADER_V2 {
-    WORD    Sig1;            // Must be IMAGE_FILE_MACHINE_UNKNOWN
-    WORD    Sig2;            // Must be 0xffff
-    WORD    Version;         // >= 2 (implies the Flags field is present - otherwise V1)
-    WORD    Machine;
-    DWORD   TimeDateStamp;
-    CLSID   ClassID;         // Used to invoke CoCreateInstance
-    DWORD   SizeOfData;      // Size of data that follows the header
-    DWORD   Flags;           // 0x1 -> contains metadata
-    DWORD   MetaDataSize;    // Size of CLR metadata
-    DWORD   MetaDataOffset;  // Offset of CLR metadata
-} ANON_OBJECT_HEADER_V2;
-#endif
+	#define PE_FIRST_SECTION32( ntheader ) ((PE_PIMAGE_SECTION_HEADER)    \
+		((UINT_PTR)ntheader +    \
+		 FIELD_OFFSET( PE_IMAGE_NT_HEADERS32, OptionalHeader ) +    \
+		 ((PE_PIMAGE_NT_HEADERS32)(ntheader))->FileHeader.SizeOfOptionalHeader    \
+		))
+	/*
+	/*
+	 * Non-COFF Object file header
+	 */
+	/*
+	#if 0
+		// XXX disabled for now, due to CLSID type inconsistency
+		typedef struct ANON_OBJECT_HEADER {
+			WORD    Sig1;            // Must be IMAGE_FILE_MACHINE_UNKNOWN
+			WORD    Sig2;            // Must be 0xffff
+			WORD    Version;         // >= 1 (implies the CLSID field is present)
+			WORD    Machine;
+			DWORD   TimeDateStamp;
+			CLSID   ClassID;         // Used to invoke CoCreateInstance
+			DWORD   SizeOfData;      // Size of data that follows the header
+		} ANON_OBJECT_HEADER;
 
-/*
- * Section header format.
- */
-#define SHORT_NAME_SIZE 8
+		typedef struct ANON_OBJECT_HEADER_V2 {
+			WORD    Sig1;            // Must be IMAGE_FILE_MACHINE_UNKNOWN
+			WORD    Sig2;            // Must be 0xffff
+			WORD    Version;         // >= 2 (implies the Flags field is present - otherwise V1)
+			WORD    Machine;
+			DWORD   TimeDateStamp;
+			CLSID   ClassID;         // Used to invoke CoCreateInstance
+			DWORD   SizeOfData;      // Size of data that follows the header
+			DWORD   Flags;           // 0x1 -> contains metadata
+			DWORD   MetaDataSize;    // Size of CLR metadata
+			DWORD   MetaDataOffset;  // Offset of CLR metadata
+		} ANON_OBJECT_HEADER_V2;
+	#endif //#if 0
+	*/
+	/*
+	 * Section header format.
+	 */
+	#define SHORT_NAME_SIZE 8
 
-typedef struct _IMAGE_SECTION_HEADER {
-    BYTE    Name[SHORT_NAME_SIZE];
-    union {
-        DWORD   PhysicalAddress;
-        DWORD   VirtualSize;
-    } Misc;
-    DWORD   VirtualAddress;
-    DWORD   SizeOfRawData;
-    DWORD   PointerToRawData;
-    DWORD   PointerToRelocations;
-    DWORD   PointerToLinenumbers;
-    WORD    NumberOfRelocations;
-    WORD    NumberOfLinenumbers;
-    DWORD   Characteristics;
-} IMAGE_SECTION_HEADER, *PIMAGE_SECTION_HEADER, PE_IMAGE_SECTION_HEADER, *PE_PIMAGE_SECTION_HEADER;
+	typedef struct _IMAGE_SECTION_HEADER {
+		BYTE    Name[SHORT_NAME_SIZE];
+		union {
+			DWORD   PhysicalAddress;
+			DWORD   VirtualSize;
+		} Misc;
+		DWORD   VirtualAddress;
+		DWORD   SizeOfRawData;
+		DWORD   PointerToRawData;
+		DWORD   PointerToRelocations;
+		DWORD   PointerToLinenumbers;
+		WORD    NumberOfRelocations;
+		WORD    NumberOfLinenumbers;
+		DWORD   Characteristics;
+	} IMAGE_SECTION_HEADER, *PIMAGE_SECTION_HEADER, PE_IMAGE_SECTION_HEADER, *PE_PIMAGE_SECTION_HEADER;
 
-#define IMAGE_SECTION_HEADER_SIZE 40
+	#define IMAGE_SECTION_HEADER_SIZE 40
+
+#endif //#ifndef USE_WINNT
 
 /*
  * Section characteristics.
@@ -457,6 +461,7 @@ enum section_charact
     SCN_SCALE_INDEX = 0x00000001  // Tls index is scaled
 };
 
+#ifndef USE_WINNT
 #include "../win_hdrs/pshpack2.h"                       // Symbols, relocs, and linenumbers are 2 byte packed
 
 /*
@@ -481,6 +486,7 @@ typedef struct _IMAGE_SYMBOL {
 typedef IMAGE_SYMBOL UNALIGNED *PIMAGE_SYMBOL;
 
 #define IMAGE_SYMBOL_SIZE 18
+#endif //#ifndef USE_WINNT
 
 /*
  * Section values.
@@ -577,6 +583,8 @@ enum packing {
     PCK_TSHIFT = 2
 };
 
+
+#ifndef USE_WINNT
 
 /*
  * Auxiliary entry format.
@@ -1266,7 +1274,7 @@ typedef struct _IMAGE_RESOURCE_DIRECTORY {
 #define RESOURCE_DATA_IS_DIRECTORY     0x80000000
 #endif
 
-namespace pe {
+#ifndef USE_WINNT
 
     /*
     * Each directory contains the 32-bit Name of the entry and an offset,
@@ -1288,7 +1296,7 @@ namespace pe {
             struct {
                 DWORD NameOffset : 31;
                 DWORD NameIsString : 1;
-            } name;
+            };
             DWORD   Name;
             WORD    Id;
         };
@@ -1297,50 +1305,49 @@ namespace pe {
             struct {
                 DWORD   OffsetToDirectory : 31;
                 DWORD   DataIsDirectory : 1;
-            } dir;
+            };
         };
     } IMAGE_RESOURCE_DIRECTORY_ENTRY, *PIMAGE_RESOURCE_DIRECTORY_ENTRY;
 
-}; // namespace pe
 
-#ifndef USE_WINNT
-/*
- * For resource directory entries that have actual string names, the Name
- * field of the directory entry points to an object of the following type.
- * All of these string objects are stored together after the last resource
- * directory entry and before the first resource data object.  This minimizes
- * the impact of these variable length objects on the alignment of the fixed
- * size directory entry objects.
- */
+    /*
+     * For resource directory entries that have actual string names, the Name
+     * field of the directory entry points to an object of the following type.
+     * All of these string objects are stored together after the last resource
+     * directory entry and before the first resource data object.  This minimizes
+     * the impact of these variable length objects on the alignment of the fixed
+     * size directory entry objects.
+     */
 
-typedef struct _IMAGE_RESOURCE_DIRECTORY_STRING {
-    WORD    Length;
-    CHAR    NameString[1];
-} IMAGE_RESOURCE_DIRECTORY_STRING, *PIMAGE_RESOURCE_DIRECTORY_STRING;
+    typedef struct _IMAGE_RESOURCE_DIRECTORY_STRING {
+        WORD    Length;
+        CHAR    NameString[1];
+    } IMAGE_RESOURCE_DIRECTORY_STRING, *PIMAGE_RESOURCE_DIRECTORY_STRING;
 
 
-typedef struct _IMAGE_RESOURCE_DIR_STRING_U {
-    WORD    Length;
-    WCHAR   NameString[1];
-} IMAGE_RESOURCE_DIR_STRING_U, *PIMAGE_RESOURCE_DIR_STRING_U;
+    typedef struct _IMAGE_RESOURCE_DIR_STRING_U {
+        WORD    Length;
+        WCHAR   NameString[1];
+    } IMAGE_RESOURCE_DIR_STRING_U, *PIMAGE_RESOURCE_DIR_STRING_U;
 
 
-/*
- * Each resource data entry describes a leaf node in the resource directory
- * tree.  It contains an offset, relative to the beginning of the resource
- * directory of the data for the resource, a size field that gives the number
- * of bytes of data at that offset, a CodePage that should be used when
- * decoding code point values within the resource data.  Typically for new
- * applications the code page would be the unicode code page.
- */
+    /*
+     * Each resource data entry describes a leaf node in the resource directory
+     * tree.  It contains an offset, relative to the beginning of the resource
+     * directory of the data for the resource, a size field that gives the number
+     * of bytes of data at that offset, a CodePage that should be used when
+     * decoding code point values within the resource data.  Typically for new
+     * applications the code page would be the unicode code page.
+     */
 
-typedef struct _IMAGE_RESOURCE_DATA_ENTRY {
-    DWORD   OffsetToData;
-    DWORD   Size;
-    DWORD   CodePage;
-    DWORD   Reserved;
-} IMAGE_RESOURCE_DATA_ENTRY, *PIMAGE_RESOURCE_DATA_ENTRY;
-#endif
+    typedef struct _IMAGE_RESOURCE_DATA_ENTRY {
+        DWORD   OffsetToData;
+        DWORD   Size;
+        DWORD   CodePage;
+        DWORD   Reserved;
+    } IMAGE_RESOURCE_DATA_ENTRY, *PIMAGE_RESOURCE_DATA_ENTRY;
+    
+#endif // USE_WINNT
 
 namespace pe {
 
