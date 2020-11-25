@@ -17,7 +17,7 @@ addons:
 before_install:
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      brew update-reset;
+      #brew update-reset;
       brew upgrade cmake -v;
       brew install qt5;
       export PATH="/usr/local/opt/qt/bin:$PATH";
