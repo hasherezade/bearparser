@@ -321,7 +321,13 @@ offset_t PEFile::rvaToRaw(offset_t rva)
         }
         return bgnRaw + curr;
     }
-    if (rva >= this->getMappedSize(Executable::RAW)) return INVALID_ADDR;
+    if (rva >= this->getMappedSize(Executable::RAW)) {
+        return INVALID_ADDR;
+    }
+    if (rva >= this->hdrsSize()) {
+        // the address is in the cave between the headers and the first section: cannot be mapped
+        return INVALID_ADDR;
+    }
     // at this point we are sure that the address is within the raw size:
     return rva;
 }
