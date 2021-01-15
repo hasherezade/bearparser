@@ -139,23 +139,37 @@ pe::IMAGE_LOAD_CONFIG_D64_W10* LdConfigDirWrapper::getW10part64()
     return (pe::IMAGE_LOAD_CONFIG_D64_W10*) getW10part();
 }
 
-bool LdConfigDirWrapper::wrap()
+bool LdConfigDirWrapper::wrapSubentriesTable(size_t parentFieldId, size_t counterFieldId)
 {
-    clear();
-    if (!getPtr()) return false;
-
     bool isOk = false;
-    size_t count = this->getNumValue(SEH_COUNT, &isOk);
-    if (!isOk) return false;
-
+    size_t count = this->getNumValue(counterFieldId, &isOk);
+    if (!isOk) {
+        return false;
+    }
     for (size_t i = 0 ; i < count; i++) {
-        LdConfigEntryWrapper *entry = new LdConfigEntryWrapper(m_Exe, this, i);
-        if (!entry->getPtr()) {
+        LdConfigEntryWrapper *entry = new LdConfigEntryWrapper(m_Exe, this, i, parentFieldId);
+        if (!entry || !entry->getPtr()) {
             delete entry;
             break;
         }
         this->entries.push_back(entry);
+        this->subEntriesMap[parentFieldId].push_back(entry);
     }
+    return isOk;
+}
+
+bool LdConfigDirWrapper::wrap()
+{
+    clear();
+    if (!getPtr()) return false;
+    //SEHandlerTable:
+    wrapSubentriesTable(SEH_TABLE, SEH_COUNT);
+    
+    //GuardCFFunctionTable:
+    wrapSubentriesTable(GUARD_TABLE, GUARD_COUNT);
+    
+    wrapSubentriesTable(GUARD_LONG_JUMP_TABLE, GUARD_LONG_JUMP_COUNT);
+    wrapSubentriesTable(GUARD_ADDR_IAT_ENTRY_TABLE, GUARD_ADDR_IAT_ENTRY_COUNT);
     return true;
 }
 
@@ -166,16 +180,26 @@ void* LdConfigDirWrapper::getPtr()
     return ptr;
 }
 
-void* LdConfigDirWrapper::firstSEHPtr()
+void LdConfigDirWrapper::clear()
+{
+    std::map<uint32_t, std::vector<ExeNodeWrapper*> >::iterator mapItr;
+    for (mapItr = this->subEntriesMap.begin(); mapItr != this->subEntriesMap.end(); mapItr++) {
+        std::vector<ExeNodeWrapper*> &vec = mapItr->second;
+        vec.clear();
+    }
+    ExeNodeWrapper::clear();
+}
+
+void* LdConfigDirWrapper::firstSubEntryPtr(size_t parentId)
 {
     bool isOk = false;
-    uint64_t offset = this->getNumValue(SEH_TABLE, &isOk);
+    uint64_t offset = this->getNumValue(parentId, &isOk);
     if (!isOk) return NULL;
 
-    Executable::addr_type aT = containsAddrType(SEH_TABLE);
+    Executable::addr_type aT = containsAddrType(parentId);
     if (aT == Executable::NOT_ADDR) return NULL;
 
-    bufsize_t handlerSize = static_cast<bufsize_t>(this->getSEHSize());
+    bufsize_t handlerSize = static_cast<bufsize_t>(this->firstSubEntrySize(parentId));
     char *ptr = (char*) m_Exe->getContentAt(offset, aT, handlerSize);
     if (!ptr) return NULL;
 
@@ -354,27 +378,60 @@ Executable::addr_type LdConfigDirWrapper::containsAddrType(size_t fieldId, size_
     }
     return Executable::NOT_ADDR;
 }
-
+    
 //----------------
 
 void* LdConfigEntryWrapper::getPtr()
 {
     if (this->parentDir == NULL) return NULL;
-    void* first = parentDir->firstSEHPtr();
+    
+    void* first = parentDir->firstSubEntryPtr(this->parentFieldId);
     if (first == NULL) return NULL;
-
-    bufsize_t size = static_cast<bufsize_t>(parentDir->getSEHSize());
+    bufsize_t fieldSize = static_cast<bufsize_t>(parentDir->firstSubEntrySize(this->parentFieldId));
+    if (fieldSize == 0) return NULL;
+    
     offset_t offset = this->getOffset(first);
     if (offset == INVALID_ADDR) return NULL;
-
-    offset += (this->entryNum * size);
-    void *ptr = m_Exe->getContentAt(offset, Executable::RVA, size);
+    
+    //offset from the beginning:
+    offset_t fieldOffset = (this->entryNum * fieldSize);
+    offset += fieldOffset;
+    void *ptr = m_Exe->getContentAt(offset, Executable::RAW, fieldSize);
     return ptr;
 }
 
 bufsize_t LdConfigEntryWrapper::getSize()
 {
     if (this->parentDir == NULL) return 0;
-    return static_cast<bufsize_t>(parentDir->getSEHSize());
+    if (!getPtr()) return 0;
+    bufsize_t size = static_cast<bufsize_t>(parentDir->firstSubEntrySize(this->parentFieldId));
+    return size;
 }
 
+void* LdConfigEntryWrapper::getFieldPtr(size_t fieldId, size_t subField)
+{
+    void* ptr = getPtr();
+    if (!ptr) return NULL;
+
+    if (fieldId == NONE) {
+        return ptr;
+    }
+    size_t counter = getFieldsCount();
+    if (fieldId >= counter) return NULL;
+    if (fieldId == HANDLER_ADDR) {
+        return ptr;
+    }
+    return (void*)((ULONGLONG)ptr + sizeof(DWORD));
+}
+
+bufsize_t LdConfigEntryWrapper::getFieldSize(size_t fieldId, size_t subField)
+{
+    size_t count = this->getFieldsCount();
+    if (fieldId >= count) {
+        return 0;
+    }
+    if (fieldId == HANDLER_ADDR) {
+        return sizeof(DWORD);
+    }
+    return sizeof(BYTE);
+}

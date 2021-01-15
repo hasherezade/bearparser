@@ -14,7 +14,17 @@ ExeNodeWrapper::ExeNodeWrapper(Executable *exec, ExeNodeWrapper* parent, size_t 
 
 ExeNodeWrapper* ExeNodeWrapper::getEntryAt(size_t fieldId)
 {
-    return (fieldId < this->entries.size()) ? this->entries[fieldId] : NULL;
+    return this->getEntryAt(this->entries, fieldId);
+}
+
+ExeNodeWrapper* ExeNodeWrapper::getEntryAt(std::vector<ExeNodeWrapper*> &_entries, size_t fieldId)
+{
+    return (fieldId < _entries.size()) ? _entries[fieldId] : NULL;
+}
+
+size_t ExeNodeWrapper::getEntriesCount(std::vector<ExeNodeWrapper*> &_entries)
+{
+    return _entries.size();
 }
 
 void ExeNodeWrapper::clear()

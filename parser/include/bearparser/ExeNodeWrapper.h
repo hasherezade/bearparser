@@ -17,8 +17,8 @@ public:
     virtual void reloadMapping() {}
 
     virtual ExeNodeWrapper* getEntryAt(size_t fieldId);
-    virtual size_t getEntriesCount() { return entries.size(); }
-    virtual size_t getEntriesNum() { return entries.size(); }
+    virtual size_t getEntriesCount() { return getEntriesCount(this->entries); }
+    virtual size_t getEntriesNum() { return getEntriesCount(this->entries); }
     virtual size_t getSubFieldsCount() { return (this->entries.size() == 0) ? 0 : this->entries[0]->getFieldsCount(); }
 
     virtual ExeNodeWrapper* getParentNode() { return parentNode; }
@@ -38,6 +38,9 @@ public:
     virtual bufsize_t geEntrySize();
 
 protected:
+    size_t getEntriesCount(std::vector<ExeNodeWrapper*> &_entries);
+    ExeNodeWrapper* getEntryAt(std::vector<ExeNodeWrapper*> &_entries, size_t fieldId);
+    
     virtual void clear();
     virtual void addMapping(ExeNodeWrapper *entry) {}
     virtual bool loadNextEntry(size_t entryNum) { return false; } //TODO!
