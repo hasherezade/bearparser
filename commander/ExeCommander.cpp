@@ -131,8 +131,12 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
         std::cout << " " << w->getFieldName(i).toStdString() << "\t";
 
         size_t subfields = w->getSubFieldsCount();
+        if (subfields == 0) subfields = 1; //it may not have a sublist, but a single value
+        
         for (size_t y = 0; y < subfields; y++) {
             WrappedValue value = w->getWrappedValue(i, y);
+            if (!value.isValid()) break;
+            
             QString str = value.toQString();
 
             Executable::addr_type aType = w->containsAddrType(i, y);

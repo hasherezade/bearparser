@@ -30,7 +30,8 @@ public:
     data_type getDataType() { return m_Type; }
     QVariant getQVariant();
     QString toQString();
-
+    bool isValid() { return (m_Size != 0); }
+    
 protected:
     virtual QString getIntFormat();
 

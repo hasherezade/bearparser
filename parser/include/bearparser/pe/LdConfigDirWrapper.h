@@ -1,6 +1,18 @@
 #pragma once
 #include "DataDirEntryWrapper.h"
 
+#ifndef IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT
+#define IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT 0x00004000
+#endif
+
+#ifndef IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_MASK
+#define IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_MASK 0xF0000000
+#endif
+
+#ifndef IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_SHIFT
+#define IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_SHIFT 28
+#endif
+
 class LdConfigDirWrapper : public DataDirEntryWrapper
 {
 public:
@@ -85,12 +97,69 @@ public:
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
 
-    void *firstSEHPtr();
-    size_t getSEHSize() { return sizeof(DWORD); } //TODO: check how it is for PE64
-
     bool isW81() { return (this->getW81part() != NULL); }
     bool isW10() { return (this->getW10part() != NULL); }
+    
+    virtual ExeNodeWrapper* getSubfieldWrapper(size_t parentType, size_t fieldId)
+    {
+        std::vector<ExeNodeWrapper*> *subList = getSubEntriesList(parentType);
+        if (subList == NULL) return 0;
+        return this->getEntryAt(*subList, fieldId);
+    }
+    
+    virtual size_t getSubfieldWrapperCount(size_t parentType)
+    {
+        std::vector<ExeNodeWrapper*> *subList = getSubEntriesList(parentType);
+        if (subList == NULL) return 0;
+        return getEntriesCount(*subList);
+    }
+
+    virtual bool hasSubfieldWrapper(size_t parentType)
+    {
+        std::vector<ExeNodeWrapper*> *subList = getSubEntriesList(parentType);
+        if (subList == NULL) return false;
+        return true;
+    }
+
+    bool hasSupressionInfo()
+    {
+        bool isOk = false;
+        bool isSupressed = false;
+        uint64_t GuardFlags = this->getNumValue(GUARD_FLAGS, &isOk);
+        if (isOk) {
+            isSupressed = (GuardFlags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
+        }
+        return isSupressed;
+    }
+
+    size_t metadataSize()
+    {
+        bool isOk = false;
+        uint64_t GuardFlags = this->getNumValue(GUARD_FLAGS, &isOk);
+        if (!isOk) {
+            return 0;
+        }
+        bool isSupressed = (GuardFlags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
+        if (!isSupressed) {
+            return 0;
+        }
+        const size_t metadata_fields = ((GuardFlags & IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_MASK) >> IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_SHIFT);
+        return metadata_fields;
+    }
+    
+protected:
+    virtual void clear();
+    void* firstSubEntryPtr(size_t parentId);
+    
+    size_t firstSubEntrySize(size_t parentId)
+    {
+        const size_t metadata_fields = metadataSize();
+        return sizeof(DWORD) + (metadata_fields * sizeof(BYTE));
+    }
+    
 private:
+    bool wrapSubentriesTable(size_t parentFieldId, size_t counterFieldId);
+    
     inline bufsize_t getLdConfigDirSize();
     inline void* getLdConfigDirPtr();
     pe::IMAGE_LOAD_CONFIG_DIRECTORY32* ldConf32();
@@ -105,6 +174,19 @@ private:
     void* getW10part();
     pe::IMAGE_LOAD_CONFIG_D32_W10* getW10part32();
     pe::IMAGE_LOAD_CONFIG_D64_W10* getW10part64();
+    
+
+    std::vector<ExeNodeWrapper*>* getSubEntriesList(size_t parentType)
+    {
+        std::map<uint32_t, std::vector<ExeNodeWrapper*> >::iterator itr = subEntriesMap.find(parentType);
+        if (itr == subEntriesMap.end()){
+            return NULL;
+        }
+        return &(itr->second);
+    } 
+    
+    std::map<uint32_t, std::vector<ExeNodeWrapper*> > subEntriesMap;
+    friend class LdConfigEntryWrapper;
 };
 
 class LdConfigEntryWrapper : public ExeNodeWrapper
@@ -113,28 +195,52 @@ public:
     // fields :
     enum FieldID {
         NONE = FIELD_NONE,
-        SEHANDLER_ADDR,
+        HANDLER_ADDR,
+        METADATA,
         FIELD_COUNTER
     };
 
-    LdConfigEntryWrapper(Executable* pe, LdConfigDirWrapper *parentDir, size_t entryNumber)
-        : ExeNodeWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
+    LdConfigEntryWrapper(Executable* pe, LdConfigDirWrapper *_parentDir, size_t entryNumber, size_t _parentFieldId)
+        : ExeNodeWrapper(pe, _parentDir, entryNumber), 
+        parentFieldId(_parentFieldId)
+    {
+        this->parentDir = _parentDir;
+    }
 
     // full structure boundaries
     virtual void* getPtr();
     virtual bufsize_t getSize();
 
-    virtual QString getName() { return "SEHandler"; }
-    virtual size_t getFieldsCount() { return FIELD_COUNTER; }
-    virtual size_t getSubFieldsCount() { return 1; }
+    virtual QString getName() { return "Address"; }
+    
+    virtual size_t getFieldsCount()
+    {
+        if (!this->parentDir) return 1;
+        return 1 + this->parentDir->metadataSize();
+    }
 
     // specific field boundaries
-    virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE) { return getPtr();  }
-    virtual QString getFieldName(size_t fieldId) { return getName(); }
-    virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField) { return Executable::RVA; }
+    virtual void* getFieldPtr(size_t fieldId, size_t subField = FIELD_NONE);
+    
+    bufsize_t getFieldSize(size_t fieldId, size_t subField);
+    
+    virtual QString getFieldName(size_t fieldId)
+    {
+        if (fieldId == HANDLER_ADDR) {
+            return "Address";
+        }
+        return "Metadata";
+    }
+    
+    virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField)
+    {
+        if (fieldId == HANDLER_ADDR) {
+            return Executable::RVA;
+        }
+        return Executable::NOT_ADDR;
+    }
 
 private:
     LdConfigDirWrapper* parentDir;
-
+    size_t parentFieldId;
 };
-
