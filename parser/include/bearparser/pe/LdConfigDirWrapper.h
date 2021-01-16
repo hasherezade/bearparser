@@ -153,6 +153,10 @@ protected:
     
     size_t firstSubEntrySize(size_t parentId)
     {
+        if (parentId == LdConfigDirWrapper::SEH_TABLE) {
+            // SEH entries have no metadata
+            return sizeof(DWORD);
+        }
         const size_t metadata_fields = metadataSize();
         return sizeof(DWORD) + (metadata_fields * sizeof(BYTE));
     }
@@ -216,6 +220,9 @@ public:
     virtual size_t getFieldsCount()
     {
         if (!this->parentDir) return 1;
+        if (this->parentFieldId == LdConfigDirWrapper::SEH_TABLE) {
+            return 1;
+        }
         return 1 + this->parentDir->metadataSize();
     }
 
