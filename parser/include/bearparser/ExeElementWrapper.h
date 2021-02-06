@@ -38,7 +38,8 @@ public:
     virtual offset_t getFieldOffset(size_t fieldId, size_t subField = FIELD_NONE);
 
     virtual QString translateFieldContent(size_t fieldId) { return ""; }
-
+    virtual bool hasSubfieldWrapper(size_t parentType) { return false; }
+   
     virtual QString getFieldName(size_t fieldId) = 0;
     virtual WrappedValue getWrappedValue(size_t fieldId, size_t subField);
     virtual WrappedValue getWrappedValue(size_t fieldId) { return getWrappedValue(fieldId, FIELD_NONE); }
