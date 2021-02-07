@@ -230,10 +230,10 @@ QString RichHdrWrapper::translateFieldContent(size_t fieldId)
 
 const QString RichHdr_ProdIdToVSversion(WORD i)
 {
-    //list from: https://github.com/kirschju/richheader
-    if (i > 0x010e || i < 0)
-        return "";
-    if (i >= 0x00fd && i < (0x010e + 1))
+    //list based on: https://github.com/kirschju/richheader + pnx's notes
+    if (i >= 0x0106 && i < (0x010a + 1))
+        return "Visual Studio 2017 14.01+";
+    if (i >= 0x00fd && i < (0x0106))
         return "Visual Studio 2015 14.00";
     if (i >= 0x00eb && i < 0x00fd)
         return "Visual Studio 2013 12.10";
@@ -251,6 +251,12 @@ const QString RichHdr_ProdIdToVSversion(WORD i)
         return "Visual Studio 2005 08.00";
     if (i >= 0x005a && i < 0x006d)
         return "Visual Studio 2003 07.10";
+    if (i >= 0x0019 && i < (0x0045 + 1))
+        return "Visual Studio 2002 07.00";
+    if (i == 0xA || i == 0xB || i == 0xD || i == 0x15 || i == 0x16 )
+        return "Visual Studio 6.0 06.00";
+    if (i == 0x2 || i == 0x6 || i == 0xC || i == 0xE)
+        return "Visual Studio 97 05.00";
     if (i == 1)
         return "Visual Studio";
     return "";
@@ -531,8 +537,6 @@ const QString RichHdr_translateProdId(WORD prodId)
         case 0x010c: return "Utc1900_POGO_I_CPP";
         case 0x010d: return "Utc1900_POGO_O_C";
         case 0x010e: return "Utc1900_POGO_O_CPP";
-
     }
     return "?";
 }
-
