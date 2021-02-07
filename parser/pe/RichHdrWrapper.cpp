@@ -57,7 +57,10 @@ size_t RichHdrWrapper::getFieldsCount()
 void* RichHdrWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
     if (!this->richSign || !this->dansHdr) {
-        return 0;
+        return NULL;
+    }
+    if (this->compIdCounter == 0) {
+        return NULL;
     }
 
     const size_t cnt = this->compIdCounter - 1;
@@ -206,6 +209,11 @@ QString RichHdrWrapper::translateFieldContent(size_t fieldId)
             return QString::number(my_num, 16);
         }
     }
+    
+    if (fieldId == CHECKSUM + cnt) {
+        return QString::number(this->calcChecksum(), 16);
+    }
+    
     if (fieldId >= COMP_ID_1 && fieldId <= COMP_ID_1 + cnt)
     {
         uint64_t xorVal2 = xorVal | ((uint64_t)xorVal << sizeof(uint32_t)*8);
