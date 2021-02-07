@@ -172,8 +172,12 @@ void pe_util::hexdump(BYTE *buf, size_t bufSize, size_t pad)
 
 bool pe_util::endsWith(std::string str, std::string endStr)
 {
-    size_t sepPos = str.find_last_of(endStr);
-    if ( sepPos == (str.length() - 1)) {
+    if (str.length() < endStr.length()) {
+        return false;
+    } 
+    size_t pos = str.length() - endStr.length();
+    std::string str3 = str.substr(pos);   
+    if ( str3 == endStr ) {
         return true;
     }
     return false;
