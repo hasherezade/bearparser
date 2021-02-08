@@ -90,15 +90,13 @@ bufsize_t ExportDirWrapper::getSize()
 
 QString ExportDirWrapper::getName()
 {
-    QString infoName = "Export";
     char *name = this->getLibraryName();
-    if (!name) return infoName;
+    if (!name) return name;
 
     if (pe_util::isStrLonger(name, 100)) {
         return INVALID_NAME;
     }
-    infoName += ": "+ QString(name);
-    return infoName;
+    return QString(name);
 }
 
 void* ExportDirWrapper::getFieldPtr(size_t fId, size_t subField)
@@ -207,10 +205,8 @@ bool ExportEntryWrapper::isByOrdinal()
 QString ExportEntryWrapper::getName()
 {
     if (isByOrdinal()) {
-        uint64_t val = getOrdinal();
-        static char buf[0xFF];
-        snprintf(buf, 0xFF, "<ord: %llX>", static_cast<unsigned long long>(val));
-        return QString(buf);
+        uint32_t val = getOrdinal();
+        return QString().asprintf("<ord: %lX>", static_cast<unsigned long>(val));
     }
     char* name = getFuncName();
     if (name == NULL) return "";
@@ -240,7 +236,7 @@ uint32_t ExportEntryWrapper::getOrdinal()
     IMAGE_EXPORT_DIRECTORY* exp = parentDir->exportDir();
     if (exp == NULL) return 0;
 
-    DWORD ordinal = static_cast<DWORD>(this->entryNum) + exp->Base;
+    uint32_t ordinal = static_cast<uint32_t>(this->entryNum) + exp->Base;
     return ordinal;
 }
 
