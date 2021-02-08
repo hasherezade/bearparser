@@ -90,13 +90,12 @@ bufsize_t ExportDirWrapper::getSize()
 
 QString ExportDirWrapper::getName()
 {
-    char *name = this->getLibraryName();
-    if (!name) return name;
-
-    if (pe_util::isStrLonger(name, 100)) {
-        return INVALID_NAME;
+    QString infoName = "Export";
+    QString libName = this->getLibraryName();
+    if (libName.length() >= 0) {
+        infoName += ": "+ libName;
     }
-    return QString(name);
+    return infoName;
 }
 
 void* ExportDirWrapper::getFieldPtr(size_t fId, size_t subField)
@@ -150,7 +149,7 @@ Executable::addr_type ExportDirWrapper::containsAddrType(size_t fieldId, size_t 
     return Executable::NOT_ADDR;
 }
 
-char* ExportDirWrapper::getLibraryName()
+char* ExportDirWrapper::_getLibraryName()
 {
     bool isOk = false;
     offset_t offset = this->getNumValue(NAME_RVA, &isOk);
@@ -163,6 +162,17 @@ char* ExportDirWrapper::getLibraryName()
     if (!ptr) return NULL;
 
     return ptr;
+}
+
+QString ExportDirWrapper::getLibraryName()
+{
+    char *name = this->_getLibraryName();
+    if (!name) return name;
+
+    if (pe_util::isStrLonger(name, 100)) {
+        return INVALID_NAME;
+    }
+    return QString(name);
 }
 
 //----------------------------------------------------------------------------------------------------

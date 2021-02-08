@@ -35,12 +35,12 @@ public:
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
-
-    virtual char* getLibraryName();
+    virtual QString getLibraryName();
 
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
 
 protected:
+    char* _getLibraryName();
     void clear();
     size_t mapNames();
 
