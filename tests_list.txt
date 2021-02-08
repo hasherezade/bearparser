@@ -23,3 +23,6 @@ x86/kernel32 explist
 
 x86/cm_level2_32 tls
 x64/cm_level2_64 tls
+
+x64/test_case5_dll winfo6
+
