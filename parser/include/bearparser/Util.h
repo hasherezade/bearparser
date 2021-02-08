@@ -25,7 +25,7 @@ namespace Logger {
     enum dbg_level{
         D_ERROR = 0, D_WARNING, D_INFO, D_LVL_COUNT
     };
-	bool append(dbg_level lvl, const char* format, ...);
+    bool append(dbg_level lvl, const char* format, ...);
 };
 //----
 namespace pe_util {
