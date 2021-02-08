@@ -43,15 +43,6 @@ bool pe_util::isStrLonger(const char *inp, size_t maxLen)
     return true;
 }
 
-/*
-QString pe_util::getString(const char *inp, size_t maxInp, size_t maxBuf)
-{
-    if (maxInp < maxBuf) maxBuf = maxInp;
-    if (!inp) return "";
-    size_t asciiLen = pe_util::getAsciiLen(inp, maxBuf);
-    return QString::fromUtf8(inp, asciiLen);
-}*/
-
 size_t pe_util::getAsciiLen(const char *inp, size_t maxInp, bool acceptNotTerminated)
 {
     size_t i = 0;
