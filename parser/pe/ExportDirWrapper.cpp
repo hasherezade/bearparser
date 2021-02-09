@@ -216,7 +216,9 @@ QString ExportEntryWrapper::getName()
 {
     if (isByOrdinal()) {
         uint32_t val = getOrdinal();
-        return QString().asprintf("<ord: %lX>", static_cast<unsigned long>(val));
+        QString ordStr;
+        QTextStream(&ordStr) << "<ord: " << QString::number(val, 16) << ">";
+        return ordStr;
     }
     char* name = getFuncName();
     if (name == NULL) return "";
