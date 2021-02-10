@@ -27,3 +27,6 @@ x64/cm_level2_64 tls
 x64/test_case5_dll winfo6
 x64/hdr_test1 conv
 
+x86/bfsvc boundimp
+x86/bfsvc conv
+
