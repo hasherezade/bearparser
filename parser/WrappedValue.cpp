@@ -48,7 +48,7 @@ QString WrappedValue::toQString()
         uint64_t num = m_Owner->getNumValue(m_Offset, m_Size, &isOk);
         if (!isOk) return "INVALID";
         QString out;
-        return out.sprintf(getIntFormat().toStdString().c_str(), num);
+        return out.asprintf(getIntFormat().toStdString().c_str(), num);
     }
     return getQVariant().toString();
 }
