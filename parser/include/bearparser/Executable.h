@@ -63,6 +63,8 @@ public:
     virtual offset_t getImageBase() = 0;
     virtual offset_t getEntryPoint(Executable::addr_type aType = Executable::RVA) = 0;
     
+    virtual bufsize_t getImageSize() { return getMappedSize(Executable::VA); }
+    
     /* All Entry Points of the application, including: main EP, Exports, TLS Callbacks */
     virtual size_t getAllEntryPoints(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA) 
     {
