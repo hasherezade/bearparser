@@ -211,7 +211,7 @@ void ConvertAddrCommand::execute(CmdParams *params, CmdContext  *context)
 
     offset_t outOffset = exe->convertAddr(offset, addrFrom, addrTo);
     if (outOffset == INVALID_ADDR) {
-        std::cerr << "[WARNING] This address cannot be mapped" << std::endl;
+        std::cout << "[WARNING] This address cannot be mapped" << std::endl;
         return;
     }
     std::cout << "[" << cmd_util::addrTypeToStr(addrFrom) << "]";
