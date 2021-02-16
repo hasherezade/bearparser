@@ -12,6 +12,21 @@ bufsize_t LdConfigDirWrapper::getLdConfigDirSize()
     return dirSize;
 }
 
+bufsize_t LdConfigDirWrapper::getHdrDefinedSize()
+{
+    void *ldPtr = getLdConfigDirPtr();
+    if (ldPtr == NULL) return 0;
+    
+    bufsize_t realSize = 0;
+    if (m_Exe->getBitMode() == Executable::BITS_32) {
+        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) ldPtr)->Size;
+
+    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
+        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) ldPtr)->Size;
+    }
+    return realSize;
+}
+
 bufsize_t LdConfigDirWrapper::getW81partSize()
 {
     bufsize_t dirSize = 0;
@@ -63,14 +78,7 @@ void* LdConfigDirWrapper::getW81part()
     if (ldPtr == NULL) return NULL;
 
     size_t dirSize = getLdConfigDirSize();
-
-    size_t realSize = 0;
-    if (m_Exe->getBitMode() == Executable::BITS_32) {
-        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) ldPtr)->Size;
-
-    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
-        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) ldPtr)->Size;
-    }
+    size_t realSize = getHdrDefinedSize();
 
     if (realSize <= dirSize) return NULL;
 
@@ -104,24 +112,19 @@ void* LdConfigDirWrapper::getW10part()
     size_t dirSize = getLdConfigDirSize();
 
     //the size defined in the header:
-    size_t realSize = 0;
-    if (m_Exe->getBitMode() == Executable::BITS_32) {
-        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) ldPtr)->Size;
+    size_t realSize = getHdrDefinedSize();
 
-    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
-        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) ldPtr)->Size;
-    }
     if (realSize <= dirSize) return NULL;
 
     dirSize += getW81partSize(); // add the 8.1 part
     if (realSize <= dirSize) return NULL;
     void* ptr = NULL;
     // is there something more?
-    if (realSize >= dirSize) {
+    if (realSize > dirSize) {
         offset_t offset = this->getOffset(ldPtr);
         if (offset == INVALID_ADDR) return NULL;
         offset += dirSize;
-        //fetch the remaining part:
+
         ptr = m_Exe->getContentAt(offset, getW10partSize());
     }
     return ptr;

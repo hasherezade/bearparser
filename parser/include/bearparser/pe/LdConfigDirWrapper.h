@@ -164,7 +164,12 @@ protected:
 private:
     bool wrapSubentriesTable(size_t parentFieldId, size_t counterFieldId);
     
+    // get the size of the structure
     inline bufsize_t getLdConfigDirSize();
+    
+    // get the size that was defined in the header:
+    bufsize_t getHdrDefinedSize();
+    
     inline void* getLdConfigDirPtr();
     pe::IMAGE_LOAD_CONFIG_DIRECTORY32* ldConf32();
     pe::IMAGE_LOAD_CONFIG_DIRECTORY64* ldConf64();
