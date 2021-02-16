@@ -1,5 +1,8 @@
 #include "pe/LdConfigDirWrapper.h"
 
+// offset from the beginning of the structure
+#define getStructFieldOffset(STRUCT_PTR, FIELD) ((ULONGLONG) &(STRUCT_PTR->FIELD) - (ULONGLONG)STRUCT_PTR)
+
 bufsize_t LdConfigDirWrapper::getLdConfigDirSize()
 {
     bufsize_t dirSize = 0;
@@ -221,6 +224,7 @@ bufsize_t LdConfigDirWrapper::getSize()
 
 void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
 {
+   
     pe::IMAGE_LOAD_CONFIG_DIRECTORY32* ld32 = ldConf32();
     pe::IMAGE_LOAD_CONFIG_DIRECTORY64* ld64 = ldConf64();
     if (ld64 == NULL && ld32 == NULL) return NULL;
@@ -236,35 +240,74 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
     if (p10_32 == NULL && p10_64 == NULL) {
         if (fId > GUARD_FLAGS) return this->getPtr();
     }
-
+    //offset from the beginning of the IMAGE_LOAD_CONFIG_DIRECTORY_T strucure
+    offset_t fieldOffset = INVALID_ADDR;
     switch (fId) {
-        case SIZE : return (ld32) ? (void*) &ld32->Size :  (void*) &ld64->Size;
-        case TIMEST : return (ld32) ? (void*) &ld32->TimeDateStamp : (void*) &ld64->TimeDateStamp ;
-        case MAJOR_VER : return (ld32) ? (void*) &ld32->MajorVersion : (void*) &ld64->MajorVersion ;
-        case MINOR_VER : return (ld32) ? (void*) &ld32->MinorVersion : (void*) &ld64->MinorVersion ;
-        case GLOBAL_FLAGS_CLEAR : return (ld32) ? (void*) &ld32->GlobalFlagsClear :  (void*) &ld64->GlobalFlagsClear ;
-        case GLOBAL_FLAGS_SET : return (ld32) ? (void*) &ld32->GlobalFlagsSet :  (void*) &ld64->GlobalFlagsSet ;
-        case CRITICAT_SEC_TIMEOUT : return (ld32) ? (void*) &ld32->CriticalSectionDefaultTimeout:  (void*) &ld64->CriticalSectionDefaultTimeout ;
-        case DECOMMIT_FREE : return (ld32) ? (void*) &ld32->DeCommitFreeBlockThreshold : (void*) &ld64->DeCommitFreeBlockThreshold ;
+        case SIZE : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, Size) : getStructFieldOffset(ld64, Size);
+            break;
+        case TIMEST : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32,TimeDateStamp) : getStructFieldOffset(ld64, TimeDateStamp);
+            break;
+        case MAJOR_VER :
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32,MajorVersion) : getStructFieldOffset(ld64, MajorVersion);
+            break;
+        case MINOR_VER : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, MinorVersion) : getStructFieldOffset(ld64, MinorVersion);
+            break;
+        case GLOBAL_FLAGS_CLEAR : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, GlobalFlagsClear) : getStructFieldOffset(ld64, GlobalFlagsClear);
+            break;
+        case GLOBAL_FLAGS_SET : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, GlobalFlagsSet) : getStructFieldOffset(ld64, GlobalFlagsSet);
+            break;
+        case CRITICAT_SEC_TIMEOUT : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, CriticalSectionDefaultTimeout) : getStructFieldOffset(ld64, CriticalSectionDefaultTimeout);
+            break;
+        case DECOMMIT_FREE : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, DeCommitFreeBlockThreshold) : getStructFieldOffset(ld64, DeCommitFreeBlockThreshold);
+            break;
 
-        case DECOMMIT_TOTAL : return (ld32) ? (void*) &ld32->DeCommitTotalFreeThreshold :  (void*) &ld64->DeCommitTotalFreeThreshold ;
-        case LOCK_PREFIX : return (ld32) ? (void*) &ld32->LockPrefixTable :  (void*) &ld64->LockPrefixTable ;
-        case MAX_ALLOC : return (ld32) ? (void*) &ld32->MaximumAllocationSize :  (void*) &ld64->MaximumAllocationSize ;
-        case VIRTUAL_MEM : return (ld32) ? (void*) &ld32->VirtualMemoryThreshold :  (void*) &ld64->VirtualMemoryThreshold ;
+        case DECOMMIT_TOTAL : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, DeCommitTotalFreeThreshold) : getStructFieldOffset(ld64, DeCommitTotalFreeThreshold);
+            break;
+        case LOCK_PREFIX : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, LockPrefixTable) : getStructFieldOffset(ld64, LockPrefixTable);
+            break;
+        case MAX_ALLOC : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, MaximumAllocationSize) : getStructFieldOffset(ld64, MaximumAllocationSize);
+            break;
+        case VIRTUAL_MEM : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, VirtualMemoryThreshold) : getStructFieldOffset(ld64, VirtualMemoryThreshold);
+            break;
         case PROC_HEAP_FLAGS32 : //PROC_AFF_MASK64
         {
-            return (ld32) ? (void*) &ld32->ProcessHeapFlags : (void*) &ld64->ProcessAffinityMask ;
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, ProcessHeapFlags) : getStructFieldOffset(ld64, ProcessAffinityMask);
+            break;
         }
         case PROC_AFF_MASK32 : // PROC_HEAP_FLAGS64
         {
-            return (ld32) ? (void*) &ld32->ProcessAffinityMask : (void*) &ld64->ProcessHeapFlags ;
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, ProcessAffinityMask) : getStructFieldOffset(ld64, ProcessHeapFlags);
+            break;
         }
-        case CSD_VER : return (ld32) ? (void*) &ld32->CSDVersion :  (void*) &ld64->CSDVersion ;
-        case DEPENDENT_LOAD_FLAGS : return (ld32) ? (void*) &ld32->DependentLoadFlags :  (void*) &ld64->DependentLoadFlags ;
-        case EDIT_LIST : return (ld32) ? (void*) &ld32->EditList :  (void*) &ld64->EditList ;
-        case SEC_COOKIE : return (ld32) ? (void*) &ld32->SecurityCookie :  (void*) &ld64->SecurityCookie ;
-        case SEH_TABLE : return (ld32) ? (void*) &ld32->SEHandlerTable :  (void*) &ld64->SEHandlerTable ;
-        case SEH_COUNT : return (ld32) ? (void*) &ld32->SEHandlerCount :  (void*) &ld64->SEHandlerCount ;
+        case CSD_VER : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, CSDVersion) : getStructFieldOffset(ld64, CSDVersion);
+            break;
+        case DEPENDENT_LOAD_FLAGS : 
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, DependentLoadFlags) : getStructFieldOffset(ld64, DependentLoadFlags);
+            break;
+        case EDIT_LIST :
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, EditList) : getStructFieldOffset(ld64, EditList);
+            break;
+        case SEC_COOKIE :
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, SecurityCookie) : getStructFieldOffset(ld64, SecurityCookie);
+            break;
+        case SEH_TABLE :
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, SEHandlerTable) : getStructFieldOffset(ld64, SEHandlerTable);
+            break;
+        case SEH_COUNT :
+            fieldOffset = (ld32) ? getStructFieldOffset(ld32, SEHandlerCount) : getStructFieldOffset(ld64, SEHandlerCount);
+            break;
 
         // W8.1 part:
         case GUARD_CHECK : return (p32) ? (void*) &p32->GuardCFCheckFunctionPointer : (void*) &p64->GuardCFCheckFunctionPointer;
@@ -293,6 +336,14 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
         case HOT_PATCH_TABLE_OFFSET:  return (p10_32) ? (void*) &p10_32->HotPatchTableOffset : (void*) &p10_64->HotPatchTableOffset; // "HotPatchTableOffset";
         case RESERVED3:  return (p10_32) ? (void*) &p10_32->Reserved3 : (void*) &p10_64->Reserved3; // "Reserved3";
         case ENCLAVE_CONFIG_PTR:  return (p10_32) ? (void*) &p10_32->EnclaveConfigurationPointer : (void*) &p10_64->EnclaveConfigurationPointer; // "EnclaveConfigurationPointer";
+        //case VOLATILE_METADATA_PTR: return (p10_32) ? (void*) &p10_32->VolatileMetadataPointer : (void*) &p10_64->VolatileMetadataPointer; // "EnclaveConfigurationPointer";
+    }
+    if (fieldOffset != INVALID_ADDR) {
+        const offset_t realSize = this->getHdrDefinedSize();
+        if (fieldOffset > realSize) {
+            return this->getPtr();
+        }
+        return m_Exe->getContentAt(this->getOffset() + fieldOffset, 1);
     }
     return this->getPtr();
 }

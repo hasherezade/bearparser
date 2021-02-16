@@ -1420,6 +1420,7 @@ namespace pe {
         DWORD   HotPatchTableOffset;
         DWORD   Reserved3;
         DWORD   EnclaveConfigurationPointer;    // VA
+        //DWORD   VolatileMetadataPointer;        // VA
     } IMAGE_LOAD_CONFIG_D32_W10, *PIMAGE_LOAD_CONFIG_D32_W10;
 
     // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W10 :
@@ -1440,6 +1441,7 @@ namespace pe {
         DWORD      HotPatchTableOffset;
         DWORD      Reserved3;
         ULONGLONG  EnclaveConfigurationPointer;     // VA
+        //ULONGLONG  VolatileMetadataPointer;         // VA
     } IMAGE_LOAD_CONFIG_D64_W10, *PIMAGE_LOAD_CONFIG_D64_W10;
 
 #include "../win_hdrs/poppack.h"                        // Back to the previous packing

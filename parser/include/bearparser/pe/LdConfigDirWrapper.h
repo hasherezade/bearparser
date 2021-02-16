@@ -72,7 +72,8 @@ public:
         HOT_PATCH_TABLE_OFFSET,
         RESERVED3,
         ENCLAVE_CONFIG_PTR,
-        FIELD_COUNTER_W10 //end of old LoadConfigDir Win10
+        //VOLATILE_METADATA_PTR,
+        FIELD_COUNTER_W10 //end of LoadConfigDir Win10
     };
 
     LdConfigDirWrapper(PEFile* pe)
