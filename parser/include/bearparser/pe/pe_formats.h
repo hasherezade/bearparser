@@ -1327,6 +1327,13 @@ namespace pe {
 
  #include "../win_hdrs/pshpack4.h"                       // Use align 4
 
+    typedef struct _IMAGE_LOAD_CONFIG_CODE_INTEGRITY {
+        WORD    Flags;          // Flags to indicate if CI information is available, etc.
+        WORD    Catalog;        // 0xFFFF means not available
+        DWORD   CatalogOffset;
+        DWORD   Reserved;       // Additional bitmask to be defined later
+    } IMAGE_LOAD_CONFIG_CODE_INTEGRITY, *PIMAGE_LOAD_CONFIG_CODE_INTEGRITY;
+    
     typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY32 {
         DWORD   Size;
         DWORD   TimeDateStamp;
@@ -1350,7 +1357,32 @@ namespace pe {
         DWORD   SEHandlerCount;
         //if Size > sizeof(IMAGE_LOAD_CONFIG_DIRECTORY32)
         // IMAGE_LOAD_CONFIG_D32_W81 ldc_W81_part;
+        DWORD   GuardCFCheckFunctionPointer; //VA
+        DWORD   GuardCFDispatchFunctionPointer; //VA
+        DWORD   GuardCFFunctionTable; //VA
+        DWORD   GuardCFFunctionCount;
+        DWORD   GuardFlags;
+        
+        //Win10
+        IMAGE_LOAD_CONFIG_CODE_INTEGRITY CodeIntegrity;
+        DWORD   GuardAddressTakenIatEntryTable; // VA
+        DWORD   GuardAddressTakenIatEntryCount;
+        DWORD   GuardLongJumpTargetTable;       // VA
+        DWORD   GuardLongJumpTargetCount;
+        DWORD   DynamicValueRelocTable;         // VA
+        DWORD   CHPEMetadataPointer;
+        DWORD   GuardRFFailureRoutine;          // VA
+        DWORD   GuardRFFailureRoutineFunctionPointer; // VA
+        DWORD   DynamicValueRelocTableOffset;
+        WORD    DynamicValueRelocTableSection;
+        WORD    Reserved2;
+        DWORD   GuardRFVerifyStackPointerFunctionPointer; // VA
+        DWORD   HotPatchTableOffset;
+        DWORD   Reserved3;
+        DWORD   EnclaveConfigurationPointer;    // VA
+        //DWORD   VolatileMetadataPointer;        // VA
     } IMAGE_LOAD_CONFIG_DIRECTORY32, *PIMAGE_LOAD_CONFIG_DIRECTORY32;
+    // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W8.1 :
 
     typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY64 {
         DWORD      Size;
@@ -1375,56 +1407,12 @@ namespace pe {
         ULONGLONG  SEHandlerCount;
         // if Size > sizeof(IMAGE_LOAD_CONFIG_DIRECTORY64)
         // IMAGE_LOAD_CONFIG_D64_W81 ldc_W81_part;
-    } IMAGE_LOAD_CONFIG_DIRECTORY64, *PIMAGE_LOAD_CONFIG_DIRECTORY64;
-
-    // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W8.1 :
-    typedef struct _IMAGE_LOAD_CONFIG_D32_W81 {
-        DWORD   GuardCFCheckFunctionPointer; //VA
-        DWORD   GuardCFDispatchFunctionPointer; //VA
-        DWORD   GuardCFFunctionTable; //VA
-        DWORD   GuardCFFunctionCount;
-        DWORD   GuardFlags;
-    } IMAGE_LOAD_CONFIG_D32_W81, *PIMAGE_LOAD_CONFIG_D32_W81;
-
-    // IMAGE_LOAD_CONFIG_DIRECTORY64 extension for W8.1 :
-    typedef struct _IMAGE_LOAD_CONFIG_D64_W81 {
         ULONGLONG   GuardCFCheckFunctionPointer; //VA
         ULONGLONG   GuardCFDispatchFunctionPointer; //VA
         ULONGLONG   GuardCFFunctionTable; //VA
         ULONGLONG   GuardCFFunctionCount;
         DWORD       GuardFlags;
-    } IMAGE_LOAD_CONFIG_D64_W81, *PIMAGE_LOAD_CONFIG_D64_W81;
-
-    typedef struct _IMAGE_LOAD_CONFIG_CODE_INTEGRITY {
-        WORD    Flags;          // Flags to indicate if CI information is available, etc.
-        WORD    Catalog;        // 0xFFFF means not available
-        DWORD   CatalogOffset;
-        DWORD   Reserved;       // Additional bitmask to be defined later
-    } IMAGE_LOAD_CONFIG_CODE_INTEGRITY, *PIMAGE_LOAD_CONFIG_CODE_INTEGRITY;
-
-    // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W10 :
-    typedef struct _IMAGE_LOAD_CONFIG_D32_W10 {
-        IMAGE_LOAD_CONFIG_CODE_INTEGRITY CodeIntegrity;
-        DWORD   GuardAddressTakenIatEntryTable; // VA
-        DWORD   GuardAddressTakenIatEntryCount;
-        DWORD   GuardLongJumpTargetTable;       // VA
-        DWORD   GuardLongJumpTargetCount;
-        DWORD   DynamicValueRelocTable;         // VA
-        DWORD   CHPEMetadataPointer;
-        DWORD   GuardRFFailureRoutine;          // VA
-        DWORD   GuardRFFailureRoutineFunctionPointer; // VA
-        DWORD   DynamicValueRelocTableOffset;
-        WORD    DynamicValueRelocTableSection;
-        WORD    Reserved2;
-        DWORD   GuardRFVerifyStackPointerFunctionPointer; // VA
-        DWORD   HotPatchTableOffset;
-        DWORD   Reserved3;
-        DWORD   EnclaveConfigurationPointer;    // VA
-        //DWORD   VolatileMetadataPointer;        // VA
-    } IMAGE_LOAD_CONFIG_D32_W10, *PIMAGE_LOAD_CONFIG_D32_W10;
-
-    // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W10 :
-    typedef struct _IMAGE_LOAD_CONFIG_D64_W10 {
+        // Win 10 Ext.
         IMAGE_LOAD_CONFIG_CODE_INTEGRITY CodeIntegrity;
         ULONGLONG  GuardAddressTakenIatEntryTable; // VA
         ULONGLONG  GuardAddressTakenIatEntryCount;
@@ -1441,8 +1429,8 @@ namespace pe {
         DWORD      HotPatchTableOffset;
         DWORD      Reserved3;
         ULONGLONG  EnclaveConfigurationPointer;     // VA
-        //ULONGLONG  VolatileMetadataPointer;         // VA
-    } IMAGE_LOAD_CONFIG_D64_W10, *PIMAGE_LOAD_CONFIG_D64_W10;
+        //ULONGLONG  VolatileMetadataPointer;         // V
+    } IMAGE_LOAD_CONFIG_DIRECTORY64, *PIMAGE_LOAD_CONFIG_DIRECTORY64;
 
 #include "../win_hdrs/poppack.h"                        // Back to the previous packing
 

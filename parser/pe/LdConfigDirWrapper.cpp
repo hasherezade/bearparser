@@ -1,7 +1,7 @@
 #include "pe/LdConfigDirWrapper.h"
 
 // offset from the beginning of the structure
-#define getStructFieldOffset(STRUCT_PTR, FIELD) ((ULONGLONG) &(STRUCT_PTR->FIELD) - (ULONGLONG)STRUCT_PTR)
+#define getStructFieldOffset(STRUCT, FIELD) ((ULONGLONG) &(STRUCT.FIELD) - (ULONGLONG)&STRUCT)
 
 bufsize_t LdConfigDirWrapper::getLdConfigDirSize()
 {
@@ -17,132 +17,30 @@ bufsize_t LdConfigDirWrapper::getLdConfigDirSize()
 
 bufsize_t LdConfigDirWrapper::getHdrDefinedSize()
 {
-    void *ldPtr = getLdConfigDirPtr();
-    if (ldPtr == NULL) return 0;
+    const offset_t rva = getDirEntryAddress();
+    offset_t raw = m_Exe->rvaToRaw(rva);
+    if (raw == INVALID_ADDR) return 0;
     
-    bufsize_t realSize = 0;
+    offset_t offset = INVALID_ADDR;
+    
     if (m_Exe->getBitMode() == Executable::BITS_32) {
-        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) ldPtr)->Size;
+        pe::IMAGE_LOAD_CONFIG_DIRECTORY32 ld = { 0 };
+        offset = getStructFieldOffset(ld, Size);
 
     } else if (m_Exe->getBitMode() == Executable::BITS_64) {
-        realSize = ((pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) ldPtr)->Size;
+        pe::IMAGE_LOAD_CONFIG_DIRECTORY64 ld = { 0 };
+        offset = getStructFieldOffset(ld, Size);
     }
-    return realSize;
-}
-
-bufsize_t LdConfigDirWrapper::getW81partSize()
-{
-    bufsize_t dirSize = 0;
-
-    if (m_Exe->getBitMode() == Executable::BITS_32) {
-        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_D32_W81);
-    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
-        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_D64_W81);
-    }
-    return dirSize;
-}
-
-bufsize_t LdConfigDirWrapper::getW10partSize()
-{
-    bufsize_t dirSize = 0;
-
-    if (m_Exe->getBitMode() == Executable::BITS_32) {
-        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_D32_W10);
-    } else if (m_Exe->getBitMode() == Executable::BITS_64) {
-        dirSize = sizeof(pe::IMAGE_LOAD_CONFIG_D64_W10);
-    }
-    return dirSize;
+    DWORD* sizePtr = (DWORD*) m_Exe->getContentAt((raw + offset), sizeof(DWORD));
+    if (!sizePtr) return 0;
+    return bufsize_t(*sizePtr);
 }
 
 void* LdConfigDirWrapper::getLdConfigDirPtr()
 {
     offset_t rva = getDirEntryAddress();
-
-    bufsize_t dirSize = getLdConfigDirSize();
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, dirSize);
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, this->getSize());
     return ptr;
-}
-
-pe::IMAGE_LOAD_CONFIG_DIRECTORY32* LdConfigDirWrapper::ldConf32()
-{
-    if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
-    return (pe::IMAGE_LOAD_CONFIG_DIRECTORY32*) getLdConfigDirPtr();
-}
-
-pe::IMAGE_LOAD_CONFIG_DIRECTORY64* LdConfigDirWrapper::ldConf64()
-{
-    if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
-    return (pe::IMAGE_LOAD_CONFIG_DIRECTORY64*) getLdConfigDirPtr();
-}
-
-void* LdConfigDirWrapper::getW81part()
-{
-    void *ldPtr = getLdConfigDirPtr();
-    if (ldPtr == NULL) return NULL;
-
-    size_t dirSize = getLdConfigDirSize();
-    size_t realSize = getHdrDefinedSize();
-
-    if (realSize <= dirSize) return NULL;
-
-    if (realSize > dirSize) {
-        offset_t offset = this->getOffset(ldPtr);
-        if (offset == INVALID_ADDR) return NULL;
-
-        offset += dirSize;
-        return m_Exe->getContentAt(offset, getW81partSize());
-    }
-    return NULL;
-}
-
-pe::IMAGE_LOAD_CONFIG_D32_W81* LdConfigDirWrapper::getW81part32()
-{
-    if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
-    return (pe::IMAGE_LOAD_CONFIG_D32_W81*) getW81part();
-}
-
-pe::IMAGE_LOAD_CONFIG_D64_W81* LdConfigDirWrapper::getW81part64()
-{
-    if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
-    return (pe::IMAGE_LOAD_CONFIG_D64_W81*) getW81part();
-}
-
-void* LdConfigDirWrapper::getW10part()
-{
-    void *ldPtr = getLdConfigDirPtr();
-    if (ldPtr == NULL) return NULL;
-
-    size_t dirSize = getLdConfigDirSize();
-
-    //the size defined in the header:
-    size_t realSize = getHdrDefinedSize();
-
-    if (realSize <= dirSize) return NULL;
-
-    dirSize += getW81partSize(); // add the 8.1 part
-    if (realSize <= dirSize) return NULL;
-    void* ptr = NULL;
-    // is there something more?
-    if (realSize > dirSize) {
-        offset_t offset = this->getOffset(ldPtr);
-        if (offset == INVALID_ADDR) return NULL;
-        offset += dirSize;
-
-        ptr = m_Exe->getContentAt(offset, getW10partSize());
-    }
-    return ptr;
-}
-
-pe::IMAGE_LOAD_CONFIG_D32_W10* LdConfigDirWrapper::getW10part32()
-{
-    if (m_Exe->getBitMode() != Executable::BITS_32) return NULL;
-    return (pe::IMAGE_LOAD_CONFIG_D32_W10*) getW10part();
-}
-
-pe::IMAGE_LOAD_CONFIG_D64_W10* LdConfigDirWrapper::getW10part64()
-{
-    if (m_Exe->getBitMode() != Executable::BITS_64) return NULL;
-    return (pe::IMAGE_LOAD_CONFIG_D64_W10*) getW10part();
 }
 
 bool LdConfigDirWrapper::wrapSubentriesTable(size_t parentFieldId, size_t counterFieldId)
@@ -181,9 +79,7 @@ bool LdConfigDirWrapper::wrap()
 
 void* LdConfigDirWrapper::getPtr()
 {
-    void *ptr = ldConf32();
-    if (ptr == NULL) ptr = ldConf64();
-    return ptr;
+    return getLdConfigDirPtr();
 }
 
 void LdConfigDirWrapper::clear()
@@ -199,7 +95,7 @@ void LdConfigDirWrapper::clear()
 void* LdConfigDirWrapper::firstSubEntryPtr(size_t parentId)
 {
     bool isOk = false;
-    uint64_t offset = this->getNumValue(parentId, &isOk);
+    offset_t offset = this->getNumValue(parentId, &isOk);
     if (!isOk) return NULL;
 
     Executable::addr_type aT = containsAddrType(parentId);
@@ -214,138 +110,188 @@ void* LdConfigDirWrapper::firstSubEntryPtr(size_t parentId)
 
 bufsize_t LdConfigDirWrapper::getSize()
 {
-    if (getPtr() == NULL) return 0;
-    bufsize_t totalSize = getLdConfigDirSize();
-
-    if (this->isW81()) totalSize += this->getW81partSize();
-    if (this->isW10()) totalSize += this->getW10partSize();
+    //validate the offset
+    const offset_t rva = getDirEntryAddress();
+    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, 1);
+    if (!ptr) return 0;
+    
+    const bufsize_t hdrSize = this->getHdrDefinedSize();
+    const bufsize_t structSize = getLdConfigDirSize();
+    const bufsize_t totalSize = (hdrSize < structSize) ? hdrSize : structSize;
+    // is the size correct
+    ptr = m_Exe->getContentAt(rva, Executable::RVA, totalSize);
+    if (!ptr) return 0;
+    
     return totalSize;
 }
 
-void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
+offset_t  LdConfigDirWrapper::_getFieldDelta(bool is32b, size_t fId)
 {
-   
-    pe::IMAGE_LOAD_CONFIG_DIRECTORY32* ld32 = ldConf32();
-    pe::IMAGE_LOAD_CONFIG_DIRECTORY64* ld64 = ldConf64();
-    if (ld64 == NULL && ld32 == NULL) return NULL;
+    static pe::IMAGE_LOAD_CONFIG_DIRECTORY32 ld32 = { 0 };
+    static pe::IMAGE_LOAD_CONFIG_DIRECTORY64 ld64 = { 0 };
 
-    pe::IMAGE_LOAD_CONFIG_D32_W81* p32 = getW81part32();
-    pe::IMAGE_LOAD_CONFIG_D64_W81* p64 = getW81part64();
-    if (p32 == NULL && p64 == NULL) {
-        if (fId > SEH_COUNT) return this->getPtr();
-    }
-
-    pe::IMAGE_LOAD_CONFIG_D32_W10* p10_32 = getW10part32();
-    pe::IMAGE_LOAD_CONFIG_D64_W10* p10_64 = getW10part64();
-    if (p10_32 == NULL && p10_64 == NULL) {
-        if (fId > GUARD_FLAGS) return this->getPtr();
-    }
     //offset from the beginning of the IMAGE_LOAD_CONFIG_DIRECTORY_T strucure
     offset_t fieldOffset = INVALID_ADDR;
     switch (fId) {
         case SIZE : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, Size) : getStructFieldOffset(ld64, Size);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, Size) : getStructFieldOffset(ld64, Size);
             break;
         case TIMEST : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32,TimeDateStamp) : getStructFieldOffset(ld64, TimeDateStamp);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32,TimeDateStamp) : getStructFieldOffset(ld64, TimeDateStamp);
             break;
         case MAJOR_VER :
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32,MajorVersion) : getStructFieldOffset(ld64, MajorVersion);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32,MajorVersion) : getStructFieldOffset(ld64, MajorVersion);
             break;
         case MINOR_VER : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, MinorVersion) : getStructFieldOffset(ld64, MinorVersion);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, MinorVersion) : getStructFieldOffset(ld64, MinorVersion);
             break;
         case GLOBAL_FLAGS_CLEAR : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, GlobalFlagsClear) : getStructFieldOffset(ld64, GlobalFlagsClear);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GlobalFlagsClear) : getStructFieldOffset(ld64, GlobalFlagsClear);
             break;
         case GLOBAL_FLAGS_SET : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, GlobalFlagsSet) : getStructFieldOffset(ld64, GlobalFlagsSet);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GlobalFlagsSet) : getStructFieldOffset(ld64, GlobalFlagsSet);
             break;
         case CRITICAT_SEC_TIMEOUT : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, CriticalSectionDefaultTimeout) : getStructFieldOffset(ld64, CriticalSectionDefaultTimeout);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, CriticalSectionDefaultTimeout) : getStructFieldOffset(ld64, CriticalSectionDefaultTimeout);
             break;
         case DECOMMIT_FREE : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, DeCommitFreeBlockThreshold) : getStructFieldOffset(ld64, DeCommitFreeBlockThreshold);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, DeCommitFreeBlockThreshold) : getStructFieldOffset(ld64, DeCommitFreeBlockThreshold);
             break;
 
         case DECOMMIT_TOTAL : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, DeCommitTotalFreeThreshold) : getStructFieldOffset(ld64, DeCommitTotalFreeThreshold);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, DeCommitTotalFreeThreshold) : getStructFieldOffset(ld64, DeCommitTotalFreeThreshold);
             break;
         case LOCK_PREFIX : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, LockPrefixTable) : getStructFieldOffset(ld64, LockPrefixTable);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, LockPrefixTable) : getStructFieldOffset(ld64, LockPrefixTable);
             break;
         case MAX_ALLOC : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, MaximumAllocationSize) : getStructFieldOffset(ld64, MaximumAllocationSize);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, MaximumAllocationSize) : getStructFieldOffset(ld64, MaximumAllocationSize);
             break;
         case VIRTUAL_MEM : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, VirtualMemoryThreshold) : getStructFieldOffset(ld64, VirtualMemoryThreshold);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, VirtualMemoryThreshold) : getStructFieldOffset(ld64, VirtualMemoryThreshold);
             break;
         case PROC_HEAP_FLAGS32 : //PROC_AFF_MASK64
         {
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, ProcessHeapFlags) : getStructFieldOffset(ld64, ProcessAffinityMask);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, ProcessHeapFlags) : getStructFieldOffset(ld64, ProcessAffinityMask);
             break;
         }
         case PROC_AFF_MASK32 : // PROC_HEAP_FLAGS64
         {
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, ProcessAffinityMask) : getStructFieldOffset(ld64, ProcessHeapFlags);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, ProcessAffinityMask) : getStructFieldOffset(ld64, ProcessHeapFlags);
             break;
         }
         case CSD_VER : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, CSDVersion) : getStructFieldOffset(ld64, CSDVersion);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, CSDVersion) : getStructFieldOffset(ld64, CSDVersion);
             break;
         case DEPENDENT_LOAD_FLAGS : 
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, DependentLoadFlags) : getStructFieldOffset(ld64, DependentLoadFlags);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, DependentLoadFlags) : getStructFieldOffset(ld64, DependentLoadFlags);
             break;
         case EDIT_LIST :
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, EditList) : getStructFieldOffset(ld64, EditList);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, EditList) : getStructFieldOffset(ld64, EditList);
             break;
         case SEC_COOKIE :
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, SecurityCookie) : getStructFieldOffset(ld64, SecurityCookie);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, SecurityCookie) : getStructFieldOffset(ld64, SecurityCookie);
             break;
         case SEH_TABLE :
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, SEHandlerTable) : getStructFieldOffset(ld64, SEHandlerTable);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, SEHandlerTable) : getStructFieldOffset(ld64, SEHandlerTable);
             break;
         case SEH_COUNT :
-            fieldOffset = (ld32) ? getStructFieldOffset(ld32, SEHandlerCount) : getStructFieldOffset(ld64, SEHandlerCount);
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, SEHandlerCount) : getStructFieldOffset(ld64, SEHandlerCount);
             break;
 
         // W8.1 part:
-        case GUARD_CHECK : return (p32) ? (void*) &p32->GuardCFCheckFunctionPointer : (void*) &p64->GuardCFCheckFunctionPointer;
-        case GUARD_DISPATCH : return (p32) ? (void*) &p32->GuardCFDispatchFunctionPointer :  (void*) &p64->GuardCFDispatchFunctionPointer;
-        case GUARD_TABLE: return (p32) ? (void*) &p32->GuardCFFunctionTable :  (void*) &p64->GuardCFFunctionTable;
-        case GUARD_COUNT: return (p32) ? (void*) &p32->GuardCFFunctionCount :  (void*) &p64->GuardCFFunctionCount;
-        case GUARD_FLAGS: return (p32) ? (void*) &p32->GuardFlags:  (void*) &p64->GuardFlags;
+        case GUARD_CHECK : 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardCFCheckFunctionPointer) : getStructFieldOffset(ld64, GuardCFCheckFunctionPointer);
+            break;
+        case GUARD_DISPATCH : 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardCFDispatchFunctionPointer) : getStructFieldOffset(ld64, GuardCFDispatchFunctionPointer);
+            break;
+        case GUARD_TABLE: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardCFFunctionTable) : getStructFieldOffset(ld64, GuardCFFunctionTable);
+            break;
+        case GUARD_COUNT: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardCFFunctionCount) : getStructFieldOffset(ld64, GuardCFFunctionCount);
+            break;
+        case GUARD_FLAGS: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardFlags) : getStructFieldOffset(ld64, GuardFlags);
+            break;
 
         // W10 part:
-        case CODE_INTEGRITY_FLAGS: return (p10_32) ? (void*) &p10_32->CodeIntegrity.Flags : (void*) &p10_64->CodeIntegrity.Flags;
-        case CODE_INTEGRITY_CATALOG: return (p10_32) ? (void*) &p10_32->CodeIntegrity.Catalog : (void*) &p10_64->CodeIntegrity.Catalog;  //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.Catalog
-        case CODE_INTEGRITY_CATALOG_OFFSET:  return (p10_32) ? (void*) &p10_32->CodeIntegrity.CatalogOffset : (void*) &p10_64->CodeIntegrity.CatalogOffset;  //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.CatalogOffset
-        case CODE_INTEGRITY_RESERVED: return (p10_32) ? (void*) &p10_32->CodeIntegrity.Reserved : (void*) &p10_64->CodeIntegrity.Reserved; //IMAGE_LOAD_CONFIG_CODE_INTEGRITY.Reserved
-        case GUARD_ADDR_IAT_ENTRY_TABLE: return (p10_32) ? (void*) &p10_32->GuardAddressTakenIatEntryTable : (void*) &p10_64->GuardAddressTakenIatEntryTable; //
-        case GUARD_ADDR_IAT_ENTRY_COUNT: return (p10_32) ? (void*) &p10_32->GuardAddressTakenIatEntryCount : (void*) &p10_64->GuardAddressTakenIatEntryCount; // return "GuardAddressTakenIatEntryCount";
-        case GUARD_LONG_JUMP_TABLE:  return (p10_32) ? (void*) &p10_32->GuardLongJumpTargetTable : (void*) &p10_64->GuardLongJumpTargetTable; //GuardLongJumpTargetTable";
-        case GUARD_LONG_JUMP_COUNT:  return (p10_32) ? (void*) &p10_32->GuardLongJumpTargetCount : (void*) &p10_64->GuardLongJumpTargetCount; // "GuardLongJumpTargetCount";
-        case DYNAMIC_VAL_RELOC:  return (p10_32) ? (void*) &p10_32->DynamicValueRelocTable : (void*) &p10_64->DynamicValueRelocTable; // "DynamicValueRelocTable";
-        case CHPE_METADATA_PTR:  return (p10_32) ? (void*) &p10_32->CHPEMetadataPointer : (void*) &p10_64->CHPEMetadataPointer; // "CHPEMetadataPointer";
-        case GUARD_FAILURE_ROUTINE:  return (p10_32) ? (void*) &p10_32->GuardRFFailureRoutine : (void*) &p10_64->GuardRFFailureRoutine; // "GuardRFFailureRoutine";
-        case GUARD_FAILURE_ROUTINE_FUNC_PTR: return (p10_32) ? (void*) &p10_32->GuardRFFailureRoutineFunctionPointer : (void*) &p10_64->GuardRFFailureRoutineFunctionPointer;
-        case DYNAMIC_VAL_RELOC_TABLE_OFFSET: return (p10_32) ? (void*) &p10_32->DynamicValueRelocTableOffset : (void*) &p10_64->DynamicValueRelocTableOffset; // "DynamicValueRelocTableOffset";
-        case DYNAMIC_VAL_RELOC_TABLE_SECTION: return (p10_32) ? (void*) &p10_32->DynamicValueRelocTableSection : (void*) &p10_64->DynamicValueRelocTableSection; // "DynamicValueRelocTableSection";
-        case RESERVED2:  return (p10_32) ? (void*) &p10_32->Reserved2 : (void*) &p10_64->Reserved2; // "Reserved2";
-        case GUARD_VERIFY_STACK_PTR:  return (p10_32) ? (void*) &p10_32->GuardRFVerifyStackPointerFunctionPointer : (void*) &p10_64->GuardRFVerifyStackPointerFunctionPointer;
-        case HOT_PATCH_TABLE_OFFSET:  return (p10_32) ? (void*) &p10_32->HotPatchTableOffset : (void*) &p10_64->HotPatchTableOffset; // "HotPatchTableOffset";
-        case RESERVED3:  return (p10_32) ? (void*) &p10_32->Reserved3 : (void*) &p10_64->Reserved3; // "Reserved3";
-        case ENCLAVE_CONFIG_PTR:  return (p10_32) ? (void*) &p10_32->EnclaveConfigurationPointer : (void*) &p10_64->EnclaveConfigurationPointer; // "EnclaveConfigurationPointer";
+        case CODE_INTEGRITY_FLAGS: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, CodeIntegrity.Flags) : getStructFieldOffset(ld64, CodeIntegrity.Flags);
+            break;
+        case CODE_INTEGRITY_CATALOG: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, CodeIntegrity.Catalog) : getStructFieldOffset(ld64, CodeIntegrity.Catalog);
+            break;
+        case CODE_INTEGRITY_CATALOG_OFFSET:  
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, CodeIntegrity.CatalogOffset) : getStructFieldOffset(ld64, CodeIntegrity.CatalogOffset);
+            break;
+        case CODE_INTEGRITY_RESERVED: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, CodeIntegrity.Reserved) : getStructFieldOffset(ld64, CodeIntegrity.Reserved);
+            break;
+        case GUARD_ADDR_IAT_ENTRY_TABLE: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardAddressTakenIatEntryTable) : getStructFieldOffset(ld64, GuardAddressTakenIatEntryTable);
+            break;
+        case GUARD_ADDR_IAT_ENTRY_COUNT: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardAddressTakenIatEntryCount) : getStructFieldOffset(ld64, GuardAddressTakenIatEntryCount);
+            break;
+        case GUARD_LONG_JUMP_TABLE: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardLongJumpTargetTable) : getStructFieldOffset(ld64, GuardLongJumpTargetTable);
+            break;
+        case GUARD_LONG_JUMP_COUNT: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardLongJumpTargetCount) : getStructFieldOffset(ld64, GuardLongJumpTargetCount);
+            break;
+        case DYNAMIC_VAL_RELOC:
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, DynamicValueRelocTable) : getStructFieldOffset(ld64, DynamicValueRelocTable);
+            break;
+        case CHPE_METADATA_PTR: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, CHPEMetadataPointer) : getStructFieldOffset(ld64, CHPEMetadataPointer);
+            break;
+        case GUARD_FAILURE_ROUTINE: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardRFFailureRoutine) : getStructFieldOffset(ld64, GuardRFFailureRoutine);
+            break;
+        case GUARD_FAILURE_ROUTINE_FUNC_PTR: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardRFFailureRoutineFunctionPointer) : getStructFieldOffset(ld64, GuardRFFailureRoutineFunctionPointer);
+            break;
+        case DYNAMIC_VAL_RELOC_TABLE_OFFSET: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, DynamicValueRelocTableOffset) : getStructFieldOffset(ld64, DynamicValueRelocTableOffset);
+            break;
+        case DYNAMIC_VAL_RELOC_TABLE_SECTION:
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, DynamicValueRelocTableSection) : getStructFieldOffset(ld64, DynamicValueRelocTableSection);
+            break;
+        case RESERVED2: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, Reserved2) : getStructFieldOffset(ld64, Reserved2);
+            break;
+        case GUARD_VERIFY_STACK_PTR: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardRFVerifyStackPointerFunctionPointer) : getStructFieldOffset(ld64, GuardRFVerifyStackPointerFunctionPointer);
+            break;
+        case HOT_PATCH_TABLE_OFFSET: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, HotPatchTableOffset) : getStructFieldOffset(ld64, HotPatchTableOffset);
+            break;
+        case RESERVED3:
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, Reserved3) : getStructFieldOffset(ld64, Reserved3);
+            break;
+        case ENCLAVE_CONFIG_PTR:
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, EnclaveConfigurationPointer) : getStructFieldOffset(ld64, EnclaveConfigurationPointer);
+            break;
         //case VOLATILE_METADATA_PTR: return (p10_32) ? (void*) &p10_32->VolatileMetadataPointer : (void*) &p10_64->VolatileMetadataPointer; // "EnclaveConfigurationPointer";
     }
-    if (fieldOffset != INVALID_ADDR) {
+    return fieldOffset;
+}
+
+void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
+{
+    const bool is32b = (m_Exe->getBitMode() == Executable::BITS_32) ? true : false;
+    
+    offset_t fieldDelta = _getFieldDelta(is32b, fId);
+    if (fieldDelta != INVALID_ADDR) {
         const offset_t realSize = this->getHdrDefinedSize();
-        if (fieldOffset > realSize) {
-            return this->getPtr();
+        if (fieldDelta >= realSize) {
+            return getPtr();
         }
-        return m_Exe->getContentAt(this->getOffset() + fieldOffset, 1);
+        return m_Exe->getContentAt(this->getOffset() + fieldDelta, 1);
     }
-    return this->getPtr();
+    return getPtr();
 }
 
 QString LdConfigDirWrapper::getFieldName(size_t fieldId)
@@ -407,6 +353,7 @@ QString LdConfigDirWrapper::getFieldName(size_t fieldId)
         case HOT_PATCH_TABLE_OFFSET:  return "HotPatchTableOffset";
         case RESERVED3:  return "Reserved3";
         case ENCLAVE_CONFIG_PTR:  return "EnclaveConfigurationPointer";
+        case VOLATILE_METADATA_PTR:  return "VolatileMetadataPointer";
     }
     return getName();
 }
@@ -428,6 +375,7 @@ Executable::addr_type LdConfigDirWrapper::containsAddrType(size_t fieldId, size_
         case GUARD_FAILURE_ROUTINE_FUNC_PTR:
         case GUARD_VERIFY_STACK_PTR:
         case ENCLAVE_CONFIG_PTR:
+        case VOLATILE_METADATA_PTR: 
             return Executable::VA;
     }
     return Executable::NOT_ADDR;
