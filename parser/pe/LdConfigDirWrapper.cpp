@@ -289,11 +289,11 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
     if (fieldDelta != INVALID_ADDR) {
         const offset_t realSize = this->getHdrDefinedSize();
         if (fieldDelta >= realSize) {
-            return getPtr();
+            return NULL;
         }
         return m_Exe->getContentAt(this->getOffset() + fieldDelta, 1);
     }
-    return getPtr();
+    return NULL;
 }
 
 QString LdConfigDirWrapper::getFieldName(size_t fieldId)

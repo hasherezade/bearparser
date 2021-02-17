@@ -87,13 +87,11 @@ public:
 
     virtual size_t getFieldsCount()
     {
-        const void* startPtr = getPtr();
-        if (!startPtr) return 0;
         bool is32b = (m_Exe->getBitMode() == Executable::BITS_32) ? true : false;
         size_t fId = 0;
-        for (fId = 1; fId <= FIELD_COUNTER; fId++) {
+        for (fId = 0; fId <= FIELD_COUNTER; fId++) {
             void* ptr = getFieldPtr(fId, 0);
-            if (ptr == startPtr) break;
+            if (ptr == NULL) break;
         }
         return fId;
     }
