@@ -274,7 +274,9 @@ offset_t  LdConfigDirWrapper::_getFieldDelta(bool is32b, size_t fId)
         case ENCLAVE_CONFIG_PTR:
             fieldOffset = (is32b) ? getStructFieldOffset(ld32, EnclaveConfigurationPointer) : getStructFieldOffset(ld64, EnclaveConfigurationPointer);
             break;
-        //case VOLATILE_METADATA_PTR: return (p10_32) ? (void*) &p10_32->VolatileMetadataPointer : (void*) &p10_64->VolatileMetadataPointer; // "EnclaveConfigurationPointer";
+        case VOLATILE_METADATA_PTR: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, VolatileMetadataPointer) : getStructFieldOffset(ld64, VolatileMetadataPointer);
+            break;
     }
     return fieldOffset;
 }
