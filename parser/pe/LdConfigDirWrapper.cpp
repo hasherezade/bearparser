@@ -74,6 +74,8 @@ bool LdConfigDirWrapper::wrap()
     
     wrapSubentriesTable(GUARD_LONG_JUMP_TABLE, GUARD_LONG_JUMP_COUNT);
     wrapSubentriesTable(GUARD_ADDR_IAT_ENTRY_TABLE, GUARD_ADDR_IAT_ENTRY_COUNT);
+    
+    wrapSubentriesTable(GUARD_EH_CONT_TABLE, GUARD_EH_CONT_COUNT);
     return true;
 }
 
@@ -277,6 +279,12 @@ offset_t  LdConfigDirWrapper::_getFieldDelta(bool is32b, size_t fId)
         case VOLATILE_METADATA_PTR: 
             fieldOffset = (is32b) ? getStructFieldOffset(ld32, VolatileMetadataPointer) : getStructFieldOffset(ld64, VolatileMetadataPointer);
             break;
+        case GUARD_EH_CONT_TABLE: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardEHContinuationTable) : getStructFieldOffset(ld64, GuardEHContinuationTable);
+            break;
+        case GUARD_EH_CONT_COUNT: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardEHContinuationCount) : getStructFieldOffset(ld64, GuardEHContinuationCount);
+            break;
     }
     return fieldOffset;
 }
@@ -356,6 +364,8 @@ QString LdConfigDirWrapper::getFieldName(size_t fieldId)
         case RESERVED3:  return "Reserved3";
         case ENCLAVE_CONFIG_PTR:  return "EnclaveConfigurationPointer";
         case VOLATILE_METADATA_PTR:  return "VolatileMetadataPointer";
+        case GUARD_EH_CONT_TABLE:  return "GuardEHContinuationTable";
+        case GUARD_EH_CONT_COUNT:  return "GuardEHContinuationCount";
     }
     return getName();
 }
@@ -377,7 +387,8 @@ Executable::addr_type LdConfigDirWrapper::containsAddrType(size_t fieldId, size_
         case GUARD_FAILURE_ROUTINE_FUNC_PTR:
         case GUARD_VERIFY_STACK_PTR:
         case ENCLAVE_CONFIG_PTR:
-        case VOLATILE_METADATA_PTR: 
+        case VOLATILE_METADATA_PTR:
+        case GUARD_EH_CONT_TABLE:
             return Executable::VA;
     }
     return Executable::NOT_ADDR;

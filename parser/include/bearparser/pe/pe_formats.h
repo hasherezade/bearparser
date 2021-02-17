@@ -1381,6 +1381,9 @@ namespace pe {
         DWORD   Reserved3;
         DWORD   EnclaveConfigurationPointer;    // VA
         DWORD   VolatileMetadataPointer;        // VA
+        //newer Win 10 extensions:
+        DWORD   GuardEHContinuationTable;       // VA
+        DWORD   GuardEHContinuationCount;
     } IMAGE_LOAD_CONFIG_DIRECTORY32, *PIMAGE_LOAD_CONFIG_DIRECTORY32;
     // IMAGE_LOAD_CONFIG_DIRECTORY32 extension for W8.1 :
 
@@ -1430,6 +1433,9 @@ namespace pe {
         DWORD      Reserved3;
         ULONGLONG  EnclaveConfigurationPointer;     // VA
         ULONGLONG  VolatileMetadataPointer;         // VA
+        // newer Win 10 extensions:
+        ULONGLONG  GuardEHContinuationTable;        // VA
+        ULONGLONG  GuardEHContinuationCount;
     } IMAGE_LOAD_CONFIG_DIRECTORY64, *PIMAGE_LOAD_CONFIG_DIRECTORY64;
 
 #include "../win_hdrs/poppack.h"                        // Back to the previous packing
