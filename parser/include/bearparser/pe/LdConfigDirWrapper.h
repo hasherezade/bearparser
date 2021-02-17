@@ -46,8 +46,8 @@ public:
         SEC_COOKIE,
         SEH_TABLE,
         SEH_COUNT,
-        FIELD_COUNTER, //end of old LoadConfigDir
-        GUARD_CHECK = FIELD_COUNTER,
+        FIELD_COUNTER_OLD, //end of old LoadConfigDir
+        GUARD_CHECK = FIELD_COUNTER_OLD,
         GUARD_DISPATCH = GUARD_CHECK + 1,
         GUARD_TABLE,
         GUARD_COUNT,
@@ -72,7 +72,8 @@ public:
         HOT_PATCH_TABLE_OFFSET,
         RESERVED3,
         ENCLAVE_CONFIG_PTR,
-        FIELD_COUNTER_W10 //end of old LoadConfigDir Win10
+        VOLATILE_METADATA_PTR,
+        FIELD_COUNTER //end of LoadConfigDir Win10
     };
 
     LdConfigDirWrapper(PEFile* pe)
@@ -86,9 +87,15 @@ public:
 
     virtual size_t getFieldsCount()
     {
-        if (isW10()) return FIELD_COUNTER_W10;
-        if (isW81()) return FIELD_COUNTER_W81;
-        return FIELD_COUNTER;
+        const void* startPtr = getPtr();
+        if (!startPtr) return 0;
+        bool is32b = (m_Exe->getBitMode() == Executable::BITS_32) ? true : false;
+        size_t fId = 0;
+        for (fId = 1; fId <= FIELD_COUNTER; fId++) {
+            void* ptr = getFieldPtr(fId, 0);
+            if (ptr == startPtr) break;
+        }
+        return fId;
     }
 
     virtual size_t getSubFieldsCount() { return 1; }
@@ -96,9 +103,6 @@ public:
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
-
-    bool isW81() { return (this->getW81part() != NULL); }
-    bool isW10() { return (this->getW10part() != NULL); }
     
     virtual ExeNodeWrapper* getSubfieldWrapper(size_t parentType, size_t fieldId)
     {
@@ -162,6 +166,8 @@ protected:
     }
     
 private:
+    static offset_t  _getFieldDelta(bool is32b, size_t fId);
+    
     bool wrapSubentriesTable(size_t parentFieldId, size_t counterFieldId);
     
     // get the size of the structure
@@ -171,19 +177,6 @@ private:
     bufsize_t getHdrDefinedSize();
     
     inline void* getLdConfigDirPtr();
-    pe::IMAGE_LOAD_CONFIG_DIRECTORY32* ldConf32();
-    pe::IMAGE_LOAD_CONFIG_DIRECTORY64* ldConf64();
-
-    inline bufsize_t getW81partSize();
-    void* getW81part();
-    pe::IMAGE_LOAD_CONFIG_D32_W81* getW81part32();
-    pe::IMAGE_LOAD_CONFIG_D64_W81* getW81part64();
-
-    inline bufsize_t getW10partSize();
-    void* getW10part();
-    pe::IMAGE_LOAD_CONFIG_D32_W10* getW10part32();
-    pe::IMAGE_LOAD_CONFIG_D64_W10* getW10part64();
-    
 
     std::vector<ExeNodeWrapper*>* getSubEntriesList(size_t parentType)
     {
