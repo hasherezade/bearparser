@@ -74,6 +74,8 @@ bool LdConfigDirWrapper::wrap()
     
     wrapSubentriesTable(GUARD_LONG_JUMP_TABLE, GUARD_LONG_JUMP_COUNT);
     wrapSubentriesTable(GUARD_ADDR_IAT_ENTRY_TABLE, GUARD_ADDR_IAT_ENTRY_COUNT);
+    
+    wrapSubentriesTable(GUARD_EH_CONT_TABLE, GUARD_EH_CONT_COUNT);
     return true;
 }
 
@@ -385,7 +387,8 @@ Executable::addr_type LdConfigDirWrapper::containsAddrType(size_t fieldId, size_
         case GUARD_FAILURE_ROUTINE_FUNC_PTR:
         case GUARD_VERIFY_STACK_PTR:
         case ENCLAVE_CONFIG_PTR:
-        case VOLATILE_METADATA_PTR: 
+        case VOLATILE_METADATA_PTR:
+        case GUARD_EH_CONT_TABLE:
             return Executable::VA;
     }
     return Executable::NOT_ADDR;
