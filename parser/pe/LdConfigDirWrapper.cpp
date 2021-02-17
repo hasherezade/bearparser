@@ -277,6 +277,12 @@ offset_t  LdConfigDirWrapper::_getFieldDelta(bool is32b, size_t fId)
         case VOLATILE_METADATA_PTR: 
             fieldOffset = (is32b) ? getStructFieldOffset(ld32, VolatileMetadataPointer) : getStructFieldOffset(ld64, VolatileMetadataPointer);
             break;
+        case GUARD_EH_CONT_TABLE: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardEHContinuationTable) : getStructFieldOffset(ld64, GuardEHContinuationTable);
+            break;
+        case GUARD_EH_CONT_COUNT: 
+            fieldOffset = (is32b) ? getStructFieldOffset(ld32, GuardEHContinuationCount) : getStructFieldOffset(ld64, GuardEHContinuationCount);
+            break;
     }
     return fieldOffset;
 }
@@ -356,6 +362,8 @@ QString LdConfigDirWrapper::getFieldName(size_t fieldId)
         case RESERVED3:  return "Reserved3";
         case ENCLAVE_CONFIG_PTR:  return "EnclaveConfigurationPointer";
         case VOLATILE_METADATA_PTR:  return "VolatileMetadataPointer";
+        case GUARD_EH_CONT_TABLE:  return "GuardEHContinuationTable";
+        case GUARD_EH_CONT_COUNT:  return "GuardEHContinuationCount";
     }
     return getName();
 }

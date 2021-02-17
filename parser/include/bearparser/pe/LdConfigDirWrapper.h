@@ -73,6 +73,8 @@ public:
         RESERVED3,
         ENCLAVE_CONFIG_PTR,
         VOLATILE_METADATA_PTR,
+        GUARD_EH_CONT_TABLE, //VA
+        GUARD_EH_CONT_COUNT,
         FIELD_COUNTER //end of LoadConfigDir Win10
     };
 
