@@ -18,7 +18,12 @@ bufsize_t LdConfigDirWrapper::getLdConfigDirSize()
 bufsize_t LdConfigDirWrapper::getHdrDefinedSize()
 {
     const offset_t rva = getDirEntryAddress();
-    offset_t raw = m_Exe->rvaToRaw(rva);
+    offset_t raw = INVALID_ADDR;
+    try {
+        raw = m_Exe->rvaToRaw(rva);
+    } catch (CustomException &e) {
+        raw = INVALID_ADDR;
+    }
     if (raw == INVALID_ADDR) return 0;
     
     offset_t offset = INVALID_ADDR;
