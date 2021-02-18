@@ -90,12 +90,14 @@ public:
     virtual size_t getFieldsCount()
     {
         bool is32b = (m_Exe->getBitMode() == Executable::BITS_32) ? true : false;
-        size_t fId = 0;
-        for (fId = 0; fId <= FIELD_COUNTER; fId++) {
-            void* ptr = getFieldPtr(fId, 0);
-            if (ptr == NULL) break;
+        size_t fId = FIELD_COUNTER - 1;
+        void* ptr = NULL;
+        for (; fId > 0; fId--) {
+            ptr = getFieldPtr(fId, 0);
+            if (ptr != NULL) break;
         }
-        return fId;
+        if (ptr == NULL) return 0;
+        return (fId + 1);
     }
 
     virtual size_t getSubFieldsCount() { return 1; }
