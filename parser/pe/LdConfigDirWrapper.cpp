@@ -119,16 +119,17 @@ bufsize_t LdConfigDirWrapper::getSize()
 {
     //validate the offset
     const offset_t rva = getDirEntryAddress();
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, 1);
-    if (!ptr) return 0;
-    
+    if (!m_Exe->isValidAddr(rva, Executable::RVA)) {
+        return 0;
+    }
     const bufsize_t hdrSize = this->getHdrDefinedSize();
     const bufsize_t structSize = getLdConfigDirSize();
     const bufsize_t totalSize = (hdrSize < structSize) ? hdrSize : structSize;
     // is the size correct
-    ptr = m_Exe->getContentAt(rva, Executable::RVA, totalSize);
-    if (!ptr) return 0;
-    
+    const offset_t rvaEnd = rva + totalSize - 1;
+    if (!m_Exe->isValidAddr(rvaEnd, Executable::RVA)) {
+        return 0;
+    }
     return totalSize;
 }
 
@@ -300,8 +301,8 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
     
     offset_t fieldDelta = _getFieldDelta(is32b, fId);
     if (fieldDelta != INVALID_ADDR) {
-        const offset_t realSize = this->getHdrDefinedSize();
-        if (fieldDelta >= realSize) {
+        const offset_t hdrSize = this->getHdrDefinedSize();
+        if (fieldDelta >= hdrSize) {
             return NULL;
         }
         return m_Exe->getContentAt(this->getOffset() + fieldDelta, 1);
@@ -312,7 +313,7 @@ void* LdConfigDirWrapper::getFieldPtr(size_t fId, size_t subField)
 QString LdConfigDirWrapper::getFieldName(size_t fieldId)
 {
     if (!m_Exe) return "";
-    bool is32bit = (m_Exe->getBitMode() == Executable::BITS_32);
+    const bool is32bit = (m_Exe->getBitMode() == Executable::BITS_32);
     switch (fieldId) {
         case SIZE : return "Size";
         case TIMEST : return "TimeDateStamp";

@@ -89,14 +89,17 @@ public:
 
     virtual size_t getFieldsCount()
     {
-        bool is32b = (m_Exe->getBitMode() == Executable::BITS_32) ? true : false;
+        const offset_t realSize = getSize();
+        const bool is32b = (m_Exe->getBitMode() == Executable::BITS_32) ? true : false;
         size_t fId = FIELD_COUNTER - 1;
-        void* ptr = NULL;
-        for (; fId > 0; fId--) {
-            ptr = getFieldPtr(fId, 0);
-            if (ptr != NULL) break;
+        offset_t fieldDelta = INVALID_ADDR;
+        for (; fId != 0; fId--) {
+            fieldDelta = _getFieldDelta(is32b, fId);
+            if (fieldDelta < realSize) break;
         }
-        if (ptr == NULL) return 0;
+        if ((fieldDelta == INVALID_ADDR) || (fieldDelta > realSize)) {
+            return 0;
+        }
         return (fId + 1);
     }
 
