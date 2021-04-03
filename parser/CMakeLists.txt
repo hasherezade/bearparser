@@ -55,6 +55,7 @@ set (pe_hdrs
     include/bearparser/pe/ExceptionDirWrapper.h
     include/bearparser/pe/ResourceDirWrapper.h
     include/bearparser/pe/ResourceLeafWrapper.h
+    include/bearparser/pe/ClrDirWrapper.h
 )
 
 set (pe_rsrc_hdrs
@@ -105,6 +106,7 @@ set (pe_srcs
     pe/RelocDirWrapper.cpp
     pe/ExceptionDirWrapper.cpp
     pe/ResourceDirWrapper.cpp
+    pe/ClrDirWrapper.cpp
 )
 
 set (pe_rsrc_srcs

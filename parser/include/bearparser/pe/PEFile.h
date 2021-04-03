@@ -21,6 +21,7 @@
 #include "RelocDirWrapper.h"
 #include "ExceptionDirWrapper.h"
 #include "ResourceDirWrapper.h"
+#include "ClrDirWrapper.h"
 
 #include "rsrc/ResourcesAlbum.h"
 
@@ -105,6 +106,7 @@ public:
     {
         return (this->album == NULL) ? NULL : album->getResourcesOfType(typeId);
     }
+    
     DataDirEntryWrapper* getDataDirEntry(pe::dir_entry eType);
 
     BufferView* createSectionView(size_t secNum);
