@@ -41,8 +41,6 @@ typedef struct IMAGE_COR20_HEADER
 } IMAGE_COR20_HEADER, *PIMAGE_COR20_HEADER;
 */
 
-using namespace pe;
-
 pe::IMAGE_COR20_HEADER* ClrDirWrapper::clrDir()
 {
     offset_t rva = getDirEntryAddress();
@@ -66,7 +64,7 @@ void* ClrDirWrapper::getPtr()
 bufsize_t ClrDirWrapper::getSize()
 {
     if (!getPtr()) return 0;
-    return sizeof(IMAGE_COR20_HEADER);
+    return sizeof(pe::IMAGE_COR20_HEADER);
 }
 
 size_t ClrDirWrapper::getFieldsCount()
@@ -125,7 +123,7 @@ QString ClrDirWrapper::getFieldName(size_t fieldId)
             const pe::IMAGE_COR20_HEADER* d = clrDir();
             if (!d) return "EntryPoint";
             
-            if (d->Flags & COMIMAGE_FLAGS_NATIVE_ENTRYPOINT) {
+            if (d->Flags & pe::COMIMAGE_FLAGS_NATIVE_ENTRYPOINT) {
                 return "EntryPointRVA";
             } else {
                 return "EntryPointToken";
@@ -153,7 +151,7 @@ Executable::addr_type ClrDirWrapper::containsAddrType(size_t fieldId, size_t sub
         case ENTRY_POINT: {
             const pe::IMAGE_COR20_HEADER* d = clrDir();
             if (!d) return Executable::NOT_ADDR;
-            if (d->Flags & COMIMAGE_FLAGS_NATIVE_ENTRYPOINT) {
+            if (d->Flags & pe::COMIMAGE_FLAGS_NATIVE_ENTRYPOINT) {
                 return Executable::RVA;
             } else {
                 return Executable::NOT_ADDR;
@@ -174,22 +172,22 @@ Executable::addr_type ClrDirWrapper::containsAddrType(size_t fieldId, size_t sub
 QStringList ClrDirWrapper::translateFlags(DWORD flags)
 {
     QStringList list;
-    if (flags & COMIMAGE_FLAGS_ILONLY) {
+    if (flags & pe::COMIMAGE_FLAGS_ILONLY) {
         list.append("IL Only");
     }
-    if (flags & COMIMAGE_FLAGS_32BITREQUIRED) {
+    if (flags & pe::COMIMAGE_FLAGS_32BITREQUIRED) {
         list.append("32-bit required");
     }
-    if (flags & COMIMAGE_FLAGS_IL_LIBRARY) {
+    if (flags & pe::COMIMAGE_FLAGS_IL_LIBRARY) {
         list.append("IL Library");
     }
-    if (flags & COMIMAGE_FLAGS_STRONGNAMESIGNED) {
+    if (flags & pe::COMIMAGE_FLAGS_STRONGNAMESIGNED) {
         list.append("Strong Named Signed");
     }
-    if (flags & COMIMAGE_FLAGS_NATIVE_ENTRYPOINT) {
+    if (flags & pe::COMIMAGE_FLAGS_NATIVE_ENTRYPOINT) {
         list.append("Native EntryPoint");
     }
-    if (flags & COMIMAGE_FLAGS_TRACKDEBUGDATA) {
+    if (flags & pe::COMIMAGE_FLAGS_TRACKDEBUGDATA) {
         list.append("Track Debug Data");
     }
     return list;

@@ -2024,9 +2024,6 @@ namespace pe {
 /*
  * from : https://github.com/tpn/winsdk-10/blob/master/Include/10.0.10240.0/um/corhdr.h
  * */
-#ifndef __IMAGE_COR20_HEADER_DEFINED__
-#define __IMAGE_COR20_HEADER_DEFINED__
-
 typedef enum ReplacesCorHdrNumericDefines
 {
 // COM+ Header entry point flags.
@@ -2106,13 +2103,5 @@ typedef struct IMAGE_COR20_HEADER
     IMAGE_DATA_DIRECTORY    ManagedNativeHeader;
     
 } IMAGE_COR20_HEADER, *PIMAGE_COR20_HEADER;
-
-#else // !__IMAGE_COR20_HEADER_DEFINED__
-
-// <TODO>@TODO: This hack is required because we pull in the COM+ 2.0 PE header
-// definition from winnt.h, and the constant below hasn't propogated yet.</TODO>
-#define COR_VTABLE_FROM_UNMANAGED_RETAIN_APPDOMAIN 0x08
-
-#endif // __IMAGE_COR20_HEADER_DEFINED__
     
 }; // namespace pe
