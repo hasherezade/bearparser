@@ -30,6 +30,8 @@ public:
         FIELD_COUNTER
     };
 
+    static QStringList translateFlags(DWORD value);
+//---
     ClrDirWrapper(PEFile *pe)
         : DataDirEntryWrapper(pe, pe::DIR_COM_DESCRIPTOR) { wrap(); }
 
@@ -46,6 +48,8 @@ public:
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
+    
+    QString translateFieldContent(size_t fieldId);
     
 private:
     pe::IMAGE_COR20_HEADER* clrDir();

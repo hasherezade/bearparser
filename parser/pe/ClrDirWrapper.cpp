@@ -171,3 +171,38 @@ Executable::addr_type ClrDirWrapper::containsAddrType(size_t fieldId, size_t sub
 }
 
 
+QStringList ClrDirWrapper::translateFlags(DWORD flags)
+{
+    QStringList list;
+    if (flags & COMIMAGE_FLAGS_ILONLY) {
+        list.append("IL Only");
+    }
+    if (flags & COMIMAGE_FLAGS_32BITREQUIRED) {
+        list.append("32-bit required");
+    }
+    if (flags & COMIMAGE_FLAGS_IL_LIBRARY) {
+        list.append("IL Library");
+    }
+    if (flags & COMIMAGE_FLAGS_STRONGNAMESIGNED) {
+        list.append("Strong Named Signed");
+    }
+    if (flags & COMIMAGE_FLAGS_NATIVE_ENTRYPOINT) {
+        list.append("Native EntryPoint");
+    }
+    if (flags & COMIMAGE_FLAGS_TRACKDEBUGDATA) {
+        list.append("Track Debug Data");
+    }
+    return list;
+}
+
+QString ClrDirWrapper::translateFieldContent(size_t fieldId)
+{
+    if (fieldId != FLAGS) return "";
+
+    const pe::IMAGE_COR20_HEADER* d = clrDir();
+    if (!d) return "";
+
+    QStringList list = translateFlags(d->Flags);
+    return list.join(';');
+}
+
