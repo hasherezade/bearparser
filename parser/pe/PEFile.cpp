@@ -106,6 +106,7 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     dataDirEntries[pe::DIR_BASERELOC] = new RelocDirWrapper(this);
     dataDirEntries[pe::DIR_EXCEPTION] = new ExceptionDirWrapper(this);
     dataDirEntries[pe::DIR_RESOURCE] = new ResourceDirWrapper(this, album);
+    dataDirEntries[pe::DIR_COM_DESCRIPTOR] = new ClrDirWrapper(this);
 
     for (int i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
         this->wrappers[WR_DIR_ENTRY + i] = dataDirEntries[i];

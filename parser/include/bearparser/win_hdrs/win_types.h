@@ -56,5 +56,8 @@
 	#endif //VOID
 
 	#endif // __WIN_TYPES__
+	
+// offset from the beginning of the structure
+#define getStructFieldOffset(STRUCT, FIELD) ((ULONGLONG) &(STRUCT.FIELD) - (ULONGLONG)&STRUCT)
 
 #endif // #if _MSC_VER

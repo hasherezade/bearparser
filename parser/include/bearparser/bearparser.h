@@ -4,7 +4,7 @@
 #define BEARPARSER_VERSION "0.3"
 
 #include <bearparser/core.h>
-#include <bearparser/pefile.h>
+#include <bearparser/pe.h>
 
 #endif //BEARPARSER_H
 
