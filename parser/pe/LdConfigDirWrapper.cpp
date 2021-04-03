@@ -1,5 +1,8 @@
 #include "pe/LdConfigDirWrapper.h"
 
+// offset from the beginning of the structure
+#define getStructFieldOffset(STRUCT, FIELD) ((ULONGLONG) &(STRUCT.FIELD) - (ULONGLONG)&STRUCT)
+
 bufsize_t LdConfigDirWrapper::getLdConfigDirSize()
 {
     bufsize_t dirSize = 0;
