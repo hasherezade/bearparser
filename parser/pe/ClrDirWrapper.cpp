@@ -157,6 +157,7 @@ Executable::addr_type ClrDirWrapper::containsAddrType(size_t fieldId, size_t sub
                 return Executable::NOT_ADDR;
             }
         }
+        case RESOURCES_VA: 
         case META_DATA_VA:
         case STRONG_NAME_SIGNATURE_VA:
         case CODE_MANAGER_TABLE_VA: 
