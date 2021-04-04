@@ -1,17 +1,6 @@
 #pragma once
 #include "DataDirEntryWrapper.h"
-
-#ifndef IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT
-#define IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT 0x00004000
-#endif
-
-#ifndef IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_MASK
-#define IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_MASK 0xF0000000
-#endif
-
-#ifndef IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_SHIFT
-#define IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_SHIFT 28
-#endif
+#include <set>
 
 class LdConfigDirWrapper : public DataDirEntryWrapper
 {
@@ -77,6 +66,9 @@ public:
         GUARD_EH_CONT_COUNT,
         FIELD_COUNTER //end of LoadConfigDir Win10
     };
+	
+    static std::set<DWORD> getGuardFlagsSet(DWORD flags);
+    static QString translateGuardFlag(DWORD flags);
 
     LdConfigDirWrapper(PEFile* pe)
         : DataDirEntryWrapper(pe, pe::DIR_LOAD_CONFIG) { wrap(); }
@@ -136,7 +128,7 @@ public:
         bool isSupressed = false;
         uint64_t GuardFlags = this->getNumValue(GUARD_FLAGS, &isOk);
         if (isOk) {
-            isSupressed = (GuardFlags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
+            isSupressed = (GuardFlags & pe::IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
         }
         return isSupressed;
     }
@@ -148,14 +140,17 @@ public:
         if (!isOk) {
             return 0;
         }
-        bool isSupressed = (GuardFlags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
+        bool isSupressed = (GuardFlags & pe::IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
         if (!isSupressed) {
             return 0;
         }
-        const size_t metadata_fields = ((GuardFlags & IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_MASK) >> IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_SHIFT);
+        const size_t metadata_fields = ((GuardFlags & pe::IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_MASK) >> pe::IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_SHIFT);
         return metadata_fields;
     }
-    
+
+    QString translateGuardFlagsContent(char delim);
+    virtual QString translateFieldContent(size_t fieldId);
+
 protected:
     virtual void clear();
     void* firstSubEntryPtr(size_t parentId);
