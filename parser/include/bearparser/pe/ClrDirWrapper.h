@@ -1,12 +1,13 @@
 #pragma once
 
 #include "DataDirEntryWrapper.h"
+#include <set>
 
 class ClrDirWrapper : public DataDirEntryWrapper
 {
 public:
 
-    enum ClrDirFID {
+    enum FieldID {
         NONE = FIELD_NONE,
         CB,
         MAJOR_RUNTIME_VER,
@@ -30,7 +31,8 @@ public:
         FIELD_COUNTER
     };
 
-    static QStringList translateFlags(DWORD value);
+    static QString translateFlag(DWORD value);
+    static std::set<DWORD> getFlagsSet(DWORD flags);
 //---
     ClrDirWrapper(PEFile *pe)
         : DataDirEntryWrapper(pe, pe::DIR_COM_DESCRIPTOR) { wrap(); }

@@ -169,39 +169,66 @@ Executable::addr_type ClrDirWrapper::containsAddrType(size_t fieldId, size_t sub
     return Executable::NOT_ADDR;
 }
 
-
-QStringList ClrDirWrapper::translateFlags(DWORD flags)
+std::set<DWORD> ClrDirWrapper::getFlagsSet(DWORD flags)
 {
-    QStringList list;
+    const size_t clrFlagsCount = 6;
+    const DWORD clrFlags[clrFlagsCount] = {
+        pe::COMIMAGE_FLAGS_ILONLY,
+        pe::COMIMAGE_FLAGS_32BITREQUIRED,
+        pe::COMIMAGE_FLAGS_IL_LIBRARY,
+        pe::COMIMAGE_FLAGS_STRONGNAMESIGNED,
+        pe::COMIMAGE_FLAGS_NATIVE_ENTRYPOINT,
+        pe::COMIMAGE_FLAGS_TRACKDEBUGDATA
+    }; 
+    std::set<DWORD> allFlags;
+    for (size_t i = 0; i < clrFlagsCount; ++i) {
+        const DWORD nextFlag = clrFlags[i];
+        if (flags & nextFlag) {
+            allFlags.insert(nextFlag);
+        }
+    }
+    return allFlags;
+}
+
+QString ClrDirWrapper::translateFlag(DWORD flags)
+{
     if (flags & pe::COMIMAGE_FLAGS_ILONLY) {
-        list.append("IL Only");
+        return ("IL Only");
     }
     if (flags & pe::COMIMAGE_FLAGS_32BITREQUIRED) {
-        list.append("32-bit required");
+        return("32-bit required");
     }
     if (flags & pe::COMIMAGE_FLAGS_IL_LIBRARY) {
-        list.append("IL Library");
+        return ("IL Library");
     }
     if (flags & pe::COMIMAGE_FLAGS_STRONGNAMESIGNED) {
-        list.append("Strong Named Signed");
+        return("Strong Name Signed");
     }
     if (flags & pe::COMIMAGE_FLAGS_NATIVE_ENTRYPOINT) {
-        list.append("Native EntryPoint");
+        return("Native EntryPoint");
     }
     if (flags & pe::COMIMAGE_FLAGS_TRACKDEBUGDATA) {
-        list.append("Track Debug Data");
+        return("Track Debug Data");
     }
-    return list;
+    return "";
 }
 
 QString ClrDirWrapper::translateFieldContent(size_t fieldId)
 {
-    if (fieldId != FLAGS) return "";
-
     const pe::IMAGE_COR20_HEADER* d = clrDir();
     if (!d) return "";
-
-    QStringList list = translateFlags(d->Flags);
+    
+    if (fieldId != FLAGS) return "";
+    
+    std::set<DWORD> flagsSet = ClrDirWrapper::getFlagsSet(d->Flags);
+    std::set<DWORD>::iterator itr;
+    QStringList list;
+    for (itr = flagsSet.begin() ; itr != flagsSet.end(); itr++) {
+        const DWORD nextFlag = *itr;
+        const QString flagInfo = ClrDirWrapper::translateFlag(nextFlag);
+        if (flagInfo.length() == 0) continue;
+        list.append(flagInfo);
+    }
     return list.join(';');
 }
 
