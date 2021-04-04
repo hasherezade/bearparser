@@ -1,4 +1,4 @@
-g#!/bin/bash
+#!/bin/bash
 echo "Trying to autobuild bearparser..."
 
 #QT check
