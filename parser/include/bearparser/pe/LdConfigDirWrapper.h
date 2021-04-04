@@ -66,7 +66,7 @@ public:
         GUARD_EH_CONT_COUNT,
         FIELD_COUNTER //end of LoadConfigDir Win10
     };
-	
+
     static std::set<DWORD> getGuardFlagsSet(DWORD flags);
     static QString translateGuardFlag(DWORD flags);
 
@@ -128,7 +128,7 @@ public:
         bool isSupressed = false;
         uint64_t GuardFlags = this->getNumValue(GUARD_FLAGS, &isOk);
         if (isOk) {
-            isSupressed = (GuardFlags & pe::IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
+            isSupressed = (GuardFlags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
         }
         return isSupressed;
     }
@@ -140,11 +140,11 @@ public:
         if (!isOk) {
             return 0;
         }
-        bool isSupressed = (GuardFlags & pe::IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
+        bool isSupressed = (GuardFlags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
         if (!isSupressed) {
             return 0;
         }
-        const size_t metadata_fields = ((GuardFlags & pe::IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_MASK) >> pe::IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_SHIFT);
+        const size_t metadata_fields = ((GuardFlags & IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_MASK) >> IMAGE_GUARD_CF_FUNCTION_TABLE_SIZE_SHIFT);
         return metadata_fields;
     }
 

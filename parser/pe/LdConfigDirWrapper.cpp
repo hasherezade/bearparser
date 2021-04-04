@@ -404,19 +404,19 @@ std::set<DWORD> LdConfigDirWrapper::getGuardFlagsSet(DWORD flags)
 {
     const size_t guardFlagsCount = 13;
     const DWORD guardFlags[guardFlagsCount] = {
-        pe::IMAGE_GUARD_CF_INSTRUMENTED,
-        pe::IMAGE_GUARD_CFW_INSTRUMENTED,
-        pe::IMAGE_GUARD_CF_FUNCTION_TABLE_PRESENT,
-        pe::IMAGE_GUARD_SECURITY_COOKIE_UNUSED,
-        pe::IMAGE_GUARD_PROTECT_DELAYLOAD_IAT,
-        pe::IMAGE_GUARD_DELAYLOAD_IAT_IN_ITS_OWN_SECTION,
-        pe::IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT,
-        pe::IMAGE_GUARD_CF_ENABLE_EXPORT_SUPPRESSION,
-        pe::IMAGE_GUARD_CF_LONGJUMP_TABLE_PRESENT,
-        pe::IMAGE_GUARD_RF_INSTRUMENTED,
-        pe::IMAGE_GUARD_RF_ENABLE,
-        pe::IMAGE_GUARD_RF_STRICT,
-        pe::IMAGE_GUARD_RETPOLINE_PRESENT
+        IMAGE_GUARD_CF_INSTRUMENTED,
+        IMAGE_GUARD_CFW_INSTRUMENTED,
+        IMAGE_GUARD_CF_FUNCTION_TABLE_PRESENT,
+        IMAGE_GUARD_SECURITY_COOKIE_UNUSED,
+        IMAGE_GUARD_PROTECT_DELAYLOAD_IAT,
+        IMAGE_GUARD_DELAYLOAD_IAT_IN_ITS_OWN_SECTION,
+        IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT,
+        IMAGE_GUARD_CF_ENABLE_EXPORT_SUPPRESSION,
+        IMAGE_GUARD_CF_LONGJUMP_TABLE_PRESENT,
+        IMAGE_GUARD_RF_INSTRUMENTED,
+        IMAGE_GUARD_RF_ENABLE,
+        IMAGE_GUARD_RF_STRICT,
+        IMAGE_GUARD_RETPOLINE_PRESENT
     }; 
     std::set<DWORD> allFlags;
     for (size_t i = 0; i < guardFlagsCount; ++i) {
@@ -430,43 +430,43 @@ std::set<DWORD> LdConfigDirWrapper::getGuardFlagsSet(DWORD flags)
 
 QString LdConfigDirWrapper::translateGuardFlag(DWORD flags)
 {
-    if (flags & pe::IMAGE_GUARD_CF_INSTRUMENTED) {
+    if (flags & IMAGE_GUARD_CF_INSTRUMENTED) {
         return ("CF_INSTRUMENTED");
     }
-    if (flags & pe::IMAGE_GUARD_CFW_INSTRUMENTED) {
+    if (flags & IMAGE_GUARD_CFW_INSTRUMENTED) {
         return ("CFW_INSTRUMENTED");
     }
-    if (flags & pe::IMAGE_GUARD_CF_FUNCTION_TABLE_PRESENT) {
+    if (flags & IMAGE_GUARD_CF_FUNCTION_TABLE_PRESENT) {
         return ("CF_FUNCTION_TABLE_PRESENT");
     } 
-    if (flags & pe::IMAGE_GUARD_SECURITY_COOKIE_UNUSED) {
+    if (flags & IMAGE_GUARD_SECURITY_COOKIE_UNUSED) {
         return ("SECURITY_COOKIE_UNUSED");
     } 
-    if (flags & pe::IMAGE_GUARD_PROTECT_DELAYLOAD_IAT) {
+    if (flags & IMAGE_GUARD_PROTECT_DELAYLOAD_IAT) {
         return ("PROTECT_DELAYLOAD_IAT");
     } 
-    if (flags & pe::IMAGE_GUARD_DELAYLOAD_IAT_IN_ITS_OWN_SECTION) {
+    if (flags & IMAGE_GUARD_DELAYLOAD_IAT_IN_ITS_OWN_SECTION) {
         return ("DELAYLOAD_IAT_IN_ITS_OWN_SECTION");
     } 
-    if (flags & pe::IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT) {
+    if (flags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT) {
         return ("CF_EXPORT_SUPPRESSION_INFO_PRESENT");
     }
-    if (flags & pe::IMAGE_GUARD_CF_ENABLE_EXPORT_SUPPRESSION) {
+    if (flags & IMAGE_GUARD_CF_ENABLE_EXPORT_SUPPRESSION) {
         return ("CF_ENABLE_EXPORT_SUPPRESSION");
     }
-    if (flags & pe::IMAGE_GUARD_CF_LONGJUMP_TABLE_PRESENT) {
+    if (flags & IMAGE_GUARD_CF_LONGJUMP_TABLE_PRESENT) {
         return ("CF_LONGJUMP_TABLE_PRESENT");
     }
-    if (flags & pe::IMAGE_GUARD_RF_INSTRUMENTED) {
+    if (flags & IMAGE_GUARD_RF_INSTRUMENTED) {
         return ("RF_INSTRUMENTED");
     }
-    if (flags & pe::IMAGE_GUARD_RF_ENABLE) {
+    if (flags & IMAGE_GUARD_RF_ENABLE) {
         return ("RF_ENABLE");
     }
-    if (flags & pe::IMAGE_GUARD_RF_STRICT) {
+    if (flags & IMAGE_GUARD_RF_STRICT) {
         return ("RF_STRICT");
     }
-    if (flags & pe::IMAGE_GUARD_RETPOLINE_PRESENT) {
+    if (flags & IMAGE_GUARD_RETPOLINE_PRESENT) {
         return ("RETPOLINE_PRESENT");
     }
     return "";
