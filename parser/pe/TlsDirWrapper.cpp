@@ -83,7 +83,7 @@ void* TlsDirWrapper::getFieldPtr(size_t fId, size_t subField)
         case INDEX_ADDR : return t32 ? (void*) &t32->AddressOfIndex : (void*) &t64->AddressOfIndex;
         case CALLBACKS_ADDR : return t32 ? (void*) &t32->AddressOfCallBacks : (void*) &t64->AddressOfCallBacks;
         case ZEROF_SIZE : return t32 ? (void*) &t32->SizeOfZeroFill : (void*) &t64->SizeOfZeroFill;
-        case CHRARCT : return t32 ? (void*) &t32->Characteristics : (void*) &t64->Characteristics;
+        case CHARACT : return t32 ? (void*) &t32->Characteristics : (void*) &t64->Characteristics;
     }
     return this->getPtr();
 }
@@ -96,7 +96,7 @@ QString TlsDirWrapper::getFieldName(size_t fieldId)
         case INDEX_ADDR : return "AddressOfIndex";
         case CALLBACKS_ADDR : return "AddressOfCallBacks";
         case ZEROF_SIZE : return "SizeOfZeroFill";
-        case CHRARCT : return "Characteristics";
+        case CHARACT : return "Characteristics";
     }
     return getName();
 }

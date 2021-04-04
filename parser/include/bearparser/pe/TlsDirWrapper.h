@@ -17,7 +17,7 @@ public:
         INDEX_ADDR,
         CALLBACKS_ADDR,
         ZEROF_SIZE,
-        CHRARCT,
+        CHARACT,
         FIELD_COUNTER
     };
 
