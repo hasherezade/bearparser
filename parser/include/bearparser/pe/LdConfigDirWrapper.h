@@ -15,7 +15,7 @@ public:
     * */
     enum LdConfigDirFID {
         NONE = FIELD_NONE,
-        SIZE,
+        SIZE = 0,
         TIMEST,
         MAJOR_VER,
         MINOR_VER,

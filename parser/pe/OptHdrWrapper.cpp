@@ -335,6 +335,9 @@ Executable::addr_type OptHdrWrapper::containsAddrType(size_t fieldId, size_t sub
         case DATA_BASE:
             return Executable::RVA;
     }
+    if (fieldId == IMAGE_BASE) {
+        return Executable::VA;
+    }
     return Executable::NOT_ADDR;
 }
 

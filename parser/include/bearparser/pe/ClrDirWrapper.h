@@ -9,7 +9,7 @@ public:
 
     enum FieldID {
         NONE = FIELD_NONE,
-        CB,
+        CB = 0,
         MAJOR_RUNTIME_VER,
         MINOR_RUNTIME_VER,
         META_DATA_VA,
