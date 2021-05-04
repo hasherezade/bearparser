@@ -6,7 +6,7 @@ QT_VER=`qmake -v`
 QTV="version"
 if echo "$QT_VER" | grep -q "$QTV"; then
     QT_FOUND=`whereis qt5`
-    if echo "$QT_FOUND" | grep -q "lib"; then
+    if echo "$QT_FOUND" | grep -q "/qt5"; then
         echo "[+] Qt5 found!"
     else
         echo "Install Qt5 SDK first"
