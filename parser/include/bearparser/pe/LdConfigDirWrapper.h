@@ -148,7 +148,7 @@ public:
         return metadata_fields;
     }
 
-    QString translateGuardFlagsContent(char delim);
+    QString translateGuardFlagsContent(const QString &delim);
     virtual QString translateFieldContent(size_t fieldId);
 
 protected:

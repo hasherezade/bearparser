@@ -229,6 +229,6 @@ QString ClrDirWrapper::translateFieldContent(size_t fieldId)
         if (flagInfo.length() == 0) continue;
         list.append(flagInfo);
     }
-    return list.join(';');
+    return list.join(";");
 }
 

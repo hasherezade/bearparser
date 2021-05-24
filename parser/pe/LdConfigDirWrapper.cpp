@@ -472,7 +472,7 @@ QString LdConfigDirWrapper::translateGuardFlag(DWORD flags)
     return "";
 }
 
-QString LdConfigDirWrapper::translateGuardFlagsContent(char delim)
+QString LdConfigDirWrapper::translateGuardFlagsContent(const QString& delim)
 {
     bool isOk = false;
     DWORD GuardFlags = this->getNumValue(GUARD_FLAGS, &isOk);
@@ -494,7 +494,7 @@ QString LdConfigDirWrapper::translateGuardFlagsContent(char delim)
 QString LdConfigDirWrapper::translateFieldContent(size_t fieldId)
 {
     if (fieldId == GUARD_FLAGS) {
-        return translateGuardFlagsContent(';');;
+        return translateGuardFlagsContent(";");;
     }
     return "";
 }
