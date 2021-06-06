@@ -7,8 +7,6 @@ bearparser
 [![Rawsec's CyberSecurity Inventory](https://inventory.rawsec.ml/img/badges/Rawsec-inventoried-FF5050_flat.svg)](https://inventory.rawsec.ml/)
 
 Portable Executable parsing library<br/>
-WARNING: this is an early beta version, some elements are unfinished!<br/>
-Please report any bugs and remarks to: hasherezade@gmail.com<br/>
 
 Requires:
 + Qt5 SDK<br/>
