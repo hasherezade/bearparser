@@ -20,6 +20,13 @@ cmake -G "Unix Makefiles" -D USE_QT4=ON ../
 ```
 
 
-Read more on Wiki:
-===
+## Read more on Wiki:
+
 https://github.com/hasherezade/bearparser/wiki
+
+## PE-bear
+
+![](https://github.com/hasherezade/pe-bear-releases/blob/master/logo/main_ico.png)
+
+Check also PE-bear - a GUI application using `bearparser`:
++ https://github.com/hasherezade/pe-bear-releases
