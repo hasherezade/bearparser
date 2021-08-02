@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['raw_1687',['RAW',['../class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5badb8a64acd3f74166ea450698d025db3b',1,'Executable']]],
+  ['raw_5fdata_5faddr_1688',['RAW_DATA_ADDR',['../class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517cabab6dc58dcff413e7d06f5af2a4f8fae',1,'DebugDirWrapper']]],
+  ['raw_5fdata_5fptr_1689',['RAW_DATA_PTR',['../class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517ca352780db92e34d00bdc0ae8bfc731780',1,'DebugDirWrapper']]],
+  ['reloc_5fentry_5fval_1690',['RELOC_ENTRY_VAL',['../class_reloc_entry_wrapper.html#a43de8e3541d124b2211939a17bc8f37ca97433c0cb900e62cbe741e4de7a46480',1,'RelocEntryWrapper']]],
+  ['reloc_5fnum_1691',['RELOC_NUM',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730ae5de568545f864bc9fb1f1be9f5b69ce',1,'SectionHdrWrapper']]],
+  ['reloc_5fptr_1692',['RELOC_PTR',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730a301b90a5d811d3e7cd8f69ecc2451ff3',1,'SectionHdrWrapper']]],
+  ['res_1693',['RES',['../class_dos_hdr_wrapper.html#a7dcac0806ba5c5f16785f683c67d8980ac04f355a702130b0a18489a06dde2938',1,'DosHdrWrapper']]],
+  ['res2_1694',['RES2',['../class_dos_hdr_wrapper.html#a7dcac0806ba5c5f16785f683c67d8980afe8a1ce6486c538849b079deacbf1d55',1,'DosHdrWrapper']]],
+  ['reserved_1695',['RESERVED',['../class_resource_leaf_wrapper.html#a904178c6336a9b45c75bf250ca29ffe1a9a4ae215b9b8540ad21fe3bdd3502252',1,'ResourceLeafWrapper']]],
+  ['reserved2_1696',['RESERVED2',['../class_ld_config_dir_wrapper.html#af8859de691d95f0b9a37501e0e38ca45ab56928eeadf55442c81420149e3fc37e',1,'LdConfigDirWrapper']]],
+  ['reserved3_1697',['RESERVED3',['../class_ld_config_dir_wrapper.html#af8859de691d95f0b9a37501e0e38ca45ace66390b29be694b6ec08a348131a4be',1,'LdConfigDirWrapper']]],
+  ['resources_5fsize_1698',['RESOURCES_SIZE',['../class_clr_dir_wrapper.html#aaa5e1e4c6b5e5923e503ed967a109987aadcf2d4df5d3e68f64ec2bd2ebfb6725',1,'ClrDirWrapper']]],
+  ['resources_5fva_1699',['RESOURCES_VA',['../class_clr_dir_wrapper.html#aaa5e1e4c6b5e5923e503ed967a109987afe5cb5af8fe28ef89ad4ed4e6fbe6afa',1,'ClrDirWrapper']]],
+  ['revision_1700',['REVISION',['../class_security_dir_wrapper.html#a0b0004347ca16049809de0017fdcfcc1aba11d88107b8938d4bd22da2ccdb73b0',1,'SecurityDirWrapper']]],
+  ['rich_5fid_1701',['RICH_ID',['../class_rich_hdr_wrapper.html#a366b4901ae5d2c2bc0b08e2ae98a1e62ac83415d46b4fd516df994e8c86783098',1,'RichHdrWrapper']]],
+  ['rptr_1702',['RPTR',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730ac5b25da6e8976ca2aaee171fed01767c',1,'SectionHdrWrapper']]],
+  ['rsize_1703',['RSIZE',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730a767d5726ed32bf524adcfba6f7c70f63',1,'SectionHdrWrapper']]],
+  ['rva_1704',['RVA',['../class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5bab09fbc5c56c2c2f13f0318d67c72b8be',1,'Executable']]],
+  ['rvas_5fsizes_5fnum_1705',['RVAS_SIZES_NUM',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013af33cf400e2fda16f6fc84c81a2ee516e',1,'OptHdrWrapper']]]
+];

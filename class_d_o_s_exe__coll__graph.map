@@ -1,0 +1,9 @@
+<map id="DOSExe" name="DOSExe">
+<area shape="rect" id="node1" title=" " alt="" coords="143,349,213,376"/>
+<area shape="rect" id="node2" href="$class_mapped_exe.html" title=" " alt="" coords="91,184,180,211"/>
+<area shape="rect" id="node3" href="$class_executable.html" title=" " alt="" coords="183,95,269,121"/>
+<area shape="rect" id="node7" href="$class_exe_element_wrapper.html" title=" " alt="" coords="205,184,343,211"/>
+<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html" title=" " alt="" coords="202,5,333,32"/>
+<area shape="rect" id="node5" href="$class_exe_wrappers_container.html" title=" " alt="" coords="5,95,159,121"/>
+<area shape="rect" id="node6" href="$class_dos_hdr_wrapper.html" title=" " alt="" coords="205,260,319,287"/>
+</map>
