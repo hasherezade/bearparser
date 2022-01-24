@@ -15,7 +15,6 @@ namespace imports_util {
 class ImportBaseDirWrapper : public DataDirEntryWrapper
 {
 public:
-    static size_t EntriesLimit;
     static bufsize_t thunkSize(Executable::exe_bits bits);
 
     virtual bool wrap();
@@ -60,7 +59,6 @@ friend class ImportBaseEntryWrapper;
 class ImportBaseEntryWrapper : public PENodeWrapper
 {
 public:
-    static size_t EntriesLimit;
     static bufsize_t NameLenLimit;
 
     virtual char* getLibraryName() = 0;

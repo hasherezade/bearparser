@@ -1,8 +1,6 @@
 #include "pe/ImportBaseDirWrapper.h"
 
 //---------------------------------
-size_t ImportBaseDirWrapper::EntriesLimit = 1000;
-size_t ImportBaseEntryWrapper::EntriesLimit = 1000;
 
 bufsize_t ImportBaseEntryWrapper::NameLenLimit = 0xFF;
 
@@ -125,7 +123,7 @@ bool ImportBaseDirWrapper::wrap()
         return (oldCount != this->importsCount); //has count changed
     }
 
-    const size_t LIMIT = ImportBaseDirWrapper::EntriesLimit;
+    const size_t LIMIT = (-1);
 
     size_t cntr = 0;
     for (cntr = 0; cntr < LIMIT; cntr++) {
@@ -150,8 +148,8 @@ bool ImportBaseEntryWrapper::wrap()
     clear();
     thunkToFuncMap.clear();
 
-    const size_t LIMIT = ImportBaseEntryWrapper::EntriesLimit;
-   if (!isValid()) {
+    const size_t LIMIT = (-1);
+    if (!isValid()) {
         return false;
     }
     size_t cntr = 0;
