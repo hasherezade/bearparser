@@ -1,16 +1,16 @@
 <map id="PEFile::setVirtualSize" name="PEFile::setVirtualSize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,67,152,93"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,79,152,105"/>
 <area shape="rect" id="node2" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="601,5,711,32"/>
-<area shape="rect" id="node3" href="$class_exe_element_wrapper.html#a1e74b95ca63396ca3f720b05a54f2b62" title=" " alt="" coords="200,89,344,130"/>
-<area shape="rect" id="node4" href="$class_exe_element_wrapper.html#a4a1afe592b11191cab1d74432f759b41" title=" " alt="" coords="392,122,536,163"/>
-<area shape="rect" id="node8" href="$class_exe_element_wrapper.html#a10ef93fdda6cf93c5db02b696a81b7c7" title=" " alt="" coords="392,246,536,287"/>
+<area shape="rect" id="node3" href="$class_exe_element_wrapper.html#a1e74b95ca63396ca3f720b05a54f2b62" title=" " alt="" coords="200,101,344,142"/>
+<area shape="rect" id="node4" href="$class_exe_element_wrapper.html#a4a1afe592b11191cab1d74432f759b41" title=" " alt="" coords="392,146,536,187"/>
+<area shape="rect" id="node8" href="$class_exe_element_wrapper.html#a10ef93fdda6cf93c5db02b696a81b7c7" title=" " alt="" coords="392,270,536,311"/>
 <area shape="rect" id="node11" href="$class_abstract_byte_buffer.html#a5e4be1e74690ad6517c3d19ed946b857" title=" " alt="" coords="399,57,529,98"/>
-<area shape="rect" id="node5" href="$class_exe_element_wrapper.html#a3844ba59948c573468db74a5fbc0d64b" title=" " alt="" coords="584,187,728,229"/>
-<area shape="rect" id="node6" href="$class_exe_element_wrapper.html#a98ca205ec6f2d2deacd32327409a3539" title=" " alt="" coords="584,122,728,163"/>
-<area shape="rect" id="node7" href="$class_exe_element_wrapper.html#a57bebd81e87f364d0ca47ce4cf14e37f" title=" " alt="" coords="776,185,920,226"/>
-<area shape="rect" id="node9" href="$class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83" title=" " alt="" coords="584,305,728,346"/>
-<area shape="rect" id="node10" href="$class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="584,370,728,411"/>
+<area shape="rect" id="node5" href="$class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf" title=" " alt="" coords="584,211,728,253"/>
+<area shape="rect" id="node6" href="$class_exe_element_wrapper.html#a98ca205ec6f2d2deacd32327409a3539" title=" " alt="" coords="584,146,728,187"/>
+<area shape="rect" id="node7" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="776,197,920,238"/>
+<area shape="rect" id="node9" href="$class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83" title=" " alt="" coords="584,329,728,370"/>
+<area shape="rect" id="node10" href="$class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="584,394,728,435"/>
 <area shape="rect" id="node12" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="591,57,721,98"/>
-<area shape="rect" id="node13" href="$class_abstract_byte_buffer.html#a8bb105c6d5deb69d285dde84f71f6220" title=" " alt="" coords="783,90,913,131"/>
+<area shape="rect" id="node13" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="783,90,913,131"/>
 <area shape="rect" id="node14" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="783,25,913,66"/>
 </map>

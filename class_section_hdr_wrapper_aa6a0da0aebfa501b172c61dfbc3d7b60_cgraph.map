@@ -1,4 +1,14 @@
 <map id="SectionHdrWrapper::getMappedRawSize" name="SectionHdrWrapper::getMappedRawSize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,147,47"/>
-<area shape="rect" id="node2" href="$namespacebuf__util.html#aad423cee9c4deed0062c92fe29744a0f" title=" " alt="" coords="195,13,349,39"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,117,147,158"/>
+<area shape="rect" id="node2" href="$class_p_e_file.html#ab638e30e50907e019dd91cdecb22812a" title=" " alt="" coords="418,5,561,32"/>
+<area shape="rect" id="node4" href="$class_section_hdr_wrapper.html#a9478405806f657e94ca5192dd2b86839" title=" " alt="" coords="195,51,356,93"/>
+<area shape="rect" id="node5" href="$class_section_hdr_wrapper.html#a9dee2f275d168224c31131b56564b230" title=" " alt="" coords="205,117,346,158"/>
+<area shape="rect" id="node11" href="$class_executable.html#a862ee23abe249ba557c740f2d2c246c5" title=" " alt="" coords="409,183,569,209"/>
+<area shape="rect" id="node12" href="$namespacebuf__util.html#aad423cee9c4deed0062c92fe29744a0f" title=" " alt="" coords="198,233,353,260"/>
+<area shape="rect" id="node3" href="$class_p_e_core.html#a2ae38f9f55db2b0ade16500364bab84f" title=" " alt="" coords="638,5,786,32"/>
+<area shape="rect" id="node6" href="$class_section_hdr_wrapper.html#a698831115eda474980d6be3e86747ee2" title=" " alt="" coords="404,62,575,103"/>
+<area shape="rect" id="node7" href="$class_p_e_file.html#a1056ad3e332b1f896e211c5f864ce8e1" title=" " alt="" coords="412,128,567,155"/>
+<area shape="rect" id="node8" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="623,81,801,108"/>
+<area shape="rect" id="node10" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="637,132,787,159"/>
+<area shape="rect" id="node9" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="849,125,980,166"/>
 </map>

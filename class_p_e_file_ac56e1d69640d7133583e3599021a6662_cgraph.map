@@ -1,8 +1,8 @@
 <map id="PEFile::PEFile" name="PEFile::PEFile">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,109,57"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,43,109,69"/>
 <area shape="rect" id="node2" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="157,5,268,32"/>
-<area shape="rect" id="node3" href="$class_p_e_file.html#a716ee06f43de71d1885443d861edfb8d" title=" " alt="" coords="165,56,260,83"/>
-<area shape="rect" id="node4" href="$class_p_e_file.html#aa84f5074e8e5f9c6b29becd0ddfd523c" title=" " alt="" coords="316,56,465,83"/>
-<area shape="rect" id="node5" href="$class_exe_wrappers_container.html#a54af5aa313aaa568653fb32395a80195" title=" " alt="" coords="513,19,667,61"/>
-<area shape="rect" id="node6" href="$class_p_e_file.html#a70787fd96ff91491b6926614ed41ef17" title=" " alt="" coords="521,85,659,112"/>
+<area shape="rect" id="node3" href="$class_p_e_file.html#a716ee06f43de71d1885443d861edfb8d" title=" " alt="" coords="165,80,260,107"/>
+<area shape="rect" id="node4" href="$class_p_e_file.html#aa84f5074e8e5f9c6b29becd0ddfd523c" title=" " alt="" coords="316,80,465,107"/>
+<area shape="rect" id="node5" href="$class_exe_wrappers_container.html#a54af5aa313aaa568653fb32395a80195" title=" " alt="" coords="513,43,667,85"/>
+<area shape="rect" id="node6" href="$class_p_e_file.html#a70787fd96ff91491b6926614ed41ef17" title=" " alt="" coords="521,109,659,136"/>
 </map>
