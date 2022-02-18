@@ -1,9 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,107,107,133"/>
-<area shape="rect" id="node2" href="$class_custom_exception.html" title=" " alt="" coords="155,107,277,133"/>
-<area shape="rect" id="node3" href="$class_buffer_exception.html" title=" " alt="" coords="341,5,453,32"/>
-<area shape="rect" id="node4" href="$class_exe_exception.html" title=" " alt="" coords="347,56,446,83"/>
-<area shape="rect" id="node5" href="$class_exe_factory_exception.html" title=" " alt="" coords="325,107,468,133"/>
-<area shape="rect" id="node6" href="$class_file_buffer_exception.html" title=" " alt="" coords="330,157,463,184"/>
-<area shape="rect" id="node7" href="$class_parser_exception.html" title=" " alt="" coords="339,208,455,235"/>
+<area shape="rect" id="node1" href="$class_exe_builder.html" title=" " alt="" coords="5,31,88,57"/>
+<area shape="rect" id="node2" href="$class_d_o_s_exe_builder.html" title=" " alt="" coords="136,5,247,32"/>
+<area shape="rect" id="node3" href="$class_p_e_file_builder.html" title=" " alt="" coords="141,56,241,83"/>
 </map>
