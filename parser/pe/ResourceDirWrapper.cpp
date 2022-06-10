@@ -299,7 +299,10 @@ offset_t ResourceEntryWrapper::getChildOffsetToDirectory()
     if (!entry) {
         return INVALID_ADDR;
     }
-    return entry->OffsetToDirectory;
+    if (entry->DataIsDirectory) {
+        return entry->OffsetToDirectory;
+    }
+    return entry->OffsetToData;
 }
 
 offset_t ResourceEntryWrapper::getChildAddress()
@@ -309,7 +312,7 @@ offset_t ResourceEntryWrapper::getChildAddress()
     const offset_t fOff = this->parentDir->getOffset(this->parentDir->mainResourceDir());
     if (fOff == INVALID_ADDR) return INVALID_ADDR;
 
-    const offset_t childOff = static_cast<offset_t>(getChildOffsetToDirectory());
+    const offset_t childOff = getChildOffsetToDirectory();
     if (childOff == INVALID_ADDR) return INVALID_ADDR;
 
     return fOff + childOff;
