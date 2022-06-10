@@ -165,15 +165,11 @@ bool ResourceEntryWrapper::wrap()
     if (this->isDir()) {
         long depth = this->parentDir->getDepth() + 1;
         if (depth >= MAX_DEPTH) return false;
-        //printf("Subdir at: %x ,depth : %lld\n", childRaw, depth);
         this->childDir = new ResourceDirWrapper(this->m_PE, this->album, childRaw, depth, topEntryID);
     } else {
-        //printf("Leaf at: %x\n", childRaw);
         this->childLeaf = new ResourceLeafWrapper(m_Exe, childRaw, topEntryID);
-        //test
         if (this->album != NULL) {
             album->putLeaf(childLeaf, topEntryID);
-            //printf("Album: topEntryID: %x\n", topEntryID);
         }
     }
     return true;
@@ -297,21 +293,26 @@ WORD ResourceEntryWrapper::getID()
     return entry->Id;
 }
 
-DWORD ResourceEntryWrapper::getChildOffsetToDirectory()
+offset_t ResourceEntryWrapper::getChildOffsetToDirectory()
 {
-    IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
-    if (entry == NULL) return 0;
+    const IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = getEntryPtr();
+    if (!entry) {
+        return INVALID_ADDR;
+    }
     return entry->OffsetToDirectory;
 }
 
 offset_t ResourceEntryWrapper::getChildAddress()
 {
-    if (this->parentDir == NULL) return INVALID_ADDR;
-    offset_t fOff = this->parentDir->getOffset(this->parentDir->mainResourceDir());
+    if (!this->parentDir) return INVALID_ADDR;
+    
+    const offset_t fOff = this->parentDir->getOffset(this->parentDir->mainResourceDir());
     if (fOff == INVALID_ADDR) return INVALID_ADDR;
 
-    fOff += static_cast<offset_t>(getChildOffsetToDirectory());
-    return fOff;
+    const offset_t childOff = static_cast<offset_t>(getChildOffsetToDirectory());
+    if (childOff == INVALID_ADDR) return INVALID_ADDR;
+
+    return fOff + childOff;
 }
 
 //-------------------------------------------------------------------------
@@ -327,7 +328,7 @@ IMAGE_RESOURCE_DATA_ENTRY* ResourceLeafWrapper::leafEntryPtr()
 void* ResourceLeafWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
     IMAGE_RESOURCE_DATA_ENTRY* leaf = leafEntryPtr();
-    if (leaf == NULL) return NULL;
+    if (!leaf) return NULL;
 
     switch (fieldId) {
         case OFFSET_TO_DATA: return &leaf->OffsetToData;

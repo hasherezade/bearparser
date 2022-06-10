@@ -103,7 +103,7 @@ public:
     bool isDir();
 
     WORD getID();
-    DWORD getChildOffsetToDirectory(); //relative offset!
+    offset_t getChildOffsetToDirectory(); //relative offset!
     offset_t getNameOffset();
 
     IMAGE_RESOURCE_DIRECTORY_STRING* getNameStr();

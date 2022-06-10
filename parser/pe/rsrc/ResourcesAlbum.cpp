@@ -59,6 +59,7 @@ void ResourcesAlbum::clear()
 
 void ResourcesAlbum::putLeaf(ResourceLeafWrapper* leaf, long topEntryId)
 {
+    if (!leaf) return;
     allLeafs[topEntryId].push_back(leaf);
 }
 
