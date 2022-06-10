@@ -65,7 +65,7 @@ BYTE* AbstractByteBuffer::getContentAt(offset_t offset, bufsize_t size, bool all
         return NULL;
     }
 
-    bufsize_t fileSize = this->getContentSize();
+    offset_t fileSize = this->getContentSize();
     BYTE* buf = this->getContent();
     if (buf == NULL) return NULL;
 
