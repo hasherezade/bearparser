@@ -27,8 +27,6 @@ protected:
     IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exceptFunc64();
 
 private:
-    static uint64_t EntriesLimit;
-
     bufsize_t parsedSize;
 
 friend class ExceptionEntryWrapper;

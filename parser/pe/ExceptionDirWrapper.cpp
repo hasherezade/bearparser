@@ -1,8 +1,6 @@
 #include "pe/ExceptionDirWrapper.h"
 #include "pe/PEFile.h"
 
-uint64_t ExceptionDirWrapper::EntriesLimit = 10000;
-
 /*
 typedef struct _IMAGE_IA64_RUNTIME_FUNCTION_ENTRY {
     DWORD BeginAddress;
@@ -20,11 +18,10 @@ bool ExceptionDirWrapper::wrap()
 
     if (!exceptFunc64()) return false;
 
-    //printf("maxSize = %x\n", maxSize);
     const size_t ENTRY_SIZE = sizeof(IMAGE_IA64_RUNTIME_FUNCTION_ENTRY);
-
-    for (int i = 0; i < ExceptionDirWrapper::EntriesLimit && parsedSize < maxSize; i++) {
-        ExceptionEntryWrapper* entry = new ExceptionEntryWrapper(this->m_Exe, this, i);
+    size_t entryId = 0;
+    while (parsedSize < maxSize) {
+        ExceptionEntryWrapper* entry = new ExceptionEntryWrapper(this->m_Exe, this, entryId++);
 
         if (entry->getPtr() == NULL) {
             delete entry;
@@ -32,11 +29,6 @@ bool ExceptionDirWrapper::wrap()
         }
         this->parsedSize += ENTRY_SIZE;
         this->entries.push_back(entry);
-
-        /*printf("pageVA = %llx size = %llx\n",
-            entry->getNumValue(ExceptionEntryWrapper::PAGE_VA, &isOk),
-            entry->getNumValue(ExceptionEntryWrapper::BLOCK_SIZE, &isOk)
-        );*/
     }
     Logger::append(Logger::D_INFO,
         "Entries num = %lu, parsedSize = %lX",
