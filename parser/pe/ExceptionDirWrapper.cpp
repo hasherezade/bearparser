@@ -13,7 +13,7 @@ bool ExceptionDirWrapper::wrap()
 {
     clear();
     parsedSize = 0;
-    bufsize_t maxSize = getDirEntrySize();
+    bufsize_t maxSize = getDirEntrySize(true);
     if (maxSize == 0) return false; // nothing to parse
 
     if (!exceptFunc64()) return false;
