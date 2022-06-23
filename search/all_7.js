@@ -31,7 +31,7 @@ var searchData=
   ['getdelta_28',['getDelta',['../class_reloc_entry_wrapper.html#a8f19db29e8f23e9e961f9b3b5f992495',1,'RelocEntryWrapper']]],
   ['getdepth_29',['getDepth',['../class_resource_dir_wrapper.html#a0e8acf8742c1bf18c316d5d6e935908c',1,'ResourceDirWrapper']]],
   ['getdirentryaddress_30',['getDirEntryAddress',['../class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f',1,'DataDirEntryWrapper']]],
-  ['getdirentrysize_31',['getDirEntrySize',['../class_data_dir_entry_wrapper.html#a6d7a51d3dbebfa37841bf2f36c7b6eb6',1,'DataDirEntryWrapper']]],
+  ['getdirentrysize_31',['getDirEntrySize',['../class_data_dir_entry_wrapper.html#a47a86b9d308f503b8b2a22ff299bd6c5',1,'DataDirEntryWrapper']]],
   ['getdirentrytype_32',['getDirEntryType',['../class_data_dir_entry_wrapper.html#a003e8eb376b75ba76191ec525c02d94e',1,'DataDirEntryWrapper']]],
   ['getentriesareasize_33',['getEntriesAreaSize',['../class_resource_dir_wrapper.html#ad7df0786cfb16d35a84311ec6a1e5d39',1,'ResourceDirWrapper']]],
   ['getentriescount_34',['getEntriesCount',['../class_exe_node_wrapper.html#ab65292a452c9c7d94b6c0b3ce2d934d5',1,'ExeNodeWrapper::getEntriesCount(std::vector&lt; ExeNodeWrapper * &gt; &amp;_entries)'],['../class_exe_node_wrapper.html#aacbf801e0cf579c0e16a7e27f8165693',1,'ExeNodeWrapper::getEntriesCount()']]],
