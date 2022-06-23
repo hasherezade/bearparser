@@ -28,13 +28,26 @@ offset_t DataDirEntryWrapper::getDirEntryAddress()
     return rva;
 }
 
-bufsize_t DataDirEntryWrapper::getDirEntrySize()
+bufsize_t DataDirEntryWrapper::getDirEntrySize(bool trimToExeSize)
 {
     if (this->entryType >= pe::DIR_ENTRIES_COUNT) return 0;
-
     IMAGE_DATA_DIRECTORY *d = getDataDirectory();
     if (!d) return 0;
-
-    bufsize_t size = static_cast<bufsize_t>(d[this->entryType].Size);
-    return size;
+    
+    bufsize_t dirSize = static_cast<bufsize_t>(d[this->entryType].Size);
+    if (!trimToExeSize) {
+        return dirSize;
+    }
+    
+    if (!this->m_Exe) return 0; // should never happen
+    
+    bufsize_t dirRva = d[this->entryType].VirtualAddress;
+    bufsize_t dirRaw = this->m_Exe->rvaToRaw(dirRva);
+    if (dirRaw == INVALID_ADDR) {
+        return 0;
+    }
+    bufsize_t fullSize = this->m_Exe->getContentSize();
+    bufsize_t remainingSize = fullSize - dirRaw;
+    
+    return (dirSize < remainingSize) ? dirSize : remainingSize;
 }
