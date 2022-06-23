@@ -5,8 +5,6 @@
 class BoundImpDirWrapper : public DataDirEntryWrapper
 {
 public:
-    static size_t EntriesLimit;
-
     BoundImpDirWrapper(PEFile *pe)
         : DataDirEntryWrapper(pe, pe::DIR_BOUND_IMPORT), importsCount(0) { wrap(); }
 

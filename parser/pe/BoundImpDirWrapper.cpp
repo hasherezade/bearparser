@@ -1,8 +1,6 @@
 #include "pe/BoundImpDirWrapper.h"
 #include "pe/PEFile.h"
 
-size_t BoundImpDirWrapper::EntriesLimit = 1000;
-
 /*
 typedef struct _IMAGE_BOUND_IMPORT_DESCRIPTOR {
     DWORD   TimeDateStamp;
@@ -56,11 +54,9 @@ bool BoundImpDirWrapper::wrap()
         return (oldCount != this->importsCount); //has count changed
     }
 
-    const size_t LIMIT = BoundImpDirWrapper::EntriesLimit;
-
     size_t cntr = 0;
-    for (cntr = 0; cntr < LIMIT; cntr++) {
-        if (loadNextEntry(cntr) == false) break;
+    while (loadNextEntry(cntr)) {
+        cntr++;
     }
 
     this->importsCount = cntr;
