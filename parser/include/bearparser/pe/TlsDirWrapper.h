@@ -38,8 +38,6 @@ public:
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
 
 private:
-    static size_t EntriesLimit;
-
     inline void* getTlsDirPtr();
     IMAGE_TLS_DIRECTORY64* tls64();
     IMAGE_TLS_DIRECTORY32* tls32();

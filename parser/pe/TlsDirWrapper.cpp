@@ -1,14 +1,12 @@
 #include "pe/TlsDirWrapper.h"
 #include "pe/PEFile.h"
 
-size_t TlsDirWrapper::EntriesLimit = 10000;
-
 bool TlsDirWrapper::wrap()
 {
     clear();
-
-    for (size_t i = 0; i < TlsDirWrapper::EntriesLimit; i++) {
-        TlsEntryWrapper* entry = new TlsEntryWrapper(this->m_Exe, this, i);
+    size_t entryId = 0;
+    while (true) {
+        TlsEntryWrapper* entry = new TlsEntryWrapper(this->m_Exe, this, entryId++);
 
         if (entry->getPtr() == NULL) {
             delete entry;
