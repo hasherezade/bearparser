@@ -29,8 +29,6 @@ protected:
     IMAGE_BASE_RELOCATION* reloc();
 
 private:
-    static size_t EntriesLimit;
-
     bufsize_t parsedSize;
 
 friend class RelocBlockWrapper;
@@ -72,8 +70,6 @@ public:
     IMAGE_BASE_RELOCATION* myReloc() { return (IMAGE_BASE_RELOCATION*) getPtr(); }
 
 private:
-    static size_t EntriesLimit;
-
     offset_t cachedRaw;
     //size_t cachedSize; // TODO
     offset_t cachedMaxNum;
