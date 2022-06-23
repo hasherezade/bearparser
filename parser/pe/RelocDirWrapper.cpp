@@ -38,17 +38,18 @@ bool RelocDirWrapper::wrap()
     clear();
     parsedSize = 0;
     bufsize_t maxSize = getDirEntrySize();
-
-    for (size_t i = 0; i < RelocDirWrapper::EntriesLimit && parsedSize < maxSize; i++) {
-        RelocBlockWrapper* entry = new RelocBlockWrapper(this->m_Exe, this, i);
-
-        if (entry->getPtr() == NULL) {
+    size_t entryId = 0;
+    while (parsedSize < maxSize) {
+        RelocBlockWrapper* entry = new RelocBlockWrapper(this->m_Exe, this, entryId++);
+        if (!entry) break;
+        
+        bool isOk = false;
+        const bufsize_t val = (bufsize_t) entry->getNumValue(RelocBlockWrapper::BLOCK_SIZE, &isOk);
+        
+        if (!entry->getPtr() || !val || !isOk) {
             delete entry;
             break;
         }
-        bool isOk = false;
-        bufsize_t val = (bufsize_t) entry->getNumValue(RelocBlockWrapper::BLOCK_SIZE, &isOk);
-
         this->parsedSize += val;
         this->entries.push_back(entry);
 
