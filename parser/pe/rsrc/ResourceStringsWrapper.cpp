@@ -54,7 +54,6 @@ bufsize_t ResString::getFieldSize(size_t fId, size_t subField)
     return 0;
 }
 //------------------------------------------------------
-size_t ResourceStringsWrapper::EntriesLimit = 10000;
 
 bool ResourceStringsWrapper::wrap()
 {
@@ -70,7 +69,7 @@ bool ResourceStringsWrapper::wrap()
     offset_t startRaw = getContentRaw();
     offset_t cRaw = startRaw;
 
-    for (size_t i = 0; i < ResourceStringsWrapper::EntriesLimit && parsedSize < maxSize; i++) {
+    while (parsedSize < maxSize) {
 
         WORD* stringSize = (WORD*) this->getContentAt(cRaw, Executable::RAW, sizeof(WORD));
         if (stringSize == NULL){

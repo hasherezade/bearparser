@@ -93,8 +93,6 @@ public:
     }
 
 protected:
-    static size_t EntriesLimit;
-
     ResourceStringsWrapper(Executable *pe, ResourceLeafWrapper* v_leaf)
         : ResourceContentWrapper(pe, v_leaf, pe::RESTYPE_STRING) { wrap(); }
 
