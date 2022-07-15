@@ -48,7 +48,7 @@ public:
     };
 
     RelocBlockWrapper(Executable *pe, RelocDirWrapper *parentDir, size_t entryNumber)
-        : ExeNodeWrapper(pe, parentDir, entryNumber), cachedRaw(INVALID_ADDR), cachedMaxNum(-1) { this->parentDir = parentDir; wrap(); }
+        : ExeNodeWrapper(pe, parentDir, entryNumber), cachedRaw(INVALID_ADDR), cachedMaxNum(0) { this->parentDir = parentDir; wrap(); }
 
     bool wrap();
 

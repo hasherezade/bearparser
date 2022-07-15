@@ -78,7 +78,7 @@ bool RelocBlockWrapper::wrap()
     if (!reloc) return false;
 
     size_t maxSize = reloc->SizeOfBlock;
-    parsedSize = sizeof(reloc->VirtualAddress) + sizeof(reloc->SizeOfBlock);
+    parsedSize = sizeof(IMAGE_BASE_RELOCATION); // the block begins with IMAGE_BASE_RELOCATION record
     size_t entryId = 0;
 
     while (parsedSize < maxSize) {
@@ -88,7 +88,7 @@ bool RelocBlockWrapper::wrap()
             delete entry;
             break;
         }
-        this->parsedSize += sizeof(WORD);
+        this->parsedSize += sizeof(pe::BASE_RELOCATION_ENTRY);
         this->entries.push_back(entry);
     }
     return true;
