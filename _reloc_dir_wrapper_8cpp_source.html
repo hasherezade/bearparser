@@ -150,7 +150,7 @@ $(function() {
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">if</span> (!reloc) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">size_t</span> maxSize = reloc-&gt;SizeOfBlock;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    parsedSize = <span class="keyword">sizeof</span>(reloc-&gt;VirtualAddress) + <span class="keyword">sizeof</span>(reloc-&gt;SizeOfBlock);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    parsedSize = <span class="keyword">sizeof</span>(IMAGE_BASE_RELOCATION); <span class="comment">// the block begins with IMAGE_BASE_RELOCATION record</span></div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">size_t</span> entryId = 0;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">while</span> (parsedSize &lt; maxSize) {</div>
@@ -160,7 +160,7 @@ $(function() {
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keyword">delete</span> entry;</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        }</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        this-&gt;parsedSize += <span class="keyword">sizeof</span>(WORD);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        this-&gt;parsedSize += <span class="keyword">sizeof</span>(pe::BASE_RELOCATION_ENTRY);</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        this-&gt;<a class="code hl_variable" href="class_exe_node_wrapper.html#a7c22babccbf1bc935ad563d06c450995">entries</a>.push_back(entry);</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
