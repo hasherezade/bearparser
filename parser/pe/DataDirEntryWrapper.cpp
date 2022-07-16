@@ -41,13 +41,13 @@ bufsize_t DataDirEntryWrapper::getDirEntrySize(bool trimToExeSize)
     
     if (!this->m_Exe) return 0; // should never happen
     
-    bufsize_t dirRva = d[this->entryType].VirtualAddress;
-    bufsize_t dirRaw = this->m_Exe->rvaToRaw(dirRva);
+    offset_t dirRva = d[this->entryType].VirtualAddress;
+    offset_t dirRaw = this->m_Exe->rvaToRaw(dirRva);
     if (dirRaw == INVALID_ADDR) {
         return 0;
     }
     bufsize_t fullSize = this->m_Exe->getContentSize();
-    bufsize_t remainingSize = fullSize - dirRaw;
+    bufsize_t remainingSize = bufsize_t(fullSize - dirRaw);
     
     return (dirSize < remainingSize) ? dirSize : remainingSize;
 }
