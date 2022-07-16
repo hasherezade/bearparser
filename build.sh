@@ -2,19 +2,23 @@
 echo "Trying to autobuild bearparser..."
 
 #QT check
+
 QT_VER=`qmake -v`
-QTV="version"
-if echo "$QT_VER" | grep -q "$QTV"; then
-    QT_FOUND=`whereis qt5`
-    if echo "$QT_FOUND" | grep -q "/qt5"; then
+str=$QT_VER
+substr="Qt version 5"
+
+echo $QT_VER
+if [[ $str == *"$substr"* ]]; then
+    echo "[+] Qt5 found!"
+else
+    str2=`whereis qt5`
+    substr2="/qt5"
+    if [[ $str2 == *"$substr2"* ]]; then
         echo "[+] Qt5 found!"
     else
         echo "Install Qt5 SDK first"
-        exit -2
+        exit -1
     fi
-else
-    echo "Install Qt5 SDK first"
-    exit -1
 fi
 
 CMAKE_VER=`cmake --version`
