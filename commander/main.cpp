@@ -78,12 +78,12 @@ int main(int argc, char *argv[])
 
         delete exe;
         delete buf;
-		
-		std::cout << "Bye!" << std::endl;
-		
+
+        std::cout << "Bye!" << std::endl;
+
     } catch (CustomException &e) {
         std::cerr << "[ERROR] " << e.what() << std::endl;
-		status = -1;
+        status = -1;
     }
     ExeFactory::destroy();
     return status;
