@@ -1,18 +1,18 @@
 <map id="OptHdrWrapper::getFieldSize" name="OptHdrWrapper::getFieldSize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,231,195,258"/>
-<area shape="rect" id="node2" href="$class_exe_element_wrapper.html#a10ef93fdda6cf93c5db02b696a81b7c7" title=" " alt="" coords="243,136,387,177"/>
-<area shape="rect" id="node7" href="$class_opt_hdr_wrapper.html#a2b341217f5473600609cfafff148d721" title=" " alt="" coords="243,293,386,319"/>
-<area shape="rect" id="node3" href="$class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf" title=" " alt="" coords="465,5,609,47"/>
-<area shape="rect" id="node4" href="$class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83" title=" " alt="" coords="465,71,609,112"/>
-<area shape="rect" id="node5" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="465,136,609,177"/>
-<area shape="rect" id="node6" href="$class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="465,201,609,243"/>
-<area shape="rect" id="node8" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="454,267,621,294"/>
-<area shape="rect" id="node12" href="$class_opt_hdr_wrapper.html#a41ebcb5b5723fb2b0c1b76388e4c7396" title=" " alt="" coords="435,318,640,345"/>
-<area shape="rect" id="node15" href="$class_p_e_file.html#a92d4e49aa9c72f79049182e0cb3fb285" title=" " alt="" coords="462,369,613,395"/>
-<area shape="rect" id="node9" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="711,252,841,293"/>
-<area shape="rect" id="node10" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="926,187,1057,228"/>
-<area shape="rect" id="node11" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="926,252,1057,293"/>
-<area shape="rect" id="node13" href="$class_p_e_file.html#af2560116036624efbb020a312d8017b2" title=" " alt="" coords="699,318,853,345"/>
-<area shape="rect" id="node14" href="$class_p_e_core.html#a26f7c98feaa67ad523fc745d7c0404a2" title=" " alt="" coords="912,318,1071,345"/>
-<area shape="rect" id="node16" href="$class_p_e_core.html#a57d02ca8214e0c9903136dc2da72ed89" title=" " alt="" coords="688,369,864,395"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,226,195,251"/>
+<area shape="rect" id="node2" href="$class_exe_element_wrapper.html#a10ef93fdda6cf93c5db02b696a81b7c7" title=" " alt="" coords="243,133,387,173"/>
+<area shape="rect" id="node7" href="$class_opt_hdr_wrapper.html#a2b341217f5473600609cfafff148d721" title=" " alt="" coords="243,286,386,311"/>
+<area shape="rect" id="node3" href="$class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf" title=" " alt="" coords="465,5,609,45"/>
+<area shape="rect" id="node4" href="$class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83" title=" " alt="" coords="465,69,609,109"/>
+<area shape="rect" id="node5" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="465,133,609,173"/>
+<area shape="rect" id="node6" href="$class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="465,197,609,237"/>
+<area shape="rect" id="node8" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="454,262,621,287"/>
+<area shape="rect" id="node12" href="$class_opt_hdr_wrapper.html#a41ebcb5b5723fb2b0c1b76388e4c7396" title=" " alt="" coords="435,311,640,337"/>
+<area shape="rect" id="node15" href="$class_p_e_file.html#a92d4e49aa9c72f79049182e0cb3fb285" title=" " alt="" coords="462,361,613,386"/>
+<area shape="rect" id="node9" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="711,247,841,287"/>
+<area shape="rect" id="node10" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="926,183,1057,223"/>
+<area shape="rect" id="node11" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="926,247,1057,287"/>
+<area shape="rect" id="node13" href="$class_p_e_file.html#af2560116036624efbb020a312d8017b2" title=" " alt="" coords="699,311,853,337"/>
+<area shape="rect" id="node14" href="$class_p_e_core.html#a26f7c98feaa67ad523fc745d7c0404a2" title=" " alt="" coords="912,311,1071,337"/>
+<area shape="rect" id="node16" href="$class_p_e_core.html#a57d02ca8214e0c9903136dc2da72ed89" title=" " alt="" coords="688,361,864,386"/>
 </map>

@@ -1,8 +1,8 @@
 <map id="ResString::getName" name="ResString::getName">
-<area shape="rect" id="node1" title=" " alt="" coords="5,46,144,73"/>
-<area shape="rect" id="node2" href="$class_res_string.html#a47a3d4c86e4414a0b9d130742483e880" title=" " alt="" coords="192,46,339,73"/>
-<area shape="rect" id="node3" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="387,46,553,73"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="601,39,732,80"/>
-<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="780,5,911,47"/>
-<area shape="rect" id="node6" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="780,71,911,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,45,144,70"/>
+<area shape="rect" id="node2" href="$class_res_string.html#a47a3d4c86e4414a0b9d130742483e880" title=" " alt="" coords="192,45,339,70"/>
+<area shape="rect" id="node3" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="387,45,553,70"/>
+<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="601,37,732,77"/>
+<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="780,5,911,45"/>
+<area shape="rect" id="node6" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="780,69,911,109"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="BufferView::getContent" name="BufferView::getContent">
-<area shape="rect" id="node1" title=" " alt="" coords="5,49,160,75"/>
-<area shape="rect" id="node2" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="232,12,363,53"/>
-<area shape="rect" id="node5" href="$class_buffer_view.html#afa235f02a4619a7e2f1e869d390c2cbf" title=" " alt="" coords="208,78,387,105"/>
-<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="435,5,565,47"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="435,71,565,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,49,160,74"/>
+<area shape="rect" id="node2" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="232,12,363,52"/>
+<area shape="rect" id="node5" href="$class_buffer_view.html#afa235f02a4619a7e2f1e869d390c2cbf" title=" " alt="" coords="208,77,387,102"/>
+<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="435,5,565,45"/>
+<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="435,69,565,109"/>
 </map>

@@ -1,8 +1,8 @@
 <map id="DOSExe::peSignatureOffset" name="DOSExe::peSignatureOffset">
-<area shape="rect" id="node1" title=" " alt="" coords="5,46,187,73"/>
-<area shape="rect" id="node2" href="$class_dos_hdr_wrapper.html#aa7cf9049040b0c1bcb92e4c588d2f8e5" title=" " alt="" coords="235,46,417,73"/>
-<area shape="rect" id="node3" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="465,46,632,73"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="680,39,811,80"/>
-<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="859,5,989,47"/>
-<area shape="rect" id="node6" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="859,71,989,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,45,187,70"/>
+<area shape="rect" id="node2" href="$class_dos_hdr_wrapper.html#aa7cf9049040b0c1bcb92e4c588d2f8e5" title=" " alt="" coords="235,45,417,70"/>
+<area shape="rect" id="node3" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="465,45,632,70"/>
+<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="680,37,811,77"/>
+<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="859,5,989,45"/>
+<area shape="rect" id="node6" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="859,69,989,109"/>
 </map>

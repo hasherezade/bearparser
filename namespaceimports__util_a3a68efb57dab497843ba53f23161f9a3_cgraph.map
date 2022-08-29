@@ -1,10 +1,10 @@
 <map id="imports_util::isNameValid" name="imports_util::isNameValid">
-<area shape="rect" id="node1" title=" " alt="" coords="5,103,175,130"/>
-<area shape="rect" id="node2" href="$class_abstract_byte_buffer.html#a4cbbe66b2777fa7c450f612ec3a20ae6" title=" " alt="" coords="233,37,375,79"/>
-<area shape="rect" id="node7" href="$namespacepe__util.html#a103f13d1382d5fa542fa6fb8a073f28a" title=" " alt="" coords="223,103,385,130"/>
-<area shape="rect" id="node8" href="$namespacepe__util.html#a5d0faa3e638d06b8762b1e646c5ee8bb" title=" " alt="" coords="231,154,377,181"/>
-<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a04f5bb327ac0789b872d0771b11adc6b" title=" " alt="" coords="433,5,593,47"/>
-<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="448,71,579,112"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="641,5,772,47"/>
-<area shape="rect" id="node6" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="641,71,772,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,102,175,127"/>
+<area shape="rect" id="node2" href="$class_abstract_byte_buffer.html#a4cbbe66b2777fa7c450f612ec3a20ae6" title=" " alt="" coords="233,37,375,77"/>
+<area shape="rect" id="node7" href="$namespacepe__util.html#a103f13d1382d5fa542fa6fb8a073f28a" title=" " alt="" coords="223,102,385,127"/>
+<area shape="rect" id="node8" href="$namespacepe__util.html#a5d0faa3e638d06b8762b1e646c5ee8bb" title=" " alt="" coords="231,151,377,177"/>
+<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a04f5bb327ac0789b872d0771b11adc6b" title=" " alt="" coords="433,5,593,45"/>
+<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="448,69,579,109"/>
+<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="641,5,772,45"/>
+<area shape="rect" id="node6" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="641,69,772,109"/>
 </map>

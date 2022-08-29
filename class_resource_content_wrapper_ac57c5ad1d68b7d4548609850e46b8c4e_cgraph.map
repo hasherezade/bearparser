@@ -1,9 +1,9 @@
 <map id="ResourceContentWrapper::getSize" name="ResourceContentWrapper::getSize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,39,176,80"/>
-<area shape="rect" id="node2" href="$class_resource_content_wrapper.html#ae7340c05c2299bc068bc6adbf2d4ac58" title=" " alt="" coords="224,39,395,80"/>
-<area shape="rect" id="node3" href="$class_resource_leaf_wrapper.html#a00acc594812f9d0e856a7e7a781b6e96" title=" " alt="" coords="443,39,593,80"/>
-<area shape="rect" id="node4" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="641,46,808,73"/>
-<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="856,39,987,80"/>
-<area shape="rect" id="node6" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1035,5,1165,47"/>
-<area shape="rect" id="node7" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1035,71,1165,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,37,176,77"/>
+<area shape="rect" id="node2" href="$class_resource_content_wrapper.html#ae7340c05c2299bc068bc6adbf2d4ac58" title=" " alt="" coords="224,37,395,77"/>
+<area shape="rect" id="node3" href="$class_resource_leaf_wrapper.html#a00acc594812f9d0e856a7e7a781b6e96" title=" " alt="" coords="443,37,593,77"/>
+<area shape="rect" id="node4" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="641,45,808,70"/>
+<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="856,37,987,77"/>
+<area shape="rect" id="node6" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1035,5,1165,45"/>
+<area shape="rect" id="node7" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1035,69,1165,109"/>
 </map>

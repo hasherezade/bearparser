@@ -1,7 +1,7 @@
 <map id="ByteBuffer::ByteBuffer" name="ByteBuffer::ByteBuffer">
-<area shape="rect" id="node1" title=" " alt="" coords="5,64,153,91"/>
-<area shape="rect" id="node2" href="$class_byte_buffer.html#a95821f73489496d751fefe6382d1e489" title=" " alt="" coords="201,5,361,32"/>
-<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="216,57,347,98"/>
-<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="409,115,540,157"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="409,50,540,91"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,63,153,88"/>
+<area shape="rect" id="node2" href="$class_byte_buffer.html#a95821f73489496d751fefe6382d1e489" title=" " alt="" coords="201,5,361,31"/>
+<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="216,55,347,95"/>
+<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="409,113,540,153"/>
+<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="409,49,540,89"/>
 </map>

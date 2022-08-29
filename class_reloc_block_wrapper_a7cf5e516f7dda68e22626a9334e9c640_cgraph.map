@@ -1,14 +1,14 @@
 <map id="RelocBlockWrapper::getPtr" name="RelocBlockWrapper::getPtr">
-<area shape="rect" id="node1" title=" " alt="" coords="5,109,148,151"/>
-<area shape="rect" id="node2" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="432,59,599,86"/>
-<area shape="rect" id="node6" href="$class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="196,79,384,106"/>
-<area shape="rect" id="node7" href="$class_exe_element_wrapper.html#a98ca205ec6f2d2deacd32327409a3539" title=" " alt="" coords="218,229,362,271"/>
-<area shape="rect" id="node9" href="$class_reloc_dir_wrapper.html#a9c0949d9331d8bc2376736732491fbfc" title=" " alt="" coords="213,154,367,181"/>
-<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="653,52,783,93"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="853,71,984,112"/>
-<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="853,5,984,47"/>
-<area shape="rect" id="node8" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="443,229,587,271"/>
-<area shape="rect" id="node10" href="$class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="444,147,587,188"/>
-<area shape="rect" id="node11" href="$class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="647,147,789,188"/>
-<area shape="rect" id="node12" href="$class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="837,154,1000,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,108,148,148"/>
+<area shape="rect" id="node2" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="432,59,599,85"/>
+<area shape="rect" id="node6" href="$class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="196,78,384,103"/>
+<area shape="rect" id="node7" href="$class_exe_element_wrapper.html#a98ca205ec6f2d2deacd32327409a3539" title=" " alt="" coords="218,225,362,265"/>
+<area shape="rect" id="node9" href="$class_reloc_dir_wrapper.html#a9c0949d9331d8bc2376736732491fbfc" title=" " alt="" coords="213,151,367,177"/>
+<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="653,52,783,92"/>
+<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="853,69,984,109"/>
+<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="853,5,984,45"/>
+<area shape="rect" id="node8" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="443,225,587,265"/>
+<area shape="rect" id="node10" href="$class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="444,144,587,184"/>
+<area shape="rect" id="node11" href="$class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="647,144,789,184"/>
+<area shape="rect" id="node12" href="$class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="837,151,1000,177"/>
 </map>

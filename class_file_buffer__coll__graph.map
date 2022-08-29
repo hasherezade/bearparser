@@ -1,6 +1,6 @@
 <map id="FileBuffer" name="FileBuffer">
-<area shape="rect" id="node1" title=" " alt="" coords="95,171,172,197"/>
-<area shape="rect" id="node2" href="$class_abstract_byte_buffer.html" title=" " alt="" coords="5,5,136,32"/>
-<area shape="rect" id="node4" href="$class_byte_buffer.html" title=" " alt="" coords="92,81,175,108"/>
-<area shape="rect" id="node3" href="$class_abstract_file_buffer.html" title=" " alt="" coords="199,81,326,108"/>
+<area shape="rect" id="node1" title=" " alt="" coords="95,168,172,193"/>
+<area shape="rect" id="node2" href="$class_abstract_byte_buffer.html" title=" " alt="" coords="5,5,136,31"/>
+<area shape="rect" id="node4" href="$class_byte_buffer.html" title=" " alt="" coords="92,80,175,105"/>
+<area shape="rect" id="node3" href="$class_abstract_file_buffer.html" title=" " alt="" coords="199,80,326,105"/>
 </map>

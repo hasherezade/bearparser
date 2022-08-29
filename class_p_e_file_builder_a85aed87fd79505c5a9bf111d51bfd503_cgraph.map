@@ -1,7 +1,7 @@
 <map id="PEFileBuilder::build" name="PEFileBuilder::build">
-<area shape="rect" id="node1" title=" " alt="" coords="5,46,139,73"/>
-<area shape="rect" id="node2" href="$class_p_e_file_builder.html#ae651cc6bbd420150f4226ed0d515dd8c" title=" " alt="" coords="187,39,345,80"/>
-<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="393,39,524,80"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="572,5,703,47"/>
-<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="572,71,703,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,45,139,70"/>
+<area shape="rect" id="node2" href="$class_p_e_file_builder.html#ae651cc6bbd420150f4226ed0d515dd8c" title=" " alt="" coords="187,37,345,77"/>
+<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="393,37,524,77"/>
+<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="572,5,703,45"/>
+<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="572,69,703,109"/>
 </map>
