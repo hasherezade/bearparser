@@ -282,11 +282,28 @@ QString DebugDirCVEntryWrapper::getSignature()
 QString DebugDirCVEntryWrapper::getFieldName(size_t fId)
 {
     switch (fId) {
-    case F_CVDBG_SIGN: return "CvSig";
-    case F_CVDBG_GUID: return "Signature";
-    case F_CVDBG_AGE: return "Age";
-    case F_CVDBG_PDB: return "PDB";
+        case F_CVDBG_SIGN: return "CvSig";
+        case F_CVDBG_GUID: return "Signature";
+        case F_CVDBG_AGE: return "Age";
+        case F_CVDBG_PDB: return "PDB";
     }
     return "";
 }
 
+QString DebugDirCVEntryWrapper::translateFieldContent(size_t fId)
+{
+    DEBUG_RSDSI* rdsi = parentDir->getRDSI();
+    DEBUG_NB10* dbg = parentDir->getNB10();
+    if (!rdsi && !dbg) return "";
+
+    char *pdb = NULL;
+    if (rdsi) pdb = (char*)rdsi->szPdb;
+    if (dbg) pdb = (char*)dbg->PdbFileName;
+
+    switch (fId) {
+        case F_CVDBG_SIGN: return getSignature();
+        case F_CVDBG_GUID: return getGuidString();
+        case F_CVDBG_PDB: return pdb ? pdb : "";
+    }
+    return "";
+}
