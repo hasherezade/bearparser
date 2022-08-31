@@ -41,6 +41,40 @@ Executable* PEFileBuilder::build(AbstractByteBuffer *buf)
 }
 
 //-------------------------------------------------------------
+long PEFile::computeChecksum(BYTE *buffer, size_t bufferSize, size_t checksumOffset)
+{
+    WORD *wordBuff = (WORD*)buffer;
+    size_t wordSize = bufferSize / sizeof(WORD);
+
+    size_t checksumBgn = checksumOffset;
+    size_t checksumEnd = checksumOffset + sizeof(DWORD);
+
+    const long long maxVal = ((long long)1) << 32;
+    long long checksum = 0;
+
+    for (int i = 0; i < wordSize; i++) {
+        WORD chunk = wordBuff[i];
+
+        size_t bI = i * sizeof(WORD);
+        if (bI >= checksumBgn && bI < checksumEnd) {
+            size_t mask = (checksumEnd - bI) % sizeof(WORD);
+            size_t shift = (sizeof(WORD) - mask) * 8;
+            chunk = (chunk >> shift) << shift;
+        }
+
+        checksum = (checksum & 0xffffffff) + chunk + (checksum >> 32);
+        if (checksum > maxVal) {
+            checksum = (checksum & 0xffffffff) + (checksum >> 32);
+        }
+    }
+    checksum = (checksum & 0xffff) + (checksum >> 16);
+    checksum = (checksum)+(checksum >> 16);
+    checksum = checksum & 0xffff;
+    checksum += bufferSize;
+    return checksum;
+}
+
+///---
 
 PEFile::PEFile(AbstractByteBuffer *v_buf)
     : MappedExe(v_buf, Executable::BITS_32), dosHdrWrapper(NULL), fHdr(NULL), optHdr(NULL), sects(NULL),
@@ -457,6 +491,30 @@ SectionHdrWrapper* PEFile::getLastSection()
     if (secCount == 0) return NULL;
     SectionHdrWrapper* secHdr = this->getSecHdr(secCount - 1);
     return secHdr;
+}
+
+offset_t PEFile::getLastMapped(Executable::addr_type aType)
+{
+    offset_t lastRaw = 0;
+
+    /* check sections bounds */
+    const size_t counter = this->getSectionsCount(true);
+    for (size_t i = 0; i < counter; i++) {
+        SectionHdrWrapper *sec = this->getSecHdr(i);
+        if (!sec) continue;
+
+        offset_t secLastRaw = sec->getContentOffset(Executable::RAW, false) + sec->getMappedRawSize();
+        if (secLastRaw > lastRaw) lastRaw = secLastRaw;
+    }
+
+    /* check header bounds */
+    /* section headers: */
+    if (lastRaw < this->secHdrsEndOffset()) lastRaw = this->secHdrsEndOffset();
+
+    /* NT headers: */
+    int ntHeadersEndOffset = this->core.peSignatureOffset() + this->core.hdrsSize();
+    if (lastRaw < ntHeadersEndOffset) lastRaw = ntHeadersEndOffset;
+    return lastRaw;
 }
 
 SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)

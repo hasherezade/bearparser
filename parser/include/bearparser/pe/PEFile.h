@@ -53,6 +53,8 @@ public:
         COUNT_WRAPPERS
     };
 
+    static long computeChecksum(BYTE *buffer, size_t bufferSize, size_t checksumOffset);
+
     PEFile(AbstractByteBuffer *v_buf);
     virtual ~PEFile() { clearWrappers(); delete album; }
     //---
@@ -102,6 +104,16 @@ public:
         return (sects == NULL) ? NULL : sects->getSecHdrAtOffset(offset, aType, roundup, verbose);
     }
 
+    int getSecIndex(SectionHdrWrapper *sec)
+    {
+        return (sects) ?  sects->getSecIndex(sec) : NULL;
+    }
+
+    SectionHdrWrapper* sectionAt(int index)
+    {
+        return (sects) ? sects->sectionAt(index) : NULL;
+    }
+
     ResourcesContainer*  getResourcesOfType(pe::resource_type typeId)
     {
         return (this->album == NULL) ? NULL : album->getResourcesOfType(typeId);
@@ -147,7 +159,16 @@ public:
         
         return entrypoints.size() - initialSize;
     }
-    
+
+    offset_t getLastMapped(Executable::addr_type aType);
+
+    //calculate the real section headers end
+    offset_t secHdrsEndOffset()
+    {
+        const offset_t secHdrSize = this->getSectionsCount(false) * sizeof(IMAGE_SECTION_HEADER);
+        return secHdrsOffset() + secHdrSize;
+    }
+
 protected:
     size_t getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA);
     

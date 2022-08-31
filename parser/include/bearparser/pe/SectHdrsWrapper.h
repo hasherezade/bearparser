@@ -119,6 +119,25 @@ public:
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool roundup, bool verbose = false);
 
     void printSectionsMapping(Executable::addr_type aType);
+
+    int getSecIndex(SectionHdrWrapper* sec)
+    {
+        int indx = (-1);
+        for (auto itr = entries.begin(); itr != entries.end(); ++itr, ++indx) {
+            if (sec == *itr) {
+                return indx;
+            }
+        }
+        return indx;
+    }
+
+    SectionHdrWrapper* sectionAt(int index)
+    {
+        if (index == (-1) || index >= entries.size()) return NULL;
+        SectionHdrWrapper* sec = dynamic_cast<SectionHdrWrapper*>(entries.at(index));
+        return sec;
+    }
+
     //---
     bool canAddEntry();
     ExeNodeWrapper* addEntry(ExeNodeWrapper *entry);
