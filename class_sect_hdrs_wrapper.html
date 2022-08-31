@@ -133,6 +133,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a67602090ef783553cfaee18f2eac6bdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3130c9344561fe2397036d51293cd315"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a3130c9344561fe2397036d51293cd315">printSectionsMapping</a> (<a class="el" href="class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5b">Executable::addr_type</a> aType)</td></tr>
 <tr class="separator:a3130c9344561fe2397036d51293cd315"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a256838ef5f7996ebbc034f45dfe63c0d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a256838ef5f7996ebbc034f45dfe63c0d">getSecIndex</a> (<a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> *sec)</td></tr>
+<tr class="separator:a256838ef5f7996ebbc034f45dfe63c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42f79e72f0bc300db56678639f557bcd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a42f79e72f0bc300db56678639f557bcd">sectionAt</a> (int index)</td></tr>
+<tr class="separator:a42f79e72f0bc300db56678639f557bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4db6152b11ac5f460f3fffa932144b89"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a4db6152b11ac5f460f3fffa932144b89">canAddEntry</a> ()</td></tr>
 <tr class="separator:a4db6152b11ac5f460f3fffa932144b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49ab96b47b072e3f0b2c1e360e550d68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_exe_node_wrapper.html">ExeNodeWrapper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a49ab96b47b072e3f0b2c1e360e550d68">addEntry</a> (<a class="el" href="class_exe_node_wrapper.html">ExeNodeWrapper</a> *entry)</td></tr>
@@ -967,6 +971,34 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="a256838ef5f7996ebbc034f45dfe63c0d" name="a256838ef5f7996ebbc034f45dfe63c0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a256838ef5f7996ebbc034f45dfe63c0d">&#9670;&#160;</a></span>getSecIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SectHdrsWrapper::getSecIndex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> *&#160;</td>
+          <td class="paramname"><em>sec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00123">123</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+
+</div>
+</div>
 <a id="a4d6b44795635eae887a570304b838e11" name="a4d6b44795635eae887a570304b838e11"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d6b44795635eae887a570304b838e11">&#9670;&#160;</a></span>getSize()</h2>
 
@@ -1205,6 +1237,34 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="a42f79e72f0bc300db56678639f557bcd" name="a42f79e72f0bc300db56678639f557bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42f79e72f0bc300db56678639f557bcd">&#9670;&#160;</a></span>sectionAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> * SectHdrsWrapper::sectionAt </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00134">134</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+
+</div>
+</div>
 <a id="aa3f5a79d62f8053557740949bb8ace4b" name="aa3f5a79d62f8053557740949bb8ace4b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa3f5a79d62f8053557740949bb8ace4b">&#9670;&#160;</a></span>wrap()</h2>
 
@@ -1303,7 +1363,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00133">133</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00152">152</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1351,7 +1411,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00132">132</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00151">151</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
 
 </div>
 </div>
