@@ -127,16 +127,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a18c6d18f87e949fd09778c62a7f13599"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e03cddf78dfe6599a75c4c36327b0ef"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a5e03cddf78dfe6599a75c4c36327b0ef">getFieldName</a> (size_t fieldId)</td></tr>
 <tr class="separator:a5e03cddf78dfe6599a75c4c36327b0ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a756229b93c5d20015f2c88d9cae5d015"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a756229b93c5d20015f2c88d9cae5d015">getSecHdr</a> (size_t secNum)</td></tr>
-<tr class="separator:a756229b93c5d20015f2c88d9cae5d015"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67602090ef783553cfaee18f2eac6bdb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a67602090ef783553cfaee18f2eac6bdb">getSecHdrAtOffset</a> (<a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> offset, <a class="el" href="class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5b">Executable::addr_type</a> addrType, bool roundup, bool verbose=false)</td></tr>
 <tr class="separator:a67602090ef783553cfaee18f2eac6bdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3130c9344561fe2397036d51293cd315"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a3130c9344561fe2397036d51293cd315">printSectionsMapping</a> (<a class="el" href="class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5b">Executable::addr_type</a> aType)</td></tr>
 <tr class="separator:a3130c9344561fe2397036d51293cd315"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a256838ef5f7996ebbc034f45dfe63c0d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a256838ef5f7996ebbc034f45dfe63c0d">getSecIndex</a> (<a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> *sec)</td></tr>
-<tr class="separator:a256838ef5f7996ebbc034f45dfe63c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42f79e72f0bc300db56678639f557bcd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a42f79e72f0bc300db56678639f557bcd">sectionAt</a> (int index)</td></tr>
-<tr class="separator:a42f79e72f0bc300db56678639f557bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92011ccf9113018f650ad46668ffbc63"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a92011ccf9113018f650ad46668ffbc63">getSecIndex</a> (<a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> *sec)</td></tr>
+<tr class="separator:a92011ccf9113018f650ad46668ffbc63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fc6bb23dbfe52cfd7e702d3c94f5e30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a1fc6bb23dbfe52cfd7e702d3c94f5e30">getSecHdr</a> (size_t index)</td></tr>
+<tr class="separator:a1fc6bb23dbfe52cfd7e702d3c94f5e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4db6152b11ac5f460f3fffa932144b89"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a4db6152b11ac5f460f3fffa932144b89">canAddEntry</a> ()</td></tr>
 <tr class="separator:a4db6152b11ac5f460f3fffa932144b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49ab96b47b072e3f0b2c1e360e550d68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_exe_node_wrapper.html">ExeNodeWrapper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a49ab96b47b072e3f0b2c1e360e550d68">addEntry</a> (<a class="el" href="class_exe_node_wrapper.html">ExeNodeWrapper</a> *entry)</td></tr>
@@ -308,6 +306,8 @@ Public Member Functions</h2></td></tr>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a8a8d5a95bcd849820fa18adcc5dbede5"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#a8a8d5a95bcd849820fa18adcc5dbede5">SECT_COUNT_MAX</a> = 0x2000</td></tr>
 <tr class="separator:a8a8d5a95bcd849820fa18adcc5dbede5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6b4f5c7cd26f2366f21ba22dceb97c6"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sect_hdrs_wrapper.html#ae6b4f5c7cd26f2366f21ba22dceb97c6">SECT_INVALID_INDEX</a> = SIZE_MAX</td></tr>
+<tr class="separator:ae6b4f5c7cd26f2366f21ba22dceb97c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -396,7 +396,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00103">103</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00104">104</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -476,7 +476,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#ad3ccdd5e4f04f961dd84a201a9b8a1f4">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00295">295</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00297">297</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -543,7 +543,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00333">333</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00335">335</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -597,7 +597,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a93babf789a4e49566b20395e43ffc797">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00284">284</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00286">286</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -646,7 +646,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#abd74c2637211cf471d022b528654c84c">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00311">311</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00313">313</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -685,7 +685,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_node_wrapper.html#a086e8cfa49daea540fc55956821375f1">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00420">420</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00422">422</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 
 </div>
 </div>
@@ -725,7 +725,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00114">114</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00115">115</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -765,7 +765,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00387">387</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00389">389</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 
 </div>
 </div>
@@ -805,7 +805,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_element_wrapper.html#a10ef93fdda6cf93c5db02b696a81b7c7">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00115">115</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00116">116</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -849,7 +849,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#af2f26b8da4cf2339944f1a4b8473454b">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00110">110</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00111">111</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -878,12 +878,12 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00392">392</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00394">394</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a756229b93c5d20015f2c88d9cae5d015" name="a756229b93c5d20015f2c88d9cae5d015"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a756229b93c5d20015f2c88d9cae5d015">&#9670;&#160;</a></span>getSecHdr()</h2>
+<a id="a1fc6bb23dbfe52cfd7e702d3c94f5e30" name="a1fc6bb23dbfe52cfd7e702d3c94f5e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fc6bb23dbfe52cfd7e702d3c94f5e30">&#9670;&#160;</a></span>getSecHdr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -895,7 +895,7 @@ Here is the call graph for this function:</div>
           <td class="memname"><a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> * SectHdrsWrapper::getSecHdr </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>secNum</em></td><td>)</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -906,7 +906,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00118">118</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00134">134</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -948,7 +948,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00426">426</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00428">428</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -971,8 +971,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a256838ef5f7996ebbc034f45dfe63c0d" name="a256838ef5f7996ebbc034f45dfe63c0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a256838ef5f7996ebbc034f45dfe63c0d">&#9670;&#160;</a></span>getSecIndex()</h2>
+<a id="a92011ccf9113018f650ad46668ffbc63" name="a92011ccf9113018f650ad46668ffbc63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92011ccf9113018f650ad46668ffbc63">&#9670;&#160;</a></span>getSecIndex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -981,7 +981,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int SectHdrsWrapper::getSecIndex </td>
+          <td class="memname">size_t SectHdrsWrapper::getSecIndex </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> *&#160;</td>
           <td class="paramname"><em>sec</em></td><td>)</td>
@@ -1024,7 +1024,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00398">398</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00400">400</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1070,7 +1070,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a18ce067c9b583670403ed0abc2cbad2d">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00275">275</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00277">277</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 
 </div>
 </div>
@@ -1100,7 +1100,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a8a0305cc15aefe812f69485bbe82508d">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00318">318</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00320">320</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1156,7 +1156,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00465">465</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00467">467</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1205,7 +1205,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a659e73a1d597a93ae7dd31cf7e98f23a">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00361">361</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00363">363</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1237,34 +1237,6 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a42f79e72f0bc300db56678639f557bcd" name="a42f79e72f0bc300db56678639f557bcd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42f79e72f0bc300db56678639f557bcd">&#9670;&#160;</a></span>sectionAt()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_section_hdr_wrapper.html">SectionHdrWrapper</a> * SectHdrsWrapper::sectionAt </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00134">134</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
-
-</div>
-</div>
 <a id="aa3f5a79d62f8053557740949bb8ace4b" name="aa3f5a79d62f8053557740949bb8ace4b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa3f5a79d62f8053557740949bb8ace4b">&#9670;&#160;</a></span>wrap()</h2>
 
@@ -1290,7 +1262,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a5cd7f16e4529be2a96f87237e31b2611">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00374">374</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html#l00376">376</a> of file <a class="el" href="_sect_hdrs_wrapper_8cpp_source.html">SectHdrsWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1363,7 +1335,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00152">152</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00151">151</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1391,6 +1363,30 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="ae6b4f5c7cd26f2366f21ba22dceb97c6" name="ae6b4f5c7cd26f2366f21ba22dceb97c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6b4f5c7cd26f2366f21ba22dceb97c6">&#9670;&#160;</a></span>SECT_INVALID_INDEX</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t SectHdrsWrapper::SECT_INVALID_INDEX = SIZE_MAX</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00101">101</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+
+</div>
+</div>
 <a id="a91315d8ffada0f94a9b095c1f1d12ee7" name="a91315d8ffada0f94a9b095c1f1d12ee7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91315d8ffada0f94a9b095c1f1d12ee7">&#9670;&#160;</a></span>vSec</h2>
 
@@ -1411,7 +1407,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00151">151</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sect_hdrs_wrapper_8h_source.html#l00150">150</a> of file <a class="el" href="_sect_hdrs_wrapper_8h_source.html">SectHdrsWrapper.h</a>.</p>
 
 </div>
 </div>
