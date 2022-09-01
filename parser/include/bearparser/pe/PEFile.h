@@ -104,9 +104,9 @@ public:
         return (sects == NULL) ? NULL : sects->getSecHdrAtOffset(offset, aType, roundup, verbose);
     }
 
-    int getSecIndex(SectionHdrWrapper *sec)
+    size_t getSecIndex(SectionHdrWrapper *sec)
     {
-        return (sects) ?  sects->getSecIndex(sec) : NULL;
+        return (sects) ?  sects->getSecIndex(sec) : SectHdrsWrapper::SECT_INVALID_INDEX;
     }
 
     ResourcesContainer*  getResourcesOfType(pe::resource_type typeId)
