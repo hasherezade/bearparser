@@ -98,6 +98,7 @@ class SectHdrsWrapper : public PENodeWrapper
 {
 public:
     static size_t SECT_COUNT_MAX;
+    static size_t SECT_INVALID_INDEX;
 
     // fields :
     SectHdrsWrapper(PEFile *pe) : PENodeWrapper(pe) { wrap(); }
@@ -115,14 +116,13 @@ public:
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField) { return getSubfieldSize(fieldId, subField ); }
     virtual QString getFieldName(size_t fieldId);
 
-    SectionHdrWrapper* getSecHdr(size_t secNum) { return (secNum >= entries.size()) ? NULL : dynamic_cast<SectionHdrWrapper*>(entries[secNum]); }
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool roundup, bool verbose = false);
 
     void printSectionsMapping(Executable::addr_type aType);
 
-    int getSecIndex(SectionHdrWrapper* sec)
+    size_t getSecIndex(SectionHdrWrapper* sec)
     {
-        int indx = (-1);
+        size_t indx = SECT_INVALID_INDEX;
         for (auto itr = entries.begin(); itr != entries.end(); ++itr, ++indx) {
             if (sec == *itr) {
                 return indx;
@@ -131,11 +131,10 @@ public:
         return indx;
     }
 
-    SectionHdrWrapper* sectionAt(int index)
+    SectionHdrWrapper* getSecHdr(size_t index)
     {
-        if (index == (-1) || index >= entries.size()) return NULL;
-        SectionHdrWrapper* sec = dynamic_cast<SectionHdrWrapper*>(entries.at(index));
-        return sec;
+        if (index == SECT_INVALID_INDEX || index >= entries.size()) return NULL;
+        return dynamic_cast<SectionHdrWrapper*>(entries.at(index));
     }
 
     //---

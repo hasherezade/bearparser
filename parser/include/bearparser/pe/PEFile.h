@@ -94,9 +94,9 @@ public:
     size_t getSectionsCount(bool useMapped = true);
     exe_bits getHdrBitMode() { return core.getHdrBitMode(); }
 
-    SectionHdrWrapper* getSecHdr(size_t secNum)
+    SectionHdrWrapper* getSecHdr(size_t index)
     {
-        return (sects == NULL) ? NULL : sects->getSecHdr(secNum);
+        return (sects) ? sects->getSecHdr(index) : NULL;
     }
 
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool roundup, bool verbose = false)
@@ -107,11 +107,6 @@ public:
     int getSecIndex(SectionHdrWrapper *sec)
     {
         return (sects) ?  sects->getSecIndex(sec) : NULL;
-    }
-
-    SectionHdrWrapper* sectionAt(int index)
-    {
-        return (sects) ? sects->sectionAt(index) : NULL;
     }
 
     ResourcesContainer*  getResourcesOfType(pe::resource_type typeId)

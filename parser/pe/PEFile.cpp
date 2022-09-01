@@ -489,8 +489,7 @@ SectionHdrWrapper* PEFile::getLastSection()
 {
     size_t secCount = this->getSectionsCount(true);
     if (secCount == 0) return NULL;
-    SectionHdrWrapper* secHdr = this->getSecHdr(secCount - 1);
-    return secHdr;
+    return this->getSecHdr(secCount - 1);
 }
 
 offset_t PEFile::getLastMapped(Executable::addr_type aType)

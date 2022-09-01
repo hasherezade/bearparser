@@ -240,10 +240,6 @@ protected:
             std:: cout << "No such section\n";
             return false;
         }
-        Executable::addr_type aType = Executable::RAW;
-        offset_t start = sec->getContentOffset(aType, true);
-        bufsize_t size = sec->getContentSize(aType, true);
-
         std::cout << "Section " << sec->getName().toStdString() << "\n";
         cmd_util::printSectionMapping(sec, Executable::RAW);
         cmd_util::printSectionMapping(sec, Executable::RVA);
