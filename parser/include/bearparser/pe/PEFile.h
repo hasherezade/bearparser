@@ -94,7 +94,7 @@ public:
     size_t getSectionsCount(bool useMapped = true);
     exe_bits getHdrBitMode() { return core.getHdrBitMode(); }
 
-    SectionHdrWrapper* getSecHdr(size_t index)
+    SectionHdrWrapper* getSecHdr(size_t index) const
     {
         return (sects) ? sects->getSecHdr(index) : NULL;
     }
@@ -104,7 +104,7 @@ public:
         return (sects == NULL) ? NULL : sects->getSecHdrAtOffset(offset, aType, roundup, verbose);
     }
 
-    size_t getSecIndex(SectionHdrWrapper *sec)
+    size_t getSecIndex(SectionHdrWrapper *sec) const
     {
         return (sects) ?  sects->getSecIndex(sec) : SectHdrsWrapper::SECT_INVALID_INDEX;
     }

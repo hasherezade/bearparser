@@ -120,7 +120,7 @@ public:
 
     void printSectionsMapping(Executable::addr_type aType);
 
-    size_t getSecIndex(SectionHdrWrapper* sec)
+    size_t getSecIndex(SectionHdrWrapper* sec) const
     {
         size_t indx = SECT_INVALID_INDEX;
         for (auto itr = entries.begin(); itr != entries.end(); ++itr, ++indx) {
@@ -131,7 +131,7 @@ public:
         return indx;
     }
 
-    SectionHdrWrapper* getSecHdr(size_t index)
+    SectionHdrWrapper* getSecHdr(size_t index) const
     {
         if (index == SECT_INVALID_INDEX || index >= entries.size()) return NULL;
         return dynamic_cast<SectionHdrWrapper*>(entries.at(index));
