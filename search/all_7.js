@@ -113,7 +113,7 @@ var searchData=
   ['getrichheadersign_110',['getRichHeaderSign',['../class_p_e_file.html#adb187c47cea5a6cfa260528b7cf577ce',1,'PEFile']]],
   ['getsechdr_111',['getSecHdr',['../class_p_e_file.html#aaec7c91119e03e652ac567cd40782ebe',1,'PEFile::getSecHdr()'],['../class_sect_hdrs_wrapper.html#a1fc6bb23dbfe52cfd7e702d3c94f5e30',1,'SectHdrsWrapper::getSecHdr()']]],
   ['getsechdratoffset_112',['getSecHdrAtOffset',['../class_p_e_file.html#aca83afba07fecbf7137e42065064c7e4',1,'PEFile::getSecHdrAtOffset()'],['../class_sect_hdrs_wrapper.html#a67602090ef783553cfaee18f2eac6bdb',1,'SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool roundup, bool verbose=false)']]],
-  ['getsecindex_113',['getSecIndex',['../class_sect_hdrs_wrapper.html#a92011ccf9113018f650ad46668ffbc63',1,'SectHdrsWrapper::getSecIndex()'],['../class_p_e_file.html#a0aff1012c4402248efd5c0b4329ab214',1,'PEFile::getSecIndex(SectionHdrWrapper *sec)']]],
+  ['getsecindex_113',['getSecIndex',['../class_sect_hdrs_wrapper.html#a92011ccf9113018f650ad46668ffbc63',1,'SectHdrsWrapper::getSecIndex()'],['../class_p_e_file.html#aaa9c1ee31a73fbe56fbca6767e5d9071',1,'PEFile::getSecIndex(SectionHdrWrapper *sec)']]],
   ['getsectionscount_114',['getSectionsCount',['../class_p_e_file.html#a701e279b71325f55f6b55a0e9f64fa00',1,'PEFile']]],
   ['getshortname_115',['getShortName',['../class_import_base_func_wrapper.html#aba342064b7e19eb82b7145a9e9a150ab',1,'ImportBaseFuncWrapper']]],
   ['getsignature_116',['getSignature',['../class_debug_dir_c_v_entry_wrapper.html#a19c25cbb168fea89a98c210f084a01db',1,'DebugDirCVEntryWrapper']]],
