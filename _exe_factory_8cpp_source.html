@@ -106,7 +106,7 @@ $(function() {
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_exe_factory.html#a2d77a07fa81a40bfa5edcf3a00bc10fd">   27</a></span><a class="code hl_enumeration" href="class_exe_factory.html#adc59e611b34ce9a0c6888fddd3699715">ExeFactory::exe_type</a> <a class="code hl_function" href="class_exe_factory.html#a2d77a07fa81a40bfa5edcf3a00bc10fd">ExeFactory::findMatching</a>(<a class="code hl_class" href="class_abstract_byte_buffer.html">AbstractByteBuffer</a> *buf)</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>{</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">if</span> (!buf) <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="class_exe_factory.html#adc59e611b34ce9a0c6888fddd3699715aea38b2736e89a0e473b7d7c63f5d32e6">NONE</a>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    std::map&lt;exe_type, ExeBuilder*&gt;::iterator itr;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">for</span> (itr = <a class="code hl_variable" href="class_exe_factory.html#a32bf534192e902b75a294cfc5b602ee6">builders</a>.begin(); itr != <a class="code hl_variable" href="class_exe_factory.html#a32bf534192e902b75a294cfc5b602ee6">builders</a>.end(); itr++) {</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
