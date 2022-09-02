@@ -74,11 +74,12 @@ public:
     virtual exe_bits getBitMode() { return getHdrBitMode(); }
     //---
     // PEFile only:
-    offset_t peFileHdrOffset() { return core.peFileHdrOffset(); }
-    offset_t peNtHdrOffset() { return core.peSignatureOffset(); }
+    offset_t peFileHdrOffset() const { return core.peFileHdrOffset(); }
+    offset_t peNtHdrOffset() const { return core.peSignatureOffset(); }
     bufsize_t peNtHeadersSize() const { return core.peNtHeadersSize(); }
-    offset_t peOptHdrOffset() { return core.peOptHdrOffset(); }
-    offset_t secHdrsOffset() { return core.secHdrsOffset(); }
+    offset_t peOptHdrOffset() const { return core.peOptHdrOffset(); }
+    offset_t secHdrsOffset() const { return core.secHdrsOffset(); }
+
     bufsize_t hdrsSize() { return core.hdrsSize(); }
     offset_t getMinSecRVA();
 
