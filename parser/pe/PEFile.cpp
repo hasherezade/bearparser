@@ -272,7 +272,7 @@ bool PEFile::setEntryPoint(offset_t entry, Executable::addr_type aType)
     return isOk;
 }
 
-size_t PEFile::hdrSectionsNum()
+size_t PEFile::hdrSectionsNum() const
 {
     bool isOk = false;
     uint64_t secNum = this->fHdr->getNumValue(FileHdrWrapper::SEC_NUM , &isOk);
@@ -303,7 +303,7 @@ bool PEFile::setVirtualSize(bufsize_t newSize)
     return true;
 }
 
-size_t PEFile::getSectionsCount(bool useMapped)
+size_t PEFile::getSectionsCount(bool useMapped) const
 {
     if (useMapped == false) {
         return hdrSectionsNum();
