@@ -11,7 +11,10 @@ public:
     PECore()
         : buf(NULL), dos(NULL), fHdr(NULL), opt32(NULL), opt64(NULL) {}
 
-    virtual ~PECore() {}
+    virtual ~PECore()
+    {
+        reset();
+    }
 
     bool wrap(AbstractByteBuffer *v_buf);
 
