@@ -5,6 +5,5 @@ var searchData=
   ['opt32_2',['opt32',['../class_opt_hdr_wrapper.html#a47d8da971d1e085b9e8e1958f5965058',1,'OptHdrWrapper::opt32()'],['../class_p_e_core.html#a78e7bc74699074938bb07d6e17aee1eb',1,'PECore::opt32()']]],
   ['opt64_3',['opt64',['../class_opt_hdr_wrapper.html#a4261c57fc2195a29207b1a1ae6716b46',1,'OptHdrWrapper::opt64()'],['../class_p_e_core.html#ad28c19fee0317e4986f322f8fad4c97a',1,'PECore::opt64()']]],
   ['opthdr_4',['optHdr',['../class_p_e_file.html#a751a81dedb00cad24d969b05e02cf97b',1,'PEFile']]],
-  ['opthdroff_5',['optHdrOff',['../class_p_e_core.html#ad38f31eeed026f5a19c3a18ccd465e38',1,'PECore']]],
-  ['ordtonameid_6',['ordToNameId',['../class_export_dir_wrapper.html#a5d245856f8815550d3c9df64b0fd331a',1,'ExportDirWrapper']]]
+  ['ordtonameid_5',['ordToNameId',['../class_export_dir_wrapper.html#a5d245856f8815550d3c9df64b0fd331a',1,'ExportDirWrapper']]]
 ];
