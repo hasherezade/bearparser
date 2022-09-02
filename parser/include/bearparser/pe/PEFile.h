@@ -74,10 +74,22 @@ public:
     virtual exe_bits getBitMode() { return getHdrBitMode(); }
     //---
     // PEFile only:
-    offset_t peHdrOffset() { return core.peFileHdrOffset(); }
-    offset_t peNtHdrOffset() { return core.peSignatureOffset(); }
-    offset_t peOptHdrOffset() { return core.peOptHdrOffset(); }
-    offset_t secHdrsOffset() { return core.secHdrsOffset(); }
+    offset_t peFileHdrOffset() const { return core.peFileHdrOffset(); }
+    offset_t peNtHdrOffset() const { return core.peSignatureOffset(); }
+    bufsize_t peNtHeadersSize() const { return core.peNtHeadersSize(); }
+    offset_t peOptHdrOffset() const { return core.peOptHdrOffset(); }
+    offset_t secHdrsOffset() const { return core.secHdrsOffset(); }
+
+    offset_t secHdrsEndOffset() const
+    {
+        const offset_t offset = secHdrsOffset();
+        if (offset == INVALID_ADDR) {
+            return INVALID_ADDR;
+        }
+        const offset_t secHdrSize = this->getSectionsCount() * sizeof(IMAGE_SECTION_HEADER);
+        return offset + secHdrSize;
+    }
+
     bufsize_t hdrsSize() { return core.hdrsSize(); }
     offset_t getMinSecRVA();
 
@@ -90,8 +102,8 @@ public:
     IMAGE_DATA_DIRECTORY* getDataDirectory();
     offset_t peDataDirOffset();
 
-    size_t hdrSectionsNum();
-    size_t getSectionsCount(bool useMapped = true);
+    size_t hdrSectionsNum() const;
+    size_t getSectionsCount(bool useMapped = true) const;
     exe_bits getHdrBitMode() { return core.getHdrBitMode(); }
 
     SectionHdrWrapper* getSecHdr(size_t index) const
