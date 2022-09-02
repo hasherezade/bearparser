@@ -9,12 +9,7 @@ class PECore
 public:
 
     PECore()
-        : buf(NULL), dos(NULL), fHdr(NULL), opt32(NULL), opt64(NULL),
-            signatureOff(INVALID_ADDR),
-            fileHdrOff(INVALID_ADDR),
-            secHdrsOff(INVALID_ADDR),
-            optHdrOff(INVALID_ADDR)
-            {}
+        : buf(NULL), dos(NULL), fHdr(NULL), opt32(NULL), opt64(NULL) {}
 
     virtual ~PECore() {}
 
@@ -26,12 +21,13 @@ public:
     virtual offset_t getImageBase();
     virtual bufsize_t getImageSize();
 
-    Executable::exe_bits getHdrBitMode();
-    offset_t peSignatureOffset();
-    offset_t peFileHdrOffset();
-    offset_t secHdrsOffset();
-    offset_t peOptHdrOffset();
-    bufsize_t hdrsSize();
+    Executable::exe_bits getHdrBitMode() const;
+    offset_t peSignatureOffset() const;
+    offset_t peFileHdrOffset() const;
+    offset_t secHdrsOffset() const;
+    offset_t peOptHdrOffset() const;
+    bufsize_t peNtHeadersSize() const;
+    bufsize_t hdrsSize() const;
 
 protected:
     void reset();
@@ -41,11 +37,6 @@ protected:
     IMAGE_FILE_HEADER* fHdr;
     IMAGE_OPTIONAL_HEADER32* opt32;
     IMAGE_OPTIONAL_HEADER64* opt64;
-//cached:
-    offset_t signatureOff;
-    offset_t fileHdrOff;
-    offset_t secHdrsOff;
-    offset_t optHdrOff;
 
 friend class PEFile;
 };

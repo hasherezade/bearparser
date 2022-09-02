@@ -8,11 +8,6 @@ void PECore::reset()
     fHdr = NULL;
     opt32 = NULL;
     opt64 = NULL;
-
-    signatureOff = INVALID_ADDR;
-    fileHdrOff = INVALID_ADDR;
-    secHdrsOff = INVALID_ADDR;
-    optHdrOff = INVALID_ADDR;
 }
 
 bool PECore::wrap(AbstractByteBuffer *v_buf)
@@ -29,7 +24,6 @@ bool PECore::wrap(AbstractByteBuffer *v_buf)
     offset = dos->e_lfanew + sizeof(DWORD); //skip 'PE' signature
     this->fHdr = (IMAGE_FILE_HEADER*) buf->getContentAt(offset, sizeof(IMAGE_FILE_HEADER), allowExceptions);
     if (fHdr == NULL)  throw ExeException("Could not wrap PECore!");
-
 
     offset = offset + sizeof(IMAGE_FILE_HEADER);
     WORD *magic = (WORD*) buf->getContentAt(offset, sizeof(WORD), allowExceptions);
@@ -52,7 +46,7 @@ bool PECore::wrap(AbstractByteBuffer *v_buf)
    return true;
 }
 
-Executable::exe_bits PECore::getHdrBitMode()
+Executable::exe_bits PECore::getHdrBitMode() const
 {
     if (opt32) return Executable::BITS_32;
     if (opt64) return Executable::BITS_64;
@@ -60,40 +54,49 @@ Executable::exe_bits PECore::getHdrBitMode()
     return Executable::BITS_32; // DEFAULT
 }
 
-offset_t PECore::peSignatureOffset()
+offset_t PECore::peSignatureOffset() const
 {
-    if (this->signatureOff == INVALID_ADDR)
-        signatureOff = static_cast<offset_t> (dos->e_lfanew);
-    return signatureOff;
+    return static_cast<offset_t> (dos->e_lfanew);
 }
 
-offset_t PECore::peFileHdrOffset()
+offset_t PECore::peFileHdrOffset() const
 {
-    if (this->fileHdrOff == INVALID_ADDR) {
-        offset_t offset = peSignatureOffset();
-        offset_t signSize = sizeof(DWORD);
-        fileHdrOff = offset + signSize;
+    const offset_t offset = peSignatureOffset();
+    if (offset == INVALID_ADDR) {
+        return INVALID_ADDR;
     }
-    return fileHdrOff;
-
+    const offset_t signSize = sizeof(DWORD);
+    return offset + signSize;
 }
 
-offset_t PECore::peOptHdrOffset()
+offset_t PECore::peOptHdrOffset() const 
 {
-    if (this->optHdrOff == INVALID_ADDR) {
-        optHdrOff = peFileHdrOffset() + sizeof(IMAGE_FILE_HEADER);
+    const offset_t offset = peFileHdrOffset();
+    if (offset == INVALID_ADDR) {
+        return INVALID_ADDR;
     }
-    return optHdrOff;
+    return offset + sizeof(IMAGE_FILE_HEADER);
 }
 
-offset_t PECore::secHdrsOffset()
+bufsize_t PECore::peNtHeadersSize() const
 {
-    if (this->secHdrsOff == INVALID_ADDR) {
-        offset_t offset = peOptHdrOffset();
-        offset_t size = static_cast<offset_t>(this->fHdr->SizeOfOptionalHeader);
-        secHdrsOff = offset + size;
+    if (this->getHdrBitMode() == Executable::BITS_64)
+        return sizeof(IMAGE_NT_HEADERS64);
+
+    return sizeof(IMAGE_NT_HEADERS32);
+}
+
+offset_t PECore::secHdrsOffset() const
+{
+    const offset_t offset = peOptHdrOffset();
+    if (offset == INVALID_ADDR) {
+        return INVALID_ADDR;
     }
-    return secHdrsOff;
+    if (!fHdr) {
+        return INVALID_ADDR;
+    }
+    const offset_t size = static_cast<offset_t>(this->fHdr->SizeOfOptionalHeader);
+    return offset + size;
 }
 
 bufsize_t PECore::getAlignment(Executable::addr_type aType)
@@ -121,7 +124,7 @@ bufsize_t PECore::getImageSize()
     return imgSize;
 }
 
-bufsize_t PECore::hdrsSize()
+bufsize_t PECore::hdrsSize() const
 {
     bufsize_t hdrsSize = 0;
     if (this->opt32) {

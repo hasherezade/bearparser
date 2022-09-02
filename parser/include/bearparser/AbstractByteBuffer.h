@@ -87,4 +87,3 @@ protected:
     bufsize_t size;
 };
 
-

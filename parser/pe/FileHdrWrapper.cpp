@@ -20,7 +20,7 @@ void* FileHdrWrapper::getPtr()
     }
     if (m_PE == NULL) return NULL;
 
-    offset_t myOff = m_PE->peHdrOffset();
+    offset_t myOff = m_PE->peFileHdrOffset();
     IMAGE_FILE_HEADER* hdr = (IMAGE_FILE_HEADER*) m_Exe->getContentAt(myOff, sizeof(IMAGE_FILE_HEADER));
     if (!hdr) return NULL; //error
 
