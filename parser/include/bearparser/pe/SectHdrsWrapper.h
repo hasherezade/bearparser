@@ -135,7 +135,8 @@ public:
 
     size_t getSecIndex(SectionHdrWrapper* sec) const
     {
-        size_t indx = SECT_INVALID_INDEX;
+        if (!entries.size()) return SECT_INVALID_INDEX;
+        size_t indx = 0;
         for (auto itr = entries.begin(); itr != entries.end(); ++itr, ++indx) {
             if (sec == *itr) {
                 return indx;
