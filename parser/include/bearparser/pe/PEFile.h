@@ -212,13 +212,13 @@ public:
 		return ptr;
 	}
 
-	size_t PEFile::getSecRawSize(PESection* sec, bool roundup=false, bool limitToFileSize=true)
+	size_t PEFile::getSecRawSize(PESection* sec, bool recalculate=false, bool limitToFileSize=true)
 	{
 		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
 			return 0; //not my section
 		}
-		size_t secRawSize = sec->getContentSize(Executable::RAW, roundup);
-		if (!roundup && !limitToFileSize) {
+		size_t secRawSize = sec->getContentSize(Executable::RAW, false);
+		if (!recalculate && !limitToFileSize) {
 			return secRawSize;
 		}
 		BYTE *ptr = sec->getContent();
@@ -232,7 +232,7 @@ public:
 		if (secEnd > peSize) {
 			trimmedSize = peSize - secOffset; // trim to the file size
 			//qDebug("The section %x overflows and has been trimmed! size: %x trimmedSize: %x", secOffset, secRawSize, trimmedSize);
-			bufsize_t virtualSize = sec->getContentSize(Executable::RVA, roundup);
+			bufsize_t virtualSize = sec->getContentSize(Executable::RVA, true);
 			if (trimmedSize > virtualSize) {
 				return virtualSize;
 			}
@@ -243,7 +243,7 @@ public:
 	size_t PEFile::getSecVirtualSize(PESection* sec, bool recalculate = false)
 	{
 		if (sec == NULL) return 0;
-		size_t vSize = sec->getContentSize(Executable::RVA, recalculate);
+		size_t vSize = sec->getContentSize(Executable::RVA, false);
 
 		if (recalculate == false)
 			return vSize;
