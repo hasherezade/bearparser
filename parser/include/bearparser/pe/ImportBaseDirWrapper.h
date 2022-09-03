@@ -71,11 +71,10 @@ protected:
 
     void addMapping(ExeNodeWrapper *func) { if (impDir) impDir->addMapping(func); }
 
+	bool isValid();
+
     std::map<offset_t, size_t> thunkToFuncMap;
     ImportBaseDirWrapper* impDir;
-
-protected:
-    bool isValid();
 
 friend class ImportBaseDirWrapper;
 };

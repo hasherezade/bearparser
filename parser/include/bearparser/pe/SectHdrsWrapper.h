@@ -73,6 +73,12 @@ public:
 
 	DWORD getVirtualPtr() { return header->VirtualAddress; }
 
+	DWORD getPointerToRelocations() { return header->PointerToRelocations; }
+
+	DWORD getNumberOfRelocations() { return header->NumberOfRelocations; }
+
+	DWORD getNumberOfLinenumbers() { return header->NumberOfLinenumbers; }
+
 	QString mappedName;
 
 protected:

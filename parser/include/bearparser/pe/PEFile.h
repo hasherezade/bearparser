@@ -212,13 +212,13 @@ public:
 		return ptr;
 	}
 
-	size_t PEFile::getSecRawSize(PESection* sec, bool recalculate=false, bool limitToFileSize=true)
+	size_t PEFile::getSecRawSize(PESection* sec, bool roundup=false, bool limitToFileSize=true)
 	{
 		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
 			return 0; //not my section
 		}
-		size_t secRawSize = sec->getContentSize(Executable::RAW, recalculate);
-		if (!recalculate && !limitToFileSize) {
+		size_t secRawSize = sec->getContentSize(Executable::RAW, roundup);
+		if (!roundup && !limitToFileSize) {
 			return secRawSize;
 		}
 		BYTE *ptr = sec->getContent();
@@ -232,13 +232,26 @@ public:
 		if (secEnd > peSize) {
 			trimmedSize = peSize - secOffset; // trim to the file size
 			//qDebug("The section %x overflows and has been trimmed! size: %x trimmedSize: %x", secOffset, secRawSize, trimmedSize);
-			bufsize_t virtualSize = sec->getContentSize(Executable::RVA, recalculate);
+			bufsize_t virtualSize = sec->getContentSize(Executable::RVA, roundup);
 			if (trimmedSize > virtualSize) {
 				return virtualSize;
 			}
 		}
 		return trimmedSize;
 	}
+
+	size_t PEFile::getSecVirtualSize(PESection* sec, bool recalculate = false)
+	{
+		if (sec == NULL) return 0;
+		size_t vSize = sec->getContentSize(Executable::RVA, recalculate);
+
+		if (recalculate == false)
+			return vSize;
+		//---
+		if (vSize == 0) vSize = sec->getContentSize(Executable::RAW, false);
+		return vSize;
+	}
+
 
 	offset_t getLastMappedRaw()
 	{
@@ -272,6 +285,53 @@ public:
 		return this->core.getFileHeader();
 	}
 
+	DWORD roudupSectionSize(PESection *sec, bool isRVA)
+	{
+		if (sec == NULL) return 0;
+
+		DWORD align = isRVA ? this->getSectionAlignment() : this->getFileAlignment();
+		DWORD size = isRVA ? this->getSecVirtualSize(sec, true) : getSecRawSize(sec, true);
+		DWORD roundedSize = pe_util::roundup(size, align);
+
+		return roundedSize;
+	}
+
+	PESection* getEntrySection()
+	{
+		DWORD ep = getEntryPoint();
+		return getSectionByAddr(ep, true, true);
+	}
+
+	bool clearContent(PESection *sec)
+	{
+		//TODO
+		return false;
+	}
+
+	virtual bool dumpFragment(offset_t offset, bufsize_t size, QString path)
+	{
+		//TODO
+		return false;
+	}
+
+	bool dumpSection(PESection *sec, QString path)
+	{
+		//TODO
+		return false;
+	}
+
+	bool isEPValid()
+	{
+		//TODO
+		return true;
+	}
+
+	bool canResize(bufsize_t newSize)
+	{
+		//TODO
+		return false;
+	}
+
 	bool setAlignments(DWORD fileAlignment, DWORD secAlignment, uint64_t fileSize, uint64_t imageSize)
 	{
 		//TODO
@@ -290,6 +350,12 @@ public:
 		return false;
 	}
 
+	// Is PE file valid - with no anomalies
+	bool isValid()
+	{
+		//TODO
+		return true;
+	}
 
 protected:
     size_t getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA);

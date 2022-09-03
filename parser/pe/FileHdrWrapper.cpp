@@ -4,13 +4,15 @@
 #include <time.h>
 #include <QDateTime>
 
-QString getDateString(const quint64 timestamp)
-{
-    const time_t rawtime = (const time_t)timestamp;
-    QString format = "dddd, dd.MM.yyyy hh:mm:ss";
-    QDateTime date1(QDateTime(QDateTime::fromTime_t(rawtime)));
-    return date1.toUTC().toString(format) + " UTC";
-}
+namespace util {
+	QString getDateString(const quint64 timestamp)
+	{
+		const time_t rawtime = (const time_t)timestamp;
+		QString format = "dddd, dd.MM.yyyy hh:mm:ss";
+		QDateTime date1(QDateTime(QDateTime::fromTime_t(rawtime)));
+		return date1.toUTC().toString(format) + " UTC";
+	}
+};
 
 void* FileHdrWrapper::getPtr()
 {
@@ -72,7 +74,7 @@ QString FileHdrWrapper::translateFieldContent(size_t fieldId)
 
     IMAGE_FILE_HEADER &fileHeader = (*hdr);
     switch (fieldId) {
-         case TIMESTAMP: return getDateString(fileHeader.TimeDateStamp);
+		case TIMESTAMP: return util::getDateString(fileHeader.TimeDateStamp);
     }
     return "";
 }

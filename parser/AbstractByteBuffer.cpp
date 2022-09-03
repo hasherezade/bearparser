@@ -350,6 +350,38 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
     return true;
 }
 
+bool AbstractByteBuffer::setTextValue(char* textPtr, std::string newText, size_t fieldLimitLen)
+{
+	if (!textPtr) return false;
+
+	size_t newLen = newText.length() + 1;
+	offset_t textOffset = this->getOffset(textPtr);
+	if (textOffset == INVALID_ADDR) {
+		return false;
+	}
+	//check against the buffer overflow
+	if (this->getOffset(textPtr + newLen) == INVALID_ADDR) {
+		return false;
+	}
+	//if both strings are same, do not overwrite
+	const char* newTextC = newText.c_str();
+	if (!strcmp(newTextC, textPtr)) { //TODO: use a safe comparison
+		return false;
+	}
+	//if the field size is set:
+	if (fieldLimitLen != 0) {
+		if (this->getOffset(textPtr + fieldLimitLen) == INVALID_ADDR) {
+			return false;
+		}
+		//clear the previous field
+		memset(textPtr, 0, fieldLimitLen);
+		if (newLen > fieldLimitLen) newLen = fieldLimitLen;
+	}
+	memcpy(textPtr, newTextC, newLen);
+	textPtr[newLen] = '\0';
+	return true;
+}
+
 offset_t AbstractByteBuffer::substFragmentByFile(offset_t offset, size_t contentSize, QFile &fIn)
 {
 	BYTE *contentPart = this->getContentAt(offset, contentSize);
