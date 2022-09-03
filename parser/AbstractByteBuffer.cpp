@@ -350,6 +350,24 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
     return true;
 }
 
+offset_t AbstractByteBuffer::substFragmentByFile(offset_t offset, size_t contentSize, QFile &fIn)
+{
+	BYTE *contentPart = this->getContentAt(offset, contentSize);
+	if (!contentPart) return 0; //invalid offset/size
+
+	if (!fIn.isReadable()) return 0;
+
+	size_t toLoad = fIn.size() < contentSize ? fIn.size() : contentSize;
+	BYTE *fBuf = new BYTE[toLoad];
+	size_t loaded = fIn.read((char*)fBuf, toLoad);
+
+	memset(contentPart, 0, contentSize);
+	memcpy(contentPart, fBuf, loaded);
+	delete[]fBuf; fBuf = NULL;
+
+	return loaded;
+}
+
 //--------------------------------------------
 
 BufferView::BufferView(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_t v_size)

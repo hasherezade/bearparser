@@ -99,7 +99,7 @@ offset_t PECore::secHdrsOffset() const
     return offset + size;
 }
 
-bufsize_t PECore::getAlignment(Executable::addr_type aType)
+bufsize_t PECore::getAlignment(Executable::addr_type aType) const
 {
     if (this->opt32) {
         if (aType == Executable::RAW) return opt32->FileAlignment;

@@ -56,6 +56,7 @@ bool SectionHdrWrapper::reloadName()
     delete []this->name;
     //...and set the new:
     this->name = buf;
+	this->mappedName = this->name;
     return true;
 }
 

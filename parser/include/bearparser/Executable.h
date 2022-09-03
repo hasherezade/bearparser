@@ -59,7 +59,7 @@ public:
     virtual BYTE* getContentAt(offset_t offset, Executable::addr_type aType, bufsize_t size, bool allowExceptions = false);
 //------------------------------
     virtual bufsize_t getMappedSize(Executable::addr_type aType) = 0;
-    virtual bufsize_t getAlignment(Executable::addr_type aType) = 0;
+    virtual bufsize_t getAlignment(Executable::addr_type aType) const = 0;
     virtual offset_t getImageBase() = 0;
     virtual offset_t getEntryPoint(Executable::addr_type aType = Executable::RVA) = 0;
     
@@ -88,7 +88,7 @@ public:
     virtual offset_t rvaToRaw(offset_t rva) = 0;
 
     // VA <-> RVA
-    virtual offset_t VaToRva(offset_t va, bool autodetect);
+    virtual offset_t VaToRva(offset_t va, bool autodetect = false);
     virtual offset_t rvaToVa(offset_t rva) { return rva + this->getImageBase(); }
 
     // VA -> FileAddr
@@ -100,6 +100,9 @@ public:
 
     QString getFileName() { return fileName; }
     virtual bool resize(bufsize_t newSize) { return buf->resize(newSize); }
+
+	/* wrappers */
+	AbstractByteBuffer* getFileBuffer() const { return buf; }
 
 protected:
     Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode);

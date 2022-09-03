@@ -35,7 +35,7 @@ Executable* PEFileBuilder::build(AbstractByteBuffer *buf)
     try {
         exe = new PEFile(buf);
     } catch (ExeException &e) {
-        //
+        exe = NULL;
     }
     return exe;
 }

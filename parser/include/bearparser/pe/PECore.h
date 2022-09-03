@@ -20,7 +20,7 @@ public:
 
     virtual offset_t getRawSize() const { return static_cast<offset_t>(buf->getContentSize()); }
 
-    virtual bufsize_t getAlignment(Executable::addr_type aType);
+    virtual bufsize_t getAlignment(Executable::addr_type aType) const;
     virtual offset_t getImageBase();
     virtual bufsize_t getImageSize();
 
@@ -31,6 +31,21 @@ public:
     offset_t peOptHdrOffset() const;
     bufsize_t peNtHeadersSize() const;
     bufsize_t hdrsSize() const;
+
+	void setImageSize(size_t newSize)
+	{
+		if (opt32) {
+			this->opt32->SizeOfImage = newSize;
+		}
+		else if (opt64) {
+			this->opt64->SizeOfImage = newSize;
+		}
+	}
+
+	IMAGE_FILE_HEADER *getFileHeader() const
+	{
+		return fHdr;
+	}
 
 protected:
     void reset();

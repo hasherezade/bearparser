@@ -67,7 +67,7 @@ public:
     virtual offset_t rvaToRaw(offset_t rva);
 
     virtual bufsize_t getMappedSize(Executable::addr_type aType);
-    virtual bufsize_t getAlignment(Executable::addr_type aType){ return core.getAlignment(aType); }
+    virtual bufsize_t getAlignment(Executable::addr_type aType) const { return core.getAlignment(aType); }
     virtual offset_t getImageBase() { return core.getImageBase(); }
     virtual offset_t getEntryPoint(Executable::addr_type addrType = Executable::RVA); // returns INVALID_ADDR if failed
 
@@ -115,6 +115,7 @@ public:
     {
         return (sects == NULL) ? NULL : sects->getSecHdrAtOffset(offset, aType, roundup, verbose);
     }
+
 
     size_t getSecIndex(SectionHdrWrapper *sec) const
     {
@@ -176,9 +177,123 @@ public:
         return secHdrsOffset() + secHdrSize;
     }
 
+    /* wrappers:
+    */
+    bool hasDirectory(pe::dir_entry dirNum)
+    {
+        return this->getDataDirEntry(dirNum) ? true : false;
+    }
+
+	PESection* PEFile::getSectionByAddr(offset_t addr, bool isRVA, bool roundup=false)
+	{
+		Executable::addr_type type = isRVA ? Executable::RVA : Executable::RAW;
+		return this->getSecHdrAtOffset(addr, type, roundup, false);
+	}
+
+	DWORD PEFile::getFileAlignment() const
+	{
+		return this->getAlignment(Executable::RAW);
+	}
+
+	DWORD PEFile::getSectionAlignment() const
+	{
+		return this->getAlignment(Executable::RVA);
+	}
+
+	BYTE* PEFile::getSecContent(PESection *sec)
+	{
+		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+			return NULL; //not my section
+		}
+		BYTE *ptr = sec->getContent();
+		if (!this->getContentAtPtr(ptr, 1)) {
+			return NULL;
+		}
+		return ptr;
+	}
+
+	size_t PEFile::getSecRawSize(PESection* sec, bool recalculate=false, bool limitToFileSize=true)
+	{
+		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+			return 0; //not my section
+		}
+		size_t secRawSize = sec->getContentSize(Executable::RAW, recalculate);
+		if (!recalculate && !limitToFileSize) {
+			return secRawSize;
+		}
+		BYTE *ptr = sec->getContent();
+		offset_t secOffset = this->getOffset(ptr);
+		if (secOffset == INVALID_ADDR) {
+			return 0;
+		}
+		size_t trimmedSize = secRawSize;
+		size_t secEnd = secOffset + secRawSize;
+		size_t peSize = this->getContentSize();
+		if (secEnd > peSize) {
+			trimmedSize = peSize - secOffset; // trim to the file size
+			//qDebug("The section %x overflows and has been trimmed! size: %x trimmedSize: %x", secOffset, secRawSize, trimmedSize);
+			bufsize_t virtualSize = sec->getContentSize(Executable::RVA, recalculate);
+			if (trimmedSize > virtualSize) {
+				return virtualSize;
+			}
+		}
+		return trimmedSize;
+	}
+
+	offset_t getLastMappedRaw()
+	{
+		return this->getLastMapped(Executable::RAW);
+	}
+
+	offset_t PEFile::getLastRva()
+	{
+		return this->getLastMapped(Executable::RVA);
+	}
+
+	DWORD peDllCharacteristics()
+	{
+		DWORD dllCharact = 0;
+		if (this->core.opt32) {
+			dllCharact = this->core.opt32->DllCharacteristics;
+		}
+		else {
+			dllCharact = this->core.opt64->DllCharacteristics;
+		}
+		return dllCharact;
+	}
+
+	void setImageSize(size_t newSize)
+	{
+		this->core.setImageSize(newSize);
+	}
+
+	IMAGE_FILE_HEADER *getFileHeader() const
+	{
+		return this->core.getFileHeader();
+	}
+
+	bool setAlignments(DWORD fileAlignment, DWORD secAlignment, uint64_t fileSize, uint64_t imageSize)
+	{
+		//TODO
+		return false;
+	}
+
+	bool loadFromFileBuffer()
+	{
+		//TODO
+		return false;
+	}
+
+	bool resizeRaw(bufsize_t newSize)
+	{
+		//TODO
+		return false;
+	}
+
+
 protected:
     size_t getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA);
-    
+
     virtual void clearWrappers();
     virtual void wrap(AbstractByteBuffer *v_buf);
 

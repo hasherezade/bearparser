@@ -68,6 +68,13 @@ public:
         return true;
     }
 
+	/* wrappers */
+	DWORD getRawPtr() { return header->PointerToRawData; }
+
+	DWORD getVirtualPtr() { return header->VirtualAddress; }
+
+	QString mappedName;
+
 protected:
     SectionHdrWrapper(PEFile *pe, IMAGE_SECTION_HEADER *v_header) //standalone entry
         : PENodeWrapper(pe), sectNum(INVALID_ENTRYNUM), name(NULL), header(v_header)
@@ -151,3 +158,5 @@ protected:
     std::map<offset_t, SectionHdrWrapper*> rSec;
 };
 
+// alias for the section wrapper
+typedef SectionHdrWrapper PESection;
