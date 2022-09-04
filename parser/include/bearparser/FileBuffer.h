@@ -73,7 +73,12 @@ public:
     bool resize(bufsize_t newSize) { return m_Buf->resize(newSize); }
 
     virtual bool isResized() { return m_Buf ? m_Buf->isResized() : false; }
-    virtual bool isTruncated() { return fileSize > this->m_Buf->getContentSize(); }
+
+    virtual bool isTruncated()
+    {
+        if (!m_Buf) return false;
+        return fileSize > this->m_Buf->getContentSize();
+    }
 
 protected:
     ByteBuffer* m_Buf;

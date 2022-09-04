@@ -344,11 +344,11 @@ public:
 		return false;
 	}
 
-	bool loadFromFileBuffer()
-	{
-		//TODO
-		return false;
-	}
+    bool loadFromFileBuffer()
+    {
+        this->wrap();
+        return true;
+    }
 
     bool resizeRaw(bufsize_t newSize)
     {

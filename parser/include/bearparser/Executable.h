@@ -99,14 +99,16 @@ public:
     }
 
     QString getFileName() { return fileName; }
+
     virtual bool resize(bufsize_t newSize) { return buf->resize(newSize); }
 
-    virtual bool isResized() { return buf->isResized(); }
+    virtual bool isResized() { return buf ? buf->isResized() : false; }
+
+    virtual bool isTruncated() { return buf ? buf->isTruncated() : false; }
 
 	/* wrappers */
 	AbstractByteBuffer* getFileBuffer() const { return buf; }
-
-	virtual bufsize_t getFileSize() const { return buf->getContentSize(); }
+    bufsize_t getFileSize() const { return buf->getContentSize(); }
 
 protected:
     Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode);
