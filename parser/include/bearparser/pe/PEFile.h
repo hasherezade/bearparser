@@ -205,10 +205,11 @@ public:
 		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
 			return NULL; //not my section
 		}
-		BYTE *ptr = sec->getContent();
-		if (!this->getContentAtPtr(ptr, 1)) {
-			return NULL;
-		}
+		const size_t buf_size = this->getSecRawSize(sec, true, true);
+		if (!buf_size) return NULL;
+
+		const DWORD raw = sec->getRawPtr();
+		BYTE *ptr = this->getContentAt(raw, buf_size);
 		return ptr;
 	}
 
@@ -221,8 +222,7 @@ public:
 		if (!recalculate && !limitToFileSize) {
 			return secRawSize;
 		}
-		BYTE *ptr = sec->getContent();
-		offset_t secOffset = this->getOffset(ptr);
+		offset_t secOffset = sec->getRawPtr();
 		if (secOffset == INVALID_ADDR) {
 			return 0;
 		}
@@ -299,11 +299,20 @@ public:
         return this->getSecHdrAtOffset(ep, Executable::RVA, true, false);
     }
 
-	bool clearContent(SectionHdrWrapper *sec)
-	{
-		//TODO
-		return false;
-	}
+    bool clearContent(SectionHdrWrapper *sec)
+    {
+        if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+            return false; //not my section
+        }
+        BYTE *buf = this->getSecContent(sec);
+        if (!buf) return false;
+       
+        size_t buf_size = this->getSecRawSize(sec, true, true);
+        if (!buf_size) return false;
+
+        ::memset(buf, 0, buf_size);
+        return true;
+    }
 
 	virtual bool dumpFragment(offset_t offset, bufsize_t size, QString path)
 	{
