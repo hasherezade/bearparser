@@ -98,7 +98,7 @@ public:
         return rvaToRaw(rva);
     }
 
-    QString getFileName() { return fileName; }
+    QString getFileName();
 
     virtual bool resize(bufsize_t newSize) { return buf->resize(newSize); }
 
@@ -115,6 +115,5 @@ protected:
 
     exe_bits bitMode;
     AbstractByteBuffer *buf;
-    QString fileName;
 };
 

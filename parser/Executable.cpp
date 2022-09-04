@@ -4,11 +4,7 @@
 Executable::Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode)
     : buf(v_buf), bitMode(v_bitMode)
 {
-    if (v_buf == NULL) throw ExeException("Cannot make Exe from NULL buffer");
-    FileBuffer *fileBuf = dynamic_cast<FileBuffer*>(buf);
-    if (fileBuf) {
-        this->fileName = fileBuf->getFileName();
-    }
+    if (!v_buf) throw ExeException("Cannot make an Exe from NULL buffer");
 }
 
 BYTE* Executable::getContentAt(offset_t offset, Executable::addr_type aType, bufsize_t size, bool allowExceptions)
@@ -17,8 +13,7 @@ BYTE* Executable::getContentAt(offset_t offset, Executable::addr_type aType, buf
     if (raw == INVALID_ADDR) {
         return NULL;
     }
-    BYTE *cAt = AbstractByteBuffer::getContentAt(raw, size, allowExceptions);
-    return cAt;
+    return AbstractByteBuffer::getContentAt(raw, size, allowExceptions);
 }
 
 bool Executable::isValidAddr(offset_t addr, addr_type addrType)
@@ -141,6 +136,15 @@ Executable::addr_type Executable::detectAddrType(offset_t offset, Executable::ad
         return Executable::NOT_ADDR; //every attempt failed! it's invalid!
     }
     return hintType;
+}
+
+QString Executable::getFileName()
+{
+    FileBuffer* fBuf = dynamic_cast<FileBuffer*>(buf);
+    if (fBuf) {
+        return fBuf->getFileName();
+    }
+    return "";
 }
 
 bufsize_t Executable::getFileSize() const
