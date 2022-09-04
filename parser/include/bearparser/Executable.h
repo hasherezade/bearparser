@@ -108,7 +108,7 @@ public:
 
 	/* wrappers */
 	AbstractByteBuffer* getFileBuffer() const { return buf; }
-    bufsize_t getFileSize() const { return buf->getContentSize(); }
+    bufsize_t getFileSize() const;
 
 protected:
     Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode);

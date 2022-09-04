@@ -143,3 +143,13 @@ Executable::addr_type Executable::detectAddrType(offset_t offset, Executable::ad
     return hintType;
 }
 
+bufsize_t Executable::getFileSize() const
+{
+    if (!buf) return 0;
+
+    FileBuffer* fBuf = dynamic_cast<FileBuffer*>(buf);
+    if (fBuf) {
+        return fBuf->getFileSize();
+    }
+    return buf->getContentSize();
+}

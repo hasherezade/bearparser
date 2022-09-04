@@ -69,7 +69,7 @@ public:
 
     virtual bufsize_t getContentSize() { return (m_Buf == NULL) ? 0 : m_Buf->getContentSize(); }
     virtual BYTE* getContent() { return (m_Buf == NULL) ? NULL : m_Buf->getContent(); }
-    uint64_t getFileSize() { return static_cast<uint64_t>(fileSize); }
+    offset_t getFileSize() { return static_cast<offset_t>(fileSize); }
     bool resize(bufsize_t newSize) { return m_Buf->resize(newSize); }
 
     virtual bool isResized() { return m_Buf ? m_Buf->isResized() : false; }
