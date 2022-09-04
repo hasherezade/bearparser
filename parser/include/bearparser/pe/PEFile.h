@@ -184,23 +184,23 @@ public:
         return this->getDataDirEntry(dirNum) ? true : false;
     }
 
-	PESection* PEFile::getSectionByAddr(offset_t addr, bool isRVA, bool roundup=false)
+	PESection* getSectionByAddr(offset_t addr, bool isRVA, bool roundup=false)
 	{
 		Executable::addr_type type = isRVA ? Executable::RVA : Executable::RAW;
 		return this->getSecHdrAtOffset(addr, type, roundup, false);
 	}
 
-	DWORD PEFile::getFileAlignment() const
+	DWORD getFileAlignment() const
 	{
 		return this->getAlignment(Executable::RAW);
 	}
 
-	DWORD PEFile::getSectionAlignment() const
+	DWORD getSectionAlignment() const
 	{
 		return this->getAlignment(Executable::RVA);
 	}
 
-	BYTE* PEFile::getSecContent(PESection *sec)
+	BYTE* getSecContent(PESection *sec)
 	{
 		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
 			return NULL; //not my section
@@ -240,7 +240,7 @@ public:
 		return trimmedSize;
 	}
 
-	size_t PEFile::getSecVirtualSize(PESection* sec, bool recalculate = false)
+	size_t getSecVirtualSize(PESection* sec, bool recalculate = false)
 	{
 		if (sec == NULL) return 0;
 		size_t vSize = sec->getContentSize(Executable::RVA, false);
@@ -258,7 +258,7 @@ public:
 		return this->getLastMapped(Executable::RAW);
 	}
 
-	offset_t PEFile::getLastRva()
+	offset_t getLastRva()
 	{
 		return this->getLastMapped(Executable::RVA);
 	}
