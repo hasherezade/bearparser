@@ -184,23 +184,23 @@ public:
         return this->getDataDirEntry(dirNum) ? true : false;
     }
 
-	PESection* getSectionByAddr(offset_t addr, bool isRVA, bool roundup=false)
+    SectionHdrWrapper* getSectionByAddr(offset_t addr, bool isRVA, bool roundup=false)
 	{
 		Executable::addr_type type = isRVA ? Executable::RVA : Executable::RAW;
 		return this->getSecHdrAtOffset(addr, type, roundup, false);
 	}
 
-	DWORD getFileAlignment() const
-	{
-		return this->getAlignment(Executable::RAW);
-	}
+    bufsize_t getFileAlignment() const
+    {
+        return this->getAlignment(Executable::RAW);
+    }
 
-	DWORD getSectionAlignment() const
-	{
-		return this->getAlignment(Executable::RVA);
-	}
+    bufsize_t getSectionAlignment() const
+    {
+        return this->getAlignment(Executable::RVA);
+    }
 
-	BYTE* getSecContent(PESection *sec)
+	BYTE* getSecContent(SectionHdrWrapper *sec)
 	{
 		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
 			return NULL; //not my section
@@ -212,7 +212,7 @@ public:
 		return ptr;
 	}
 
-	size_t getSecRawSize(PESection* sec, bool recalculate=false, bool limitToFileSize=true)
+	size_t getSecRawSize(SectionHdrWrapper* sec, bool recalculate=false, bool limitToFileSize=true)
 	{
 		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
 			return 0; //not my section
@@ -240,7 +240,7 @@ public:
 		return trimmedSize;
 	}
 
-	size_t getSecVirtualSize(PESection* sec, bool recalculate = false)
+	size_t getSecVirtualSize(SectionHdrWrapper* sec, bool recalculate = false)
 	{
 		if (sec == NULL) return 0;
 		size_t vSize = sec->getContentSize(Executable::RVA, false);
@@ -251,7 +251,6 @@ public:
 		if (vSize == 0) vSize = sec->getContentSize(Executable::RAW, false);
 		return vSize;
 	}
-
 
 	offset_t getLastMappedRaw()
 	{
@@ -277,7 +276,7 @@ public:
 
 	void setImageSize(size_t newSize)
 	{
-		this->core.setImageSize(newSize);
+        this->setVirtualSize(newSize);
 	}
 
 	IMAGE_FILE_HEADER *getFileHeader() const
@@ -285,24 +284,22 @@ public:
 		return this->core.getFileHeader();
 	}
 
-	DWORD roudupSectionSize(PESection *sec, bool isRVA)
+	DWORD roudupSectionSize(SectionHdrWrapper *sec, bool isRVA)
 	{
-		if (sec == NULL) return 0;
+		if (!sec) return 0;
 
 		DWORD align = isRVA ? this->getSectionAlignment() : this->getFileAlignment();
 		DWORD size = isRVA ? this->getSecVirtualSize(sec, true) : getSecRawSize(sec, true);
-		DWORD roundedSize = pe_util::roundup(size, align);
-
-		return roundedSize;
+		return pe_util::roundup(size, align);
 	}
 
-	PESection* getEntrySection()
-	{
-		DWORD ep = getEntryPoint();
-		return getSectionByAddr(ep, true, true);
-	}
+    SectionHdrWrapper* getEntrySection()
+    {
+        offset_t ep = getEntryPoint(Executable::RVA);
+        return this->getSecHdrAtOffset(ep, Executable::RVA, true, false);
+    }
 
-	bool clearContent(PESection *sec)
+	bool clearContent(SectionHdrWrapper *sec)
 	{
 		//TODO
 		return false;
@@ -314,7 +311,7 @@ public:
 		return false;
 	}
 
-	bool dumpSection(PESection *sec, QString path)
+	bool dumpSection(SectionHdrWrapper *sec, QString path)
 	{
 		//TODO
 		return false;

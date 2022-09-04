@@ -164,6 +164,3 @@ protected:
     std::map<offset_t, SectionHdrWrapper*> vSec;
     std::map<offset_t, SectionHdrWrapper*> rSec;
 };
-
-// alias for the section wrapper
-typedef SectionHdrWrapper PESection;
