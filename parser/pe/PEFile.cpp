@@ -494,7 +494,7 @@ SectionHdrWrapper* PEFile::getLastSection()
 
 offset_t PEFile::getLastMapped(Executable::addr_type aType)
 {
-    offset_t lastRaw = 0;
+    offset_t lastMapped = 0;
 
     /* check sections bounds */
     const size_t counter = this->getSectionsCount(true);
@@ -502,18 +502,27 @@ offset_t PEFile::getLastMapped(Executable::addr_type aType)
         SectionHdrWrapper *sec = this->getSecHdr(i);
         if (!sec) continue;
 
-        offset_t secLastRaw = sec->getContentOffset(Executable::RAW, false) + sec->getMappedRawSize();
-        if (secLastRaw > lastRaw) lastRaw = secLastRaw;
+        offset_t secLastMapped= sec->getContentOffset(aType, true);
+        if (secLastMapped == INVALID_ADDR) continue;
+
+        const size_t size = (aType == Executable::RAW) ? sec->getMappedRawSize() : sec->getMappedVirtualSize();
+        secLastMapped += size;
+        if (secLastMapped > lastMapped) {
+            lastMapped = secLastMapped;
+        }
     }
 
     /* check header bounds */
     /* section headers: */
-    if (lastRaw < this->secHdrsEndOffset()) lastRaw = this->secHdrsEndOffset();
-
+    if (lastMapped < this->secHdrsEndOffset()) {
+        lastMapped = this->secHdrsEndOffset();
+    }
     /* NT headers: */
     int ntHeadersEndOffset = this->core.peSignatureOffset() + this->core.hdrsSize();
-    if (lastRaw < ntHeadersEndOffset) lastRaw = ntHeadersEndOffset;
-    return lastRaw;
+    if (lastMapped < ntHeadersEndOffset) {
+        lastMapped = ntHeadersEndOffset;
+    }
+    return lastMapped;
 }
 
 SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
