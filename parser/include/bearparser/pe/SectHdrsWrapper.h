@@ -52,32 +52,52 @@ public:
 
     bufsize_t getContentSize(Executable::addr_type aType, bool roundup);
 
-    DWORD getCharacteristics()
-    {
-        if (header == NULL) return 0;
-        return header->Characteristics;
-    }
+    DWORD getCharacteristics() { return header ? header->Characteristics : 0; }
+
+    /* wrappers */
+    DWORD getRawPtr() { return header ? header->PointerToRawData : 0; }
+
+    DWORD getVirtualPtr() { return header ? header->VirtualAddress : 0; }
+
+    DWORD getPointerToRelocations() { return header ? header->PointerToRelocations : 0; }
+
+    DWORD getNumberOfRelocations() { return header ? header->NumberOfRelocations : 0; }
+
+    DWORD getNumberOfLinenumbers() { return header ? header->NumberOfLinenumbers : 0; }
 
 //modifications:
     bool setCharacteristics(DWORD newCharacteristics)
     {
-        if (header == NULL) return false;
+        if (!header) return false;
         //TODO: validate newCharacteristics
 
         header->Characteristics = newCharacteristics;
         return true;
     }
 
-	/* wrappers */
-	DWORD getRawPtr() { return header->PointerToRawData; }
+    bool setPointerToRelocations(DWORD newPointerToRelocations)
+    {
+        if (!header) return false;
 
-	DWORD getVirtualPtr() { return header->VirtualAddress; }
+        header->PointerToRelocations = newPointerToRelocations;
+        return true;
+    }
 
-	DWORD getPointerToRelocations() { return header->PointerToRelocations; }
+    bool setNumberOfRelocations(DWORD newNumberOfRelocations)
+    {
+        if (!header) return false;
 
-	DWORD getNumberOfRelocations() { return header->NumberOfRelocations; }
+        header->NumberOfRelocations = newNumberOfRelocations;
+        return true;
+    }
 
-	DWORD getNumberOfLinenumbers() { return header->NumberOfLinenumbers; }
+    bool setNumberOfLinenumbers(DWORD newNumberOfLinenumbers)
+    {
+        if (!header) return false;
+
+        header->NumberOfLinenumbers = newNumberOfLinenumbers;
+        return true;
+    }
 
 	QString mappedName;
 
