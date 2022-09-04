@@ -101,6 +101,8 @@ public:
     QString getFileName() { return fileName; }
     virtual bool resize(bufsize_t newSize) { return buf->resize(newSize); }
 
+    virtual bool isResized() { return buf->isResized(); }
+
 	/* wrappers */
 	AbstractByteBuffer* getFileBuffer() const { return buf; }
 

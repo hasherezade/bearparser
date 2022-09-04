@@ -71,6 +71,8 @@ public:
     virtual BYTE* getContent() { return (m_Buf == NULL) ? NULL : m_Buf->getContent(); }
     uint64_t getFileSize() { return static_cast<uint64_t>(fileSize); }
     bool resize(bufsize_t newSize) { return m_Buf->resize(newSize); }
+
+    virtual bool isResized() { return m_Buf ? m_Buf->isResized() : false; }
     virtual bool isTruncated() { return fileSize > this->m_Buf->getContentSize(); }
 
 protected:
