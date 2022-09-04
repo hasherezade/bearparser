@@ -212,7 +212,7 @@ public:
 		return ptr;
 	}
 
-	size_t PEFile::getSecRawSize(PESection* sec, bool recalculate=false, bool limitToFileSize=true)
+	size_t getSecRawSize(PESection* sec, bool recalculate=false, bool limitToFileSize=true)
 	{
 		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
 			return 0; //not my section
