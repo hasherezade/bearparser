@@ -5,14 +5,60 @@
 #include <QDateTime>
 
 namespace util {
-	QString getDateString(const quint64 timestamp)
-	{
-		const time_t rawtime = (const time_t)timestamp;
-		QString format = "dddd, dd.MM.yyyy hh:mm:ss";
-		QDateTime date1(QDateTime(QDateTime::fromTime_t(rawtime)));
-		return date1.toUTC().toString(format) + " UTC";
-	}
+    QString getDateString(const quint64 timestamp)
+    {
+        const time_t rawtime = (const time_t)timestamp;
+        QString format = "dddd, dd.MM.yyyy hh:mm:ss";
+        QDateTime date1(QDateTime(QDateTime::fromTime_t(rawtime)));
+        return date1.toUTC().toString(format) + " UTC";
+    }
 };
+
+
+std::map<DWORD, QString> FileHdrWrapper::s_fHdrCharact;
+
+void FileHdrWrapper::initCharact()
+{
+    if (s_fHdrCharact.size() != 0) {
+        return; //already initialized
+    }
+    s_fHdrCharact[F_RELOCS_STRIPPED] = "Relocation info stripped from file.";
+    s_fHdrCharact[F_EXECUTABLE_IMAGE] = "File is executable  (i.e. no unresolved externel references).";
+    s_fHdrCharact[F_LINE_NUMS_STRIPPED] = "Line nunbers stripped from file.";
+    s_fHdrCharact[F_LOCAL_SYMS_STRIPPED] = "Local symbols stripped from file.";
+    s_fHdrCharact[F_AGGRESIVE_WS_TRIM] = "Agressively trim working set";
+    s_fHdrCharact[F_LARGE_ADDRESS_AWARE] = "App can handle >2gb addresses";
+    s_fHdrCharact[F_BYTES_REVERSED_LO] = "Bytes of machine word are reversed.";
+    s_fHdrCharact[F_MACHINE_32BIT] = "32 bit word machine.";
+    s_fHdrCharact[F_DEBUG_STRIPPED] = "Debugging info stripped from file in .DBG file";
+    s_fHdrCharact[F_REMOVABLE_RUN_FROM_SWAP] = "If Image is on removable media, copy and run from the swap file.";
+    s_fHdrCharact[F_NET_RUN_FROM_SWAP] = "If Image is on Net, copy and run from the swap file.";
+    s_fHdrCharact[F_SYSTEM] = "System File.";
+    s_fHdrCharact[F_DLL] = "File is a DLL.";
+    s_fHdrCharact[F_UP_SYSTEM_ONLY] = "File should only be run on a UP machine";
+    s_fHdrCharact[F_BYTES_REVERSED_HI] = "Bytes of machine word are reversed.";
+}
+
+std::vector<DWORD> FileHdrWrapper::splitCharact(DWORD characteristics)
+{
+    if (s_fHdrCharact.size() == 0) initCharact();
+
+    std::vector<DWORD> chSet;
+    for (std::map<DWORD, QString>::iterator iter = s_fHdrCharact.begin(); iter != s_fHdrCharact.end(); iter++) {
+        if (characteristics & iter->first) {
+            chSet.push_back(iter->first);
+        }
+    }
+    return chSet;
+}
+
+QString FileHdrWrapper::translateCharacteristics(DWORD charact)
+{
+    if (s_fHdrCharact.size() == 0) initCharact();
+
+    if (s_fHdrCharact.find(charact) == s_fHdrCharact.end()) return "";
+    return s_fHdrCharact[charact];
+}
 
 void* FileHdrWrapper::getPtr()
 {
@@ -28,7 +74,6 @@ void* FileHdrWrapper::getPtr()
 
     return (void*) hdr;
 }
-
 
 void* FileHdrWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
@@ -74,7 +119,7 @@ QString FileHdrWrapper::translateFieldContent(size_t fieldId)
 
     IMAGE_FILE_HEADER &fileHeader = (*hdr);
     switch (fieldId) {
-		case TIMESTAMP: return util::getDateString(fileHeader.TimeDateStamp);
+        case TIMESTAMP: return util::getDateString(fileHeader.TimeDateStamp);
     }
     return "";
 }

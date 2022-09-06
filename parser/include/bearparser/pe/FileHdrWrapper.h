@@ -4,6 +4,9 @@
 
 #include "pe_formats.h"
 
+#include <map>
+#include <vector>
+
 class FileHdrWrapper : public PEElementWrapper
 {
 public:
@@ -19,6 +22,11 @@ public:
         CHARACT,
         FIELD_COUNTER
     };
+
+    static std::map<DWORD, QString> s_fHdrCharact;
+    static void initCharact();
+    static std::vector<DWORD> splitCharact(DWORD characteristics);
+    static QString translateCharacteristics(DWORD charact);
 
     FileHdrWrapper(PEFile *pe) : PEElementWrapper(pe), hdr(NULL) {}
     bool wrap() { hdr = NULL; getPtr(); return true; }
