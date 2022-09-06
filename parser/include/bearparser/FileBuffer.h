@@ -18,8 +18,8 @@ public:
     static ByteBuffer* read(QString &file, bufsize_t minBufSize); //throws exceptions
     static bufsize_t getReadableSize(QFile &fIn);
 
-    static bufsize_t getReadableSize(QString &path);
-    static bufsize_t dump(QString fileName, AbstractByteBuffer &buf, bool allowExceptions = false);
+    static bufsize_t getReadableSize(const QString &path);
+    static bufsize_t dump(const QString &fileName, AbstractByteBuffer &buf, bool allowExceptions = false);
     QString getFileName() { return this->fileName; }
 
 protected:
