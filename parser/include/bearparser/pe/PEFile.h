@@ -332,11 +332,18 @@ public:
 		return true;
 	}
 
-	bool canResize(bufsize_t newSize)
-	{
-		//TODO
-		return false;
-	}
+    bool canResize(bufsize_t newSize)
+    {
+        bufsize_t currentSize = (bufsize_t)this->getRawSize();
+        if (newSize > currentSize) {
+            return true;
+        }
+        bufsize_t hEnd = bufsize_t(this->peNtHdrOffset()) + this->peNtHeadersSize();
+        if (newSize < hEnd) {
+            return false; // the resize will harm headers!
+        }
+        return true;
+    }
 
 	bool setAlignments(DWORD fileAlignment, DWORD secAlignment, uint64_t fileSize, uint64_t imageSize)
 	{
