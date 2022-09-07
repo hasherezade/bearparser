@@ -201,26 +201,26 @@ public:
         return this->getAlignment(Executable::RVA);
     }
 
-	BYTE* getSecContent(SectionHdrWrapper *sec)
-	{
-		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
-			return NULL; //not my section
-		}
-		const size_t buf_size = this->getSecRawSize(sec, true, true);
-		if (!buf_size) return NULL;
+    BYTE* getSecContent(SectionHdrWrapper *sec)
+    {
+        if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+            return NULL; //not my section
+        }
+        const size_t buf_size = this->getSecRawSize(sec, true, true);
+        if (!buf_size) return NULL;
 
-		const DWORD raw = sec->getRawPtr();
-		BYTE *ptr = this->getContentAt(raw, buf_size);
-		return ptr;
-	}
+        offset_t start = sec->getContentOffset(Executable::RAW, true);
+        BYTE *ptr = this->getContentAt(start, buf_size);
+        return ptr;
+    }
 
 	size_t getSecRawSize(SectionHdrWrapper* sec, bool recalculate=false, bool limitToFileSize=true)
 	{
 		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
 			return 0; //not my section
 		}
-		size_t secRawSize = sec->getContentSize(Executable::RAW, false);
-		if (!recalculate && !limitToFileSize) {
+		size_t secRawSize = sec->getContentSize(Executable::RAW, recalculate);
+		if (!limitToFileSize) {
 			return secRawSize;
 		}
 		offset_t secOffset = sec->getRawPtr();
@@ -318,10 +318,10 @@ public:
         return dumpedSize ? true : false;
     }
 
-	bool isEPValid()
-	{
-		return true;
-	}
+    bool isEPValid()
+    {
+        return true;
+    }
 
     bool canResize(bufsize_t newSize)
     {
