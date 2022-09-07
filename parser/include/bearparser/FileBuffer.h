@@ -35,12 +35,14 @@ protected:
 class FileView : public AbstractByteBuffer, public AbstractFileBuffer
 {
 public:
+    static bufsize_t getMappableSize(QFile &fIn);
+
     FileView(QString &fileName, bufsize_t maxSize = FILE_MAXSIZE); //throws exceptions
     virtual ~FileView();
 
     virtual bufsize_t getContentSize() { return mappedSize; }
     virtual BYTE* getContent() { return mappedContent; }
-    bufsize_t getMappableSize(QFile &fIn);
+    bufsize_t getMappableSize() { return FileView::getMappableSize(fIn); }
     virtual bool isTruncated() { return fIn.size() > mappedSize; }
 
 protected:
