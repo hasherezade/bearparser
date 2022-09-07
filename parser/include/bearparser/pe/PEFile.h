@@ -285,15 +285,6 @@ public:
 		return this->core.getFileHeader();
 	}
 
-	DWORD roudupSectionSize(SectionHdrWrapper *sec, bool isRVA)
-	{
-		if (!sec) return 0;
-
-		DWORD align = isRVA ? this->getSectionAlignment() : this->getFileAlignment();
-		DWORD size = isRVA ? this->getSecVirtualSize(sec, true) : getSecRawSize(sec, true);
-		return pe_util::roundup(size, align);
-	}
-
     SectionHdrWrapper* getEntrySection()
     {
         offset_t ep = getEntryPoint(Executable::RVA);
@@ -329,7 +320,6 @@ public:
 
 	bool isEPValid()
 	{
-		//TODO
 		return true;
 	}
 
