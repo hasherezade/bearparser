@@ -50,7 +50,7 @@ public:
     offset_t getContentOffset(Executable::addr_type aType, bool useMapped = true);
     offset_t getContentEndOffset(Executable::addr_type aType, bool roundup); //always useMapped startOFfset
 
-    bufsize_t getContentSize(Executable::addr_type aType, bool roundup);
+    bufsize_t getContentSize(Executable::addr_type aType, bool recalculate);
 
     DWORD getCharacteristics() { return header ? header->Characteristics : 0; }
 

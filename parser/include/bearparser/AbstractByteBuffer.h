@@ -66,11 +66,11 @@ public:
 
     uint64_t getNumValue(offset_t offset, bufsize_t size, bool* isOk);
     bool setNumValue(offset_t offset, bufsize_t size, uint64_t newVal);
-	bool setTextValue(char* textPtr, std::string newText, size_t fieldLimitLen = true);
+    bool setTextValue(char* textPtr, std::string newText, size_t fieldLimitLen = true);
 
-	//TODO
+    //TODO
     virtual bool resize(bufsize_t newSize) { return false; }
-	offset_t substFragmentByFile(offset_t offset, size_t contentSize, QFile &fIn);
+    offset_t substFragmentByFile(offset_t offset, bufsize_t contentSize, QFile &fIn);
 };
 
 //--------------------------------------------

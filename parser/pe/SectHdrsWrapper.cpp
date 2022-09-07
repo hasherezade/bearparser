@@ -249,13 +249,13 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
     return size;
 }
 
-bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool roundup)
+bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool recalculate)
 {
     if (this->header == NULL) return 0;
     if (m_PE == NULL) return 0;
 
     bufsize_t size = 0;
-    if (roundup == false) {
+    if (!recalculate) {
         size = getContentDeclaredSize(aType);
         //printf("Declared size = %llx\n---\n", size);
         return size;

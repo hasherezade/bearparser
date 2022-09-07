@@ -354,52 +354,54 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
 
 bool AbstractByteBuffer::setTextValue(char* textPtr, std::string newText, size_t fieldLimitLen)
 {
-	if (!textPtr) return false;
+    if (!textPtr) return false;
 
-	size_t newLen = newText.length() + 1;
-	offset_t textOffset = this->getOffset(textPtr);
-	if (textOffset == INVALID_ADDR) {
-		return false;
-	}
-	//check against the buffer overflow
-	if (this->getOffset(textPtr + newLen) == INVALID_ADDR) {
-		return false;
-	}
-	//if both strings are same, do not overwrite
-	const char* newTextC = newText.c_str();
-	if (!strcmp(newTextC, textPtr)) { //TODO: use a safe comparison
-		return false;
-	}
-	//if the field size is set:
-	if (fieldLimitLen != 0) {
-		if (this->getOffset(textPtr + fieldLimitLen) == INVALID_ADDR) {
-			return false;
-		}
-		//clear the previous field
-		memset(textPtr, 0, fieldLimitLen);
-		if (newLen > fieldLimitLen) newLen = fieldLimitLen;
-	}
-	memcpy(textPtr, newTextC, newLen);
-	textPtr[newLen] = '\0';
-	return true;
+    size_t newLen = newText.length() + 1;
+    offset_t textOffset = this->getOffset(textPtr);
+    if (textOffset == INVALID_ADDR) {
+        return false;
+    }
+    //check against the buffer overflow
+    if (this->getOffset(textPtr + newLen) == INVALID_ADDR) {
+        return false;
+    }
+    //if both strings are same, do not overwrite
+    const char* newTextC = newText.c_str();
+    if (!strcmp(newTextC, textPtr)) { //TODO: use a safe comparison
+        return false;
+    }
+    //if the field size is set:
+    if (fieldLimitLen != 0) {
+        if (this->getOffset(textPtr + fieldLimitLen) == INVALID_ADDR) {
+            return false;
+        }
+        //clear the previous field
+        memset(textPtr, 0, fieldLimitLen);
+        if (newLen > fieldLimitLen) newLen = fieldLimitLen;
+    }
+    memcpy(textPtr, newTextC, newLen);
+    textPtr[newLen] = '\0';
+    return true;
 }
 
-offset_t AbstractByteBuffer::substFragmentByFile(offset_t offset, size_t contentSize, QFile &fIn)
+offset_t AbstractByteBuffer::substFragmentByFile(offset_t offset, bufsize_t contentSize, QFile &fIn)
 {
-	BYTE *contentPart = this->getContentAt(offset, contentSize);
-	if (!contentPart) return 0; //invalid offset/size
+    BYTE *contentPart = this->getContentAt(offset, contentSize);
+    if (!contentPart) return 0; //invalid offset/size
 
-	if (!fIn.isReadable()) return 0;
+    if (!fIn.isReadable()) return 0;
 
-	size_t toLoad = fIn.size() < contentSize ? fIn.size() : contentSize;
-	BYTE *fBuf = new BYTE[toLoad];
-	size_t loaded = fIn.read((char*)fBuf, toLoad);
+    size_t toLoad = fIn.size() < contentSize ? fIn.size() : contentSize;
+    BYTE *fBuf = (BYTE*)::calloc(toLoad, 1);
+    if (!fBuf) {
+        return 0;
+    }
+    size_t loaded = fIn.read((char*)fBuf, toLoad);
+    memset(contentPart, 0, contentSize);
+    memcpy(contentPart, fBuf, loaded);
+    free(fBuf); fBuf = NULL;
 
-	memset(contentPart, 0, contentSize);
-	memcpy(contentPart, fBuf, loaded);
-	delete[]fBuf; fBuf = NULL;
-
-	return loaded;
+    return loaded;
 }
 
 //--------------------------------------------

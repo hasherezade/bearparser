@@ -380,13 +380,7 @@ BufferView* PEFile::createSectionView(size_t secId)
         Logger::append(Logger::D_WARNING, "No such section");
         return NULL;
     }
-    Executable::addr_type aType = Executable::RAW;
-    offset_t start = sec->getContentOffset(aType, true);
-    bufsize_t size = sec->getContentSize(aType, true);
-    if (start == INVALID_ADDR || size == 0) return NULL;
-
-    BufferView *secView = new BufferView(this, start, size);
-    return secView;
+    return _createSectionView(sec);
 }
 
 bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addrType)
@@ -580,6 +574,18 @@ bool PEFile::unbindImports()
 }
 
 //protected:
+
+BufferView* PEFile::_createSectionView(SectionHdrWrapper *sec)
+{
+    Executable::addr_type aType = Executable::RAW;
+    offset_t start = sec->getContentOffset(aType, true);
+    bufsize_t size = sec->getContentSize(aType, true);
+    if (start == INVALID_ADDR || size == 0) {
+        return NULL;
+    }
+    return new BufferView(this, start, size);
+}
+
 size_t PEFile::getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType)
 {
     size_t initialSize = entrypoints.size();

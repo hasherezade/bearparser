@@ -110,6 +110,8 @@ public:
 	AbstractByteBuffer* getFileBuffer() const { return buf; }
     bufsize_t getFileSize() const;
 
+    virtual bool dumpFragment(offset_t offset, bufsize_t size, QString fileName);
+
 protected:
     Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode);
 

@@ -157,3 +157,14 @@ bufsize_t Executable::getFileSize() const
     }
     return buf->getContentSize();
 }
+
+bool Executable::dumpFragment(offset_t offset, bufsize_t size, QString fileName)
+{
+    BufferView *view = new BufferView(this, offset, size);
+    if (!view) return false;
+
+    bufsize_t dumpedSize = FileBuffer::dump(fileName, *view, false);
+    delete view;
+
+    return dumpedSize ? true : false;
+}

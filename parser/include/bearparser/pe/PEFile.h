@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pe_formats.h"
+#include "FileBuffer.h"
 #include "PECore.h"
 
 #include "DOSExe.h"
@@ -274,10 +275,10 @@ public:
 		return dllCharact;
 	}
 
-	void setImageSize(size_t newSize)
-	{
+    void setImageSize(size_t newSize)
+    {
         this->setVirtualSize(newSize);
-	}
+    }
 
 	IMAGE_FILE_HEADER *getFileHeader() const
 	{
@@ -304,27 +305,27 @@ public:
         if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
             return false; //not my section
         }
-        BYTE *buf = this->getSecContent(sec);
-        if (!buf) return false;
-       
-        size_t buf_size = this->getSecRawSize(sec, true, true);
-        if (!buf_size) return false;
+        BufferView *secView = this->_createSectionView(sec);
+        if (!secView) return false;
 
-        ::memset(buf, 0, buf_size);
-        return true;
+        bool isOk = secView->fillContent(0);
+        delete secView;
+        return isOk;
     }
 
-	virtual bool dumpFragment(offset_t offset, bufsize_t size, QString path)
-	{
-		//TODO
-		return false;
-	}
+    bool dumpSection(SectionHdrWrapper *sec, QString fileName)
+    {
+        if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+            return false; //not my section
+        }
+        BufferView *secView = this->_createSectionView(sec);
+        if (!secView) return false;
 
-	bool dumpSection(SectionHdrWrapper *sec, QString path)
-	{
-		//TODO
-		return false;
-	}
+        bufsize_t dumpedSize = FileBuffer::dump(fileName, *secView, false);
+        delete secView;
+
+        return dumpedSize ? true : false;
+    }
 
 	bool isEPValid()
 	{
@@ -359,6 +360,7 @@ public:
 	}
 
 protected:
+    BufferView* _createSectionView(SectionHdrWrapper *sec);
     size_t getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA);
 
     virtual void clearWrappers();
