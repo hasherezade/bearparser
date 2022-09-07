@@ -24,9 +24,14 @@ public:
     };
 
     static std::map<DWORD, QString> s_fHdrCharact;
+    static std::map<DWORD, QString> s_machine;
+
     static void initCharact();
     static std::vector<DWORD> splitCharact(DWORD characteristics);
     static QString translateCharacteristics(DWORD charact);
+
+    static void initMachine();
+    static QString translateMachine(DWORD val);
 
     FileHdrWrapper(PEFile *pe) : PEElementWrapper(pe), hdr(NULL) {}
     bool wrap() { hdr = NULL; getPtr(); return true; }
