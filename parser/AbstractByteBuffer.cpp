@@ -74,10 +74,10 @@ BYTE* AbstractByteBuffer::getContentAt(offset_t offset, bufsize_t size, bool all
             + QString::number(fileSize) + " vs reguested Offset: " + QString::number(offset));
         return NULL;
     }
-    offset_t endOffset = offset + size;
+    const offset_t endOffset = offset + size;
     if (endOffset > fileSize) {
         if (allowExceptions) throw BufferException("Too big size requested! Buffer size: "
-            + QString::number(fileSize) + " vs requested Size: " + QString::number(endOffset));
+            + QString::number(fileSize) + " vs end of the requested area: " + QString::number(endOffset));
         return NULL;
     }
     BYTE *cntnt = buf + offset;
