@@ -318,11 +318,6 @@ public:
         return dumpedSize ? true : false;
     }
 
-    bool isEPValid()
-    {
-        return true;
-    }
-
     bool canResize(bufsize_t newSize)
     {
         bufsize_t currentSize = (bufsize_t)this->getRawSize();
