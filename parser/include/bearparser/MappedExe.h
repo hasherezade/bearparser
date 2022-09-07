@@ -31,6 +31,23 @@ class MappedExe : public Executable, public ExeWrappersContainer {
 public:
     virtual void wrap() { return wrap(this->buf); }
 
+    virtual bool canResize(bufsize_t newSize)
+    {
+        // disabled by default
+        return false;
+    }
+
+    virtual bool resize(bufsize_t newSize)
+    {
+        if (!canResize(newSize)) return false;
+
+        if (Executable::resize(newSize)) {
+            wrap();
+            return true;
+        }
+        return false;
+    }
+
 protected:
     MappedExe(AbstractByteBuffer *v_buf, exe_bits v_bitMode)
         : Executable(v_buf, v_bitMode), ExeWrappersContainer() { }
@@ -38,13 +55,4 @@ protected:
     virtual ~MappedExe(void) { }
 
     virtual void wrap(AbstractByteBuffer *v_buf) = 0;
-    virtual bool resize(bufsize_t newSize) 
-    { 
-        if (Executable::resize(newSize)) {
-            wrap(); 
-            printf("Resize and rewrap...");
-            return true;
-        }
-        return false;
-    }
 };

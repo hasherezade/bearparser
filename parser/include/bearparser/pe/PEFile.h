@@ -351,11 +351,6 @@ public:
 		return false;
 	}
 
-    bool resizeRaw(bufsize_t newSize)
-    {
-        return this->resize(newSize);
-    }
-
 	// Is PE file valid - with no anomalies
 	bool isValid()
 	{
