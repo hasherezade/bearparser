@@ -1,4 +1,5 @@
 #include "pe/PEFile.h"
+#include "FileBuffer.h"
 
 bool PEFileBuilder::signatureMatches(AbstractByteBuffer *buf)
 {
@@ -575,6 +576,20 @@ bool PEFile::unbindImports()
     return isOk;
 }
 
+bool PEFile::dumpSection(SectionHdrWrapper *sec, QString fileName)
+{
+    if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+        return false; //not my section
+    }
+    BufferView *secView = this->_createSectionView(sec);
+    if (!secView) return false;
+
+    bufsize_t dumpedSize = FileBuffer::dump(fileName, *secView, false);
+    delete secView;
+
+    return dumpedSize ? true : false;
+}
+
 //protected:
 
 BufferView* PEFile::_createSectionView(SectionHdrWrapper *sec)
@@ -616,4 +631,3 @@ size_t PEFile::getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::ad
     }
     return entrypoints.size() - initialSize;
 }
-    

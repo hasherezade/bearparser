@@ -1,7 +1,6 @@
 #pragma once
 
 #include "pe_formats.h"
-#include "FileBuffer.h"
 #include "PECore.h"
 
 #include "DOSExe.h"
@@ -304,19 +303,7 @@ public:
         return isOk;
     }
 
-    bool dumpSection(SectionHdrWrapper *sec, QString fileName)
-    {
-        if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
-            return false; //not my section
-        }
-        BufferView *secView = this->_createSectionView(sec);
-        if (!secView) return false;
-
-        bufsize_t dumpedSize = FileBuffer::dump(fileName, *secView, false);
-        delete secView;
-
-        return dumpedSize ? true : false;
-    }
+    bool dumpSection(SectionHdrWrapper *sec, QString fileName);
 
     bool canResize(bufsize_t newSize)
     {
