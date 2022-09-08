@@ -626,7 +626,6 @@ size_t PEFile::getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::ad
         if (offset == INVALID_ADDR) {
             continue;
         }
-            
         entrypoints.insert(offset, entry->getName());
     }
     return entrypoints.size() - initialSize;

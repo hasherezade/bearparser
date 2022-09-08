@@ -27,7 +27,7 @@ public:
     virtual QString getFieldName(size_t fieldId) { return getFieldName(fieldId, FIELD_NONE); }
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE) { return getSubfieldSize(fieldId, subField); }
 
-    QString thunkToFuncName(offset_t thunk);
+    QString thunkToFuncName(offset_t thunk, bool shortName=true);
     QString thunkToLibName(offset_t thunk);
 
     QList<offset_t> getThunksList() { return this->thunksList; }
