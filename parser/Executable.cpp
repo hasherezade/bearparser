@@ -18,6 +18,9 @@ BYTE* Executable::getContentAt(offset_t offset, Executable::addr_type aType, buf
 
 bool Executable::isValidAddr(offset_t addr, addr_type addrType)
 {
+    if (addr == INVALID_ADDR || addrType == Executable::NOT_ADDR) {
+        return false;
+    }
     offset_t mappedFrom = (addrType == Executable::VA) ? this->getImageBase() : 0;
     offset_t mappedTo = mappedFrom + this->getMappedSize(addrType);
 
@@ -26,6 +29,8 @@ bool Executable::isValidAddr(offset_t addr, addr_type addrType)
 
 offset_t Executable::VaToRva(offset_t va, bool autodetect)
 {
+    if (va == INVALID_ADDR) return INVALID_ADDR;
+
     const offset_t mappedFrom = this->getImageBase();
     const offset_t mappedTo = mappedFrom + this->getMappedSize(Executable::RVA);
 

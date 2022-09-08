@@ -89,11 +89,17 @@ public:
 
     // VA <-> RVA
     virtual offset_t VaToRva(offset_t va, bool autodetect = false);
-    virtual offset_t rvaToVa(offset_t rva) { return rva + this->getImageBase(); }
+
+    virtual offset_t rvaToVa(offset_t rva)
+    {
+        return (rva == INVALID_ADDR) ? INVALID_ADDR : (rva + this->getImageBase());
+    }
 
     // VA -> FileAddr
     virtual offset_t vaToRaw(offset_t va)
     {
+        if (va == INVALID_ADDR) return INVALID_ADDR;
+
         offset_t rva = this->VaToRva(va, true);
         return rvaToRaw(rva);
     }

@@ -234,6 +234,8 @@ IMAGE_DATA_DIRECTORY* PEFile::getDataDirectory()
 
 bufsize_t PEFile::getMappedSize(Executable::addr_type aType)
 {
+    if (aType == Executable::NOT_ADDR) return 0;
+
     if (aType == Executable::RAW) {
         return this->getContentSize();
     }
