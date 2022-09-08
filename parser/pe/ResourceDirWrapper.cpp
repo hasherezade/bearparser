@@ -125,9 +125,22 @@ void* ResourceDirWrapper::getFieldPtr(size_t fId, size_t subField)
         case MINOR_VER: return &d->MinorVersion;
         case NAMED_ENTRIES_NUM : return &d->NumberOfNamedEntries;
         case ID_ENTRIES_NUM : return &d->NumberOfIdEntries;
-        case CHILDREN : return (&d->NumberOfIdEntries) + 1;
     }
     return this->getPtr();
+}
+
+bufsize_t ResourceDirWrapper::getFieldSize(size_t fId, size_t subField)
+{
+    IMAGE_RESOURCE_DIRECTORY* d = resourceDir();
+    if (d == NULL) return 0;
+
+    // calculate size of the last field separately:
+    if (fId == ID_ENTRIES_NUM) {
+        void *nextPtr = (&d->NumberOfIdEntries) + 1;
+        void *argPtr = &d->NumberOfIdEntries;
+        return (ULONG_PTR) nextPtr - (ULONG_PTR)argPtr;
+    }
+    return DataDirEntryWrapper::getFieldSize(fId, subField);
 }
 
 QString ResourceDirWrapper::getFieldName(size_t fieldId)
@@ -139,7 +152,6 @@ QString ResourceDirWrapper::getFieldName(size_t fieldId)
         case MINOR_VER: return "MinorVersion";
         case NAMED_ENTRIES_NUM : return "NumberOfNamedEntries";
         case ID_ENTRIES_NUM : return "NumberOfIdEntries";
-        case CHILDREN : return "Entries";
     }
     return getName();
 }

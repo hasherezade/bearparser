@@ -22,7 +22,6 @@ public:
         MINOR_VER,
         NAMED_ENTRIES_NUM,
         ID_ENTRIES_NUM,
-        CHILDREN,
         FIELD_COUNTER
     };
 
@@ -43,6 +42,7 @@ public:
     virtual size_t getSubFieldsCount() { return 1; }
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField);
+    virtual bufsize_t getFieldSize(size_t fieldId, size_t subField);
     virtual QString getFieldName(size_t fieldId);
 
     bufsize_t getEntriesAreaSize()
