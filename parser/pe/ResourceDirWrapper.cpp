@@ -138,7 +138,7 @@ bufsize_t ResourceDirWrapper::getFieldSize(size_t fId, size_t subField)
     if (fId == ID_ENTRIES_NUM) {
         void *nextPtr = (&d->NumberOfIdEntries) + 1;
         void *argPtr = &d->NumberOfIdEntries;
-        return (ULONG_PTR) nextPtr - (ULONG_PTR)argPtr;
+        return (BYTE*) nextPtr - (BYTE*)argPtr;
     }
     return DataDirEntryWrapper::getFieldSize(fId, subField);
 }
