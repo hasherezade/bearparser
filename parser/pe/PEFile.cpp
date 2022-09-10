@@ -402,7 +402,7 @@ bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::
         return false;
     }
     Executable::addr_type dataDirAddrType = ddirWrapper->containsAddrType(id, DataDirWrapper::ADDRESS);
-    offset_t dataDirAddr = this-> convertAddr(newOffset, addrType, dataDirAddrType);
+    offset_t dataDirAddr = this->convertAddr(newOffset, addrType, dataDirAddrType);
     if (dataDirAddr == INVALID_ADDR) {
         if (allowExceptions) throw ExeException("Invalid new offset");
         return false;
