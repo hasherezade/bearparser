@@ -66,7 +66,7 @@ public:
 
     uint64_t getNumValue(offset_t offset, bufsize_t size, bool* isOk);
     bool setNumValue(offset_t offset, bufsize_t size, uint64_t newVal);
-    bool setTextValue(char* textPtr, std::string newText, size_t fieldLimitLen = true);
+    bool setTextValue(char* textPtr, std::string newText, size_t fieldLimitLen = 0);
 
     //TODO
     virtual bool resize(bufsize_t newSize) { return false; }
