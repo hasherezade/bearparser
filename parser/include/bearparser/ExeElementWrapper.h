@@ -28,8 +28,8 @@ public:
     virtual size_t getFieldsCount() = 0;
     virtual size_t getSubFieldsCount() { return 1; }
 
-    offset_t getOffset();
-    offset_t getOffset(void *ptr);
+    virtual offset_t getOffset();
+    virtual offset_t getOffset(void *ptr, bool allowExceptions = false);
 
     /* specific field boundaries */
     virtual void* getFieldPtr(size_t fieldId, size_t subField) = 0;

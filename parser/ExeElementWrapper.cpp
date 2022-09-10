@@ -42,10 +42,10 @@ offset_t ExeElementWrapper::getOffset()
     return getOffset(ptr);
 }
 
-offset_t ExeElementWrapper::getOffset(void *ptr)
+offset_t ExeElementWrapper::getOffset(void *ptr, bool allowExceptions)
 {
     if (!m_Exe) return INVALID_ADDR;
-    return m_Exe->getOffset(ptr);
+    return m_Exe->getOffset(ptr, allowExceptions);
 }
 
 offset_t ExeElementWrapper::getFieldOffset(size_t fieldId, size_t subField)
