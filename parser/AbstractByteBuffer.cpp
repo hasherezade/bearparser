@@ -372,12 +372,13 @@ bool AbstractByteBuffer::setTextValue(char* textPtr, std::string newText, size_t
     }
     //if the field size is set:
     if (fieldLimitLen != 0) {
-        if (!this->getContentAt(textOffset, fieldLimitLen)) {
-            return false;
+        if (this->getContentAt(textOffset, fieldLimitLen)) {
+            //clear the previous field
+            memset(textPtr, 0, fieldLimitLen);
+            if (newLen > fieldLimitLen) {
+                newLen = fieldLimitLen;
+            }
         }
-        //clear the previous field
-        memset(textPtr, 0, fieldLimitLen);
-        if (newLen > fieldLimitLen) newLen = fieldLimitLen;
     }
     memcpy(textPtr, newTextC, newLen);
     textPtr[newLen] = '\0';
