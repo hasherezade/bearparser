@@ -71,13 +71,13 @@ BYTE* AbstractByteBuffer::getContentAt(offset_t offset, bufsize_t size, bool all
 
     if (offset >= fileSize ) {
         if (allowExceptions) throw BufferException("Too far offset requested! Buffer size: "
-            + QString::number(fileSize) + " vs reguested Offset: " + QString::number(offset));
+            + QString::number(fileSize) + " vs reguested Offset: 0x" + QString::number(offset, 16));
         return NULL;
     }
     const offset_t endOffset = offset + size;
     if (endOffset > fileSize) {
         if (allowExceptions) throw BufferException("Too big size requested! Buffer size: "
-            + QString::number(fileSize) + " vs end of the requested area: " + QString::number(endOffset));
+            + QString::number(fileSize) + " vs end of the requested area: 0x" + QString::number(endOffset, 16));
         return NULL;
     }
     BYTE *cntnt = buf + offset;
@@ -362,7 +362,7 @@ bool AbstractByteBuffer::setTextValue(char* textPtr, std::string newText, size_t
         return false;
     }
     //check against the buffer overflow
-    if (this->getOffset(textPtr + newLen) == INVALID_ADDR) {
+    if (!this->getContentAt(textOffset, newLen)) {
         return false;
     }
     //if both strings are same, do not overwrite
@@ -372,7 +372,7 @@ bool AbstractByteBuffer::setTextValue(char* textPtr, std::string newText, size_t
     }
     //if the field size is set:
     if (fieldLimitLen != 0) {
-        if (this->getOffset(textPtr + fieldLimitLen) == INVALID_ADDR) {
+        if (!this->getContentAt(textOffset, fieldLimitLen)) {
             return false;
         }
         //clear the previous field
