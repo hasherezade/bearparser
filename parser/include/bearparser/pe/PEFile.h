@@ -111,11 +111,10 @@ public:
         return (sects) ? sects->getSecHdr(index) : NULL;
     }
 
-    SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool roundup, bool verbose = false)
+    SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)
     {
-        return (sects == NULL) ? NULL : sects->getSecHdrAtOffset(offset, aType, roundup, verbose);
+        return (sects == NULL) ? NULL : sects->getSecHdrAtOffset(offset, aType, recalculate, verbose);
     }
-
 
     size_t getSecIndex(SectionHdrWrapper *sec) const
     {
@@ -126,7 +125,7 @@ public:
     {
         return (this->album == NULL) ? NULL : album->getResourcesOfType(typeId);
     }
-    
+
     DataDirEntryWrapper* getDataDirEntry(pe::dir_entry eType);
 
     BufferView* createSectionView(size_t secNum);
@@ -184,10 +183,10 @@ public:
         return this->getDataDirEntry(dirNum) ? true : false;
     }
 
-    SectionHdrWrapper* getSectionByAddr(offset_t addr, bool isRVA, bool roundup=false)
+    SectionHdrWrapper* getSectionByAddr(offset_t addr, bool isRVA, bool recalculate = false)
 	{
 		Executable::addr_type type = isRVA ? Executable::RVA : Executable::RAW;
-		return this->getSecHdrAtOffset(addr, type, roundup, false);
+		return this->getSecHdrAtOffset(addr, type, recalculate, false);
 	}
 
     bufsize_t getFileAlignment() const
@@ -279,7 +278,7 @@ public:
         this->setVirtualSize(newSize);
     }
 
-	IMAGE_FILE_HEADER *getFileHeader() const
+	IMAGE_FILE_HEADER* getFileHeader() const
 	{
 		return this->core.getFileHeader();
 	}
@@ -317,13 +316,6 @@ public:
         }
         return true;
     }
-
-	// Is PE file valid - with no anomalies
-	bool isValid()
-	{
-		//TODO
-		return true;
-	}
 
 protected:
     BufferView* _createSectionView(SectionHdrWrapper *sec);

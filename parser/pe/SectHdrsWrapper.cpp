@@ -163,13 +163,13 @@ offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType, bool u
     return offset;
 }
 
-offset_t SectionHdrWrapper::getContentEndOffset(Executable::addr_type addrType, bool roundup)
+offset_t SectionHdrWrapper::getContentEndOffset(Executable::addr_type addrType, bool recalculate)
 {
     const bool useMapped = true;
     offset_t startOffset = getContentOffset(addrType, useMapped);
     if (startOffset == INVALID_ADDR) return INVALID_ADDR;
 
-    offset_t endOffset = static_cast<offset_t>(getContentSize(addrType, roundup)) + startOffset;
+    offset_t endOffset = static_cast<offset_t>(getContentSize(addrType, recalculate)) + startOffset;
     return endOffset;
 }
 
@@ -425,7 +425,7 @@ QString SectHdrsWrapper::getFieldName(size_t fieldId)
     return entries[fieldId]->getName();
 }
 
-SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool roundup, bool verbose)
+SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool recalculate, bool verbose)
 {
     size_t size = this->entries.size();
     std::map<offset_t, SectionHdrWrapper*> *secMap = NULL;
@@ -454,7 +454,7 @@ SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executabl
         offset_t startOffset = sec->getContentOffset(addrType);
         if (startOffset == INVALID_ADDR) continue;
 
-        offset_t endOffset = sec->getContentEndOffset(addrType, roundup);
+        offset_t endOffset = sec->getContentEndOffset(addrType, recalculate);
 
         if (offset >= startOffset && offset < endOffset) {
             return sec;
