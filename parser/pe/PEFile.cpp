@@ -501,8 +501,12 @@ offset_t PEFile::getLastMapped(Executable::addr_type aType)
     offset_t lastMapped = 0;
 
     /* check sections bounds */
-    const size_t counter = this->getSectionsCount(true);
-    for (size_t i = 0; i < counter; i++) {
+    const size_t secCounter = this->getSectionsCount(true);
+    if (!secCounter) {
+        // if PE file has no sections, full file will be mapped
+        return getMappedSize(aType);
+    }
+    for (size_t i = 0; i < secCounter; i++) {
         SectionHdrWrapper *sec = this->getSecHdr(i);
         if (!sec) continue;
 
