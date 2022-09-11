@@ -183,12 +183,6 @@ public:
         return this->getDataDirEntry(dirNum) ? true : false;
     }
 
-    SectionHdrWrapper* getSectionByAddr(offset_t addr, bool isRVA, bool recalculate = false)
-	{
-		Executable::addr_type type = isRVA ? Executable::RVA : Executable::RAW;
-		return this->getSecHdrAtOffset(addr, type, recalculate, false);
-	}
-
     bufsize_t getFileAlignment() const
     {
         return this->getAlignment(Executable::RAW);
@@ -342,5 +336,4 @@ protected:
 
 friend class SectHdrsWrapper;
 };
-
 
