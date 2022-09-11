@@ -318,12 +318,6 @@ public:
         return true;
     }
 
-	bool setAlignments(DWORD fileAlignment, DWORD secAlignment, uint64_t fileSize, uint64_t imageSize)
-	{
-		//TODO
-		return false;
-	}
-
 	// Is PE file valid - with no anomalies
 	bool isValid()
 	{
