@@ -101,13 +101,18 @@ void PEFile::initDirEntries()
 
 void PEFile::wrap()
 {
-    clearWrappers();
     PEFile::wrap(this->buf);
 }
 
 void  PEFile::wrap(AbstractByteBuffer *v_buf)
 {
+    //erase all existing wrappers:
+    clearWrappers();
+
+    // rewrao the core:
     core.wrap(v_buf);
+
+    //regenerate the wrappers:
     this->dosHdrWrapper = new DosHdrWrapper(this);
     this->wrappers[WR_DOS_HDR] = this->dosHdrWrapper;
 
