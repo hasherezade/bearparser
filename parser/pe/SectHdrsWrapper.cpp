@@ -156,8 +156,7 @@ offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType, bool u
     }
     if (aType == Executable::RAW) {
         const size_t peSize = m_PE->getMappedSize(aType);
-        const offset_t minAlign = m_PE->getAlignment(aType);
-        if (offset < minAlign || offset > peSize) {
+        if (offset > peSize) {
             offset = INVALID_ADDR;
         }
     }
