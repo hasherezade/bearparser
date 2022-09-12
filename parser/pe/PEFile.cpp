@@ -216,7 +216,7 @@ pe::RICH_SIGNATURE* PEFile::getRichHeaderSign()
 
 offset_t PEFile::getMinSecRVA()
 {
-    if (this->getSectionsCount() < 1) {
+    if (!this->getSectionsCount()) {
         return INVALID_ADDR;
     }
     SectionHdrWrapper* sec = this->getSecHdr(0);
