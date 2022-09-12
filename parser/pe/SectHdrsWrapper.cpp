@@ -243,11 +243,10 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
     bufsize_t mVirtualSize = (dVirtualSize > mRawSize) ? dVirtualSize : mRawSize;
 
     bufsize_t unit = m_PE->getAlignment(aType);
-    if (unit == 0) {
-        return mRawSize; // do not roundup
+    if (unit) {
+        mRawSize = roundupToUnit(mVirtualSize, unit);
     }
-    bufsize_t size = roundupToUnit(mVirtualSize, unit);
-    return size;
+    return mRawSize;
 }
 
 bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool recalculate)
