@@ -226,7 +226,7 @@ public:
 			trimmedSize = peSize - secOffset; // trim to the file size
 			//qDebug("The section %x overflows and has been trimmed! size: %x trimmedSize: %x", secOffset, secRawSize, trimmedSize);
 			bufsize_t virtualSize = sec->getContentSize(Executable::RVA, true);
-			if (trimmedSize > virtualSize) {
+			if ((virtualSize != 0) && (trimmedSize > virtualSize)) {
 				return virtualSize;
 			}
 		}
@@ -235,13 +235,15 @@ public:
 
 	size_t getSecVirtualSize(SectionHdrWrapper* sec, bool recalculate = false)
 	{
-		if (sec == NULL) return 0;
+		if (!sec) return 0;
 		size_t vSize = sec->getContentSize(Executable::RVA, false);
 
 		if (recalculate == false)
 			return vSize;
 		//---
-		if (vSize == 0) vSize = sec->getContentSize(Executable::RAW, false);
+		if (vSize == 0) {
+			vSize = sec->getContentSize(Executable::RAW, true);
+		}
 		return vSize;
 	}
 

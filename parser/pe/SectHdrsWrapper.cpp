@@ -219,7 +219,7 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
         const bufsize_t trimmedSize = peSize - secOffset; // trim to the file size
         const bufsize_t virtualSize = getContentDeclaredSize(Executable::RVA);
 
-        if (trimmedSize > virtualSize) {
+        if ((virtualSize != 0) && (trimmedSize > virtualSize)) {
             return virtualSize;
         }
         return trimmedSize;
@@ -239,6 +239,7 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
 
     bufsize_t dVirtualSize = getContentDeclaredSize(aType);
     bufsize_t mRawSize = getMappedRawSize();
+
     bufsize_t mVirtualSize = (dVirtualSize > mRawSize) ? dVirtualSize : mRawSize;
 
     bufsize_t unit = m_PE->getAlignment(aType);
