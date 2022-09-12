@@ -262,11 +262,6 @@ public:
         this->setVirtualSize(newSize);
     }
 
-	IMAGE_FILE_HEADER* getFileHeader() const
-	{
-		return this->core.getFileHeader();
-	}
-
     SectionHdrWrapper* getEntrySection()
     {
         offset_t ep = getEntryPoint(Executable::RVA);
