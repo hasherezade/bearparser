@@ -3,7 +3,8 @@
 
 using namespace buf_util;
 
-const size_t SECNAME_LEN = 8;
+const size_t SectionHdrWrapper::SECNAME_LEN = 8;
+
 size_t SectHdrsWrapper::SECT_COUNT_MAX = 0x2000;
 size_t SectHdrsWrapper::SECT_INVALID_INDEX = SIZE_MAX;
 

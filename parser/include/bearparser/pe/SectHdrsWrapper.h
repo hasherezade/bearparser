@@ -6,7 +6,9 @@
 class SectionHdrWrapper : public PENodeWrapper
 {
 public:
-    
+
+    static const size_t SECNAME_LEN;
+
     /* fields :*/
     enum SecFieldId {
         NAME = 0,
@@ -66,38 +68,8 @@ public:
     DWORD getNumberOfLinenumbers() { return header ? header->NumberOfLinenumbers : 0; }
 
 //modifications:
-    bool setCharacteristics(DWORD newCharacteristics)
-    {
-        if (!header) return false;
-        //TODO: validate newCharacteristics
 
-        header->Characteristics = newCharacteristics;
-        return true;
-    }
-
-    bool setPointerToRelocations(DWORD newPointerToRelocations)
-    {
-        if (!header) return false;
-
-        header->PointerToRelocations = newPointerToRelocations;
-        return true;
-    }
-
-    bool setNumberOfRelocations(DWORD newNumberOfRelocations)
-    {
-        if (!header) return false;
-
-        header->NumberOfRelocations = newNumberOfRelocations;
-        return true;
-    }
-
-    bool setNumberOfLinenumbers(DWORD newNumberOfLinenumbers)
-    {
-        if (!header) return false;
-
-        header->NumberOfLinenumbers = newNumberOfLinenumbers;
-        return true;
-    }
+    bool reloadName();
 
 	QString mappedName;
 
@@ -113,8 +85,6 @@ protected:
     bufsize_t getContentDeclaredSize(Executable::addr_type aType);
     bufsize_t getMappedRawSize();
     bufsize_t getMappedVirtualSize();
-
-    bool reloadName();
 
     char *name;
     size_t sectNum;
@@ -155,7 +125,7 @@ public:
 
     size_t getSecIndex(SectionHdrWrapper* sec) const
     {
-        if (!entries.size()) return SECT_INVALID_INDEX;
+        if (!sec || !entries.size()) return SECT_INVALID_INDEX;
         size_t indx = 0;
         for (auto itr = entries.begin(); itr != entries.end(); ++itr, ++indx) {
             if (sec == *itr) {

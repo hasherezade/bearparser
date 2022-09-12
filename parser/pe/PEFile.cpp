@@ -303,7 +303,7 @@ bool PEFile::setHdrSectionsNum(size_t newNum)
 bool PEFile::setVirtualSize(bufsize_t newSize)
 {
     uint64_t size = newSize;
-    bool canSet = optHdr->setNumValue(OptHdrWrapper::IMAGE_SIZE, 0, size);
+    bool canSet = optHdr->setNumValue(OptHdrWrapper::IMAGE_SIZE, size);
     if (canSet == false) {
         Logger::append(Logger::D_ERROR, "Can not change OptHdr!");
         return false;
@@ -624,7 +624,7 @@ size_t PEFile::getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::ad
     const size_t entriesCnt = exports->getEntriesCount();
     if (entriesCnt == 0) return 0;
 
-    for(int i = 0; i < entriesCnt; i++) {
+    for (int i = 0; i < entriesCnt; i++) {
         ExportEntryWrapper* entry = dynamic_cast<ExportEntryWrapper*>(exports->getEntryAt(i));
         if (!entry) continue;
 
