@@ -257,18 +257,6 @@ public:
 		return this->getLastMapped(Executable::RVA);
 	}
 
-	DWORD peDllCharacteristics()
-	{
-		DWORD dllCharact = 0;
-		if (this->core.opt32) {
-			dllCharact = this->core.opt32->DllCharacteristics;
-		}
-		else {
-			dllCharact = this->core.opt64->DllCharacteristics;
-		}
-		return dllCharact;
-	}
-
     void setImageSize(size_t newSize)
     {
         this->setVirtualSize(newSize);
