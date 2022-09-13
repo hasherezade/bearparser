@@ -215,10 +215,14 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
     
     //trim to the file size:
     if (secEnd > peSize) {
-        
         const bufsize_t trimmedSize = peSize - secOffset; // trim to the file size
-        const bufsize_t virtualSize = getContentDeclaredSize(Executable::RVA);
-
+        bufsize_t virtualSize = getContentDeclaredSize(Executable::RVA);
+        if (virtualSize) {
+            bufsize_t unit = m_PE->getAlignment(Executable::RVA);
+            if (unit != 0) {
+                virtualSize = roundupToUnit(virtualSize, unit);
+            }
+        }
         if ((virtualSize != 0) && (trimmedSize > virtualSize)) {
             return virtualSize;
         }
@@ -230,6 +234,8 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
 //VirtualSize that is really mapped
 bufsize_t SectionHdrWrapper::getMappedVirtualSize()
 {
+    if (!m_PE) return 0;
+
     const Executable::addr_type aType = Executable::RVA;
 
     const offset_t startOffset = getContentOffset(aType);
@@ -242,6 +248,12 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
 
     bufsize_t mVirtualSize = (dVirtualSize > mRawSize) ? dVirtualSize : mRawSize;
 
+    // is i the last section?
+    const size_t secIndex = m_PE->getSecIndex(this);
+    if (secIndex != SectHdrsWrapper::SECT_INVALID_INDEX && secIndex == (m_PE->getSectionsCount() - 1)) {
+        // it is the last section, use mapped raw
+        return mRawSize;
+    }
     bufsize_t unit = m_PE->getAlignment(aType);
     if (unit) {
         mRawSize = roundupToUnit(mVirtualSize, unit);
@@ -251,8 +263,7 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
 
 bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool recalculate)
 {
-    if (this->header == NULL) return 0;
-    if (m_PE == NULL) return 0;
+    if (!this->header || !m_PE) return 0;
 
     bufsize_t size = 0;
     if (!recalculate) {
