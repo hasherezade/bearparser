@@ -198,40 +198,13 @@ public:
         if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
             return NULL; //not my section
         }
-        const size_t buf_size = this->getSecRawSize(sec, true, true);
+        const size_t buf_size = sec->getContentSize(Executable::RAW, true);
         if (!buf_size) return NULL;
 
         offset_t start = sec->getContentOffset(Executable::RAW, true);
         BYTE *ptr = this->getContentAt(start, buf_size);
         return ptr;
     }
-
-	size_t getSecRawSize(SectionHdrWrapper* sec, bool recalculate=false, bool limitToFileSize=true)
-	{
-		if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
-			return 0; //not my section
-		}
-		size_t secRawSize = sec->getContentSize(Executable::RAW, recalculate);
-		if (!limitToFileSize) {
-			return secRawSize;
-		}
-		offset_t secOffset = sec->getRawPtr();
-		if (secOffset == INVALID_ADDR) {
-			return 0;
-		}
-		size_t trimmedSize = secRawSize;
-		size_t secEnd = secOffset + secRawSize;
-		size_t peSize = this->getContentSize();
-		if (secEnd > peSize) {
-			trimmedSize = peSize - secOffset; // trim to the file size
-			//qDebug("The section %x overflows and has been trimmed! size: %x trimmedSize: %x", secOffset, secRawSize, trimmedSize);
-			bufsize_t virtualSize = sec->getContentSize(Executable::RVA, true);
-			if ((virtualSize != 0) && (trimmedSize > virtualSize)) {
-				return virtualSize;
-			}
-		}
-		return trimmedSize;
-	}
 
 	size_t getSecVirtualSize(SectionHdrWrapper* sec, bool recalculate = false)
 	{
