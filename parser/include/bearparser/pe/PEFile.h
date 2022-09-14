@@ -206,30 +206,6 @@ public:
         return ptr;
     }
 
-	size_t getSecVirtualSize(SectionHdrWrapper* sec, bool recalculate = false)
-	{
-		if (!sec) return 0;
-		size_t vSize = sec->getContentSize(Executable::RVA, false);
-
-		if (recalculate == false)
-			return vSize;
-		//---
-		if (vSize == 0) {
-			vSize = sec->getContentSize(Executable::RAW, true);
-		}
-		return vSize;
-	}
-
-	offset_t getLastMappedRaw()
-	{
-		return this->getLastMapped(Executable::RAW);
-	}
-
-	offset_t getLastRva()
-	{
-		return this->getLastMapped(Executable::RVA);
-	}
-
     void setImageSize(size_t newSize)
     {
         this->setVirtualSize(newSize);
