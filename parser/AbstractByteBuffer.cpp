@@ -287,6 +287,13 @@ bool AbstractByteBuffer::intersectsBlock(offset_t rawOffset, bufsize_t size)
     return false;
 }
 
+template <typename INT_TYPE>
+INT_TYPE _getNumValue(void* ptr)
+{
+    INT_TYPE val = *((INT_TYPE*)ptr);
+    return val;
+}
+
 uint64_t AbstractByteBuffer::getNumValue(offset_t offset, bufsize_t size, bool* isOk)
 {
     if (isOk) (*isOk) = false;
@@ -297,16 +304,24 @@ uint64_t AbstractByteBuffer::getNumValue(offset_t offset, bufsize_t size, bool* 
         return (-1);
     }
     uint64_t val = (-1);
-
-    if (size == sizeof(uint8_t)) val = *((uint8_t*) ptr);
-    else if (size == sizeof(uint16_t)) val = *((uint16_t*) ptr);
-    else if (size == sizeof(uint32_t)) val = *((uint32_t*) ptr);
-    else if (size == sizeof(uint64_t)) val = *((uint64_t*) ptr);
+    if (size == sizeof(uint8_t)) val = _getNumValue<uint8_t>(ptr);
+    else if (size == sizeof(uint16_t)) val = _getNumValue<uint16_t>(ptr);
+    else if (size == sizeof(uint32_t)) val = _getNumValue<uint32_t>(ptr);
+    else if (size == sizeof(uint64_t)) val = _getNumValue<uint64_t>(ptr);
     else {
         return (-1);
     }
     if (isOk) (*isOk) = true;
     return val;
+}
+
+template <typename INT_TYPE>
+bool _setNumValue(void* ptr, INT_TYPE nVal)
+{
+    INT_TYPE* valPtr = (INT_TYPE*)ptr;
+    if ((*valPtr) == nVal) return false;
+    (*valPtr) = nVal;
+    return true;
 }
 
 bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t newVal)
@@ -323,28 +338,20 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
     }
 
     if (size == sizeof(uint8_t)) {
-        uint8_t nVal = newVal;
-        uint8_t* valPtr = (uint8_t*) ptr;
-        if ((*valPtr) == nVal) return false;
-        (*valPtr) = nVal;
+        if (!_setNumValue(ptr, uint8_t(newVal)))
+            return false;
     }
     else if (size == sizeof(uint16_t)) {
-        uint16_t nVal = newVal;
-        uint16_t* valPtr = (uint16_t*) ptr;
-        if ((*valPtr) == nVal) return false;
-        (*valPtr) = nVal;
+        if (!_setNumValue(ptr, uint16_t(newVal)))
+            return false;
     }
     else if (size == sizeof(uint32_t)) {
-        uint32_t nVal = newVal;
-        uint32_t* valPtr = (uint32_t*) ptr;
-        if ((*valPtr) == nVal) return false;
-        (*valPtr) = nVal;
+        if (!_setNumValue(ptr, uint32_t(newVal)))
+            return false;
     }
     else if (size == sizeof(uint64_t)) {
-        uint64_t nVal = newVal;
-        uint64_t* valPtr = (uint64_t*) ptr;
-        if ((*valPtr) == nVal) return false;
-        (*valPtr) = nVal;
+        if (!_setNumValue(ptr, uint64_t(newVal)))
+            return false;
     } else {
         Logger::append(Logger::D_ERROR, "Wrong size!");
         return false;
