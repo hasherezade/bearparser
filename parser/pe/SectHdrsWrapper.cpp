@@ -247,18 +247,18 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
     bufsize_t mRawSize = getMappedRawSize();
 
     bufsize_t mVirtualSize = (dVirtualSize > mRawSize) ? dVirtualSize : mRawSize;
-
-    // is i the last section?
-    const size_t secIndex = m_PE->getSecIndex(this);
-    if (secIndex != SectHdrsWrapper::SECT_INVALID_INDEX && secIndex == (m_PE->getSectionsCount() - 1)) {
-        // it is the last section, use mapped raw
-        return mRawSize;
-    }
     bufsize_t unit = m_PE->getAlignment(aType);
     if (unit) {
-        mRawSize = roundupToUnit(mVirtualSize, unit);
+        mVirtualSize = roundupToUnit(mVirtualSize, unit);
     }
-    return mRawSize;
+    // trim to Image Size:
+    const bufsize_t secEnd = startOffset + mVirtualSize;
+    const bufsize_t imgSize = m_PE->getImageSize();
+    if (secEnd > imgSize) {
+        const bufsize_t trimmedSize = imgSize - startOffset;
+        return trimmedSize;
+    }
+    return mVirtualSize;
 }
 
 bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool recalculate)
