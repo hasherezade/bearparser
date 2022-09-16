@@ -21,7 +21,7 @@ var searchData=
   ['filehdrwrapper_18',['FileHdrWrapper',['../class_file_hdr_wrapper.html#ae11fa7241e2816b444da9c4c9f5e3c2e',1,'FileHdrWrapper::FileHdrWrapper()'],['../class_file_hdr_wrapper.html',1,'FileHdrWrapper']]],
   ['filehdrwrapper_2ecpp_19',['FileHdrWrapper.cpp',['../_file_hdr_wrapper_8cpp.html',1,'']]],
   ['filehdrwrapper_2eh_20',['FileHdrWrapper.h',['../_file_hdr_wrapper_8h.html',1,'']]],
-  ['filename_21',['fileName',['../class_executable.html#a4381394b0200fe58303725bd69d1c6a6',1,'Executable::fileName()'],['../class_abstract_file_buffer.html#ad5ce86edf932f9bb92b91a1b03b8aa9a',1,'AbstractFileBuffer::fileName()']]],
+  ['filename_21',['fileName',['../class_abstract_file_buffer.html#ad5ce86edf932f9bb92b91a1b03b8aa9a',1,'AbstractFileBuffer']]],
   ['filesize_22',['fileSize',['../class_abstract_file_buffer.html#adc73322cb20b97be9ffb987c6b290e40',1,'AbstractFileBuffer']]],
   ['fileview_23',['FileView',['../class_file_view.html',1,'FileView'],['../class_file_view.html#af161ebb5802a8f0da8dafdabbb7feb5c',1,'FileView::FileView()']]],
   ['fileview_5fmaxsize_24',['FILEVIEW_MAXSIZE',['../_file_buffer_8h.html#a5c995a9bac9ca6c6d057896ae4b4ea76',1,'FileBuffer.h']]],

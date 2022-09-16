@@ -1,4 +1,5 @@
 <map id="ExeFactory::build" name="ExeFactory::build">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,124,31"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,124,56"/>
 <area shape="rect" id="node2" href="$class_exe_builder.html#a7eed0fb932d27efb3bef6b7f461df3a7" title=" " alt="" coords="172,5,288,31"/>
+<area shape="rect" id="node3" href="$class_exe_factory.html#a754878078e16859193af16b68dc19457" title=" " alt="" coords="175,55,285,80"/>
 </map>

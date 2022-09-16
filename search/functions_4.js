@@ -16,5 +16,7 @@ var searchData=
   ['dosexebuilder_13',['DOSExeBuilder',['../class_d_o_s_exe_builder.html#a47514a2fe69102516c7d0730cec1b850',1,'DOSExeBuilder']]],
   ['doshdrwrapper_14',['DosHdrWrapper',['../class_dos_hdr_wrapper.html#af3cac5dc9b654c55f8c7a893af58ab31',1,'DosHdrWrapper']]],
   ['dosheaderoffset_15',['dosHeaderOffset',['../class_d_o_s_exe.html#a1e459a69c1b775b9a9de2c40caf76ced',1,'DOSExe']]],
-  ['dump_16',['dump',['../class_abstract_file_buffer.html#a8efe106b10ea55e54666ecea2da1c853',1,'AbstractFileBuffer']]]
+  ['dump_16',['dump',['../class_abstract_file_buffer.html#aa81c39df0e0fde74cdf084bdda6fe321',1,'AbstractFileBuffer']]],
+  ['dumpfragment_17',['dumpFragment',['../class_executable.html#acf0f83af41f7676f59dd99a8919e0610',1,'Executable']]],
+  ['dumpsection_18',['dumpSection',['../class_p_e_file.html#a76311e3aa2ccf07af3ac2eac12b88674',1,'PEFile']]]
 ];

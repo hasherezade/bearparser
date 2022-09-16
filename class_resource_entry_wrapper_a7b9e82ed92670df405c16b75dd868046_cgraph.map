@@ -1,14 +1,15 @@
 <map id="ResourceEntryWrapper::getEntryPtr" name="ResourceEntryWrapper::getEntryPtr">
-<area shape="rect" id="node1" title=" " alt="" coords="5,155,160,195"/>
-<area shape="rect" id="node2" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="208,75,375,101"/>
-<area shape="rect" id="node6" href="$class_exe_element_wrapper.html#a4a1afe592b11191cab1d74432f759b41" title=" " alt="" coords="219,155,363,195"/>
-<area shape="rect" id="node10" href="$class_exe_element_wrapper.html#a10ef93fdda6cf93c5db02b696a81b7c7" title=" " alt="" coords="219,247,363,287"/>
-<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="429,37,560,77"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,145,160,185"/>
+<area shape="rect" id="node2" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="208,85,375,110"/>
+<area shape="rect" id="node6" href="$class_exe_element_wrapper.html#a4a1afe592b11191cab1d74432f759b41" title=" " alt="" coords="219,145,363,185"/>
+<area shape="rect" id="node10" href="$class_resource_dir_wrapper.html#aaf0ae328a457b55928694c639e1de5a2" title=" " alt="" coords="221,229,362,269"/>
+<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="429,67,560,107"/>
 <area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="621,5,752,45"/>
 <area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="621,69,752,109"/>
-<area shape="rect" id="node7" href="$class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf" title=" " alt="" coords="423,189,567,229"/>
-<area shape="rect" id="node8" href="$class_exe_element_wrapper.html#a98ca205ec6f2d2deacd32327409a3539" title=" " alt="" coords="423,125,567,165"/>
-<area shape="rect" id="node9" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="615,173,759,213"/>
-<area shape="rect" id="node11" href="$class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83" title=" " alt="" coords="423,304,567,344"/>
-<area shape="rect" id="node12" href="$class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="423,368,567,408"/>
+<area shape="rect" id="node7" href="$class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf" title=" " alt="" coords="615,139,759,179"/>
+<area shape="rect" id="node8" href="$class_exe_element_wrapper.html#a98ca205ec6f2d2deacd32327409a3539" title=" " alt="" coords="423,205,567,245"/>
+<area shape="rect" id="node9" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="615,205,759,245"/>
+<area shape="rect" id="node11" href="$class_exe_element_wrapper.html#a10ef93fdda6cf93c5db02b696a81b7c7" title=" " alt="" coords="423,269,567,309"/>
+<area shape="rect" id="node12" href="$class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83" title=" " alt="" coords="615,269,759,309"/>
+<area shape="rect" id="node13" href="$class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="615,333,759,373"/>
 </map>

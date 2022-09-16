@@ -92,6 +92,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2d68f6930726a129478c8ab5ed38779a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a113d0f29022df23ed74ff1c171df8c82"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_byte_buffer.html#a113d0f29022df23ed74ff1c171df8c82">isTruncated</a> ()</td></tr>
 <tr class="separator:a113d0f29022df23ed74ff1c171df8c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20e43caa5780d199dd1d7d919f9d590e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_byte_buffer.html#a20e43caa5780d199dd1d7d919f9d590e">isResized</a> ()</td></tr>
+<tr class="separator:a20e43caa5780d199dd1d7d919f9d590e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe753ded9eb9cb7495c37050d0ed8a5e"><td class="memItemLeft" align="right" valign="top">BYTE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_byte_buffer.html#abe753ded9eb9cb7495c37050d0ed8a5e">operator[]</a> (size_t idx)</td></tr>
 <tr class="separator:abe753ded9eb9cb7495c37050d0ed8a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb10018e327d14ac29d842aee3ab5465"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465">getOffset</a> (void *ptr, bool allowExceptions=false)</td></tr>
@@ -128,8 +130,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9476fc334d491f3882852b0048a76b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e4be1e74690ad6517c3d19ed946b857"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_byte_buffer.html#a5e4be1e74690ad6517c3d19ed946b857">setNumValue</a> (<a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> offset, <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a> size, uint64_t newVal)</td></tr>
 <tr class="separator:a5e4be1e74690ad6517c3d19ed946b857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39e77f97d0d667575ef574cc68255ae6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_byte_buffer.html#a39e77f97d0d667575ef574cc68255ae6">setTextValue</a> (char *textPtr, std::string newText, size_t fieldLimitLen=0)</td></tr>
+<tr class="separator:a39e77f97d0d667575ef574cc68255ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1710ac29680e17156a74a3618fe35f2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_byte_buffer.html#ac1710ac29680e17156a74a3618fe35f2">resize</a> (<a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a> newSize)</td></tr>
 <tr class="separator:ac1710ac29680e17156a74a3618fe35f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74943c97716eb8c33448a883f384f64c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_byte_buffer.html#a74943c97716eb8c33448a883f384f64c">substFragmentByFile</a> (<a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> offset, <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a> contentSize, QFile &amp;fIn)</td></tr>
+<tr class="separator:a74943c97716eb8c33448a883f384f64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -221,7 +227,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00235">235</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00237">237</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -252,7 +258,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00197">197</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00199">199</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -391,7 +397,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_executable.html#a3dc1741cba39f6422ad114a3417c88bf">Executable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00097">97</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00099">99</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -450,7 +456,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00085">85</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00087">87</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -487,7 +493,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8h_source.html#l00057">57</a> of file <a class="el" href="_abstract_byte_buffer_8h_source.html">AbstractByteBuffer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8h_source.html#l00058">58</a> of file <a class="el" href="_abstract_byte_buffer_8h_source.html">AbstractByteBuffer.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -535,7 +541,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00288">288</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00297">297</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -584,6 +590,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Reimplemented in <a class="el" href="class_exe_element_wrapper.html#af6fdb98a1dff9810143d6677b99ff4dd">ExeElementWrapper</a>.</p>
+
 <p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00035">35</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
@@ -624,7 +632,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00148">148</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00150">150</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -666,7 +674,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00172">172</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00174">174</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -708,7 +716,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00160">160</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00162">162</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -749,7 +757,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00255">255</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00257">257</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -791,7 +799,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00186">186</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00188">188</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -803,6 +811,35 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="363,69,493,109"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="a20e43caa5780d199dd1d7d919f9d590e" name="a20e43caa5780d199dd1d7d919f9d590e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20e43caa5780d199dd1d7d919f9d590e">&#9670;&#160;</a></span>isResized()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool AbstractByteBuffer::isResized </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_byte_buffer.html#a2a9463758d08480ddf96d7d551f39a8f">ByteBuffer</a>, <a class="el" href="class_executable.html#afc83c5cdac5c8a28c59949944c790c5d">Executable</a>, and <a class="el" href="class_file_buffer.html#a0525da6f0ae5fc868ad5b398034ec4df">FileBuffer</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8h_source.html#l00042">42</a> of file <a class="el" href="_abstract_byte_buffer_8h_source.html">AbstractByteBuffer.h</a>.</p>
 
 </div>
 </div>
@@ -829,7 +866,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="class_file_view.html#a0cbe4cf4efb205092c64c993ce4dc3cb">FileView</a>, and <a class="el" href="class_file_buffer.html#ae1b0afb493c07daf35cdf4e7da5cbc45">FileBuffer</a>.</p>
+<p>Reimplemented in <a class="el" href="class_executable.html#a076fe5621405c05bc0835866a32a2b0d">Executable</a>, <a class="el" href="class_file_view.html#a0cbe4cf4efb205092c64c993ce4dc3cb">FileView</a>, and <a class="el" href="class_file_buffer.html#ae1b0afb493c07daf35cdf4e7da5cbc45">FileBuffer</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8h_source.html#l00041">41</a> of file <a class="el" href="_abstract_byte_buffer_8h_source.html">AbstractByteBuffer.h</a>.</p>
 
@@ -935,7 +972,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00208">208</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00210">210</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -978,7 +1015,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_byte_buffer.html#ab92692d610d9138a850e0cd04bef69d2">ByteBuffer</a>, <a class="el" href="class_executable.html#ab87eef44bb2ba2cdd64f830d7f067d31">Executable</a>, <a class="el" href="class_file_buffer.html#ac0170f40d7df0b65b416937fe46f066e">FileBuffer</a>, and <a class="el" href="class_mapped_exe.html#a48c66e1ace578bb506e5beb7f1b661cc">MappedExe</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8h_source.html#l00068">68</a> of file <a class="el" href="_abstract_byte_buffer_8h_source.html">AbstractByteBuffer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8h_source.html#l00072">72</a> of file <a class="el" href="_abstract_byte_buffer_8h_source.html">AbstractByteBuffer.h</a>.</p>
 
 </div>
 </div>
@@ -1034,7 +1071,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00105">105</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00107">107</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1081,17 +1118,18 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00310">310</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00327">327</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_abstract_byte_buffer_a5e4be1e74690ad6517c3d19ed946b857_cgraph.png" border="0" usemap="#aclass_abstract_byte_buffer_a5e4be1e74690ad6517c3d19ed946b857_cgraph" alt=""/></div>
 <map name="aclass_abstract_byte_buffer_a5e4be1e74690ad6517c3d19ed946b857_cgraph" id="aclass_abstract_byte_buffer_a5e4be1e74690ad6517c3d19ed946b857_cgraph">
-<area shape="rect" title=" " alt="" coords="5,27,136,67"/>
-<area shape="rect" href="namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="194,5,305,31"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="184,55,315,95"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="363,23,493,63"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="363,87,493,127"/>
+<area shape="rect" title=" " alt="" coords="5,47,136,87"/>
+<area shape="rect" href="_abstract_byte_buffer_8cpp.html#ac3cd053e69301cf6e8ca7e6b0ca382f2" title=" " alt="" coords="195,5,303,31"/>
+<area shape="rect" href="namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="194,55,305,80"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="184,105,315,145"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="363,73,493,113"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="363,137,493,177"/>
 </map>
 </div>
 
@@ -1123,7 +1161,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00133">133</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00135">135</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1135,6 +1173,101 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="541,5,672,45"/>
 <area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="541,69,672,109"/>
 <area shape="rect" href="class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="363,69,493,109"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a39e77f97d0d667575ef574cc68255ae6" name="a39e77f97d0d667575ef574cc68255ae6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39e77f97d0d667575ef574cc68255ae6">&#9670;&#160;</a></span>setTextValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool AbstractByteBuffer::setTextValue </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>textPtr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>newText</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>fieldLimitLen</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00362">362</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_abstract_byte_buffer_a39e77f97d0d667575ef574cc68255ae6_cgraph.png" border="0" usemap="#aclass_abstract_byte_buffer_a39e77f97d0d667575ef574cc68255ae6_cgraph" alt=""/></div>
+<map name="aclass_abstract_byte_buffer_a39e77f97d0d667575ef574cc68255ae6_cgraph" id="aclass_abstract_byte_buffer_a39e77f97d0d667575ef574cc68255ae6_cgraph">
+<area shape="rect" title=" " alt="" coords="5,37,136,77"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="184,5,315,45"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="184,69,315,109"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="363,5,493,45"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="363,69,493,109"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a74943c97716eb8c33448a883f384f64c" name="a74943c97716eb8c33448a883f384f64c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74943c97716eb8c33448a883f384f64c">&#9670;&#160;</a></span>substFragmentByFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> AbstractByteBuffer::substFragmentByFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a>&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td>
+          <td class="paramname"><em>contentSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QFile &amp;&#160;</td>
+          <td class="paramname"><em>fIn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_abstract_byte_buffer_8cpp_source.html#l00395">395</a> of file <a class="el" href="_abstract_byte_buffer_8cpp_source.html">AbstractByteBuffer.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_abstract_byte_buffer_a74943c97716eb8c33448a883f384f64c_cgraph.png" border="0" usemap="#aclass_abstract_byte_buffer_a74943c97716eb8c33448a883f384f64c_cgraph" alt=""/></div>
+<map name="aclass_abstract_byte_buffer_a74943c97716eb8c33448a883f384f64c_cgraph" id="aclass_abstract_byte_buffer_a74943c97716eb8c33448a883f384f64c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,37,156,77"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="204,37,335,77"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="383,5,513,45"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="383,69,513,109"/>
 </map>
 </div>
 
