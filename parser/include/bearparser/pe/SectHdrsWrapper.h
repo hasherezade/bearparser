@@ -37,8 +37,11 @@ public:
     SectionHdrWrapper(PEFile *pe, size_t sectionNumber)
         : PENodeWrapper(pe), sectNum(sectionNumber), name(NULL), header(NULL) { wrap(); }
         
-    ~SectionHdrWrapper() { delete []name; }
-    
+    ~SectionHdrWrapper()
+    { 
+        if (name) delete []name;
+    }
+
     bool wrap();
 
     /* full structure boundaries */

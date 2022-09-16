@@ -83,8 +83,6 @@ void* SectionHdrWrapper::getPtr()
     if (header != NULL) {
         return (void*) this->header;
     }
-    //validate it above, not here...
-    //if (this->sectNum >= m_PE->hdrSectionsNum()) return NULL;
 
     offset_t firstSecOffset = m_PE->secHdrsOffset();
     offset_t secOffset = firstSecOffset + (this->sectNum * sizeof(IMAGE_SECTION_HEADER));
@@ -105,15 +103,12 @@ bool SectionHdrWrapper::reloadName()
         }
     }
     const size_t BUF_LEN = SECNAME_LEN + 2;
+    if (!this->name) {
+        this->name = new char[BUF_LEN];
+    }
+    memset(this->name, 0, BUF_LEN);
+    snprintf(this->name, BUF_LEN, "%.8s", (char*) header->Name);
     
-    char *buf = new char[BUF_LEN];
-    memset(buf, 0, BUF_LEN);
-    snprintf(buf, BUF_LEN, "%.8s", (char*) header->Name);
-    
-    //delete the previous pointer...
-    delete []this->name;
-    //...and set the new:
-    this->name = buf;
 	this->mappedName = this->name;
     return true;
 }
