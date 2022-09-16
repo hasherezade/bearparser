@@ -1,13 +1,19 @@
 #pragma once
 
 #include "PENodeWrapper.h"
-
+#include <vector>
+#include <map>
 
 class SectionHdrWrapper : public PENodeWrapper
 {
 public:
-
     static const size_t SECNAME_LEN;
+
+    static std::vector<DWORD> splitCharacteristics(DWORD characteristics);
+    static QString getSecHdrAccessRightsDesc(DWORD characteristics);
+
+    static void initSecCharacter(std::map<DWORD, QString> &secHdrCharact);
+    static QString translateCharacteristics(DWORD charact);
 
     /* fields :*/
     enum SecFieldId {
@@ -90,6 +96,7 @@ protected:
     size_t sectNum;
 
 private:
+    static std::map<DWORD, QString> s_secHdrCharact;
     IMAGE_SECTION_HEADER *header;
 
 friend class PEFile;

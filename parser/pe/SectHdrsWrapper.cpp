@@ -8,6 +8,63 @@ const size_t SectionHdrWrapper::SECNAME_LEN = 8;
 size_t SectHdrsWrapper::SECT_COUNT_MAX = 0x2000;
 size_t SectHdrsWrapper::SECT_INVALID_INDEX = SIZE_MAX;
 
+std::map<DWORD, QString> SectionHdrWrapper::s_secHdrCharact;
+
+QString SectionHdrWrapper::getSecHdrAccessRightsDesc(DWORD characteristics)
+{
+    char rights[] = "---";
+
+    if (characteristics & SCN_MEM_READ)
+        rights[0] = 'r';
+    if (characteristics & SCN_MEM_WRITE)
+        rights[1] = 'w';
+    if (characteristics & SCN_MEM_EXECUTE)
+        rights[2] = 'x';
+    return rights;
+}
+
+void SectionHdrWrapper::initSecCharacter(static std::map<DWORD, QString> &secHdrCharact)
+{
+    secHdrCharact[SCN_MEM_READ] = "readable";
+    secHdrCharact[SCN_MEM_WRITE] = "writeable";
+    secHdrCharact[SCN_MEM_EXECUTE] = "executable";
+
+    secHdrCharact[SCN_LNK_NRELOC_OVFL] = "contains extended relocations";
+    secHdrCharact[SCN_MEM_DISCARDABLE] = "discardable";
+    secHdrCharact[SCN_MEM_NOT_CACHED] = "not cachable";
+    secHdrCharact[SCN_MEM_NOT_PAGED] = "pageable";
+    secHdrCharact[SCN_MEM_SHARED] = "shareable";
+    secHdrCharact[SCN_CNT_CODE] = "code";
+    secHdrCharact[SCN_CNT_INITIALIZED_DATA] = "initialized data";
+    secHdrCharact[SCN_CNT_UNINITIALIZED_DATA] = "uninitialized data";
+}
+
+std::vector<DWORD> SectionHdrWrapper::splitCharacteristics(DWORD charact)
+{
+    if (s_secHdrCharact.size() == 0) {
+        initSecCharacter(s_secHdrCharact);
+    }
+    std::vector<DWORD> chSet;
+    std::map<DWORD, QString>::iterator iter;
+    for (iter = s_secHdrCharact.begin(); iter != s_secHdrCharact.end(); iter++) {
+        if (charact & iter->first) {
+            chSet.push_back(iter->first);
+        }
+    }
+    return chSet;
+}
+
+QString SectionHdrWrapper::translateCharacteristics(DWORD charact)
+{
+    if (s_secHdrCharact.size() == 0) {
+        initSecCharacter(s_secHdrCharact);
+    }
+
+    if (s_secHdrCharact.find(charact) == s_secHdrCharact.end()) return "";
+    return s_secHdrCharact[charact];
+}
+
+//----
 
 bool SectionHdrWrapper::wrap()
 {
