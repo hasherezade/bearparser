@@ -108,8 +108,7 @@ bool SectionHdrWrapper::reloadName()
     }
     memset(this->name, 0, BUF_LEN);
     snprintf(this->name, BUF_LEN, "%.8s", (char*) header->Name);
-    
-	this->mappedName = this->name;
+    this->mappedName = this->name;
     return true;
 }
 

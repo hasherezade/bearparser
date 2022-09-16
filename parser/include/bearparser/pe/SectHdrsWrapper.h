@@ -80,7 +80,7 @@ public:
 
     bool reloadName();
 
-	QString mappedName;
+    QString mappedName;
 
 protected:
     SectionHdrWrapper(PEFile *pe, IMAGE_SECTION_HEADER *v_header) //standalone entry
