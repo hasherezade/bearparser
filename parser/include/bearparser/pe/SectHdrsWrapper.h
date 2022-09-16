@@ -39,7 +39,9 @@ public:
         
     ~SectionHdrWrapper()
     { 
-        if (name) delete []name;
+        if (name) {
+            ::free(name);
+        }
     }
 
     bool wrap();

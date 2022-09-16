@@ -104,7 +104,7 @@ bool SectionHdrWrapper::reloadName()
     }
     const size_t BUF_LEN = SECNAME_LEN + 2;
     if (!this->name) {
-        this->name = new char[BUF_LEN];
+        this->name = (char*)::calloc(BUF_LEN, 1);
     }
     memset(this->name, 0, BUF_LEN);
     snprintf(this->name, BUF_LEN, "%.8s", (char*) header->Name);
