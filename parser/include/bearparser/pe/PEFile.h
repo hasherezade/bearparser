@@ -136,7 +136,7 @@ public:
 
     SectionHdrWrapper* getLastSection();
     bool canAddNewSection();
-    SectionHdrWrapper* addNewSection(QString name, bufsize_t size);
+    SectionHdrWrapper* addNewSection(QString name, bufsize_t size, bufsize_t v_size=0);
     SectionHdrWrapper* extendLastSection(bufsize_t addedSize);
     bool unbindImports();
 

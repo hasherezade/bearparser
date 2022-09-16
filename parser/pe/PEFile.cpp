@@ -442,16 +442,17 @@ bool PEFile::canAddNewSection()
 }
 
 
-SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
+SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size, bufsize_t v_size)
 {
     if (canAddNewSection() == false) return NULL;
 
     ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
+    if (!v_size) v_size = size;
 
     bufsize_t roundedRawEnd = buf_util::roundupToUnit(getMappedSize(Executable::RAW), getAlignment(Executable::RAW));
     bufsize_t roundedVirtualEnd = buf_util::roundupToUnit(getMappedSize(Executable::RVA), getAlignment(Executable::RVA));
     bufsize_t newSize = roundedRawEnd + size;
-    bufsize_t newVirtualSize = roundedVirtualEnd + size;
+    bufsize_t newVirtualSize = roundedVirtualEnd + v_size;
 
     if (setVirtualSize(newVirtualSize) == false) {
         Logger::append(Logger::D_ERROR, "Failed to change virtual size");
@@ -482,7 +483,7 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
     secHdr.PointerToRawData = static_cast<DWORD>(roundedRawEnd);
     secHdr.VirtualAddress = static_cast<DWORD>(roundedVirtualEnd);
     secHdr.SizeOfRawData = size;
-    secHdr.Misc.VirtualSize = size;
+    secHdr.Misc.VirtualSize = v_size;
 
     SectionHdrWrapper wr(this, &secHdr);
     SectionHdrWrapper* secHdrWr = dynamic_cast<SectionHdrWrapper*>(sec->addEntry(&wr));
