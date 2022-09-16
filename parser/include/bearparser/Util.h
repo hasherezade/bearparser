@@ -42,7 +42,20 @@ namespace pe_util {
     size_t forwarderNameLen(const char *ptr, size_t max_len);
 
     void hexdump(BYTE *buf, size_t bufSize, size_t pad);
-    inline uint64_t roundup(uint64_t value, uint64_t unit) { return unit == 0 ? 0 : ((value + unit - 1) / unit) * unit; }
+    
+    inline size_t unitsCount(uint64_t value, uint64_t unit)
+    {
+        if (unit == 0) return 0;
+        size_t units = value / unit;
+        if (value % unit) units++;
+        return units;
+    }
+
+    inline uint64_t roundup(uint64_t value, uint64_t unit)
+    {
+        const size_t units = unitsCount(value, unit);
+        return units * unit;
+    }
 
     bool isSpaceClear(void* ptr, uint64_t size);
     bool isHexChar(char c);

@@ -1,4 +1,5 @@
 #include "pe/PEFile.h"
+#include "FileBuffer.h"
 
 bool PEFileBuilder::signatureMatches(AbstractByteBuffer *buf)
 {
@@ -35,7 +36,7 @@ Executable* PEFileBuilder::build(AbstractByteBuffer *buf)
     try {
         exe = new PEFile(buf);
     } catch (ExeException &e) {
-        //
+        exe = NULL;
     }
     return exe;
 }
@@ -100,13 +101,18 @@ void PEFile::initDirEntries()
 
 void PEFile::wrap()
 {
-    clearWrappers();
     PEFile::wrap(this->buf);
 }
 
 void  PEFile::wrap(AbstractByteBuffer *v_buf)
 {
+    //erase all existing wrappers:
+    clearWrappers();
+
+    // rewrao the core:
     core.wrap(v_buf);
+
+    //regenerate the wrappers:
     this->dosHdrWrapper = new DosHdrWrapper(this);
     this->wrappers[WR_DOS_HDR] = this->dosHdrWrapper;
 
@@ -210,7 +216,7 @@ pe::RICH_SIGNATURE* PEFile::getRichHeaderSign()
 
 offset_t PEFile::getMinSecRVA()
 {
-    if (this->getSectionsCount() < 1) {
+    if (!this->getSectionsCount()) {
         return INVALID_ADDR;
     }
     SectionHdrWrapper* sec = this->getSecHdr(0);
@@ -234,6 +240,8 @@ IMAGE_DATA_DIRECTORY* PEFile::getDataDirectory()
 
 bufsize_t PEFile::getMappedSize(Executable::addr_type aType)
 {
+    if (aType == Executable::NOT_ADDR) return 0;
+
     if (aType == Executable::RAW) {
         return this->getContentSize();
     }
@@ -295,7 +303,7 @@ bool PEFile::setHdrSectionsNum(size_t newNum)
 bool PEFile::setVirtualSize(bufsize_t newSize)
 {
     uint64_t size = newSize;
-    bool canSet = optHdr->setNumValue(OptHdrWrapper::IMAGE_SIZE, 0, size);
+    bool canSet = optHdr->setNumValue(OptHdrWrapper::IMAGE_SIZE, size);
     if (canSet == false) {
         Logger::append(Logger::D_ERROR, "Can not change OptHdr!");
         return false;
@@ -359,9 +367,11 @@ offset_t PEFile::rvaToRaw(offset_t rva)
     if (rva >= this->getMappedSize(Executable::RAW)) {
         return INVALID_ADDR;
     }
-    if (rva >= this->hdrsSize()) {
-        // the address is in the cave between the headers and the first section: cannot be mapped
-        return INVALID_ADDR;
+    if (this->getSectionsCount()) { // do this check only if sections count is non-zero
+        if (rva >= this->hdrsSize()) {
+            // the address is in the cave between the headers and the first section: cannot be mapped
+            return INVALID_ADDR;
+        }
     }
     // at this point we are sure that the address is within the raw size:
     return rva;
@@ -380,13 +390,7 @@ BufferView* PEFile::createSectionView(size_t secId)
         Logger::append(Logger::D_WARNING, "No such section");
         return NULL;
     }
-    Executable::addr_type aType = Executable::RAW;
-    offset_t start = sec->getContentOffset(aType, true);
-    bufsize_t size = sec->getContentSize(aType, true);
-    if (start == INVALID_ADDR || size == 0) return NULL;
-
-    BufferView *secView = new BufferView(this, start, size);
-    return secView;
+    return _createSectionView(sec);
 }
 
 bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addrType)
@@ -405,7 +409,7 @@ bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::
         return false;
     }
     Executable::addr_type dataDirAddrType = ddirWrapper->containsAddrType(id, DataDirWrapper::ADDRESS);
-    offset_t dataDirAddr = this-> convertAddr(newOffset, addrType, dataDirAddrType);
+    offset_t dataDirAddr = this->convertAddr(newOffset, addrType, dataDirAddrType);
     if (dataDirAddr == INVALID_ADDR) {
         if (allowExceptions) throw ExeException("Invalid new offset");
         return false;
@@ -438,16 +442,17 @@ bool PEFile::canAddNewSection()
 }
 
 
-SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
+SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size, bufsize_t v_size)
 {
     if (canAddNewSection() == false) return NULL;
 
     ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
+    if (!v_size) v_size = size;
 
     bufsize_t roundedRawEnd = buf_util::roundupToUnit(getMappedSize(Executable::RAW), getAlignment(Executable::RAW));
     bufsize_t roundedVirtualEnd = buf_util::roundupToUnit(getMappedSize(Executable::RVA), getAlignment(Executable::RVA));
     bufsize_t newSize = roundedRawEnd + size;
-    bufsize_t newVirtualSize = roundedVirtualEnd + size;
+    bufsize_t newVirtualSize = roundedVirtualEnd + v_size;
 
     if (setVirtualSize(newVirtualSize) == false) {
         Logger::append(Logger::D_ERROR, "Failed to change virtual size");
@@ -478,7 +483,7 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size)
     secHdr.PointerToRawData = static_cast<DWORD>(roundedRawEnd);
     secHdr.VirtualAddress = static_cast<DWORD>(roundedVirtualEnd);
     secHdr.SizeOfRawData = size;
-    secHdr.Misc.VirtualSize = size;
+    secHdr.Misc.VirtualSize = v_size;
 
     SectionHdrWrapper wr(this, &secHdr);
     SectionHdrWrapper* secHdrWr = dynamic_cast<SectionHdrWrapper*>(sec->addEntry(&wr));
@@ -494,26 +499,39 @@ SectionHdrWrapper* PEFile::getLastSection()
 
 offset_t PEFile::getLastMapped(Executable::addr_type aType)
 {
-    offset_t lastRaw = 0;
+    offset_t lastMapped = 0;
 
     /* check sections bounds */
-    const size_t counter = this->getSectionsCount(true);
-    for (size_t i = 0; i < counter; i++) {
+    const size_t secCounter = this->getSectionsCount(true);
+    if (!secCounter) {
+        // if PE file has no sections, full file will be mapped
+        return getMappedSize(aType);
+    }
+    for (size_t i = 0; i < secCounter; i++) {
         SectionHdrWrapper *sec = this->getSecHdr(i);
         if (!sec) continue;
 
-        offset_t secLastRaw = sec->getContentOffset(Executable::RAW, false) + sec->getMappedRawSize();
-        if (secLastRaw > lastRaw) lastRaw = secLastRaw;
+        offset_t secLastMapped= sec->getContentOffset(aType, true);
+        if (secLastMapped == INVALID_ADDR) continue;
+
+        const size_t size = (aType == Executable::RAW) ? sec->getMappedRawSize() : sec->getMappedVirtualSize();
+        secLastMapped += size;
+        if (secLastMapped > lastMapped) {
+            lastMapped = secLastMapped;
+        }
     }
 
     /* check header bounds */
     /* section headers: */
-    if (lastRaw < this->secHdrsEndOffset()) lastRaw = this->secHdrsEndOffset();
-
+    if (lastMapped < this->secHdrsEndOffset()) {
+        lastMapped = this->secHdrsEndOffset();
+    }
     /* NT headers: */
     int ntHeadersEndOffset = this->core.peSignatureOffset() + this->core.hdrsSize();
-    if (lastRaw < ntHeadersEndOffset) lastRaw = ntHeadersEndOffset;
-    return lastRaw;
+    if (lastMapped < ntHeadersEndOffset) {
+        lastMapped = ntHeadersEndOffset;
+    }
+    return lastMapped;
 }
 
 SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
@@ -570,7 +588,33 @@ bool PEFile::unbindImports()
     return isOk;
 }
 
+bool PEFile::dumpSection(SectionHdrWrapper *sec, QString fileName)
+{
+    if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+        return false; //not my section
+    }
+    BufferView *secView = this->_createSectionView(sec);
+    if (!secView) return false;
+
+    bufsize_t dumpedSize = FileBuffer::dump(fileName, *secView, false);
+    delete secView;
+
+    return dumpedSize ? true : false;
+}
+
 //protected:
+
+BufferView* PEFile::_createSectionView(SectionHdrWrapper *sec)
+{
+    Executable::addr_type aType = Executable::RAW;
+    offset_t start = sec->getContentOffset(aType, true);
+    bufsize_t size = sec->getContentSize(aType, true);
+    if (start == INVALID_ADDR || size == 0) {
+        return NULL;
+    }
+    return new BufferView(this, start, size);
+}
+
 size_t PEFile::getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType)
 {
     size_t initialSize = entrypoints.size();
@@ -581,7 +625,7 @@ size_t PEFile::getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::ad
     const size_t entriesCnt = exports->getEntriesCount();
     if (entriesCnt == 0) return 0;
 
-    for(int i = 0; i < entriesCnt; i++) {
+    for (int i = 0; i < entriesCnt; i++) {
         ExportEntryWrapper* entry = dynamic_cast<ExportEntryWrapper*>(exports->getEntryAt(i));
         if (!entry) continue;
 
@@ -594,9 +638,7 @@ size_t PEFile::getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::ad
         if (offset == INVALID_ADDR) {
             continue;
         }
-            
         entrypoints.insert(offset, entry->getName());
     }
     return entrypoints.size() - initialSize;
 }
-    

@@ -67,7 +67,7 @@ public:
     virtual offset_t rvaToRaw(offset_t rva);
 
     virtual bufsize_t getMappedSize(Executable::addr_type aType);
-    virtual bufsize_t getAlignment(Executable::addr_type aType){ return core.getAlignment(aType); }
+    virtual bufsize_t getAlignment(Executable::addr_type aType) const { return core.getAlignment(aType); }
     virtual offset_t getImageBase() { return core.getImageBase(); }
     virtual offset_t getEntryPoint(Executable::addr_type addrType = Executable::RVA); // returns INVALID_ADDR if failed
 
@@ -111,9 +111,9 @@ public:
         return (sects) ? sects->getSecHdr(index) : NULL;
     }
 
-    SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool roundup, bool verbose = false)
+    SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)
     {
-        return (sects == NULL) ? NULL : sects->getSecHdrAtOffset(offset, aType, roundup, verbose);
+        return (sects == NULL) ? NULL : sects->getSecHdrAtOffset(offset, aType, recalculate, verbose);
     }
 
     size_t getSecIndex(SectionHdrWrapper *sec) const
@@ -125,7 +125,7 @@ public:
     {
         return (this->album == NULL) ? NULL : album->getResourcesOfType(typeId);
     }
-    
+
     DataDirEntryWrapper* getDataDirEntry(pe::dir_entry eType);
 
     BufferView* createSectionView(size_t secNum);
@@ -136,7 +136,7 @@ public:
 
     SectionHdrWrapper* getLastSection();
     bool canAddNewSection();
-    SectionHdrWrapper* addNewSection(QString name, bufsize_t size);
+    SectionHdrWrapper* addNewSection(QString name, bufsize_t size, bufsize_t v_size=0);
     SectionHdrWrapper* extendLastSection(bufsize_t addedSize);
     bool unbindImports();
 
@@ -176,9 +176,79 @@ public:
         return secHdrsOffset() + secHdrSize;
     }
 
+    /* wrappers:
+    */
+    bool hasDirectory(pe::dir_entry dirNum)
+    {
+        return this->getDataDirEntry(dirNum) ? true : false;
+    }
+
+    bufsize_t getFileAlignment() const
+    {
+        return this->getAlignment(Executable::RAW);
+    }
+
+    bufsize_t getSectionAlignment() const
+    {
+        return this->getAlignment(Executable::RVA);
+    }
+
+    BYTE* getSecContent(SectionHdrWrapper *sec)
+    {
+        if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+            return NULL; //not my section
+        }
+        const size_t buf_size = sec->getContentSize(Executable::RAW, true);
+        if (!buf_size) return NULL;
+
+        offset_t start = sec->getContentOffset(Executable::RAW, true);
+        BYTE *ptr = this->getContentAt(start, buf_size);
+        return ptr;
+    }
+
+    void setImageSize(size_t newSize)
+    {
+        this->setVirtualSize(newSize);
+    }
+
+    SectionHdrWrapper* getEntrySection()
+    {
+        offset_t ep = getEntryPoint(Executable::RVA);
+        return this->getSecHdrAtOffset(ep, Executable::RVA, true, false);
+    }
+
+    bool clearContent(SectionHdrWrapper *sec)
+    {
+        if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+            return false; //not my section
+        }
+        BufferView *secView = this->_createSectionView(sec);
+        if (!secView) return false;
+
+        bool isOk = secView->fillContent(0);
+        delete secView;
+        return isOk;
+    }
+
+    bool dumpSection(SectionHdrWrapper *sec, QString fileName);
+
+    bool canResize(bufsize_t newSize)
+    {
+        bufsize_t currentSize = (bufsize_t)this->getRawSize();
+        if (newSize > currentSize) {
+            return true;
+        }
+        bufsize_t hEnd = bufsize_t(this->peNtHdrOffset()) + this->peNtHeadersSize();
+        if (newSize < hEnd) {
+            return false; // the resize will harm headers!
+        }
+        return true;
+    }
+
 protected:
+    BufferView* _createSectionView(SectionHdrWrapper *sec);
     size_t getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA);
-    
+
     virtual void clearWrappers();
     virtual void wrap(AbstractByteBuffer *v_buf);
 
@@ -200,5 +270,4 @@ protected:
 
 friend class SectHdrsWrapper;
 };
-
 

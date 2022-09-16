@@ -59,7 +59,7 @@ ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize) //throws 
     char *content = (char*) bufferedFile->getContent();
     bufsize_t contentSize = bufferedFile->getContentSize();
 
-    if (content == NULL) throw FileBufferException("Cannot allocate buffer");
+    if (!content || !contentSize) throw FileBufferException("Cannot allocate buffer");
     //printf("Reading...%lx , BUFSIZE_MAX = %lx\n", allocSize, BUFSIZE_MAX);
 
     bufsize_t readSize = 0;
@@ -85,25 +85,23 @@ ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize) //throws 
 bufsize_t AbstractFileBuffer::getReadableSize(QFile &fIn)
 {
     qint64 fileSize = fIn.size();
-    bufsize_t size = static_cast<bufsize_t> (fileSize);
-
-    if (size > FILE_MAXSIZE) {
-        size = FILE_MAXSIZE;
+    if (fileSize > qint64(FILE_MAXSIZE)) {
+        fileSize = qint64(FILE_MAXSIZE);
     }
-    return size;
+    return static_cast<bufsize_t>(fileSize);
 }
 
-bufsize_t AbstractFileBuffer::getReadableSize(QString &path)
+bufsize_t AbstractFileBuffer::getReadableSize(const QString &path)
 {
-    if (path.length() == 0) return 0;
+    if (!path.length()) return 0;
     QFile fIn(path);
-    if (fIn.open(QIODevice::ReadOnly) == false) return 0;
-    bufsize_t size = getReadableSize(fIn);
+    if (!fIn.open(QIODevice::ReadOnly)) return 0;
+    const bufsize_t size = getReadableSize(fIn);
     fIn.close();
     return size;
 }
 
-bufsize_t AbstractFileBuffer::dump(QString path, AbstractByteBuffer &bBuf, bool allowExceptions)
+bufsize_t AbstractFileBuffer::dump(const QString &path, AbstractByteBuffer &bBuf, bool allowExceptions)
 {
     BYTE* buf = bBuf.getContent();
     bufsize_t bufSize  = bBuf.getContentSize();

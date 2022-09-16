@@ -70,12 +70,14 @@ BYTE* AbstractByteBuffer::getContentAt(offset_t offset, bufsize_t size, bool all
     if (buf == NULL) return NULL;
 
     if (offset >= fileSize ) {
-        if (allowExceptions) throw BufferException("Too far offset requested!");
+        if (allowExceptions) throw BufferException("Too far offset requested! Buffer size: "
+            + QString::number(fileSize) + " vs reguested Offset: 0x" + QString::number(offset, 16));
         return NULL;
     }
-
-    if (offset + size > fileSize) {
-        if (allowExceptions) throw BufferException("Too big size requested!");
+    const offset_t endOffset = offset + size;
+    if (endOffset > fileSize) {
+        if (allowExceptions) throw BufferException("Too big size requested! Buffer size: "
+            + QString::number(fileSize) + " vs end of the requested area: 0x" + QString::number(endOffset, 16));
         return NULL;
     }
     BYTE *cntnt = buf + offset;
@@ -285,6 +287,13 @@ bool AbstractByteBuffer::intersectsBlock(offset_t rawOffset, bufsize_t size)
     return false;
 }
 
+template <typename INT_TYPE>
+INT_TYPE _getNumValue(void* ptr)
+{
+    INT_TYPE val = *((INT_TYPE*)ptr);
+    return val;
+}
+
 uint64_t AbstractByteBuffer::getNumValue(offset_t offset, bufsize_t size, bool* isOk)
 {
     if (isOk) (*isOk) = false;
@@ -295,16 +304,24 @@ uint64_t AbstractByteBuffer::getNumValue(offset_t offset, bufsize_t size, bool* 
         return (-1);
     }
     uint64_t val = (-1);
-
-    if (size == sizeof(uint8_t)) val = *((uint8_t*) ptr);
-    else if (size == sizeof(uint16_t)) val = *((uint16_t*) ptr);
-    else if (size == sizeof(uint32_t)) val = *((uint32_t*) ptr);
-    else if (size == sizeof(uint64_t)) val = *((uint64_t*) ptr);
+    if (size == sizeof(uint8_t)) val = _getNumValue<uint8_t>(ptr);
+    else if (size == sizeof(uint16_t)) val = _getNumValue<uint16_t>(ptr);
+    else if (size == sizeof(uint32_t)) val = _getNumValue<uint32_t>(ptr);
+    else if (size == sizeof(uint64_t)) val = _getNumValue<uint64_t>(ptr);
     else {
         return (-1);
     }
     if (isOk) (*isOk) = true;
     return val;
+}
+
+template <typename INT_TYPE>
+bool _setNumValue(void* ptr, INT_TYPE nVal)
+{
+    INT_TYPE* valPtr = (INT_TYPE*)ptr;
+    if ((*valPtr) == nVal) return false;
+    (*valPtr) = nVal;
+    return true;
 }
 
 bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t newVal)
@@ -321,33 +338,78 @@ bool AbstractByteBuffer::setNumValue(offset_t offset, bufsize_t size, uint64_t n
     }
 
     if (size == sizeof(uint8_t)) {
-        uint8_t nVal = newVal;
-        uint8_t* valPtr = (uint8_t*) ptr;
-        if ((*valPtr) == nVal) return false;
-        (*valPtr) = nVal;
+        if (!_setNumValue(ptr, uint8_t(newVal)))
+            return false;
     }
     else if (size == sizeof(uint16_t)) {
-        uint16_t nVal = newVal;
-        uint16_t* valPtr = (uint16_t*) ptr;
-        if ((*valPtr) == nVal) return false;
-        (*valPtr) = nVal;
+        if (!_setNumValue(ptr, uint16_t(newVal)))
+            return false;
     }
     else if (size == sizeof(uint32_t)) {
-        uint32_t nVal = newVal;
-        uint32_t* valPtr = (uint32_t*) ptr;
-        if ((*valPtr) == nVal) return false;
-        (*valPtr) = nVal;
+        if (!_setNumValue(ptr, uint32_t(newVal)))
+            return false;
     }
     else if (size == sizeof(uint64_t)) {
-        uint64_t nVal = newVal;
-        uint64_t* valPtr = (uint64_t*) ptr;
-        if ((*valPtr) == nVal) return false;
-        (*valPtr) = nVal;
+        if (!_setNumValue(ptr, uint64_t(newVal)))
+            return false;
     } else {
         Logger::append(Logger::D_ERROR, "Wrong size!");
         return false;
     }
     return true;
+}
+
+bool AbstractByteBuffer::setTextValue(char* textPtr, std::string newText, size_t fieldLimitLen)
+{
+    if (!textPtr) return false;
+
+    size_t newLen = newText.length() + 1;
+    offset_t textOffset = this->getOffset(textPtr);
+    if (textOffset == INVALID_ADDR) {
+        return false;
+    }
+    //check against the buffer overflow
+    if (!this->getContentAt(textOffset, newLen)) {
+        return false;
+    }
+    //if both strings are same, do not overwrite
+    const char* newTextC = newText.c_str();
+    if (!strcmp(newTextC, textPtr)) { //TODO: use a safe comparison
+        return false;
+    }
+    //if the field size is set:
+    if (fieldLimitLen != 0) {
+        if (this->getContentAt(textOffset, fieldLimitLen)) {
+            //clear the previous field
+            memset(textPtr, 0, fieldLimitLen);
+            if (newLen > fieldLimitLen) {
+                newLen = fieldLimitLen;
+            }
+        }
+    }
+    memcpy(textPtr, newTextC, newLen);
+    textPtr[newLen] = '\0';
+    return true;
+}
+
+offset_t AbstractByteBuffer::substFragmentByFile(offset_t offset, bufsize_t contentSize, QFile &fIn)
+{
+    BYTE *contentPart = this->getContentAt(offset, contentSize);
+    if (!contentPart) return 0; //invalid offset/size
+
+    if (!fIn.isReadable()) return 0;
+
+    size_t toLoad = fIn.size() < contentSize ? fIn.size() : contentSize;
+    BYTE *fBuf = (BYTE*)::calloc(toLoad, 1);
+    if (!fBuf) {
+        return 0;
+    }
+    size_t loaded = fIn.read((char*)fBuf, toLoad);
+    memset(contentPart, 0, contentSize);
+    memcpy(contentPart, fBuf, loaded);
+    free(fBuf); fBuf = NULL;
+
+    return loaded;
 }
 
 //--------------------------------------------

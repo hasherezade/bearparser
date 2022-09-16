@@ -13,35 +13,37 @@ void PECore::reset()
 bool PECore::wrap(AbstractByteBuffer *v_buf)
 {
     buf = v_buf;
-    bool allowExceptions = true;
+    const bool allowExceptionsFromBuffer = false;
+
     // reset all:
     reset();
 
     offset_t offset = 0;
-    this->dos = (IMAGE_DOS_HEADER*) buf->getContentAt(offset, sizeof(IMAGE_DOS_HEADER), allowExceptions);
-    if (dos == NULL) throw ExeException("Could not wrap PECore: invalid DOS Header!");
+    this->dos = (IMAGE_DOS_HEADER*) buf->getContentAt(offset, sizeof(IMAGE_DOS_HEADER), allowExceptionsFromBuffer);
+    if (!dos) throw ExeException("Could not wrap PECore: invalid DOS Header!");
 
     offset = dos->e_lfanew + sizeof(DWORD); //skip 'PE' signature
-    this->fHdr = (IMAGE_FILE_HEADER*) buf->getContentAt(offset, sizeof(IMAGE_FILE_HEADER), allowExceptions);
-    if (fHdr == NULL)  throw ExeException("Could not wrap PECore!");
+    this->fHdr = (IMAGE_FILE_HEADER*) buf->getContentAt(offset, sizeof(IMAGE_FILE_HEADER), allowExceptionsFromBuffer);
+    if (!fHdr)  throw ExeException("Could not wrap PECore!");
 
     offset = offset + sizeof(IMAGE_FILE_HEADER);
-    WORD *magic = (WORD*) buf->getContentAt(offset, sizeof(WORD), allowExceptions);
-    if (magic == NULL)  throw ExeException("Could not wrap PECore: invalid FileHeader");
+    WORD *magic = (WORD*) buf->getContentAt(offset, sizeof(WORD), allowExceptionsFromBuffer);
+    if (!magic)  throw ExeException("Could not wrap PECore: invalid FileHeader");
 
-    Executable::exe_bits mode = Executable::BITS_32;
-    if ((*magic) == pe::OH_NT64) {//32 = 0x10B) {
-        mode = Executable::BITS_64;
+    const Executable::exe_bits mode = ((*magic) == pe::OH_NT64) ? Executable::BITS_64 : Executable::BITS_32;
+    const size_t ntHdrSize = (mode == Executable::BITS_32) ? sizeof(IMAGE_OPTIONAL_HEADER32) : sizeof(IMAGE_OPTIONAL_HEADER64);
+    BYTE *ntHdrPtr = buf->getContentAt(offset, ntHdrSize, allowExceptionsFromBuffer);
+
+    if (ntHdrPtr) {
+        if (mode == Executable::BITS_32) {
+            this->opt32 = (IMAGE_OPTIONAL_HEADER32*)ntHdrPtr;
+        }
+        else if (mode == Executable::BITS_64) {
+            this->opt64 = (IMAGE_OPTIONAL_HEADER64*)ntHdrPtr;
+        }
     }
-
-    if (mode == Executable::BITS_32) {
-        this->opt32 = (IMAGE_OPTIONAL_HEADER32*) buf->getContentAt(offset, sizeof(IMAGE_OPTIONAL_HEADER32), allowExceptions);
-
-    } else if (mode == Executable::BITS_64) {
-        this->opt64 = (IMAGE_OPTIONAL_HEADER64*) buf->getContentAt(offset, sizeof(IMAGE_OPTIONAL_HEADER64), allowExceptions);
-    }
-    if ( this->opt32 == NULL && this->opt64 == NULL) {
-        throw ExeException("Could not wrap PECore : invalid OptionalHeader");
+    if (!this->opt32 && !this->opt64) {
+        throw ExeException("Could not wrap PECore: invalid OptionalHeader");
    }
    return true;
 }
@@ -99,7 +101,7 @@ offset_t PECore::secHdrsOffset() const
     return offset + size;
 }
 
-bufsize_t PECore::getAlignment(Executable::addr_type aType)
+bufsize_t PECore::getAlignment(Executable::addr_type aType) const
 {
     if (this->opt32) {
         if (aType == Executable::RAW) return opt32->FileAlignment;

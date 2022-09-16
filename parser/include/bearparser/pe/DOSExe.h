@@ -40,7 +40,7 @@ public:
         return moduleSize() - codeOffset();
     }
 
-    virtual bufsize_t getAlignment(Executable::addr_type aType) { return 0; } //TODO
+    virtual bufsize_t getAlignment(Executable::addr_type aType) const { return 0; } //TODO
     virtual offset_t getImageBase() { return m_dosHdr->e_cs; }
     virtual offset_t getEntryPoint(Executable::addr_type aType = Executable::RVA) { return codeOffset() + m_dosHdr->e_ip; }
 

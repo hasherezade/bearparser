@@ -96,12 +96,14 @@ ImportBaseFuncWrapper* ImportBaseDirWrapper::thunkToFunction(offset_t thunk)
     return func;
 }
 
-QString ImportBaseDirWrapper::thunkToFuncName(offset_t thunk)
+QString ImportBaseDirWrapper::thunkToFuncName(offset_t thunk, bool shortName)
 {
     ImportBaseFuncWrapper* func = thunkToFunction(thunk);
     if (func == NULL) return "";
-
-    return func->getShortName();
+    if (shortName) {
+        return func->getShortName();
+    }
+    return func->getName();
 }
 
 QString ImportBaseDirWrapper::thunkToLibName(offset_t thunk)

@@ -18,8 +18,8 @@ public:
     static ByteBuffer* read(QString &file, bufsize_t minBufSize); //throws exceptions
     static bufsize_t getReadableSize(QFile &fIn);
 
-    static bufsize_t getReadableSize(QString &path);
-    static bufsize_t dump(QString fileName, AbstractByteBuffer &buf, bool allowExceptions = false);
+    static bufsize_t getReadableSize(const QString &path);
+    static bufsize_t dump(const QString &fileName, AbstractByteBuffer &buf, bool allowExceptions = false);
     QString getFileName() { return this->fileName; }
 
 protected:
@@ -35,12 +35,14 @@ protected:
 class FileView : public AbstractByteBuffer, public AbstractFileBuffer
 {
 public:
+    static bufsize_t getMappableSize(QFile &fIn);
+
     FileView(QString &fileName, bufsize_t maxSize = FILE_MAXSIZE); //throws exceptions
     virtual ~FileView();
 
     virtual bufsize_t getContentSize() { return mappedSize; }
     virtual BYTE* getContent() { return mappedContent; }
-    bufsize_t getMappableSize(QFile &fIn);
+    bufsize_t getMappableSize() { return FileView::getMappableSize(fIn); }
     virtual bool isTruncated() { return fIn.size() > mappedSize; }
 
 protected:
@@ -69,9 +71,16 @@ public:
 
     virtual bufsize_t getContentSize() { return (m_Buf == NULL) ? 0 : m_Buf->getContentSize(); }
     virtual BYTE* getContent() { return (m_Buf == NULL) ? NULL : m_Buf->getContent(); }
-    uint64_t getFileSize() { return static_cast<uint64_t>(fileSize); }
+    offset_t getFileSize() { return static_cast<offset_t>(fileSize); }
     bool resize(bufsize_t newSize) { return m_Buf->resize(newSize); }
-    virtual bool isTruncated() { return fileSize > this->m_Buf->getContentSize(); }
+
+    virtual bool isResized() { return m_Buf ? m_Buf->isResized() : false; }
+
+    virtual bool isTruncated()
+    {
+        if (!m_Buf) return false;
+        return fileSize > this->m_Buf->getContentSize();
+    }
 
 protected:
     ByteBuffer* m_Buf;

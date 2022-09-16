@@ -3,10 +3,68 @@
 
 using namespace buf_util;
 
-const size_t SECNAME_LEN = 8;
+const size_t SectionHdrWrapper::SECNAME_LEN = 8;
+
 size_t SectHdrsWrapper::SECT_COUNT_MAX = 0x2000;
 size_t SectHdrsWrapper::SECT_INVALID_INDEX = SIZE_MAX;
 
+std::map<DWORD, QString> SectionHdrWrapper::s_secHdrCharact;
+
+QString SectionHdrWrapper::getSecHdrAccessRightsDesc(DWORD characteristics)
+{
+    char rights[] = "---";
+
+    if (characteristics & SCN_MEM_READ)
+        rights[0] = 'r';
+    if (characteristics & SCN_MEM_WRITE)
+        rights[1] = 'w';
+    if (characteristics & SCN_MEM_EXECUTE)
+        rights[2] = 'x';
+    return rights;
+}
+
+void SectionHdrWrapper::initSecCharacter(std::map<DWORD, QString> &secHdrCharact)
+{
+    secHdrCharact[SCN_MEM_READ] = "readable";
+    secHdrCharact[SCN_MEM_WRITE] = "writeable";
+    secHdrCharact[SCN_MEM_EXECUTE] = "executable";
+
+    secHdrCharact[SCN_LNK_NRELOC_OVFL] = "contains extended relocations";
+    secHdrCharact[SCN_MEM_DISCARDABLE] = "discardable";
+    secHdrCharact[SCN_MEM_NOT_CACHED] = "not cachable";
+    secHdrCharact[SCN_MEM_NOT_PAGED] = "pageable";
+    secHdrCharact[SCN_MEM_SHARED] = "shareable";
+    secHdrCharact[SCN_CNT_CODE] = "code";
+    secHdrCharact[SCN_CNT_INITIALIZED_DATA] = "initialized data";
+    secHdrCharact[SCN_CNT_UNINITIALIZED_DATA] = "uninitialized data";
+}
+
+std::vector<DWORD> SectionHdrWrapper::splitCharacteristics(DWORD charact)
+{
+    if (s_secHdrCharact.size() == 0) {
+        initSecCharacter(s_secHdrCharact);
+    }
+    std::vector<DWORD> chSet;
+    std::map<DWORD, QString>::iterator iter;
+    for (iter = s_secHdrCharact.begin(); iter != s_secHdrCharact.end(); iter++) {
+        if (charact & iter->first) {
+            chSet.push_back(iter->first);
+        }
+    }
+    return chSet;
+}
+
+QString SectionHdrWrapper::translateCharacteristics(DWORD charact)
+{
+    if (s_secHdrCharact.size() == 0) {
+        initSecCharacter(s_secHdrCharact);
+    }
+
+    if (s_secHdrCharact.find(charact) == s_secHdrCharact.end()) return "";
+    return s_secHdrCharact[charact];
+}
+
+//----
 
 bool SectionHdrWrapper::wrap()
 {
@@ -25,8 +83,6 @@ void* SectionHdrWrapper::getPtr()
     if (header != NULL) {
         return (void*) this->header;
     }
-    //validate it above, not here...
-    //if (this->sectNum >= m_PE->hdrSectionsNum()) return NULL;
 
     offset_t firstSecOffset = m_PE->secHdrsOffset();
     offset_t secOffset = firstSecOffset + (this->sectNum * sizeof(IMAGE_SECTION_HEADER));
@@ -47,15 +103,15 @@ bool SectionHdrWrapper::reloadName()
         }
     }
     const size_t BUF_LEN = SECNAME_LEN + 2;
-    
-    char *buf = new char[BUF_LEN];
-    memset(buf, 0, BUF_LEN);
-    snprintf(buf, BUF_LEN, "%.8s", (char*) header->Name);
-    
-    //delete the previous pointer...
-    delete []this->name;
-    //...and set the new:
-    this->name = buf;
+    if (!this->name) {
+        this->name = (char*)::calloc(BUF_LEN, 1);
+    }
+    memset(this->name, 0, BUF_LEN);
+    snprintf(this->name, BUF_LEN, "%.8s", (char*) header->Name);
+    this->mappedName = this->name;
+    if (this->mappedName.length() == 0) {
+        this->mappedName = "#" + QString::number(this->sectNum, 10);
+    }
     return true;
 }
 
@@ -155,21 +211,20 @@ offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType, bool u
     }
     if (aType == Executable::RAW) {
         const size_t peSize = m_PE->getMappedSize(aType);
-        const offset_t minAlign = m_PE->getAlignment(aType);
-        if (offset < minAlign || offset > peSize) {
+        if (offset > peSize) {
             offset = INVALID_ADDR;
         }
     }
     return offset;
 }
 
-offset_t SectionHdrWrapper::getContentEndOffset(Executable::addr_type addrType, bool roundup)
+offset_t SectionHdrWrapper::getContentEndOffset(Executable::addr_type addrType, bool recalculate)
 {
     const bool useMapped = true;
     offset_t startOffset = getContentOffset(addrType, useMapped);
     if (startOffset == INVALID_ADDR) return INVALID_ADDR;
 
-    offset_t endOffset = static_cast<offset_t>(getContentSize(addrType, roundup)) + startOffset;
+    offset_t endOffset = static_cast<offset_t>(getContentSize(addrType, recalculate)) + startOffset;
     return endOffset;
 }
 
@@ -214,11 +269,15 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
     
     //trim to the file size:
     if (secEnd > peSize) {
-        
         const bufsize_t trimmedSize = peSize - secOffset; // trim to the file size
-        const bufsize_t virtualSize = getContentDeclaredSize(Executable::RVA);
-
-        if (trimmedSize > virtualSize) {
+        bufsize_t virtualSize = getContentDeclaredSize(Executable::RVA);
+        if (virtualSize) {
+            bufsize_t unit = m_PE->getAlignment(Executable::RVA);
+            if (unit != 0) {
+                virtualSize = roundupToUnit(virtualSize, unit);
+            }
+        }
+        if ((virtualSize != 0) && (trimmedSize > virtualSize)) {
             return virtualSize;
         }
         return trimmedSize;
@@ -229,6 +288,8 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
 //VirtualSize that is really mapped
 bufsize_t SectionHdrWrapper::getMappedVirtualSize()
 {
+    if (!m_PE) return 0;
+
     const Executable::addr_type aType = Executable::RVA;
 
     const offset_t startOffset = getContentOffset(aType);
@@ -238,23 +299,28 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
 
     bufsize_t dVirtualSize = getContentDeclaredSize(aType);
     bufsize_t mRawSize = getMappedRawSize();
-    bufsize_t mVirtualSize = (dVirtualSize > mRawSize) ? dVirtualSize : mRawSize;
 
+    bufsize_t mVirtualSize = (dVirtualSize > mRawSize) ? dVirtualSize : mRawSize;
     bufsize_t unit = m_PE->getAlignment(aType);
-    if (unit == 0) {
-        return mRawSize; // do not roundup
+    if (unit) {
+        mVirtualSize = roundupToUnit(mVirtualSize, unit);
     }
-    bufsize_t size = roundupToUnit(mVirtualSize, unit);
-    return size;
+    // trim to Image Size:
+    const bufsize_t secEnd = startOffset + mVirtualSize;
+    const bufsize_t imgSize = m_PE->getImageSize();
+    if (secEnd > imgSize) {
+        const bufsize_t trimmedSize = imgSize - startOffset;
+        return trimmedSize;
+    }
+    return mVirtualSize;
 }
 
-bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool roundup)
+bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool recalculate)
 {
-    if (this->header == NULL) return 0;
-    if (m_PE == NULL) return 0;
+    if (!this->header || !m_PE) return 0;
 
     bufsize_t size = 0;
-    if (roundup == false) {
+    if (!recalculate) {
         size = getContentDeclaredSize(aType);
         //printf("Declared size = %llx\n---\n", size);
         return size;
@@ -425,7 +491,7 @@ QString SectHdrsWrapper::getFieldName(size_t fieldId)
     return entries[fieldId]->getName();
 }
 
-SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool roundup, bool verbose)
+SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool recalculate, bool verbose)
 {
     size_t size = this->entries.size();
     std::map<offset_t, SectionHdrWrapper*> *secMap = NULL;
@@ -454,7 +520,7 @@ SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executabl
         offset_t startOffset = sec->getContentOffset(addrType);
         if (startOffset == INVALID_ADDR) continue;
 
-        offset_t endOffset = sec->getContentEndOffset(addrType, roundup);
+        offset_t endOffset = sec->getContentEndOffset(addrType, recalculate);
 
         if (offset >= startOffset && offset < endOffset) {
             return sec;

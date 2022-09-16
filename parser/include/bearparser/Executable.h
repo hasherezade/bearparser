@@ -59,7 +59,7 @@ public:
     virtual BYTE* getContentAt(offset_t offset, Executable::addr_type aType, bufsize_t size, bool allowExceptions = false);
 //------------------------------
     virtual bufsize_t getMappedSize(Executable::addr_type aType) = 0;
-    virtual bufsize_t getAlignment(Executable::addr_type aType) = 0;
+    virtual bufsize_t getAlignment(Executable::addr_type aType) const = 0;
     virtual offset_t getImageBase() = 0;
     virtual offset_t getEntryPoint(Executable::addr_type aType = Executable::RVA) = 0;
     
@@ -88,24 +88,40 @@ public:
     virtual offset_t rvaToRaw(offset_t rva) = 0;
 
     // VA <-> RVA
-    virtual offset_t VaToRva(offset_t va, bool autodetect);
-    virtual offset_t rvaToVa(offset_t rva) { return rva + this->getImageBase(); }
+    virtual offset_t VaToRva(offset_t va, bool autodetect = false);
+
+    virtual offset_t rvaToVa(offset_t rva)
+    {
+        return (rva == INVALID_ADDR) ? INVALID_ADDR : (rva + this->getImageBase());
+    }
 
     // VA -> FileAddr
     virtual offset_t vaToRaw(offset_t va)
     {
+        if (va == INVALID_ADDR) return INVALID_ADDR;
+
         offset_t rva = this->VaToRva(va, true);
         return rvaToRaw(rva);
     }
 
-    QString getFileName() { return fileName; }
+    QString getFileName();
+
     virtual bool resize(bufsize_t newSize) { return buf->resize(newSize); }
+
+    virtual bool isResized() { return buf ? buf->isResized() : false; }
+
+    virtual bool isTruncated() { return buf ? buf->isTruncated() : false; }
+
+	/* wrappers */
+	AbstractByteBuffer* getFileBuffer() const { return buf; }
+    bufsize_t getFileSize() const;
+
+    virtual bool dumpFragment(offset_t offset, bufsize_t size, QString fileName);
 
 protected:
     Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode);
 
     exe_bits bitMode;
     AbstractByteBuffer *buf;
-    QString fileName;
 };
 

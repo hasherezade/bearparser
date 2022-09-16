@@ -1,7 +1,8 @@
 #include "ByteBuffer.h"
 
 ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
-    : content(NULL), contentSize(v_size), padding(v_padding)
+    : content(NULL), contentSize(v_size), padding(v_padding),
+    m_isResized(false)
 {
     if (v_size == 0) throw BufferException("Zero size requested");
 
@@ -10,7 +11,8 @@ ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
 }
 
 ByteBuffer::ByteBuffer(BYTE *v_content, bufsize_t v_size, bufsize_t v_padding)
-    : content(NULL), contentSize(v_size), padding(v_padding)
+    : content(NULL), contentSize(v_size), padding(v_padding),
+    m_isResized(false)
 {
     if (v_size == 0) throw BufferException("Zero size requested");
 
@@ -20,6 +22,8 @@ ByteBuffer::ByteBuffer(BYTE *v_content, bufsize_t v_size, bufsize_t v_padding)
 }
 
 ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_t v_size, bufsize_t v_padding)
+    : content(NULL), contentSize(0), padding(0),
+    m_isResized(false)
 {
     if (v_parent == NULL) throw BufferException("Cannot make subBuffer for NULL buffer!");
     if (v_size == 0) throw BufferException("Cannot make 0 size buffer!");
@@ -72,6 +76,8 @@ bool ByteBuffer::resize(bufsize_t newSize)
     this->contentSize = newSize;
 
     delete []oldContent;
+
+    m_isResized = true;
     return true;
 }
 

@@ -4,11 +4,7 @@
 Executable::Executable(AbstractByteBuffer *v_buf, exe_bits v_bitMode)
     : buf(v_buf), bitMode(v_bitMode)
 {
-    if (v_buf == NULL) throw ExeException("Cannot make Exe from NULL buffer");
-    FileBuffer *fileBuf = dynamic_cast<FileBuffer*>(buf);
-    if (fileBuf) {
-        this->fileName = fileBuf->getFileName();
-    }
+    if (!v_buf) throw ExeException("Cannot make an Exe from NULL buffer");
 }
 
 BYTE* Executable::getContentAt(offset_t offset, Executable::addr_type aType, bufsize_t size, bool allowExceptions)
@@ -17,12 +13,14 @@ BYTE* Executable::getContentAt(offset_t offset, Executable::addr_type aType, buf
     if (raw == INVALID_ADDR) {
         return NULL;
     }
-    BYTE *cAt = AbstractByteBuffer::getContentAt(raw, size, allowExceptions);
-    return cAt;
+    return AbstractByteBuffer::getContentAt(raw, size, allowExceptions);
 }
 
 bool Executable::isValidAddr(offset_t addr, addr_type addrType)
 {
+    if (addr == INVALID_ADDR || addrType == Executable::NOT_ADDR) {
+        return false;
+    }
     offset_t mappedFrom = (addrType == Executable::VA) ? this->getImageBase() : 0;
     offset_t mappedTo = mappedFrom + this->getMappedSize(addrType);
 
@@ -31,6 +29,8 @@ bool Executable::isValidAddr(offset_t addr, addr_type addrType)
 
 offset_t Executable::VaToRva(offset_t va, bool autodetect)
 {
+    if (va == INVALID_ADDR) return INVALID_ADDR;
+
     const offset_t mappedFrom = this->getImageBase();
     const offset_t mappedTo = mappedFrom + this->getMappedSize(Executable::RVA);
 
@@ -143,3 +143,33 @@ Executable::addr_type Executable::detectAddrType(offset_t offset, Executable::ad
     return hintType;
 }
 
+QString Executable::getFileName()
+{
+    FileBuffer* fBuf = dynamic_cast<FileBuffer*>(buf);
+    if (fBuf) {
+        return fBuf->getFileName();
+    }
+    return "";
+}
+
+bufsize_t Executable::getFileSize() const
+{
+    if (!buf) return 0;
+
+    FileBuffer* fBuf = dynamic_cast<FileBuffer*>(buf);
+    if (fBuf) {
+        return fBuf->getFileSize();
+    }
+    return buf->getContentSize();
+}
+
+bool Executable::dumpFragment(offset_t offset, bufsize_t size, QString fileName)
+{
+    BufferView *view = new BufferView(this, offset, size);
+    if (!view) return false;
+
+    bufsize_t dumpedSize = FileBuffer::dump(fileName, *view, false);
+    delete view;
+
+    return dumpedSize ? true : false;
+}

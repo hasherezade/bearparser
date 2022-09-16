@@ -13,25 +13,25 @@ bool Logger::append(dbg_level lvl, const char* format, ...)
     if (format == NULL) {
         return false;
     }
-    va_list argptr;                     
+    va_list argptr;
     // Initializing arguments to store all values after format
     va_start(argptr, format);
 
-    char line[MAX_LINE+1];
-	memset(line, 0, MAX_LINE+1);
-	
+    char line[MAX_LINE + 1];
+    memset(line, 0, MAX_LINE + 1);
+
     int printed = vsnprintf(line, MAX_LINE, format, argptr);
 
     //cleaning up the list:
     va_end(argptr);
     if (printed <= 0) return false;
-	
-	const char *prefixes[D_LVL_COUNT] = {"ERROR", "WARNING", "INFO"};
+
+    const char *prefixes[D_LVL_COUNT] = { "ERROR", "WARNING", "INFO" };
     if (static_cast<unsigned>(lvl) > static_cast<unsigned>(D_LVL_COUNT)) {
         lvl = Logger::D_ERROR;
     }
 
-	fprintf(stderr, "[%s] %s\n", prefixes[lvl], line);
+    fprintf(stderr, "[%s] %s\n", prefixes[lvl], line);
     return true;
 }
 

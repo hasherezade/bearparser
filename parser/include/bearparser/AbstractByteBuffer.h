@@ -39,6 +39,7 @@ public:
     virtual bufsize_t getContentSize() = 0;
     virtual BYTE* getContent() = 0;
     virtual bool isTruncated() { return false; }
+    virtual bool isResized() { return false; }
 
     BYTE operator[](size_t idx);
 
@@ -65,7 +66,11 @@ public:
 
     uint64_t getNumValue(offset_t offset, bufsize_t size, bool* isOk);
     bool setNumValue(offset_t offset, bufsize_t size, uint64_t newVal);
+    bool setTextValue(char* textPtr, std::string newText, size_t fieldLimitLen = 0);
+
+    //TODO
     virtual bool resize(bufsize_t newSize) { return false; }
+    offset_t substFragmentByFile(offset_t offset, bufsize_t contentSize, QFile &fIn);
 };
 
 //--------------------------------------------
