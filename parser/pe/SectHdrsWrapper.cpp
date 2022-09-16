@@ -23,7 +23,7 @@ QString SectionHdrWrapper::getSecHdrAccessRightsDesc(DWORD characteristics)
     return rights;
 }
 
-void SectionHdrWrapper::initSecCharacter(static std::map<DWORD, QString> &secHdrCharact)
+void SectionHdrWrapper::initSecCharacter(std::map<DWORD, QString> &secHdrCharact)
 {
     secHdrCharact[SCN_MEM_READ] = "readable";
     secHdrCharact[SCN_MEM_WRITE] = "writeable";
