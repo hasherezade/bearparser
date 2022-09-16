@@ -65,20 +65,23 @@ public:
 
     bufsize_t getContentSize(Executable::addr_type aType, bool recalculate);
 
+    /* wrappers */
     DWORD getCharacteristics() { return header ? header->Characteristics : 0; }
 
-    /* wrappers */
     DWORD getRawPtr() { return header ? header->PointerToRawData : 0; }
 
     DWORD getVirtualPtr() { return header ? header->VirtualAddress : 0; }
 
-    DWORD getPointerToRelocations() { return header ? header->PointerToRelocations : 0; }
-
-    DWORD getNumberOfRelocations() { return header ? header->NumberOfRelocations : 0; }
-
-    DWORD getNumberOfLinenumbers() { return header ? header->NumberOfLinenumbers : 0; }
-
 //modifications:
+
+    bool setCharacteristics(DWORD newCharacteristics)
+    {
+        if (!header) return false;
+        //TODO: validate newCharacteristics
+
+        header->Characteristics = newCharacteristics;
+        return true;
+    }
 
     bool reloadName();
 
