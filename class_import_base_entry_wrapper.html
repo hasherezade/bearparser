@@ -116,6 +116,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a48961f8c1663c5801d0ccc8512570204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa176da686bdcec05c9a4acd23c2cdf13"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_import_base_entry_wrapper.html#aa176da686bdcec05c9a4acd23c2cdf13">wrap</a> ()</td></tr>
 <tr class="separator:aa176da686bdcec05c9a4acd23c2cdf13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac43611e5b2a326c78da167b0e4784de8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_import_base_entry_wrapper.html#ac43611e5b2a326c78da167b0e4784de8">isValid</a> ()</td></tr>
+<tr class="separator:ac43611e5b2a326c78da167b0e4784de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_p_e_node_wrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_p_e_node_wrapper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_p_e_node_wrapper.html">PENodeWrapper</a></td></tr>
 <tr class="memitem:a313df66e81dfce411fa83d0ebc08c935 inherit pub_methods_class_p_e_node_wrapper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_e_node_wrapper.html#a313df66e81dfce411fa83d0ebc08c935">PENodeWrapper</a> (<a class="el" href="class_p_e_file.html">PEFile</a> *pe, <a class="el" href="class_p_e_node_wrapper.html">PENodeWrapper</a> *parent=NULL)</td></tr>
 <tr class="separator:a313df66e81dfce411fa83d0ebc08c935 inherit pub_methods_class_p_e_node_wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -296,8 +298,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ad16dc8acadd054efecd45f7674571413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc5866cd92a0da7af6faa18b674e8e9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_import_base_entry_wrapper.html#abc5866cd92a0da7af6faa18b674e8e9a">addMapping</a> (<a class="el" href="class_exe_node_wrapper.html">ExeNodeWrapper</a> *func)</td></tr>
 <tr class="separator:abc5866cd92a0da7af6faa18b674e8e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac43611e5b2a326c78da167b0e4784de8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_import_base_entry_wrapper.html#ac43611e5b2a326c78da167b0e4784de8">isValid</a> ()</td></tr>
-<tr class="separator:ac43611e5b2a326c78da167b0e4784de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_exe_node_wrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_exe_node_wrapper')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_exe_node_wrapper.html">ExeNodeWrapper</a></td></tr>
 <tr class="memitem:ab65292a452c9c7d94b6c0b3ce2d934d5 inherit pro_methods_class_exe_node_wrapper"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_exe_node_wrapper.html#ab65292a452c9c7d94b6c0b3ce2d934d5">getEntriesCount</a> (std::vector&lt; <a class="el" href="class_exe_node_wrapper.html">ExeNodeWrapper</a> * &gt; &amp;_entries)</td></tr>
 <tr class="separator:ab65292a452c9c7d94b6c0b3ce2d934d5 inherit pro_methods_class_exe_node_wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -396,7 +396,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00069">69</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00070">70</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -427,7 +427,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a7689f2efd4ed0f43890385839a0b617a">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00072">72</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00073">73</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -504,9 +504,6 @@ Here is the call graph for this function:</div>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool ImportBaseEntryWrapper::isValid </td>
@@ -515,11 +512,6 @@ Here is the call graph for this function:</div>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00141">141</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
@@ -614,7 +606,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00079">79</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00078">78</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -639,7 +631,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00077">77</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00076">76</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -687,7 +679,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00076">76</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00075">75</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
