@@ -64,14 +64,13 @@ public:
     virtual char* getLibraryName() = 0;
     virtual size_t getSubFieldsCount() { return 1; }
     bool wrap();
+    bool isValid();
 
 protected:
     ImportBaseEntryWrapper(PEFile *pe, ImportBaseDirWrapper *importsDir, size_t entryNumber)
         : PENodeWrapper(pe, importsDir, entryNumber), impDir(importsDir) { }//wrap(); }
 
     void addMapping(ExeNodeWrapper *func) { if (impDir) impDir->addMapping(func); }
-
-    bool isValid();
 
     std::map<offset_t, size_t> thunkToFuncMap;
     ImportBaseDirWrapper* impDir;
