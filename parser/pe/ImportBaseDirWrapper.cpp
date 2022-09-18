@@ -172,7 +172,7 @@ QString ImportBaseFuncWrapper::getShortName()
         uint64_t val = getOrdinal();
         QString out;
 #if QT_VERSION >= 0x050000
-        out.asprintf("<ord: %llX>", static_cast<unsigned long long>(val));
+        out = QString::asprintf("<ord: %llX>", static_cast<unsigned long long>(val));
 #else
         out.sprintf("<ord: %llX>", static_cast<unsigned long long>(val));
 #endif
