@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['filebuffer_0',['FileBuffer',['../class_file_buffer.html#a4e57c5e5c45c0cb7f703e19f5e480b22',1,'FileBuffer']]],
+  ['filebuffer_0',['FileBuffer',['../class_file_buffer.html#a8cd30daa65984872abadd8bb70faaaa3',1,'FileBuffer']]],
   ['filebufferexception_1',['FileBufferException',['../class_file_buffer_exception.html#a69b33bb8aa338971160d131659a25990',1,'FileBufferException']]],
   ['filehdrwrapper_2',['FileHdrWrapper',['../class_file_hdr_wrapper.html#ae11fa7241e2816b444da9c4c9f5e3c2e',1,'FileHdrWrapper']]],
   ['fileview_3',['FileView',['../class_file_view.html#af161ebb5802a8f0da8dafdabbb7feb5c',1,'FileView']]],

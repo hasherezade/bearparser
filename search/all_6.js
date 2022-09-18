@@ -14,7 +14,7 @@ var searchData=
   ['file_5fmaxsize_11',['FILE_MAXSIZE',['../_file_buffer_8h.html#ade633a52361f4d36fb0c82ac2acfbe67',1,'FileBuffer.h']]],
   ['file_5fver_5f0_12',['FILE_VER_0',['../class_resource_version_wrapper.html#ab5d68467854b544b4b69ce2701563928ae6c4fa8c5d88b02fcc5e1c5fbebff13a',1,'ResourceVersionWrapper']]],
   ['file_5fver_5f1_13',['FILE_VER_1',['../class_resource_version_wrapper.html#ab5d68467854b544b4b69ce2701563928a330be5af7b2d1a873bc167a718f66680',1,'ResourceVersionWrapper']]],
-  ['filebuffer_14',['FileBuffer',['../class_file_buffer.html#a4e57c5e5c45c0cb7f703e19f5e480b22',1,'FileBuffer::FileBuffer()'],['../class_file_buffer.html',1,'FileBuffer']]],
+  ['filebuffer_14',['FileBuffer',['../class_file_buffer.html#a8cd30daa65984872abadd8bb70faaaa3',1,'FileBuffer::FileBuffer()'],['../class_file_buffer.html',1,'FileBuffer']]],
   ['filebuffer_2ecpp_15',['FileBuffer.cpp',['../_file_buffer_8cpp.html',1,'']]],
   ['filebuffer_2eh_16',['FileBuffer.h',['../_file_buffer_8h.html',1,'']]],
   ['filebufferexception_17',['FileBufferException',['../class_file_buffer_exception.html#a69b33bb8aa338971160d131659a25990',1,'FileBufferException::FileBufferException()'],['../class_file_buffer_exception.html',1,'FileBufferException']]],
