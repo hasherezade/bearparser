@@ -198,7 +198,7 @@ public:
         if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
             return NULL; //not my section
         }
-        const size_t buf_size = sec->getContentSize(Executable::RAW, true);
+        const bufsize_t buf_size = sec->getContentSize(Executable::RAW, true);
         if (!buf_size) return NULL;
 
         offset_t start = sec->getContentOffset(Executable::RAW, true);
