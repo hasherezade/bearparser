@@ -128,7 +128,7 @@ $(function() {
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">if</span> (!isOk) <span class="keywordflow">return</span> <span class="stringliteral">&quot;INVALID&quot;</span>;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        QString out;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#if QT_VERSION &gt;= 0x050000</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        out.asprintf(<a class="code hl_function" href="class_wrapped_value.html#ac61fb00bb5536fe17a3f48570cabca14">getIntFormat</a>().toStdString().c_str(), num);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        out = QString::asprintf(<a class="code hl_function" href="class_wrapped_value.html#ac61fb00bb5536fe17a3f48570cabca14">getIntFormat</a>().toStdString().c_str(), num);</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        out.sprintf(<a class="code hl_function" href="class_wrapped_value.html#ac61fb00bb5536fe17a3f48570cabca14">getIntFormat</a>().toStdString().c_str(), num);</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif</span></div>
