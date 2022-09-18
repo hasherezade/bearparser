@@ -1,7 +1,7 @@
 var searchData=
 [
   ['rawtorva_0',['rawToRva',['../class_d_o_s_exe.html#ac4417e47e4af170c9d9a8c72fbd32937',1,'DOSExe::rawToRva()'],['../class_executable.html#a8ea6a55050fe8242f94e830cac77c483',1,'Executable::rawToRva()'],['../class_p_e_file.html#aaf80a2d2b2d7e9b87e0edf79dcf19f42',1,'PEFile::rawToRva()']]],
-  ['read_1',['read',['../class_abstract_file_buffer.html#afb30e0505d9518938ec7b653f381c3fe',1,'AbstractFileBuffer::read(QString &amp;file, bufsize_t minBufSize, bool allowTruncate)'],['../class_abstract_file_buffer.html#a87bab22c55c6b10f3658c29e3c338535',1,'AbstractFileBuffer::read(QFile &amp;fIn, bufsize_t minBufSize, bool allowTruncate)']]],
+  ['read_1',['read',['../class_abstract_file_buffer.html#acfe88940b215a54b9e514a0fb8146781',1,'AbstractFileBuffer::read(QString &amp;file, bufsize_t minBufSize, const bool allowTruncate)'],['../class_abstract_file_buffer.html#aa7315240b434b114bb5b935746f27b69',1,'AbstractFileBuffer::read(QFile &amp;fIn, bufsize_t minBufSize, const bool allowTruncate)']]],
   ['reloadmapping_2',['reloadMapping',['../class_exe_node_wrapper.html#a659e73a1d597a93ae7dd31cf7e98f23a',1,'ExeNodeWrapper::reloadMapping()'],['../class_import_base_dir_wrapper.html#a736fac50c585752a8c8b6cb85ef9c9d3',1,'ImportBaseDirWrapper::reloadMapping()'],['../class_sect_hdrs_wrapper.html#a7cf7f2fd77bab1e52b044c5f77e439ad',1,'SectHdrsWrapper::reloadMapping()']]],
   ['reloadname_3',['reloadName',['../class_section_hdr_wrapper.html#a3a97c0c870be0be28a7425142338a55e',1,'SectionHdrWrapper']]],
   ['reloc_4',['reloc',['../class_reloc_dir_wrapper.html#a9c0949d9331d8bc2376736732491fbfc',1,'RelocDirWrapper']]],
