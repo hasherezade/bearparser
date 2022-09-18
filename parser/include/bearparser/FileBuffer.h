@@ -15,7 +15,7 @@ public:
 
 class AbstractFileBuffer {
 public:
-    static ByteBuffer* read(QString &file, bufsize_t minBufSize, bool allowTruncate); //throws exceptions
+    static ByteBuffer* read(QString &file, bufsize_t minBufSize, const bool allowTruncate); //throws exceptions
     static bufsize_t getReadableSize(QFile &fIn);
 
     static bufsize_t getReadableSize(const QString &path);
@@ -23,7 +23,7 @@ public:
     QString getFileName() { return this->fileName; }
 
 protected:
-    static ByteBuffer* read(QFile &fIn, bufsize_t minBufSize, bool allowTruncate); //throws exceptions
+    static ByteBuffer* read(QFile &fIn, bufsize_t minBufSize, const bool allowTruncate); //throws exceptions
 
     AbstractFileBuffer(QString v_fileName) :fileName(v_fileName) {}
 

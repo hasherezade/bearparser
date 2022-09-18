@@ -38,7 +38,7 @@ bufsize_t FileView::getMappableSize(QFile &fIn)
 }
 //----------------------------------------------------------------
 
-ByteBuffer* AbstractFileBuffer::read(QString &path, bufsize_t minBufSize, bool allowTruncate)
+ByteBuffer* AbstractFileBuffer::read(QString &path, bufsize_t minBufSize, const bool allowTruncate)
 {
     QFile fIn(path);
     if (fIn.open(QIODevice::ReadOnly) == false) {
@@ -49,7 +49,7 @@ ByteBuffer* AbstractFileBuffer::read(QString &path, bufsize_t minBufSize, bool a
     return bufferedFile;
 }
 
-ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize, bool allowTruncate) //throws exceptions
+ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize, const bool allowTruncate) //throws exceptions
 {
     bufsize_t readableSize = getReadableSize(fIn);
     bufsize_t allocSize = (readableSize < minBufSize) ? minBufSize : readableSize;
@@ -64,7 +64,7 @@ ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize, bool allo
             if (!allowTruncate) throw e;
             allocSize /= 2;
         }
-    } while(allowTruncate && !bufferedFile && allocSize);
+    } while(!bufferedFile && allocSize);
 
     char *content = (char*) bufferedFile->getContent();
     bufsize_t contentSize = bufferedFile->getContentSize();
