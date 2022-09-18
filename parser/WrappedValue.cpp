@@ -49,7 +49,7 @@ QString WrappedValue::toQString()
         if (!isOk) return "INVALID";
         QString out;
 #if QT_VERSION >= 0x050000
-        out.asprintf(getIntFormat().toStdString().c_str(), num);
+        out = QString::asprintf(getIntFormat().toStdString().c_str(), num);
 #else
         out.sprintf(getIntFormat().toStdString().c_str(), num);
 #endif
