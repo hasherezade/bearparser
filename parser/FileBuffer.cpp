@@ -38,24 +38,34 @@ bufsize_t FileView::getMappableSize(QFile &fIn)
 }
 //----------------------------------------------------------------
 
-ByteBuffer* AbstractFileBuffer::read(QString &path, bufsize_t minBufSize)
+ByteBuffer* AbstractFileBuffer::read(QString &path, bufsize_t minBufSize, bool allowTruncate)
 {
     QFile fIn(path);
     if (fIn.open(QIODevice::ReadOnly) == false) {
         throw FileBufferException("Cannot open the file: " + path);
     }
-    ByteBuffer *bufferedFile = read(fIn, minBufSize);
+    ByteBuffer *bufferedFile = read(fIn, minBufSize, allowTruncate);
     fIn.close();
     return bufferedFile;
 }
 
-ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize) //throws exceptions
+ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize, bool allowTruncate) //throws exceptions
 {
     bufsize_t readableSize = getReadableSize(fIn);
     bufsize_t allocSize = (readableSize < minBufSize) ? minBufSize : readableSize;
-    //printf("Alloc size: %lx\n", allocSize);
 
-    ByteBuffer *bufferedFile = new ByteBuffer(allocSize); //throws exceptions
+    ByteBuffer *bufferedFile = NULL;
+    do {
+        try {
+            bufferedFile = new ByteBuffer(allocSize); //throws exceptions
+        }
+        catch (CustomException &e)
+        {
+            if (!allowTruncate) throw e;
+            allocSize /= 2;
+        }
+    } while(allowTruncate && !bufferedFile && allocSize);
+
     char *content = (char*) bufferedFile->getContent();
     bufsize_t contentSize = bufferedFile->getContentSize();
 
