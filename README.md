@@ -26,7 +26,7 @@ https://github.com/hasherezade/bearparser/wiki
 
 ## PE-bear
 
-![](https://github.com/hasherezade/pe-bear/blob/master/logo/main_ico.png)
+![](https://github.com/hasherezade/pe-bear/blob/main/logo/main_ico.png)
 
 Check also PE-bear - a GUI application using `bearparser`:
 + https://github.com/hasherezade/pe-bear
