@@ -27,7 +27,6 @@ bufsize_t ImportBaseDirWrapper::thunkSize(Executable::exe_bits bits) {
 }
 
 
-
 void ImportBaseDirWrapper::addMapping(ExeNodeWrapper *funcNode)
 {
     ImportBaseFuncWrapper* func = dynamic_cast<ImportBaseFuncWrapper*> (funcNode);
@@ -171,9 +170,13 @@ QString ImportBaseFuncWrapper::getShortName()
     QString functionName;
     if (isByOrdinal()) {
         uint64_t val = getOrdinal();
-        static char buf[0xFF];
-        snprintf(buf, 0xFF, "<ord: %llX>", static_cast<unsigned long long>(val));
-        functionName = buf;
+        QString out;
+#if QT_VERSION >= 0x050000
+        out.asprintf("<ord: %llX>", static_cast<unsigned long long>(val));
+#else
+        out.sprintf("<ord: %llX>", static_cast<unsigned long long>(val));
+#endif
+        functionName = out;
     } else {
         char *fName = this->getFunctionName();
         if (!fName) return "";

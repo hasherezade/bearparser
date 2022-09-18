@@ -106,8 +106,8 @@ bool SectionHdrWrapper::reloadName()
     if (!this->name) {
         this->name = (char*)::calloc(BUF_LEN, 1);
     }
-    memset(this->name, 0, BUF_LEN);
-    snprintf(this->name, BUF_LEN, "%.8s", (char*) header->Name);
+    ::memset(this->name, 0, BUF_LEN);
+    ::memcpy(this->name, header->Name, SECNAME_LEN);
     this->mappedName = this->name;
     if (this->mappedName.length() == 0) {
         this->mappedName = "#" + QString::number(this->sectNum, 10);
