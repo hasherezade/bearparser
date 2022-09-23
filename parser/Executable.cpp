@@ -88,17 +88,20 @@ offset_t Executable::toRaw(offset_t offset, addr_type aT, bool allowExceptions)
         return INVALID_ADDR;
     }
 
-    offset_t convertedOffset = INVALID_ADDR;
-
     if (aT == Executable::RAW) {
+        if (offset >= this->getRawSize()) {
+            return INVALID_ADDR;
+        }
         //no need to convert
         return offset;
-    } 
+    }
 
     if (aT == Executable::VA) {
         offset = VaToRva(offset, false);
         aT = Executable::RVA;
-    } 
+    }
+
+    offset_t convertedOffset = INVALID_ADDR;
     if (aT == Executable::RVA){
         try {
             convertedOffset = this->rvaToRaw(offset);
