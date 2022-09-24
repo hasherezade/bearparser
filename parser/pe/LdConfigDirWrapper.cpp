@@ -92,7 +92,7 @@ void* LdConfigDirWrapper::getPtr()
 void LdConfigDirWrapper::clear()
 {
     std::map<uint32_t, std::vector<ExeNodeWrapper*> >::iterator mapItr;
-    for (mapItr = this->subEntriesMap.begin(); mapItr != this->subEntriesMap.end(); mapItr++) {
+    for (mapItr = this->subEntriesMap.begin(); mapItr != this->subEntriesMap.end(); ++mapItr) {
         std::vector<ExeNodeWrapper*> &vec = mapItr->second;
         vec.clear();
     }
@@ -482,7 +482,7 @@ QString LdConfigDirWrapper::translateGuardFlagsContent(const QString& delim)
     std::set<DWORD> flagsSet = LdConfigDirWrapper::getGuardFlagsSet(GuardFlags);
     std::set<DWORD>::iterator itr;
     QStringList list;
-    for (itr = flagsSet.begin() ; itr != flagsSet.end(); itr++) {
+    for (itr = flagsSet.begin() ; itr != flagsSet.end(); ++itr) {
         const DWORD nextFlag = *itr;
         const QString flagInfo = LdConfigDirWrapper::translateGuardFlag(nextFlag);
         if (flagInfo.length() == 0) continue;

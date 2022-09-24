@@ -45,7 +45,7 @@ std::vector<DWORD> FileHdrWrapper::splitCharact(DWORD characteristics)
     if (s_fHdrCharact.size() == 0) initCharact();
 
     std::vector<DWORD> chSet;
-    for (std::map<DWORD, QString>::iterator iter = s_fHdrCharact.begin(); iter != s_fHdrCharact.end(); iter++) {
+    for (std::map<DWORD, QString>::iterator iter = s_fHdrCharact.begin(); iter != s_fHdrCharact.end(); ++iter) {
         if (characteristics & iter->first) {
             chSet.push_back(iter->first);
         }

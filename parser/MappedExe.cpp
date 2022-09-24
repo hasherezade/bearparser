@@ -3,7 +3,7 @@
 void ExeWrappersContainer::clearWrappers()
 {
     std::map<size_t, ExeElementWrapper*>::iterator itr;
-    for (itr = this->wrappers.begin(); itr != this->wrappers.end(); itr++){
+    for (itr = this->wrappers.begin(); itr != this->wrappers.end(); ++itr){
         ExeElementWrapper* wrapper = itr->second;
         delete wrapper;
     }

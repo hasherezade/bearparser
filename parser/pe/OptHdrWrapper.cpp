@@ -38,7 +38,7 @@ std::vector<DWORD> OptHdrWrapper::splitDllCharact(DWORD characteristics)
 
     std::vector<DWORD> chSet;
     map<DWORD, QString>::iterator iter;
-    for (iter = s_dllCharact.begin(); iter != s_dllCharact.end(); iter++) {
+    for (iter = s_dllCharact.begin(); iter != s_dllCharact.end(); ++iter) {
         if (characteristics & iter->first) {
             chSet.push_back(iter->first);
         }

@@ -46,7 +46,7 @@ std::vector<DWORD> SectionHdrWrapper::splitCharacteristics(DWORD charact)
     }
     std::vector<DWORD> chSet;
     std::map<DWORD, QString>::iterator iter;
-    for (iter = s_secHdrCharact.begin(); iter != s_secHdrCharact.end(); iter++) {
+    for (iter = s_secHdrCharact.begin(); iter != s_secHdrCharact.end(); ++iter) {
         if (charact & iter->first) {
             chSet.push_back(iter->first);
         }
@@ -505,7 +505,7 @@ SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executabl
 
     std::map<offset_t, SectionHdrWrapper*>::iterator found = secMap->lower_bound(offset);
     std::map<offset_t, SectionHdrWrapper*>::iterator itr;
-    for (itr = found; itr != secMap->end(); itr++) {
+    for (itr = found; itr != secMap->end(); ++itr) {
         SectionHdrWrapper* sec = itr->second;
         if (sec == NULL) continue; //TODO: check it
         if (verbose) {
@@ -542,7 +542,7 @@ void SectHdrsWrapper::printSectionsMapping(Executable::addr_type aType)
     if (secMap == NULL) return;
 
     std::map<offset_t, SectionHdrWrapper*>::iterator itr;
-    for (itr = secMap->begin(); itr != secMap->end(); itr++) {
+    for (itr = secMap->begin(); itr != secMap->end(); ++itr) {
         SectionHdrWrapper* sec = itr->second;
         offset_t secEnd = itr->first;
 

@@ -35,7 +35,7 @@ size_t ResourcesContainer::entriesCount()
 void ResourcesAlbum::clearLeafsContent()
 {
     std::map<ResourceLeafWrapper*, ResourceContentWrapper*>::iterator itr;
-    for (itr = leafToContentWrapper.begin(); itr != leafToContentWrapper.end(); itr++) {
+    for (itr = leafToContentWrapper.begin(); itr != leafToContentWrapper.end(); ++itr) {
         ResourceContentWrapper* cw = itr->second;
         delete cw;
     }
@@ -66,7 +66,7 @@ void ResourcesAlbum::putLeaf(ResourceLeafWrapper* leaf, long topEntryId)
 void ResourcesAlbum::wrapLeafsContent()
 {
     std::map<long, std::vector<ResourceLeafWrapper*> >::iterator itr;
-    for (itr = allLeafs.begin(); itr != allLeafs.end(); itr++) {
+    for (itr = allLeafs.begin(); itr != allLeafs.end(); ++itr) {
 
         std::vector<ResourceLeafWrapper*> &leafVec = itr->second;
         long topEntryId = itr->first;
@@ -115,7 +115,7 @@ void ResourcesAlbum::initResourceTypes()
     this->allTypes.clear();
     std::map<pe::resource_type, ResourcesContainer>::iterator itr;
 
-    for ( itr = this->allWrappers.begin(); itr != this->allWrappers.end(); itr++ ) {
+    for ( itr = this->allWrappers.begin(); itr != this->allWrappers.end(); ++itr ) {
         pe::resource_type type = itr->first;
         this->allTypes.push_back(type);
     }
@@ -126,7 +126,7 @@ std::vector<pe::resource_type> ResourcesAlbum::getResourceTypes()
     std::vector<pe::resource_type> typesVec;
     std::map<pe::resource_type, ResourcesContainer>::iterator itr;
 
-    for ( itr = allWrappers.begin(); itr != allWrappers.end(); itr++ ) {
+    for ( itr = allWrappers.begin(); itr != allWrappers.end(); ++itr ) {
         pe::resource_type type = itr->first;
         typesVec.push_back(type);
     }

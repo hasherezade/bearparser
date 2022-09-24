@@ -54,7 +54,7 @@ bool BufferPrinter::useFormatter(int formatterId)
 void BufferPrinter::clearFormatters()
 {
     std::map<int, AbstractFormatter*>::iterator itr;
-    for (itr = formatters.begin(); itr != formatters.end(); itr++) {
+    for (itr = formatters.begin(); itr != formatters.end(); ++itr) {
         AbstractFormatter* f = itr->second;
         delete f;
     }

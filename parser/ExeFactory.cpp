@@ -17,7 +17,7 @@ void ExeFactory::init()
 void ExeFactory::destroy()
 {
     std::map<exe_type, ExeBuilder*>::iterator itr;
-    for (itr = builders.begin(); itr != builders.end(); itr++) {
+    for (itr = builders.begin(); itr != builders.end(); ++itr) {
         ExeBuilder* builder = itr->second;
         delete builder;
     }
@@ -31,7 +31,7 @@ ExeFactory::exe_type ExeFactory::findMatching(AbstractByteBuffer *buf)
     ExeFactory::init(); //ensue that the builders are initialized
 
     std::map<exe_type, ExeBuilder*>::iterator itr;
-    for (itr = builders.begin(); itr != builders.end(); itr++) {
+    for (itr = builders.begin(); itr != builders.end(); ++itr) {
 
         ExeBuilder* builder = itr->second;
         if (builder == NULL) continue;

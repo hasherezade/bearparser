@@ -223,7 +223,7 @@ QString ClrDirWrapper::translateFieldContent(size_t fieldId)
     std::set<DWORD> flagsSet = ClrDirWrapper::getFlagsSet(d->Flags);
     std::set<DWORD>::iterator itr;
     QStringList list;
-    for (itr = flagsSet.begin() ; itr != flagsSet.end(); itr++) {
+    for (itr = flagsSet.begin() ; itr != flagsSet.end(); ++itr) {
         const DWORD nextFlag = *itr;
         const QString flagInfo = ClrDirWrapper::translateFlag(nextFlag);
         if (flagInfo.length() == 0) continue;
