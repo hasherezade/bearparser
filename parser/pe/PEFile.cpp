@@ -478,15 +478,15 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size, bufsize_t
     }
 
     IMAGE_SECTION_HEADER secHdr;
-    memset(&secHdr, 0, sizeof(IMAGE_SECTION_HEADER));
+    ::memset(&secHdr, 0, sizeof(IMAGE_SECTION_HEADER));
 
     //name copy:
-    std::string nameStr = name.toStdString();
-    const char *nameChar = nameStr.c_str();
-    size_t copySize = sizeof(secHdr.Name);
-    size_t nameLen = strlen(nameChar);
-    if (nameLen < copySize) copySize = nameLen;
-    memcpy(secHdr.Name, nameChar, copySize);
+    const size_t nameLen = name.length();
+    const size_t bufSize = sizeof(secHdr.Name);
+    const size_t copySize = (nameLen < bufSize) ? nameLen : bufSize;
+    if (copySize) {
+        ::memcpy(secHdr.Name, name.toStdString().c_str(), copySize);
+    }
 
     secHdr.PointerToRawData = static_cast<DWORD>(roundedRawEnd);
     secHdr.VirtualAddress = static_cast<DWORD>(roundedVirtualEnd);
