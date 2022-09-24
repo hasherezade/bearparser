@@ -149,8 +149,8 @@ void* OptHdrWrapper::getPtr()
 {
     if (opt32 == NULL && opt64 == NULL) {
         IMAGE_NT_HEADERS32* ntHdr32 = nt32();
-        if (ntHdr32 != NULL) {
-            this->opt32 = ntHdr32 ? &(ntHdr32->OptionalHeader) : NULL;
+        if (ntHdr32) {
+            this->opt32 = &(ntHdr32->OptionalHeader);
         } else {
             IMAGE_NT_HEADERS64* ntHdr64 = nt64();
             this->opt64 = (ntHdr64) ? &(ntHdr64->OptionalHeader) : NULL;

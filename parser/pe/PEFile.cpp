@@ -128,8 +128,8 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     this->wrappers[WR_DATADIR] =  new DataDirWrapper(this);
 
     bool isOk = false;
-    size_t secNum = fHdr->getNumValue(FileHdrWrapper::SEC_NUM, &isOk);
-    if (isOk){
+    const size_t secNum = fHdr->getNumValue(FileHdrWrapper::SEC_NUM, &isOk);
+    if (isOk && secNum){
         this->sects = new SectHdrsWrapper(this);
         this->wrappers[WR_SECTIONS] = sects;
     }
@@ -316,7 +316,7 @@ size_t PEFile::getSectionsCount(bool useMapped) const
     if (useMapped == false) {
         return hdrSectionsNum();
     }
-    return this->sects->getEntriesCount();
+    return (this->sects) ? this->sects->getEntriesCount() : 0;
 }
 
 offset_t PEFile::rawToRva(offset_t raw)

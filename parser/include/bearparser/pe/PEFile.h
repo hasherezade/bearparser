@@ -113,7 +113,7 @@ public:
 
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)
     {
-        return (sects == NULL) ? NULL : sects->getSecHdrAtOffset(offset, aType, recalculate, verbose);
+        return (sects) ? sects->getSecHdrAtOffset(offset, aType, recalculate, verbose) : NULL;
     }
 
     size_t getSecIndex(SectionHdrWrapper *sec) const
