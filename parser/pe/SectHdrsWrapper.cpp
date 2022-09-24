@@ -407,8 +407,6 @@ void SectHdrsWrapper::addMapping(SectionHdrWrapper *sec)
         //printf("skipping empty section..\n");
         return;
     }
-    offset_t RVA =sec->getContentOffset(Executable::RVA);
-    offset_t raw =sec->getContentOffset(Executable::RAW);
 
     offset_t endRVA = sec->getContentEndOffset(Executable::RVA, roundup);
     offset_t endRaw = sec->getContentEndOffset(Executable::RAW, roundup);

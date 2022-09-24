@@ -65,7 +65,6 @@ void* ImportedFuncWrapper::getValuePtr(ImportEntryWrapper::FieldID fId)
 
 uint64_t ImportedFuncWrapper::getThunkValue()
 {
-    bool isOk = false;
     bool is64 = (m_Exe->getBitMode() == Executable::BITS_64) ? true : false;
 
     uint64_t ordinal = 0;
@@ -294,8 +293,8 @@ char* ImportEntryWrapper::getLibraryName()
     offset_t peSize = m_Exe->getRawSize();
 
     bufsize_t upperLimit = m_Exe->getMaxSizeFromPtr((BYTE*) name);
-    uint32_t HARD_LIMIT = ImportEntryWrapper::NameLenLimit;
-    int32_t limit = (uint32_t) upperLimit < HARD_LIMIT ? upperLimit : HARD_LIMIT;
+    bufsize_t HARD_LIMIT = ImportEntryWrapper::NameLenLimit;
+    size_t limit = (size_t) upperLimit < HARD_LIMIT ? upperLimit : HARD_LIMIT;
 
     if (pe_util::isStrLonger(name, limit)) {
         if (upperLimit < HARD_LIMIT) {
