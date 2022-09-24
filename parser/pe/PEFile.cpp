@@ -90,6 +90,11 @@ void PEFile::clearWrappers()
 {
     initDirEntries();
     MappedExe::clearWrappers();
+
+    this->dosHdrWrapper = NULL;
+    this->fHdr = NULL;
+    this->optHdr = NULL;
+    this->sects = NULL;
 }
 
 void PEFile::initDirEntries()
@@ -132,6 +137,9 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     if (isOk && secNum){
         this->sects = new SectHdrsWrapper(this);
         this->wrappers[WR_SECTIONS] = sects;
+    }
+    else {
+        this->sects = NULL;
     }
     // map Data Dirs
     initDirEntries();
