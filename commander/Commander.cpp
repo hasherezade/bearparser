@@ -25,7 +25,7 @@ void Commander::printHelp()
 {
     std::cout << "Available commands: " << cmds.size() << endl;
     std::map<std::string, Command*>::iterator itr;
-    for (itr = cmds.begin(); itr != cmds.end(); itr++) {
+    for (itr = cmds.begin(); itr != cmds.end(); ++itr) {
         Command *cmd = itr->second;
         if (cmd == NULL) continue;
         std::cout << itr->first << " \t- " << cmd->getDescription() << endl;

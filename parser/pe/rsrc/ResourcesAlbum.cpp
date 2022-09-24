@@ -47,7 +47,7 @@ void ResourcesAlbum::clear()
     clearLeafsContent();
     //---
     std::map<ResourceLeafWrapper*, ResourceContentWrapper*>::iterator cntItr;
-    for (cntItr = leafToContentWrapper.begin(); cntItr != leafToContentWrapper.end(); cntItr++) {
+    for (cntItr = leafToContentWrapper.begin(); cntItr != leafToContentWrapper.end(); ++cntItr) {
         ResourceContentWrapper* cntWr = cntItr->second;
         delete cntWr;
     }
