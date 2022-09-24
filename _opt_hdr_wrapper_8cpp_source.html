@@ -117,7 +117,7 @@ $(function() {
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    std::vector&lt;DWORD&gt; chSet;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    map&lt;DWORD, QString&gt;::iterator iter;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">for</span> (iter = <a class="code hl_variable" href="class_opt_hdr_wrapper.html#ae2d5ebd9bb7c6b034fef7b6ae400b083">s_dllCharact</a>.begin(); iter != <a class="code hl_variable" href="class_opt_hdr_wrapper.html#ae2d5ebd9bb7c6b034fef7b6ae400b083">s_dllCharact</a>.end(); iter++) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">for</span> (iter = <a class="code hl_variable" href="class_opt_hdr_wrapper.html#ae2d5ebd9bb7c6b034fef7b6ae400b083">s_dllCharact</a>.begin(); iter != <a class="code hl_variable" href="class_opt_hdr_wrapper.html#ae2d5ebd9bb7c6b034fef7b6ae400b083">s_dllCharact</a>.end(); ++iter) {</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">if</span> (characteristics &amp; iter-&gt;first) {</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            chSet.push_back(iter-&gt;first);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }</div>

@@ -302,7 +302,7 @@ $(function() {
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    std::set&lt;DWORD&gt; flagsSet = <a class="code hl_function" href="class_clr_dir_wrapper.html#a036c2a8e9060ccbd6399822004fe4165">ClrDirWrapper::getFlagsSet</a>(d-&gt;Flags);</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    std::set&lt;DWORD&gt;::iterator itr;</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    QStringList list;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">for</span> (itr = flagsSet.begin() ; itr != flagsSet.end(); itr++) {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">for</span> (itr = flagsSet.begin() ; itr != flagsSet.end(); ++itr) {</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <span class="keyword">const</span> DWORD nextFlag = *itr;</div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="keyword">const</span> QString flagInfo = <a class="code hl_function" href="class_clr_dir_wrapper.html#a6482ec54df71bff3d6c5bc29d0aeb6f2">ClrDirWrapper::translateFlag</a>(nextFlag);</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <span class="keywordflow">if</span> (flagInfo.length() == 0) <span class="keywordflow">continue</span>;</div>
