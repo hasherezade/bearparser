@@ -552,22 +552,23 @@ SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
     bufsize_t newSize = fullSize + addedSize;
 
     offset_t secROffset = secHdr->getContentOffset(Executable::RAW, false);
-    bufsize_t secRSize = secHdr->getContentSize(Executable::RAW, false);
-    bufsize_t secNewRSize = newSize - secROffset; //include overlay in section
+    if (secROffset == INVALID_ADDR) {
+        return NULL;
+    }
+    const bufsize_t secNewRSize = newSize - secROffset; //include overlay in section
 
     secHdr->setNumValue(SectionHdrWrapper::RSIZE, uint64_t(secNewRSize));
 
-    offset_t secVOffset = secHdr->getContentOffset(Executable::RVA, false);
-    bufsize_t secVSize = secHdr->getContentSize(Executable::RVA, false);
-    bufsize_t secNewVSize = secVSize;
+    const offset_t secVOffset = secHdr->getContentOffset(Executable::RVA, false);
+    const bufsize_t secVSize = secHdr->getContentSize(Executable::RVA, false);
+
     // if the previous virtual size is smaller than the new raw size, then update it:
     if (secVSize < secNewRSize) {
-        secNewVSize = secNewRSize;
         secHdr->setNumValue(SectionHdrWrapper::VSIZE, uint64_t(secNewRSize));
 
         // if the virtual size of section has changed,
         // update the Size of Image (saved in the header):
-        bufsize_t newVSize = secVOffset + secNewVSize;
+        bufsize_t newVSize = secVOffset + secNewRSize;
         this->setVirtualSize(newVSize);
     }
 
