@@ -81,7 +81,7 @@ public:
     virtual void parseCommands(); // main loop
 
 protected:
-    Command* getCommand(std::string name);
+    Command* getCommand(const std::string& line);
     void clearCommands();
 
     std::map<std::string, Command*> cmds;

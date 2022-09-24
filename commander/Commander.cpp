@@ -14,7 +14,7 @@ Commander::Commander(CmdContext *v_context)
 void Commander::clearCommands()
 {
     std::map<std::string, Command*>::iterator itr;
-    for (itr = cmds.begin(); itr != cmds.end(); itr++) {
+    for (itr = cmds.begin(); itr != cmds.end(); ++itr) {
         Command* cmd = itr->second;
         delete cmd;
     }
@@ -32,7 +32,7 @@ void Commander::printHelp()
     }
 }
 
-Command* Commander::getCommand(std::string line)
+Command* Commander::getCommand(const std::string& line)
 {
     std::string name = line;
     //TODO: split the line...
