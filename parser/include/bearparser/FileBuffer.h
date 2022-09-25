@@ -6,10 +6,10 @@
 const bufsize_t FILE_MAXSIZE = BUFSIZE_MAX;
 const bufsize_t FILEVIEW_MAXSIZE = (1024*1024*400); //419mb
 
-class FileBufferException : public CustomException
+class FileBufferException : public BufferException
 {
 public:
-    FileBufferException(const QString info) : CustomException(info) {}
+    FileBufferException(const QString info) : BufferException(info) {}
 };
 
 
