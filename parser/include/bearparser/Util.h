@@ -43,11 +43,13 @@ namespace pe_util {
 
     void hexdump(BYTE *buf, size_t bufSize, size_t pad);
     
-    inline size_t unitsCount(uint64_t value, uint64_t unit)
+    inline size_t unitsCount(uint64_t value, uint64_t unit, bool roundup = true)
     {
         if (unit == 0) return 0;
         size_t units = value / unit;
-        if (value % unit) units++;
+        if (roundup) {
+            if (value % unit) units++;
+        }
         return units;
     }
 
