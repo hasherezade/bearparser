@@ -32,20 +32,20 @@ public:
     bufsize_t peNtHeadersSize() const;
     bufsize_t hdrsSize() const;
 
-	void setImageSize(bufsize_t newSize)
-	{
-		if (opt32) {
-			this->opt32->SizeOfImage = newSize;
-		}
-		else if (opt64) {
-			this->opt64->SizeOfImage = newSize;
-		}
-	}
+    void setImageSize(bufsize_t newSize)
+    {
+        if (opt32) {
+            this->opt32->SizeOfImage = newSize;
+        }
+        else if (opt64) {
+            this->opt64->SizeOfImage = newSize;
+        }
+    }
 
-	IMAGE_FILE_HEADER *getFileHeader() const
-	{
-		return fHdr;
-	}
+    IMAGE_FILE_HEADER *getFileHeader() const
+    {
+        return fHdr;
+    }
 
 protected:
     void reset();
