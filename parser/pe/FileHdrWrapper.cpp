@@ -24,10 +24,10 @@ void FileHdrWrapper::initCharact()
         return; //already initialized
     }
     s_fHdrCharact[F_RELOCS_STRIPPED] = "Relocation info stripped from file.";
-    s_fHdrCharact[F_EXECUTABLE_IMAGE] = "File is executable  (i.e. no unresolved externel references).";
-    s_fHdrCharact[F_LINE_NUMS_STRIPPED] = "Line nunbers stripped from file.";
+    s_fHdrCharact[F_EXECUTABLE_IMAGE] = "File is executable  (i.e. no unresolved external references).";
+    s_fHdrCharact[F_LINE_NUMS_STRIPPED] = "Line numbers stripped from file.";
     s_fHdrCharact[F_LOCAL_SYMS_STRIPPED] = "Local symbols stripped from file.";
-    s_fHdrCharact[F_AGGRESIVE_WS_TRIM] = "Agressively trim working set";
+    s_fHdrCharact[F_AGGRESIVE_WS_TRIM] = "Aggressively trim working set";
     s_fHdrCharact[F_LARGE_ADDRESS_AWARE] = "App can handle >2gb addresses";
     s_fHdrCharact[F_BYTES_REVERSED_LO] = "Bytes of machine word are reversed.";
     s_fHdrCharact[F_MACHINE_32BIT] = "32 bit word machine.";
