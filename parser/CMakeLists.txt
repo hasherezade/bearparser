@@ -151,6 +151,8 @@ SOURCE_GROUP("Header Files\\pe\\rsrc" FILES ${pe_rsrc_hdrs} )
 
 add_library ( bearparser STATIC ${parser_hdrs} ${parser_srcs} )
 
+target_include_directories(bearparser PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include/")
+
 if(USE_QT4)
     target_link_libraries (bearparser ${QT_QTCORE_LIBRARIES} )
 else()
