@@ -78,6 +78,38 @@ bool pe_util::hasNonPrintable(const char *inp, size_t maxInp)
     return false;
 }
 
+bool _isFuncChar(const char c)
+{
+    if ((c >= 'a' && c <= 'z')
+            || (c >= 'A' && c <= 'Z')
+            || (c >= '0' && c <= '9')
+            || (c == '_')
+            || (c == '.')
+            || (c== '#') 
+            || (c == '@')
+            || (c == '?')
+            || (c == '-')
+        )
+    {
+        return true;
+    }
+    return false;
+}
+
+bool pe_util::validateFuncName(const char* fPtr, size_t bufSize)
+{
+    if (!fPtr || !bufSize) return false;
+
+    for (char i = 0; i < bufSize; i++) {
+        const char c = fPtr[i];
+        if (c == 0) break;
+        if (!_isFuncChar(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 size_t pe_util::forwarderNameLen(const char* fPtr, size_t bufSize)
 {
     if (!fPtr || bufSize == 0) return 0;
@@ -85,15 +117,7 @@ size_t pe_util::forwarderNameLen(const char* fPtr, size_t bufSize)
     // names can be also mangled, i.e. MSVCRT.??0__non_rtti_object@std@@QAE@ABV01@@Z
     bool has_dot = false;
     size_t len = 0;
-    while ((*fPtr >= 'a' && *fPtr <= 'z')
-            || (*fPtr >= 'A' && *fPtr <= 'Z')
-            || (*fPtr >= '0' && *fPtr <= '9')
-            || (*fPtr == '.')
-            || (*fPtr == '_')
-            || (*fPtr == '#') 
-            || (*fPtr == '@')
-            || (*fPtr == '?')
-            || (*fPtr == '-'))
+    while ((*fPtr == '.') || _isFuncChar(*fPtr))
     {
         if (*fPtr == '.') has_dot = true;
         len++;

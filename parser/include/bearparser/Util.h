@@ -39,6 +39,7 @@ namespace pe_util {
 
     size_t noWhiteCount(char *buf, size_t bufSize);
     size_t noWhiteCount(std::string);
+    bool validateFuncName(const char* fPtr, size_t bufSize);
     size_t forwarderNameLen(const char *ptr, size_t max_len);
 
     void hexdump(BYTE *buf, size_t bufSize, size_t pad);
