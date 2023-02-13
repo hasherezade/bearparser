@@ -1989,6 +1989,7 @@ namespace pe {
         // DLL_PROCESS_TERM           0x0002     // Reserved.
         // DLL_THREAD_INIT            0x0004     // Reserved.
         // DLL_THREAD_TERM            0x0008     // Reserved.
+        DLL_CHARACTERISTICS_HIGH_ENTROPY_VA = 0x0020,
         DLL_DYNAMIC_BASE = 0x0040,     // DLL can move.
         DLL_FORCE_INTEGRITY = 0x0080,     // Code Integrity Image
         DLL_NX_COMPAT = 0x0100,     // Image is NX compatible

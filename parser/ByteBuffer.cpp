@@ -2,7 +2,7 @@
 
 ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
     : content(NULL), contentSize(v_size), padding(v_padding),
-    m_isResized(false)
+    originalSize(v_size)
 {
     if (v_size == 0) throw BufferException("Zero size requested");
 
@@ -12,18 +12,18 @@ ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
 
 ByteBuffer::ByteBuffer(BYTE *v_content, bufsize_t v_size, bufsize_t v_padding)
     : content(NULL), contentSize(v_size), padding(v_padding),
-    m_isResized(false)
+    originalSize(v_size)
 {
     if (v_size == 0) throw BufferException("Zero size requested");
 
     this->content =  allocContent(v_size, v_padding);
     this->contentSize = v_size;
-    memcpy(this->content, v_content, v_size);
+    ::memcpy(this->content, v_content, v_size);
 }
 
 ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_t v_size, bufsize_t v_padding)
     : content(NULL), contentSize(0), padding(0),
-    m_isResized(false)
+    originalSize(0)
 {
     if (v_parent == NULL) throw BufferException("Cannot make subBuffer for NULL buffer!");
     if (v_size == 0) throw BufferException("Cannot make 0 size buffer!");
@@ -36,10 +36,10 @@ ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_
     BYTE *bContent = v_parent->getContentAt(v_offset, copySize);
     if (bContent == NULL) throw BufferException("Cannot make Buffer for NULL content!");
 
-    this->content =  allocContent(allocSize, v_padding);
+    this->content = allocContent(allocSize, v_padding);
     this->contentSize = allocSize;
-
-    memcpy(this->content, bContent, copySize);
+    this->originalSize = this->contentSize;
+    ::memcpy(this->content, bContent, copySize);
 }
 
 BYTE* ByteBuffer::allocContent(bufsize_t v_size, bufsize_t v_padding)
@@ -50,7 +50,7 @@ BYTE* ByteBuffer::allocContent(bufsize_t v_size, bufsize_t v_padding)
     if (content == NULL) {
         throw BufferException("Cannot allocate buffer of size: 0x" + QString::number(allocSize, 16));
     }
-    memset(content, 0, allocSize);
+    ::memset(content, 0, allocSize);
     return content;
 }
 
@@ -64,20 +64,19 @@ bool ByteBuffer::resize(bufsize_t newSize)
     } catch(BufferException &e) {
         newContent = NULL;
     }
-    if (newContent == NULL) return false;
+    if (!newContent) return false;
 
     BYTE *oldContent = this->content;
     bufsize_t oldSize = this->contentSize;
     bufsize_t copySize = newSize < oldSize ? newSize : oldSize;
 
-    memcpy(newContent, oldContent, copySize);
+    ::memcpy(newContent, oldContent, copySize);
 
     this->content = newContent;
     this->contentSize = newSize;
 
     delete []oldContent;
 
-    m_isResized = true;
     return true;
 }
 

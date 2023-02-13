@@ -7,7 +7,7 @@ class ByteBuffer : public AbstractByteBuffer
 {
 public:
     ByteBuffer(bufsize_t v_size, bufsize_t padding = DEFAULT_PADDING);
-    ByteBuffer(BYTE *v_content,bufsize_t v_size, bufsize_t padding = DEFAULT_PADDING);
+    ByteBuffer(BYTE *v_content, bufsize_t v_size, bufsize_t padding = DEFAULT_PADDING);
     ByteBuffer(AbstractByteBuffer *sourceBuf, offset_t offset, bufsize_t size, bufsize_t padding = DEFAULT_PADDING);
 
     virtual ~ByteBuffer();
@@ -16,7 +16,7 @@ public:
     virtual BYTE* getContent() { return content; }
     virtual bool resize(bufsize_t newSize); 
 
-    virtual bool isResized() { return m_isResized; }
+    virtual bool isResized() { return originalSize != contentSize; }
 
 protected:
     BYTE* allocContent(bufsize_t v_size, bufsize_t padding);
@@ -25,6 +25,6 @@ protected:
     bufsize_t contentSize;
     bufsize_t padding;
 
-    bool m_isResized;
+    bufsize_t originalSize;
 };
 

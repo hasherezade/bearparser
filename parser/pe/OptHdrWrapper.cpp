@@ -11,6 +11,7 @@ std::map<DWORD, QString> OptHdrWrapper::s_subsystem;
 void OptHdrWrapper::initDllCharact()
 {
     if (s_dllCharact.size() == 0) {
+        s_dllCharact[pe::DLL_CHARACTERISTICS_HIGH_ENTROPY_VA] = "Image can handle a high entropy 64-bit virtual address space";
         s_dllCharact[pe::DLL_DYNAMIC_BASE] = "DLL can move";
         s_dllCharact[pe::DLL_FORCE_INTEGRITY] = "Code Integrity Image";
         s_dllCharact[pe::DLL_NX_COMPAT] = "Image is NX compatible";
