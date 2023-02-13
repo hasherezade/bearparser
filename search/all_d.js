@@ -18,8 +18,9 @@ var searchData=
   ['ordtonameid_15',['ordToNameId',['../class_export_dir_wrapper.html#a5d245856f8815550d3c9df64b0fd331a',1,'ExportDirWrapper']]],
   ['orig_5ffirst_5fthunk_16',['ORIG_FIRST_THUNK',['../class_import_entry_wrapper.html#a0dd736fcaa604c966425896fd6f99986a6789ac43f4c80b7fc3c98999169dbcc1',1,'ImportEntryWrapper']]],
   ['orig_5fthunk_17',['ORIG_THUNK',['../class_imported_func_wrapper.html#a748f0650d6c1815885732483aa0d5bcca92b20e35811bb05b71f0c96c961ae271',1,'ImportedFuncWrapper']]],
-  ['os_18',['OS',['../class_resource_version_wrapper.html#ab5d68467854b544b4b69ce2701563928a69c55f5fa341237cc7ef3354be13eaa9',1,'ResourceVersionWrapper']]],
-  ['osver_5fmajor_19',['OSVER_MAJOR',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013a197363e46ad5d7a0bc04eda2cf0c0903',1,'OptHdrWrapper']]],
-  ['osver_5fminor_20',['OSVER_MINOR',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013a90e5ea25483fdd4ff17059da33ca4af9',1,'OptHdrWrapper']]],
-  ['ovno_21',['OVNO',['../class_dos_hdr_wrapper.html#a7dcac0806ba5c5f16785f683c67d8980afd33643deb4fcf3e7ab52671530b6828',1,'DosHdrWrapper']]]
+  ['originalsize_18',['originalSize',['../class_byte_buffer.html#a395f661b2dc5635e153a06d7d639a757',1,'ByteBuffer']]],
+  ['os_19',['OS',['../class_resource_version_wrapper.html#ab5d68467854b544b4b69ce2701563928a69c55f5fa341237cc7ef3354be13eaa9',1,'ResourceVersionWrapper']]],
+  ['osver_5fmajor_20',['OSVER_MAJOR',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013a197363e46ad5d7a0bc04eda2cf0c0903',1,'OptHdrWrapper']]],
+  ['osver_5fminor_21',['OSVER_MINOR',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013a90e5ea25483fdd4ff17059da33ca4af9',1,'OptHdrWrapper']]],
+  ['ovno_22',['OVNO',['../class_dos_hdr_wrapper.html#a7dcac0806ba5c5f16785f683c67d8980afd33643deb4fcf3e7ab52671530b6828',1,'DosHdrWrapper']]]
 ];
