@@ -1,8 +1,12 @@
 <map id="SectionHdrWrapper::getContentOffset" name="SectionHdrWrapper::getContentOffset">
-<area shape="rect" id="node1" title=" " alt="" coords="5,35,147,75"/>
-<area shape="rect" id="node2" href="$class_section_hdr_wrapper.html#a698831115eda474980d6be3e86747ee2" title=" " alt="" coords="195,5,365,45"/>
-<area shape="rect" id="node3" href="$class_p_e_file.html#a1056ad3e332b1f896e211c5f864ce8e1" title=" " alt="" coords="203,70,357,95"/>
-<area shape="rect" id="node4" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="413,45,592,70"/>
-<area shape="rect" id="node6" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="427,94,578,119"/>
-<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="640,37,771,77"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,85,147,125"/>
+<area shape="rect" id="node2" href="$class_p_e_file.html#acfaebe1d9ceb92b150eee6357cf1ca5c" title=" " alt="" coords="209,5,351,31"/>
+<area shape="rect" id="node4" href="$class_section_hdr_wrapper.html#a698831115eda474980d6be3e86747ee2" title=" " alt="" coords="195,55,365,95"/>
+<area shape="rect" id="node5" href="$class_p_e_file.html#a1056ad3e332b1f896e211c5f864ce8e1" title=" " alt="" coords="203,120,357,145"/>
+<area shape="rect" id="node9" href="$namespacepe__util.html#a2a369e52bafe749186319d717122796e" title=" " alt="" coords="216,169,344,195"/>
+<area shape="rect" id="node3" href="$class_p_e_core.html#a4acc20ded3755cb301f284b0de0b0652" title=" " alt="" coords="429,5,577,31"/>
+<area shape="rect" id="node6" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="413,71,592,96"/>
+<area shape="rect" id="node8" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="427,120,578,145"/>
+<area shape="rect" id="node7" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="640,63,771,103"/>
+<area shape="rect" id="node10" href="$namespacepe__util.html#a9dc8feee375f5c7288ea1221c3965dfb" title=" " alt="" coords="447,169,559,195"/>
 </map>

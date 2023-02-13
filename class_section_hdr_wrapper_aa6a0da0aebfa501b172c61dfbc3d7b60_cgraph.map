@@ -1,14 +1,16 @@
 <map id="SectionHdrWrapper::getMappedRawSize" name="SectionHdrWrapper::getMappedRawSize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,119,147,159"/>
-<area shape="rect" id="node2" href="$class_p_e_file.html#acfaebe1d9ceb92b150eee6357cf1ca5c" title=" " alt="" coords="204,5,347,31"/>
-<area shape="rect" id="node4" href="$class_section_hdr_wrapper.html#a9478405806f657e94ca5192dd2b86839" title=" " alt="" coords="195,55,356,95"/>
-<area shape="rect" id="node5" href="$class_section_hdr_wrapper.html#a9dee2f275d168224c31131b56564b230" title=" " alt="" coords="205,119,346,159"/>
-<area shape="rect" id="node11" href="$class_executable.html#a862ee23abe249ba557c740f2d2c246c5" title=" " alt="" coords="632,184,792,209"/>
-<area shape="rect" id="node12" href="$namespacebuf__util.html#aad423cee9c4deed0062c92fe29744a0f" title=" " alt="" coords="198,235,353,260"/>
-<area shape="rect" id="node3" href="$class_p_e_core.html#a4acc20ded3755cb301f284b0de0b0652" title=" " alt="" coords="415,5,563,31"/>
-<area shape="rect" id="node6" href="$class_section_hdr_wrapper.html#a698831115eda474980d6be3e86747ee2" title=" " alt="" coords="404,65,575,105"/>
-<area shape="rect" id="node7" href="$class_p_e_file.html#a1056ad3e332b1f896e211c5f864ce8e1" title=" " alt="" coords="412,129,567,155"/>
-<area shape="rect" id="node8" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="623,85,801,111"/>
-<area shape="rect" id="node10" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="637,135,787,160"/>
-<area shape="rect" id="node9" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="849,127,980,167"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,117,147,157"/>
+<area shape="rect" id="node2" href="$class_p_e_file.html#acfaebe1d9ceb92b150eee6357cf1ca5c" title=" " alt="" coords="418,5,561,31"/>
+<area shape="rect" id="node4" href="$class_section_hdr_wrapper.html#a9478405806f657e94ca5192dd2b86839" title=" " alt="" coords="195,53,356,93"/>
+<area shape="rect" id="node5" href="$class_section_hdr_wrapper.html#a9dee2f275d168224c31131b56564b230" title=" " alt="" coords="205,117,346,157"/>
+<area shape="rect" id="node13" href="$class_executable.html#a862ee23abe249ba557c740f2d2c246c5" title=" " alt="" coords="195,181,355,207"/>
+<area shape="rect" id="node14" href="$namespacebuf__util.html#aad423cee9c4deed0062c92fe29744a0f" title=" " alt="" coords="198,231,353,256"/>
+<area shape="rect" id="node3" href="$class_p_e_core.html#a4acc20ded3755cb301f284b0de0b0652" title=" " alt="" coords="638,5,786,31"/>
+<area shape="rect" id="node6" href="$class_section_hdr_wrapper.html#a698831115eda474980d6be3e86747ee2" title=" " alt="" coords="404,58,575,98"/>
+<area shape="rect" id="node7" href="$class_p_e_file.html#a1056ad3e332b1f896e211c5f864ce8e1" title=" " alt="" coords="412,123,567,148"/>
+<area shape="rect" id="node11" href="$namespacepe__util.html#a2a369e52bafe749186319d717122796e" title=" " alt="" coords="425,172,553,197"/>
+<area shape="rect" id="node8" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="623,73,801,99"/>
+<area shape="rect" id="node10" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="637,123,787,148"/>
+<area shape="rect" id="node9" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="849,141,980,181"/>
+<area shape="rect" id="node12" href="$namespacepe__util.html#a9dc8feee375f5c7288ea1221c3965dfb" title=" " alt="" coords="656,172,768,197"/>
 </map>

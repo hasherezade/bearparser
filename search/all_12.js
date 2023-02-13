@@ -2,7 +2,7 @@ var searchData=
 [
   ['unbindimports_0',['unbindImports',['../class_p_e_file.html#a317a61aa57bae476ff9157dcbf383c36',1,'PEFile']]],
   ['uninitdata_5fsize_1',['UNINITDATA_SIZE',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013a2d36b2ca2292e6a6bf287b4da10116eb',1,'OptHdrWrapper']]],
-  ['unitscount_2',['unitsCount',['../namespacepe__util.html#af5ae46a21c36e329b01cdd51da0c6a00',1,'pe_util']]],
+  ['unitscount_2',['unitsCount',['../namespacepe__util.html#a2a369e52bafe749186319d717122796e',1,'pe_util']]],
   ['unknown_3',['UNKNOWN',['../class_executable.html#a2f0aa130b569d7d8f56ec7c746d08684a385d9237ba097db97551e56a2b6c351c',1,'Executable']]],
   ['unknown_5fexception_4',['UNKNOWN_EXCEPTION',['../_custom_exception_8h.html#a9df729422f16089fb0146656c1264e6f',1,'CustomException.h']]],
   ['unload_5fiat_5',['UNLOAD_IAT',['../class_delay_imp_entry_wrapper.html#ab3020a74b9682cd49e18c1da1e8096faa5e00e2edc06b6b23b2d5486b376929ab',1,'DelayImpEntryWrapper']]],

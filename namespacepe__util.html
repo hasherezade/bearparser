@@ -98,8 +98,8 @@ Functions</h2></td></tr>
 <tr class="separator:a242ea277da991102b3d65c0ea87be014"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89542115abc280faa162fbd815672f48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepe__util.html#a89542115abc280faa162fbd815672f48">hexdump</a> (BYTE *buf, size_t bufSize, size_t pad)</td></tr>
 <tr class="separator:a89542115abc280faa162fbd815672f48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5ae46a21c36e329b01cdd51da0c6a00"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepe__util.html#af5ae46a21c36e329b01cdd51da0c6a00">unitsCount</a> (uint64_t value, uint64_t unit)</td></tr>
-<tr class="separator:af5ae46a21c36e329b01cdd51da0c6a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a369e52bafe749186319d717122796e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepe__util.html#a2a369e52bafe749186319d717122796e">unitsCount</a> (uint64_t value, uint64_t unit, bool <a class="el" href="namespacepe__util.html#a9dc8feee375f5c7288ea1221c3965dfb">roundup</a>=true)</td></tr>
+<tr class="separator:a2a369e52bafe749186319d717122796e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dc8feee375f5c7288ea1221c3965dfb"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepe__util.html#a9dc8feee375f5c7288ea1221c3965dfb">roundup</a> (uint64_t value, uint64_t unit)</td></tr>
 <tr class="separator:a9dc8feee375f5c7288ea1221c3965dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d27344da7a33a4c5b7c43c329179367"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepe__util.html#a8d27344da7a33a4c5b7c43c329179367">isSpaceClear</a> (void *ptr, uint64_t size)</td></tr>
@@ -509,21 +509,21 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_util_8h_source.html#l00055">55</a> of file <a class="el" href="_util_8h_source.html">Util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_util_8h_source.html#l00057">57</a> of file <a class="el" href="_util_8h_source.html">Util.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepe__util_a9dc8feee375f5c7288ea1221c3965dfb_cgraph.png" border="0" usemap="#anamespacepe__util_a9dc8feee375f5c7288ea1221c3965dfb_cgraph" alt=""/></div>
 <map name="anamespacepe__util_a9dc8feee375f5c7288ea1221c3965dfb_cgraph" id="anamespacepe__util_a9dc8feee375f5c7288ea1221c3965dfb_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,117,31"/>
-<area shape="rect" href="namespacepe__util.html#af5ae46a21c36e329b01cdd51da0c6a00" title=" " alt="" coords="165,5,293,31"/>
+<area shape="rect" href="namespacepe__util.html#a2a369e52bafe749186319d717122796e" title=" " alt="" coords="165,5,293,31"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="af5ae46a21c36e329b01cdd51da0c6a00" name="af5ae46a21c36e329b01cdd51da0c6a00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5ae46a21c36e329b01cdd51da0c6a00">&#9670;&#160;</a></span>unitsCount()</h2>
+<a id="a2a369e52bafe749186319d717122796e" name="a2a369e52bafe749186319d717122796e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a369e52bafe749186319d717122796e">&#9670;&#160;</a></span>unitsCount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -541,7 +541,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>unit</em>&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>roundup</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -557,6 +563,15 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_util_8h_source.html#l00047">47</a> of file <a class="el" href="_util_8h_source.html">Util.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacepe__util_a2a369e52bafe749186319d717122796e_cgraph.png" border="0" usemap="#anamespacepe__util_a2a369e52bafe749186319d717122796e_cgraph" alt=""/></div>
+<map name="anamespacepe__util_a2a369e52bafe749186319d717122796e_cgraph" id="anamespacepe__util_a2a369e52bafe749186319d717122796e_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,133,31"/>
+<area shape="rect" href="namespacepe__util.html#a9dc8feee375f5c7288ea1221c3965dfb" title=" " alt="" coords="181,5,293,31"/>
+</map>
+</div>
 
 </div>
 </div>
