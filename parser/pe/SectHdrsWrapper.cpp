@@ -210,6 +210,12 @@ offset_t SectionHdrWrapper::getContentOffset(Executable::addr_type aType, bool u
         return offset; //returning as is
     }
     if (aType == Executable::RAW) {
+        bufsize_t align = m_PE->getAlignment(Executable::RAW);
+        const size_t units = pe_util::unitsCount(offset, align, false);
+        const offset_t rounded = units * align; //round down to section alignment
+        if (rounded != 0) {
+            offset = rounded;
+        }
         const size_t peSize = m_PE->getMappedSize(aType);
         if (offset > peSize) {
             offset = INVALID_ADDR;
@@ -402,14 +408,14 @@ void SectHdrsWrapper::addMapping(SectionHdrWrapper *sec)
 {
     if (sec == NULL) return;
 
-    bool roundup = true;
+    bool recalculate = true;
     if (sec->getContentSize(Executable::RAW, true) == 0) {
         //printf("skipping empty section..\n");
         return;
     }
 
-    offset_t endRVA = sec->getContentEndOffset(Executable::RVA, roundup);
-    offset_t endRaw = sec->getContentEndOffset(Executable::RAW, roundup);
+    offset_t endRVA = sec->getContentEndOffset(Executable::RVA, recalculate);
+    offset_t endRaw = sec->getContentEndOffset(Executable::RAW, recalculate);
     vSec[endRVA] = sec;
 
     if (rSec.find(endRaw) != rSec.end()) { //already exist
