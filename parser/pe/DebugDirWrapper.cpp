@@ -16,7 +16,7 @@ typedef struct _IMAGE_DEBUG_DIRECTORY {
 
 */
 
-bool DebugDirWrapper::loadNextEntry(const size_t cntr)
+bool DebugDirWrapper::loadNextEntry(size_t cntr)
 {
     const size_t dirSize = this->getSize();
     const size_t entriesCount = dirSize / sizeof(IMAGE_DEBUG_DIRECTORY);

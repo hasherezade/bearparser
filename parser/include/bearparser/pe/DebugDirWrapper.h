@@ -44,7 +44,7 @@ protected:
         return true;
     }
 
-    virtual bool loadNextEntry(const size_t cntr);
+    virtual bool loadNextEntry(size_t cntr);
 
     IMAGE_DEBUG_DIRECTORY* getDebugDir(size_t index = 0)
     {
