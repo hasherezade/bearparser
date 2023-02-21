@@ -49,7 +49,7 @@ protected:
     IMAGE_DEBUG_DIRECTORY* getDebugDir(size_t index = 0)
     {
         const offset_t rva = getDirEntryAddress();
-        if (rva == INVALID_ADDR) {
+        if (rva == INVALID_ADDR || rva == 0) {
             return NULL;
         }
         const size_t offset = index * sizeof(IMAGE_DEBUG_DIRECTORY);
