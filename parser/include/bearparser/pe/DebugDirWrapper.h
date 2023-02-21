@@ -21,8 +21,7 @@ public:
     
     virtual size_t getFieldsCount()
     {
-        const size_t dirSize = this->getSize();
-        return dirSize / sizeof(IMAGE_DEBUG_DIRECTORY);
+        return entries.size();
     }
 
     virtual void* getFieldPtr(size_t fieldId, size_t subField) { return getSubfieldPtr(fieldId, subField ); }
