@@ -90,7 +90,14 @@ public:
 
     virtual void* getPtr();
     virtual bufsize_t getSize();
-    virtual QString getName() { return "Debug entry"; }
+    
+    virtual QString getName()
+    {
+        IMAGE_DEBUG_DIRECTORY* d = debugDir();
+        if (!d) return "";
+        return translateType(d->Type);
+    }
+    
     virtual size_t getFieldsCount() { return FIELD_COUNTER; }
     virtual size_t getSubFieldsCount() { return 1; }
 

@@ -103,7 +103,7 @@ QString DebugDirEntryWrapper::translateType(int type)
         case pe::DT_UNKNOWN : return "unknown";
         case pe::DT_COFF : return "COFF";
         case pe::DT_CODEVIEW : return "Visual C++ (CodeView)";
-        case pe::DT_FPO : return "frame pointer omission";
+        case pe::DT_FPO : return "Frame pointer omission";
         case pe::DT_MISC : return "DBG file";
         case pe::DT_EXCEPTION : return "A copy of .pdata section";
         case pe::DT_FIXUP : return "Reserved";
@@ -118,7 +118,7 @@ QString DebugDirEntryWrapper::translateType(int type)
         case pe::DT_MPX : return "MPX";
         case pe::DT_REPRO : return "REPRO";
     }
-    return "";
+    return "<Unknown>";
 }
 
 QString DebugDirEntryWrapper::translateFieldContent(size_t fieldId)
