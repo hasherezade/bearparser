@@ -17,7 +17,7 @@ public:
         return getDirEntrySize();
     }
     
-    virtual QString getName() { return "Debugs"; }
+    virtual QString getName() { return "Debug"; }
     
     virtual size_t getFieldsCount()
     {
@@ -29,7 +29,6 @@ public:
     virtual QString getFieldName(size_t fieldId, size_t subField) { return getSubfieldName(fieldId, subField ); }
     virtual QString getFieldName(size_t fieldId) { return getFieldName(fieldId, FIELD_NONE); }
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE) { return getSubfieldSize(fieldId, subField); }
-    //virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField = FIELD_NONE);
     
 protected:
     bool wrap()
@@ -43,7 +42,6 @@ protected:
         for (cntr = 0; cntr < LIMIT; cntr++) {
             if (loadNextEntry(cntr) == false) break;
         }
-        //TODO: check if number of entries has changed
         return true;
     }
 
