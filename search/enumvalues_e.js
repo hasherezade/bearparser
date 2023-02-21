@@ -1,8 +1,8 @@
 var searchData=
 [
   ['raw_0',['RAW',['../class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5badb8a64acd3f74166ea450698d025db3b',1,'Executable']]],
-  ['raw_5fdata_5faddr_1',['RAW_DATA_ADDR',['../class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517cabab6dc58dcff413e7d06f5af2a4f8fae',1,'DebugDirWrapper']]],
-  ['raw_5fdata_5fptr_2',['RAW_DATA_PTR',['../class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517ca352780db92e34d00bdc0ae8bfc731780',1,'DebugDirWrapper']]],
+  ['raw_5fdata_5faddr_1',['RAW_DATA_ADDR',['../class_debug_dir_entry_wrapper.html#a78106e75b9c8550289c35667ddd0768cae2e700d6fd3694ac11bd7b7fb23adf6f',1,'DebugDirEntryWrapper']]],
+  ['raw_5fdata_5fptr_2',['RAW_DATA_PTR',['../class_debug_dir_entry_wrapper.html#a78106e75b9c8550289c35667ddd0768ca0d6168884820bf465cb591591c55b868',1,'DebugDirEntryWrapper']]],
   ['reloc_5fentry_5fval_3',['RELOC_ENTRY_VAL',['../class_reloc_entry_wrapper.html#a43de8e3541d124b2211939a17bc8f37ca97433c0cb900e62cbe741e4de7a46480',1,'RelocEntryWrapper']]],
   ['reloc_5fnum_4',['RELOC_NUM',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730ae5de568545f864bc9fb1f1be9f5b69ce',1,'SectionHdrWrapper']]],
   ['reloc_5fptr_5',['RELOC_PTR',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730a301b90a5d811d3e7cd8f69ecc2451ff3',1,'SectionHdrWrapper']]],

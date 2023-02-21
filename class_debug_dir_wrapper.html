@@ -71,7 +71,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#friends">Friends</a> &#124;
@@ -106,53 +105,26 @@ Collaboration diagram for DebugDirWrapper:</div>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a77866dd23fdcdef88ee06dd3456a517c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517c">DebugDirFID</a> { <br />
-&#160;&#160;<a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517cae2a2853a8adcb7fd95018bc66ec27e8f">NONE</a> = FIELD_NONE
-, <a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517ca2a2338fb216f92e2129aa97ae0253419">CHARACTERISTIC</a>
-, <a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517ca0f642c4f8f37e6f9cde272a991c423cc">TIMESTAMP</a>
-, <a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517cab11acc924d6fda16d373256d66aae8fe">MAJOR_VER</a>
-, <br />
-&#160;&#160;<a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517ca38659096397c626c5de7994934f870ff">MINOR_VER</a>
-, <a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517ca48a5e4b7a8e9bf0cab0b3ee2884a1c73">TYPE</a>
-, <a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517ca4f5fb5651a52e673bfa76f5689f1aca9">DATA_SIZE</a>
-, <a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517cabab6dc58dcff413e7d06f5af2a4f8fae">RAW_DATA_ADDR</a>
-, <br />
-&#160;&#160;<a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517ca352780db92e34d00bdc0ae8bfc731780">RAW_DATA_PTR</a>
-, <a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517ca491fa5e105f3b77846e8d7644a67150f">FIELD_COUNTER</a>
-<br />
- }</td></tr>
-<tr class="separator:a77866dd23fdcdef88ee06dd3456a517c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa96f3bd1945636e77a87255916e66729"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#aa96f3bd1945636e77a87255916e66729">DebugDirWrapper</a> (<a class="el" href="class_p_e_file.html">PEFile</a> *pe)</td></tr>
 <tr class="separator:aa96f3bd1945636e77a87255916e66729"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7f53d0e9968833eb79571095e95750a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#af7f53d0e9968833eb79571095e95750a">~DebugDirWrapper</a> ()</td></tr>
-<tr class="separator:af7f53d0e9968833eb79571095e95750a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac081e75c9eed3c5f67aa9826bd335b82"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#ac081e75c9eed3c5f67aa9826bd335b82">wrap</a> ()</td></tr>
-<tr class="separator:ac081e75c9eed3c5f67aa9826bd335b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7966582981150c8ef024aa6b093163c"><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#ad7966582981150c8ef024aa6b093163c">getPtr</a> ()</td></tr>
-<tr class="separator:ad7966582981150c8ef024aa6b093163c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6332d742b44cdab704af8ae229209787"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a6332d742b44cdab704af8ae229209787">getSize</a> ()</td></tr>
-<tr class="separator:a6332d742b44cdab704af8ae229209787"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a653a05b328112264b01aea14defce61d"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a653a05b328112264b01aea14defce61d">getName</a> ()</td></tr>
-<tr class="separator:a653a05b328112264b01aea14defce61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33ba43d13e79286f634c26b8e8ddd368"><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a33ba43d13e79286f634c26b8e8ddd368">getPtr</a> ()</td></tr>
+<tr class="separator:a33ba43d13e79286f634c26b8e8ddd368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa569b5e9cb43f99cba1753516776b82e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#aa569b5e9cb43f99cba1753516776b82e">getSize</a> ()</td></tr>
+<tr class="separator:aa569b5e9cb43f99cba1753516776b82e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3eeb8d7ae50b730d97b6811021194efa"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a3eeb8d7ae50b730d97b6811021194efa">getName</a> ()</td></tr>
+<tr class="separator:a3eeb8d7ae50b730d97b6811021194efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b2a4db178ee65f190ce2692c15faac0"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a1b2a4db178ee65f190ce2692c15faac0">getFieldsCount</a> ()</td></tr>
 <tr class="separator:a1b2a4db178ee65f190ce2692c15faac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa413e5bd1227fffa881d755bb7b3cc1c"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#aa413e5bd1227fffa881d755bb7b3cc1c">getSubFieldsCount</a> ()</td></tr>
-<tr class="separator:aa413e5bd1227fffa881d755bb7b3cc1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dbbaed74fdd99a947a034236fc89fae"><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a7dbbaed74fdd99a947a034236fc89fae">getFieldPtr</a> (size_t fieldId, size_t subField)</td></tr>
-<tr class="separator:a7dbbaed74fdd99a947a034236fc89fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7aebc3cc4167a56da12bdf526b69b07c"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a7aebc3cc4167a56da12bdf526b69b07c">getFieldName</a> (size_t fieldId)</td></tr>
-<tr class="separator:a7aebc3cc4167a56da12bdf526b69b07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a729371ea6d46de6d9d10de57906e1b64"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5b">Executable::addr_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a729371ea6d46de6d9d10de57906e1b64">containsAddrType</a> (size_t fieldId, size_t subField=<a class="el" href="_exe_element_wrapper_8h.html#ae810f8925d2f98da8659d53ce26b5b5c">FIELD_NONE</a>)</td></tr>
-<tr class="separator:a729371ea6d46de6d9d10de57906e1b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47a83128cfd54c3d17ac0629a0e3dd6d"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a47a83128cfd54c3d17ac0629a0e3dd6d">translateType</a> (int type)</td></tr>
-<tr class="separator:a47a83128cfd54c3d17ac0629a0e3dd6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ff91e1f6e8b6a4d846b6d1b7fb1a3dd"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a3ff91e1f6e8b6a4d846b6d1b7fb1a3dd">translateFieldContent</a> (size_t fieldId)</td></tr>
-<tr class="separator:a3ff91e1f6e8b6a4d846b6d1b7fb1a3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3578924bd5183d0f546aad3f52e0c35"><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#aa3578924bd5183d0f546aad3f52e0c35">getFieldPtr</a> (size_t fieldId, size_t subField)</td></tr>
+<tr class="separator:aa3578924bd5183d0f546aad3f52e0c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a125063dac2798aa4f100d1d1802a255f"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a125063dac2798aa4f100d1d1802a255f">getFieldName</a> (size_t fieldId, size_t subField)</td></tr>
+<tr class="separator:a125063dac2798aa4f100d1d1802a255f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a117eef973386c056617fc1dfeed71ef2"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a117eef973386c056617fc1dfeed71ef2">getFieldName</a> (size_t fieldId)</td></tr>
+<tr class="separator:a117eef973386c056617fc1dfeed71ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b7dfe78dde9e71402d8e9dc3e869d30"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a7b7dfe78dde9e71402d8e9dc3e869d30">getFieldSize</a> (size_t fieldId, size_t subField=<a class="el" href="_exe_element_wrapper_8h.html#ae810f8925d2f98da8659d53ce26b5b5c">FIELD_NONE</a>)</td></tr>
+<tr class="separator:a7b7dfe78dde9e71402d8e9dc3e869d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_data_dir_entry_wrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_data_dir_entry_wrapper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_data_dir_entry_wrapper.html">DataDirEntryWrapper</a></td></tr>
 <tr class="memitem:af5e95792dc15586d7b769dc46ba55e59 inherit pub_methods_class_data_dir_entry_wrapper"><td class="memItemLeft" align="right" valign="top">IMAGE_DATA_DIRECTORY *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59">getDataDirectory</a> ()</td></tr>
 <tr class="separator:af5e95792dc15586d7b769dc46ba55e59 inherit pub_methods_class_data_dir_entry_wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -333,14 +305,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a09b77ff32464bb4de29b5be05500070c"><td class="memItemLeft" align="right" valign="top">BYTE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a09b77ff32464bb4de29b5be05500070c">getDebugStruct</a> ()</td></tr>
-<tr class="separator:a09b77ff32464bb4de29b5be05500070c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31ad430d993c87a3af90664838b7b6e1"><td class="memItemLeft" align="right" valign="top">pe::DEBUG_RSDSI *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a31ad430d993c87a3af90664838b7b6e1">getRDSI</a> ()</td></tr>
-<tr class="separator:a31ad430d993c87a3af90664838b7b6e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9544b01ffd53fad0eabeb8333afe6267"><td class="memItemLeft" align="right" valign="top">pe::DEBUG_NB10 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a9544b01ffd53fad0eabeb8333afe6267">getNB10</a> ()</td></tr>
-<tr class="separator:a9544b01ffd53fad0eabeb8333afe6267"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcabeea848bf6becff1d89c53b3e69d4"><td class="memItemLeft" align="right" valign="top">IMAGE_DEBUG_DIRECTORY *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#abcabeea848bf6becff1d89c53b3e69d4">debugDir</a> ()</td></tr>
-<tr class="separator:abcabeea848bf6becff1d89c53b3e69d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac081e75c9eed3c5f67aa9826bd335b82"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#ac081e75c9eed3c5f67aa9826bd335b82">wrap</a> ()</td></tr>
+<tr class="separator:ac081e75c9eed3c5f67aa9826bd335b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fca74cef0b781cff0c2323cce79ac64"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a4fca74cef0b781cff0c2323cce79ac64">loadNextEntry</a> (const size_t cntr)</td></tr>
+<tr class="separator:a4fca74cef0b781cff0c2323cce79ac64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44f717dbc7964316ab01b0fd09b4e56c"><td class="memItemLeft" align="right" valign="top">IMAGE_DEBUG_DIRECTORY *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a44f717dbc7964316ab01b0fd09b4e56c">getDebugDir</a> (size_t index=0)</td></tr>
+<tr class="separator:a44f717dbc7964316ab01b0fd09b4e56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_data_dir_entry_wrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_data_dir_entry_wrapper')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_data_dir_entry_wrapper.html">DataDirEntryWrapper</a></td></tr>
 <tr class="memitem:abeca109880b28e18f101e790efc29b1d inherit pro_methods_class_data_dir_entry_wrapper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_dir_entry_wrapper.html#abeca109880b28e18f101e790efc29b1d">DataDirEntryWrapper</a> (<a class="el" href="class_p_e_file.html">PEFile</a> *pe, pe::dir_entry v_entryType)</td></tr>
 <tr class="separator:abeca109880b28e18f101e790efc29b1d inherit pro_methods_class_data_dir_entry_wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -367,8 +337,8 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a9ee90bdf1e1a8d1ff7a9505de8363da1"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a9ee90bdf1e1a8d1ff7a9505de8363da1">DebugDirCVEntryWrapper</a></td></tr>
-<tr class="separator:a9ee90bdf1e1a8d1ff7a9505de8363da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eef2bb4acbb90681927f7feafef7cb6"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_debug_dir_wrapper.html#a1eef2bb4acbb90681927f7feafef7cb6">DebugDirEntryWrapper</a></td></tr>
+<tr class="separator:a1eef2bb4acbb90681927f7feafef7cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -396,37 +366,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00006">6</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
-</div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="a77866dd23fdcdef88ee06dd3456a517c" name="a77866dd23fdcdef88ee06dd3456a517c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77866dd23fdcdef88ee06dd3456a517c">&#9670;&#160;</a></span>DebugDirFID</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517c">DebugDirWrapper::DebugDirFID</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a77866dd23fdcdef88ee06dd3456a517cae2a2853a8adcb7fd95018bc66ec27e8f" name="a77866dd23fdcdef88ee06dd3456a517cae2a2853a8adcb7fd95018bc66ec27e8f"></a>NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a77866dd23fdcdef88ee06dd3456a517ca2a2338fb216f92e2129aa97ae0253419" name="a77866dd23fdcdef88ee06dd3456a517ca2a2338fb216f92e2129aa97ae0253419"></a>CHARACTERISTIC&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a77866dd23fdcdef88ee06dd3456a517ca0f642c4f8f37e6f9cde272a991c423cc" name="a77866dd23fdcdef88ee06dd3456a517ca0f642c4f8f37e6f9cde272a991c423cc"></a>TIMESTAMP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a77866dd23fdcdef88ee06dd3456a517cab11acc924d6fda16d373256d66aae8fe" name="a77866dd23fdcdef88ee06dd3456a517cab11acc924d6fda16d373256d66aae8fe"></a>MAJOR_VER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a77866dd23fdcdef88ee06dd3456a517ca38659096397c626c5de7994934f870ff" name="a77866dd23fdcdef88ee06dd3456a517ca38659096397c626c5de7994934f870ff"></a>MINOR_VER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a77866dd23fdcdef88ee06dd3456a517ca48a5e4b7a8e9bf0cab0b3ee2884a1c73" name="a77866dd23fdcdef88ee06dd3456a517ca48a5e4b7a8e9bf0cab0b3ee2884a1c73"></a>TYPE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a77866dd23fdcdef88ee06dd3456a517ca4f5fb5651a52e673bfa76f5689f1aca9" name="a77866dd23fdcdef88ee06dd3456a517ca4f5fb5651a52e673bfa76f5689f1aca9"></a>DATA_SIZE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a77866dd23fdcdef88ee06dd3456a517cabab6dc58dcff413e7d06f5af2a4f8fae" name="a77866dd23fdcdef88ee06dd3456a517cabab6dc58dcff413e7d06f5af2a4f8fae"></a>RAW_DATA_ADDR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a77866dd23fdcdef88ee06dd3456a517ca352780db92e34d00bdc0ae8bfc731780" name="a77866dd23fdcdef88ee06dd3456a517ca352780db92e34d00bdc0ae8bfc731780"></a>RAW_DATA_PTR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a77866dd23fdcdef88ee06dd3456a517ca491fa5e105f3b77846e8d7644a67150f" name="a77866dd23fdcdef88ee06dd3456a517ca491fa5e105f3b77846e8d7644a67150f"></a>FIELD_COUNTER&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00010">10</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00007">7</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa96f3bd1945636e77a87255916e66729" name="aa96f3bd1945636e77a87255916e66729"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa96f3bd1945636e77a87255916e66729">&#9670;&#160;</a></span>DebugDirWrapper()</h2>
 
@@ -451,67 +392,38 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00023">23</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00010">10</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_debug_dir_wrapper_aa96f3bd1945636e77a87255916e66729_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_aa96f3bd1945636e77a87255916e66729_cgraph" alt=""/></div>
 <map name="aclass_debug_dir_wrapper_aa96f3bd1945636e77a87255916e66729_cgraph" id="aclass_debug_dir_wrapper_aa96f3bd1945636e77a87255916e66729_cgraph">
-<area shape="rect" title=" " alt="" coords="5,93,188,133"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#ac081e75c9eed3c5f67aa9826bd335b82" title=" " alt="" coords="236,101,393,126"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#a09b77ff32464bb4de29b5be05500070c" title=" " alt="" coords="441,93,625,133"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#abcabeea848bf6becff1d89c53b3e69d4" title=" " alt="" coords="673,126,853,151"/>
-<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="901,75,1068,101"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="913,127,1056,167"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="1122,65,1253,105"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1323,5,1453,45"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1323,69,1453,109"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="1116,129,1259,169"/>
-<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="1307,137,1469,162"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="af7f53d0e9968833eb79571095e95750a" name="af7f53d0e9968833eb79571095e95750a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7f53d0e9968833eb79571095e95750a">&#9670;&#160;</a></span>~DebugDirWrapper()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">DebugDirWrapper::~DebugDirWrapper </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00026">26</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_debug_dir_wrapper_af7f53d0e9968833eb79571095e95750a_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_af7f53d0e9968833eb79571095e95750a_cgraph" alt=""/></div>
-<map name="aclass_debug_dir_wrapper_af7f53d0e9968833eb79571095e95750a_cgraph" id="aclass_debug_dir_wrapper_af7f53d0e9968833eb79571095e95750a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,195,45"/>
-<area shape="rect" href="class_exe_node_wrapper.html#abd74c2637211cf471d022b528654c84c" title=" " alt="" coords="243,13,399,38"/>
+<area shape="rect" title=" " alt="" coords="5,49,188,89"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#ac081e75c9eed3c5f67aa9826bd335b82" title=" " alt="" coords="236,56,393,81"/>
+<area shape="rect" href="class_exe_node_wrapper.html#abd74c2637211cf471d022b528654c84c" title=" " alt="" coords="453,5,609,31"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="1570,99,1713,139"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#a4fca74cef0b781cff0c2323cce79ac64" title=" " alt="" coords="441,134,621,174"/>
+<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="1779,107,1941,132"/>
+<area shape="rect" href="class_debug_dir_entry_wrapper.html#a690e686ab98a6abecd2f2dab93a3d2ba" title=" " alt="" coords="679,134,831,174"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#aa569b5e9cb43f99cba1753516776b82e" title=" " alt="" coords="669,205,841,231"/>
+<area shape="rect" href="class_debug_dir_entry_wrapper.html#a99e6a454435b7d17f742041ca5b44b4d" title=" " alt="" coords="889,134,1041,174"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#a44f717dbc7964316ab01b0fd09b4e56c" title=" " alt="" coords="1089,141,1289,167"/>
+<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="1337,171,1504,196"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="1349,106,1492,146"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="1576,163,1707,203"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1795,163,1925,203"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1795,249,1925,289"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#a47a86b9d308f503b8b2a22ff299bd6c5" title=" " alt="" coords="1349,221,1492,261"/>
+<area shape="rect" href="class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="1552,277,1731,303"/>
+<area shape="rect" href="class_executable.html#a9d1979e57f2c6d4146e8ddf1892c6e99" title=" " alt="" coords="1566,228,1717,253"/>
 </map>
 </div>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a729371ea6d46de6d9d10de57906e1b64" name="a729371ea6d46de6d9d10de57906e1b64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a729371ea6d46de6d9d10de57906e1b64">&#9670;&#160;</a></span>containsAddrType()</h2>
+<a id="a44f717dbc7964316ab01b0fd09b4e56c" name="a44f717dbc7964316ab01b0fd09b4e56c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f717dbc7964316ab01b0fd09b4e56c">&#9670;&#160;</a></span>getDebugDir()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -520,80 +432,41 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5b">Executable::addr_type</a> DebugDirWrapper::containsAddrType </td>
+          <td class="memname">IMAGE_DEBUG_DIRECTORY * DebugDirWrapper::getDebugDir </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>fieldId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>subField</em> = <code><a class="el" href="_exe_element_wrapper_8h.html#ae810f8925d2f98da8659d53ce26b5b5c">FIELD_NONE</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_exe_element_wrapper.html#a8108914de5353bd75c8874bb3fb17129">ExeElementWrapper</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00089">89</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
-
-</div>
-</div>
-<a id="abcabeea848bf6becff1d89c53b3e69d4" name="abcabeea848bf6becff1d89c53b3e69d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcabeea848bf6becff1d89c53b3e69d4">&#9670;&#160;</a></span>debugDir()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">IMAGE_DEBUG_DIRECTORY * DebugDirWrapper::debugDir </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>index</em> = <code>0</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00019">19</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00050">50</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_debug_dir_wrapper_abcabeea848bf6becff1d89c53b3e69d4_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_abcabeea848bf6becff1d89c53b3e69d4_cgraph" alt=""/></div>
-<map name="aclass_debug_dir_wrapper_abcabeea848bf6becff1d89c53b3e69d4_cgraph" id="aclass_debug_dir_wrapper_abcabeea848bf6becff1d89c53b3e69d4_cgraph">
-<area shape="rect" title=" " alt="" coords="5,106,185,131"/>
-<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="233,75,400,101"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="245,127,388,167"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="454,65,585,105"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="655,5,785,45"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="655,69,785,109"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="448,129,591,169"/>
-<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="639,137,801,162"/>
+<div class="center"><img src="class_debug_dir_wrapper_a44f717dbc7964316ab01b0fd09b4e56c_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a44f717dbc7964316ab01b0fd09b4e56c_cgraph" alt=""/></div>
+<map name="aclass_debug_dir_wrapper_a44f717dbc7964316ab01b0fd09b4e56c_cgraph" id="aclass_debug_dir_wrapper_a44f717dbc7964316ab01b0fd09b4e56c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,106,205,131"/>
+<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="253,75,420,101"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="265,127,408,167"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="474,65,605,105"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="675,5,805,45"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="675,69,805,109"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="468,129,611,169"/>
+<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="659,137,821,162"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a09b77ff32464bb4de29b5be05500070c" name="a09b77ff32464bb4de29b5be05500070c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09b77ff32464bb4de29b5be05500070c">&#9670;&#160;</a></span>getDebugStruct()</h2>
+<a id="a117eef973386c056617fc1dfeed71ef2" name="a117eef973386c056617fc1dfeed71ef2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a117eef973386c056617fc1dfeed71ef2">&#9670;&#160;</a></span>getFieldName() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -602,50 +475,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">BYTE * DebugDirWrapper::getDebugStruct </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00132">132</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_debug_dir_wrapper_a09b77ff32464bb4de29b5be05500070c_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a09b77ff32464bb4de29b5be05500070c_cgraph" alt=""/></div>
-<map name="aclass_debug_dir_wrapper_a09b77ff32464bb4de29b5be05500070c_cgraph" id="aclass_debug_dir_wrapper_a09b77ff32464bb4de29b5be05500070c_cgraph">
-<area shape="rect" title=" " alt="" coords="5,93,189,133"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#abcabeea848bf6becff1d89c53b3e69d4" title=" " alt="" coords="237,126,417,151"/>
-<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="465,75,632,101"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="477,127,620,167"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="686,65,817,105"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="887,5,1017,45"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="887,69,1017,109"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="680,129,823,169"/>
-<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="871,137,1033,162"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a7aebc3cc4167a56da12bdf526b69b07c" name="a7aebc3cc4167a56da12bdf526b69b07c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7aebc3cc4167a56da12bdf526b69b07c">&#9670;&#160;</a></span>getFieldName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QString DebugDirWrapper::getFieldName </td>
+          <td class="memname">virtual QString DebugDirWrapper::getFieldName </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>fieldId</em></td><td>)</td>
@@ -654,28 +484,27 @@ Here is the call graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="class_exe_node_wrapper.html#a086e8cfa49daea540fc55956821375f1">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00074">74</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00030">30</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_debug_dir_wrapper_a7aebc3cc4167a56da12bdf526b69b07c_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a7aebc3cc4167a56da12bdf526b69b07c_cgraph" alt=""/></div>
-<map name="aclass_debug_dir_wrapper_a7aebc3cc4167a56da12bdf526b69b07c_cgraph" id="aclass_debug_dir_wrapper_a7aebc3cc4167a56da12bdf526b69b07c_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,216,31"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#a653a05b328112264b01aea14defce61d" title=" " alt="" coords="264,5,447,31"/>
+<div class="center"><img src="class_debug_dir_wrapper_a117eef973386c056617fc1dfeed71ef2_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a117eef973386c056617fc1dfeed71ef2_cgraph" alt=""/></div>
+<map name="aclass_debug_dir_wrapper_a117eef973386c056617fc1dfeed71ef2_cgraph" id="aclass_debug_dir_wrapper_a117eef973386c056617fc1dfeed71ef2_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,216,55"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a7dbbaed74fdd99a947a034236fc89fae" name="a7dbbaed74fdd99a947a034236fc89fae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dbbaed74fdd99a947a034236fc89fae">&#9670;&#160;</a></span>getFieldPtr()</h2>
+<a id="a125063dac2798aa4f100d1d1802a255f" name="a125063dac2798aa4f100d1d1802a255f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a125063dac2798aa4f100d1d1802a255f">&#9670;&#160;</a></span>getFieldName() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -684,7 +513,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void * DebugDirWrapper::getFieldPtr </td>
+          <td class="memname">virtual QString DebugDirWrapper::getFieldName </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>fieldId</em>, </td>
@@ -703,29 +532,72 @@ Here is the call graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00029">29</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_debug_dir_wrapper_a125063dac2798aa4f100d1d1802a255f_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a125063dac2798aa4f100d1d1802a255f_cgraph" alt=""/></div>
+<map name="aclass_debug_dir_wrapper_a125063dac2798aa4f100d1d1802a255f_cgraph" id="aclass_debug_dir_wrapper_a125063dac2798aa4f100d1d1802a255f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,55,216,80"/>
+<area shape="rect" href="class_exe_node_wrapper.html#a3d01a79fd85ba49847452b30e818c03e" title=" " alt="" coords="264,55,491,80"/>
+<area shape="rect" href="class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="549,29,737,55"/>
+<area shape="rect" href="class_exe_node_wrapper.html#a086e8cfa49daea540fc55956821375f1" title=" " alt="" coords="539,79,748,104"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa3578924bd5183d0f546aad3f52e0c35" name="aa3578924bd5183d0f546aad3f52e0c35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3578924bd5183d0f546aad3f52e0c35">&#9670;&#160;</a></span>getFieldPtr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void * DebugDirWrapper::getFieldPtr </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>fieldId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>subField</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00056">56</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00028">28</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_debug_dir_wrapper_a7dbbaed74fdd99a947a034236fc89fae_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a7dbbaed74fdd99a947a034236fc89fae_cgraph" alt=""/></div>
-<map name="aclass_debug_dir_wrapper_a7dbbaed74fdd99a947a034236fc89fae_cgraph" id="aclass_debug_dir_wrapper_a7dbbaed74fdd99a947a034236fc89fae_cgraph">
-<area shape="rect" title=" " alt="" coords="5,106,197,131"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#abcabeea848bf6becff1d89c53b3e69d4" title=" " alt="" coords="457,106,637,131"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#ad7966582981150c8ef024aa6b093163c" title=" " alt="" coords="245,131,409,157"/>
-<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="685,75,852,101"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="697,127,840,167"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="906,65,1037,105"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1107,5,1237,45"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1107,69,1237,109"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="900,129,1043,169"/>
-<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="1091,137,1253,162"/>
+<div class="center"><img src="class_debug_dir_wrapper_aa3578924bd5183d0f546aad3f52e0c35_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_aa3578924bd5183d0f546aad3f52e0c35_cgraph" alt=""/></div>
+<map name="aclass_debug_dir_wrapper_aa3578924bd5183d0f546aad3f52e0c35_cgraph" id="aclass_debug_dir_wrapper_aa3578924bd5183d0f546aad3f52e0c35_cgraph">
+<area shape="rect" title=" " alt="" coords="5,59,197,84"/>
+<area shape="rect" href="class_exe_node_wrapper.html#a1d7490ea5cf0f177357727df53c9a08a" title=" " alt="" coords="245,59,455,84"/>
+<area shape="rect" href="class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="503,29,691,55"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf" title=" " alt="" coords="525,79,669,119"/>
 </map>
 </div>
 
@@ -756,85 +628,27 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00033">33</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
-
-</div>
-</div>
-<a id="a653a05b328112264b01aea14defce61d" name="a653a05b328112264b01aea14defce61d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a653a05b328112264b01aea14defce61d">&#9670;&#160;</a></span>getName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QString DebugDirWrapper::getName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="class_exe_element_wrapper.html#af2f26b8da4cf2339944f1a4b8473454b">ExeElementWrapper</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00050">50</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a9544b01ffd53fad0eabeb8333afe6267" name="a9544b01ffd53fad0eabeb8333afe6267"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9544b01ffd53fad0eabeb8333afe6267">&#9670;&#160;</a></span>getNB10()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">pe::DEBUG_NB10 * DebugDirWrapper::getNB10 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00159">159</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00022">22</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_debug_dir_wrapper_a9544b01ffd53fad0eabeb8333afe6267_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a9544b01ffd53fad0eabeb8333afe6267_cgraph" alt=""/></div>
-<map name="aclass_debug_dir_wrapper_a9544b01ffd53fad0eabeb8333afe6267_cgraph" id="aclass_debug_dir_wrapper_a9544b01ffd53fad0eabeb8333afe6267_cgraph">
-<area shape="rect" title=" " alt="" coords="5,46,185,71"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#abcabeea848bf6becff1d89c53b3e69d4" title=" " alt="" coords="465,21,645,46"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#a09b77ff32464bb4de29b5be05500070c" title=" " alt="" coords="233,67,417,107"/>
-<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="693,74,860,99"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="705,8,848,48"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="914,69,1045,109"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1115,65,1245,105"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1115,129,1245,169"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="908,5,1051,45"/>
-<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="1099,13,1261,38"/>
+<div class="center"><img src="class_debug_dir_wrapper_a1b2a4db178ee65f190ce2692c15faac0_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a1b2a4db178ee65f190ce2692c15faac0_cgraph" alt=""/></div>
+<map name="aclass_debug_dir_wrapper_a1b2a4db178ee65f190ce2692c15faac0_cgraph" id="aclass_debug_dir_wrapper_a1b2a4db178ee65f190ce2692c15faac0_cgraph">
+<area shape="rect" title=" " alt="" coords="5,63,188,103"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#aa569b5e9cb43f99cba1753516776b82e" title=" " alt="" coords="236,70,408,95"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#a47a86b9d308f503b8b2a22ff299bd6c5" title=" " alt="" coords="456,63,599,103"/>
+<area shape="rect" href="class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="647,13,825,38"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="665,63,807,103"/>
+<area shape="rect" href="class_executable.html#a9d1979e57f2c6d4146e8ddf1892c6e99" title=" " alt="" coords="661,127,811,153"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="889,5,1020,45"/>
+<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="873,70,1036,95"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="ad7966582981150c8ef024aa6b093163c" name="ad7966582981150c8ef024aa6b093163c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7966582981150c8ef024aa6b093163c">&#9670;&#160;</a></span>getPtr()</h2>
+<a id="a7b7dfe78dde9e71402d8e9dc3e869d30" name="a7b7dfe78dde9e71402d8e9dc3e869d30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7dfe78dde9e71402d8e9dc3e869d30">&#9670;&#160;</a></span>getFieldSize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -843,43 +657,53 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void * DebugDirWrapper::getPtr </td>
+          <td class="memname">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a> DebugDirWrapper::getFieldSize </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>fieldId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>subField</em> = <code><a class="el" href="_exe_element_wrapper_8h.html#ae810f8925d2f98da8659d53ce26b5b5c">FIELD_NONE</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116">ExeElementWrapper</a>.</p>
+<p>Reimplemented from <a class="el" href="class_exe_element_wrapper.html#a10ef93fdda6cf93c5db02b696a81b7c7">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00039">39</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00031">31</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_debug_dir_wrapper_ad7966582981150c8ef024aa6b093163c_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_ad7966582981150c8ef024aa6b093163c_cgraph" alt=""/></div>
-<map name="aclass_debug_dir_wrapper_ad7966582981150c8ef024aa6b093163c_cgraph" id="aclass_debug_dir_wrapper_ad7966582981150c8ef024aa6b093163c_cgraph">
-<area shape="rect" title=" " alt="" coords="5,106,169,131"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#abcabeea848bf6becff1d89c53b3e69d4" title=" " alt="" coords="217,106,397,131"/>
-<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="445,75,612,101"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="457,127,600,167"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="666,65,797,105"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="867,5,997,45"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="867,69,997,109"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="660,129,803,169"/>
-<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="851,137,1013,162"/>
+<div class="center"><img src="class_debug_dir_wrapper_a7b7dfe78dde9e71402d8e9dc3e869d30_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a7b7dfe78dde9e71402d8e9dc3e869d30_cgraph" alt=""/></div>
+<map name="aclass_debug_dir_wrapper_a7b7dfe78dde9e71402d8e9dc3e869d30_cgraph" id="aclass_debug_dir_wrapper_a7b7dfe78dde9e71402d8e9dc3e869d30_cgraph">
+<area shape="rect" title=" " alt="" coords="5,81,205,106"/>
+<area shape="rect" href="class_exe_node_wrapper.html#ac0f199fc5f2afabb187da4594e0af82b" title=" " alt="" coords="253,81,471,106"/>
+<area shape="rect" href="class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="519,51,707,77"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a10ef93fdda6cf93c5db02b696a81b7c7" title=" " alt="" coords="541,101,685,141"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf" title=" " alt="" coords="755,5,899,45"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83" title=" " alt="" coords="755,69,899,109"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="755,133,899,173"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="755,197,899,237"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a31ad430d993c87a3af90664838b7b6e1" name="a31ad430d993c87a3af90664838b7b6e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31ad430d993c87a3af90664838b7b6e1">&#9670;&#160;</a></span>getRDSI()</h2>
+<a id="a3eeb8d7ae50b730d97b6811021194efa" name="a3eeb8d7ae50b730d97b6811021194efa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3eeb8d7ae50b730d97b6811021194efa">&#9670;&#160;</a></span>getName()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -888,97 +712,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DEBUG_RSDSI * DebugDirWrapper::getRDSI </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00144">144</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_debug_dir_wrapper_a31ad430d993c87a3af90664838b7b6e1_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a31ad430d993c87a3af90664838b7b6e1_cgraph" alt=""/></div>
-<map name="aclass_debug_dir_wrapper_a31ad430d993c87a3af90664838b7b6e1_cgraph" id="aclass_debug_dir_wrapper_a31ad430d993c87a3af90664838b7b6e1_cgraph">
-<area shape="rect" title=" " alt="" coords="5,46,184,71"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#abcabeea848bf6becff1d89c53b3e69d4" title=" " alt="" coords="464,21,644,46"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#a09b77ff32464bb4de29b5be05500070c" title=" " alt="" coords="232,67,416,107"/>
-<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="692,74,859,99"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="704,8,847,48"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="913,69,1043,109"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1113,65,1244,105"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1113,129,1244,169"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="907,5,1049,45"/>
-<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="1097,13,1260,38"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a6332d742b44cdab704af8ae229209787" name="a6332d742b44cdab704af8ae229209787"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6332d742b44cdab704af8ae229209787">&#9670;&#160;</a></span>getSize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a> DebugDirWrapper::getSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616">ExeElementWrapper</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00044">44</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_debug_dir_wrapper_a6332d742b44cdab704af8ae229209787_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a6332d742b44cdab704af8ae229209787_cgraph" alt=""/></div>
-<map name="aclass_debug_dir_wrapper_a6332d742b44cdab704af8ae229209787_cgraph" id="aclass_debug_dir_wrapper_a6332d742b44cdab704af8ae229209787_cgraph">
-<area shape="rect" title=" " alt="" coords="5,106,177,131"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#ad7966582981150c8ef024aa6b093163c" title=" " alt="" coords="225,106,389,131"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#abcabeea848bf6becff1d89c53b3e69d4" title=" " alt="" coords="437,106,617,131"/>
-<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="665,75,832,101"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="677,127,820,167"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="886,65,1017,105"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1087,5,1217,45"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1087,69,1217,109"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="880,129,1023,169"/>
-<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="1071,137,1233,162"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="aa413e5bd1227fffa881d755bb7b3cc1c" name="aa413e5bd1227fffa881d755bb7b3cc1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa413e5bd1227fffa881d755bb7b3cc1c">&#9670;&#160;</a></span>getSubFieldsCount()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual size_t DebugDirWrapper::getSubFieldsCount </td>
+          <td class="memname">virtual QString DebugDirWrapper::getName </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -991,14 +725,14 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#ab83dd78bccf0c4693a7483c3484b2e39">ExeNodeWrapper</a>.</p>
+<p>Implements <a class="el" href="class_exe_element_wrapper.html#af2f26b8da4cf2339944f1a4b8473454b">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00034">34</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00020">20</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
 
 </div>
 </div>
-<a id="a3ff91e1f6e8b6a4d846b6d1b7fb1a3dd" name="a3ff91e1f6e8b6a4d846b6d1b7fb1a3dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ff91e1f6e8b6a4d846b6d1b7fb1a3dd">&#9670;&#160;</a></span>translateFieldContent()</h2>
+<a id="a33ba43d13e79286f634c26b8e8ddd368" name="a33ba43d13e79286f634c26b8e8ddd368"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33ba43d13e79286f634c26b8e8ddd368">&#9670;&#160;</a></span>getPtr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1007,60 +741,133 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">QString DebugDirWrapper::translateFieldContent </td>
+          <td class="memname">virtual void * DebugDirWrapper::getPtr </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>fieldId</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_exe_element_wrapper.html#ac39b13e7ac41c89db1b66c6e7a57e757">ExeElementWrapper</a>.</p>
+<p>Implements <a class="el" href="class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00122">122</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00013">13</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_debug_dir_wrapper_a3ff91e1f6e8b6a4d846b6d1b7fb1a3dd_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a3ff91e1f6e8b6a4d846b6d1b7fb1a3dd_cgraph" alt=""/></div>
-<map name="aclass_debug_dir_wrapper_a3ff91e1f6e8b6a4d846b6d1b7fb1a3dd_cgraph" id="aclass_debug_dir_wrapper_a3ff91e1f6e8b6a4d846b6d1b7fb1a3dd_cgraph">
-<area shape="rect" title=" " alt="" coords="5,123,184,163"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#abcabeea848bf6becff1d89c53b3e69d4" title=" " alt="" coords="245,105,425,130"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#a47a83128cfd54c3d17ac0629a0e3dd6d" title=" " alt="" coords="232,154,439,179"/>
-<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="487,75,653,101"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="499,127,641,167"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="707,65,838,105"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="908,5,1039,45"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="908,69,1039,109"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="701,129,844,169"/>
-<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="892,137,1055,162"/>
+<div class="center"><img src="class_debug_dir_wrapper_a33ba43d13e79286f634c26b8e8ddd368_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a33ba43d13e79286f634c26b8e8ddd368_cgraph" alt=""/></div>
+<map name="aclass_debug_dir_wrapper_a33ba43d13e79286f634c26b8e8ddd368_cgraph" id="aclass_debug_dir_wrapper_a33ba43d13e79286f634c26b8e8ddd368_cgraph">
+<area shape="rect" title=" " alt="" coords="5,106,169,131"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#a44f717dbc7964316ab01b0fd09b4e56c" title=" " alt="" coords="217,106,417,131"/>
+<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="465,75,632,101"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="477,127,620,167"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="686,65,817,105"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="887,5,1017,45"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="887,69,1017,109"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="680,129,823,169"/>
+<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="871,137,1033,162"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a47a83128cfd54c3d17ac0629a0e3dd6d" name="a47a83128cfd54c3d17ac0629a0e3dd6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47a83128cfd54c3d17ac0629a0e3dd6d">&#9670;&#160;</a></span>translateType()</h2>
+<a id="aa569b5e9cb43f99cba1753516776b82e" name="aa569b5e9cb43f99cba1753516776b82e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa569b5e9cb43f99cba1753516776b82e">&#9670;&#160;</a></span>getSize()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">QString DebugDirWrapper::translateType </td>
+          <td class="memname">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a> DebugDirWrapper::getSize </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00098">98</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
+<p>Implements <a class="el" href="class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616">ExeElementWrapper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00015">15</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_debug_dir_wrapper_aa569b5e9cb43f99cba1753516776b82e_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_aa569b5e9cb43f99cba1753516776b82e_cgraph" alt=""/></div>
+<map name="aclass_debug_dir_wrapper_aa569b5e9cb43f99cba1753516776b82e_cgraph" id="aclass_debug_dir_wrapper_aa569b5e9cb43f99cba1753516776b82e_cgraph">
+<area shape="rect" title=" " alt="" coords="5,70,177,95"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#a47a86b9d308f503b8b2a22ff299bd6c5" title=" " alt="" coords="225,63,368,103"/>
+<area shape="rect" href="class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="416,13,595,38"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="434,63,577,103"/>
+<area shape="rect" href="class_executable.html#a9d1979e57f2c6d4146e8ddf1892c6e99" title=" " alt="" coords="430,127,581,153"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="659,5,789,45"/>
+<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="643,70,805,95"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4fca74cef0b781cff0c2323cce79ac64" name="a4fca74cef0b781cff0c2323cce79ac64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fca74cef0b781cff0c2323cce79ac64">&#9670;&#160;</a></span>loadNextEntry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DebugDirWrapper::loadNextEntry </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>cntr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a8a0305cc15aefe812f69485bbe82508d">ExeNodeWrapper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00019">19</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_debug_dir_wrapper_a4fca74cef0b781cff0c2323cce79ac64_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_a4fca74cef0b781cff0c2323cce79ac64_cgraph" alt=""/></div>
+<map name="aclass_debug_dir_wrapper_a4fca74cef0b781cff0c2323cce79ac64_cgraph" id="aclass_debug_dir_wrapper_a4fca74cef0b781cff0c2323cce79ac64_cgraph">
+<area shape="rect" title=" " alt="" coords="5,84,185,124"/>
+<area shape="rect" href="class_debug_dir_entry_wrapper.html#a690e686ab98a6abecd2f2dab93a3d2ba" title=" " alt="" coords="243,55,395,95"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#aa569b5e9cb43f99cba1753516776b82e" title=" " alt="" coords="233,119,405,145"/>
+<area shape="rect" href="class_debug_dir_entry_wrapper.html#a99e6a454435b7d17f742041ca5b44b4d" title=" " alt="" coords="453,55,605,95"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#a44f717dbc7964316ab01b0fd09b4e56c" title=" " alt="" coords="653,62,853,87"/>
+<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="901,41,1068,66"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="913,176,1056,216"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="1140,12,1271,52"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1359,5,1489,45"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1359,69,1489,109"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="1134,176,1277,216"/>
+<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="1343,183,1505,209"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#a47a86b9d308f503b8b2a22ff299bd6c5" title=" " alt="" coords="913,112,1056,152"/>
+<area shape="rect" href="class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="1116,77,1295,102"/>
+<area shape="rect" href="class_executable.html#a9d1979e57f2c6d4146e8ddf1892c6e99" title=" " alt="" coords="1130,126,1281,151"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -1082,37 +889,44 @@ Here is the call graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a5cd7f16e4529be2a96f87237e31b2611">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8cpp_source.html#l00029">29</a> of file <a class="el" href="_debug_dir_wrapper_8cpp_source.html">DebugDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00034">34</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_debug_dir_wrapper_ac081e75c9eed3c5f67aa9826bd335b82_cgraph.png" border="0" usemap="#aclass_debug_dir_wrapper_ac081e75c9eed3c5f67aa9826bd335b82_cgraph" alt=""/></div>
 <map name="aclass_debug_dir_wrapper_ac081e75c9eed3c5f67aa9826bd335b82_cgraph" id="aclass_debug_dir_wrapper_ac081e75c9eed3c5f67aa9826bd335b82_cgraph">
-<area shape="rect" title=" " alt="" coords="5,101,163,126"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#a09b77ff32464bb4de29b5be05500070c" title=" " alt="" coords="211,93,395,133"/>
-<area shape="rect" href="class_debug_dir_wrapper.html#abcabeea848bf6becff1d89c53b3e69d4" title=" " alt="" coords="443,126,623,151"/>
-<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="671,75,837,101"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="683,127,825,167"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="891,65,1022,105"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1092,5,1223,45"/>
-<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1092,69,1223,109"/>
-<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="885,129,1028,169"/>
-<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="1076,137,1239,162"/>
+<area shape="rect" title=" " alt="" coords="5,56,163,81"/>
+<area shape="rect" href="class_exe_node_wrapper.html#abd74c2637211cf471d022b528654c84c" title=" " alt="" coords="223,5,379,31"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="1339,99,1482,139"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#a4fca74cef0b781cff0c2323cce79ac64" title=" " alt="" coords="211,134,391,174"/>
+<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="1548,107,1711,132"/>
+<area shape="rect" href="class_debug_dir_entry_wrapper.html#a690e686ab98a6abecd2f2dab93a3d2ba" title=" " alt="" coords="449,134,601,174"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#aa569b5e9cb43f99cba1753516776b82e" title=" " alt="" coords="439,205,611,231"/>
+<area shape="rect" href="class_debug_dir_entry_wrapper.html#a99e6a454435b7d17f742041ca5b44b4d" title=" " alt="" coords="659,134,811,174"/>
+<area shape="rect" href="class_debug_dir_wrapper.html#a44f717dbc7964316ab01b0fd09b4e56c" title=" " alt="" coords="859,141,1059,167"/>
+<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="1107,171,1273,196"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="1119,106,1261,146"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="1345,163,1476,203"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1564,163,1695,203"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1564,249,1695,289"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#a47a86b9d308f503b8b2a22ff299bd6c5" title=" " alt="" coords="1119,221,1261,261"/>
+<area shape="rect" href="class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="1321,277,1500,303"/>
+<area shape="rect" href="class_executable.html#a9d1979e57f2c6d4146e8ddf1892c6e99" title=" " alt="" coords="1335,228,1486,253"/>
 </map>
 </div>
 
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a9ee90bdf1e1a8d1ff7a9505de8363da1" name="a9ee90bdf1e1a8d1ff7a9505de8363da1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ee90bdf1e1a8d1ff7a9505de8363da1">&#9670;&#160;</a></span>DebugDirCVEntryWrapper</h2>
+<a id="a1eef2bb4acbb90681927f7feafef7cb6" name="a1eef2bb4acbb90681927f7feafef7cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eef2bb4acbb90681927f7feafef7cb6">&#9670;&#160;</a></span>DebugDirEntryWrapper</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1121,7 +935,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">friend class <a class="el" href="class_debug_dir_c_v_entry_wrapper.html">DebugDirCVEntryWrapper</a></td>
+          <td class="memname">friend class <a class="el" href="class_debug_dir_entry_wrapper.html">DebugDirEntryWrapper</a></td>
         </tr>
       </table>
   </td>
@@ -1131,7 +945,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00050">50</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_debug_dir_wrapper_8h_source.html#l00060">60</a> of file <a class="el" href="_debug_dir_wrapper_8h_source.html">DebugDirWrapper.h</a>.</p>
 
 </div>
 </div>

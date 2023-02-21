@@ -6,7 +6,7 @@ var searchData=
   ['_7ebytebuffer_3',['~ByteBuffer',['../class_byte_buffer.html#a5d531a56781defcfc90ff85e18e89548',1,'ByteBuffer']]],
   ['_7eclrdirwrapper_4',['~ClrDirWrapper',['../class_clr_dir_wrapper.html#a637cd33953bef92aa32cada70884c36d',1,'ClrDirWrapper']]],
   ['_7ecustomexception_5',['~CustomException',['../class_custom_exception.html#ac4fb927e4197e228ad8d88554a342f02',1,'CustomException']]],
-  ['_7edebugdirwrapper_6',['~DebugDirWrapper',['../class_debug_dir_wrapper.html#af7f53d0e9968833eb79571095e95750a',1,'DebugDirWrapper']]],
+  ['_7edebugdirentrywrapper_6',['~DebugDirEntryWrapper',['../class_debug_dir_entry_wrapper.html#a60970968e8a48b6cc15eaad5c0cd584f',1,'DebugDirEntryWrapper']]],
   ['_7edosexe_7',['~DOSExe',['../class_d_o_s_exe.html#adf1e77847b2c2e2fae5741c31250fcae',1,'DOSExe']]],
   ['_7eexebuilder_8',['~ExeBuilder',['../class_exe_builder.html#a014ebb1db2ef5914fa2af6928df2c821',1,'ExeBuilder']]],
   ['_7eexecutable_9',['~Executable',['../class_executable.html#a7b97bf825e213b49b13b076b591c8bfb',1,'Executable']]],

@@ -1,8 +1,8 @@
 var searchData=
 [
   ['raw_0',['RAW',['../class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5badb8a64acd3f74166ea450698d025db3b',1,'Executable']]],
-  ['raw_5fdata_5faddr_1',['RAW_DATA_ADDR',['../class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517cabab6dc58dcff413e7d06f5af2a4f8fae',1,'DebugDirWrapper']]],
-  ['raw_5fdata_5fptr_2',['RAW_DATA_PTR',['../class_debug_dir_wrapper.html#a77866dd23fdcdef88ee06dd3456a517ca352780db92e34d00bdc0ae8bfc731780',1,'DebugDirWrapper']]],
+  ['raw_5fdata_5faddr_1',['RAW_DATA_ADDR',['../class_debug_dir_entry_wrapper.html#a78106e75b9c8550289c35667ddd0768cae2e700d6fd3694ac11bd7b7fb23adf6f',1,'DebugDirEntryWrapper']]],
+  ['raw_5fdata_5fptr_2',['RAW_DATA_PTR',['../class_debug_dir_entry_wrapper.html#a78106e75b9c8550289c35667ddd0768ca0d6168884820bf465cb591591c55b868',1,'DebugDirEntryWrapper']]],
   ['rawtorva_3',['rawToRva',['../class_executable.html#a8ea6a55050fe8242f94e830cac77c483',1,'Executable::rawToRva()'],['../class_d_o_s_exe.html#ac4417e47e4af170c9d9a8c72fbd32937',1,'DOSExe::rawToRva()'],['../class_p_e_file.html#aaf80a2d2b2d7e9b87e0edf79dcf19f42',1,'PEFile::rawToRva()']]],
   ['read_4',['read',['../class_abstract_file_buffer.html#acfe88940b215a54b9e514a0fb8146781',1,'AbstractFileBuffer::read(QString &amp;file, bufsize_t minBufSize, const bool allowTruncate)'],['../class_abstract_file_buffer.html#aa7315240b434b114bb5b935746f27b69',1,'AbstractFileBuffer::read(QFile &amp;fIn, bufsize_t minBufSize, const bool allowTruncate)']]],
   ['reloadmapping_5',['reloadMapping',['../class_exe_node_wrapper.html#a659e73a1d597a93ae7dd31cf7e98f23a',1,'ExeNodeWrapper::reloadMapping()'],['../class_import_base_dir_wrapper.html#a736fac50c585752a8c8b6cb85ef9c9d3',1,'ImportBaseDirWrapper::reloadMapping()'],['../class_sect_hdrs_wrapper.html#a7cf7f2fd77bab1e52b044c5f77e439ad',1,'SectHdrsWrapper::reloadMapping()']]],
