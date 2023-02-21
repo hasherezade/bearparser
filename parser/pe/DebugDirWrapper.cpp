@@ -16,17 +16,26 @@ typedef struct _IMAGE_DEBUG_DIRECTORY {
 
 */
 
-IMAGE_DEBUG_DIRECTORY* DebugDirWrapper::debugDir()
+bool DebugDirWrapper::loadNextEntry(const size_t cntr)
 {
-    offset_t rva = getDirEntryAddress();
+    const size_t dirSize = this->getSize();
+    const size_t entriesCount = dirSize / sizeof(IMAGE_DEBUG_DIRECTORY);
+    if (cntr >= entriesCount) {
+        return false;
+    }
 
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(IMAGE_DEBUG_DIRECTORY));
-    if (!ptr) return NULL;
-
-    return (IMAGE_DEBUG_DIRECTORY*) ptr;
+    DebugDirEntryWrapper* dbgEntry = new DebugDirEntryWrapper(m_PE, this, cntr);
+    if (!dbgEntry || !dbgEntry->getPtr()) {
+        delete dbgEntry;
+        return false;
+    }
+    entries.push_back(dbgEntry);
+    return true;
 }
 
-bool DebugDirWrapper::wrap()
+//---
+
+bool DebugDirEntryWrapper::wrap()
 {
     if (this->getDebugStruct()) {
         DebugDirCVEntryWrapper *cvWrapper = new DebugDirCVEntryWrapper(m_Exe, this);
@@ -35,25 +44,18 @@ bool DebugDirWrapper::wrap()
     return true;
 }
 
-
-void* DebugDirWrapper::getPtr()
+void* DebugDirEntryWrapper::getPtr()
 {
     return debugDir();
 }
 
-bufsize_t DebugDirWrapper::getSize()
+bufsize_t DebugDirEntryWrapper::getSize()
 {
     if (!getPtr()) return 0;
     return sizeof(IMAGE_DEBUG_DIRECTORY);
 }
 
-QString DebugDirWrapper::getName()
-{
-    return "Debug";
-}
-
-
-void* DebugDirWrapper::getFieldPtr(size_t fId, size_t subField)
+void* DebugDirEntryWrapper::getFieldPtr(size_t fId, size_t subField)
 {
     IMAGE_DEBUG_DIRECTORY* d = debugDir();
     if (d == NULL) return NULL;
@@ -71,7 +73,7 @@ void* DebugDirWrapper::getFieldPtr(size_t fId, size_t subField)
     return this->getPtr();
 }
 
-QString DebugDirWrapper::getFieldName(size_t fieldId)
+QString DebugDirEntryWrapper::getFieldName(size_t fieldId)
 {
     switch (fieldId) {
         case CHARACTERISTIC: return "Characteristics";
@@ -86,7 +88,7 @@ QString DebugDirWrapper::getFieldName(size_t fieldId)
     return getName();
 }
 
-Executable::addr_type DebugDirWrapper::containsAddrType(size_t fieldId, size_t subField)
+Executable::addr_type DebugDirEntryWrapper::containsAddrType(size_t fieldId, size_t subField)
 {
     switch (fieldId) {
         case RAW_DATA_ADDR: return Executable::RVA;
@@ -95,13 +97,13 @@ Executable::addr_type DebugDirWrapper::containsAddrType(size_t fieldId, size_t s
     return Executable::NOT_ADDR;
 }
 
-QString DebugDirWrapper::translateType(int type)
+QString DebugDirEntryWrapper::translateType(int type)
 {
     switch (type) {
         case pe::DT_UNKNOWN : return "unknown";
         case pe::DT_COFF : return "COFF";
         case pe::DT_CODEVIEW : return "Visual C++ (CodeView)";
-        case pe::DT_FPO : return "frame pointer omission";
+        case pe::DT_FPO : return "Frame pointer omission";
         case pe::DT_MISC : return "DBG file";
         case pe::DT_EXCEPTION : return "A copy of .pdata section";
         case pe::DT_FIXUP : return "Reserved";
@@ -116,10 +118,10 @@ QString DebugDirWrapper::translateType(int type)
         case pe::DT_MPX : return "MPX";
         case pe::DT_REPRO : return "REPRO";
     }
-    return "";
+    return "<Unknown>";
 }
 
-QString DebugDirWrapper::translateFieldContent(size_t fieldId)
+QString DebugDirEntryWrapper::translateFieldContent(size_t fieldId)
 {
     if (fieldId != TYPE) return "";
 
@@ -129,9 +131,9 @@ QString DebugDirWrapper::translateFieldContent(size_t fieldId)
     return translateType(d->Type);
 }
 
-BYTE* DebugDirWrapper::getDebugStruct()
+BYTE* DebugDirEntryWrapper::getDebugStruct()
 {
-    IMAGE_DEBUG_DIRECTORY* d = debugDir();
+    IMAGE_DEBUG_DIRECTORY* d = this->debugDir();
     if (d == NULL) return NULL;
     if (d->Type != DT_CODEVIEW) {
         return NULL;
@@ -141,7 +143,7 @@ BYTE* DebugDirWrapper::getDebugStruct()
     return m_Exe->getContentAt(rva, Executable::RAW, dirSize);
 }
 
-DEBUG_RSDSI* DebugDirWrapper::getRDSI()
+DEBUG_RSDSI* DebugDirEntryWrapper::getRDSI()
 {
     BYTE* debugStr = getDebugStruct();
     IMAGE_DEBUG_DIRECTORY* d = debugDir();
@@ -156,7 +158,7 @@ DEBUG_RSDSI* DebugDirWrapper::getRDSI()
     return NULL;
 }
 
-pe::DEBUG_NB10* DebugDirWrapper::getNB10()
+pe::DEBUG_NB10* DebugDirEntryWrapper::getNB10()
 {
     BYTE* debugStr = getDebugStruct();
     IMAGE_DEBUG_DIRECTORY* d = debugDir();
