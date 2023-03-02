@@ -314,6 +314,9 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
     // trim to Image Size:
     const bufsize_t secEnd = startOffset + mVirtualSize;
     const bufsize_t imgSize = m_PE->getImageSize();
+    if (imgSize < startOffset) {
+        return 0;
+    }
     if (secEnd > imgSize) {
         const bufsize_t trimmedSize = imgSize - startOffset;
         return trimmedSize;
