@@ -433,18 +433,26 @@ void SectHdrsWrapper::addMapping(SectionHdrWrapper *sec)
         return;
     }
 
-    offset_t endRVA = sec->getContentEndOffset(Executable::RVA, recalculate);
-    offset_t endRaw = sec->getContentEndOffset(Executable::RAW, recalculate);
-    vSec[endRVA] = sec;
+    const offset_t endRVA = sec->getContentEndOffset(Executable::RVA, recalculate);
+    const offset_t endRaw = sec->getContentEndOffset(Executable::RAW, recalculate);
 
     if (rSec.find(endRaw) != rSec.end()) { //already exist
         SectionHdrWrapper* prevSec = rSec[endRaw];
         if (prevSec == NULL) return;
+        // keep the bigger one (with lower start address) in the mapping
         if (prevSec->getContentOffset(Executable::RAW) < sec->getContentOffset(Executable::RAW)) {
-            //printf("endRaw = %llX - SKIP\n", endRaw);
             return; //skip
         }
     }
+    if (vSec.find(endRVA) != vSec.end()) { //already exist
+        SectionHdrWrapper* prevSec = vSec[endRaw];
+        if (prevSec == NULL) return;
+        // keep the bigger one (with lower start address) in the mapping
+        if (prevSec->getContentOffset(Executable::RVA) < sec->getContentOffset(Executable::RVA)) {
+            return; //skip
+        }
+    }
+    vSec[endRVA] = sec;
     rSec[endRaw] = sec;
     return;
 }
