@@ -169,13 +169,6 @@ public:
 
     offset_t getLastMapped(Executable::addr_type aType);
 
-    //calculate the real section headers end
-    offset_t secHdrsEndOffset()
-    {
-        const offset_t secHdrSize = this->getSectionsCount(false) * sizeof(IMAGE_SECTION_HEADER);
-        return secHdrsOffset() + secHdrSize;
-    }
-
     /* wrappers:
     */
     bool hasDirectory(pe::dir_entry dirNum)
