@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sechdrsendoffset_0',['secHdrsEndOffset',['../class_p_e_file.html#a12ec7a20c4fb428bbf169700c03c4cf9',1,'PEFile::secHdrsEndOffset()'],['../class_p_e_file.html#ab2bff011d7bf559482adc90a5e669911',1,'PEFile::secHdrsEndOffset() const']]],
+  ['sechdrsendoffset_0',['secHdrsEndOffset',['../class_p_e_file.html#ab2bff011d7bf559482adc90a5e669911',1,'PEFile']]],
   ['sechdrsoffset_1',['secHdrsOffset',['../class_p_e_core.html#ac2d793b316b1ee2a64fa8ed606e028b8',1,'PECore::secHdrsOffset()'],['../class_p_e_file.html#a35ddafbeba19abd9fe72e18afad43f0b',1,'PEFile::secHdrsOffset()']]],
   ['secthdrswrapper_2',['SectHdrsWrapper',['../class_sect_hdrs_wrapper.html#a16122d83260892062668fdca12cdf296',1,'SectHdrsWrapper']]],
   ['sectionhdrwrapper_3',['SectionHdrWrapper',['../class_section_hdr_wrapper.html#a36e21a830a294c26c9d5a750fdf23d54',1,'SectionHdrWrapper::SectionHdrWrapper(PEFile *pe, size_t sectionNumber)'],['../class_section_hdr_wrapper.html#a6ea887e1a18e11f53812ebef79ad2133',1,'SectionHdrWrapper::SectionHdrWrapper(PEFile *pe, IMAGE_SECTION_HEADER *v_header)']]],
@@ -10,8 +10,8 @@ var searchData=
   ['setentrypoint_7',['setEntryPoint',['../class_p_e_file.html#a540e79b6105e41a69f04fc5374367b36',1,'PEFile']]],
   ['sethdrsectionsnum_8',['setHdrSectionsNum',['../class_p_e_file.html#a893f8c6b03ccb7785757b5d4aee95f07',1,'PEFile']]],
   ['sethex_9',['setHex',['../class_formatter.html#af14f0559fb635c3a5afaa71fbc0e87ae',1,'Formatter']]],
-  ['setimagesize_10',['setImageSize',['../class_p_e_file.html#ac401f0d815819cd69fdb3e522af88fa0',1,'PEFile::setImageSize()'],['../class_p_e_core.html#af05d45f16fb865550d00bdbdf3d9d8e8',1,'PECore::setImageSize()']]],
-  ['setnumvalue_11',['setNumValue',['../class_abstract_byte_buffer.html#a5e4be1e74690ad6517c3d19ed946b857',1,'AbstractByteBuffer::setNumValue()'],['../class_exe_element_wrapper.html#a1e74b95ca63396ca3f720b05a54f2b62',1,'ExeElementWrapper::setNumValue(size_t fieldId, size_t subField, uint64_t val)'],['../class_exe_element_wrapper.html#a60e6c709525c912e4f4b60e7ecbdfb12',1,'ExeElementWrapper::setNumValue(size_t fieldId, uint64_t val)']]],
+  ['setimagesize_10',['setImageSize',['../class_p_e_core.html#af05d45f16fb865550d00bdbdf3d9d8e8',1,'PECore::setImageSize()'],['../class_p_e_file.html#ac401f0d815819cd69fdb3e522af88fa0',1,'PEFile::setImageSize()']]],
+  ['setnumvalue_11',['setNumValue',['../class_abstract_byte_buffer.html#a5e4be1e74690ad6517c3d19ed946b857',1,'AbstractByteBuffer::setNumValue()'],['../class_exe_element_wrapper.html#a60e6c709525c912e4f4b60e7ecbdfb12',1,'ExeElementWrapper::setNumValue(size_t fieldId, uint64_t val)'],['../class_exe_element_wrapper.html#a1e74b95ca63396ca3f720b05a54f2b62',1,'ExeElementWrapper::setNumValue(size_t fieldId, size_t subField, uint64_t val)']]],
   ['setskipnonprintable_12',['setSkipNonPrintable',['../class_formatter.html#a184c36e62fb95e0df57aefdbc200a65b',1,'Formatter']]],
   ['setstringvalue_13',['setStringValue',['../class_abstract_byte_buffer.html#a91f67da45e60fe85a4b03bd4e2b1c59e',1,'AbstractByteBuffer']]],
   ['settextvalue_14',['setTextValue',['../class_abstract_byte_buffer.html#a39e77f97d0d667575ef574cc68255ae6',1,'AbstractByteBuffer']]],
