@@ -314,16 +314,30 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
         mVirtualSize = roundupToUnit(mVirtualSize, unit);
     }
     // trim to Image Size:
-    const bufsize_t secEnd = startOffset + mVirtualSize;
+    bufsize_t secEnd = startOffset + mVirtualSize;
     const bufsize_t imgSize = m_PE->getImageSize();
     if (imgSize < startOffset) {
         return 0;
     }
+
+    // trim to next section
+    int secCounter = m_PE->getSectionsCount(true);
+    for (size_t i = 0; i < secCounter; i++) {
+        SectionHdrWrapper *sec = m_PE->getSecHdr(i);
+        if (!sec) continue;
+
+        offset_t currOffset = sec->getContentOffset(aType, true);
+        if (currOffset == INVALID_ADDR) continue;
+        if (currOffset > startOffset && currOffset < secEnd) {
+            secEnd = currOffset;
+        }
+    }
+    //trim to image size:
     if (secEnd > imgSize) {
         const bufsize_t trimmedSize = imgSize - startOffset;
         return trimmedSize;
     }
-    return mVirtualSize;
+    return (secEnd - startOffset);
 }
 
 bufsize_t SectionHdrWrapper::getContentSize(Executable::addr_type aType, bool recalculate)
