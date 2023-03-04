@@ -257,26 +257,28 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
     if (secOffset == INVALID_ADDR) {
         return 0; //invalid addr, nothing is mapped
     }
-    const bufsize_t dRawSize = getContentDeclaredSize(aType);
-    if (dRawSize == 0) {
-        return 0; // no changes
-    }
-
     const bufsize_t peSize = m_PE->getRawSize();
     if (secOffset > peSize) {
         return 0; //out of scope
     }
-    bufsize_t roundedUpSize = dRawSize;
+    bufsize_t rawSize = getContentDeclaredSize(aType);
+    if (rawSize == 0) {
+        return 0; // no changes
+    }
+    bufsize_t virtualSize = getContentDeclaredSize(Executable::RVA);
+    if (virtualSize < rawSize) {
+        // if Virtual Size is smaller than the raw size, it means not full raw size will be mapped
+        rawSize = virtualSize;
+    }
+    // round up to the file alignment unit:
     bufsize_t unit = m_PE->getAlignment(aType);
     if (unit != 0) {
-        roundedUpSize = roundupToUnit(dRawSize, unit);
+        rawSize = roundupToUnit(rawSize, unit);
     }
-    const bufsize_t secEnd = secOffset + roundedUpSize;
-    
+    const bufsize_t secEnd = secOffset + rawSize;
     //trim to the file size:
     if (secEnd > peSize) {
         const bufsize_t trimmedSize = peSize - secOffset; // trim to the file size
-        bufsize_t virtualSize = getContentDeclaredSize(Executable::RVA);
         if (virtualSize) {
             bufsize_t unit = m_PE->getAlignment(Executable::RVA);
             if (unit != 0) {
@@ -288,7 +290,7 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
         }
         return trimmedSize;
     }
-    return roundedUpSize;
+    return rawSize;
 }
 
 //VirtualSize that is really mapped
