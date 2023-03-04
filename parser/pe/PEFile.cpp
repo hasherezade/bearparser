@@ -540,8 +540,13 @@ offset_t PEFile::getLastMapped(Executable::addr_type aType)
     if (lastMapped < this->secHdrsEndOffset()) {
         lastMapped = this->secHdrsEndOffset();
     }
-    /* NT headers: */
-    int ntHeadersEndOffset = this->core.peSignatureOffset() + this->core.hdrsSize();
+    // PE hdrs ending:
+    const offset_t peHdrsEnd = this->core.peSignatureOffset() + sizeof(DWORD) + sizeof(IMAGE_FILE_HEADER) + this->core.peNtHeadersSize();
+    if (lastMapped < peHdrsEnd) {
+        lastMapped = peHdrsEnd;
+    }
+    // OptionalHdr -> SizeOfHeaders:
+    const offset_t ntHeadersEndOffset = this->core.hdrsSize();
     if (lastMapped < ntHeadersEndOffset) {
         lastMapped = ntHeadersEndOffset;
     }
