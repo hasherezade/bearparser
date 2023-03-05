@@ -529,6 +529,8 @@ offset_t PEFile::getLastMapped(Executable::addr_type aType)
         if (secLastMapped == INVALID_ADDR) continue;
 
         const size_t size = (aType == Executable::RAW) ? sec->getMappedRawSize() : sec->getMappedVirtualSize();
+        if (size == 0) continue; // exclude not mapped sections
+        
         secLastMapped += size;
         if (secLastMapped > lastMapped) {
             lastMapped = secLastMapped;
