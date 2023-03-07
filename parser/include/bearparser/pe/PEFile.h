@@ -237,6 +237,16 @@ public:
         }
         return true;
     }
+    
+    bool isReproBuild()
+    {
+        bool isRepro = false;
+        DebugDirWrapper* dbgDir = dynamic_cast<DebugDirWrapper*>(dataDirEntries[pe::DIR_DEBUG]);
+        if (dbgDir && dbgDir->isRepro()) {
+            isRepro = true;
+        }
+        return isRepro;
+    }
 
 protected:
     BufferView* _createSectionView(SectionHdrWrapper *sec);

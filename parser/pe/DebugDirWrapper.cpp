@@ -33,6 +33,20 @@ bool DebugDirWrapper::loadNextEntry(size_t cntr)
     return true;
 }
 
+bool DebugDirWrapper::isRepro()
+{
+    for (auto itr = entries.begin(); itr != entries.end(); ++itr) {
+        DebugDirEntryWrapper* dbgEntry = dynamic_cast<DebugDirEntryWrapper*>(*itr);
+        if (!dbgEntry) continue;
+        
+        bool isOk = false;
+        uint64_t typeVal = dbgEntry->getNumValue(DebugDirEntryWrapper::TYPE, &isOk);
+        if (isOk && typeVal == pe::DT_REPRO) {
+            return true;
+        }
+    }
+    return false;
+}
 //---
 
 bool DebugDirEntryWrapper::wrap()
@@ -77,7 +91,7 @@ QString DebugDirEntryWrapper::getFieldName(size_t fieldId)
 {
     switch (fieldId) {
         case CHARACTERISTIC: return "Characteristics";
-        case TIMESTAMP: return "TimeDateStamp";
+        case TIMESTAMP: return (dbgRootDir && dbgRootDir->isRepro()) ? "ReproHash" :"TimeDateStamp";
         case MAJOR_VER: return "MajorVersion";
         case MINOR_VER: return "MinorVersion";
         case TYPE: return "Type";

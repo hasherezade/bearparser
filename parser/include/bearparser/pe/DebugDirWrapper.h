@@ -28,6 +28,9 @@ public:
     virtual QString getFieldName(size_t fieldId, size_t subField) { return getSubfieldName(fieldId, subField ); }
     virtual QString getFieldName(size_t fieldId) { return getFieldName(fieldId, FIELD_NONE); }
     virtual bufsize_t getFieldSize(size_t fieldId, size_t subField = FIELD_NONE) { return getSubfieldSize(fieldId, subField); }
+
+    // debug dir only
+    bool isRepro();
     
 protected:
     bool wrap()
