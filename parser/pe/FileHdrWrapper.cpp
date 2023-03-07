@@ -144,7 +144,13 @@ QString FileHdrWrapper::getFieldName(size_t fieldId)
     switch (fieldId) {
          case MACHINE: return("Machine");
          case SEC_NUM: return ("Sections Count");
-         case TIMESTAMP: return("Time Date Stamp");
+         case TIMESTAMP: {
+            PEFile* myPe = dynamic_cast<PEFile*>(this->m_Exe);
+            if (myPe && myPe->isReproBuild()) {
+                return "ReproChecksum";
+            }
+            return("Time Date Stamp");
+         }
          case SYMBOL_PTR: return("Ptr to Symbol Table");
          case SYMBOL_NUM: return("Num. of Symbols");
          case OPTHDR_SIZE: return("Size of OptionalHeader");
@@ -166,7 +172,13 @@ QString FileHdrWrapper::translateFieldContent(size_t fieldId)
     IMAGE_FILE_HEADER &fileHeader = (*hdr);
     switch (fieldId) {
         case MACHINE: return FileHdrWrapper::translateMachine(fileHeader.Machine);
-        case TIMESTAMP: return util::getDateString(fileHeader.TimeDateStamp);
+        case TIMESTAMP: {
+            PEFile* myPe = dynamic_cast<PEFile*>(this->m_Exe);
+            if (myPe && myPe->isReproBuild()) {
+                return ""; // This is not a real timestamp
+            }
+            return util::getDateString(fileHeader.TimeDateStamp);
+        }
     }
     return "";
 }

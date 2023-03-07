@@ -91,7 +91,7 @@ QString DebugDirEntryWrapper::getFieldName(size_t fieldId)
 {
     switch (fieldId) {
         case CHARACTERISTIC: return "Characteristics";
-        case TIMESTAMP: return (dbgRootDir && dbgRootDir->isRepro()) ? "ReproHash" :"TimeDateStamp";
+        case TIMESTAMP: return (dbgRootDir && dbgRootDir->isRepro()) ? "ReproChecksum" :"TimeDateStamp";
         case MAJOR_VER: return "MajorVersion";
         case MINOR_VER: return "MinorVersion";
         case TYPE: return "Type";

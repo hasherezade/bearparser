@@ -147,7 +147,13 @@ QString ResourceDirWrapper::getFieldName(size_t fieldId)
 {
     switch (fieldId) {
         case CHARACTERISTIC: return "Characteristics";
-        case TIMESTAMP: return "TimeDateStamp";
+        case TIMESTAMP: {
+            PEFile* myPe = dynamic_cast<PEFile*>(this->m_Exe);
+            if (myPe && myPe->isReproBuild()) {
+                return "ReproChecksum";
+            }
+            return "TimeDateStamp";
+        }
         case MAJOR_VER: return "MajorVersion";
         case MINOR_VER: return "MinorVersion";
         case NAMED_ENTRIES_NUM : return "NumberOfNamedEntries";
