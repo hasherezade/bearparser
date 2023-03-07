@@ -200,6 +200,7 @@ enum file_machine {
     M_SH5 = 0x01a8,  // SH5
     M_ARM = 0x01c0,  // ARM Little-Endian
     M_THUMB = 0x01c2,
+    M_THUMB2 = 0x01c4, // ARM Thumb2
     M_AM33 = 0x01d3,
     M_POWERPC = 0x01F0,  // IBM PowerPC Little-Endian
     M_POWERPCFP = 0x01f1,

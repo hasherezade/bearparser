@@ -79,6 +79,7 @@ void FileHdrWrapper::initMachine()
     s_machine[M_SH5] = "SH5";
     s_machine[M_ARM] = "ARM Little-Endian";
     s_machine[M_THUMB] = "Thumb";
+    s_machine[M_THUMB2] = "Thumb2";
     s_machine[M_AM33] = "AM33";
     s_machine[M_POWERPC] = "IBM PowerPC Little-Endian";
     s_machine[M_POWERPCFP] = "PowerRPCFP";
