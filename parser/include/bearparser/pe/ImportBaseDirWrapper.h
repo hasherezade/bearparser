@@ -64,7 +64,7 @@ public:
     virtual char* getLibraryName() = 0;
     virtual size_t getSubFieldsCount() { return 1; }
     bool wrap();
-    bool isValid();
+    virtual bool isValid();
 
 protected:
     ImportBaseEntryWrapper(PEFile *pe, ImportBaseDirWrapper *importsDir, size_t entryNumber)

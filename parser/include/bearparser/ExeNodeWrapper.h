@@ -37,6 +37,8 @@ public:
     virtual offset_t getNextEntryOffset();
     virtual bufsize_t geEntrySize();
 
+    virtual bool isValid() { return true; }
+    
 protected:
     size_t getEntriesCount(std::vector<ExeNodeWrapper*> &_entries);
     ExeNodeWrapper* getEntryAt(std::vector<ExeNodeWrapper*> &_entries, size_t fieldId);

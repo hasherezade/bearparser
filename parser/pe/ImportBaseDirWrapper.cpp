@@ -125,10 +125,20 @@ bool ImportBaseDirWrapper::wrap()
     }
 
     const size_t LIMIT = (-1);
-
+    const size_t INVALID_LIMIT = 100;
     size_t cntr = 0;
+    size_t invalidSeries = 0;
     for (cntr = 0; cntr < LIMIT; cntr++) {
         if (loadNextEntry(cntr) == false) break;
+        ExeNodeWrapper* entry = this->entries.at(cntr);
+        if (!entry) break;
+        if (entry->isValid()) {
+            invalidSeries = 0;
+        }
+        else {
+            invalidSeries++;
+            if (invalidSeries >= INVALID_LIMIT) break;
+        }
     }
 
     this->importsCount = cntr;
@@ -150,15 +160,29 @@ bool ImportBaseEntryWrapper::wrap()
     thunkToFuncMap.clear();
 
     const size_t LIMIT = (-1);
+    const size_t INVALID_LIMIT = 100;
     if (!isValid()) {
         return false;
     }
-    size_t cntr = 0;
+
     if (this->getPtr() == NULL) {
         return false;
     }
+
+    size_t cntr = 0;
+    size_t invalidSeries = 0;
+    
     for (cntr = 0; cntr < LIMIT; cntr++) {
         if (loadNextEntry(cntr) == false) break;
+        ExeNodeWrapper* entry = this->entries.at(cntr);
+        if (!entry) break;
+        if (entry->isValid()) {
+            invalidSeries = 0;
+        }
+        else {
+            invalidSeries++;
+            if (invalidSeries >= INVALID_LIMIT) break;
+        }
     }
     //printf("Entries: %d\n", entries.size());
     return true;
