@@ -33,7 +33,7 @@ var searchData=
   ['isspaceclear_30',['isSpaceClear',['../namespacepe__util.html#a8d27344da7a33a4c5b7c43c329179367',1,'pe_util']]],
   ['isstrlonger_31',['isStrLonger',['../namespacepe__util.html#a3206ffc8778304d1d269decfbe3ab0b6',1,'pe_util']]],
   ['istruncated_32',['isTruncated',['../class_file_buffer.html#ae1b0afb493c07daf35cdf4e7da5cbc45',1,'FileBuffer::isTruncated()'],['../class_file_view.html#a0cbe4cf4efb205092c64c993ce4dc3cb',1,'FileView::isTruncated()'],['../class_executable.html#a076fe5621405c05bc0835866a32a2b0d',1,'Executable::isTruncated()'],['../class_abstract_byte_buffer.html#a113d0f29022df23ed74ff1c171df8c82',1,'AbstractByteBuffer::isTruncated()']]],
-  ['isvalid_33',['isValid',['../class_import_base_entry_wrapper.html#ac43611e5b2a326c78da167b0e4784de8',1,'ImportBaseEntryWrapper::isValid()'],['../class_wrapped_value.html#a35afd8eacb5727e0921d7448333c6cca',1,'WrappedValue::isValid()'],['../class_abstract_byte_buffer.html#ac24d107f7f7dafeeb671e9aceeba818d',1,'AbstractByteBuffer::isValid()']]],
+  ['isvalid_33',['isValid',['../class_exe_node_wrapper.html#aa90cce24f1bec49d87dc18b329dce62e',1,'ExeNodeWrapper::isValid()'],['../class_import_base_entry_wrapper.html#ac43611e5b2a326c78da167b0e4784de8',1,'ImportBaseEntryWrapper::isValid()'],['../class_wrapped_value.html#a35afd8eacb5727e0921d7448333c6cca',1,'WrappedValue::isValid()'],['../class_abstract_byte_buffer.html#ac24d107f7f7dafeeb671e9aceeba818d',1,'AbstractByteBuffer::isValid()']]],
   ['isvalidaddr_34',['isValidAddr',['../class_executable.html#a383eb91b928dc417d9a631704737a192',1,'Executable']]],
   ['isvalidva_35',['isValidVA',['../class_executable.html#a7c38d78f5e14efeaaa205b9ee593dd4a',1,'Executable']]]
 ];

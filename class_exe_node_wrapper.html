@@ -134,6 +134,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9c33a8a3dc433b166b86fae38d19297c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b8052d3bc6614113d34ccbfcf9b08be"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_exe_node_wrapper.html#a7b8052d3bc6614113d34ccbfcf9b08be">geEntrySize</a> ()</td></tr>
 <tr class="separator:a7b8052d3bc6614113d34ccbfcf9b08be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa90cce24f1bec49d87dc18b329dce62e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_exe_node_wrapper.html#aa90cce24f1bec49d87dc18b329dce62e">isValid</a> ()</td></tr>
+<tr class="separator:aa90cce24f1bec49d87dc18b329dce62e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_exe_element_wrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_exe_element_wrapper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_exe_element_wrapper.html">ExeElementWrapper</a></td></tr>
 <tr class="memitem:a7764c345edef03df4f974f7f09a70a3b inherit pub_methods_class_exe_element_wrapper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_exe_element_wrapper.html#a7764c345edef03df4f974f7f09a70a3b">ExeElementWrapper</a> (<a class="el" href="class_executable.html">Executable</a> *exe)</td></tr>
 <tr class="separator:a7764c345edef03df4f974f7f09a70a3b inherit pub_methods_class_exe_element_wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -565,7 +567,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_import_base_dir_wrapper.html#ae3401167a9ee3eee123cb42728d90b42">ImportBaseDirWrapper</a>, and <a class="el" href="class_import_base_entry_wrapper.html#abc5866cd92a0da7af6faa18b674e8e9a">ImportBaseEntryWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00045">45</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00047">47</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1229,6 +1231,35 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="aa90cce24f1bec49d87dc18b329dce62e" name="aa90cce24f1bec49d87dc18b329dce62e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa90cce24f1bec49d87dc18b329dce62e">&#9670;&#160;</a></span>isValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ExeNodeWrapper::isValid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_import_base_entry_wrapper.html#ac43611e5b2a326c78da167b0e4784de8">ImportBaseEntryWrapper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00040">40</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
+
+</div>
+</div>
 <a id="a8a0305cc15aefe812f69485bbe82508d" name="a8a0305cc15aefe812f69485bbe82508d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8a0305cc15aefe812f69485bbe82508d">&#9670;&#160;</a></span>loadNextEntry()</h2>
 
@@ -1255,7 +1286,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_debug_dir_wrapper.html#a71d7b9d4bd5aafbc77a6939b293f14c3">DebugDirWrapper</a>, <a class="el" href="class_delay_imp_dir_wrapper.html#a9a65bd88e9cba04eec4d53c626e1f967">DelayImpDirWrapper</a>, <a class="el" href="class_import_dir_wrapper.html#a4299a35ac29e73bc70c4788a7e7d1099">ImportDirWrapper</a>, <a class="el" href="class_bound_imp_dir_wrapper.html#a13b9a7bba1549733fdc60d51abcea5ea">BoundImpDirWrapper</a>, <a class="el" href="class_delay_imp_entry_wrapper.html#abd79b0c4556c89d51d65d60d947629ee">DelayImpEntryWrapper</a>, <a class="el" href="class_import_entry_wrapper.html#a5a8b765e428aaf85d898604b50dba99f">ImportEntryWrapper</a>, and <a class="el" href="class_sect_hdrs_wrapper.html#a5d346cfbb674f06a00fceb5fceedadc5">SectHdrsWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00046">46</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00048">48</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1340,7 +1371,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00054">54</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00056">56</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1364,7 +1395,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00052">52</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00054">54</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1388,7 +1419,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00051">51</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exe_node_wrapper_8h_source.html#l00053">53</a> of file <a class="el" href="_exe_node_wrapper_8h_source.html">ExeNodeWrapper.h</a>.</p>
 
 </div>
 </div>
