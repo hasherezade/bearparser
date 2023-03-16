@@ -476,8 +476,7 @@ bool SectHdrsWrapper::wrap()
     if (this->m_PE == NULL) return false;
 
     size_t count = this->m_PE->hdrSectionsNum();
-
-    for (size_t i = 0; i < count; i++) {
+    for (size_t i = 0; i < count && i < SECT_COUNT_MAX; i++) {
         if (this->loadNextEntry(i) == false) break;
     }
     return true;
