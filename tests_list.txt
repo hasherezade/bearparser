@@ -33,3 +33,5 @@ x86/bfsvc conv
 x86/srpapi ldconfig
 x86/srpapi delayimp
 
+x86/manyimportsW7 info
+
