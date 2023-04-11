@@ -1,7 +1,6 @@
 bearparser
 ==========
 [![Build status](https://ci.appveyor.com/api/projects/status/8p6wp0bcq2mx8208?svg=true)](https://ci.appveyor.com/project/hasherezade/bearparser)
-[![Build status](https://travis-ci.org/hasherezade/bearparser.svg?branch=master)](https://travis-ci.org/hasherezade/bearparser)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bc1bdddf14244559ab4786939c6f9569)](https://app.codacy.com/gh/hasherezade/bearparser/dashboard?branch=master)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/hasherezade/bearparser.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/hasherezade/bearparser/alerts/)
 
