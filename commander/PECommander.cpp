@@ -116,7 +116,9 @@ void cmd_util::dumpResourcesInfo(PEFile *pe, pe::resource_type type, size_t wrap
 
 void cmd_util::listDataDirs(PEFile *pe)
 {
-    for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
+    DataDirWrapper *dDir = dynamic_cast<DataDirWrapper*>(pe->getWrapper(PEFile::WR_DATADIR));
+    const int recordsCount = (dDir) ? dDir->getDirsCount() : 0;
+    for (size_t i = 0 ; i < recordsCount; i++) {
         DataDirEntryWrapper* entry = pe->getDataDirEntry(pe::dir_entry(i));
         if (entry == NULL) {
             continue;

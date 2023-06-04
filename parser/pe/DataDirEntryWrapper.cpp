@@ -18,7 +18,9 @@ IMAGE_DATA_DIRECTORY* DataDirEntryWrapper::getDataDirectory()
 
 offset_t DataDirEntryWrapper::getDirEntryAddress()
 {
-    if (this->entryType >= pe::DIR_ENTRIES_COUNT) return INVALID_ADDR;
+    DataDirWrapper *dDir = dynamic_cast<DataDirWrapper*>(m_PE->getWrapper(PEFile::WR_DATADIR));
+    const size_t recordsCount = dDir ? dDir->getDirsCount() : 0;
+    if (this->entryType >= recordsCount) return INVALID_ADDR;
 
     IMAGE_DATA_DIRECTORY *d = getDataDirectory();
     if (!d) return INVALID_ADDR;
@@ -30,7 +32,10 @@ offset_t DataDirEntryWrapper::getDirEntryAddress()
 
 bufsize_t DataDirEntryWrapper::getDirEntrySize(bool trimToExeSize)
 {
-    if (this->entryType >= pe::DIR_ENTRIES_COUNT) return 0;
+    DataDirWrapper *dDir = dynamic_cast<DataDirWrapper*>(m_PE->getWrapper(PEFile::WR_DATADIR));
+    const size_t recordsCount = dDir ? dDir->getDirsCount() : 0;
+    if (this->entryType >= recordsCount) return 0;
+    
     IMAGE_DATA_DIRECTORY *d = getDataDirectory();
     if (!d) return 0;
     
