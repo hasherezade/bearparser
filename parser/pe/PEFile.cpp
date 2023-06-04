@@ -42,13 +42,14 @@ Executable* PEFileBuilder::build(AbstractByteBuffer *buf)
 }
 
 //-------------------------------------------------------------
-long PEFile::computeChecksum(BYTE *buffer, size_t bufferSize, offset_t checksumOffset)
+long PEFile::computeChecksum(BYTE* buffer, size_t bufferSize, offset_t checksumOffset)
 {
     if (!buffer || !bufferSize) return 0;
 
-    WORD *wordBuff = (WORD*)buffer;
-    size_t wordSize = bufferSize / sizeof(WORD);
-
+    WORD* wordsBuff = reinterpret_cast<WORD*>(buffer);
+    const size_t wordsCount = bufferSize / sizeof(WORD);
+    const size_t remainingBytes = bufferSize % sizeof(WORD);
+    
     size_t checksumBgn = 0;
     size_t checksumEnd = 0;
     if (checksumOffset != INVALID_ADDR) {
@@ -58,11 +59,29 @@ long PEFile::computeChecksum(BYTE *buffer, size_t bufferSize, offset_t checksumO
 
     const long long maxVal = ((long long)1) << 32;
     long long checksum = 0;
-
-    for (int i = 0; i < wordSize; i++) {
-        WORD chunk = wordBuff[i];
+    
+    for (int i = 0; i < wordsCount; i++) {
+        WORD chunk = wordsBuff[i];
 
         size_t bI = i * sizeof(WORD);
+        if (checksumBgn != checksumEnd && bI >= checksumBgn && bI < checksumEnd) {
+            size_t mask = (checksumEnd - bI) % sizeof(WORD);
+            size_t shift = (sizeof(WORD) - mask) * 8;
+            chunk = (chunk >> shift) << shift;
+        }
+
+        checksum = (checksum & 0xffffffff) + chunk + (checksum >> 32);
+        if (checksum > maxVal) {
+            checksum = (checksum & 0xffffffff) + (checksum >> 32);
+        }
+    }
+    
+    // Handle the remaining bytes
+    if (remainingBytes > 0) {
+        WORD chunk = 0;
+        memcpy(&chunk, buffer + wordsCount * sizeof(WORD), remainingBytes);
+
+        size_t bI = wordsCount * sizeof(WORD);
         if (checksumBgn != checksumEnd && bI >= checksumBgn && bI < checksumEnd) {
             size_t mask = (checksumEnd - bI) % sizeof(WORD);
             size_t shift = (sizeof(WORD) - mask) * 8;
