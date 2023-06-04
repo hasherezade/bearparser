@@ -1,8 +1,13 @@
 <map id="DataDirEntryWrapper::getDirEntrySize" name="DataDirEntryWrapper::getDirEntrySize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,63,148,103"/>
-<area shape="rect" id="node2" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="196,13,375,38"/>
-<area shape="rect" id="node4" href="$class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="214,63,357,103"/>
-<area shape="rect" id="node6" href="$class_executable.html#a9d1979e57f2c6d4146e8ddf1892c6e99" title=" " alt="" coords="210,127,361,153"/>
-<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="439,5,569,45"/>
-<area shape="rect" id="node5" href="$class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="423,70,585,95"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,147,103"/>
+<area shape="rect" id="Node000002" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="195,13,373,39"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,61,220,40,221,46,148,66"/>
+<area shape="rect" id="Node000004" href="$class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="213,63,355,103"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="147,80,199,80,199,86,147,86"/>
+<area shape="rect" id="Node000006" href="$class_executable.html#a9d1979e57f2c6d4146e8ddf1892c6e99" title=" " alt="" coords="209,128,359,153"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="148,100,221,120,220,126,146,105"/>
+<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="437,5,567,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="373,23,422,23,422,28,373,28"/>
+<area shape="rect" id="Node000005" href="$class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="421,70,582,96"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="355,80,406,80,406,86,355,86"/>
 </map>

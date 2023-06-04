@@ -1,4 +1,6 @@
 <map id="pe_util::roundup" name="pe_util::roundup">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,117,31"/>
-<area shape="rect" id="node2" href="$namespacepe__util.html#a2a369e52bafe749186319d717122796e" title=" " alt="" coords="165,5,293,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,117,31"/>
+<area shape="rect" id="Node000002" href="$namespacepe__util.html#a2a369e52bafe749186319d717122796e" title=" " alt="" coords="165,5,292,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,24,150,24,150,30,117,29"/>
+<area shape="poly" id="edge2_Node000002_Node000001" title=" " alt="" coords="164,12,132,12,132,7,164,7"/>
 </map>

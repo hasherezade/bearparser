@@ -1,4 +1,5 @@
 <map id="ResourcesAlbum::entriesCountAt" name="ResourcesAlbum::entriesCountAt">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,219,31"/>
-<area shape="rect" id="node2" href="$class_resources_album.html#ac46ef44dc24379237449de6f1ca708f5" title=" " alt="" coords="267,5,465,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,218,31"/>
+<area shape="rect" id="Node000002" href="$class_resources_album.html#ac46ef44dc24379237449de6f1ca708f5" title=" " alt="" coords="266,5,464,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="218,16,251,16,251,21,218,21"/>
 </map>

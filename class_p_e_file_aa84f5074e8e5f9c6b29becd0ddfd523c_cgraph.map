@@ -1,5 +1,7 @@
 <map id="PEFile::clearWrappers" name="PEFile::clearWrappers">
-<area shape="rect" id="node1" title=" " alt="" coords="5,42,155,67"/>
-<area shape="rect" id="node2" href="$class_exe_wrappers_container.html#a54af5aa313aaa568653fb32395a80195" title=" " alt="" coords="203,5,356,45"/>
-<area shape="rect" id="node3" href="$class_p_e_file.html#a70787fd96ff91491b6926614ed41ef17" title=" " alt="" coords="210,70,349,95"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,42,154,68"/>
+<area shape="rect" id="Node000002" href="$class_exe_wrappers_container.html#a54af5aa313aaa568653fb32395a80195" title=" " alt="" coords="202,5,354,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,41,187,36,187,42,155,47"/>
+<area shape="rect" id="Node000003" href="$class_p_e_file.html#a70787fd96ff91491b6926614ed41ef17" title=" " alt="" coords="209,70,347,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,63,195,69,194,74,154,68"/>
 </map>

@@ -1,6 +1,9 @@
 <map id="Executable::detectAddrType" name="Executable::detectAddrType">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,188,56"/>
-<area shape="rect" id="node2" href="$class_executable.html#a383eb91b928dc417d9a631704737a192" title=" " alt="" coords="236,31,393,56"/>
-<area shape="rect" id="node3" href="$class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="444,5,619,31"/>
-<area shape="rect" id="node4" href="$class_executable.html#a8715ce5ec6dfcf19916b1bcab0ed6c5a" title=" " alt="" coords="441,55,621,80"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,187,56"/>
+<area shape="rect" id="Node000002" href="$class_executable.html#a383eb91b928dc417d9a631704737a192" title=" " alt="" coords="235,31,391,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,41,220,41,220,46,187,46"/>
+<area shape="rect" id="Node000003" href="$class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="442,5,616,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="391,32,426,27,427,33,391,37"/>
+<area shape="rect" id="Node000004" href="$class_executable.html#a8715ce5ec6dfcf19916b1bcab0ed6c5a" title=" " alt="" coords="439,55,618,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="391,50,424,53,424,59,391,55"/>
 </map>

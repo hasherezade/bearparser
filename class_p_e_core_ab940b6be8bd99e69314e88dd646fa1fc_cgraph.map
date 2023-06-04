@@ -1,4 +1,5 @@
 <map id="PECore::getRawSize" name="PECore::getRawSize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,13,147,38"/>
-<area shape="rect" id="node2" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="195,5,325,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,13,146,39"/>
+<area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="194,5,324,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,23,179,23,179,28,146,28"/>
 </map>

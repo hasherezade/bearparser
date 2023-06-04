@@ -1,6 +1,10 @@
 <map id="RichHdrWrapper::getFieldsCount" name="RichHdrWrapper::getFieldsCount">
-<area shape="rect" id="node1" title=" " alt="" coords="5,29,181,69"/>
-<area shape="rect" id="node2" href="$class_rich_hdr_wrapper.html#a7795602908abdba362679d43d5d0bbbf" title=" " alt="" coords="229,37,396,62"/>
-<area shape="rect" id="node3" href="$class_exe_element_wrapper.html#a98ca205ec6f2d2deacd32327409a3539" title=" " alt="" coords="444,29,588,69"/>
-<area shape="rect" id="node4" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="636,29,780,69"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,181,70"/>
+<area shape="rect" id="Node000002" href="$class_rich_hdr_wrapper.html#a7795602908abdba362679d43d5d0bbbf" title=" " alt="" coords="229,37,394,63"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,47,213,47,213,52,181,52"/>
+<area shape="rect" id="Node000003" href="$class_exe_element_wrapper.html#a98ca205ec6f2d2deacd32327409a3539" title=" " alt="" coords="442,29,585,70"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="394,47,427,47,427,52,394,52"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="477,29,475,19,481,10,494,5,514,3,535,5,547,12,545,17,533,10,514,8,496,10,485,15,481,20,482,28"/>
+<area shape="rect" id="Node000004" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="633,29,777,70"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="586,47,619,47,619,52,586,52"/>
 </map>

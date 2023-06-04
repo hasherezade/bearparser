@@ -1,4 +1,5 @@
 <map id="ResourceEntryWrapper::~ResourceEntryWrapper" name="ResourceEntryWrapper::~ResourceEntryWrapper">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,172,45"/>
-<area shape="rect" id="node2" href="$class_resource_entry_wrapper.html#a8a963b1e9d2a70fb23bcbc057ad87208" title=" " alt="" coords="220,5,375,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,172,46"/>
+<area shape="rect" id="Node000002" href="$class_resource_entry_wrapper.html#a8a963b1e9d2a70fb23bcbc057ad87208" title=" " alt="" coords="220,5,373,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,23,205,23,205,28,172,28"/>
 </map>

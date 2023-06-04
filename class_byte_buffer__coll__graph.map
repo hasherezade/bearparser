@@ -1,4 +1,5 @@
 <map id="ByteBuffer" name="ByteBuffer">
-<area shape="rect" id="node1" title=" " alt="" coords="29,79,112,104"/>
-<area shape="rect" id="node2" href="$class_abstract_byte_buffer.html" title=" " alt="" coords="5,5,136,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="30,79,111,105"/>
+<area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html" title=" " alt="" coords="5,5,136,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,46,73,79,68,79,68,46"/>
 </map>

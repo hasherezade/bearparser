@@ -1,6 +1,9 @@
 <map id="AbstractByteBuffer::substFragmentByFile" name="AbstractByteBuffer::substFragmentByFile">
-<area shape="rect" id="node1" title=" " alt="" coords="5,37,156,77"/>
-<area shape="rect" id="node2" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="204,37,335,77"/>
-<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="383,5,513,45"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="383,69,513,109"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,156,79"/>
+<area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="204,39,334,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,56,189,56,189,62,156,62"/>
+<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="382,5,512,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="334,44,367,38,368,43,335,49"/>
+<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="382,71,512,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="335,68,368,74,367,79,334,73"/>
 </map>

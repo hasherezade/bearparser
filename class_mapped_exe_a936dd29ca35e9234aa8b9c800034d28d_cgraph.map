@@ -1,3 +1,4 @@
 <map id="MappedExe::wrap" name="MappedExe::wrap">
-<area shape="rect" id="node1" title=" " alt="" coords="5,29,128,55"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,128,55"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="45,30,41,21,43,11,52,5,67,3,82,6,90,13,87,17,80,10,66,8,54,10,48,14,46,20,50,28"/>
 </map>

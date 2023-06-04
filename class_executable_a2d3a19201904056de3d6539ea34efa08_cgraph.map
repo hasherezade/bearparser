@@ -1,5 +1,7 @@
 <map id="Executable::getFileSize" name="Executable::getFileSize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,42,160,67"/>
-<area shape="rect" id="node2" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="216,5,347,45"/>
-<area shape="rect" id="node3" href="$class_file_buffer.html#ae4818607757fb43295f9e6173916de1a" title=" " alt="" coords="208,70,355,95"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,42,160,68"/>
+<area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="216,5,346,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,41,200,35,201,40,160,46"/>
+<area shape="rect" id="Node000003" href="$class_file_buffer.html#ae4818607757fb43295f9e6173916de1a" title=" " alt="" coords="208,70,354,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="160,63,193,68,192,73,160,69"/>
 </map>

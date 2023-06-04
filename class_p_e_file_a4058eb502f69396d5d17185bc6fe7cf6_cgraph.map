@@ -1,4 +1,5 @@
 <map id="PEFile::getExports" name="PEFile::getExports">
-<area shape="rect" id="node1" title=" " alt="" coords="5,13,132,38"/>
-<area shape="rect" id="node2" href="$class_exe_wrappers_container.html#adb485acf2f9b4ad9b32d73f15ef9bec3" title=" " alt="" coords="180,5,333,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,13,132,39"/>
+<area shape="rect" id="Node000002" href="$class_exe_wrappers_container.html#adb485acf2f9b4ad9b32d73f15ef9bec3" title=" " alt="" coords="180,5,332,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,23,165,23,165,28,132,28"/>
 </map>

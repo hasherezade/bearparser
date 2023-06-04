@@ -1,4 +1,5 @@
 <map id="SecurityDirWrapper::translateFieldContent" name="SecurityDirWrapper::translateFieldContent">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,156,45"/>
-<area shape="rect" id="node2" href="$class_security_dir_wrapper.html#ae527f94810e106aed6ae4246358e9ef1" title=" " alt="" coords="204,5,337,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,156,46"/>
+<area shape="rect" id="Node000002" href="$class_security_dir_wrapper.html#ae527f94810e106aed6ae4246358e9ef1" title=" " alt="" coords="204,5,336,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,23,189,23,189,28,156,28"/>
 </map>

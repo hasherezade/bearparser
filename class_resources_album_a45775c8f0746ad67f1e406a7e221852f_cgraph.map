@@ -1,6 +1,9 @@
 <map id="ResourcesAlbum::wrapLeafsContent" name="ResourcesAlbum::wrapLeafsContent">
-<area shape="rect" id="node1" title=" " alt="" coords="5,37,193,77"/>
-<area shape="rect" id="node2" href="$class_resources_album.html#a48b7a8f6ac536d8c95d2ea976f468e38" title=" " alt="" coords="241,5,440,45"/>
-<area shape="rect" id="node3" href="$class_resource_content_factory.html#a0994d8fb70984e2b07f88ddb4c58add2" title=" " alt="" coords="253,69,429,109"/>
-<area shape="rect" id="node4" href="$class_resource_leaf_wrapper.html#a2586189ea8f9cb8e67a1c8dbb2f6bb40" title=" " alt="" coords="488,69,639,109"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,193,79"/>
+<area shape="rect" id="Node000002" href="$class_resources_album.html#a48b7a8f6ac536d8c95d2ea976f468e38" title=" " alt="" coords="241,5,439,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,43,225,39,226,44,193,49"/>
+<area shape="rect" id="Node000003" href="$class_resource_content_factory.html#a0994d8fb70984e2b07f88ddb4c58add2" title=" " alt="" coords="252,71,428,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,69,238,75,237,80,193,74"/>
+<area shape="rect" id="Node000004" href="$class_resource_leaf_wrapper.html#a2586189ea8f9cb8e67a1c8dbb2f6bb40" title=" " alt="" coords="487,71,637,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="428,88,472,88,472,94,428,94"/>
 </map>

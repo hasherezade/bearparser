@@ -1,6 +1,10 @@
 <map id="SectHdrsWrapper::getFieldPtr" name="SectHdrsWrapper::getFieldPtr">
-<area shape="rect" id="node1" title=" " alt="" coords="5,59,200,84"/>
-<area shape="rect" id="node2" href="$class_exe_node_wrapper.html#a1d7490ea5cf0f177357727df53c9a08a" title=" " alt="" coords="248,59,457,84"/>
-<area shape="rect" id="node3" href="$class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="505,29,693,55"/>
-<area shape="rect" id="node4" href="$class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf" title=" " alt="" coords="527,79,671,119"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,59,199,84"/>
+<area shape="rect" id="Node000002" href="$class_exe_node_wrapper.html#a1d7490ea5cf0f177357727df53c9a08a" title=" " alt="" coords="247,59,455,84"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,69,232,69,232,74,199,74"/>
+<area shape="rect" id="Node000003" href="$class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="503,29,690,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="455,56,488,52,488,58,456,62"/>
+<area shape="rect" id="Node000004" href="$class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf" title=" " alt="" coords="525,79,668,120"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="456,81,510,87,510,92,455,86"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="556,31,548,21,553,11,569,5,597,3,628,6,643,14,641,18,627,11,597,8,571,10,556,15,553,20,560,27"/>
 </map>

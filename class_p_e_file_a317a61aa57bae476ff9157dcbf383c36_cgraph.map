@@ -1,6 +1,9 @@
 <map id="PEFile::unbindImports" name="PEFile::unbindImports">
-<area shape="rect" id="node1" title=" " alt="" coords="5,55,153,80"/>
-<area shape="rect" id="node2" href="$class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="201,5,364,31"/>
-<area shape="rect" id="node3" href="$class_p_e_file.html#a9c486bba23979268695ac6cdfcda318e" title=" " alt="" coords="205,55,361,80"/>
-<area shape="rect" id="node4" href="$class_exe_node_wrapper.html#a5cd7f16e4529be2a96f87237e31b2611" title=" " alt="" coords="205,104,361,129"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,153,80"/>
+<area shape="rect" id="Node000002" href="$class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="201,5,362,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,51,211,32,212,38,136,57"/>
+<area shape="rect" id="Node000003" href="$class_p_e_file.html#a9c486bba23979268695ac6cdfcda318e" title=" " alt="" coords="204,55,359,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,65,189,65,189,70,153,70"/>
+<area shape="rect" id="Node000004" href="$class_exe_node_wrapper.html#a5cd7f16e4529be2a96f87237e31b2611" title=" " alt="" coords="204,104,359,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="136,78,212,97,211,103,134,84"/>
 </map>

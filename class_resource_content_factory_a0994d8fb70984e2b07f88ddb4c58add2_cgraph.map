@@ -1,4 +1,5 @@
 <map id="ResourceContentFactory::makeResContentWrapper" name="ResourceContentFactory::makeResContentWrapper">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,181,45"/>
-<area shape="rect" id="node2" href="$class_resource_leaf_wrapper.html#a2586189ea8f9cb8e67a1c8dbb2f6bb40" title=" " alt="" coords="229,5,380,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,181,46"/>
+<area shape="rect" id="Node000002" href="$class_resource_leaf_wrapper.html#a2586189ea8f9cb8e67a1c8dbb2f6bb40" title=" " alt="" coords="229,5,379,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,23,214,23,214,28,181,28"/>
 </map>

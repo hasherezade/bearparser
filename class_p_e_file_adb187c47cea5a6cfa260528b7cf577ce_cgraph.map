@@ -1,7 +1,11 @@
 <map id="PEFile::getRichHeaderSign" name="PEFile::getRichHeaderSign">
-<area shape="rect" id="node1" title=" " alt="" coords="5,45,184,70"/>
-<area shape="rect" id="node2" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="232,45,399,70"/>
-<area shape="rect" id="node3" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="447,37,577,77"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="625,5,756,45"/>
-<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="625,69,756,109"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,46,183,72"/>
+<area shape="rect" id="Node000002" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="231,46,397,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,56,215,56,215,62,183,62"/>
+<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="445,39,575,79"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="397,56,430,56,430,62,397,62"/>
+<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="623,5,754,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="575,44,608,38,609,43,576,49"/>
+<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="623,71,754,111"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="576,68,609,74,608,79,575,73"/>
 </map>

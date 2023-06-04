@@ -1,7 +1,11 @@
 <map id="DOSExe::getMappedSize" name="DOSExe::getMappedSize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,55,172,80"/>
-<area shape="rect" id="node2" href="$class_d_o_s_exe.html#a0dc602c68c8eb5b146b93112d86893a9" title=" " alt="" coords="239,5,379,31"/>
-<area shape="rect" id="node3" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="220,55,399,80"/>
-<area shape="rect" id="node5" href="$class_d_o_s_exe.html#a6a28586c07666b87f9273bd24c73e51b" title=" " alt="" coords="237,104,381,129"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="447,47,577,87"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,171,80"/>
+<area shape="rect" id="Node000002" href="$class_d_o_s_exe.html#a0dc602c68c8eb5b146b93112d86893a9" title=" " alt="" coords="238,5,378,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,51,233,32,234,37,149,57"/>
+<area shape="rect" id="Node000003" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="219,55,397,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,65,204,65,204,70,171,70"/>
+<area shape="rect" id="Node000005" href="$class_d_o_s_exe.html#a6a28586c07666b87f9273bd24c73e51b" title=" " alt="" coords="236,104,380,130"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="149,78,234,98,233,103,148,84"/>
+<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="445,47,575,88"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="397,65,430,65,430,70,397,70"/>
 </map>

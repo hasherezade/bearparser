@@ -1,4 +1,5 @@
 <map id="PECore::peNtHeadersSize" name="PECore::peNtHeadersSize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,180,31"/>
-<area shape="rect" id="node2" href="$class_p_e_core.html#ae19b9fc1ba78c32982baeda811479de1" title=" " alt="" coords="228,5,387,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,179,31"/>
+<area shape="rect" id="Node000002" href="$class_p_e_core.html#ae19b9fc1ba78c32982baeda811479de1" title=" " alt="" coords="227,5,385,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,16,212,16,212,21,179,21"/>
 </map>

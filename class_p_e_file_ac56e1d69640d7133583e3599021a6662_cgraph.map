@@ -1,5 +1,8 @@
 <map id="PEFile::PEFile" name="PEFile::PEFile">
-<area shape="rect" id="node1" title=" " alt="" coords="5,43,109,68"/>
-<area shape="rect" id="node2" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="157,5,268,31"/>
-<area shape="rect" id="node3" href="$class_p_e_file.html#a716ee06f43de71d1885443d861edfb8d" title=" " alt="" coords="165,79,260,104"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,43,109,68"/>
+<area shape="rect" id="Node000002" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="157,5,266,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,40,142,32,143,37,110,46"/>
+<area shape="rect" id="Node000003" href="$class_p_e_file.html#a716ee06f43de71d1885443d861edfb8d" title=" " alt="" coords="165,79,258,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="110,65,150,75,149,80,109,70"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="185,80,180,70,183,60,194,54,211,52,231,55,241,62,238,66,229,60,211,57,195,59,187,64,185,70,190,77"/>
 </map>

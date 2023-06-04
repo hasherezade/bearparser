@@ -1,7 +1,12 @@
 <map id="MappedExe::resize" name="MappedExe::resize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,55,135,80"/>
-<area shape="rect" id="node2" href="$class_mapped_exe.html#a0086dbc7e88025fc100cd258d1aa7df4" title=" " alt="" coords="183,5,337,31"/>
-<area shape="rect" id="node3" href="$class_executable.html#ab87eef44bb2ba2cdd64f830d7f067d31" title=" " alt="" coords="197,55,323,80"/>
-<area shape="rect" id="node5" href="$class_mapped_exe.html#a936dd29ca35e9234aa8b9c800034d28d" title=" " alt="" coords="199,128,321,153"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#ac1710ac29680e17156a74a3618fe35f2" title=" " alt="" coords="385,47,516,87"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,134,80"/>
+<area shape="rect" id="Node000002" href="$class_mapped_exe.html#a0086dbc7e88025fc100cd258d1aa7df4" title=" " alt="" coords="182,5,336,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,51,192,33,193,38,123,57"/>
+<area shape="rect" id="Node000003" href="$class_executable.html#ab87eef44bb2ba2cdd64f830d7f067d31" title=" " alt="" coords="197,55,321,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,65,182,65,182,70,134,70"/>
+<area shape="rect" id="Node000005" href="$class_mapped_exe.html#a936dd29ca35e9234aa8b9c800034d28d" title=" " alt="" coords="198,128,320,154"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="106,78,211,120,209,125,104,83"/>
+<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#ac1710ac29680e17156a74a3618fe35f2" title=" " alt="" coords="384,47,514,88"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="322,65,369,65,369,70,322,70"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="227,129,221,119,225,110,238,104,259,101,283,104,294,111,292,116,281,109,259,107,239,109,228,113,226,119,231,126"/>
 </map>

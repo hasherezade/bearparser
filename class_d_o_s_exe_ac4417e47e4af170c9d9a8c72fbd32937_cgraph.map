@@ -1,4 +1,5 @@
 <map id="DOSExe::rawToRva" name="DOSExe::rawToRva">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,141,31"/>
-<area shape="rect" id="node2" href="$class_d_o_s_exe.html#a0dc602c68c8eb5b146b93112d86893a9" title=" " alt="" coords="189,5,329,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,141,31"/>
+<area shape="rect" id="Node000002" href="$class_d_o_s_exe.html#a0dc602c68c8eb5b146b93112d86893a9" title=" " alt="" coords="189,5,328,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,16,174,16,174,21,141,21"/>
 </map>

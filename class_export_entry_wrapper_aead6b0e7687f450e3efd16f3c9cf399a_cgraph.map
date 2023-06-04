@@ -1,15 +1,31 @@
 <map id="ExportEntryWrapper::getForwarder" name="ExportEntryWrapper::getForwarder">
-<area shape="rect" id="node1" title=" " alt="" coords="5,137,140,177"/>
-<area shape="rect" id="node2" href="$class_export_dir_wrapper.html#a7e49769340051dc3d1f11a60288e281f" title=" " alt="" coords="188,43,367,69"/>
-<area shape="rect" id="node3" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="415,77,581,102"/>
-<area shape="rect" id="node10" href="$namespacepe__util.html#a242ea277da991102b3d65c0ea87be014" title=" " alt="" coords="189,245,366,270"/>
-<area shape="rect" id="node12" href="$class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="635,133,766,173"/>
-<area shape="rect" id="node13" href="$class_executable.html#a862ee23abe249ba557c740f2d2c246c5" title=" " alt="" coords="197,195,357,221"/>
-<area shape="rect" id="node7" href="$class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="427,9,569,49"/>
-<area shape="rect" id="node4" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="635,69,766,109"/>
-<area shape="rect" id="node5" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="836,69,967,109"/>
-<area shape="rect" id="node6" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="836,133,967,173"/>
-<area shape="rect" id="node8" href="$class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="629,5,772,45"/>
-<area shape="rect" id="node9" href="$class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="820,13,983,38"/>
-<area shape="rect" id="node11" href="$_util_8cpp.html#aa4fdbecc18b0d1086fc76c27bc2db21d" title=" " alt="" coords="451,249,545,274"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,140,140,181"/>
+<area shape="rect" id="Node000002" href="$class_export_dir_wrapper.html#a7e49769340051dc3d1f11a60288e281f" title=" " alt="" coords="188,46,366,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,137,186,89,219,75,221,80,189,93,106,142"/>
+<area shape="rect" id="Node000003" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="414,78,580,104"/>
+<area shape="poly" id="edge11_Node000001_Node000003" title=" " alt="" coords="140,147,399,104,400,109,141,152"/>
+<area shape="rect" id="Node000010" href="$namespacepe__util.html#a242ea277da991102b3d65c0ea87be014" title=" " alt="" coords="189,248,365,273"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="101,179,141,207,189,234,203,240,201,245,187,239,138,212,98,183"/>
+<area shape="rect" id="Node000012" href="$class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="634,136,764,177"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="140,157,619,154,619,160,140,163"/>
+<area shape="rect" id="Node000013" href="$class_executable.html#a862ee23abe249ba557c740f2d2c246c5" title=" " alt="" coords="197,198,357,224"/>
+<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="141,174,209,191,207,197,139,180"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="366,69,400,74,399,79,366,75"/>
+<area shape="rect" id="Node000007" href="$class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="427,9,568,50"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="366,45,412,38,412,44,366,50"/>
+<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="634,71,764,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="581,88,619,88,619,94,581,94"/>
+<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="833,71,964,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="765,88,818,88,818,94,765,94"/>
+<area shape="rect" id="Node000006" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="833,136,964,177"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="764,109,821,128,819,133,762,114"/>
+<area shape="rect" id="Node000008" href="$class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="628,5,770,46"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="568,26,613,25,613,30,568,31"/>
+<area shape="rect" id="Node000009" href="$class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="818,13,979,39"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="770,23,803,23,803,28,770,28"/>
+<area shape="rect" id="Node000011" href="$_util_8cpp.html#aa4fdbecc18b0d1086fc76c27bc2db21d" title=" " alt="" coords="450,252,544,277"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="365,259,435,261,435,266,365,265"/>
+<area shape="poly" id="edge13_Node000012_Node000005" title=" " alt="" coords="762,133,819,114,821,119,764,138"/>
+<area shape="poly" id="edge14_Node000012_Node000006" title=" " alt="" coords="765,154,818,154,818,159,765,159"/>
+<area shape="poly" id="edge16_Node000013_Node000006" title=" " alt="" coords="357,210,546,206,658,198,769,186,818,176,819,181,770,191,658,204,546,211,357,215"/>
 </map>

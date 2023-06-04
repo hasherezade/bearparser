@@ -1,7 +1,11 @@
 <map id="ImportBaseEntryWrapper::addMapping" name="ImportBaseEntryWrapper::addMapping">
-<area shape="rect" id="node1" title=" " alt="" coords="5,63,172,103"/>
-<area shape="rect" id="node2" href="$class_import_base_dir_wrapper.html#ae3401167a9ee3eee123cb42728d90b42" title=" " alt="" coords="220,63,373,103"/>
-<area shape="rect" id="node3" href="$class_import_base_func_wrapper.html#ab7262c25838f7e5b8ab9e243f5e616ce" title=" " alt="" coords="443,5,610,45"/>
-<area shape="rect" id="node4" href="$class_exe_node_wrapper.html#a7f85ba53a1be60d32c65b13bd7c35487" title=" " alt="" coords="433,70,620,95"/>
-<area shape="rect" id="node5" href="$class_p_e_node_wrapper.html#a9895adb75c8a282060182f7b698bb454" title=" " alt="" coords="421,119,632,145"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,171,103"/>
+<area shape="rect" id="Node000002" href="$class_import_base_dir_wrapper.html#ae3401167a9ee3eee123cb42728d90b42" title=" " alt="" coords="219,63,371,103"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,80,204,80,204,86,171,86"/>
+<area shape="rect" id="Node000003" href="$class_import_base_func_wrapper.html#ab7262c25838f7e5b8ab9e243f5e616ce" title=" " alt="" coords="442,5,607,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="371,61,426,47,428,52,372,66"/>
+<area shape="rect" id="Node000004" href="$class_exe_node_wrapper.html#a7f85ba53a1be60d32c65b13bd7c35487" title=" " alt="" coords="432,70,617,96"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="372,80,417,80,417,86,372,86"/>
+<area shape="rect" id="Node000005" href="$class_p_e_node_wrapper.html#a9895adb75c8a282060182f7b698bb454" title=" " alt="" coords="419,120,629,145"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="372,97,447,113,446,118,371,102"/>
 </map>

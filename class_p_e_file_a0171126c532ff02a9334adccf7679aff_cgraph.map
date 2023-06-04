@@ -1,4 +1,5 @@
 <map id="PEFile::getSecIndex" name="PEFile::getSecIndex">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,144,31"/>
-<area shape="rect" id="node2" href="$class_sect_hdrs_wrapper.html#aac8e2b65a8afeeb5f8d5eca5be7c53e3" title=" " alt="" coords="192,5,395,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,143,31"/>
+<area shape="rect" id="Node000002" href="$class_sect_hdrs_wrapper.html#aac8e2b65a8afeeb5f8d5eca5be7c53e3" title=" " alt="" coords="191,5,393,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,16,176,16,176,21,143,21"/>
 </map>
