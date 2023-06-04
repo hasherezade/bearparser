@@ -5,20 +5,36 @@ void* DataDirWrapper::getPtr()
 {
     if (m_PE == NULL) return NULL;
 
-    offset_t myOff = m_PE->peDataDirOffset();
+    const offset_t myOff = m_PE->peDataDirOffset();
     IMAGE_DATA_DIRECTORY* ptr = (IMAGE_DATA_DIRECTORY*) m_Exe->getContentAt(myOff, getSize());
     return ptr;
 }
 
 bufsize_t DataDirWrapper::getSize()
 {
-    bufsize_t size = sizeof(IMAGE_DATA_DIRECTORY) * pe::DIR_ENTRIES_COUNT;
+    if (m_PE == NULL) return 0;
+    const size_t count = getDirsCount();
+    const bufsize_t size = sizeof(IMAGE_DATA_DIRECTORY) * count;
     return size;
+}
+
+size_t DataDirWrapper::getDirsCount()
+{
+    if (m_PE == NULL) return 0;
+    OptHdrWrapper* optHdr  = dynamic_cast<OptHdrWrapper*>(m_PE->getWrapper(PEFile::WR_OPTIONAL_HDR));
+    if (!optHdr) return 0;
+    bool isOk = false;
+    size_t count = optHdr->getNumValue(OptHdrWrapper::RVAS_SIZES_NUM, &isOk);
+    if (!isOk) return 0;
+    if (count > pe::DIR_ENTRIES_COUNT) {
+        count = pe::DIR_ENTRIES_COUNT;
+    }
+    return count;
 }
 
 void* DataDirWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
-    if (fieldId >= pe::DIR_ENTRIES_COUNT) {
+    if (fieldId >= getDirsCount()) {
         return getPtr(); // invalid fieldID, give default
     }
 
@@ -36,7 +52,7 @@ void* DataDirWrapper::getFieldPtr(size_t fieldId, size_t subField)
 
 bufsize_t DataDirWrapper::getFieldSize(size_t fieldId, size_t subField)
 {
-    if (fieldId >= pe::DIR_ENTRIES_COUNT) return getSize();
+    if (fieldId >= getDirsCount()) return getSize();
 
     IMAGE_DATA_DIRECTORY* dir = (IMAGE_DATA_DIRECTORY*) getPtr();
     if (dir == NULL) return 0;
