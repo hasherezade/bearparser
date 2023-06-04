@@ -3,8 +3,6 @@
 #include "../Executable.h"
 #include "pe_formats.h"
 
-#define DEFAULT_IMGBASE 0x10000
-
 //class for internal use of PEFile
 class PECore
 {
