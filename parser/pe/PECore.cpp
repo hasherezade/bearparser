@@ -1,7 +1,5 @@
 #include "pe/PECore.h"
 
-#define DEFAULT_IMGBASE 0x10000
-
 void PECore::reset()
 {
     dos = NULL;
@@ -138,7 +136,7 @@ bufsize_t PECore::hdrsSize() const
     return hdrsSize;
 }
 
-offset_t PECore::getImageBase()
+offset_t PECore::getImageBase(bool recalculate)
 {
     offset_t imgBase = 0;
     if (this->opt32) {
@@ -149,15 +147,14 @@ offset_t PECore::getImageBase()
     }
     //can be null, under XP. In this case, the binary will be relocated to 10000h
     //(quote: http://code.google.com/p/corkami/wiki/PE)
-    if (imgBase == 0) {
+    if (imgBase == 0 && recalculate) {
         imgBase = DEFAULT_IMGBASE;
     }
-
     //in 32 bit PEs: it can be any value as long as ImageBase + 'SizeOfImage' < 80000000h
     //if the ImageBase is bigger than that, the binary will be relocated to 10000h
     if (this->opt32) {
         offset_t maxOffset = this->getImageSize() + imgBase;
-        if (maxOffset >= 0x80000000) {
+        if (maxOffset >= 0x80000000 && recalculate) {
             imgBase = DEFAULT_IMGBASE;
         }
     }

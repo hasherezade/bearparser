@@ -60,7 +60,7 @@ public:
 //------------------------------
     virtual bufsize_t getMappedSize(Executable::addr_type aType) = 0;
     virtual bufsize_t getAlignment(Executable::addr_type aType) const = 0;
-    virtual offset_t getImageBase() = 0;
+    virtual offset_t getImageBase(bool recalculate = false) = 0;
     virtual offset_t getEntryPoint(Executable::addr_type aType = Executable::RVA) = 0;
     
     virtual bufsize_t getImageSize() { return getMappedSize(Executable::VA); }
@@ -112,8 +112,8 @@ public:
 
     virtual bool isTruncated() { return buf ? buf->isTruncated() : false; }
 
-	/* wrappers */
-	AbstractByteBuffer* getFileBuffer() const { return buf; }
+    /* wrappers */
+    AbstractByteBuffer* getFileBuffer() const { return buf; }
     bufsize_t getFileSize() const;
 
     virtual bool dumpFragment(offset_t offset, bufsize_t size, QString fileName);

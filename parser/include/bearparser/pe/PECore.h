@@ -3,6 +3,8 @@
 #include "../Executable.h"
 #include "pe_formats.h"
 
+#define DEFAULT_IMGBASE 0x10000
+
 //class for internal use of PEFile
 class PECore
 {
@@ -21,7 +23,7 @@ public:
     virtual offset_t getRawSize() const { return static_cast<offset_t>(buf->getContentSize()); }
 
     virtual bufsize_t getAlignment(Executable::addr_type aType) const;
-    virtual offset_t getImageBase();
+    virtual offset_t getImageBase(bool recalculate = false);
     virtual bufsize_t getImageSize();
 
     Executable::exe_bits getHdrBitMode() const;
