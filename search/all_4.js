@@ -32,7 +32,7 @@ var searchData=
   ['decommit_5ffree_29',['DECOMMIT_FREE',['../class_ld_config_dir_wrapper.html#af8859de691d95f0b9a37501e0e38ca45a6920ab6c583d970b5e758552714625fe',1,'LdConfigDirWrapper']]],
   ['decommit_5ftotal_30',['DECOMMIT_TOTAL',['../class_ld_config_dir_wrapper.html#af8859de691d95f0b9a37501e0e38ca45a68f2da2f9fa115134d2e894f9fb3a8da',1,'LdConfigDirWrapper']]],
   ['default_5fbufsize_31',['DEFAULT_BUFSIZE',['../_util_8h.html#a79c48d35afc7873614502689e1bf9b65',1,'Util.h']]],
-  ['default_5fimgbase_32',['DEFAULT_IMGBASE',['../_p_e_core_8cpp.html#a8f3218e445e49b9d1cc18b39b48d2aa5',1,'PECore.cpp']]],
+  ['default_5fimgbase_32',['DEFAULT_IMGBASE',['../_p_e_core_8h.html#a8f3218e445e49b9d1cc18b39b48d2aa5',1,'PECore.h']]],
   ['default_5fpadding_33',['DEFAULT_PADDING',['../_byte_buffer_8h.html#af14790cc4c0d7d62f9ed6312e8eb55c7',1,'ByteBuffer.h']]],
   ['delayimpdirfid_34',['DelayImpDirFID',['../class_delay_imp_entry_wrapper.html#ab3020a74b9682cd49e18c1da1e8096fa',1,'DelayImpEntryWrapper']]],
   ['delayimpdirwrapper_35',['DelayImpDirWrapper',['../class_delay_imp_entry_wrapper.html#a07ed508d94a6b798a6117566e6f0b8ea',1,'DelayImpEntryWrapper::DelayImpDirWrapper'],['../class_delay_imp_dir_wrapper.html#a6c1394a6f1c2a8ee7b3e540249661a6d',1,'DelayImpDirWrapper::DelayImpDirWrapper()'],['../class_delay_imp_dir_wrapper.html',1,'DelayImpDirWrapper']]],

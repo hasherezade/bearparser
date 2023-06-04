@@ -104,8 +104,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab940b6be8bd99e69314e88dd646fa1fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4acc20ded3755cb301f284b0de0b0652"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_e_core.html#a4acc20ded3755cb301f284b0de0b0652">getAlignment</a> (<a class="el" href="class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5b">Executable::addr_type</a> aType) const</td></tr>
 <tr class="separator:a4acc20ded3755cb301f284b0de0b0652"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e2c4c279eba3d3573b6a66a6832e519"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_e_core.html#a7e2c4c279eba3d3573b6a66a6832e519">getImageBase</a> ()</td></tr>
-<tr class="separator:a7e2c4c279eba3d3573b6a66a6832e519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7de22e67191aa4cc85a13d4647e1d926"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_e_core.html#a7de22e67191aa4cc85a13d4647e1d926">getImageBase</a> (bool recalculate=false)</td></tr>
+<tr class="separator:a7de22e67191aa4cc85a13d4647e1d926"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a968d53a13a783b32a6b3adbbdbd00e96"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96">getImageSize</a> ()</td></tr>
 <tr class="separator:a968d53a13a783b32a6b3adbbdbd00e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae19b9fc1ba78c32982baeda811479de1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_executable.html#a2f0aa130b569d7d8f56ec7c746d08684">Executable::exe_bits</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_e_core.html#ae19b9fc1ba78c32982baeda811479de1">getHdrBitMode</a> () const</td></tr>
@@ -152,7 +152,7 @@ Friends</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00007">7</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00009">9</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9d10fffb2dd077f43b0e02eaacb8064c" name="a9d10fffb2dd077f43b0e02eaacb8064c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9d10fffb2dd077f43b0e02eaacb8064c">&#9670;&#160;</a></span>PECore()</h2>
@@ -177,7 +177,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00011">11</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00013">13</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 
 </div>
 </div>
@@ -204,7 +204,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00014">14</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00016">16</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -243,7 +243,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00104">104</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00102">102</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 
 </div>
 </div>
@@ -270,7 +270,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00045">45</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00047">47</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 
 </div>
 </div>
@@ -289,12 +289,12 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00051">51</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00049">49</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a7e2c4c279eba3d3573b6a66a6832e519" name="a7e2c4c279eba3d3573b6a66a6832e519"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e2c4c279eba3d3573b6a66a6832e519">&#9670;&#160;</a></span>getImageBase()</h2>
+<a id="a7de22e67191aa4cc85a13d4647e1d926" name="a7de22e67191aa4cc85a13d4647e1d926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7de22e67191aa4cc85a13d4647e1d926">&#9670;&#160;</a></span>getImageBase()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -305,7 +305,8 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname"><a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> PECore::getImageBase </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>recalculate</em> = <code>false</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -316,12 +317,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00141">141</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00139">139</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_p_e_core_a7e2c4c279eba3d3573b6a66a6832e519_cgraph.png" border="0" usemap="#aclass_p_e_core_a7e2c4c279eba3d3573b6a66a6832e519_cgraph" alt=""/></div>
-<map name="aclass_p_e_core_a7e2c4c279eba3d3573b6a66a6832e519_cgraph" id="aclass_p_e_core_a7e2c4c279eba3d3573b6a66a6832e519_cgraph">
+<div class="center"><img src="class_p_e_core_a7de22e67191aa4cc85a13d4647e1d926_cgraph.png" border="0" usemap="#aclass_p_e_core_a7de22e67191aa4cc85a13d4647e1d926_cgraph" alt=""/></div>
+<map name="aclass_p_e_core_a7de22e67191aa4cc85a13d4647e1d926_cgraph" id="aclass_p_e_core_a7de22e67191aa4cc85a13d4647e1d926_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,161,31"/>
 <area shape="rect" href="class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="209,5,359,31"/>
 <area shape="poly" title=" " alt="" coords="161,16,193,16,193,21,161,21"/>
@@ -353,7 +354,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00117">117</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00115">115</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 
 </div>
 </div>
@@ -380,7 +381,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00021">21</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00023">23</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -409,7 +410,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00129">129</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00127">127</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -437,7 +438,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00064">64</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00062">62</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -466,7 +467,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00083">83</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00081">81</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -495,7 +496,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00074">74</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00072">72</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -526,7 +527,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00059">59</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00057">57</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 
 </div>
 </div>
@@ -553,7 +554,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00005">5</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00003">3</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 
 </div>
 </div>
@@ -572,7 +573,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00091">91</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00089">89</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -614,7 +615,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00035">35</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00037">37</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 
 </div>
 </div>
@@ -634,7 +635,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00013">13</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8cpp_source.html#l00011">11</a> of file <a class="el" href="_p_e_core_8cpp_source.html">PECore.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -675,7 +676,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00059">59</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00061">61</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 
 </div>
 </div>
@@ -700,7 +701,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00052">52</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00054">54</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 
 </div>
 </div>
@@ -724,7 +725,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00054">54</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00056">56</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 
 </div>
 </div>
@@ -748,7 +749,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00055">55</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00057">57</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 
 </div>
 </div>
@@ -772,7 +773,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00056">56</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00058">58</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 
 </div>
 </div>
@@ -796,7 +797,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00057">57</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_p_e_core_8h_source.html#l00059">59</a> of file <a class="el" href="_p_e_core_8h_source.html">PECore.h</a>.</p>
 
 </div>
 </div>

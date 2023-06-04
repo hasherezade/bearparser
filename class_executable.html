@@ -135,8 +135,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8715ce5ec6dfcf19916b1bcab0ed6c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab74d0e5dd5daa2d8da6387f85c233287"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_executable.html#ab74d0e5dd5daa2d8da6387f85c233287">getAlignment</a> (<a class="el" href="class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5b">Executable::addr_type</a> aType) const =0</td></tr>
 <tr class="separator:ab74d0e5dd5daa2d8da6387f85c233287"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6b720d513f684a0b65dd73370de33a6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_executable.html#ab6b720d513f684a0b65dd73370de33a6">getImageBase</a> ()=0</td></tr>
-<tr class="separator:ab6b720d513f684a0b65dd73370de33a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a513ca66070ae1b44cf81981346165d82"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_executable.html#a513ca66070ae1b44cf81981346165d82">getImageBase</a> (bool recalculate=false)=0</td></tr>
+<tr class="separator:a513ca66070ae1b44cf81981346165d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23863d16500af8a8e0fe52015d6f6fdd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_executable.html#a23863d16500af8a8e0fe52015d6f6fdd">getEntryPoint</a> (<a class="el" href="class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5b">Executable::addr_type</a> aType=<a class="el" href="class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5bab09fbc5c56c2c2f13f0318d67c72b8be">Executable::RVA</a>)=0</td></tr>
 <tr class="separator:a23863d16500af8a8e0fe52015d6f6fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8792e07e9290a5eade2ba15ee4491326"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_executable.html#a8792e07e9290a5eade2ba15ee4491326">getImageSize</a> ()</td></tr>
@@ -418,7 +418,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_executable_ab8129d6c42c7b4e84bf524381e4561b9_cgraph.png" border="0" usemap="#aclass_executable_ab8129d6c42c7b4e84bf524381e4561b9_cgraph" alt=""/></div>
 <map name="aclass_executable_ab8129d6c42c7b4e84bf524381e4561b9_cgraph" id="aclass_executable_ab8129d6c42c7b4e84bf524381e4561b9_cgraph">
 <area shape="rect" title=" " alt="" coords="5,80,166,106"/>
-<area shape="rect" href="class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="421,5,595,31"/>
+<area shape="rect" href="class_executable.html#a513ca66070ae1b44cf81981346165d82" title=" " alt="" coords="421,5,595,31"/>
 <area shape="poly" title=" " alt="" coords="112,77,158,57,213,40,311,23,405,16,406,22,312,29,214,45,160,62,114,82"/>
 <area shape="rect" href="class_executable.html#a383eb91b928dc417d9a631704737a192" title=" " alt="" coords="214,55,370,80"/>
 <area shape="poly" title=" " alt="" coords="166,80,199,76,199,82,166,86"/>
@@ -469,7 +469,7 @@ Here is the call graph for this function:</div>
 <area shape="rect" title=" " alt="" coords="5,31,187,56"/>
 <area shape="rect" href="class_executable.html#a383eb91b928dc417d9a631704737a192" title=" " alt="" coords="235,31,391,56"/>
 <area shape="poly" title=" " alt="" coords="187,41,220,41,220,46,187,46"/>
-<area shape="rect" href="class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="442,5,616,31"/>
+<area shape="rect" href="class_executable.html#a513ca66070ae1b44cf81981346165d82" title=" " alt="" coords="442,5,616,31"/>
 <area shape="poly" title=" " alt="" coords="391,32,426,27,427,33,391,37"/>
 <area shape="rect" href="class_executable.html#a8715ce5ec6dfcf19916b1bcab0ed6c5a" title=" " alt="" coords="439,55,618,80"/>
 <area shape="poly" title=" " alt="" coords="391,50,424,53,424,59,391,55"/>
@@ -812,7 +812,7 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="class_executable.html#ad01bb6955b84cb82c66f7a0c5ba1cd82" title=" " alt="" coords="406,269,550,295"/>
 <area shape="poly" title=" " alt="" coords="304,194,346,224,399,255,412,261,410,266,397,260,343,229,301,198"/>
 <area shape="poly" title=" " alt="" coords="528,167,603,147,605,152,529,172"/>
-<area shape="rect" href="class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="812,245,987,271"/>
+<area shape="rect" href="class_executable.html#a513ca66070ae1b44cf81981346165d82" title=" " alt="" coords="812,245,987,271"/>
 <area shape="poly" title=" " alt="" coords="534,266,605,254,704,248,798,249,798,255,704,254,606,259,534,271"/>
 <area shape="rect" href="class_executable.html#a8715ce5ec6dfcf19916b1bcab0ed6c5a" title=" " alt="" coords="810,294,989,320"/>
 <area shape="poly" title=" " alt="" coords="534,293,606,304,703,310,795,309,795,315,703,315,605,310,534,298"/>
@@ -1045,8 +1045,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="ab6b720d513f684a0b65dd73370de33a6" name="ab6b720d513f684a0b65dd73370de33a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6b720d513f684a0b65dd73370de33a6">&#9670;&#160;</a></span>getImageBase()</h2>
+<a id="a513ca66070ae1b44cf81981346165d82" name="a513ca66070ae1b44cf81981346165d82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a513ca66070ae1b44cf81981346165d82">&#9670;&#160;</a></span>getImageBase()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1057,7 +1057,8 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">virtual <a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> Executable::getImageBase </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>recalculate</em> = <code>false</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1068,7 +1069,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_d_o_s_exe.html#a5d97b166ede39c2e78c6888e47f4c10e">DOSExe</a>, and <a class="el" href="class_p_e_file.html#a4a78dd40f84d8774eb785e6d0bd063ab">PEFile</a>.</p>
+<p>Implemented in <a class="el" href="class_d_o_s_exe.html#a7e13e1243f359587db7fb48364147a7e">DOSExe</a>, and <a class="el" href="class_p_e_file.html#a631999ef77e6cf9492993e5d5af1e5ab">PEFile</a>.</p>
 
 </div>
 </div>
@@ -1441,7 +1442,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_executable_a383eb91b928dc417d9a631704737a192_cgraph.png" border="0" usemap="#aclass_executable_a383eb91b928dc417d9a631704737a192_cgraph" alt=""/></div>
 <map name="aclass_executable_a383eb91b928dc417d9a631704737a192_cgraph" id="aclass_executable_a383eb91b928dc417d9a631704737a192_cgraph">
 <area shape="rect" title=" " alt="" coords="5,31,162,56"/>
-<area shape="rect" href="class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="212,5,387,31"/>
+<area shape="rect" href="class_executable.html#a513ca66070ae1b44cf81981346165d82" title=" " alt="" coords="212,5,387,31"/>
 <area shape="poly" title=" " alt="" coords="161,32,197,27,198,33,162,37"/>
 <area shape="rect" href="class_executable.html#a8715ce5ec6dfcf19916b1bcab0ed6c5a" title=" " alt="" coords="210,55,389,80"/>
 <area shape="poly" title=" " alt="" coords="162,50,195,53,194,59,161,55"/>
@@ -1483,7 +1484,7 @@ Here is the call graph for this function:</div>
 <area shape="rect" title=" " alt="" coords="5,31,153,56"/>
 <area shape="rect" href="class_executable.html#a383eb91b928dc417d9a631704737a192" title=" " alt="" coords="201,31,357,56"/>
 <area shape="poly" title=" " alt="" coords="153,41,186,41,186,46,153,46"/>
-<area shape="rect" href="class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="408,5,582,31"/>
+<area shape="rect" href="class_executable.html#a513ca66070ae1b44cf81981346165d82" title=" " alt="" coords="408,5,582,31"/>
 <area shape="poly" title=" " alt="" coords="357,32,392,27,393,33,357,37"/>
 <area shape="rect" href="class_executable.html#a8715ce5ec6dfcf19916b1bcab0ed6c5a" title=" " alt="" coords="405,55,584,80"/>
 <area shape="poly" title=" " alt="" coords="357,50,390,53,390,59,357,55"/>
@@ -1621,7 +1622,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_executable_ae3a32e3cea7c9c5a9aa2e938fc1091b9_cgraph.png" border="0" usemap="#aclass_executable_ae3a32e3cea7c9c5a9aa2e938fc1091b9_cgraph" alt=""/></div>
 <map name="aclass_executable_ae3a32e3cea7c9c5a9aa2e938fc1091b9_cgraph" id="aclass_executable_ae3a32e3cea7c9c5a9aa2e938fc1091b9_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,145,31"/>
-<area shape="rect" href="class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="193,5,367,31"/>
+<area shape="rect" href="class_executable.html#a513ca66070ae1b44cf81981346165d82" title=" " alt="" coords="193,5,367,31"/>
 <area shape="poly" title=" " alt="" coords="145,16,178,16,178,21,145,21"/>
 </map>
 </div>
@@ -1685,7 +1686,7 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="99,104,182,140,204,148,203,153,180,145,97,109"/>
 <area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="401,45,531,85"/>
 <area shape="poly" title=" " alt="" coords="340,64,387,63,387,69,340,69"/>
-<area shape="rect" href="class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="595,136,769,162"/>
+<area shape="rect" href="class_executable.html#a513ca66070ae1b44cf81981346165d82" title=" " alt="" coords="595,136,769,162"/>
 <area shape="poly" title=" " alt="" coords="328,153,388,145,487,140,580,141,580,147,487,146,388,150,329,158"/>
 <area shape="rect" href="class_executable.html#a8715ce5ec6dfcf19916b1bcab0ed6c5a" title=" " alt="" coords="592,185,772,211"/>
 <area shape="poly" title=" " alt="" coords="309,180,388,196,485,202,578,201,578,207,485,207,388,201,307,185"/>
@@ -1733,7 +1734,7 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="151,31,184,27,184,32,151,37"/>
 <area shape="rect" href="class_executable.html#ad01bb6955b84cb82c66f7a0c5ba1cd82" title=" " alt="" coords="201,55,346,80"/>
 <area shape="poly" title=" " alt="" coords="151,50,187,54,186,60,151,55"/>
-<area shape="rect" href="class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="603,31,777,56"/>
+<area shape="rect" href="class_executable.html#a513ca66070ae1b44cf81981346165d82" title=" " alt="" coords="603,31,777,56"/>
 <area shape="poly" title=" " alt="" coords="327,51,396,40,495,34,588,35,588,40,495,39,396,45,328,57"/>
 <area shape="rect" href="class_executable.html#a8715ce5ec6dfcf19916b1bcab0ed6c5a" title=" " alt="" coords="600,80,780,106"/>
 <area shape="poly" title=" " alt="" coords="328,78,396,90,493,96,586,95,586,101,493,101,396,95,327,84"/>
@@ -1787,7 +1788,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_executable_ad01bb6955b84cb82c66f7a0c5ba1cd82_cgraph.png" border="0" usemap="#aclass_executable_ad01bb6955b84cb82c66f7a0c5ba1cd82_cgraph" alt=""/></div>
 <map name="aclass_executable_ad01bb6955b84cb82c66f7a0c5ba1cd82_cgraph" id="aclass_executable_ad01bb6955b84cb82c66f7a0c5ba1cd82_cgraph">
 <area shape="rect" title=" " alt="" coords="5,29,150,55"/>
-<area shape="rect" href="class_executable.html#ab6b720d513f684a0b65dd73370de33a6" title=" " alt="" coords="405,5,579,31"/>
+<area shape="rect" href="class_executable.html#a513ca66070ae1b44cf81981346165d82" title=" " alt="" coords="405,5,579,31"/>
 <area shape="poly" title=" " alt="" coords="130,26,197,14,296,9,390,10,390,15,296,14,198,19,131,31"/>
 <area shape="rect" href="class_executable.html#a8715ce5ec6dfcf19916b1bcab0ed6c5a" title=" " alt="" coords="402,55,581,80"/>
 <area shape="poly" title=" " alt="" coords="131,53,198,65,295,71,387,70,387,75,295,76,197,70,130,58"/>
