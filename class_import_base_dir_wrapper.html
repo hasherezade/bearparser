@@ -161,6 +161,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8c925ecdf852aa1886000cfb8f521f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a782d3492affeb5ab95a9c470bf18f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_import_base_dir_wrapper.html#a4a782d3492affeb5ab95a9c470bf18f0">hasThunk</a> (<a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> thunk)</td></tr>
 <tr class="separator:a4a782d3492affeb5ab95a9c470bf18f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf1b088adeb5cee4c3e81b135132326c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_import_base_func_wrapper.html">ImportBaseFuncWrapper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_import_base_dir_wrapper.html#adf1b088adeb5cee4c3e81b135132326c">thunkToFunction</a> (<a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> thunk)</td></tr>
+<tr class="separator:adf1b088adeb5cee4c3e81b135132326c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_data_dir_entry_wrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_data_dir_entry_wrapper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_data_dir_entry_wrapper.html">DataDirEntryWrapper</a></td></tr>
 <tr class="memitem:af5e95792dc15586d7b769dc46ba55e59 inherit pub_methods_class_data_dir_entry_wrapper"><td class="memItemLeft" align="right" valign="top">IMAGE_DATA_DIRECTORY *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59">getDataDirectory</a> ()</td></tr>
 <tr class="separator:af5e95792dc15586d7b769dc46ba55e59 inherit pub_methods_class_data_dir_entry_wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -357,8 +359,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ae3401167a9ee3eee123cb42728d90b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cba99f6a8ea91df9fef85d5551150e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_import_base_entry_wrapper.html">ImportBaseEntryWrapper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_import_base_dir_wrapper.html#a1cba99f6a8ea91df9fef85d5551150e9">thunkToLib</a> (<a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> thunk)</td></tr>
 <tr class="separator:a1cba99f6a8ea91df9fef85d5551150e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf1b088adeb5cee4c3e81b135132326c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_import_base_func_wrapper.html">ImportBaseFuncWrapper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_import_base_dir_wrapper.html#adf1b088adeb5cee4c3e81b135132326c">thunkToFunction</a> (<a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> thunk)</td></tr>
-<tr class="separator:adf1b088adeb5cee4c3e81b135132326c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_data_dir_entry_wrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_data_dir_entry_wrapper')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_data_dir_entry_wrapper.html">DataDirEntryWrapper</a></td></tr>
 <tr class="memitem:abeca109880b28e18f101e790efc29b1d inherit pro_methods_class_data_dir_entry_wrapper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_dir_entry_wrapper.html#abeca109880b28e18f101e790efc29b1d">DataDirEntryWrapper</a> (<a class="el" href="class_p_e_file.html">PEFile</a> *pe, pe::dir_entry v_entryType)</td></tr>
 <tr class="separator:abeca109880b28e18f101e790efc29b1d inherit pro_methods_class_data_dir_entry_wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -453,7 +453,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00041">41</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00043">43</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -936,30 +936,32 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_import_base_dir_wrapper_ae3a5cc957ac0af30561a8a14ecddbe30_cgraph.png" border="0" usemap="#aclass_import_base_dir_wrapper_ae3a5cc957ac0af30561a8a14ecddbe30_cgraph" alt=""/></div>
 <map name="aclass_import_base_dir_wrapper_ae3a5cc957ac0af30561a8a14ecddbe30_cgraph" id="aclass_import_base_dir_wrapper_ae3a5cc957ac0af30561a8a14ecddbe30_cgraph">
-<area shape="rect" title=" " alt="" coords="5,120,158,161"/>
-<area shape="rect" href="class_import_base_func_wrapper.html#a357e6c0400c04809c286c70de8edf5fa" title=" " alt="" coords="206,63,371,103"/>
-<area shape="poly" title=" " alt="" coords="156,117,198,105,199,110,158,122"/>
-<area shape="rect" href="class_import_base_func_wrapper.html#aba342064b7e19eb82b7145a9e9a150ab" title=" " alt="" coords="442,120,607,161"/>
-<area shape="poly" title=" " alt="" coords="158,138,427,138,427,143,158,143"/>
-<area shape="rect" href="class_import_base_dir_wrapper.html#adf1b088adeb5cee4c3e81b135132326c" title=" " alt="" coords="212,193,365,234"/>
-<area shape="poly" title=" " alt="" coords="142,159,216,185,214,190,140,164"/>
-<area shape="rect" href="class_import_base_entry_wrapper.html#ad5ee91f17a35bc9691a7d1cf96d7c75e" title=" " alt="" coords="442,5,607,46"/>
-<area shape="poly" title=" " alt="" coords="371,60,426,47,428,52,372,66"/>
-<area shape="rect" href="class_p_e_node_wrapper.html#a9895adb75c8a282060182f7b698bb454" title=" " alt="" coords="419,70,629,96"/>
-<area shape="poly" title=" " alt="" coords="371,80,404,80,404,86,371,86"/>
-<area shape="poly" title=" " alt="" coords="372,100,428,114,426,119,371,106"/>
-<area shape="rect" href="class_import_base_func_wrapper.html#aae83f36e9dde96fc3373b73a238c05a3" title=" " alt="" coords="688,39,854,79"/>
-<area shape="poly" title=" " alt="" coords="594,117,628,106,698,82,699,87,630,111,596,122"/>
-<area shape="rect" href="class_import_base_func_wrapper.html#a695260b969ca9ead18a3e2330792adad" title=" " alt="" coords="688,104,854,145"/>
-<area shape="poly" title=" " alt="" coords="607,132,674,128,674,133,608,138"/>
-<area shape="rect" href="class_import_base_func_wrapper.html#ace0d20b46771cb1c8f978ebaf7a5106e" title=" " alt="" coords="688,169,854,210"/>
-<area shape="poly" title=" " alt="" coords="608,154,674,168,673,173,607,160"/>
-<area shape="rect" href="class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="677,258,865,284"/>
-<area shape="poly" title=" " alt="" coords="365,213,489,221,630,236,706,252,705,257,629,242,489,226,365,219"/>
-<area shape="rect" href="class_import_base_dir_wrapper.html#a1cba99f6a8ea91df9fef85d5551150e9" title=" " alt="" coords="448,251,600,291"/>
-<area shape="poly" title=" " alt="" coords="365,230,434,246,433,252,364,235"/>
-<area shape="poly" title=" " alt="" coords="730,260,722,250,727,240,744,234,771,232,803,235,818,242,815,247,801,240,771,237,745,239,731,244,728,249,734,256"/>
-<area shape="poly" title=" " alt="" coords="601,268,663,268,663,274,601,274"/>
+<area shape="rect" title=" " alt="" coords="5,201,158,242"/>
+<area shape="rect" href="class_import_base_func_wrapper.html#a357e6c0400c04809c286c70de8edf5fa" title=" " alt="" coords="206,144,371,185"/>
+<area shape="poly" title=" " alt="" coords="156,198,198,187,199,192,158,203"/>
+<area shape="rect" href="class_import_base_func_wrapper.html#aba342064b7e19eb82b7145a9e9a150ab" title=" " alt="" coords="419,185,584,226"/>
+<area shape="poly" title=" " alt="" coords="158,216,404,207,404,212,158,221"/>
+<area shape="rect" href="class_import_base_dir_wrapper.html#adf1b088adeb5cee4c3e81b135132326c" title=" " alt="" coords="212,275,365,315"/>
+<area shape="poly" title=" " alt="" coords="142,240,216,267,214,272,140,245"/>
+<area shape="rect" href="class_import_base_func_wrapper.html#abd90449e2d5e2f026af89cdb5e42aa6c" title=" " alt="" coords="419,63,584,103"/>
+<area shape="poly" title=" " alt="" coords="343,141,432,107,434,111,345,146"/>
+<area shape="poly" title=" " alt="" coords="372,178,405,184,404,189,371,183"/>
+<area shape="rect" href="class_import_base_entry_wrapper.html#ad5ee91f17a35bc9691a7d1cf96d7c75e" title=" " alt="" coords="655,5,820,46"/>
+<area shape="poly" title=" " alt="" coords="584,60,640,47,641,52,585,66"/>
+<area shape="rect" href="class_p_e_node_wrapper.html#a9895adb75c8a282060182f7b698bb454" title=" " alt="" coords="632,70,843,96"/>
+<area shape="poly" title=" " alt="" coords="585,80,617,80,617,86,585,86"/>
+<area shape="rect" href="class_import_base_func_wrapper.html#aae83f36e9dde96fc3373b73a238c05a3" title=" " alt="" coords="655,120,820,161"/>
+<area shape="poly" title=" " alt="" coords="577,182,646,163,648,168,578,187"/>
+<area shape="rect" href="class_import_base_func_wrapper.html#a695260b969ca9ead18a3e2330792adad" title=" " alt="" coords="655,185,820,226"/>
+<area shape="poly" title=" " alt="" coords="585,203,640,203,640,208,585,208"/>
+<area shape="rect" href="class_import_base_func_wrapper.html#ace0d20b46771cb1c8f978ebaf7a5106e" title=" " alt="" coords="655,251,820,291"/>
+<area shape="poly" title=" " alt="" coords="578,224,648,243,646,249,577,229"/>
+<area shape="rect" href="class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="644,340,831,365"/>
+<area shape="poly" title=" " alt="" coords="365,296,470,304,585,318,667,333,666,338,584,323,469,310,365,302"/>
+<area shape="rect" href="class_import_base_dir_wrapper.html#a1cba99f6a8ea91df9fef85d5551150e9" title=" " alt="" coords="426,332,578,373"/>
+<area shape="poly" title=" " alt="" coords="366,313,412,325,410,331,364,318"/>
+<area shape="poly" title=" " alt="" coords="699,341,691,331,695,321,711,315,738,313,768,316,782,324,780,328,766,321,737,318,712,320,699,325,696,330,703,337"/>
+<area shape="poly" title=" " alt="" coords="578,350,629,350,629,355,578,355"/>
 </map>
 </div>
 
@@ -970,9 +972,6 @@ Here is the call graph for this function:</div>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_import_base_func_wrapper.html">ImportBaseFuncWrapper</a> * ImportBaseDirWrapper::thunkToFunction </td>
@@ -982,11 +981,6 @@ Here is the call graph for this function:</div>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00086">86</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
@@ -1151,7 +1145,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00055">55</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00056">56</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1176,7 +1170,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00053">53</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00054">54</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1200,7 +1194,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00051">51</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00052">52</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1224,7 +1218,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00050">50</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00051">51</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
