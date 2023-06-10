@@ -37,6 +37,8 @@ public:
         return (libItr != thunkToLibMap.end());
     }
 
+    ImportBaseFuncWrapper* thunkToFunction(offset_t thunk);
+
 protected:
     ImportBaseDirWrapper(PEFile *pe, pe:: dir_entry v_entryType)
         : DataDirEntryWrapper(pe, v_entryType), importsCount(0) { }
@@ -45,7 +47,6 @@ protected:
 
     void addMapping(ExeNodeWrapper *func);
     ImportBaseEntryWrapper* thunkToLib(offset_t thunk);
-    ImportBaseFuncWrapper* thunkToFunction(offset_t thunk);
     //---
     std::map<offset_t, size_t> thunkToLibMap;
     QList<offset_t> thunksList;
@@ -86,6 +87,7 @@ public:
 
     virtual QString getName();
     QString getShortName();
+    QString getLibName();
 
     virtual bool isByOrdinal() = 0;
     virtual uint64_t getOrdinal() = 0;

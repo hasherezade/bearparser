@@ -209,16 +209,24 @@ QString ImportBaseFuncWrapper::getShortName()
     return functionName;
 }
 
+QString ImportBaseFuncWrapper::getLibName()
+{
+    ImportBaseEntryWrapper *p = dynamic_cast<ImportBaseEntryWrapper*>(this->getParentNode());
+    if (!p) return "";
+    
+    char *libName = p->getLibraryName();
+    if (!libName) return "";
+    
+    return QString(libName);
+}
+
 QString ImportBaseFuncWrapper::getName()
 {
+    QString libName = getLibName();
     QString functionName = getShortName();
-    ImportBaseEntryWrapper *p = dynamic_cast<ImportBaseEntryWrapper*>(this->getParentNode());
-    if (!p) return functionName;
 
-    char *libName = p->getLibraryName();
-    if (!libName) return functionName;
+    if (!libName.length()) return functionName;
 
-    functionName = "[" + QString(libName) + "]." + functionName;
-    return functionName;
+    return "[" + QString(libName) + "]." + functionName;
 }
 
