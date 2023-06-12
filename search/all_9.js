@@ -23,7 +23,7 @@ var searchData=
   ['importscount_20',['importsCount',['../class_bound_imp_dir_wrapper.html#a5c4c7d7cf872187d05e365c6aa44b756',1,'BoundImpDirWrapper::importsCount'],['../class_import_base_dir_wrapper.html#a5c3f77f425a0eaa22f31b836bf9c868c',1,'ImportBaseDirWrapper::importsCount']]],
   ['index_5faddr_21',['INDEX_ADDR',['../class_tls_dir_wrapper.html#ab13e121ad448dcd394a87d0a4eadfa33a5bf345f0a756f439f23982a8b8dc93cb',1,'TlsDirWrapper']]],
   ['info_22',['INFO',['../class_resource_version_wrapper.html#ab5d68467854b544b4b69ce2701563928a3075b0de04d7af3f02f02ebff6817500',1,'ResourceVersionWrapper']]],
-  ['init_23',['init',['../class_exe_factory.html#a754878078e16859193af16b68dc19457',1,'ExeFactory']]],
+  ['init_23',['init',['../class_exe_factory.html#a754878078e16859193af16b68dc19457',1,'ExeFactory::init()'],['../class_common_ordinals_lookup.html#a256345e66253fa446d1eafe29094b7dc',1,'CommonOrdinalsLookup::init()']]],
   ['initcharact_24',['initCharact',['../class_file_hdr_wrapper.html#a65e7374f6ae6468b5fb772940721a602',1,'FileHdrWrapper']]],
   ['initdata_5fsize_25',['INITDATA_SIZE',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013ae7d3200fd93c0c87a3d1bdc6e3b5c5ca',1,'OptHdrWrapper']]],
   ['initdirentries_26',['initDirEntries',['../class_p_e_file.html#a70787fd96ff91491b6926614ed41ef17',1,'PEFile']]],

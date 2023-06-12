@@ -6,7 +6,7 @@ var searchData=
   ['importdirwrapper_3',['ImportDirWrapper',['../class_import_dir_wrapper.html#a0a0f2284f3aaef1d525360b44d91d3e8',1,'ImportDirWrapper']]],
   ['importedfuncwrapper_4',['ImportedFuncWrapper',['../class_imported_func_wrapper.html#a3015989da062c8652c3570ede71e6485',1,'ImportedFuncWrapper']]],
   ['importentrywrapper_5',['ImportEntryWrapper',['../class_import_entry_wrapper.html#a37f0a126fa7693446cfdacc723a4e0a4',1,'ImportEntryWrapper']]],
-  ['init_6',['init',['../class_exe_factory.html#a754878078e16859193af16b68dc19457',1,'ExeFactory']]],
+  ['init_6',['init',['../class_exe_factory.html#a754878078e16859193af16b68dc19457',1,'ExeFactory::init()'],['../class_common_ordinals_lookup.html#a256345e66253fa446d1eafe29094b7dc',1,'CommonOrdinalsLookup::init()']]],
   ['initcharact_7',['initCharact',['../class_file_hdr_wrapper.html#a65e7374f6ae6468b5fb772940721a602',1,'FileHdrWrapper']]],
   ['initdirentries_8',['initDirEntries',['../class_p_e_file.html#a70787fd96ff91491b6926614ed41ef17',1,'PEFile']]],
   ['initdllcharact_9',['initDllCharact',['../class_opt_hdr_wrapper.html#a405a0671ef70e11c8e5f70651b0f9cc6',1,'OptHdrWrapper']]],
