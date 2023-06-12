@@ -22,7 +22,7 @@
 #include "ExceptionDirWrapper.h"
 #include "ResourceDirWrapper.h"
 #include "ClrDirWrapper.h"
-
+#include "CommonOrdinalsLookup.h"
 #include "rsrc/ResourcesAlbum.h"
 
 class PEFile;

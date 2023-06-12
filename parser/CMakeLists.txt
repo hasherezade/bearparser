@@ -54,6 +54,7 @@ set (pe_hdrs
     include/bearparser/pe/ResourceDirWrapper.h
     include/bearparser/pe/ResourceLeafWrapper.h
     include/bearparser/pe/ClrDirWrapper.h
+    include/bearparser/pe/CommonOrdinalsLookup.h
 )
 
 set (pe_rsrc_hdrs
