@@ -128,7 +128,7 @@ public:
         bool isSupressed = false;
         uint64_t GuardFlags = this->getNumValue(GUARD_FLAGS, &isOk);
         if (isOk) {
-            isSupressed = (GuardFlags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
+            isSupressed = (GuardFlags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT) || (GuardFlags & 0x10000000);
         }
         return isSupressed;
     }
@@ -140,7 +140,7 @@ public:
         if (!isOk) {
             return 0;
         }
-        bool isSupressed = (GuardFlags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT);
+        bool isSupressed = (GuardFlags & IMAGE_GUARD_CF_EXPORT_SUPPRESSION_INFO_PRESENT) || (GuardFlags & 0x10000000);
         if (!isSupressed) {
             return 0;
         }
