@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['abstractbytebuffer_0',['AbstractByteBuffer',['../class_abstract_byte_buffer.html#a083856a64bf8a0682a6a7799830f0ec1',1,'AbstractByteBuffer::AbstractByteBuffer()'],['../class_abstract_byte_buffer.html',1,'AbstractByteBuffer']]],
+  ['abstractbytebuffer_0',['abstractbytebuffer',['../class_abstract_byte_buffer.html#a083856a64bf8a0682a6a7799830f0ec1',1,'AbstractByteBuffer::AbstractByteBuffer()'],['../class_abstract_byte_buffer.html',1,'AbstractByteBuffer']]],
   ['abstractbytebuffer_2ecpp_1',['AbstractByteBuffer.cpp',['../_abstract_byte_buffer_8cpp.html',1,'']]],
   ['abstractbytebuffer_2eh_2',['AbstractByteBuffer.h',['../_abstract_byte_buffer_8h.html',1,'']]],
-  ['abstractfilebuffer_3',['AbstractFileBuffer',['../class_abstract_file_buffer.html',1,'AbstractFileBuffer'],['../class_abstract_file_buffer.html#ad81001a3650854c762c761b8c21ff762',1,'AbstractFileBuffer::AbstractFileBuffer()']]],
-  ['abstractformatter_4',['AbstractFormatter',['../class_abstract_formatter.html',1,'AbstractFormatter'],['../class_abstract_formatter.html#a57a59b2942bb9c829fcc1b45aba1bbb1',1,'AbstractFormatter::AbstractFormatter()']]],
-  ['addentry_5',['addEntry',['../class_exe_node_wrapper.html#ad3ccdd5e4f04f961dd84a201a9b8a1f4',1,'ExeNodeWrapper::addEntry()'],['../class_sect_hdrs_wrapper.html#a49ab96b47b072e3f0b2c1e360e550d68',1,'SectHdrsWrapper::addEntry()']]],
+  ['abstractfilebuffer_3',['abstractfilebuffer',['../class_abstract_file_buffer.html',1,'AbstractFileBuffer'],['../class_abstract_file_buffer.html#ad81001a3650854c762c761b8c21ff762',1,'AbstractFileBuffer::AbstractFileBuffer()']]],
+  ['abstractformatter_4',['abstractformatter',['../class_abstract_formatter.html',1,'AbstractFormatter'],['../class_abstract_formatter.html#a57a59b2942bb9c829fcc1b45aba1bbb1',1,'AbstractFormatter::AbstractFormatter()']]],
+  ['addentry_5',['addentry',['../class_exe_node_wrapper.html#ad3ccdd5e4f04f961dd84a201a9b8a1f4',1,'ExeNodeWrapper::addEntry()'],['../class_sect_hdrs_wrapper.html#a49ab96b47b072e3f0b2c1e360e550d68',1,'SectHdrsWrapper::addEntry()']]],
   ['addentryat_6',['addEntryAt',['../class_exe_node_wrapper.html#a22e7c147e4a0f6f9882d6ac3bb40ed25',1,'ExeNodeWrapper']]],
-  ['addmapping_7',['addMapping',['../class_import_base_dir_wrapper.html#ae3401167a9ee3eee123cb42728d90b42',1,'ImportBaseDirWrapper::addMapping()'],['../class_sect_hdrs_wrapper.html#ab6d8b5a465ce5b8163f3975b302ea087',1,'SectHdrsWrapper::addMapping()'],['../class_import_base_entry_wrapper.html#abc5866cd92a0da7af6faa18b674e8e9a',1,'ImportBaseEntryWrapper::addMapping()'],['../class_exe_node_wrapper.html#a7689f2efd4ed0f43890385839a0b617a',1,'ExeNodeWrapper::addMapping()']]],
+  ['addmapping_7',['addmapping',['../class_import_base_dir_wrapper.html#ae3401167a9ee3eee123cb42728d90b42',1,'ImportBaseDirWrapper::addMapping()'],['../class_sect_hdrs_wrapper.html#ab6d8b5a465ce5b8163f3975b302ea087',1,'SectHdrsWrapper::addMapping()'],['../class_import_base_entry_wrapper.html#abc5866cd92a0da7af6faa18b674e8e9a',1,'ImportBaseEntryWrapper::addMapping()'],['../class_exe_node_wrapper.html#a7689f2efd4ed0f43890385839a0b617a',1,'ExeNodeWrapper::addMapping()']]],
   ['addnewsection_8',['addNewSection',['../class_p_e_file.html#afdb1b254ee5f6d557c4d850196abd6e3',1,'PEFile']]],
   ['addr_5ftype_9',['addr_type',['../class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5b',1,'Executable']]],
   ['address_10',['ADDRESS',['../class_data_dir_wrapper.html#aa6d39cbb88d0f3716cbd90412f4a0db6a3c9e67519120c837a331888955ba46a0',1,'DataDirWrapper']]],
