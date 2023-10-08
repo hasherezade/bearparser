@@ -215,7 +215,10 @@ enum file_machine {
     M_EBC = 0x0EBC,  // EFI Byte Code
     M_AMD64 = 0x8664,  // AMD64 (K8)
     M_M32R = 0x9041,  // M32R little-endian
-    M_CEE = 0xC0EE
+    M_CEE = 0xC0EE,
+    M_RISCV32 = 0x5032,   // RISC-V 32-bit address space
+    M_RISCV64 = 0x5064,   // RISC-V 64-bit address space
+    M_RISCV128 = 0x5128,  // RISC-V 128-bit address space
 };
 
 #ifndef USE_WINNT
