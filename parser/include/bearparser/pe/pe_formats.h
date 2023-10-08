@@ -216,9 +216,12 @@ enum file_machine {
     M_AMD64 = 0x8664,  // AMD64 (K8)
     M_M32R = 0x9041,  // M32R little-endian
     M_CEE = 0xC0EE,
-    M_RISCV32 = 0x5032,   // RISC-V 32-bit address space
-    M_RISCV64 = 0x5064,   // RISC-V 64-bit address space
-    M_RISCV128 = 0x5128,  // RISC-V 128-bit address space
+    M_RISCV32 = 0x5032,     // RISC-V 32-bit address space
+    M_RISCV64 = 0x5064,     // RISC-V 64-bit address space
+    M_RISCV128 = 0x5128,    // RISC-V 128-bit address space
+    M_ARM64LE = 0xaa64,     //ARM64 little endian
+    M_LOONGARCH32 = 0x6232, //LoongArch 32-bit processor family
+    M_LOONGARCH64 = 0x6264, //LoongArch 64-bit processor family
 };
 
 #ifndef USE_WINNT

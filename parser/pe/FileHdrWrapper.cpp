@@ -95,9 +95,12 @@ void FileHdrWrapper::initMachine()
     s_machine[M_AMD64] = "AMD64 (K8)";
     s_machine[M_M32R] = "M32R little-endian";
     s_machine[M_CEE] = "CEE";
-    s_machine[M_RISCV32] = "RISC-V 32-bit address space";
-    s_machine[M_RISCV64] = "RISC-V 64-bit address space";
-    s_machine[M_RISCV128] = "RISC-V 128-bit address space";
+    s_machine[M_RISCV32] = "RISC-V 32-bit Address Space";
+    s_machine[M_RISCV64] = "RISC-V 64-bit Address Space";
+    s_machine[M_RISCV128] = "RISC-V 128-bit Address Space";
+    s_machine[M_ARM64LE] = "ARM64 Little Endian";
+    s_machine[M_LOONGARCH32] = "LoongArch 32-bit Processor Family";
+    s_machine[M_LOONGARCH64] = "LoongArch 64-bit Processor Family";
 }
 
 QString FileHdrWrapper::translateMachine(DWORD val)
