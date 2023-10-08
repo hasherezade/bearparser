@@ -1,7 +1,7 @@
 <map id="PEFile::getAlignment" name="PEFile::getAlignment">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,31,147,56"/>
 <area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="215,5,322,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,32,200,24,200,30,147,37"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,32,199,25,199,30,147,37"/>
 <area shape="rect" id="Node000003" href="$class_p_e_core.html#a4acc20ded3755cb301f284b0de0b0652" title=" " alt="" coords="195,55,342,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="147,50,180,54,180,59,147,55"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="147,50,179,54,179,59,147,55"/>
 </map>

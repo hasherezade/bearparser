@@ -1,10 +1,10 @@
 <map id="PEFile::_createSectionView" name="PEFile::_createSectionView">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,31,187,56"/>
 <area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="473,5,580,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,36,458,19,458,25,187,41"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,36,457,19,458,25,187,41"/>
 <area shape="rect" id="Node000003" href="$class_buffer_view.html#afa235f02a4619a7e2f1e869d390c2cbf" title=" " alt="" coords="235,56,413,82"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="187,51,220,55,220,60,187,56"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="377,53,457,33,459,38,379,58"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="187,51,219,55,219,60,187,56"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="377,53,457,33,458,38,379,58"/>
 <area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="461,55,591,96"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="413,69,446,70,446,76,413,74"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="413,69,445,70,445,76,413,74"/>
 </map>

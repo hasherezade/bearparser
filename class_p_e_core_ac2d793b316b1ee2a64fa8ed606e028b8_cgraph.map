@@ -1,12 +1,12 @@
 <map id="PECore::secHdrsOffset" name="PECore::secHdrsOffset">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,29,161,55"/>
 <area shape="rect" id="Node000002" href="$class_p_e_core.html#a6bf58c2b373385ac5ce05aa676dc43b7" title=" " alt="" coords="209,29,371,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,40,194,40,194,45,161,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,40,193,40,193,45,161,45"/>
 <area shape="rect" id="Node000003" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="663,5,771,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="371,35,649,19,649,25,372,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="371,35,648,19,648,25,372,40"/>
 <area shape="rect" id="Node000004" href="$class_p_e_core.html#a809ce6d61e968f409e6d630514b224bb" title=" " alt="" coords="419,55,581,80"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="372,49,404,53,404,59,371,55"/>
-<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="559,51,648,31,649,36,561,57"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="372,49,404,53,403,59,371,55"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="559,51,647,31,649,36,561,57"/>
 <area shape="rect" id="Node000005" href="$class_p_e_core.html#aa2ff4665d8b56b2a5e1e1e00bc446b18" title=" " alt="" coords="629,55,805,80"/>
 <area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="582,65,614,65,614,70,582,70"/>
 </map>

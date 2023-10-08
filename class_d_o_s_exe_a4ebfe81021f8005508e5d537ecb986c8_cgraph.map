@@ -1,6 +1,6 @@
 <map id="DOSExe::DOSExe" name="DOSExe::DOSExe">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,29,131,55"/>
 <area shape="rect" id="Node000002" href="$class_mapped_exe.html#a936dd29ca35e9234aa8b9c800034d28d" title=" " alt="" coords="179,29,301,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,40,164,40,164,45,131,45"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="211,30,205,21,208,11,220,5,240,3,262,6,272,13,269,17,260,11,240,8,222,10,212,15,210,20,215,28"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,40,163,40,163,45,131,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="211,30,205,21,208,11,220,5,240,3,261,5,272,12,269,16,259,10,240,8,222,10,212,15,210,20,215,28"/>
 </map>

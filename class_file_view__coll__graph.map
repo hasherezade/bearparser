@@ -1,7 +1,7 @@
 <map id="FileView" name="FileView">
 <area shape="rect" id="Node000001" title=" " alt="" coords="111,79,182,105"/>
 <area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html" title=" " alt="" coords="5,5,136,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,40,136,77,132,81,92,43"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,40,136,77,132,81,93,44"/>
 <area shape="rect" id="Node000003" href="$class_abstract_file_buffer.html" title=" " alt="" coords="160,5,285,31"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="201,43,161,81,157,77,197,40"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="200,44,161,81,157,77,197,40"/>
 </map>

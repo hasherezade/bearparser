@@ -1,11 +1,11 @@
 <map id="PEFile::getImageBase" name="PEFile::getImageBase">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,5,155,31"/>
 <area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="604,31,712,56"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,12,338,10,447,14,557,22,590,27,589,32,556,27,447,19,338,16,155,18"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,12,338,10,447,14,557,22,589,27,588,32,556,27,447,19,338,16,155,18"/>
 <area shape="rect" id="Node000003" href="$class_p_e_core.html#a7de22e67191aa4cc85a13d4647e1d926" title=" " alt="" coords="203,31,358,56"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,25,188,29,187,34,155,30"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="358,41,590,41,590,46,358,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,25,187,29,187,34,155,30"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="358,41,589,41,589,46,358,46"/>
 <area shape="rect" id="Node000004" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="406,81,556,107"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="335,54,414,75,413,80,334,60"/>
-<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="528,78,597,58,598,63,529,83"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="335,54,413,74,412,80,334,60"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="528,78,596,58,597,64,529,83"/>
 </map>

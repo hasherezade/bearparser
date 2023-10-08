@@ -1,10 +1,10 @@
 <map id="AbstractByteBuffer::setBufferedValue" name="AbstractByteBuffer::setBufferedValue">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,35,136,75"/>
 <area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="362,5,492,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,47,347,30,347,35,136,52"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,47,346,30,347,35,136,52"/>
 <area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="184,63,314,103"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="137,63,169,68,168,73,136,68"/>
-<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="313,60,347,49,349,54,315,65"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="313,60,346,49,348,54,315,65"/>
 <area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="362,71,492,111"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="315,83,347,85,347,90,314,89"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="315,83,346,85,346,90,314,89"/>
 </map>

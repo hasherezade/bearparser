@@ -1,9 +1,9 @@
 <map id="PEFile::peNtHeadersSize" name="PEFile::peNtHeadersSize">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,31,173,56"/>
 <area shape="rect" id="Node000002" href="$class_p_e_core.html#aa9c0035f661485e8c24fc548a0a233c1" title=" " alt="" coords="221,31,394,56"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,41,206,41,206,46,173,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,41,205,41,205,46,173,46"/>
 <area shape="rect" id="Node000003" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="468,5,575,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="394,31,453,24,453,29,395,36"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="394,31,452,24,453,29,395,36"/>
 <area shape="rect" id="Node000004" href="$class_p_e_core.html#ae19b9fc1ba78c32982baeda811479de1" title=" " alt="" coords="442,55,600,80"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="395,51,427,54,427,60,394,56"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="395,51,427,54,426,60,394,56"/>
 </map>

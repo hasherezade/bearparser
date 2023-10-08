@@ -1,6 +1,6 @@
 <map id="ExeElementWrapper::isBit32" name="ExeElementWrapper::isBit32">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,22,149,63"/>
 <area shape="rect" id="Node000002" href="$class_executable.html#a2dacd9266dfa0a64948e494b412a5810" title=" " alt="" coords="197,29,327,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,40,182,40,182,45,149,45"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="231,30,225,21,228,11,241,5,262,3,285,6,297,13,294,17,283,11,262,8,242,10,232,15,230,20,235,27"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,40,181,40,181,45,149,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="231,30,225,21,228,11,241,5,262,3,284,5,296,12,293,16,283,10,262,8,242,10,232,15,230,20,235,27"/>
 </map>
