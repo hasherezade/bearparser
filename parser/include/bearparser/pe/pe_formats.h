@@ -222,6 +222,19 @@ enum file_machine {
     M_ARM64LE = 0xaa64,     //ARM64 little endian
     M_LOONGARCH32 = 0x6232, //LoongArch 32-bit processor family
     M_LOONGARCH64 = 0x6264, //LoongArch 64-bit processor family
+
+    // Defined by .NET
+    // https://github.com/dotnet/runtime/blob/61c658183231100a5836e833c86446ff51a4654b/src/coreclr/src/inc/pedecoder.h#L90-L104
+    M_LINUXDOTNET64     = M_AMD64 ^ 0X4644, //0XFD1D
+    M_OSXDOTNET64       = M_AMD64 ^ 0X7B79, //0XC020
+    M_FREEBSDDOTNET64   = M_AMD64 ^ 0XADC4, //0X2BA0
+    M_NETBSDDOTNET64    = M_AMD64 ^ 0X1993, //0X9FF7
+    M_SUNDOTNET64       = M_AMD64 ^ 0X1992, //0X9FF6
+    M_LINUXDOTNET32     = M_I386  ^ 0X4644, //0X4708
+    M_OSXDOTNET32       = M_I386  ^ 0X7B79, //0X7A35
+    M_FREEBSDDOTNET32   = M_I386  ^ 0XADC4, //0XAC88
+    M_NETBSDDOTNET32    = M_I386  ^ 0X1993, //0X18DF
+    M_SUNDOTNET32       = M_I386  ^ 0X1992, //0X18DE
 };
 
 #ifndef USE_WINNT
