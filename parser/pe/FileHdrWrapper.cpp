@@ -101,6 +101,16 @@ void FileHdrWrapper::initMachine()
     s_machine[M_ARM64LE] = "ARM64 Little Endian";
     s_machine[M_LOONGARCH32] = "LoongArch 32-bit Processor Family";
     s_machine[M_LOONGARCH64] = "LoongArch 64-bit Processor Family";
+    s_machine[M_LINUXDOTNET64] = "AMD64 .Net For Linux";
+    s_machine[M_OSXDOTNET64] = "AMD64 .Net For Mac OS";
+    s_machine[M_FREEBSDDOTNET64] = "AMD64 .Net For Free BSD";
+    s_machine[M_NETBSDDOTNET64] = "AMD64 .Net For Net BSD";
+    s_machine[M_SUNDOTNET64] = "AMD64 .Net For Sun (Oracle Solaris)";
+    s_machine[M_LINUXDOTNET32] = "Intel 386 .Net For Linux";
+    s_machine[M_OSXDOTNET32] = "Intel 386 .Net For Mac OS";
+    s_machine[M_FREEBSDDOTNET32] = "Intel 386 .Net For Free BSD";
+    s_machine[M_NETBSDDOTNET32] = "Intel 386 .Net For Net BSD";
+    s_machine[M_SUNDOTNET32] = "Intel 386 .Net For Sun (Oracle Solaris)";
 }
 
 QString FileHdrWrapper::translateMachine(DWORD val)
