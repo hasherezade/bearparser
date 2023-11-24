@@ -53,10 +53,10 @@ protected:
     offset_t codeOffset() { return static_cast<offset_t> (m_dosHdr->e_cparhdr) * DOS_PARAGRAPH; }
     bufsize_t moduleSize()
     {
-        const size_t PAGE_SIZE = 0x200;
-        WORD size = m_dosHdr->e_cp * PAGE_SIZE;
+        const size_t unit_size = 0x200;
+        WORD size = m_dosHdr->e_cp * unit_size;
         if (m_dosHdr->e_cblp ) {
-            WORD trimSize = PAGE_SIZE - m_dosHdr->e_cblp;
+            WORD trimSize = unit_size - m_dosHdr->e_cblp;
             size -= trimSize;
         }
         return static_cast<bufsize_t> (size);
