@@ -278,13 +278,13 @@ bufsize_t PEFile::getMappedSize(Executable::addr_type aType)
     if (aType == Executable::RAW) {
         return this->getContentSize();
     }
-    const size_t PAGE_SIZE = 0x1000;
+    const size_t unit_size = 0x1000;
     bufsize_t vSize = 0;
     if (aType == Executable::VA || aType == Executable::RVA) {
         vSize = core.getImageSize();
     }
-    if (vSize < PAGE_SIZE) {
-        return PAGE_SIZE;
+    if (vSize < unit_size) {
+        return unit_size;
     }
     return vSize;
 }
