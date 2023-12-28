@@ -49,7 +49,7 @@ size_t pe_util::getAsciiLen(const char *inp, size_t maxInp, bool acceptNotTermin
     for (; i < maxInp; i++) {
         const char c = inp[i];
         if (c == '\0') return i; //end of string
-        if (!IS_PRINTABLE(c) && !IS_ENDLINE(c)) return 0;
+        if (!IS_PRINTABLE(c) && !IS_ENDLINE(c)) break;
     }
     if (acceptNotTerminated) return i;
     return 0;
@@ -61,7 +61,7 @@ size_t pe_util::getAsciiLenW(const WORD *inp, size_t maxInp, bool acceptNotTermi
     for (; i < maxInp; i++) {
         const WORD w = inp[i];
         if (w == 0) return i; //end of string
-        if (!IS_PRINTABLE(w) && !IS_ENDLINE(w)) return 0;
+        if (!IS_PRINTABLE(w) && !IS_ENDLINE(w)) break;
     }
     if (acceptNotTerminated) return i;
     return 0;

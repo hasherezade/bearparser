@@ -50,9 +50,9 @@ public:
     virtual bool setBufferedValue(BYTE *dstPtr, BYTE *srcPtr, bufsize_t srcSize, bufsize_t paddingSize, bool allowExceptions = false);
     bool setStringValue(offset_t rawOffset, QString newText);
 
-    QString getStringValue(offset_t rawOffset, bufsize_t len = BUFSIZE_MAX);
+    QString getStringValue(offset_t rawOffset, bufsize_t len = BUFSIZE_MAX, bool acceptNonTerminated = false);
     QString getWStringValue(offset_t rawOffset, bufsize_t len);
-    QString getWAsciiStringValue(offset_t rawOffset, bufsize_t len);
+    QString getWAsciiStringValue(offset_t rawOffset, bufsize_t len, bool acceptNonTerminated = false);
 
     bufsize_t getMaxSizeFromOffset(offset_t startOffset);
     bufsize_t getMaxSizeFromPtr(BYTE *ptr) { return getMaxSizeFromOffset(getOffset(ptr)); }
