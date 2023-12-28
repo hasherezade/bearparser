@@ -147,14 +147,14 @@ bool AbstractByteBuffer::setStringValue(offset_t rawOffset, QString newText)
      return isOk;
 }
 
-QString AbstractByteBuffer::getStringValue(offset_t rawOffset, bufsize_t size)
+QString AbstractByteBuffer::getStringValue(offset_t rawOffset, bufsize_t size, bool acceptNonTerminated)
 {
     if (size == BUFSIZE_MAX) {
         size = this->getContentSize() - rawOffset;
     }
     char *ptr = (char*) getContentAt(rawOffset, size);
     if (!ptr) return "";
-    size_t asciiLen = pe_util::getAsciiLen(ptr, size);
+    size_t asciiLen = pe_util::getAsciiLen(ptr, size, acceptNonTerminated);
 
     return QString::fromUtf8(ptr, static_cast<int>(asciiLen));
 }
@@ -171,7 +171,7 @@ QString AbstractByteBuffer::getWStringValue(offset_t rawOffset, bufsize_t len)
     return QString::fromUtf16(ptr, static_cast<int>(len));
 }
 
-QString AbstractByteBuffer::getWAsciiStringValue(offset_t rawOffset, bufsize_t len)
+QString AbstractByteBuffer::getWAsciiStringValue(offset_t rawOffset, bufsize_t len, bool acceptNonTerminated)
 {
     const bufsize_t unitSize = sizeof(WORD);
     bufsize_t size = unitSize;
@@ -181,7 +181,7 @@ QString AbstractByteBuffer::getWAsciiStringValue(offset_t rawOffset, bufsize_t l
     WORD* ptr = (WORD*) getContentAt(rawOffset, size);
     if (!ptr) return "";
 
-    size_t asciiLen = pe_util::getAsciiLenW(ptr, len);
+    size_t asciiLen = pe_util::getAsciiLenW(ptr, len, acceptNonTerminated);
     return QString::fromUtf16(ptr, static_cast<int>(asciiLen));
 }
 
