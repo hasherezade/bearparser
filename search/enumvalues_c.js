@@ -2,7 +2,7 @@ var searchData=
 [
   ['oemid_0',['OEMID',['../class_dos_hdr_wrapper.html#a7dcac0806ba5c5f16785f683c67d8980aed725c43ed9b139c82014e08634d6ecb',1,'DosHdrWrapper']]],
   ['oeminfo_1',['OEMINFO',['../class_dos_hdr_wrapper.html#a7dcac0806ba5c5f16785f683c67d8980a862775a2d0a1a8de49cb18fa582e09f8',1,'DosHdrWrapper']]],
-  ['offset_5fto_5fdata_2',['offset_to_data',['../class_resource_entry_wrapper.html#adcfde441164c89796a7bfe20b9364094ae9c5bc4371ade736f5c18e2d3ff44d3a',1,'ResourceEntryWrapper::OFFSET_TO_DATA'],['../class_resource_leaf_wrapper.html#a904178c6336a9b45c75bf250ca29ffe1ac8e8bfa8e2fdd2e54becc4c495e2c247',1,'ResourceLeafWrapper::OFFSET_TO_DATA']]],
+  ['offset_5fto_5fdata_2',['OFFSET_TO_DATA',['../class_resource_entry_wrapper.html#adcfde441164c89796a7bfe20b9364094ae9c5bc4371ade736f5c18e2d3ff44d3a',1,'ResourceEntryWrapper::OFFSET_TO_DATA'],['../class_resource_leaf_wrapper.html#a904178c6336a9b45c75bf250ca29ffe1ac8e8bfa8e2fdd2e54becc4c495e2c247',1,'ResourceLeafWrapper::OFFSET_TO_DATA']]],
   ['opthdr_5fsize_3',['OPTHDR_SIZE',['../class_file_hdr_wrapper.html#a075f42271d453ff33ce06e801101a389a5da8c34f8163ba4adc382d8b716ef9d9',1,'FileHdrWrapper']]],
   ['orig_5ffirst_5fthunk_4',['ORIG_FIRST_THUNK',['../class_import_entry_wrapper.html#a0dd736fcaa604c966425896fd6f99986a6789ac43f4c80b7fc3c98999169dbcc1',1,'ImportEntryWrapper']]],
   ['orig_5fthunk_5',['ORIG_THUNK',['../class_imported_func_wrapper.html#a748f0650d6c1815885732483aa0d5bcca92b20e35811bb05b71f0c96c961ae271',1,'ImportedFuncWrapper']]],

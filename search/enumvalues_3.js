@@ -7,7 +7,7 @@ var searchData=
   ['dans_5fid_4',['DANS_ID',['../class_rich_hdr_wrapper.html#a366b4901ae5d2c2bc0b08e2ae98a1e62a06b867dd028484259f02ad30cf49c284',1,'RichHdrWrapper']]],
   ['data_5fbase_5',['DATA_BASE',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013ac707d42c0d8bbbc427719a0675c38790',1,'OptHdrWrapper']]],
   ['data_5fdir_6',['DATA_DIR',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013ab09378c8fb9254f6b54b38eee81f72c3',1,'OptHdrWrapper']]],
-  ['data_5fsize_7',['data_size',['../class_resource_leaf_wrapper.html#a904178c6336a9b45c75bf250ca29ffe1a5f79e6a5b19b020a93aa0be5e4e5155f',1,'ResourceLeafWrapper::DATA_SIZE'],['../class_debug_dir_entry_wrapper.html#a78106e75b9c8550289c35667ddd0768caa934aede5c40d5900c723f7a93548f66',1,'DebugDirEntryWrapper::DATA_SIZE']]],
+  ['data_5fsize_7',['DATA_SIZE',['../class_debug_dir_entry_wrapper.html#a78106e75b9c8550289c35667ddd0768caa934aede5c40d5900c723f7a93548f66',1,'DebugDirEntryWrapper::DATA_SIZE'],['../class_resource_leaf_wrapper.html#a904178c6336a9b45c75bf250ca29ffe1a5f79e6a5b19b020a93aa0be5e4e5155f',1,'ResourceLeafWrapper::DATA_SIZE']]],
   ['datatype_5fcount_8',['DATATYPE_COUNT',['../class_wrapped_value.html#a70fcd4afb963d228e1f84fc422d13e0aab15ad7b0ac32a44d4b444cfd6575230a',1,'WrappedValue']]],
   ['decommit_5ffree_9',['DECOMMIT_FREE',['../class_ld_config_dir_wrapper.html#af8859de691d95f0b9a37501e0e38ca45a6920ab6c583d970b5e758552714625fe',1,'LdConfigDirWrapper']]],
   ['decommit_5ftotal_10',['DECOMMIT_TOTAL',['../class_ld_config_dir_wrapper.html#af8859de691d95f0b9a37501e0e38ca45a68f2da2f9fa115134d2e894f9fb3a8da',1,'LdConfigDirWrapper']]],

@@ -6,5 +6,5 @@ var searchData=
   ['dllcharact_3',['dllCharact',['../class_opt_hdr_wrapper.html#a795d3e4e9421b9d4ab7c75340ee9f1c3',1,'OptHdrWrapper']]],
   ['dllname_4',['dllName',['../class_common_ordinals_map.html#a4d458c1a370ac29f77db49f39f42210c',1,'CommonOrdinalsMap']]],
   ['dos_5',['dos',['../class_p_e_core.html#af99e6949cf43d775874f7e24d74fb7aa',1,'PECore']]],
-  ['doshdrwrapper_6',['doshdrwrapper',['../class_d_o_s_exe.html#abb5c388a6cf02053c820a646a93f5d06',1,'DOSExe::dosHdrWrapper'],['../class_p_e_file.html#ae8a71a084f7d689552259d012ea95820',1,'PEFile::dosHdrWrapper']]]
+  ['doshdrwrapper_6',['dosHdrWrapper',['../class_d_o_s_exe.html#abb5c388a6cf02053c820a646a93f5d06',1,'DOSExe::dosHdrWrapper'],['../class_p_e_file.html#ae8a71a084f7d689552259d012ea95820',1,'PEFile::dosHdrWrapper']]]
 ];

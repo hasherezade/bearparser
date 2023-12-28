@@ -12,7 +12,7 @@ var searchData=
   ['exeelementwrapper_9',['ExeElementWrapper',['../class_exe_element_wrapper.html#a7764c345edef03df4f974f7f09a70a3b',1,'ExeElementWrapper']]],
   ['exeexception_10',['ExeException',['../class_exe_exception.html#a5a1d0a0e89988addd03224aa47c5dcb5',1,'ExeException']]],
   ['exefactoryexception_11',['ExeFactoryException',['../class_exe_factory_exception.html#abaf55cdb3d1988c20e6c57f4415bb4f0',1,'ExeFactoryException']]],
-  ['exenodewrapper_12',['exenodewrapper',['../class_exe_node_wrapper.html#a62bc3ef1f006f8b4ac823c3d573819ce',1,'ExeNodeWrapper::ExeNodeWrapper(Executable *pe, ExeNodeWrapper *parent=NULL)'],['../class_exe_node_wrapper.html#adb280f768896cb573d995e3738988cb4',1,'ExeNodeWrapper::ExeNodeWrapper(Executable *pe, ExeNodeWrapper *parent, size_t entryNumber)']]],
+  ['exenodewrapper_12',['ExeNodeWrapper',['../class_exe_node_wrapper.html#a62bc3ef1f006f8b4ac823c3d573819ce',1,'ExeNodeWrapper::ExeNodeWrapper(Executable *pe, ExeNodeWrapper *parent=NULL)'],['../class_exe_node_wrapper.html#adb280f768896cb573d995e3738988cb4',1,'ExeNodeWrapper::ExeNodeWrapper(Executable *pe, ExeNodeWrapper *parent, size_t entryNumber)']]],
   ['exewrapperscontainer_13',['ExeWrappersContainer',['../class_exe_wrappers_container.html#a0a27d87b01905e3c9fbf60f52bccdec3',1,'ExeWrappersContainer']]],
   ['exportdir_14',['exportDir',['../class_export_dir_wrapper.html#a7e49769340051dc3d1f11a60288e281f',1,'ExportDirWrapper']]],
   ['exportdirwrapper_15',['ExportDirWrapper',['../class_export_dir_wrapper.html#a5b0b8f1f86d3848ee3533adcf6c8988c',1,'ExportDirWrapper']]],
