@@ -198,20 +198,20 @@ void* ImportEntryWrapper::getPtr()
     if (m_PE == NULL) return NULL;
     IMAGE_DATA_DIRECTORY *d = m_PE->getDataDirectory();
     if (!d) return NULL;
-
+    
     offset_t importRva = static_cast<offset_t>(d[pe::DIR_IMPORT].VirtualAddress);
     if (importRva == 0) return NULL;
 
-    offset_t descAddr = this->m_Exe->toRaw(importRva, Executable::RVA);
+    offset_t descAddr = this->m_PE->toRaw(importRva, Executable::RVA);
     if (descAddr == INVALID_ADDR) {
         return NULL; // address invalid
     }
-    BYTE *dirPtr = this->m_Exe->getContentAt(descAddr, Executable::RAW, sizeof(IMAGE_IMPORT_DESCRIPTOR));
+    BYTE *dirPtr = this->m_PE->getContentAt(descAddr, Executable::RAW, sizeof(IMAGE_IMPORT_DESCRIPTOR));
     if (dirPtr == NULL) return NULL; // address invalid
 
     offset_t entryOffset = descAddr + (this->entryNum * sizeof(IMAGE_IMPORT_DESCRIPTOR));
 
-    BYTE *content =  this->m_Exe->getContentAt(entryOffset, Executable::RAW, sizeof(IMAGE_IMPORT_DESCRIPTOR));
+    BYTE *content = this->m_PE->getContentAt(entryOffset, Executable::RAW, sizeof(IMAGE_IMPORT_DESCRIPTOR));
     if (!content) return NULL;
     return (void*) content;
 }
