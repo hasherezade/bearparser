@@ -1,12 +1,12 @@
 #include "ExeElementWrapper.h"
 
 ExeElementWrapper::ExeElementWrapper(Executable *v_exe)
+    : m_Exe(v_exe)
 {
     if (v_exe == NULL) {
         Logger::append(Logger::D_ERROR, "Cannot initialize with Exe == NULL!");
         throw CustomException("Cannot initialize with Exe == NULL!");
     }
-    this->m_Exe = v_exe;
 }
 
 bufsize_t ExeElementWrapper::getFieldSize(size_t fieldId, size_t subField)
