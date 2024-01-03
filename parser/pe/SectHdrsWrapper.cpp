@@ -459,6 +459,7 @@ void SectHdrsWrapper::addMapping(SectionHdrWrapper *sec)
 
 void SectHdrsWrapper::reloadMapping()
 {
+    QMutexLocker lock(&m_secMutex);
     this->rSec.clear();
     this->vSec.clear();
 
@@ -472,6 +473,7 @@ void SectHdrsWrapper::reloadMapping()
     
 bool SectHdrsWrapper::wrap()
 {
+    QMutexLocker lock(&m_secMutex);
     this->clear();
     if (this->m_PE == NULL) return false;
 
@@ -484,21 +486,25 @@ bool SectHdrsWrapper::wrap()
 
 size_t SectHdrsWrapper::getFieldsCount()
 {
+    //QMutexLocker lock(&m_secMutex);
     return this->entries.size();
 }
 
 void* SectHdrsWrapper::getPtr()
 {
+    //QMutexLocker lock(&m_secMutex);
     if (entries.size() == 0) return NULL;
     return entries[0]->getPtr();
 }
 
 bufsize_t SectHdrsWrapper::getSize()
 {
+    //QMutexLocker lock(&m_secMutex);
     if (this->m_PE == NULL) return 0;
 
-    size_t secCount = getFieldsCount();
-
+    size_t secCount = this->entries.size();
+    if (!secCount) return 0;
+    
     offset_t hdrOffset = m_PE->secHdrsOffset();
     offset_t fileSize = m_PE->getRawSize();
     offset_t endOffset = hdrOffset + (secCount * sizeof(IMAGE_SECTION_HEADER));

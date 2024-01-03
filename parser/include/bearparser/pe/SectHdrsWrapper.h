@@ -150,8 +150,9 @@ public:
         return indx;
     }
 
-    SectionHdrWrapper* getSecHdr(size_t index) const
+    SectionHdrWrapper* getSecHdr(size_t index)
     {
+        //QMutexLocker lock(&m_secMutex);
         if (index == SECT_INVALID_INDEX || index >= entries.size()) return NULL;
         return dynamic_cast<SectionHdrWrapper*>(entries.at(index));
     }
@@ -168,4 +169,5 @@ protected:
 
     std::map<offset_t, SectionHdrWrapper*> vSec;
     std::map<offset_t, SectionHdrWrapper*> rSec;
+    QMutex m_secMutex;
 };

@@ -106,10 +106,54 @@ PEFile::PEFile(AbstractByteBuffer *v_buf)
     : MappedExe(v_buf, Executable::BITS_32), dosHdrWrapper(NULL), fHdr(NULL), optHdr(NULL), sects(NULL),
     album(NULL)
 {
-    album = new ResourcesAlbum(this);
-    wrap(v_buf);
+    clearWrappers();
+
+    init(v_buf);
     Logger::append(Logger::D_INFO,"Wrapped");
 }
+
+void PEFile::init(AbstractByteBuffer *v_buf)
+{
+    // wrap the core:
+    core.wrap(v_buf);
+
+    album = new ResourcesAlbum(this);
+    
+    //generate wrappers:
+    this->dosHdrWrapper = new DosHdrWrapper(this);
+    this->wrappers[WR_DOS_HDR] = this->dosHdrWrapper;
+
+    this->fHdr = new FileHdrWrapper(this);
+    if (fHdr->getPtr() == NULL) throw ExeException("Cannot parse FileHdr: It is not PE File!");
+    this->wrappers[WR_FILE_HDR] = fHdr;
+    this->wrappers[WR_RICH_HDR] = new RichHdrWrapper(this);
+
+    this->optHdr = new OptHdrWrapper(this);
+    if (optHdr->getPtr() == NULL) throw ExeException("Cannot parse OptionalHeader: It is not PE File!");
+    this->wrappers[WR_OPTIONAL_HDR] = optHdr;
+
+    this->sects = new SectHdrsWrapper(this);
+    this->wrappers[WR_SECTIONS] = sects;
+
+    this->wrappers[WR_DATADIR] = new DataDirWrapper(this);
+    dataDirEntries[pe::DIR_IMPORT] = new ImportDirWrapper(this);
+    dataDirEntries[pe::DIR_DELAY_IMPORT] = new DelayImpDirWrapper(this);
+    dataDirEntries[pe::DIR_BOUND_IMPORT] = new BoundImpDirWrapper(this);
+    dataDirEntries[pe::DIR_DEBUG] = new DebugDirWrapper(this);
+    dataDirEntries[pe::DIR_EXPORT] = new ExportDirWrapper(this);
+    dataDirEntries[pe::DIR_SECURITY] = new SecurityDirWrapper(this);
+    dataDirEntries[pe::DIR_TLS] = new TlsDirWrapper(this);
+    dataDirEntries[pe::DIR_LOAD_CONFIG] = new LdConfigDirWrapper(this);
+    dataDirEntries[pe::DIR_BASERELOC] = new RelocDirWrapper(this);
+    dataDirEntries[pe::DIR_EXCEPTION] = new ExceptionDirWrapper(this);
+    dataDirEntries[pe::DIR_RESOURCE] = new ResourceDirWrapper(this, album);
+    dataDirEntries[pe::DIR_COM_DESCRIPTOR] = new ClrDirWrapper(this); 
+ 
+    for (int i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
+        this->wrappers[WR_DIR_ENTRY + i] = dataDirEntries[i];
+    }
+}
+
 
 void PEFile::clearWrappers()
 {
@@ -134,28 +178,22 @@ void PEFile::wrap()
     PEFile::wrap(this->buf);
 }
 
-void  PEFile::wrap(AbstractByteBuffer *v_buf)
+void PEFile::wrap(AbstractByteBuffer *v_buf)
 {
-    //erase all existing wrappers:
-    clearWrappers();
-
-    // rewrao the core:
+    // rewrap the core:
     core.wrap(v_buf);
-
+/*
     //regenerate the wrappers:
-    this->dosHdrWrapper = new DosHdrWrapper(this);
-    this->wrappers[WR_DOS_HDR] = this->dosHdrWrapper;
+    this->dosHdrWrapper->wrap();
 
-    this->fHdr = new FileHdrWrapper(this);
+    this->fHdr->wrap();
     if (fHdr->getPtr() == NULL) throw ExeException("Cannot parse FileHdr: It is not PE File!");
-    this->wrappers[WR_FILE_HDR] = fHdr;
-    this->wrappers[WR_RICH_HDR] = new RichHdrWrapper(this);
+    this->wrappers[WR_RICH_HDR]->wrap();
 
-    this->optHdr = new OptHdrWrapper(this);
+    this->optHdr->wrap();
     if (optHdr->getPtr() == NULL) throw ExeException("Cannot parse OptionalHeader: It is not PE File!");
-    this->wrappers[WR_OPTIONAL_HDR] = optHdr;
 
-    this->wrappers[WR_DATADIR] =  new DataDirWrapper(this);
+    this->wrappers[WR_DATADIR]->wrap();
 
     bool isOk = false;
     const size_t secNum = fHdr->getNumValue(FileHdrWrapper::SEC_NUM, &isOk);
@@ -166,25 +204,12 @@ void  PEFile::wrap(AbstractByteBuffer *v_buf)
     else {
         this->sects = NULL;
     }
-    // map Data Dirs
-    initDirEntries();
-    dataDirEntries[pe::DIR_IMPORT] = new ImportDirWrapper(this);
-    dataDirEntries[pe::DIR_DELAY_IMPORT] = new DelayImpDirWrapper(this);
-    dataDirEntries[pe::DIR_BOUND_IMPORT] = new BoundImpDirWrapper(this);
-    dataDirEntries[pe::DIR_DEBUG] = new DebugDirWrapper(this);
-    dataDirEntries[pe::DIR_EXPORT] = new ExportDirWrapper(this);
-    dataDirEntries[pe::DIR_SECURITY] = new SecurityDirWrapper(this);
-    dataDirEntries[pe::DIR_TLS] = new TlsDirWrapper(this);
-    dataDirEntries[pe::DIR_LOAD_CONFIG] = new LdConfigDirWrapper(this);
-    dataDirEntries[pe::DIR_BASERELOC] = new RelocDirWrapper(this);
-    dataDirEntries[pe::DIR_EXCEPTION] = new ExceptionDirWrapper(this);
-    dataDirEntries[pe::DIR_RESOURCE] = new ResourceDirWrapper(this, album);
-    dataDirEntries[pe::DIR_COM_DESCRIPTOR] = new ClrDirWrapper(this);
 
-    for (int i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
-        this->wrappers[WR_DIR_ENTRY + i] = dataDirEntries[i];
+    for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
+        dataDirEntries[i]->wrap();
     }
-
+*/
+    this->sects->wrap();
     if (this->album) {
         this->album->wrapLeafsContent();
     }
