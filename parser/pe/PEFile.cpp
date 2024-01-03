@@ -108,11 +108,11 @@ PEFile::PEFile(AbstractByteBuffer *v_buf)
 {
     clearWrappers();
 
-    init(v_buf);
+    _init(v_buf);
     Logger::append(Logger::D_INFO,"Wrapped");
 }
 
-void PEFile::init(AbstractByteBuffer *v_buf)
+void PEFile::_init(AbstractByteBuffer *v_buf)
 {
     // wrap the core:
     core.wrap(v_buf);
@@ -152,6 +152,9 @@ void PEFile::init(AbstractByteBuffer *v_buf)
     for (int i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
         this->wrappers[WR_DIR_ENTRY + i] = dataDirEntries[i];
     }
+    if (this->album) {
+        this->album->wrapLeafsContent();
+    }
 }
 
 
@@ -180,6 +183,8 @@ void PEFile::wrap()
 
 void PEFile::wrap(AbstractByteBuffer *v_buf)
 {
+    //std::cout << __FUNCTION__ << std::endl;
+    WatchedLocker lock(&m_peMutex);
     // rewrap the core:
     core.wrap(v_buf);
 /*
@@ -272,10 +277,11 @@ pe::RICH_SIGNATURE* PEFile::getRichHeaderSign()
     return richSign;
 }
 
-
 offset_t PEFile::getMinSecRVA()
 {
-    if (!this->getSectionsCount()) {
+    std::cout << __FUNCTION__ << std::endl;
+    WatchedLocker lock(&m_peMutex);
+    if (!this->_getSectionsCount()) {
         return INVALID_ADDR;
     }
     SectionHdrWrapper* sec = this->_getSecHdr(0);
@@ -370,7 +376,7 @@ bool PEFile::setVirtualSize(bufsize_t newSize)
     return true;
 }
 
-size_t PEFile::getSectionsCount(bool useMapped) const
+size_t PEFile::_getSectionsCount(bool useMapped) const
 {
     if (useMapped == false) {
         return hdrSectionsNum();
@@ -380,6 +386,8 @@ size_t PEFile::getSectionsCount(bool useMapped) const
 
 offset_t PEFile::rawToRva(offset_t raw)
 {
+    //std::cout << __FUNCTION__ << std::endl;
+    WatchedLocker lock(&m_peMutex);
     if (raw >= this->getMappedSize(Executable::RAW)) return INVALID_ADDR;
 
     SectionHdrWrapper* sec = this->_getSecHdrAtOffset(raw, Executable::RAW, true);
@@ -398,7 +406,7 @@ offset_t PEFile::rawToRva(offset_t raw)
         return bgnVA + curr;
     }
     //TODO: make more tests
-    if (this->getSectionsCount() == 0) return raw;
+    if (this->_getSectionsCount() == 0) return raw;
     if (raw < this->hdrsSize()) {
         return raw;
     } //else: content that is between the end of sections headers and the first virtual section is not mapped
@@ -407,14 +415,18 @@ offset_t PEFile::rawToRva(offset_t raw)
 
 offset_t PEFile::rvaToRaw(offset_t rva)
 {
-    if (rva >= this->getMappedSize(Executable::RVA)) return INVALID_ADDR;
-
+    //std::cout << __FUNCTION__ << std::endl;
+    WatchedLocker lock(&m_peMutex);
+    if (rva >= this->getMappedSize(Executable::RVA)) {
+        return INVALID_ADDR;
+    }
     SectionHdrWrapper* sec = this->_getSecHdrAtOffset(rva, Executable::RVA, true);
     if (sec) {
         offset_t bgnRVA = sec->getContentOffset(Executable::RVA);
         offset_t bgnRaw = sec->getContentOffset(Executable::RAW);
-        if (bgnRVA  == INVALID_ADDR || bgnRaw == INVALID_ADDR) return INVALID_ADDR;
-
+        if (bgnRVA  == INVALID_ADDR || bgnRaw == INVALID_ADDR) {
+            return INVALID_ADDR;
+        }
         bufsize_t curr = (rva - bgnRVA);
         bufsize_t rawSize = sec->getContentSize(Executable::RAW, true);
         if (curr >= rawSize) {
@@ -426,7 +438,7 @@ offset_t PEFile::rvaToRaw(offset_t rva)
     if (rva >= this->getMappedSize(Executable::RAW)) {
         return INVALID_ADDR;
     }
-    if (this->getSectionsCount()) { // do this check only if sections count is non-zero
+    if (this->_getSectionsCount()) { // do this check only if sections count is non-zero
         if (rva >= this->hdrsSize()) {
             // the address is in the cave between the headers and the first section: cannot be mapped
             return INVALID_ADDR;
@@ -444,6 +456,8 @@ DataDirEntryWrapper* PEFile::getDataDirEntry(pe::dir_entry eType)
 
 BufferView* PEFile::createSectionView(size_t secId)
 {
+    //std::cout << __FUNCTION__ << std::endl;
+    WatchedLocker lock(&m_peMutex);
     SectionHdrWrapper *sec = this->_getSecHdr(secId);
     if (sec == NULL) {
         Logger::append(Logger::D_WARNING, "No such section");
@@ -551,7 +565,7 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size, bufsize_t
 
 SectionHdrWrapper* PEFile::getLastSection()
 {
-    size_t secCount = this->getSectionsCount(true);
+    size_t secCount = this->_getSectionsCount(true);
     if (secCount == 0) return NULL;
     return this->_getSecHdr(secCount - 1);
 }
@@ -561,7 +575,7 @@ offset_t PEFile::getLastMapped(Executable::addr_type aType)
     offset_t lastMapped = 0;
 
     /* check sections bounds */
-    const size_t secCounter = this->getSectionsCount(true);
+    const size_t secCounter = this->_getSectionsCount(true);
     if (!secCounter) {
         // if PE file has no sections, full file will be mapped
         return getMappedSize(aType);

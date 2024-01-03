@@ -321,9 +321,9 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
     }
 
     // trim to next section
-    int secCounter = m_PE->getSectionsCount(true);
+    int secCounter = m_PE->_getSectionsCount(true);
     for (size_t i = 0; i < secCounter; i++) {
-        SectionHdrWrapper *sec = m_PE->getSecHdr(i);
+        SectionHdrWrapper *sec = m_PE->_getSecHdr(i);
         if (!sec) continue;
 
         offset_t currOffset = sec->getContentOffset(aType, true);

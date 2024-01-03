@@ -25,6 +25,8 @@
 #include "CommonOrdinalsLookup.h"
 #include "rsrc/ResourcesAlbum.h"
 
+#include <iostream>
+
 class PEFile;
 
 class PEFileBuilder: public ExeBuilder {
@@ -33,6 +35,25 @@ public:
     virtual bool signatureMatches(AbstractByteBuffer *buf);
     virtual Executable* build(AbstractByteBuffer *buf);
     QString typeName() { return "PE"; }
+};
+
+
+class WatchedLocker : public QMutexLocker {
+public:  
+    WatchedLocker(QMutex *mutex)
+        : QMutexLocker(mutex)
+    {
+#ifdef SHOW_WATCH
+        std::cout << __FUNCTION__ << std::endl;
+#endif
+    }
+        
+    ~WatchedLocker()
+    {
+#ifdef SHOW_WATCH
+        std::cout << __FUNCTION__ << std::endl;
+#endif
+    }
 };
 
 //-------------------------------------------------------------
@@ -62,10 +83,6 @@ public:
     //
     virtual void wrap();
 
-    // FileAddr <-> RVA
-    virtual offset_t rawToRva(offset_t raw);
-    virtual offset_t rvaToRaw(offset_t rva);
-
     virtual bufsize_t getMappedSize(Executable::addr_type aType);
     virtual bufsize_t getAlignment(Executable::addr_type aType) const { return core.getAlignment(aType); }
     virtual offset_t getImageBase(bool recalculate = false) { return core.getImageBase(recalculate); }
@@ -80,18 +97,7 @@ public:
     offset_t peOptHdrOffset() const { return core.peOptHdrOffset(); }
     offset_t secHdrsOffset() const { return core.secHdrsOffset(); }
 
-    offset_t secHdrsEndOffset() const
-    {
-        const offset_t offset = secHdrsOffset();
-        if (offset == INVALID_ADDR) {
-            return INVALID_ADDR;
-        }
-        const offset_t secHdrSize = this->getSectionsCount() * sizeof(IMAGE_SECTION_HEADER);
-        return offset + secHdrSize;
-    }
-
     bufsize_t hdrsSize() { return core.hdrsSize(); }
-    offset_t getMinSecRVA();
 
     ResourcesAlbum* getResourcesAlbum() const { return this->album; }
 
@@ -103,36 +109,65 @@ public:
     offset_t peDataDirOffset();
 
     size_t hdrSectionsNum() const;
-    size_t getSectionsCount(bool useMapped = true) const;
+
     exe_bits getHdrBitMode() { return core.getHdrBitMode(); }
 
 /* mutex protected: section operations */
 
+    offset_t secHdrsEndOffset()
+    {
+        //std::cout << __FUNCTION__ << std::endl;
+        WatchedLocker lock(&m_peMutex);
+        const offset_t offset = secHdrsOffset();
+        if (offset == INVALID_ADDR) {
+            return INVALID_ADDR;
+        }
+        const offset_t secHdrSize = this->_getSectionsCount() * sizeof(IMAGE_SECTION_HEADER);
+        return offset + secHdrSize;
+    }
+
+    // FileAddr <-> RVA
+    virtual offset_t rawToRva(offset_t raw);
+    virtual offset_t rvaToRaw(offset_t rva);
+    
+    offset_t getMinSecRVA();
+
+    size_t getSectionsCount(bool useMapped = true)
+    {
+        //std::cout << __FUNCTION__ << std::endl;
+        WatchedLocker lock(&m_peMutex);
+        return _getSectionsCount(useMapped);
+    }
+
     // mutex protected
     size_t getSecIndex(SectionHdrWrapper *sec)
     {
-        QMutexLocker lock(&m_peMutex);
+        //std::cout << __FUNCTION__ << std::endl;
+        WatchedLocker lock(&m_peMutex);
         return _getSecIndex(sec);
     }
     
     // mutex protected
     SectionHdrWrapper* getSecHdr(size_t index)
     {
-        QMutexLocker lock(&m_peMutex);
+        //std::cout << __FUNCTION__ << std::endl;
+        WatchedLocker lock(&m_peMutex);
         return _getSecHdr(index);
     }
 
-        // mutex protected
+    // mutex protected
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)
     {
-        QMutexLocker lock(&m_peMutex);
+        //std::cout << __FUNCTION__ << std::endl;
+        WatchedLocker lock(&m_peMutex);
         return _getSecHdrAtOffset(offset, aType, recalculate, verbose);
     }
     
     // mutex protected
     BYTE* getSecContent(SectionHdrWrapper *sec)
     {
-        QMutexLocker lock(&m_peMutex);
+        //std::cout << __FUNCTION__ << std::endl;
+        WatchedLocker lock(&m_peMutex);
         if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
             return NULL; //not my section
         }
@@ -143,10 +178,11 @@ public:
         BYTE *ptr = this->getContentAt(start, buf_size);
         return ptr;
     }
-    
+    // mutex protected
     bool clearContent(SectionHdrWrapper *sec)
     {
-        QMutexLocker lock(&m_peMutex);
+        //std::cout << __FUNCTION__ << std::endl;
+        WatchedLocker lock(&m_peMutex);
         if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
             return false; //not my section
         }
@@ -264,6 +300,8 @@ public:
     }
 
 protected:
+    size_t _getSectionsCount(bool useMapped = true) const;
+    
     size_t _getSecIndex(SectionHdrWrapper *sec) const
     {
         return (sects) ?  sects->getSecIndex(sec) : SectHdrsWrapper::SECT_INVALID_INDEX;
@@ -285,7 +323,7 @@ protected:
     virtual void clearWrappers();
     virtual void wrap(AbstractByteBuffer *v_buf);
     
-    void init(AbstractByteBuffer *v_buf);
+    void _init(AbstractByteBuffer *v_buf);
     void initDirEntries();
     PECore core;
     //---
@@ -304,5 +342,6 @@ protected:
     QMutex m_peMutex;
 
 friend class SectHdrsWrapper;
+friend class SectionHdrWrapper;
 };
 
