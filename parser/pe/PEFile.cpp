@@ -186,33 +186,6 @@ void PEFile::wrap(AbstractByteBuffer *v_buf)
     WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
     // rewrap the core:
     core.wrap(v_buf);
-/*
-    //regenerate the wrappers:
-    this->dosHdrWrapper->wrap();
-
-    this->fHdr->wrap();
-    if (fHdr->getPtr() == NULL) throw ExeException("Cannot parse FileHdr: It is not PE File!");
-    this->wrappers[WR_RICH_HDR]->wrap();
-
-    this->optHdr->wrap();
-    if (optHdr->getPtr() == NULL) throw ExeException("Cannot parse OptionalHeader: It is not PE File!");
-
-    this->wrappers[WR_DATADIR]->wrap();
-
-    bool isOk = false;
-    const size_t secNum = fHdr->getNumValue(FileHdrWrapper::SEC_NUM, &isOk);
-    if (isOk && secNum){
-        this->sects = new SectHdrsWrapper(this);
-        this->wrappers[WR_SECTIONS] = sects;
-    }
-    else {
-        this->sects = NULL;
-    }
-
-    for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
-        dataDirEntries[i]->wrap();
-    }
-*/
     this->sects->wrap();
     
     if (this->album) {
