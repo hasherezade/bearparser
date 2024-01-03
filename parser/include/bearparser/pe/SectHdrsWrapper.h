@@ -4,6 +4,10 @@
 #include <vector>
 #include <map>
 
+#include "WatchedLocker.h"
+
+#define SEC_SHOW_LOCK false
+
 class SectionHdrWrapper : public PENodeWrapper
 {
 public:
@@ -150,18 +154,25 @@ public:
         return indx;
     }
 
-    SectionHdrWrapper* getSecHdr(size_t index)
-    {
-        //QMutexLocker lock(&m_secMutex);
-        if (index == SECT_INVALID_INDEX || index >= entries.size()) return NULL;
-        return dynamic_cast<SectionHdrWrapper*>(entries.at(index));
-    }
-
     //---
     bool canAddEntry();
     ExeNodeWrapper* addEntry(ExeNodeWrapper *entry);
 
+/* protected by mutex*/
+    SectionHdrWrapper* getSecHdr(size_t index)
+    {
+        WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
+        return _getSecHdr(index);
+    }
+    
 protected:
+    SectionHdrWrapper* _getSecHdr(size_t index)
+    {       
+        if (index == SECT_INVALID_INDEX || index >= entries.size()) return NULL;
+        return dynamic_cast<SectionHdrWrapper*>(entries.at(index));
+    }
+    
+private:
     void clear();
     void addMapping(SectionHdrWrapper *sec);
     virtual bool loadNextEntry(size_t entryNum);
@@ -170,4 +181,6 @@ protected:
     std::map<offset_t, SectionHdrWrapper*> vSec;
     std::map<offset_t, SectionHdrWrapper*> rSec;
     QMutex m_secMutex;
+
+friend class PEFile;
 };

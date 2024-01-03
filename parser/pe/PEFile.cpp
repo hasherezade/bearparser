@@ -183,8 +183,7 @@ void PEFile::wrap()
 
 void PEFile::wrap(AbstractByteBuffer *v_buf)
 {
-    //std::cout << __FUNCTION__ << std::endl;
-    WatchedLocker lock(&m_peMutex);
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
     // rewrap the core:
     core.wrap(v_buf);
 /*
@@ -279,8 +278,7 @@ pe::RICH_SIGNATURE* PEFile::getRichHeaderSign()
 
 offset_t PEFile::getMinSecRVA()
 {
-    std::cout << __FUNCTION__ << std::endl;
-    WatchedLocker lock(&m_peMutex);
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
     if (!this->_getSectionsCount()) {
         return INVALID_ADDR;
     }
@@ -386,8 +384,7 @@ size_t PEFile::_getSectionsCount(bool useMapped) const
 
 offset_t PEFile::rawToRva(offset_t raw)
 {
-    //std::cout << __FUNCTION__ << std::endl;
-    WatchedLocker lock(&m_peMutex);
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
     if (raw >= this->getMappedSize(Executable::RAW)) return INVALID_ADDR;
 
     SectionHdrWrapper* sec = this->_getSecHdrAtOffset(raw, Executable::RAW, true);
@@ -415,8 +412,7 @@ offset_t PEFile::rawToRva(offset_t raw)
 
 offset_t PEFile::rvaToRaw(offset_t rva)
 {
-    //std::cout << __FUNCTION__ << std::endl;
-    WatchedLocker lock(&m_peMutex);
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
     if (rva >= this->getMappedSize(Executable::RVA)) {
         return INVALID_ADDR;
     }
@@ -456,8 +452,7 @@ DataDirEntryWrapper* PEFile::getDataDirEntry(pe::dir_entry eType)
 
 BufferView* PEFile::createSectionView(size_t secId)
 {
-    //std::cout << __FUNCTION__ << std::endl;
-    WatchedLocker lock(&m_peMutex);
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
     SectionHdrWrapper *sec = this->_getSecHdr(secId);
     if (sec == NULL) {
         Logger::append(Logger::D_WARNING, "No such section");
@@ -570,7 +565,7 @@ SectionHdrWrapper* PEFile::getLastSection()
     return this->_getSecHdr(secCount - 1);
 }
 
-offset_t PEFile::getLastMapped(Executable::addr_type aType)
+offset_t PEFile::_getLastMapped(Executable::addr_type aType)
 {
     offset_t lastMapped = 0;
 
@@ -598,8 +593,8 @@ offset_t PEFile::getLastMapped(Executable::addr_type aType)
 
     /* check header bounds */
     /* section headers: */
-    if (lastMapped < this->secHdrsEndOffset()) {
-        lastMapped = this->secHdrsEndOffset();
+    if (lastMapped < this->_secHdrsEndOffset()) {
+        lastMapped = this->_secHdrsEndOffset();
     }
     // PE hdrs ending:
     const offset_t peHdrsEnd = this->core.peSignatureOffset() + sizeof(DWORD) + sizeof(IMAGE_FILE_HEADER) + this->core.peNtHeadersSize();

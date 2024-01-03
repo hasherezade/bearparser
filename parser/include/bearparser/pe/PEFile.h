@@ -25,7 +25,9 @@
 #include "CommonOrdinalsLookup.h"
 #include "rsrc/ResourcesAlbum.h"
 
-#include <iostream>
+#include "WatchedLocker.h"
+
+#define PE_SHOW_LOCK false
 
 class PEFile;
 
@@ -35,25 +37,6 @@ public:
     virtual bool signatureMatches(AbstractByteBuffer *buf);
     virtual Executable* build(AbstractByteBuffer *buf);
     QString typeName() { return "PE"; }
-};
-
-
-class WatchedLocker : public QMutexLocker {
-public:  
-    WatchedLocker(QMutex *mutex)
-        : QMutexLocker(mutex)
-    {
-#ifdef SHOW_WATCH
-        std::cout << __FUNCTION__ << std::endl;
-#endif
-    }
-        
-    ~WatchedLocker()
-    {
-#ifdef SHOW_WATCH
-        std::cout << __FUNCTION__ << std::endl;
-#endif
-    }
 };
 
 //-------------------------------------------------------------
@@ -114,18 +97,12 @@ public:
 
 /* mutex protected: section operations */
 
-    offset_t secHdrsEndOffset()
+    offset_t getLastMapped(Executable::addr_type aType)
     {
-        //std::cout << __FUNCTION__ << std::endl;
-        WatchedLocker lock(&m_peMutex);
-        const offset_t offset = secHdrsOffset();
-        if (offset == INVALID_ADDR) {
-            return INVALID_ADDR;
-        }
-        const offset_t secHdrSize = this->_getSectionsCount() * sizeof(IMAGE_SECTION_HEADER);
-        return offset + secHdrSize;
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return _getLastMapped(aType);
     }
-
+    
     // FileAddr <-> RVA
     virtual offset_t rawToRva(offset_t raw);
     virtual offset_t rvaToRaw(offset_t rva);
@@ -134,40 +111,35 @@ public:
 
     size_t getSectionsCount(bool useMapped = true)
     {
-        //std::cout << __FUNCTION__ << std::endl;
-        WatchedLocker lock(&m_peMutex);
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
         return _getSectionsCount(useMapped);
     }
 
     // mutex protected
     size_t getSecIndex(SectionHdrWrapper *sec)
     {
-        //std::cout << __FUNCTION__ << std::endl;
-        WatchedLocker lock(&m_peMutex);
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
         return _getSecIndex(sec);
     }
     
     // mutex protected
     SectionHdrWrapper* getSecHdr(size_t index)
     {
-        //std::cout << __FUNCTION__ << std::endl;
-        WatchedLocker lock(&m_peMutex);
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
         return _getSecHdr(index);
     }
 
     // mutex protected
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)
     {
-        //std::cout << __FUNCTION__ << std::endl;
-        WatchedLocker lock(&m_peMutex);
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
         return _getSecHdrAtOffset(offset, aType, recalculate, verbose);
     }
     
     // mutex protected
     BYTE* getSecContent(SectionHdrWrapper *sec)
     {
-        //std::cout << __FUNCTION__ << std::endl;
-        WatchedLocker lock(&m_peMutex);
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
         if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
             return NULL; //not my section
         }
@@ -181,8 +153,7 @@ public:
     // mutex protected
     bool clearContent(SectionHdrWrapper *sec)
     {
-        //std::cout << __FUNCTION__ << std::endl;
-        WatchedLocker lock(&m_peMutex);
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
         if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
             return false; //not my section
         }
@@ -193,7 +164,12 @@ public:
         delete secView;
         return isOk;
     }
-
+    
+    offset_t secHdrsEndOffset()
+    {
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return _secHdrsEndOffset();
+    }
     
 /* resource operations */
 
@@ -242,8 +218,6 @@ public:
         
         return entrypoints.size() - initialSize;
     }
-
-    offset_t getLastMapped(Executable::addr_type aType);
 
     /* wrappers:
     */
@@ -300,6 +274,19 @@ public:
     }
 
 protected:
+
+    offset_t _secHdrsEndOffset()
+    {
+        const offset_t offset = secHdrsOffset();
+        if (offset == INVALID_ADDR) {
+            return INVALID_ADDR;
+        }
+        const offset_t secHdrSize = this->_getSectionsCount() * sizeof(IMAGE_SECTION_HEADER);
+        return offset + secHdrSize;
+    }
+    
+    offset_t _getLastMapped(Executable::addr_type aType);
+
     size_t _getSectionsCount(bool useMapped = true) const;
     
     size_t _getSecIndex(SectionHdrWrapper *sec) const
@@ -309,7 +296,7 @@ protected:
     
     SectionHdrWrapper* _getSecHdr(size_t index) const
     {
-        return (sects) ? sects->getSecHdr(index) : NULL;
+        return (sects) ? sects->_getSecHdr(index) : NULL;
     }
 
     SectionHdrWrapper* _getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)

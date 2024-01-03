@@ -426,16 +426,13 @@ bool SectHdrsWrapper::loadNextEntry(size_t entryNum)
 void SectHdrsWrapper::addMapping(SectionHdrWrapper *sec)
 {
     if (sec == NULL) return;
-
     bool recalculate = true;
     if (sec->getContentSize(Executable::RAW, true) == 0) {
         //printf("skipping empty section..\n");
         return;
     }
-
     const offset_t endRVA = sec->getContentEndOffset(Executable::RVA, recalculate);
     const offset_t endRaw = sec->getContentEndOffset(Executable::RAW, recalculate);
-
     if (rSec.find(endRaw) != rSec.end()) { //already exist
         SectionHdrWrapper* prevSec = rSec[endRaw];
         if (prevSec == NULL) return;
@@ -459,7 +456,7 @@ void SectHdrsWrapper::addMapping(SectionHdrWrapper *sec)
 
 void SectHdrsWrapper::reloadMapping()
 {
-    QMutexLocker lock(&m_secMutex);
+    WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
     this->rSec.clear();
     this->vSec.clear();
 
@@ -473,10 +470,10 @@ void SectHdrsWrapper::reloadMapping()
     
 bool SectHdrsWrapper::wrap()
 {
-    QMutexLocker lock(&m_secMutex);
+    WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
+    
     this->clear();
     if (this->m_PE == NULL) return false;
-
     size_t count = this->m_PE->hdrSectionsNum();
     for (size_t i = 0; i < count && i < SECT_COUNT_MAX; i++) {
         if (this->loadNextEntry(i) == false) break;
@@ -486,20 +483,22 @@ bool SectHdrsWrapper::wrap()
 
 size_t SectHdrsWrapper::getFieldsCount()
 {
-    //QMutexLocker lock(&m_secMutex);
+    WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
     return this->entries.size();
 }
 
 void* SectHdrsWrapper::getPtr()
 {
-    //QMutexLocker lock(&m_secMutex);
+    WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
+    
     if (entries.size() == 0) return NULL;
     return entries[0]->getPtr();
 }
 
 bufsize_t SectHdrsWrapper::getSize()
 {
-    //QMutexLocker lock(&m_secMutex);
+    WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
+    
     if (this->m_PE == NULL) return 0;
 
     size_t secCount = this->entries.size();
