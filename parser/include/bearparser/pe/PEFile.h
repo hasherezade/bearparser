@@ -25,7 +25,7 @@
 #include "CommonOrdinalsLookup.h"
 #include "rsrc/ResourcesAlbum.h"
 
-#include "WatchedLocker.h"
+#include "../WatchedLocker.h"
 
 #define PE_SHOW_LOCK false
 
