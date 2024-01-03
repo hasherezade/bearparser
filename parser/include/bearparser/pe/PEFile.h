@@ -106,20 +106,60 @@ public:
     size_t getSectionsCount(bool useMapped = true) const;
     exe_bits getHdrBitMode() { return core.getHdrBitMode(); }
 
-    SectionHdrWrapper* getSecHdr(size_t index) const
+/* mutex protected: section operations */
+
+    // mutex protected
+    size_t getSecIndex(SectionHdrWrapper *sec)
     {
-        return (sects) ? sects->getSecHdr(index) : NULL;
+        QMutexLocker lock(&m_peMutex);
+        return _getSecIndex(sec);
+    }
+    
+    // mutex protected
+    SectionHdrWrapper* getSecHdr(size_t index)
+    {
+        QMutexLocker lock(&m_peMutex);
+        return _getSecHdr(index);
     }
 
+        // mutex protected
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)
     {
-        return (sects) ? sects->getSecHdrAtOffset(offset, aType, recalculate, verbose) : NULL;
+        QMutexLocker lock(&m_peMutex);
+        return _getSecHdrAtOffset(offset, aType, recalculate, verbose);
+    }
+    
+    // mutex protected
+    BYTE* getSecContent(SectionHdrWrapper *sec)
+    {
+        QMutexLocker lock(&m_peMutex);
+        if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+            return NULL; //not my section
+        }
+        const bufsize_t buf_size = sec->getContentSize(Executable::RAW, true);
+        if (!buf_size) return NULL;
+
+        offset_t start = sec->getContentOffset(Executable::RAW, true);
+        BYTE *ptr = this->getContentAt(start, buf_size);
+        return ptr;
+    }
+    
+    bool clearContent(SectionHdrWrapper *sec)
+    {
+        QMutexLocker lock(&m_peMutex);
+        if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+            return false; //not my section
+        }
+        BufferView *secView = this->_createSectionView(sec);
+        if (!secView) return false;
+
+        bool isOk = secView->fillContent(0);
+        delete secView;
+        return isOk;
     }
 
-    size_t getSecIndex(SectionHdrWrapper *sec) const
-    {
-        return (sects) ?  sects->getSecIndex(sec) : SectHdrsWrapper::SECT_INVALID_INDEX;
-    }
+    
+/* resource operations */
 
     ResourcesContainer*  getResourcesOfType(pe::resource_type typeId)
     {
@@ -186,18 +226,6 @@ public:
         return this->getAlignment(Executable::RVA);
     }
 
-    BYTE* getSecContent(SectionHdrWrapper *sec)
-    {
-        if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
-            return NULL; //not my section
-        }
-        const bufsize_t buf_size = sec->getContentSize(Executable::RAW, true);
-        if (!buf_size) return NULL;
-
-        offset_t start = sec->getContentOffset(Executable::RAW, true);
-        BYTE *ptr = this->getContentAt(start, buf_size);
-        return ptr;
-    }
 
     void setImageSize(size_t newSize)
     {
@@ -207,20 +235,7 @@ public:
     SectionHdrWrapper* getEntrySection()
     {
         offset_t ep = getEntryPoint(Executable::RVA);
-        return this->getSecHdrAtOffset(ep, Executable::RVA, true, false);
-    }
-
-    bool clearContent(SectionHdrWrapper *sec)
-    {
-        if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
-            return false; //not my section
-        }
-        BufferView *secView = this->_createSectionView(sec);
-        if (!secView) return false;
-
-        bool isOk = secView->fillContent(0);
-        delete secView;
-        return isOk;
+        return this->_getSecHdrAtOffset(ep, Executable::RVA, true, false);
     }
 
     bool dumpSection(SectionHdrWrapper *sec, QString fileName);
@@ -249,6 +264,21 @@ public:
     }
 
 protected:
+    size_t _getSecIndex(SectionHdrWrapper *sec) const
+    {
+        return (sects) ?  sects->getSecIndex(sec) : SectHdrsWrapper::SECT_INVALID_INDEX;
+    }
+    
+    SectionHdrWrapper* _getSecHdr(size_t index) const
+    {
+        return (sects) ? sects->getSecHdr(index) : NULL;
+    }
+
+    SectionHdrWrapper* _getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)
+    {
+        return (sects) ? sects->getSecHdrAtOffset(offset, aType, recalculate, verbose) : NULL;
+    }
+    
     BufferView* _createSectionView(SectionHdrWrapper *sec);
     size_t getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA);
 
@@ -271,6 +301,7 @@ protected:
 
     ResourcesAlbum *album;
     DataDirEntryWrapper* dataDirEntries[pe::DIR_ENTRIES_COUNT];
+    QMutex m_peMutex;
 
 friend class SectHdrsWrapper;
 };

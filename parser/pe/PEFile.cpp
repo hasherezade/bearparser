@@ -210,6 +210,7 @@ void PEFile::wrap(AbstractByteBuffer *v_buf)
     }
 */
     this->sects->wrap();
+    
     if (this->album) {
         this->album->wrapLeafsContent();
     }
@@ -277,7 +278,7 @@ offset_t PEFile::getMinSecRVA()
     if (!this->getSectionsCount()) {
         return INVALID_ADDR;
     }
-    SectionHdrWrapper* sec = this->getSecHdr(0);
+    SectionHdrWrapper* sec = this->_getSecHdr(0);
     if (!sec) {
         return INVALID_ADDR;
     }
@@ -381,7 +382,7 @@ offset_t PEFile::rawToRva(offset_t raw)
 {
     if (raw >= this->getMappedSize(Executable::RAW)) return INVALID_ADDR;
 
-    SectionHdrWrapper* sec = this->getSecHdrAtOffset(raw, Executable::RAW, true);
+    SectionHdrWrapper* sec = this->_getSecHdrAtOffset(raw, Executable::RAW, true);
     if (sec) {
         offset_t bgnVA = sec->getContentOffset(Executable::VA);
         offset_t bgnRaw = sec->getContentOffset(Executable::RAW);
@@ -408,7 +409,7 @@ offset_t PEFile::rvaToRaw(offset_t rva)
 {
     if (rva >= this->getMappedSize(Executable::RVA)) return INVALID_ADDR;
 
-    SectionHdrWrapper* sec = this->getSecHdrAtOffset(rva, Executable::RVA, true);
+    SectionHdrWrapper* sec = this->_getSecHdrAtOffset(rva, Executable::RVA, true);
     if (sec) {
         offset_t bgnRVA = sec->getContentOffset(Executable::RVA);
         offset_t bgnRaw = sec->getContentOffset(Executable::RAW);
@@ -443,7 +444,7 @@ DataDirEntryWrapper* PEFile::getDataDirEntry(pe::dir_entry eType)
 
 BufferView* PEFile::createSectionView(size_t secId)
 {
-    SectionHdrWrapper *sec = this->getSecHdr(secId);
+    SectionHdrWrapper *sec = this->_getSecHdr(secId);
     if (sec == NULL) {
         Logger::append(Logger::D_WARNING, "No such section");
         return NULL;
@@ -552,7 +553,7 @@ SectionHdrWrapper* PEFile::getLastSection()
 {
     size_t secCount = this->getSectionsCount(true);
     if (secCount == 0) return NULL;
-    return this->getSecHdr(secCount - 1);
+    return this->_getSecHdr(secCount - 1);
 }
 
 offset_t PEFile::getLastMapped(Executable::addr_type aType)
@@ -566,7 +567,7 @@ offset_t PEFile::getLastMapped(Executable::addr_type aType)
         return getMappedSize(aType);
     }
     for (size_t i = 0; i < secCounter; i++) {
-        SectionHdrWrapper *sec = this->getSecHdr(i);
+        SectionHdrWrapper *sec = this->_getSecHdr(i);
         if (!sec) continue;
 
         offset_t secLastMapped= sec->getContentOffset(aType, true);
@@ -656,7 +657,7 @@ bool PEFile::unbindImports()
 
 bool PEFile::dumpSection(SectionHdrWrapper *sec, QString fileName)
 {
-    if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+    if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
         return false; //not my section
     }
     BufferView *secView = this->_createSectionView(sec);
