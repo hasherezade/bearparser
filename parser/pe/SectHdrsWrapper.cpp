@@ -321,9 +321,9 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
     }
 
     // trim to next section
-    int secCounter = m_PE->getSectionsCount(true);
+    int secCounter = m_PE->_getSectionsCount(true);
     for (size_t i = 0; i < secCounter; i++) {
-        SectionHdrWrapper *sec = m_PE->getSecHdr(i);
+        SectionHdrWrapper *sec = m_PE->_getSecHdr(i);
         if (!sec) continue;
 
         offset_t currOffset = sec->getContentOffset(aType, true);
@@ -426,16 +426,13 @@ bool SectHdrsWrapper::loadNextEntry(size_t entryNum)
 void SectHdrsWrapper::addMapping(SectionHdrWrapper *sec)
 {
     if (sec == NULL) return;
-
     bool recalculate = true;
     if (sec->getContentSize(Executable::RAW, true) == 0) {
         //printf("skipping empty section..\n");
         return;
     }
-
     const offset_t endRVA = sec->getContentEndOffset(Executable::RVA, recalculate);
     const offset_t endRaw = sec->getContentEndOffset(Executable::RAW, recalculate);
-
     if (rSec.find(endRaw) != rSec.end()) { //already exist
         SectionHdrWrapper* prevSec = rSec[endRaw];
         if (prevSec == NULL) return;
@@ -459,6 +456,7 @@ void SectHdrsWrapper::addMapping(SectionHdrWrapper *sec)
 
 void SectHdrsWrapper::reloadMapping()
 {
+    WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
     this->rSec.clear();
     this->vSec.clear();
 
@@ -472,9 +470,10 @@ void SectHdrsWrapper::reloadMapping()
     
 bool SectHdrsWrapper::wrap()
 {
+    WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
+    
     this->clear();
     if (this->m_PE == NULL) return false;
-
     size_t count = this->m_PE->hdrSectionsNum();
     for (size_t i = 0; i < count && i < SECT_COUNT_MAX; i++) {
         if (this->loadNextEntry(i) == false) break;
@@ -484,21 +483,27 @@ bool SectHdrsWrapper::wrap()
 
 size_t SectHdrsWrapper::getFieldsCount()
 {
+    WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
     return this->entries.size();
 }
 
 void* SectHdrsWrapper::getPtr()
 {
+    WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
+    
     if (entries.size() == 0) return NULL;
     return entries[0]->getPtr();
 }
 
 bufsize_t SectHdrsWrapper::getSize()
 {
+    WatchedLocker lock(&m_secMutex, SEC_SHOW_LOCK, __FUNCTION__);
+    
     if (this->m_PE == NULL) return 0;
 
-    size_t secCount = getFieldsCount();
-
+    size_t secCount = this->entries.size();
+    if (!secCount) return 0;
+    
     offset_t hdrOffset = m_PE->secHdrsOffset();
     offset_t fileSize = m_PE->getRawSize();
     offset_t endOffset = hdrOffset + (secCount * sizeof(IMAGE_SECTION_HEADER));

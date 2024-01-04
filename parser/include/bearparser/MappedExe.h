@@ -21,7 +21,7 @@ public:
     QString getWrapperName(size_t id);
 
 protected:
-    virtual void wrap(AbstractByteBuffer *v_buf) = 0;
+    virtual void wrap() = 0;
     void clearWrappers();
 
     std::map<size_t, ExeElementWrapper*> wrappers;
@@ -29,8 +29,6 @@ protected:
 
 class MappedExe : public Executable, public ExeWrappersContainer {
 public:
-    virtual void wrap() { return wrap(this->buf); }
-
     virtual bool canResize(bufsize_t newSize)
     {
         // disabled by default
@@ -47,12 +45,13 @@ public:
         }
         return false;
     }
-
+    
+    virtual void wrap() = 0;
+    
 protected:
     MappedExe(AbstractByteBuffer *v_buf, exe_bits v_bitMode)
         : Executable(v_buf, v_bitMode), ExeWrappersContainer() { }
 
     virtual ~MappedExe(void) { }
 
-    virtual void wrap(AbstractByteBuffer *v_buf) = 0;
 };

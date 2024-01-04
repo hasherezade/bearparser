@@ -29,6 +29,7 @@ public:
 
     // inherited from Executable:
     //
+    virtual void wrap();
     // FileAddr <-> RVA
     virtual offset_t rawToRva(offset_t raw) { return (raw < codeOffset()) ? INVALID_ADDR : raw - codeOffset(); }
     virtual offset_t rvaToRaw(offset_t rva) { return rva + codeOffset();  } //TODO
@@ -62,7 +63,6 @@ protected:
         return static_cast<bufsize_t> (size);
     }
 
-    virtual void wrap(AbstractByteBuffer *v_buf);
 
     DosHdrWrapper *dosHdrWrapper;
     IMAGE_DOS_HEADER* m_dosHdr;

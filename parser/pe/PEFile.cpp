@@ -103,13 +103,61 @@ long PEFile::computeChecksum(BYTE* buffer, size_t bufferSize, offset_t checksumO
 ///---
 
 PEFile::PEFile(AbstractByteBuffer *v_buf)
-    : MappedExe(v_buf, Executable::BITS_32), dosHdrWrapper(NULL), fHdr(NULL), optHdr(NULL), sects(NULL),
+    : MappedExe(v_buf, Executable::BITS_32), 
+    dosHdrWrapper(NULL), fHdr(NULL), optHdr(NULL), sects(NULL),
     album(NULL)
 {
-    album = new ResourcesAlbum(this);
-    wrap(v_buf);
+    clearWrappers();
+
+    _init(v_buf);
     Logger::append(Logger::D_INFO,"Wrapped");
 }
+
+void PEFile::_init(AbstractByteBuffer *v_buf)
+{
+    // wrap the core:
+    core.wrap(v_buf);
+
+    album = new ResourcesAlbum(this);
+    
+    //generate wrappers:
+    this->dosHdrWrapper = new DosHdrWrapper(this);
+    this->wrappers[WR_DOS_HDR] = this->dosHdrWrapper;
+
+    this->fHdr = new FileHdrWrapper(this);
+    if (fHdr->getPtr() == NULL) throw ExeException("Cannot parse FileHdr: It is not PE File!");
+    this->wrappers[WR_FILE_HDR] = fHdr;
+    this->wrappers[WR_RICH_HDR] = new RichHdrWrapper(this);
+
+    this->optHdr = new OptHdrWrapper(this);
+    if (optHdr->getPtr() == NULL) throw ExeException("Cannot parse OptionalHeader: It is not PE File!");
+    this->wrappers[WR_OPTIONAL_HDR] = optHdr;
+
+    this->sects = new SectHdrsWrapper(this);
+    this->wrappers[WR_SECTIONS] = sects;
+
+    this->wrappers[WR_DATADIR] = new DataDirWrapper(this);
+    dataDirEntries[pe::DIR_IMPORT] = new ImportDirWrapper(this);
+    dataDirEntries[pe::DIR_DELAY_IMPORT] = new DelayImpDirWrapper(this);
+    dataDirEntries[pe::DIR_BOUND_IMPORT] = new BoundImpDirWrapper(this);
+    dataDirEntries[pe::DIR_DEBUG] = new DebugDirWrapper(this);
+    dataDirEntries[pe::DIR_EXPORT] = new ExportDirWrapper(this);
+    dataDirEntries[pe::DIR_SECURITY] = new SecurityDirWrapper(this);
+    dataDirEntries[pe::DIR_TLS] = new TlsDirWrapper(this);
+    dataDirEntries[pe::DIR_LOAD_CONFIG] = new LdConfigDirWrapper(this);
+    dataDirEntries[pe::DIR_BASERELOC] = new RelocDirWrapper(this);
+    dataDirEntries[pe::DIR_EXCEPTION] = new ExceptionDirWrapper(this);
+    dataDirEntries[pe::DIR_RESOURCE] = new ResourceDirWrapper(this, album);
+    dataDirEntries[pe::DIR_COM_DESCRIPTOR] = new ClrDirWrapper(this); 
+ 
+    for (int i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
+        this->wrappers[WR_DIR_ENTRY + i] = dataDirEntries[i];
+    }
+    if (this->album) {
+        this->album->wrapLeafsContent();
+    }
+}
+
 
 void PEFile::clearWrappers()
 {
@@ -129,62 +177,30 @@ void PEFile::initDirEntries()
     }
 }
 
-void PEFile::wrap()
+void PEFile::wrapCore()
 {
-    PEFile::wrap(this->buf);
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+    // rewrap the core:
+    core.wrap(this->buf);
+    // rewrap the PE headers:
+    for (int i = 0; i < WR_DIR_ENTRY; i++) {
+        this->wrappers[i]->wrap();
+    }
+    // rewrap the sections:
+    this->sects->wrap();
 }
 
-void  PEFile::wrap(AbstractByteBuffer *v_buf)
+void PEFile::wrap()
 {
-    //erase all existing wrappers:
-    clearWrappers();
-
-    // rewrao the core:
-    core.wrap(v_buf);
-
-    //regenerate the wrappers:
-    this->dosHdrWrapper = new DosHdrWrapper(this);
-    this->wrappers[WR_DOS_HDR] = this->dosHdrWrapper;
-
-    this->fHdr = new FileHdrWrapper(this);
-    if (fHdr->getPtr() == NULL) throw ExeException("Cannot parse FileHdr: It is not PE File!");
-    this->wrappers[WR_FILE_HDR] = fHdr;
-    this->wrappers[WR_RICH_HDR] = new RichHdrWrapper(this);
-
-    this->optHdr = new OptHdrWrapper(this);
-    if (optHdr->getPtr() == NULL) throw ExeException("Cannot parse OptionalHeader: It is not PE File!");
-    this->wrappers[WR_OPTIONAL_HDR] = optHdr;
-
-    this->wrappers[WR_DATADIR] =  new DataDirWrapper(this);
-
-    bool isOk = false;
-    const size_t secNum = fHdr->getNumValue(FileHdrWrapper::SEC_NUM, &isOk);
-    if (isOk && secNum){
-        this->sects = new SectHdrsWrapper(this);
-        this->wrappers[WR_SECTIONS] = sects;
+    wrapCore();
+    
+    // rewrap directories
+    for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
+        if (dataDirEntries[i]) {
+            dataDirEntries[i]->wrap();
+        }
     }
-    else {
-        this->sects = NULL;
-    }
-    // map Data Dirs
-    initDirEntries();
-    dataDirEntries[pe::DIR_IMPORT] = new ImportDirWrapper(this);
-    dataDirEntries[pe::DIR_DELAY_IMPORT] = new DelayImpDirWrapper(this);
-    dataDirEntries[pe::DIR_BOUND_IMPORT] = new BoundImpDirWrapper(this);
-    dataDirEntries[pe::DIR_DEBUG] = new DebugDirWrapper(this);
-    dataDirEntries[pe::DIR_EXPORT] = new ExportDirWrapper(this);
-    dataDirEntries[pe::DIR_SECURITY] = new SecurityDirWrapper(this);
-    dataDirEntries[pe::DIR_TLS] = new TlsDirWrapper(this);
-    dataDirEntries[pe::DIR_LOAD_CONFIG] = new LdConfigDirWrapper(this);
-    dataDirEntries[pe::DIR_BASERELOC] = new RelocDirWrapper(this);
-    dataDirEntries[pe::DIR_EXCEPTION] = new ExceptionDirWrapper(this);
-    dataDirEntries[pe::DIR_RESOURCE] = new ResourceDirWrapper(this, album);
-    dataDirEntries[pe::DIR_COM_DESCRIPTOR] = new ClrDirWrapper(this);
-
-    for (int i = 0; i < pe::DIR_ENTRIES_COUNT; i++) {
-        this->wrappers[WR_DIR_ENTRY + i] = dataDirEntries[i];
-    }
-
+    // rewrap resources
     if (this->album) {
         this->album->wrapLeafsContent();
     }
@@ -246,13 +262,13 @@ pe::RICH_SIGNATURE* PEFile::getRichHeaderSign()
     return richSign;
 }
 
-
 offset_t PEFile::getMinSecRVA()
 {
-    if (!this->getSectionsCount()) {
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+    if (!this->_getSectionsCount()) {
         return INVALID_ADDR;
     }
-    SectionHdrWrapper* sec = this->getSecHdr(0);
+    SectionHdrWrapper* sec = this->_getSecHdr(0);
     if (!sec) {
         return INVALID_ADDR;
     }
@@ -344,7 +360,7 @@ bool PEFile::setVirtualSize(bufsize_t newSize)
     return true;
 }
 
-size_t PEFile::getSectionsCount(bool useMapped) const
+size_t PEFile::_getSectionsCount(bool useMapped) const
 {
     if (useMapped == false) {
         return hdrSectionsNum();
@@ -354,9 +370,10 @@ size_t PEFile::getSectionsCount(bool useMapped) const
 
 offset_t PEFile::rawToRva(offset_t raw)
 {
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
     if (raw >= this->getMappedSize(Executable::RAW)) return INVALID_ADDR;
 
-    SectionHdrWrapper* sec = this->getSecHdrAtOffset(raw, Executable::RAW, true);
+    SectionHdrWrapper* sec = this->_getSecHdrAtOffset(raw, Executable::RAW, true);
     if (sec) {
         offset_t bgnVA = sec->getContentOffset(Executable::VA);
         offset_t bgnRaw = sec->getContentOffset(Executable::RAW);
@@ -372,7 +389,7 @@ offset_t PEFile::rawToRva(offset_t raw)
         return bgnVA + curr;
     }
     //TODO: make more tests
-    if (this->getSectionsCount() == 0) return raw;
+    if (this->_getSectionsCount() == 0) return raw;
     if (raw < this->hdrsSize()) {
         return raw;
     } //else: content that is between the end of sections headers and the first virtual section is not mapped
@@ -381,14 +398,17 @@ offset_t PEFile::rawToRva(offset_t raw)
 
 offset_t PEFile::rvaToRaw(offset_t rva)
 {
-    if (rva >= this->getMappedSize(Executable::RVA)) return INVALID_ADDR;
-
-    SectionHdrWrapper* sec = this->getSecHdrAtOffset(rva, Executable::RVA, true);
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+    if (rva >= this->getMappedSize(Executable::RVA)) {
+        return INVALID_ADDR;
+    }
+    SectionHdrWrapper* sec = this->_getSecHdrAtOffset(rva, Executable::RVA, true);
     if (sec) {
         offset_t bgnRVA = sec->getContentOffset(Executable::RVA);
         offset_t bgnRaw = sec->getContentOffset(Executable::RAW);
-        if (bgnRVA  == INVALID_ADDR || bgnRaw == INVALID_ADDR) return INVALID_ADDR;
-
+        if (bgnRVA  == INVALID_ADDR || bgnRaw == INVALID_ADDR) {
+            return INVALID_ADDR;
+        }
         bufsize_t curr = (rva - bgnRVA);
         bufsize_t rawSize = sec->getContentSize(Executable::RAW, true);
         if (curr >= rawSize) {
@@ -400,7 +420,7 @@ offset_t PEFile::rvaToRaw(offset_t rva)
     if (rva >= this->getMappedSize(Executable::RAW)) {
         return INVALID_ADDR;
     }
-    if (this->getSectionsCount()) { // do this check only if sections count is non-zero
+    if (this->_getSectionsCount()) { // do this check only if sections count is non-zero
         if (rva >= this->hdrsSize()) {
             // the address is in the cave between the headers and the first section: cannot be mapped
             return INVALID_ADDR;
@@ -418,7 +438,8 @@ DataDirEntryWrapper* PEFile::getDataDirEntry(pe::dir_entry eType)
 
 BufferView* PEFile::createSectionView(size_t secId)
 {
-    SectionHdrWrapper *sec = this->getSecHdr(secId);
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+    SectionHdrWrapper *sec = this->_getSecHdr(secId);
     if (sec == NULL) {
         Logger::append(Logger::D_WARNING, "No such section");
         return NULL;
@@ -525,23 +546,23 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size, bufsize_t
 
 SectionHdrWrapper* PEFile::getLastSection()
 {
-    size_t secCount = this->getSectionsCount(true);
+    size_t secCount = this->_getSectionsCount(true);
     if (secCount == 0) return NULL;
-    return this->getSecHdr(secCount - 1);
+    return this->_getSecHdr(secCount - 1);
 }
 
-offset_t PEFile::getLastMapped(Executable::addr_type aType)
+offset_t PEFile::_getLastMapped(Executable::addr_type aType)
 {
     offset_t lastMapped = 0;
 
     /* check sections bounds */
-    const size_t secCounter = this->getSectionsCount(true);
+    const size_t secCounter = this->_getSectionsCount(true);
     if (!secCounter) {
         // if PE file has no sections, full file will be mapped
         return getMappedSize(aType);
     }
     for (size_t i = 0; i < secCounter; i++) {
-        SectionHdrWrapper *sec = this->getSecHdr(i);
+        SectionHdrWrapper *sec = this->_getSecHdr(i);
         if (!sec) continue;
 
         offset_t secLastMapped= sec->getContentOffset(aType, true);
@@ -558,8 +579,8 @@ offset_t PEFile::getLastMapped(Executable::addr_type aType)
 
     /* check header bounds */
     /* section headers: */
-    if (lastMapped < this->secHdrsEndOffset()) {
-        lastMapped = this->secHdrsEndOffset();
+    if (lastMapped < this->_secHdrsEndOffset()) {
+        lastMapped = this->_secHdrsEndOffset();
     }
     // PE hdrs ending:
     const offset_t peHdrsEnd = this->core.peSignatureOffset() + sizeof(DWORD) + sizeof(IMAGE_FILE_HEADER) + this->core.peNtHeadersSize();
@@ -631,7 +652,7 @@ bool PEFile::unbindImports()
 
 bool PEFile::dumpSection(SectionHdrWrapper *sec, QString fileName)
 {
-    if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+    if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
         return false; //not my section
     }
     BufferView *secView = this->_createSectionView(sec);

@@ -25,6 +25,10 @@
 #include "CommonOrdinalsLookup.h"
 #include "rsrc/ResourcesAlbum.h"
 
+#include "../WatchedLocker.h"
+
+#define PE_SHOW_LOCK false
+
 class PEFile;
 
 class PEFileBuilder: public ExeBuilder {
@@ -57,15 +61,9 @@ public:
 
     PEFile(AbstractByteBuffer *v_buf);
     virtual ~PEFile() { clearWrappers(); delete album; }
-    //---
-    // inherited from Executable:
-    //
-    virtual void wrap();
-
-    // FileAddr <-> RVA
-    virtual offset_t rawToRva(offset_t raw);
-    virtual offset_t rvaToRaw(offset_t rva);
-
+    
+    virtual void wrap(); // inherited from Executable
+    
     virtual bufsize_t getMappedSize(Executable::addr_type aType);
     virtual bufsize_t getAlignment(Executable::addr_type aType) const { return core.getAlignment(aType); }
     virtual offset_t getImageBase(bool recalculate = false) { return core.getImageBase(recalculate); }
@@ -80,18 +78,7 @@ public:
     offset_t peOptHdrOffset() const { return core.peOptHdrOffset(); }
     offset_t secHdrsOffset() const { return core.secHdrsOffset(); }
 
-    offset_t secHdrsEndOffset() const
-    {
-        const offset_t offset = secHdrsOffset();
-        if (offset == INVALID_ADDR) {
-            return INVALID_ADDR;
-        }
-        const offset_t secHdrSize = this->getSectionsCount() * sizeof(IMAGE_SECTION_HEADER);
-        return offset + secHdrSize;
-    }
-
     bufsize_t hdrsSize() { return core.hdrsSize(); }
-    offset_t getMinSecRVA();
 
     ResourcesAlbum* getResourcesAlbum() const { return this->album; }
 
@@ -103,23 +90,86 @@ public:
     offset_t peDataDirOffset();
 
     size_t hdrSectionsNum() const;
-    size_t getSectionsCount(bool useMapped = true) const;
+
     exe_bits getHdrBitMode() { return core.getHdrBitMode(); }
 
-    SectionHdrWrapper* getSecHdr(size_t index) const
+/* mutex protected: section operations */
+
+    offset_t getLastMapped(Executable::addr_type aType)
     {
-        return (sects) ? sects->getSecHdr(index) : NULL;
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return _getLastMapped(aType);
+    }
+    
+    // FileAddr <-> RVA
+    virtual offset_t rawToRva(offset_t raw);
+    virtual offset_t rvaToRaw(offset_t rva);
+    
+    offset_t getMinSecRVA();
+
+    size_t getSectionsCount(bool useMapped = true)
+    {
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return _getSectionsCount(useMapped);
     }
 
+    // mutex protected
+    size_t getSecIndex(SectionHdrWrapper *sec)
+    {
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return _getSecIndex(sec);
+    }
+    
+    // mutex protected
+    SectionHdrWrapper* getSecHdr(size_t index)
+    {
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return _getSecHdr(index);
+    }
+
+    // mutex protected
     SectionHdrWrapper* getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)
     {
-        return (sects) ? sects->getSecHdrAtOffset(offset, aType, recalculate, verbose) : NULL;
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return _getSecHdrAtOffset(offset, aType, recalculate, verbose);
     }
-
-    size_t getSecIndex(SectionHdrWrapper *sec) const
+    
+    // mutex protected
+    BYTE* getSecContent(SectionHdrWrapper *sec)
     {
-        return (sects) ?  sects->getSecIndex(sec) : SectHdrsWrapper::SECT_INVALID_INDEX;
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+            return NULL; //not my section
+        }
+        const bufsize_t buf_size = sec->getContentSize(Executable::RAW, true);
+        if (!buf_size) return NULL;
+
+        offset_t start = sec->getContentOffset(Executable::RAW, true);
+        BYTE *ptr = this->getContentAt(start, buf_size);
+        return ptr;
     }
+    // mutex protected
+    bool clearContent(SectionHdrWrapper *sec)
+    {
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+            return false; //not my section
+        }
+        BufferView *secView = this->_createSectionView(sec);
+        if (!secView) return false;
+
+        bool isOk = secView->fillContent(0);
+        delete secView;
+        return isOk;
+    }
+    
+    offset_t secHdrsEndOffset()
+    {
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return _secHdrsEndOffset();
+    }
+    
+/* resource operations */
 
     ResourcesContainer*  getResourcesOfType(pe::resource_type typeId)
     {
@@ -167,8 +217,6 @@ public:
         return entrypoints.size() - initialSize;
     }
 
-    offset_t getLastMapped(Executable::addr_type aType);
-
     /* wrappers:
     */
     bool hasDirectory(pe::dir_entry dirNum)
@@ -186,18 +234,6 @@ public:
         return this->getAlignment(Executable::RVA);
     }
 
-    BYTE* getSecContent(SectionHdrWrapper *sec)
-    {
-        if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
-            return NULL; //not my section
-        }
-        const bufsize_t buf_size = sec->getContentSize(Executable::RAW, true);
-        if (!buf_size) return NULL;
-
-        offset_t start = sec->getContentOffset(Executable::RAW, true);
-        BYTE *ptr = this->getContentAt(start, buf_size);
-        return ptr;
-    }
 
     void setImageSize(size_t newSize)
     {
@@ -207,20 +243,7 @@ public:
     SectionHdrWrapper* getEntrySection()
     {
         offset_t ep = getEntryPoint(Executable::RVA);
-        return this->getSecHdrAtOffset(ep, Executable::RVA, true, false);
-    }
-
-    bool clearContent(SectionHdrWrapper *sec)
-    {
-        if (this->getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
-            return false; //not my section
-        }
-        BufferView *secView = this->_createSectionView(sec);
-        if (!secView) return false;
-
-        bool isOk = secView->fillContent(0);
-        delete secView;
-        return isOk;
+        return this->_getSecHdrAtOffset(ep, Executable::RVA, true, false);
     }
 
     bool dumpSection(SectionHdrWrapper *sec, QString fileName);
@@ -249,12 +272,43 @@ public:
     }
 
 protected:
+    void wrapCore();
+    
+    offset_t _secHdrsEndOffset()
+    {
+        const offset_t offset = secHdrsOffset();
+        if (offset == INVALID_ADDR) {
+            return INVALID_ADDR;
+        }
+        const offset_t secHdrSize = this->_getSectionsCount() * sizeof(IMAGE_SECTION_HEADER);
+        return offset + secHdrSize;
+    }
+    
+    offset_t _getLastMapped(Executable::addr_type aType);
+
+    size_t _getSectionsCount(bool useMapped = true) const;
+    
+    size_t _getSecIndex(SectionHdrWrapper *sec) const
+    {
+        return (sects) ?  sects->getSecIndex(sec) : SectHdrsWrapper::SECT_INVALID_INDEX;
+    }
+    
+    SectionHdrWrapper* _getSecHdr(size_t index) const
+    {
+        return (sects) ? sects->_getSecHdr(index) : NULL;
+    }
+
+    SectionHdrWrapper* _getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)
+    {
+        return (sects) ? sects->getSecHdrAtOffset(offset, aType, recalculate, verbose) : NULL;
+    }
+    
     BufferView* _createSectionView(SectionHdrWrapper *sec);
     size_t getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA);
 
     virtual void clearWrappers();
-    virtual void wrap(AbstractByteBuffer *v_buf);
 
+    void _init(AbstractByteBuffer *v_buf);
     void initDirEntries();
     PECore core;
     //---
@@ -270,7 +324,9 @@ protected:
 
     ResourcesAlbum *album;
     DataDirEntryWrapper* dataDirEntries[pe::DIR_ENTRIES_COUNT];
+    QMutex m_peMutex;
 
 friend class SectHdrsWrapper;
+friend class SectionHdrWrapper;
 };
 

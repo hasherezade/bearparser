@@ -58,6 +58,7 @@ Executable::exe_bits PECore::getHdrBitMode() const
 
 offset_t PECore::peSignatureOffset() const
 {
+    if (!dos) return INVALID_ADDR;
     return static_cast<offset_t> (dos->e_lfanew);
 }
 
