@@ -24,7 +24,7 @@ var searchData=
   ['isbyordinal_21',['isByOrdinal',['../class_delay_imp_func_wrapper.html#a3b4e8d96c151873ca97513c0165348b6',1,'DelayImpFuncWrapper::isByOrdinal()'],['../class_export_entry_wrapper.html#a994d8a16bcbd84a6991c1febe4e29c41',1,'ExportEntryWrapper::isByOrdinal()'],['../class_import_base_func_wrapper.html#ace0d20b46771cb1c8f978ebaf7a5106e',1,'ImportBaseFuncWrapper::isByOrdinal()'],['../class_imported_func_wrapper.html#a9188244dbc4ad0c1834bac394cf0d66d',1,'ImportedFuncWrapper::isByOrdinal()']]],
   ['isdir_22',['isDir',['../class_resource_entry_wrapper.html#a9624f3dc917bdc36fc2e10c45b139ce2',1,'ResourceEntryWrapper']]],
   ['ishexchar_23',['isHexChar',['../namespacepe__util.html#ad7a076665793ae6a73d7fb9243d4501e',1,'pe_util']]],
-  ['ismyentrytype_24',['isMyEntryType',['../class_exe_node_wrapper.html#a18ce067c9b583670403ed0abc2cbad2d',1,'ExeNodeWrapper::isMyEntryType()'],['../class_sect_hdrs_wrapper.html#a72bf5fb11581fdfc4c2653d2be7c3633',1,'SectHdrsWrapper::isMyEntryType()']]],
+  ['ismyentrytype_24',['isMyEntryType',['../class_exe_node_wrapper.html#a18ce067c9b583670403ed0abc2cbad2d',1,'ExeNodeWrapper']]],
   ['isnamevalid_25',['isNameValid',['../namespaceimports__util.html#a3a68efb57dab497843ba53f23161f9a3',1,'imports_util']]],
   ['isprintable_26',['isPrintable',['../namespacepe__util.html#aad5182df7cffa8c7cbcadcf71ff60a19',1,'pe_util']]],
   ['isrepro_27',['isRepro',['../class_debug_dir_wrapper.html#a6a8ae76c391c092a19a4ad29d2f150f4',1,'DebugDirWrapper']]],

@@ -65,10 +65,9 @@ var searchData=
   ['roundup_62',['roundup',['../namespacepe__util.html#a9dc8feee375f5c7288ea1221c3965dfb',1,'pe_util']]],
   ['rounduptounit_63',['roundupToUnit',['../namespacebuf__util.html#aad423cee9c4deed0062c92fe29744a0f',1,'buf_util']]],
   ['rptr_64',['RPTR',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730ac5b25da6e8976ca2aaee171fed01767c',1,'SectionHdrWrapper']]],
-  ['rsec_65',['rSec',['../class_sect_hdrs_wrapper.html#a2d5342b37467bf0afaa9bf780aa37490',1,'SectHdrsWrapper']]],
-  ['rsize_66',['RSIZE',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730a767d5726ed32bf524adcfba6f7c70f63',1,'SectionHdrWrapper']]],
-  ['rva_67',['RVA',['../class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5bab09fbc5c56c2c2f13f0318d67c72b8be',1,'Executable']]],
-  ['rvas_5fsizes_5fnum_68',['RVAS_SIZES_NUM',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013af33cf400e2fda16f6fc84c81a2ee516e',1,'OptHdrWrapper']]],
-  ['rvatoraw_69',['rvaToRaw',['../class_executable.html#a9d1979e57f2c6d4146e8ddf1892c6e99',1,'Executable::rvaToRaw()'],['../class_d_o_s_exe.html#a2b381dee76f31a58fb41c9b5e5293938',1,'DOSExe::rvaToRaw()'],['../class_p_e_file.html#a7fa60daf15123f14d1f7b199d19d1368',1,'PEFile::rvaToRaw()']]],
-  ['rvatova_70',['rvaToVa',['../class_executable.html#ae3a32e3cea7c9c5a9aa2e938fc1091b9',1,'Executable']]]
+  ['rsize_65',['RSIZE',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730a767d5726ed32bf524adcfba6f7c70f63',1,'SectionHdrWrapper']]],
+  ['rva_66',['RVA',['../class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5bab09fbc5c56c2c2f13f0318d67c72b8be',1,'Executable']]],
+  ['rvas_5fsizes_5fnum_67',['RVAS_SIZES_NUM',['../class_opt_hdr_wrapper.html#a50a0ba638e2810426b475714dc23b013af33cf400e2fda16f6fc84c81a2ee516e',1,'OptHdrWrapper']]],
+  ['rvatoraw_68',['rvaToRaw',['../class_executable.html#a9d1979e57f2c6d4146e8ddf1892c6e99',1,'Executable::rvaToRaw()'],['../class_d_o_s_exe.html#a2b381dee76f31a58fb41c9b5e5293938',1,'DOSExe::rvaToRaw()'],['../class_p_e_file.html#a7fa60daf15123f14d1f7b199d19d1368',1,'PEFile::rvaToRaw()']]],
+  ['rvatova_69',['rvaToVa',['../class_executable.html#ae3a32e3cea7c9c5a9aa2e938fc1091b9',1,'Executable']]]
 ];

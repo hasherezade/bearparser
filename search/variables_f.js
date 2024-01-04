@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vsec_0',['vSec',['../class_sect_hdrs_wrapper.html#a91315d8ffada0f94a9b095c1f1d12ee7',1,'SectHdrsWrapper']]]
+  ['wrappers_0',['wrappers',['../class_exe_wrappers_container.html#a1951bc11aa86eb00c6a3c9044a58655b',1,'ExeWrappersContainer::wrappers'],['../class_resources_container.html#a911552d5d31f91b24ec7803fa5b78107',1,'ResourcesContainer::wrappers']]]
 ];

@@ -26,5 +26,6 @@ var searchData=
   ['_7eresourcesalbum_23',['~ResourcesAlbum',['../class_resources_album.html#af88c04abba00c4f175a30c1933ebbba3',1,'ResourcesAlbum']]],
   ['_7eresourcescontainer_24',['~ResourcesContainer',['../class_resources_container.html#ae01366d04575355130b5d8559b9b81cf',1,'ResourcesContainer']]],
   ['_7esectionhdrwrapper_25',['~SectionHdrWrapper',['../class_section_hdr_wrapper.html#a2372633e3ffabdbacf13ebfeb93176cc',1,'SectionHdrWrapper']]],
-  ['_7esecuritydirwrapper_26',['~SecurityDirWrapper',['../class_security_dir_wrapper.html#a60e9cc0834f004caf71d8759f53290ce',1,'SecurityDirWrapper']]]
+  ['_7esecuritydirwrapper_26',['~SecurityDirWrapper',['../class_security_dir_wrapper.html#a60e9cc0834f004caf71d8759f53290ce',1,'SecurityDirWrapper']]],
+  ['_7ewatchedlocker_27',['~WatchedLocker',['../class_watched_locker.html#ae6a62172105f980f1f2706773eb5d459',1,'WatchedLocker']]]
 ];

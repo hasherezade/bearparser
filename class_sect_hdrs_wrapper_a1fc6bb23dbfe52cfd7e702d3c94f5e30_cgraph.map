@@ -1,0 +1,8 @@
+<map id="SectHdrsWrapper::getSecHdr" name="SectHdrsWrapper::getSecHdr">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,198,31"/>
+<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="493,5,600,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,16,478,16,478,21,198,21"/>
+<area shape="rect" id="Node000003" href="$class_sect_hdrs_wrapper.html#a1dab0aca36f57b33456321ad5e4df469" title=" " alt="" coords="246,31,445,56"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="198,26,230,29,230,34,198,31"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="445,28,478,24,478,29,446,34"/>
+</map>

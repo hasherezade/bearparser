@@ -1,0 +1,8 @@
+<map id="PEFile::_getSecHdrAtOffset" name="PEFile::_getSecHdrAtOffset">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,188,31"/>
+<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="476,5,583,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,13,236,12,428,12,461,12,461,18,428,17,236,17,188,18"/>
+<area shape="rect" id="Node000003" href="$class_sect_hdrs_wrapper.html#a67602090ef783553cfaee18f2eac6bdb" title=" " alt="" coords="236,26,428,67"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="188,26,220,30,220,36,187,32"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="428,30,460,25,461,30,429,35"/>
+</map>

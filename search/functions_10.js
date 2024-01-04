@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sechdrsendoffset_0',['secHdrsEndOffset',['../class_p_e_file.html#ab2bff011d7bf559482adc90a5e669911',1,'PEFile']]],
+  ['sechdrsendoffset_0',['secHdrsEndOffset',['../class_p_e_file.html#a12ec7a20c4fb428bbf169700c03c4cf9',1,'PEFile']]],
   ['sechdrsoffset_1',['secHdrsOffset',['../class_p_e_core.html#ac2d793b316b1ee2a64fa8ed606e028b8',1,'PECore::secHdrsOffset()'],['../class_p_e_file.html#a35ddafbeba19abd9fe72e18afad43f0b',1,'PEFile::secHdrsOffset()']]],
   ['secthdrswrapper_2',['SectHdrsWrapper',['../class_sect_hdrs_wrapper.html#a16122d83260892062668fdca12cdf296',1,'SectHdrsWrapper']]],
   ['sectionhdrwrapper_3',['SectionHdrWrapper',['../class_section_hdr_wrapper.html#a36e21a830a294c26c9d5a750fdf23d54',1,'SectionHdrWrapper::SectionHdrWrapper(PEFile *pe, size_t sectionNumber)'],['../class_section_hdr_wrapper.html#a6ea887e1a18e11f53812ebef79ad2133',1,'SectionHdrWrapper::SectionHdrWrapper(PEFile *pe, IMAGE_SECTION_HEADER *v_header)']]],

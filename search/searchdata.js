@@ -5,12 +5,12 @@ var indexSectionsWithContent =
   2: "bilpu",
   3: "abcdefilmoprstuw",
   4: "_abcdefghilmnoprstuvw~",
-  5: "abcdefilmnoprstvw",
+  5: "abcdefilmnoprstw",
   6: "bo",
   7: "adeflorstw",
   8: "abcdefghilmnoprstuvwz",
   9: "bdeilprs",
-  10: "bdfgilmtu"
+  10: "bdfgilmpstu"
 };
 
 var indexSectionNames =
