@@ -183,10 +183,24 @@ void PEFile::wrap()
 
 void PEFile::wrap(AbstractByteBuffer *v_buf)
 {
-    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
-    // rewrap the core:
-    core.wrap(v_buf);
-    this->sects->wrap();
+    { // scope0
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        // rewrap the core:
+        core.wrap(v_buf);
+        
+        for (int i = 0; i < WR_DIR_ENTRY; i++) {
+            this->wrappers[i]->wrap();
+        }
+    
+        this->sects->wrap();
+    }// !scope0
+    
+    // rewrap directories
+    for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
+        if (dataDirEntries[i]) {
+            dataDirEntries[i]->wrap();
+        }
+    }
     
     if (this->album) {
         this->album->wrapLeafsContent();
