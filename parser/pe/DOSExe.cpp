@@ -33,10 +33,10 @@ Executable* DOSExeBuilder::build(AbstractByteBuffer *buf)
 DOSExe::DOSExe(AbstractByteBuffer *v_buf)
     : MappedExe(v_buf, Executable::BITS_16), dosHdrWrapper(NULL)
 {
-    wrap(buf);
+    wrap();
 }
 
-void DOSExe::wrap(AbstractByteBuffer *v_buf)
+void DOSExe::wrap()
 {
     this->dosHdrWrapper = new DosHdrWrapper(this);
 

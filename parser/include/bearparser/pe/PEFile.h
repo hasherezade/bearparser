@@ -61,11 +61,9 @@ public:
 
     PEFile(AbstractByteBuffer *v_buf);
     virtual ~PEFile() { clearWrappers(); delete album; }
-    //---
-    // inherited from Executable:
-    //
-    virtual void wrap();
-
+    
+    virtual void wrap(); // inherited from Executable
+    
     virtual bufsize_t getMappedSize(Executable::addr_type aType);
     virtual bufsize_t getAlignment(Executable::addr_type aType) const { return core.getAlignment(aType); }
     virtual offset_t getImageBase(bool recalculate = false) { return core.getImageBase(recalculate); }
@@ -274,7 +272,8 @@ public:
     }
 
 protected:
-
+    void wrapCore();
+    
     offset_t _secHdrsEndOffset()
     {
         const offset_t offset = secHdrsOffset();
@@ -308,8 +307,7 @@ protected:
     size_t getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA);
 
     virtual void clearWrappers();
-    virtual void wrap(AbstractByteBuffer *v_buf);
-    
+
     void _init(AbstractByteBuffer *v_buf);
     void initDirEntries();
     PECore core;

@@ -103,7 +103,8 @@ long PEFile::computeChecksum(BYTE* buffer, size_t bufferSize, offset_t checksumO
 ///---
 
 PEFile::PEFile(AbstractByteBuffer *v_buf)
-    : MappedExe(v_buf, Executable::BITS_32), dosHdrWrapper(NULL), fHdr(NULL), optHdr(NULL), sects(NULL),
+    : MappedExe(v_buf, Executable::BITS_32), 
+    dosHdrWrapper(NULL), fHdr(NULL), optHdr(NULL), sects(NULL),
     album(NULL)
 {
     clearWrappers();
@@ -176,24 +177,22 @@ void PEFile::initDirEntries()
     }
 }
 
-void PEFile::wrap()
+void PEFile::wrapCore()
 {
-    PEFile::wrap(this->buf);
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+    // rewrap the core:
+    core.wrap(this->buf);
+    // rewrap the PE headers:
+    for (int i = 0; i < WR_DIR_ENTRY; i++) {
+        this->wrappers[i]->wrap();
+    }
+    // rewrap the sections:
+    this->sects->wrap();
 }
 
-void PEFile::wrap(AbstractByteBuffer *v_buf)
+void PEFile::wrap()
 {
-    { // scope0
-        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
-        // rewrap the core:
-        core.wrap(v_buf);
-        
-        for (int i = 0; i < WR_DIR_ENTRY; i++) {
-            this->wrappers[i]->wrap();
-        }
-    
-        this->sects->wrap();
-    }// !scope0
+    wrapCore();
     
     // rewrap directories
     for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
@@ -201,7 +200,7 @@ void PEFile::wrap(AbstractByteBuffer *v_buf)
             dataDirEntries[i]->wrap();
         }
     }
-    
+    // rewrap resources
     if (this->album) {
         this->album->wrapLeafsContent();
     }
