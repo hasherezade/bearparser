@@ -12,7 +12,7 @@ var searchData=
   ['reloc_5fnum_9',['RELOC_NUM',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730ae5de568545f864bc9fb1f1be9f5b69ce',1,'SectionHdrWrapper']]],
   ['reloc_5fptr_10',['RELOC_PTR',['../class_section_hdr_wrapper.html#a5ab13065e15d8a0a487ba80544deb730a301b90a5d811d3e7cd8f69ecc2451ff3',1,'SectionHdrWrapper']]],
   ['relocblockfid_11',['RelocBlockFID',['../class_reloc_block_wrapper.html#ab1fae7ba4a5ef07ccdd5f495e216ab03',1,'RelocBlockWrapper']]],
-  ['relocblockwrapper_12',['RelocBlockWrapper',['../class_reloc_block_wrapper.html',1,'RelocBlockWrapper'],['../class_reloc_dir_wrapper.html#a34f3d7dd0d1515c570621828bd1d7b7a',1,'RelocDirWrapper::RelocBlockWrapper'],['../class_reloc_block_wrapper.html#a6dfd0ada972f9de522390a454c14d121',1,'RelocBlockWrapper::RelocBlockWrapper()']]],
+  ['relocblockwrapper_12',['RelocBlockWrapper',['../class_reloc_block_wrapper.html',1,'RelocBlockWrapper'],['../class_reloc_dir_wrapper.html#a34f3d7dd0d1515c570621828bd1d7b7a',1,'RelocDirWrapper::RelocBlockWrapper'],['../class_reloc_block_wrapper.html#a44e634f97c55572ae56f14a19d8410f7',1,'RelocBlockWrapper::RelocBlockWrapper()']]],
   ['relocdirwrapper_13',['RelocDirWrapper',['../class_reloc_dir_wrapper.html',1,'RelocDirWrapper'],['../class_reloc_dir_wrapper.html#a890a07b3d56bc36a526c1b5a73e2073c',1,'RelocDirWrapper::RelocDirWrapper()']]],
   ['relocdirwrapper_2ecpp_14',['RelocDirWrapper.cpp',['../_reloc_dir_wrapper_8cpp.html',1,'']]],
   ['relocdirwrapper_2eh_15',['RelocDirWrapper.h',['../_reloc_dir_wrapper_8h.html',1,'']]],
