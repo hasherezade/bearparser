@@ -46,10 +46,9 @@ bool RelocDirWrapper::wrap()
         RelocBlockWrapper* entry = new RelocBlockWrapper(this->m_Exe, this, entryId++);
         if (!entry) break;
         
-        bool isOk = false;
-        const bufsize_t val = (bufsize_t) entry->getNumValue(RelocBlockWrapper::BLOCK_SIZE, &isOk);
-        
-        if (!entry->getPtr() || !val || !isOk) {
+        bool isOk1 = false;
+        const bufsize_t blockSize = (bufsize_t) entry->getNumValue(RelocBlockWrapper::BLOCK_SIZE, &isOk1);
+        if (!isOk1 || !blockSize || !entry->getPtr()) {
             delete entry;
             break;
         }
@@ -62,13 +61,12 @@ bool RelocDirWrapper::wrap()
             if (invalidSeries >= INVALID_SERIES_LIMIT) break;
             if (invalidEntries >= INVALID_ENTRIES_LIMIT) break;
         }
-        this->parsedSize += val;
+        this->parsedSize += blockSize;
         this->entries.push_back(entry);
 
     }
     return true;
 }
-
 
 IMAGE_BASE_RELOCATION* RelocDirWrapper::reloc()
 {
@@ -92,8 +90,8 @@ bool RelocBlockWrapper::wrap()
     IMAGE_BASE_RELOCATION* reloc = myReloc();
     if (!reloc) return false;
     
-    const size_t INVALID_SERIES_LIMIT = 10;
-    const size_t INVALID_ENTRIES_LIMIT = 100;
+    const size_t INVALID_SERIES_LIMIT = 100;
+    const size_t INVALID_ENTRIES_LIMIT = 1000;
     size_t maxSize = reloc->SizeOfBlock;
     parsedSize = sizeof(IMAGE_BASE_RELOCATION); // the block begins with IMAGE_BASE_RELOCATION record
     size_t entryId = 0;
@@ -119,6 +117,21 @@ bool RelocBlockWrapper::wrap()
     return true;
 }
 
+bool RelocBlockWrapper::isValid()
+{
+    if (this->invalidEntries > 0) return false;
+
+    if (!parentDir) return false;
+    PEFile *m_PE = parentDir->m_PE;
+    if (!m_PE) return false;
+
+    bool isOk = false;
+    const offset_t pageRva = this->getNumValue(RelocBlockWrapper::PAGE_VA, &isOk);
+    if (!isOk) return false;
+
+    const bool isValidRVA = (pageRva < m_PE->getImageSize()) ? true : false;
+    return isValidRVA;
+}
 
 void* RelocBlockWrapper::getPtr()
 {
@@ -277,7 +290,7 @@ bool RelocEntryWrapper::isValid()
     if (!isOk) return false;
     
     WORD relocType = RelocEntryWrapper::getType(val);
-    if (relocType != 0 && relocType != 3 && relocType != 10) {
+    if (relocType != 3 && relocType != 10) {
         return false;
     }
     return true;

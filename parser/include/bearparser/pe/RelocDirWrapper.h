@@ -61,8 +61,7 @@ public:
     }
 
     bool wrap();
-
-    virtual bool isValid() { return (this->invalidEntries > 0) ? false : true; }
+    virtual bool isValid();
     
     // full structure boundaries
     virtual void* getPtr();
