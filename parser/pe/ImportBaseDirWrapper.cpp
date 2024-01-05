@@ -137,6 +137,7 @@ bool ImportBaseDirWrapper::wrap()
         }
         else {
             invalidSeries++;
+            this->invalidEntries++;
             if (invalidSeries >= INVALID_LIMIT) break;
         }
     }
@@ -145,13 +146,23 @@ bool ImportBaseDirWrapper::wrap()
     return (oldCount != this->importsCount); //has count changed
 }
 
+bool ImportBaseDirWrapper::isValid()
+{
+    if (this->invalidEntries > 0) return false;
+        
+    const QList<offset_t> thunks = getThunksList();
+    if (!thunks.size()) return false;
+    return true;
+}
+
 //--------------------------------------------------------------------------------------------------------------
 
 bool ImportBaseEntryWrapper::isValid()
 {
+    if (this->invalidEntries > 0) return false;
     char *libName = this->getLibraryName();
-    bool isValid = imports_util::isNameValid(m_Exe, libName);
-    return isValid;
+    if (!imports_util::isNameValid(m_Exe, libName)) return false;
+    return true;
 }
 
 bool ImportBaseEntryWrapper::wrap()
@@ -181,6 +192,7 @@ bool ImportBaseEntryWrapper::wrap()
         }
         else {
             invalidSeries++;
+            this->invalidEntries++;
             if (invalidSeries >= INVALID_LIMIT) break;
         }
     }
@@ -230,3 +242,17 @@ QString ImportBaseFuncWrapper::getName()
     return "[" + QString(libName) + "]." + functionName;
 }
 
+bool ImportBaseFuncWrapper::isValid()
+{
+    ImportBaseEntryWrapper *p = dynamic_cast<ImportBaseEntryWrapper*>(this->getParentNode());
+    if (!p) return false;
+
+    char *libName = p->getLibraryName();
+    if (!imports_util::isNameValid(m_Exe, libName)) return false;
+    
+    if (!isByOrdinal()) {
+        char *fName = this->getFunctionName();
+        if (!imports_util::isNameValid(m_Exe, libName)) return false;
+    }
+    return true;
+}

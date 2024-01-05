@@ -18,6 +18,8 @@ public:
     static bufsize_t thunkSize(Executable::exe_bits bits);
 
     virtual bool wrap();
+    virtual bool isValid();
+
     virtual void clearMapping();
     virtual void reloadMapping();
     virtual size_t getFieldsCount() { return this->importsCount; }
@@ -41,7 +43,10 @@ public:
 
 protected:
     ImportBaseDirWrapper(PEFile *pe, pe:: dir_entry v_entryType)
-        : DataDirEntryWrapper(pe, v_entryType), importsCount(0) { }
+        : DataDirEntryWrapper(pe, v_entryType),
+        importsCount(0), invalidEntries(0)
+    {
+    }
 
     //virtual bool loadNextEntry(size_t entryNum) = 0;
 
@@ -52,6 +57,7 @@ protected:
     QList<offset_t> thunksList;
 
     size_t importsCount;
+    size_t invalidEntries;
 
 friend class ImportBaseEntryWrapper;
 };
@@ -69,12 +75,17 @@ public:
 
 protected:
     ImportBaseEntryWrapper(PEFile *pe, ImportBaseDirWrapper *importsDir, size_t entryNumber)
-        : PENodeWrapper(pe, importsDir, entryNumber), impDir(importsDir) { }//wrap(); }
+        : PENodeWrapper(pe, importsDir, entryNumber),
+        impDir(importsDir), invalidEntries(0)
+    {
+    }
 
     void addMapping(ExeNodeWrapper *func) { if (impDir) impDir->addMapping(func); }
 
     std::map<offset_t, size_t> thunkToFuncMap;
     ImportBaseDirWrapper* impDir;
+    
+    size_t invalidEntries;
 
 friend class ImportBaseDirWrapper;
 };
@@ -88,6 +99,8 @@ public:
     virtual QString getName();
     QString getShortName();
     QString getLibName();
+    
+    virtual bool isValid();
 
     virtual bool isByOrdinal() = 0;
     virtual uint64_t getOrdinal() = 0;
