@@ -34,9 +34,14 @@ enum reloc_based {
 bool RelocDirWrapper::wrap()
 {
     clear();
-    parsedSize = 0;
+    this->parsedSize = 0;
+    this->invalidEntries = 0;
+    
+    const size_t INVALID_SERIES_LIMIT = 10;
+    const size_t INVALID_ENTRIES_LIMIT = 20;
     bufsize_t maxSize = getDirEntrySize(true);
     size_t entryId = 0;
+    size_t invalidSeries = 0;
     while (parsedSize < maxSize) {
         RelocBlockWrapper* entry = new RelocBlockWrapper(this->m_Exe, this, entryId++);
         if (!entry) break;
@@ -47,6 +52,15 @@ bool RelocDirWrapper::wrap()
         if (!entry->getPtr() || !val || !isOk) {
             delete entry;
             break;
+        }
+        if (entry->isValid()) {
+            invalidSeries = 0;
+        }
+        else {
+            invalidSeries++;
+            this->invalidEntries++;
+            if (invalidSeries >= INVALID_SERIES_LIMIT) break;
+            if (invalidEntries >= INVALID_ENTRIES_LIMIT) break;
         }
         this->parsedSize += val;
         this->entries.push_back(entry);
@@ -72,21 +86,32 @@ IMAGE_BASE_RELOCATION* RelocDirWrapper::reloc()
 bool RelocBlockWrapper::wrap()
 {
     clear();
-    parsedSize = 0;
-
+    this->parsedSize = 0;
+    this->invalidEntries = 0;
+    
     IMAGE_BASE_RELOCATION* reloc = myReloc();
     if (!reloc) return false;
-
+    
+    const size_t INVALID_SERIES_LIMIT = 10;
+    const size_t INVALID_ENTRIES_LIMIT = 100;
     size_t maxSize = reloc->SizeOfBlock;
     parsedSize = sizeof(IMAGE_BASE_RELOCATION); // the block begins with IMAGE_BASE_RELOCATION record
     size_t entryId = 0;
-
+    size_t invalidSeries = 0;
     while (parsedSize < maxSize) {
         RelocEntryWrapper* entry = new RelocEntryWrapper(this->m_Exe, this, entryId++);
-
         if (!entry->getPtr()) {
             delete entry;
             break;
+        }
+        if (entry->isValid()) {
+            invalidSeries = 0;
+        }
+        else {
+            invalidSeries++;
+            this->invalidEntries++;
+            if (invalidSeries >= INVALID_SERIES_LIMIT) break;
+            if (invalidEntries >= INVALID_ENTRIES_LIMIT) break;
         }
         this->parsedSize += sizeof(pe::BASE_RELOCATION_ENTRY);
         this->entries.push_back(entry);
@@ -243,6 +268,20 @@ size_t RelocBlockWrapper::maxEntriesNumInBlock()
     return entriesNum;
 }
 //-------------------------------------------------------------------------------------------------
+bool RelocEntryWrapper::isValid()
+{
+    if (!getPtr()) return false;
+    
+    bool isOk = false;
+    uint64_t val = this->getNumValue(RelocEntryWrapper::RELOC_ENTRY_VAL, &isOk);
+    if (!isOk) return false;
+    
+    WORD relocType = RelocEntryWrapper::getType(val);
+    if (relocType != 0 && relocType != 3 && relocType != 10) {
+        return false;
+    }
+    return true;
+}
 
 void* RelocEntryWrapper::getPtr()
 {
@@ -276,9 +315,9 @@ WORD RelocEntryWrapper::getDelta(WORD relocEntryVal)
     return entry->Offset;
 }
 
-QString RelocEntryWrapper::translateType(WORD type)
+QString RelocEntryWrapper::translateType(WORD relocType)
 {
-    switch (type) {
+    switch (relocType) {
         case 0 : return "Padding (skipped)";
         case 1 : return "High WORD of 32-bit field";
         case 2 : return "Low  WORD of 32-bit field";
