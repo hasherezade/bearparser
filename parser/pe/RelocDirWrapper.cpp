@@ -102,7 +102,7 @@ bool RelocBlockWrapper::wrap()
             delete entry;
             break;
         }
-        if (entry->isValid()) {
+        if (entry->isValid() && !entry->isEmpty()) {
             invalidSeries = 0;
         }
         else {
@@ -290,10 +290,27 @@ bool RelocEntryWrapper::isValid()
     if (!isOk) return false;
     
     WORD relocType = RelocEntryWrapper::getType(val);
-    if (relocType != 3 && relocType != 10) {
+    if (relocType != 0 && relocType != 3 && relocType != 10) {
         return false;
     }
     return true;
+}
+
+bool RelocEntryWrapper::isEmpty()
+{
+    if (!getPtr()) return true;
+    
+    bool isOk = false;
+    uint64_t val = this->getNumValue(RelocEntryWrapper::RELOC_ENTRY_VAL, &isOk);
+    if (!isOk) return true;
+    
+    if (val == 0) return true;
+    
+    WORD relocType = RelocEntryWrapper::getType(val);
+    if (relocType == 0) {
+        return true;
+    }
+    return false;
 }
 
 void* RelocEntryWrapper::getPtr()

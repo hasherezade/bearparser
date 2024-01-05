@@ -105,6 +105,7 @@ public:
         : ExeNodeWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
     virtual bool isValid();
+    bool isEmpty();
     
     // full structure boundaries
     virtual void* getPtr();
