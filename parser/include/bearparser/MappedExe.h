@@ -53,5 +53,4 @@ protected:
         : Executable(v_buf, v_bitMode), ExeWrappersContainer() { }
 
     virtual ~MappedExe(void) { }
-
 };

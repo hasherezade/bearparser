@@ -135,6 +135,14 @@ public:
     }
     
     // mutex protected
+    SectionHdrWrapper* getEntrySection()
+    {
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        offset_t ep = getEntryPoint(Executable::RVA);
+        return this->_getSecHdrAtOffset(ep, Executable::RVA, true, false);
+    }
+    
+    // mutex protected
     BYTE* getSecContent(SectionHdrWrapper *sec)
     {
         WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
@@ -148,6 +156,11 @@ public:
         BYTE *ptr = this->getContentAt(start, buf_size);
         return ptr;
     }
+    
+    // mutex protected
+    BufferView* createSectionView(size_t secNum);
+    //---
+    
     // mutex protected
     bool clearContent(SectionHdrWrapper *sec)
     {
@@ -163,11 +176,35 @@ public:
         return isOk;
     }
     
+    // mutex protected
     offset_t secHdrsEndOffset()
     {
         WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
         return _secHdrsEndOffset();
     }
+    
+    // mutex protected
+    SectionHdrWrapper* getLastSection()
+    {
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return this->_getLastSection();
+    }
+
+    // mutex protected
+    bool canAddNewSection()
+    {
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return this->_canAddNewSection();
+    }
+    
+    // mutex protected
+    SectionHdrWrapper* addNewSection(QString name, bufsize_t size, bufsize_t v_size=0);
+    
+    // NOT mutex protected
+    SectionHdrWrapper* extendLastSection(bufsize_t addedSize);
+    
+    // mutex protected
+    bool dumpSection(SectionHdrWrapper *sec, QString fileName);
     
 /* resource operations */
 
@@ -178,16 +215,10 @@ public:
 
     DataDirEntryWrapper* getDataDirEntry(pe::dir_entry eType);
 
-    BufferView* createSectionView(size_t secNum);
-    //---
     //modifications:
     bool setEntryPoint(offset_t entry, Executable::addr_type aType);
     bool moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addType = Executable::RAW); //throws CustomException
 
-    SectionHdrWrapper* getLastSection();
-    bool canAddNewSection();
-    SectionHdrWrapper* addNewSection(QString name, bufsize_t size, bufsize_t v_size=0);
-    SectionHdrWrapper* extendLastSection(bufsize_t addedSize);
     bool unbindImports();
 
     /* wrappers for fetching commonly used directories */
@@ -240,14 +271,6 @@ public:
         this->setVirtualSize(newSize);
     }
 
-    SectionHdrWrapper* getEntrySection()
-    {
-        offset_t ep = getEntryPoint(Executable::RVA);
-        return this->_getSecHdrAtOffset(ep, Executable::RVA, true, false);
-    }
-
-    bool dumpSection(SectionHdrWrapper *sec, QString fileName);
-
     bool canResize(bufsize_t newSize)
     {
         bufsize_t currentSize = (bufsize_t)this->getRawSize();
@@ -274,6 +297,9 @@ public:
 protected:
     void wrapCore();
     
+    SectionHdrWrapper* _getLastSection();
+    bool _canAddNewSection();
+
     offset_t _secHdrsEndOffset()
     {
         const offset_t offset = secHdrsOffset();
@@ -304,18 +330,20 @@ protected:
     }
     
     BufferView* _createSectionView(SectionHdrWrapper *sec);
+    
     size_t getExportsMap(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA);
 
     virtual void clearWrappers();
 
     void _init(AbstractByteBuffer *v_buf);
     void initDirEntries();
-    PECore core;
+
     //---
     //modifications:
     bool setHdrSectionsNum(size_t newNum);
     bool setVirtualSize(bufsize_t newSize);
-
+    
+    PECore core;
     DosHdrWrapper *dosHdrWrapper;
 
     FileHdrWrapper *fHdr;

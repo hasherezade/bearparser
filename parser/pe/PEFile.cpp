@@ -440,7 +440,7 @@ BufferView* PEFile::createSectionView(size_t secId)
 {
     WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
     SectionHdrWrapper *sec = this->_getSecHdr(secId);
-    if (sec == NULL) {
+    if (!sec) {
         Logger::append(Logger::D_WARNING, "No such section");
         return NULL;
     }
@@ -482,73 +482,86 @@ bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::
     return true;
 }
 
-bool PEFile::canAddNewSection()
+bool PEFile::_canAddNewSection()
 {
     ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
     if (sec == NULL || sec->canAddEntry() == false) {
         return false;
     }
     const size_t secCount = hdrSectionsNum();
-    if (secCount == SectHdrsWrapper::SECT_COUNT_MAX) return false; //limit exceeded
-
+    if (secCount == SectHdrsWrapper::SECT_COUNT_MAX) {
+        return false; //limit exceeded
+    }
     //TODO: some more checks? overlay?
     return true;
 }
 
-
-SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t size, bufsize_t v_size)
+SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t r_size, bufsize_t v_size)
 {
-    if (canAddNewSection() == false) return NULL;
-
-    ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
-    if (!v_size) v_size = size;
-
-    bufsize_t roundedRawEnd = buf_util::roundupToUnit(getMappedSize(Executable::RAW), getAlignment(Executable::RAW));
-    bufsize_t roundedVirtualEnd = buf_util::roundupToUnit(getMappedSize(Executable::RVA), getAlignment(Executable::RVA));
-    bufsize_t newSize = roundedRawEnd + size;
-    bufsize_t newVirtualSize = roundedVirtualEnd + v_size;
-
-    if (setVirtualSize(newVirtualSize) == false) {
-        Logger::append(Logger::D_ERROR, "Failed to change virtual size");
-        return NULL;
-    }
-
+    if (!r_size && !v_size) return nullptr; //nothing to add
+    
+    bufsize_t newSize = 0;
+    bufsize_t roundedRawEnd = 0;
+    bufsize_t roundedVirtualEnd = 0;
+    SectionHdrWrapper* secHdrWr = nullptr;
+    { //scope0
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        if (!_canAddNewSection()) {
+            return nullptr;
+        }
+        ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
+        if (!v_size) {
+            v_size = r_size;
+        }
+        roundedRawEnd = buf_util::roundupToUnit(getMappedSize(Executable::RAW), getAlignment(Executable::RAW));
+        roundedVirtualEnd = buf_util::roundupToUnit(getMappedSize(Executable::RVA), getAlignment(Executable::RVA));
+        newSize = roundedRawEnd + r_size;
+        const bufsize_t newVirtualSize = roundedVirtualEnd + v_size;
+        if (setVirtualSize(newVirtualSize) == false) {
+            Logger::append(Logger::D_ERROR, "Failed to change virtual size to: %X", newVirtualSize);
+            return nullptr;
+        }
+    } //scope0
+    
+    // the PE file is resized and rewrapped:
     if (resize(newSize) == false) {
         Logger::append(Logger::D_ERROR, "Failed to resize");
-        return NULL;
+        return nullptr;
     }
-    // fetch again after resize:
-    sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
-    if (sec == NULL) {
-        return NULL;
-    }
+    
+    { //scope1
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        // fetch again after resize:
+        ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
+        if (!sec) {
+            return nullptr;
+        }
 
-    IMAGE_SECTION_HEADER secHdr;
-    ::memset(&secHdr, 0, sizeof(IMAGE_SECTION_HEADER));
+        IMAGE_SECTION_HEADER secHdr;
+        ::memset(&secHdr, 0, sizeof(IMAGE_SECTION_HEADER));
 
-    //name copy:
-    const size_t nameLen = name.length();
-    const size_t bufSize = sizeof(secHdr.Name);
-    const size_t copySize = (nameLen < bufSize) ? nameLen : bufSize;
-    if (copySize) {
-        ::memcpy(secHdr.Name, name.toStdString().c_str(), copySize);
-    }
+        //name copy:
+        const size_t nameLen = name.length();
+        const size_t bufSize = sizeof(secHdr.Name);
+        const size_t copySize = (nameLen < bufSize) ? nameLen : bufSize;
+        if (copySize) {
+            ::memcpy(secHdr.Name, name.toStdString().c_str(), copySize);
+        }
+        secHdr.PointerToRawData = static_cast<DWORD>(roundedRawEnd);
+        secHdr.VirtualAddress = static_cast<DWORD>(roundedVirtualEnd);
+        secHdr.SizeOfRawData = r_size;
+        secHdr.Misc.VirtualSize = v_size;
 
-    secHdr.PointerToRawData = static_cast<DWORD>(roundedRawEnd);
-    secHdr.VirtualAddress = static_cast<DWORD>(roundedVirtualEnd);
-    secHdr.SizeOfRawData = size;
-    secHdr.Misc.VirtualSize = v_size;
-
-    SectionHdrWrapper wr(this, &secHdr);
-    SectionHdrWrapper* secHdrWr = dynamic_cast<SectionHdrWrapper*>(sec->addEntry(&wr));
+        SectionHdrWrapper wr(this, &secHdr);
+        secHdrWr = dynamic_cast<SectionHdrWrapper*>(sec->addEntry(&wr));
+    } //!scope1
     return secHdrWr;
 }
 
-SectionHdrWrapper* PEFile::getLastSection()
+SectionHdrWrapper* PEFile::_getLastSection()
 {
     size_t secCount = this->_getSectionsCount(true);
-    if (secCount == 0) return NULL;
-    return this->_getSecHdr(secCount - 1);
+    return (secCount > 0) ? this->_getSecHdr(secCount - 1) : nullptr;
 }
 
 offset_t PEFile::_getLastMapped(Executable::addr_type aType)
@@ -597,38 +610,58 @@ offset_t PEFile::_getLastMapped(Executable::addr_type aType)
 
 SectionHdrWrapper* PEFile::extendLastSection(bufsize_t addedSize)
 {
-    SectionHdrWrapper* secHdr = getLastSection();
-    if (secHdr == NULL) return NULL;
+    bufsize_t newSize = 0;
+    
+    { //scope0
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        SectionHdrWrapper* secHdr = _getLastSection();
+        if (!secHdr) return nullptr;
 
-    //TODO: check overlay...
-    bufsize_t fullSize = getContentSize();
-    bufsize_t newSize = fullSize + addedSize;
+        //TODO: check overlay...
+        const bufsize_t fullSize = getContentSize();
+        newSize = fullSize + addedSize;
 
-    offset_t secROffset = secHdr->getContentOffset(Executable::RAW, false);
-    if (secROffset == INVALID_ADDR) {
-        return NULL;
-    }
-    const bufsize_t secNewRSize = newSize - secROffset; //include overlay in section
+        const offset_t secROffset = secHdr->getContentOffset(Executable::RAW, false);
+        if (secROffset == INVALID_ADDR) {
+            return NULL;
+        }
+        const bufsize_t secNewRSize = newSize - secROffset; //include overlay in section
+        secHdr->setNumValue(SectionHdrWrapper::RSIZE, uint64_t(secNewRSize));
+        
+        const offset_t secVOffset = secHdr->getContentOffset(Executable::RVA, false);
+        const bufsize_t secVSize = secHdr->getContentSize(Executable::RVA, false);
 
-    secHdr->setNumValue(SectionHdrWrapper::RSIZE, uint64_t(secNewRSize));
+        // if the previous virtual size is smaller than the new raw size, then update it:
+        if (secVSize < secNewRSize) {
+            secHdr->setNumValue(SectionHdrWrapper::VSIZE, uint64_t(secNewRSize));
 
-    const offset_t secVOffset = secHdr->getContentOffset(Executable::RVA, false);
-    const bufsize_t secVSize = secHdr->getContentSize(Executable::RVA, false);
+            // if the virtual size of section has changed,
+            // update the Size of Image (saved in the header):
+            bufsize_t newVSize = secVOffset + secNewRSize;
+            this->setVirtualSize(newVSize);
+        }
 
-    // if the previous virtual size is smaller than the new raw size, then update it:
-    if (secVSize < secNewRSize) {
-        secHdr->setNumValue(SectionHdrWrapper::VSIZE, uint64_t(secNewRSize));
-
-        // if the virtual size of section has changed,
-        // update the Size of Image (saved in the header):
-        bufsize_t newVSize = secVOffset + secNewRSize;
-        this->setVirtualSize(newVSize);
-    }
-
+    } //!scope0
+    
     //update raw size:
     this->resize(newSize);
     //finally, retrieve the resized section:
     return getLastSection();
+}
+
+bool PEFile::dumpSection(SectionHdrWrapper *sec, QString fileName)
+{
+    WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+    if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
+        return false; //not my section
+    }
+    BufferView *secView = this->_createSectionView(sec);
+    if (!secView) return false;
+
+    bufsize_t dumpedSize = FileBuffer::dump(fileName, *secView, false);
+    delete secView;
+
+    return dumpedSize ? true : false;
 }
 
 bool PEFile::unbindImports()
@@ -648,20 +681,6 @@ bool PEFile::unbindImports()
     bool isOk = bImp->wrap();
     //TODO: change timestamp for all library entries from (-1 : BOUND) to 0 : NOT BOUND
     return isOk;
-}
-
-bool PEFile::dumpSection(SectionHdrWrapper *sec, QString fileName)
-{
-    if (this->_getSecIndex(sec) == SectHdrsWrapper::SECT_INVALID_INDEX) {
-        return false; //not my section
-    }
-    BufferView *secView = this->_createSectionView(sec);
-    if (!secView) return false;
-
-    bufsize_t dumpedSize = FileBuffer::dump(fileName, *secView, false);
-    delete secView;
-
-    return dumpedSize ? true : false;
 }
 
 //protected:
