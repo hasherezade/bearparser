@@ -119,7 +119,8 @@ bool ImportBaseDirWrapper::wrap()
 
     size_t oldCount = this->importsCount;
     this->importsCount = 0;
-
+    this->invalidEntries = 0;
+    
     if (!getDataDirectory()) {
         return (oldCount != this->importsCount); //has count changed
     }
@@ -170,6 +171,8 @@ bool ImportBaseEntryWrapper::wrap()
     clear();
     thunkToFuncMap.clear();
 
+    this->invalidEntries = 0;
+    
     const size_t LIMIT = (-1);
     const size_t INVALID_LIMIT = 100;
     if (!isValid()) {
@@ -182,7 +185,6 @@ bool ImportBaseEntryWrapper::wrap()
 
     size_t cntr = 0;
     size_t invalidSeries = 0;
-    
     for (cntr = 0; cntr < LIMIT; cntr++) {
         if (loadNextEntry(cntr) == false) break;
         ExeNodeWrapper* entry = this->entries.at(cntr);
