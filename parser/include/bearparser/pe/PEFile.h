@@ -200,7 +200,7 @@ public:
     // mutex protected
     SectionHdrWrapper* addNewSection(QString name, bufsize_t size, bufsize_t v_size=0);
     
-    // NOT mutex protected
+    // mutex protected
     SectionHdrWrapper* extendLastSection(bufsize_t addedSize);
     
     // mutex protected
