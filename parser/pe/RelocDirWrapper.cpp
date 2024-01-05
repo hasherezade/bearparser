@@ -96,13 +96,14 @@ bool RelocBlockWrapper::wrap()
     parsedSize = sizeof(IMAGE_BASE_RELOCATION); // the block begins with IMAGE_BASE_RELOCATION record
     size_t entryId = 0;
     size_t invalidSeries = 0;
+    size_t emptySeries = 0;
     while (parsedSize < maxSize) {
         RelocEntryWrapper* entry = new RelocEntryWrapper(this->m_Exe, this, entryId++);
         if (!entry->getPtr()) {
             delete entry;
             break;
         }
-        if (entry->isValid() && !entry->isEmpty()) {
+        if (entry->isValid()) {
             invalidSeries = 0;
         }
         else {
@@ -110,6 +111,15 @@ bool RelocBlockWrapper::wrap()
             this->invalidEntries++;
             if (invalidSeries >= INVALID_SERIES_LIMIT) break;
             if (invalidEntries >= INVALID_ENTRIES_LIMIT) break;
+        }
+        if (!entry->isEmpty()) {
+            emptySeries = 0;
+        } else {
+            emptySeries++;
+            if (emptySeries >= INVALID_SERIES_LIMIT) {
+                this->invalidEntries++;
+                break;
+            }
         }
         this->parsedSize += sizeof(pe::BASE_RELOCATION_ENTRY);
         this->entries.push_back(entry);
