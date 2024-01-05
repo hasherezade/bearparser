@@ -200,11 +200,17 @@ public:
     // mutex protected
     SectionHdrWrapper* addNewSection(QString name, bufsize_t size, bufsize_t v_size=0);
     
-    // NOT mutex protected
+    // mutex protected
     SectionHdrWrapper* extendLastSection(bufsize_t addedSize);
     
     // mutex protected
     bool dumpSection(SectionHdrWrapper *sec, QString fileName);
+    
+    ExeElementWrapper* getWrapperContaining(offset_t rawOffset, size_t rawSize = 1)
+    {
+        WatchedLocker lock(&m_peMutex, PE_SHOW_LOCK, __FUNCTION__);
+        return _getWrapperContaining(rawOffset, rawSize);
+    }
     
 /* resource operations */
 
@@ -324,9 +330,26 @@ protected:
         return (sects) ? sects->_getSecHdr(index) : NULL;
     }
 
-    SectionHdrWrapper* _getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false)
+    SectionHdrWrapper* _getSecHdrAtOffset(offset_t offset, Executable::addr_type aType, bool recalculate = false, bool verbose = false) const
     {
         return (sects) ? sects->getSecHdrAtOffset(offset, aType, recalculate, verbose) : NULL;
+    }
+    
+    ExeElementWrapper* _getWrapperContaining(offset_t rawOffset, size_t rawSize = 1)
+    {
+        if (dosHdrWrapper && dosHdrWrapper->containsBlock(rawOffset, rawSize)) {
+            return dosHdrWrapper;
+        }
+        if (fHdr && fHdr->containsBlock(rawOffset, rawSize)) {
+            return fHdr;
+        }
+        if (optHdr && optHdr->containsBlock(rawOffset, rawSize)) {
+            return optHdr;
+        }
+        if (sects && sects->containsBlock(rawOffset, rawSize)) {
+            return sects;
+        }
+        return nullptr;
     }
     
     BufferView* _createSectionView(SectionHdrWrapper *sec);
