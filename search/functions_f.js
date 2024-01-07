@@ -5,7 +5,7 @@ var searchData=
   ['reloadmapping_2',['reloadMapping',['../class_exe_node_wrapper.html#a659e73a1d597a93ae7dd31cf7e98f23a',1,'ExeNodeWrapper::reloadMapping()'],['../class_import_base_dir_wrapper.html#a736fac50c585752a8c8b6cb85ef9c9d3',1,'ImportBaseDirWrapper::reloadMapping()'],['../class_sect_hdrs_wrapper.html#a7cf7f2fd77bab1e52b044c5f77e439ad',1,'SectHdrsWrapper::reloadMapping()']]],
   ['reloadname_3',['reloadName',['../class_section_hdr_wrapper.html#a3a97c0c870be0be28a7425142338a55e',1,'SectionHdrWrapper']]],
   ['reloc_4',['reloc',['../class_reloc_dir_wrapper.html#a9c0949d9331d8bc2376736732491fbfc',1,'RelocDirWrapper']]],
-  ['relocblockwrapper_5',['RelocBlockWrapper',['../class_reloc_block_wrapper.html#a44e634f97c55572ae56f14a19d8410f7',1,'RelocBlockWrapper']]],
+  ['relocblockwrapper_5',['RelocBlockWrapper',['../class_reloc_block_wrapper.html#a6dfd0ada972f9de522390a454c14d121',1,'RelocBlockWrapper']]],
   ['relocdirwrapper_6',['RelocDirWrapper',['../class_reloc_dir_wrapper.html#a890a07b3d56bc36a526c1b5a73e2073c',1,'RelocDirWrapper']]],
   ['relocentrywrapper_7',['RelocEntryWrapper',['../class_reloc_entry_wrapper.html#a9fd90e5423cd5d01b4fbd494976f1fa3',1,'RelocEntryWrapper']]],
   ['reourcehtmlwrapper_8',['ReourceHTMLWrapper',['../class_reource_h_t_m_l_wrapper.html#ab7c2350ca773b5323b763cca55b89f1a',1,'ReourceHTMLWrapper']]],
