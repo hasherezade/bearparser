@@ -11,7 +11,7 @@ class RelocDirWrapper : public DataDirEntryWrapper
 public:
     RelocDirWrapper(PEFile *pe)
         : DataDirEntryWrapper(pe, pe::DIR_BASERELOC),
-        parsedSize(0), invalidEntries(0)
+        parsedSize(0)
     {
         wrap();
     }
@@ -34,7 +34,6 @@ protected:
 
 private:
     bufsize_t parsedSize;
-    size_t invalidEntries;
 
 friend class RelocBlockWrapper;
 };
@@ -52,17 +51,17 @@ public:
         FIELD_COUNTER
     };
 
-    RelocBlockWrapper(Executable *pe, RelocDirWrapper *_parentDir, size_t entryNumber)
-        : ExeNodeWrapper(pe, _parentDir, entryNumber),
-        parentDir(_parentDir),
-        cachedRaw(INVALID_ADDR), cachedMaxNum(0), invalidEntries(0)
-    { 
+    RelocBlockWrapper(Executable *pe, RelocDirWrapper *parentDir, size_t entryNumber)
+        : ExeNodeWrapper(pe, parentDir, entryNumber), 
+        cachedRaw(INVALID_ADDR), cachedMaxNum(0),
+        isValidPage(false)
+    {
+        this->parentDir = parentDir;
         wrap();
     }
 
     bool wrap();
-    virtual bool isValid();
-    
+    bool isValid();
     // full structure boundaries
     virtual void* getPtr();
     virtual bufsize_t getSize();
@@ -81,6 +80,9 @@ public:
     IMAGE_BASE_RELOCATION* myReloc() { return (IMAGE_BASE_RELOCATION*) getPtr(); }
 
 private:
+    void validatePage();
+    bool isValidPage;
+    
     offset_t cachedRaw;
     //size_t cachedSize; // TODO
     offset_t cachedMaxNum;
@@ -88,7 +90,7 @@ private:
     RelocDirWrapper* parentDir;
 
     size_t parsedSize;
-    size_t invalidEntries;
+
 };
 
 class RelocEntryWrapper : public ExeNodeWrapper
@@ -104,9 +106,6 @@ public:
     RelocEntryWrapper(Executable* pe, RelocBlockWrapper *parentDir, size_t entryNumber)
         : ExeNodeWrapper(pe, parentDir, entryNumber) { this->parentDir = parentDir; }
 
-    virtual bool isValid();
-    bool isEmpty();
-    
     // full structure boundaries
     virtual void* getPtr();
     virtual bufsize_t getSize();

@@ -35,13 +35,9 @@ bool RelocDirWrapper::wrap()
 {
     clear();
     this->parsedSize = 0;
-    this->invalidEntries = 0;
     
-    const size_t INVALID_SERIES_LIMIT = 10;
-    const size_t INVALID_ENTRIES_LIMIT = 20;
     bufsize_t maxSize = getDirEntrySize(true);
     size_t entryId = 0;
-    size_t invalidSeries = 0;
     while (parsedSize < maxSize) {
         RelocBlockWrapper* entry = new RelocBlockWrapper(this->m_Exe, this, entryId++);
         if (!entry) break;
@@ -52,21 +48,16 @@ bool RelocDirWrapper::wrap()
             delete entry;
             break;
         }
-        if (entry->isValid()) {
-            invalidSeries = 0;
-        }
-        else {
-            invalidSeries++;
-            this->invalidEntries++;
-            if (invalidSeries >= INVALID_SERIES_LIMIT) break;
-            if (invalidEntries >= INVALID_ENTRIES_LIMIT) break;
-        }
         this->parsedSize += blockSize;
         this->entries.push_back(entry);
-
+        if (!entry->isValid()) {
+            break;
+        }
     }
     return true;
 }
+
+
 
 IMAGE_BASE_RELOCATION* RelocDirWrapper::reloc()
 {
@@ -84,42 +75,24 @@ IMAGE_BASE_RELOCATION* RelocDirWrapper::reloc()
 bool RelocBlockWrapper::wrap()
 {
     clear();
-    this->parsedSize = 0;
-    this->invalidEntries = 0;
-    
+    parsedSize = 0;
+
     IMAGE_BASE_RELOCATION* reloc = myReloc();
     if (!reloc) return false;
     
-    const size_t INVALID_SERIES_LIMIT = 100;
-    const size_t INVALID_ENTRIES_LIMIT = 1000;
+    validatePage();
+    if (!this->isValidPage) return false;
+    
     size_t maxSize = reloc->SizeOfBlock;
     parsedSize = sizeof(IMAGE_BASE_RELOCATION); // the block begins with IMAGE_BASE_RELOCATION record
     size_t entryId = 0;
-    size_t invalidSeries = 0;
-    size_t emptySeries = 0;
+
     while (parsedSize < maxSize) {
         RelocEntryWrapper* entry = new RelocEntryWrapper(this->m_Exe, this, entryId++);
+
         if (!entry->getPtr()) {
             delete entry;
             break;
-        }
-        if (entry->isValid()) {
-            invalidSeries = 0;
-        }
-        else {
-            invalidSeries++;
-            this->invalidEntries++;
-            if (invalidSeries >= INVALID_SERIES_LIMIT) break;
-            if (invalidEntries >= INVALID_ENTRIES_LIMIT) break;
-        }
-        if (!entry->isEmpty()) {
-            emptySeries = 0;
-        } else {
-            emptySeries++;
-            if (emptySeries >= INVALID_SERIES_LIMIT) {
-                this->invalidEntries++;
-                break;
-            }
         }
         this->parsedSize += sizeof(pe::BASE_RELOCATION_ENTRY);
         this->entries.push_back(entry);
@@ -127,20 +100,23 @@ bool RelocBlockWrapper::wrap()
     return true;
 }
 
-bool RelocBlockWrapper::isValid()
+void RelocBlockWrapper::validatePage()
 {
-    if (this->invalidEntries > 0) return false;
-
-    if (!parentDir) return false;
+    this->isValidPage = false;
+    if (!parentDir) return;
     PEFile *m_PE = parentDir->m_PE;
-    if (!m_PE) return false;
+    if (!m_PE) return;
 
     bool isOk = false;
     const offset_t pageRva = this->getNumValue(RelocBlockWrapper::PAGE_VA, &isOk);
-    if (!isOk) return false;
+    if (!isOk) return;
 
-    const bool isValidRVA = (pageRva < m_PE->getImageSize()) ? true : false;
-    return isValidRVA;
+    this->isValidPage = (pageRva < m_PE->getImageSize()) ? true : false;
+}
+
+bool RelocBlockWrapper::isValid()
+{
+    return this->isValidPage;
 }
 
 void* RelocBlockWrapper::getPtr()
@@ -291,37 +267,6 @@ size_t RelocBlockWrapper::maxEntriesNumInBlock()
     return entriesNum;
 }
 //-------------------------------------------------------------------------------------------------
-bool RelocEntryWrapper::isValid()
-{
-    if (!getPtr()) return false;
-    
-    bool isOk = false;
-    uint64_t val = this->getNumValue(RelocEntryWrapper::RELOC_ENTRY_VAL, &isOk);
-    if (!isOk) return false;
-    
-    WORD relocType = RelocEntryWrapper::getType(val);
-    if (relocType != 0 && relocType != 3 && relocType != 10) {
-        return false;
-    }
-    return true;
-}
-
-bool RelocEntryWrapper::isEmpty()
-{
-    if (!getPtr()) return true;
-    
-    bool isOk = false;
-    uint64_t val = this->getNumValue(RelocEntryWrapper::RELOC_ENTRY_VAL, &isOk);
-    if (!isOk) return true;
-    
-    if (val == 0) return true;
-    
-    WORD relocType = RelocEntryWrapper::getType(val);
-    if (relocType == 0) {
-        return true;
-    }
-    return false;
-}
 
 void* RelocEntryWrapper::getPtr()
 {
@@ -355,9 +300,9 @@ WORD RelocEntryWrapper::getDelta(WORD relocEntryVal)
     return entry->Offset;
 }
 
-QString RelocEntryWrapper::translateType(WORD relocType)
+QString RelocEntryWrapper::translateType(WORD type)
 {
-    switch (relocType) {
+    switch (type) {
         case 0 : return "Padding (skipped)";
         case 1 : return "High WORD of 32-bit field";
         case 2 : return "Low  WORD of 32-bit field";
