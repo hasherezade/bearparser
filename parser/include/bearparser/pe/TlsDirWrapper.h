@@ -1,7 +1,6 @@
 #pragma once
 
 #include "DataDirEntryWrapper.h"
-#include "PEFile.h"
 
 class TlsEntryWrapper;
 class TlsDirWrapper;

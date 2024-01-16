@@ -221,22 +221,67 @@ public:
 
     bool unbindImports();
 
-    /* wrappers for fetching commonly used directories */
-    ImportDirWrapper* getImports()
+    /* wrappers for fetching the initialized directories */
+    ImportDirWrapper* getImportsDir()
     {
         return dynamic_cast<ImportDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_IMPORT));
     }
     
-    DelayImpDirWrapper* getDelayedImports()
+    DelayImpDirWrapper* getDelayedImportsDir()
     {
         return dynamic_cast<DelayImpDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_DELAY_IMPORT));
     }
+    
+    BoundImpDirWrapper* getBoundImportsDir()
+    {
+        return dynamic_cast<BoundImpDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_BOUND_IMPORT));
+    }
+    
+    DebugDirWrapper* getDebugDir()
+    {
+        return dynamic_cast<DebugDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_DEBUG));
+    }
 
-    ExportDirWrapper* getExports()
+    ExportDirWrapper* getExportsDir()
     {
         return dynamic_cast<ExportDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_EXPORT));
     }
+    
+    SecurityDirWrapper* getSecurityDir()
+    {
+        return dynamic_cast<SecurityDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_SECURITY));
+    }
 
+    TlsDirWrapper* getTlsDir()
+    {
+        return dynamic_cast<TlsDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_TLS));
+    }
+    
+    LdConfigDirWrapper* getLoadConfigDir()
+    {
+        return dynamic_cast<LdConfigDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_LOAD_CONFIG));
+    }
+    
+    RelocDirWrapper* getRelocsDir()
+    {
+        return dynamic_cast<RelocDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_BASERELOC));
+    }
+    
+    ExceptionDirWrapper* getExceptionsDir()
+    {
+        return dynamic_cast<ExceptionDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_EXCEPTION));
+    }
+    
+    ResourceDirWrapper* getResourcesDir()
+    {
+        return dynamic_cast<ResourceDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_RESOURCE));
+    }
+    
+    ClrDirWrapper* getClsDir()
+    {
+        return dynamic_cast<ClrDirWrapper*>(getWrapper(PEFile::WR_DIR_ENTRY + pe::DIR_COM_DESCRIPTOR));
+    }
+    
     /* All Entry Points of the application, including: main EP, Exports, TLS Callbacks */
     virtual size_t getAllEntryPoints(QMap<offset_t,QString> &entrypoints, Executable::addr_type aType = Executable::RVA) 
     {
