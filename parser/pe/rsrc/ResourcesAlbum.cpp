@@ -77,7 +77,7 @@ void ResourcesAlbum::wrapLeafsContent()
             //printf("topEntryId %d type: %d\n", topEntryId, type);
 //TODO: finish it!
             ResourceContentWrapper* cw = ResourceContentFactory::makeResContentWrapper(type, leaf);
-            if (cw != NULL) {
+            if (cw) {
                 leafToContentWrapper[leaf] = cw;
                 this->allWrappers[type].putWrapper(cw);
             }

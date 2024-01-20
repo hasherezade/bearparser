@@ -63,6 +63,7 @@ public:
     virtual ~PEFile() { clearWrappers(); delete album; }
     
     virtual void wrap(); // inherited from Executable
+    bool wrapDataDirs();
     
     virtual bufsize_t getMappedSize(Executable::addr_type aType);
     virtual bufsize_t getAlignment(Executable::addr_type aType) const { return core.getAlignment(aType); }

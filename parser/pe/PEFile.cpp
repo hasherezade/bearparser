@@ -190,20 +190,28 @@ void PEFile::wrapCore()
     this->sects->wrap();
 }
 
-void PEFile::wrap()
+bool PEFile::wrapDataDirs()
 {
-    wrapCore();
-    
+    bool anyModified = false;
     // rewrap directories
     for (size_t i = 0 ; i < pe::DIR_ENTRIES_COUNT; i++) {
         if (dataDirEntries[i]) {
-            dataDirEntries[i]->wrap();
+            if (dataDirEntries[i]->wrap()) {
+                anyModified = true;
+            }
         }
     }
     // rewrap resources
     if (this->album) {
         this->album->wrapLeafsContent();
     }
+    return anyModified;
+}
+
+void PEFile::wrap()
+{
+    wrapCore();
+    wrapDataDirs();
 }
 
 pe::RICH_DANS_HEADER* PEFile::getRichHeaderBgn(pe::RICH_SIGNATURE* richSign)
