@@ -455,11 +455,11 @@ BufferView* PEFile::createSectionView(size_t secId)
     return _createSectionView(sec);
 }
 
-bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addrType)
+bool PEFile::moveDataDirEntry(pe::dir_entry dirNum, offset_t newOffset, Executable::addr_type addrType)
 {
     bool allowExceptions = true; //TODO: configure exception mode outside...
 
-    DataDirEntryWrapper *entry = getDataDirEntry(id);
+    DataDirEntryWrapper *entry = getDataDirEntry(dirNum);
     if (entry == NULL) {
         if (allowExceptions) throw ExeException("No such Data Directory");
         return false;
@@ -470,7 +470,7 @@ bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::
         if (allowExceptions) throw ExeException("Cannot fetch DataDirTable");
         return false;
     }
-    Executable::addr_type dataDirAddrType = ddirWrapper->containsAddrType(id, DataDirWrapper::ADDRESS);
+    Executable::addr_type dataDirAddrType = ddirWrapper->containsAddrType(dirNum, DataDirWrapper::ADDRESS);
     offset_t dataDirAddr = this->convertAddr(newOffset, addrType, dataDirAddrType);
     if (dataDirAddr == INVALID_ADDR) {
         if (allowExceptions) throw ExeException("Invalid new offset");
@@ -486,7 +486,8 @@ bool PEFile::moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::
         return false;
     }
     entry->fillContent(0);
-    ddir[id].VirtualAddress = static_cast<DWORD> (dataDirAddr);
+    ddir[dirNum].VirtualAddress = static_cast<DWORD>(dataDirAddr);
+    entry->wrap();
     return true;
 }
 
