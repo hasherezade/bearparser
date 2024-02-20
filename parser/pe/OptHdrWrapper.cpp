@@ -73,7 +73,7 @@ QString OptHdrWrapper::translateOSVersion(WORD major, WORD minor)
         s_osVersion[pair<WORD,WORD>(4, 10)] = "Windows 98";
         s_osVersion[pair<WORD,WORD>(4, 0)] = "Windows 95 / NT 4.0";
 
-        s_osVersion[pair<WORD,WORD>(3, 51)] = "Windows NT 4.51";
+        s_osVersion[pair<WORD,WORD>(3, 51)] = "Windows NT 3.51";
         s_osVersion[pair<WORD,WORD>(3, 10)] = "Windows NT 3.1";
     }
     pair<WORD,WORD> p(major, minor);
