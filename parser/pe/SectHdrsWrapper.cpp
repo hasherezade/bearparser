@@ -266,6 +266,9 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
         return 0; // no changes
     }
     bufsize_t virtualSize = getContentDeclaredSize(Executable::RVA);
+    if (virtualSize == 0) { // if virtual size is not filled, use the raw size as virtual
+        virtualSize = getContentDeclaredSize(Executable::RAW);
+    }
     if (virtualSize < rawSize) {
         // if Virtual Size is smaller than the raw size, it means not full raw size will be mapped
         rawSize = virtualSize;
@@ -305,7 +308,10 @@ bufsize_t SectionHdrWrapper::getMappedVirtualSize()
         return 0; //invalid addr, nothing is mapped
     }
 
-    bufsize_t dVirtualSize = getContentDeclaredSize(aType);
+    bufsize_t dVirtualSize = getContentDeclaredSize(aType);   
+    if (dVirtualSize == 0) {
+        dVirtualSize = getContentDeclaredSize(Executable::RAW);
+    }
     bufsize_t mRawSize = getMappedRawSize();
 
     bufsize_t mVirtualSize = (dVirtualSize > mRawSize) ? dVirtualSize : mRawSize;
