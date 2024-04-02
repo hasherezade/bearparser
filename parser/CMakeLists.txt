@@ -11,8 +11,9 @@ if(USE_QT4)
     INCLUDE( ${QT_USE_FILE} )
     ADD_DEFINITIONS( ${QT_DEFINITIONS} )
 else()
-    find_package(Qt5Core REQUIRED)
-    get_target_property(QtCore_location Qt5::Core LOCATION)
+    find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
+    get_target_property(QtCore_location Qt${QT_VERSION_MAJOR}::Core LOCATION)
 endif()
 
 include_directories (include/bearparser)
@@ -157,7 +158,7 @@ target_include_directories(bearparser PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include/
 if(USE_QT4)
     target_link_libraries (bearparser ${QT_QTCORE_LIBRARIES} )
 else()
-    target_link_libraries(bearparser Qt5::Core)
+    target_link_libraries(bearparser Qt${QT_VERSION_MAJOR}::Core)
 endif()
 
 

@@ -7,8 +7,9 @@ if(USE_QT4)
     INCLUDE( ${QT_USE_FILE} )
     ADD_DEFINITIONS( ${QT_DEFINITIONS} )
 else()
-    find_package(Qt5Core REQUIRED)
-    get_target_property(QtCore_location Qt5::Core LOCATION)
+    find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
+    get_target_property(QtCore_location Qt${QT_VERSION_MAJOR}::Core LOCATION)
 endif()
 
 set (imps_srcs
@@ -30,7 +31,7 @@ target_link_libraries(${PROJECT_NAME} ${PARSER_LIB})
 if(USE_QT4)
     target_link_libraries (${PROJECT_NAME} ${QT_QTCORE_LIBRARIES} )
 else()
-    target_link_libraries(${PROJECT_NAME} Qt5::Core)
+    target_link_libraries(${PROJECT_NAME} Qt${QT_VERSION_MAJOR}::Core)
 endif()
 
 #install

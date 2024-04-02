@@ -21,7 +21,7 @@ const QString Formatter::operator[](std::size_t idx) const
         }
         return "\\x"+ QString::number(b, 16).leftJustified(2,'0');
     }
-    return QString(b);
+    return QChar(b);
 }
 
 /*
