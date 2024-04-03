@@ -23,7 +23,7 @@ https://github.com/hasherezade/bearparser/wiki
 
 ## PE-bear
 
-![](https://github.com/hasherezade/pe-bear/blob/main/logo/main_ico.png)
+<img src="https://github.com/hasherezade/pe-bear/blob/main/logo/main_ico.png" alt="PE-bear logo" width=128>
 
 Check also PE-bear - a GUI application using `bearparser`:
 + https://github.com/hasherezade/pe-bear
