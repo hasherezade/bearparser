@@ -1,5 +1,5 @@
 <map id="WatchedLocker" name="WatchedLocker">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,118,105"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="8,5,115,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,46,64,79,59,79,59,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="36,79,148,105"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,179,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,46,95,79,89,79,89,46"/>
 </map>
