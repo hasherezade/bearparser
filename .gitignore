@@ -3,4 +3,4 @@ build_qt5/
 build_qt4/
 test_cases/
 docs/
-
+.vs/

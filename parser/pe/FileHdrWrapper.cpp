@@ -9,7 +9,11 @@ namespace util {
     {
         const time_t rawtime = (const time_t)timestamp;
         QString format = "dddd, dd.MM.yyyy hh:mm:ss";
-        QDateTime date1(QDateTime(QDateTime::fromTime_t(rawtime)));
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QDateTime date1(QDateTime::fromSecsSinceEpoch(rawtime));
+#else
+        QDateTime date1(QDateTime::fromTime_t(rawtime));
+#endif
         return date1.toUTC().toString(format) + " UTC";
     }
 };
