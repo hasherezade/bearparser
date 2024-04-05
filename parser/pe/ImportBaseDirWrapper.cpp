@@ -64,7 +64,6 @@ void ImportBaseDirWrapper::reloadMapping()
     for (size_t i = 0; i < entriesCount; i++) {
         ImportBaseEntryWrapper* lib = dynamic_cast<ImportBaseEntryWrapper*> (this->getEntryAt(i));
         if (lib == NULL) continue;
-        size_t libId = lib->entryNum;
 
         size_t funcCount = lib->getEntriesCount();
         for (size_t fI = 0; fI < funcCount; fI++) {
@@ -254,7 +253,7 @@ bool ImportBaseFuncWrapper::isValid()
     
     if (!isByOrdinal()) {
         char *fName = this->getFunctionName();
-        if (!imports_util::isNameValid(m_Exe, libName)) return false;
+        if (!imports_util::isNameValid(m_Exe, fName)) return false;
     }
     return true;
 }

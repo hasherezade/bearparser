@@ -74,10 +74,10 @@ void cmd_util::printStrings(PEFile *pe, size_t limit)
         }
         size_t count = wrapper->getResStringsCount();
 
-        for (size_t i = 0; i < count; i++) {
+        for (size_t j = 0; j < count; j++) {
             if (limit != 0 && limCount >= limit) return;
 
-            ResString *resStr = wrapper->getResStringAt(i);
+            ResString *resStr = wrapper->getResStringAt(j);
             if (resStr != NULL) {
                 OUT_PADDED_OFFSET(std::cout, resStr->offset);
                 std::cout << " [" << std::dec << resStr->getSize() << "]" << std::endl;

@@ -174,7 +174,7 @@ class DumpWrapperEntriesCommand : public WrapperCommand
 {
 public:
     DumpWrapperEntriesCommand(const std::string& desc, size_t v_wrapperId = INVALID_WRAPPER)
-        : WrapperCommand(desc), wrapperId(v_wrapperId) {}
+        : WrapperCommand(desc, v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper)
     {
@@ -196,9 +196,6 @@ public:
         cmd_util::dumpEntryInfo(lib);
         cmd_util::dumpNodeInfo(lib);
     }
-
-protected:
-    size_t wrapperId; //TODO: fetch it from params!
 };
 
 
