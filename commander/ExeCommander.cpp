@@ -49,7 +49,7 @@ offset_t cmd_util::readOffset(Executable::addr_type aType)
     return offset;
 }
 
-size_t cmd_util::readNumber(std::string prompt, bool read_hex)
+size_t cmd_util::readNumber(const std::string& prompt, bool read_hex)
 {
     unsigned int num = 0;
     std::cout << prompt.c_str() << ": ";

@@ -39,7 +39,7 @@ friend class Commander;
 class Command
 {
 public:
-    Command(std::string v_desc = "") : desc(v_desc) {}
+    Command(const std::string& v_desc) : desc(v_desc) {}
     virtual ~Command() {}
 
     virtual std::string getDescription() { return desc; }
@@ -76,7 +76,7 @@ public:
     virtual ~Commander() { clearCommands(); }
 
     void printHelp();
-    bool addCommand(std::string name, Command *cmd, bool overwrite = true);
+    bool addCommand(const std::string& name, Command *cmd, bool overwrite = true);
 
     virtual void parseCommands(); // main loop
 

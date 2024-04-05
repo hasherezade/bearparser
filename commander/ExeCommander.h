@@ -19,7 +19,7 @@ namespace cmd_util {
     std::string addrTypeToStr(Executable::addr_type type);
 
     offset_t readOffset(Executable::addr_type aType);
-    size_t readNumber(std::string prompt, bool read_hex=false);
+    size_t readNumber(const std::string& prompt, bool read_hex=false);
 
     void fetch(Executable *exe, offset_t offset, Executable::addr_type aType, bool hex);
     void printWrapperNames(MappedExe *exe);
@@ -60,7 +60,7 @@ protected:
 class ConvertAddrCommand : public Command
 {
 public:
-    ConvertAddrCommand(Executable::addr_type v_from, Executable::addr_type v_to, std::string desc)
+    ConvertAddrCommand(Executable::addr_type v_from, Executable::addr_type v_to, const std::string& desc)
         : Command(desc), addrFrom(v_from), addrTo(v_to) {}
 
     virtual void execute(CmdParams *params, CmdContext  *context);
@@ -74,7 +74,7 @@ protected:
 class FetchCommand : public Command
 {
 public:
-    FetchCommand(bool v_isHex, Executable::addr_type v_addrType, std::string desc)
+    FetchCommand(bool v_isHex, Executable::addr_type v_addrType, const std::string& desc)
         : Command(desc), isHex(v_isHex), addrType(v_addrType) {}
 
     virtual void execute(CmdParams *params, CmdContext  *context)
@@ -92,7 +92,7 @@ protected:
 class ExeInfoCommand : public Command
 {
 public:
-    ExeInfoCommand(std::string desc = "Exe Info")
+    ExeInfoCommand(const std::string& desc = "Exe Info")
         : Command(desc) {}
 
     virtual void execute(CmdParams *params, CmdContext  *context);
@@ -101,7 +101,7 @@ public:
 class WrapperCommand : public Command
 {
 public:
-    WrapperCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
+    WrapperCommand(const std::string& desc, size_t v_wrapperId = INVALID_WRAPPER)
         : Command(desc), wrapperId(v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper) = 0;
@@ -130,7 +130,7 @@ protected:
 class AddEntryCommand : public WrapperCommand
 {
 public:
-    AddEntryCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
+    AddEntryCommand(const std::string& desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc, v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper)
@@ -159,7 +159,7 @@ public:
 class DumpWrapperCommand : public WrapperCommand
 {
 public:
-    DumpWrapperCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
+    DumpWrapperCommand(const std::string& desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc, v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper)
@@ -173,7 +173,7 @@ public:
 class DumpWrapperEntriesCommand : public WrapperCommand
 {
 public:
-    DumpWrapperEntriesCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
+    DumpWrapperEntriesCommand(const std::string& desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc), wrapperId(v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper)
@@ -205,7 +205,7 @@ protected:
 class ClearWrapperCommand : public WrapperCommand
 {
 public:
-    ClearWrapperCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
+    ClearWrapperCommand(const std::string& desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc, v_wrapperId) {}
 
     virtual void wrapperAction(ExeElementWrapper *wrapper)
@@ -228,7 +228,7 @@ public:
 class DumpWrapperToFileCommand : public WrapperCommand
 {
 public:
-    DumpWrapperToFileCommand(std::string desc, size_t v_wrapperId = INVALID_WRAPPER)
+    DumpWrapperToFileCommand(const std::string& desc, size_t v_wrapperId = INVALID_WRAPPER)
         : WrapperCommand(desc, v_wrapperId)
     {
     }
@@ -261,7 +261,7 @@ protected:
 class SaveExeToFileCommand : public Command
 {
 public:
-    SaveExeToFileCommand(std::string desc = "Save exe to file")
+    SaveExeToFileCommand(const std::string& desc = "Save exe to file")
         : Command(desc)
     {
     }

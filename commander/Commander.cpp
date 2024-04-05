@@ -45,7 +45,7 @@ Command* Commander::getCommand(const std::string& line)
     return cmd;
 }
 
-bool Commander::addCommand(std::string name, Command *cmd, bool overwrite)
+bool Commander::addCommand(const std::string& name, Command *cmd, bool overwrite)
 {
     if ( cmds.find(name) != cmds.end() ) {
         if (!overwrite) return false; // already exist
