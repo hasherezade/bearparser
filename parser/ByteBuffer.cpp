@@ -61,7 +61,7 @@ bool ByteBuffer::resize(bufsize_t newSize)
     BYTE *newContent = NULL;
     try {
         newContent = allocContent(newSize, this->padding);
-    } catch(BufferException &e) {
+    } catch(BufferException) {
         newContent = NULL;
     }
     if (!newContent) return false;

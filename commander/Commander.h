@@ -12,7 +12,7 @@ class Commander;
 class CmdException : public CustomException
 {
 public:
-    CmdException(const QString info) : CustomException(info) {}
+    CmdException(const QString& info) : CustomException(info) {}
 };
 
 class CmdParams

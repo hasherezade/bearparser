@@ -59,7 +59,7 @@ ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize, const boo
         try {
             bufferedFile = new ByteBuffer(allocSize); //throws exceptions
         }
-        catch (CustomException &e)
+        catch (CustomException)
         {
             if (!allowTruncate) throw;
             allocSize /= 2;
