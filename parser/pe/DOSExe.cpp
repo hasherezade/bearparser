@@ -17,13 +17,16 @@ bool DOSExeBuilder::signatureMatches(AbstractByteBuffer *buf)
 
 Executable* DOSExeBuilder::build(AbstractByteBuffer *buf)
 {
+    Executable *exe = NULL;
     if (signatureMatches(buf) == false) return NULL;
 
     try {
-        return new DOSExe(buf);
+        exe = new DOSExe(buf);
     } catch (ExeException) {
-        return NULL;
+        //
     }
+
+    return exe;
 }
 
 //-------------------------------------------------------------
