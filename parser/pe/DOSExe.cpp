@@ -22,9 +22,10 @@ Executable* DOSExeBuilder::build(AbstractByteBuffer *buf)
 
     try {
         exe = new DOSExe(buf);
-    } catch (ExeException &e) {
+    } catch (ExeException) {
         //
     }
+
     return exe;
 }
 

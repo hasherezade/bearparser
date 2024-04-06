@@ -19,7 +19,7 @@ public:
     PECommander(ExeCmdContext *v_context)
         : ExeCommander(v_context)
     {
-        initCommands();
+        PECommander::initCommands();
     }
 
 protected:

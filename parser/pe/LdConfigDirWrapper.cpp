@@ -21,7 +21,7 @@ bufsize_t LdConfigDirWrapper::getHdrDefinedSize()
     offset_t raw = INVALID_ADDR;
     try {
         raw = m_Exe->rvaToRaw(rva);
-    } catch (CustomException &e) {
+    } catch (CustomException) {
         raw = INVALID_ADDR;
     }
     if (raw == INVALID_ADDR) return 0;

@@ -35,7 +35,7 @@ Executable* PEFileBuilder::build(AbstractByteBuffer *buf)
 
     try {
         exe = new PEFile(buf);
-    } catch (ExeException &e) {
+    } catch (ExeException) {
         exe = NULL;
     }
     return exe;
@@ -518,7 +518,7 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t r_size, bufsize
         if (!_canAddNewSection()) {
             return nullptr;
         }
-        ExeNodeWrapper* sec = dynamic_cast<ExeNodeWrapper*>(getWrapper(PEFile::WR_SECTIONS));
+
         if (!v_size) {
             v_size = r_size;
         }

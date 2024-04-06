@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="1">
+    <builddir>build/cppcheck</builddir>
+    <analyze-all-vs-configs>false</analyze-all-vs-configs>
+    <check-headers>true</check-headers>
+    <check-unused-templates>true</check-unused-templates>
+    <max-ctu-depth>10</max-ctu-depth>
+    <max-template-recursion>100</max-template-recursion>
+    <paths>
+        <dir name="commander"/>
+        <dir name="parser"/>
+    </paths>
+    <libraries>
+        <library>posix</library>
+        <library>qt</library>
+        <library>windows</library>
+    </libraries>
+    <suppressions>
+        <suppression>noExplicitConstructor</suppression>
+        <suppression>useStlAlgorithm</suppression>
+        <suppression>cstyleCast</suppression>
+        <suppression>constVariablePointer</suppression>
+    </suppressions>
+</project>
