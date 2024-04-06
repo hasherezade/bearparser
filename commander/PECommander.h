@@ -29,7 +29,7 @@ protected:
 class SectionByAddrCommand : public Command
 {
 public:
-    SectionByAddrCommand(Executable::addr_type v_addrType, std::string desc)
+    SectionByAddrCommand(Executable::addr_type v_addrType, const std::string& desc)
         : Command(desc), addrType(v_addrType) {}
 
     virtual void execute(CmdParams *params, CmdContext  *context)
@@ -79,7 +79,7 @@ protected:
 class PrintStringsCommand : public Command
 {
 public:
-    PrintStringsCommand(std::string desc)
+    PrintStringsCommand(const std::string& desc)
         : Command(desc) {}
 
     virtual void execute(CmdParams *params, CmdContext  *context)
@@ -101,14 +101,12 @@ public:
 
        cmd_util::printStrings(pe, limit);
     }
-protected:
-    int wrapperId; //TODO: fetch it from params!
 };
 
 class PrintWrapperTypesCommand : public Command
 {
 public:
-    PrintWrapperTypesCommand(std::string desc)
+    PrintWrapperTypesCommand(const std::string& desc)
         : Command(desc) {}
 
     virtual void execute(CmdParams *params, CmdContext  *context)
@@ -125,7 +123,7 @@ public:
 class WrapperInfoCommand : public Command
 {
 public:
-    WrapperInfoCommand(std::string desc)
+    WrapperInfoCommand(const std::string& desc)
         : Command(desc) {}
 
     virtual void execute(CmdParams *params, CmdContext  *context)
@@ -166,7 +164,7 @@ public:
 class MoveDataDirEntryCommand : public Command
 {
 public:
-    MoveDataDirEntryCommand(std::string desc)
+    MoveDataDirEntryCommand(const std::string& desc)
         : Command(desc) {}
 
     virtual void execute(CmdParams *params, CmdContext  *context)
@@ -200,7 +198,7 @@ public:
 class SectionDumpCommand : public Command
 {
 public:
-    SectionDumpCommand(std::string desc, bool v_saveToFile = false)
+    SectionDumpCommand(const std::string& desc, bool v_saveToFile = false)
         : Command(desc), saveToFile(v_saveToFile)
     {
     }
@@ -210,7 +208,6 @@ public:
         PEFile *pe = cmd_util::getPEFromContext(context);
         if (!pe) return;
 
-        size_t sectHdrCount = pe->getSectionsCount(false);
         size_t sectCount = pe->getSectionsCount(true);
         std:: cout << "Sections count = " << std::dec << sectCount << "\n";
         if (sectCount == 0) {
@@ -274,7 +271,7 @@ protected:
 class ExportsListCommand : public Command
 {
 public:
-    ExportsListCommand(std::string desc)
+    ExportsListCommand(const std::string& desc)
         : Command(desc) {}
 
     virtual void execute(CmdParams *params, CmdContext  *context)
@@ -310,7 +307,7 @@ public:
 class ImportsListCommand : public Command
 {
 public:
-    ImportsListCommand(std::string desc)
+    ImportsListCommand(const std::string& desc)
         : Command(desc) {}
 
     virtual void execute(CmdParams *params, CmdContext  *context)

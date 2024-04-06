@@ -283,7 +283,7 @@ bufsize_t SectionHdrWrapper::getMappedRawSize()
     if (secEnd > peSize) {
         const bufsize_t trimmedSize = peSize - secOffset; // trim to the file size
         if (virtualSize) {
-            bufsize_t unit = m_PE->getAlignment(Executable::RVA);
+            unit = m_PE->getAlignment(Executable::RVA);
             if (unit != 0) {
                 virtualSize = roundupToUnit(virtualSize, unit);
             }
@@ -534,7 +534,6 @@ QString SectHdrsWrapper::getFieldName(size_t fieldId)
 
 SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool recalculate, bool verbose)
 {
-    size_t size = this->entries.size();
     std::map<offset_t, SectionHdrWrapper*> *secMap = NULL;
 
     if (addrType == Executable::RAW) {

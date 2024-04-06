@@ -63,7 +63,6 @@ size_t ExportDirWrapper::mapNames()
 bool ExportDirWrapper::wrap()
 {
     clear();
-    size_t mapNum = mapNames();
 
     IMAGE_EXPORT_DIRECTORY* exp = exportDir();
     if (exp == NULL) return 0;
