@@ -47,7 +47,7 @@ public:
     ExeCommander(ExeCmdContext *v_context)
         : Commander(v_context), exeContext(v_context)
     {
-        initCommands();
+        ExeCommander::initCommands();
     }
 
     void setExe(Executable *exe) { exeContext->setExe(exe); }
