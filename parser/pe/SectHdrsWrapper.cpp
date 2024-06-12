@@ -32,7 +32,7 @@ void SectionHdrWrapper::initSecCharacter(std::map<DWORD, QString> &secHdrCharact
     secHdrCharact[SCN_LNK_NRELOC_OVFL] = "contains extended relocations";
     secHdrCharact[SCN_MEM_DISCARDABLE] = "discardable";
     secHdrCharact[SCN_MEM_NOT_CACHED] = "not cachable";
-    secHdrCharact[SCN_MEM_NOT_PAGED] = "pageable";
+    secHdrCharact[SCN_MEM_NOT_PAGED] = "non-pageable";
     secHdrCharact[SCN_MEM_SHARED] = "shareable";
     secHdrCharact[SCN_CNT_CODE] = "code";
     secHdrCharact[SCN_CNT_INITIALIZED_DATA] = "initialized data";
