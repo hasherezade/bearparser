@@ -1,10 +1,8 @@
 <map id="TlsDirWrapper::getSize" name="TlsDirWrapper::getSize">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,56,158,82"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="224,5,332,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,53,210,33,211,38,135,58"/>
-<area shape="rect" id="Node000003" href="$class_executable.html#a2f2044788eb57c73903dca8e6a0477c2" title=" " alt="" coords="398,81,554,107"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="158,71,383,86,382,91,158,76"/>
-<area shape="rect" id="Node000004" href="$class_tls_dir_wrapper.html#a8d736a2c745811951dd7dcc41fc0ff3d" title=" " alt="" coords="206,107,350,132"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="135,80,211,100,210,105,134,85"/>
-<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="350,108,382,103,383,109,351,113"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,158,31"/>
+<area shape="rect" id="Node000002" href="$class_executable.html#a2f2044788eb57c73903dca8e6a0477c2" title=" " alt="" coords="398,5,554,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,16,383,16,383,21,158,21"/>
+<area shape="rect" id="Node000003" href="$class_tls_dir_wrapper.html#a8d736a2c745811951dd7dcc41fc0ff3d" title=" " alt="" coords="206,31,350,56"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,25,191,30,190,35,158,31"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="350,32,382,27,383,33,351,37"/>
 </map>

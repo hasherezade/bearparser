@@ -1,8 +1,6 @@
 <map id="ExeElementWrapper::getOffset" name="ExeElementWrapper::getOffset">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,29,149,70"/>
-<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="40,29,39,19,45,10,58,5,77,3,98,5,110,11,108,16,96,10,77,8,59,10,48,15,44,20,46,28"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="215,8,322,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,36,199,28,199,34,150,41"/>
-<area shape="rect" id="Node000003" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="197,57,340,98"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="150,58,182,62,181,68,149,63"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="40,29,39,19,45,10,58,5,77,3,98,5,110,11,108,16,96,10,77,8,59,10,48,15,44,20,46,28"/>
+<area shape="rect" id="Node000002" href="$class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="197,29,340,70"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="149,47,181,47,181,52,149,52"/>
 </map>

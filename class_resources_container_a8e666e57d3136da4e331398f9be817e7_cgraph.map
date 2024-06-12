@@ -1,10 +1,9 @@
 <map id="ResourcesContainer::entriesCount" name="ResourcesContainer::entriesCount">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,24,144,65"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="378,36,485,62"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,21,191,10,261,3,331,10,388,27,387,32,329,15,261,8,192,15,140,26"/>
-<area shape="rect" id="Node000003" href="$class_resources_container.html#a3c38a9853548f264d01b01eca49a8672" title=" " alt="" coords="192,24,330,65"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="144,42,176,42,176,47,144,47"/>
-<area shape="rect" id="Node000004" href="$class_resources_container.html#a5977bb096781d3c2131750c94fea6ffd" title=" " alt="" coords="192,90,330,130"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="135,63,187,82,186,87,134,68"/>
-<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="319,87,379,65,381,70,320,92"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,71,144,111"/>
+<area shape="rect" id="Node000002" href="$class_resources_container.html#a3c38a9853548f264d01b01eca49a8672" title=" " alt="" coords="207,5,346,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,68,196,49,198,54,140,73"/>
+<area shape="rect" id="Node000003" href="$class_resource_content_wrapper.html#a92215e56ef0c8ddb7e775f7b1cdb9a6c" title=" " alt="" coords="192,71,361,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="144,88,176,88,176,94,144,94"/>
+<area shape="rect" id="Node000004" href="$class_resources_container.html#a5977bb096781d3c2131750c94fea6ffd" title=" " alt="" coords="207,136,346,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="140,109,198,128,196,133,139,114"/>
 </map>

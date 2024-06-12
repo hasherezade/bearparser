@@ -1,9 +1,6 @@
 <map id="pe_util::roundup" name="pe_util::roundup">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,117,56"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="340,5,447,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,27,164,16,248,10,325,11,325,17,248,16,165,21,107,33"/>
-<area shape="rect" id="Node000003" href="$namespacepe__util.html#a2a369e52bafe749186319d717122796e" title=" " alt="" coords="165,31,292,56"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="117,49,149,50,149,55,117,55"/>
-<area shape="poly" id="edge4_Node000003_Node000001" title=" " alt="" coords="164,37,132,37,132,32,164,32"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="292,31,324,26,325,31,293,36"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,117,31"/>
+<area shape="rect" id="Node000002" href="$namespacepe__util.html#a2a369e52bafe749186319d717122796e" title=" " alt="" coords="165,5,292,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,24,149,24,149,30,117,29"/>
+<area shape="poly" id="edge2_Node000002_Node000001" title=" " alt="" coords="164,12,132,12,132,7,164,7"/>
 </map>

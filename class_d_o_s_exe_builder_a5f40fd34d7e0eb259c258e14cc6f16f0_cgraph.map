@@ -1,14 +1,11 @@
 <map id="DOSExeBuilder::build" name="DOSExeBuilder::build">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,35,149,60"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="426,5,533,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,40,410,20,410,26,149,45"/>
-<area shape="rect" id="Node000003" href="$class_d_o_s_exe_builder.html#af61a6197a24802577d439e2ce587b3ca" title=" " alt="" coords="197,55,366,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,55,182,59,181,64,148,60"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="353,52,417,33,419,38,354,57"/>
-<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="414,55,544,96"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="367,73,398,73,398,78,367,78"/>
-<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="592,22,723,63"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="544,61,576,55,577,60,545,66"/>
-<area shape="rect" id="Node000006" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="592,87,723,128"/>
-<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="545,85,577,90,576,96,544,90"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,46,149,72"/>
+<area shape="rect" id="Node000002" href="$class_d_o_s_exe_builder.html#af61a6197a24802577d439e2ce587b3ca" title=" " alt="" coords="197,39,366,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,56,181,56,181,62,149,62"/>
+<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="414,39,544,79"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="367,56,398,56,398,62,367,62"/>
+<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="592,5,723,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="544,44,576,38,577,43,545,49"/>
+<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="592,71,723,111"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="545,68,577,74,576,79,544,73"/>
 </map>

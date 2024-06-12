@@ -1,9 +1,7 @@
 <map id="OptHdrWrapper::getHdrBitMode" name="OptHdrWrapper::getHdrBitMode">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,210,56"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="280,5,388,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,29,264,23,265,29,210,35"/>
-<area shape="rect" id="Node000003" href="$class_p_e_file.html#af2560116036624efbb020a312d8017b2" title=" " alt="" coords="258,55,410,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,52,243,55,242,60,210,57"/>
-<area shape="rect" id="Node000004" href="$class_p_e_core.html#ae19b9fc1ba78c32982baeda811479de1" title=" " alt="" coords="458,55,616,80"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="410,65,442,65,442,70,410,70"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,210,31"/>
+<area shape="rect" id="Node000002" href="$class_p_e_file.html#af2560116036624efbb020a312d8017b2" title=" " alt="" coords="258,5,410,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,16,242,16,242,21,210,21"/>
+<area shape="rect" id="Node000003" href="$class_p_e_core.html#ae19b9fc1ba78c32982baeda811479de1" title=" " alt="" coords="458,5,616,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="410,16,442,16,442,21,410,21"/>
 </map>

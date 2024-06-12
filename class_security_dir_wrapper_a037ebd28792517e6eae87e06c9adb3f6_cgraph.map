@@ -1,8 +1,5 @@
 <map id="SecurityDirWrapper::translateFieldContent" name="SecurityDirWrapper::translateFieldContent">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,5,156,46"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="384,13,491,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,20,204,19,336,19,369,20,369,25,336,24,204,24,156,26"/>
-<area shape="rect" id="Node000003" href="$class_security_dir_wrapper.html#ae527f94810e106aed6ae4246358e9ef1" title=" " alt="" coords="204,33,336,74"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="157,34,189,39,188,44,156,39"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="336,40,368,34,369,40,337,45"/>
+<area shape="rect" id="Node000002" href="$class_security_dir_wrapper.html#ae527f94810e106aed6ae4246358e9ef1" title=" " alt="" coords="204,5,336,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,23,188,23,188,28,156,28"/>
 </map>

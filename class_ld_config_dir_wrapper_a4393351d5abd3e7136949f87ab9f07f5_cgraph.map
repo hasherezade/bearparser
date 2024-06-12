@@ -1,8 +1,6 @@
 <map id="LdConfigDirWrapper::getSubfieldWrapperCount" name="LdConfigDirWrapper::getSubfieldWrapperCount">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,179,80"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="266,5,373,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,41,250,28,251,33,179,46"/>
-<area shape="rect" id="Node000003" href="$class_exe_node_wrapper.html#aacbf801e0cf579c0e16a7e27f8165693" title=" " alt="" coords="227,79,412,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,72,212,78,211,83,178,77"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="276,79,274,69,281,60,297,55,319,53,344,55,359,61,356,66,343,60,319,58,298,60,285,64,280,70,282,78"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,179,70"/>
+<area shape="rect" id="Node000002" href="$class_exe_node_wrapper.html#aacbf801e0cf579c0e16a7e27f8165693" title=" " alt="" coords="227,29,412,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,47,211,47,211,52,179,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="276,29,274,19,281,10,297,5,319,3,344,5,359,11,356,16,343,10,319,8,298,10,285,15,280,21,282,28"/>
 </map>

@@ -1,7 +1,5 @@
 <map id="ResourceDirWrapper::getFieldPtr" name="ResourceDirWrapper::getFieldPtr">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,27,146,68"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="210,5,318,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,34,194,26,195,32,146,39"/>
-<area shape="rect" id="Node000003" href="$class_resource_dir_wrapper.html#aadb74fc45784fe5b1c97982d35b02030" title=" " alt="" coords="194,55,334,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,55,179,60,178,65,146,61"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,146,46"/>
+<area shape="rect" id="Node000002" href="$class_resource_dir_wrapper.html#aadb74fc45784fe5b1c97982d35b02030" title=" " alt="" coords="194,5,334,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,23,178,23,178,28,146,28"/>
 </map>

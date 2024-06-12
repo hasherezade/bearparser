@@ -1,11 +1,9 @@
 <map id="ResourcesAlbum::wrapLeafsContent" name="ResourcesAlbum::wrapLeafsContent">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,26,193,67"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="487,34,594,59"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,23,240,12,340,3,384,5,440,12,492,25,491,30,438,17,383,10,340,8,241,17,179,28"/>
-<area shape="rect" id="Node000003" href="$class_resources_album.html#a48b7a8f6ac536d8c95d2ea976f468e38" title=" " alt="" coords="241,26,439,67"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,44,225,44,225,49,193,49"/>
-<area shape="rect" id="Node000004" href="$class_resource_content_factory.html#a0994d8fb70984e2b07f88ddb4c58add2" title=" " alt="" coords="252,91,428,132"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="177,65,248,84,247,89,176,70"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="439,44,471,44,471,49,439,49"/>
-<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="404,88,483,62,485,67,405,93"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,193,79"/>
+<area shape="rect" id="Node000002" href="$class_resources_album.html#a48b7a8f6ac536d8c95d2ea976f468e38" title=" " alt="" coords="241,5,439,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,43,225,39,225,44,193,49"/>
+<area shape="rect" id="Node000003" href="$class_resource_content_factory.html#a0994d8fb70984e2b07f88ddb4c58add2" title=" " alt="" coords="252,71,428,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,69,237,75,237,80,193,74"/>
+<area shape="rect" id="Node000004" href="$class_resource_leaf_wrapper.html#a2586189ea8f9cb8e67a1c8dbb2f6bb40" title=" " alt="" coords="487,71,637,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="428,88,471,88,471,94,428,94"/>
 </map>

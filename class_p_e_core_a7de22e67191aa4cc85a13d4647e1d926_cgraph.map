@@ -1,8 +1,5 @@
 <map id="PECore::getImageBase" name="PECore::getImageBase">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,5,161,31"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="407,5,514,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,16,391,16,391,21,161,21"/>
-<area shape="rect" id="Node000003" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="209,31,359,56"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,25,193,29,193,35,161,31"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="359,30,391,25,392,31,360,35"/>
+<area shape="rect" id="Node000002" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="209,5,359,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,16,193,16,193,21,161,21"/>
 </map>

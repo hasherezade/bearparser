@@ -1,13 +1,9 @@
 <map id="ResourcesAlbum::clear" name="ResourcesAlbum::clear">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,43,160,68"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="646,59,754,84"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,40,225,22,341,7,405,3,470,3,535,9,599,20,635,32,667,48,665,53,633,37,598,25,535,14,470,9,405,9,341,12,226,27,137,45"/>
-<area shape="rect" id="Node000003" href="$class_exe_node_wrapper.html#abd74c2637211cf471d022b528654c84c" title=" " alt="" coords="443,59,598,84"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="160,56,428,66,428,71,160,61"/>
-<area shape="rect" id="Node000004" href="$class_resources_album.html#a3787964dab392032ae17f74ba747b9d8" title=" " alt="" coords="208,93,395,133"/>
-<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="135,66,207,85,205,91,134,72"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="599,69,631,69,631,74,599,74"/>
-<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="490,60,484,50,488,40,500,34,521,32,542,35,554,41,551,46,541,40,521,37,502,39,492,44,490,50,495,57"/>
-<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="395,110,493,105,598,94,638,86,639,91,599,100,493,111,395,115"/>
-<area shape="poly" id="edge7_Node000004_Node000003" title=" " alt="" coords="395,93,434,85,435,91,396,98"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,160,55"/>
+<area shape="rect" id="Node000002" href="$class_exe_node_wrapper.html#abd74c2637211cf471d022b528654c84c" title=" " alt="" coords="443,29,598,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,37,208,36,395,36,427,36,427,42,395,41,208,41,160,42"/>
+<area shape="rect" id="Node000003" href="$class_resources_album.html#a3787964dab392032ae17f74ba747b9d8" title=" " alt="" coords="208,50,395,91"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="160,49,192,54,192,59,160,55"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="484,31,477,21,481,11,496,5,521,3,548,5,561,12,559,17,546,10,521,8,497,10,485,15,482,20,488,27"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="395,56,427,51,428,57,396,61"/>
 </map>

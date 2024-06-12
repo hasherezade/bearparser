@@ -1,14 +1,11 @@
 <map id="DOSExe::getMappedSize" name="DOSExe::getMappedSize">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,51,171,76"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="457,21,564,47"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,47,162,27,218,10,277,4,336,4,441,17,441,22,336,9,277,9,219,15,163,32,116,52"/>
-<area shape="rect" id="Node000003" href="$class_d_o_s_exe.html#a0dc602c68c8eb5b146b93112d86893a9" title=" " alt="" coords="238,25,378,51"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,51,223,45,223,50,171,57"/>
-<area shape="rect" id="Node000004" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="219,124,397,150"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="123,74,220,110,240,117,239,122,218,115,121,79"/>
-<area shape="rect" id="Node000006" href="$class_d_o_s_exe.html#a6a28586c07666b87f9273bd24c73e51b" title=" " alt="" coords="236,75,380,100"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="171,70,221,75,220,81,171,75"/>
-<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="445,116,575,157"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="397,134,429,134,429,139,397,139"/>
-<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="359,71,443,49,444,54,360,76"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,171,80"/>
+<area shape="rect" id="Node000002" href="$class_d_o_s_exe.html#a0dc602c68c8eb5b146b93112d86893a9" title=" " alt="" coords="238,5,378,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,51,232,32,233,38,149,57"/>
+<area shape="rect" id="Node000003" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="219,55,397,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,65,203,65,203,70,171,70"/>
+<area shape="rect" id="Node000005" href="$class_d_o_s_exe.html#a6a28586c07666b87f9273bd24c73e51b" title=" " alt="" coords="236,104,380,130"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="149,78,233,97,232,103,148,84"/>
+<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="445,47,575,88"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="397,65,429,65,429,70,397,70"/>
 </map>

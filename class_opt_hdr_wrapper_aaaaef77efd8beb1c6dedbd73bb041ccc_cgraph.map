@@ -1,12 +1,9 @@
 <map id="OptHdrWrapper::getFieldName" name="OptHdrWrapper::getFieldName">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,204,55"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="527,5,634,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,35,511,19,512,24,204,40"/>
-<area shape="rect" id="Node000003" href="$class_opt_hdr_wrapper.html#a41ebcb5b5723fb2b0c1b76388e4c7396" title=" " alt="" coords="252,55,456,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,50,236,53,236,58,204,55"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="416,51,511,30,512,36,417,57"/>
-<area shape="rect" id="Node000004" href="$class_p_e_file.html#af2560116036624efbb020a312d8017b2" title=" " alt="" coords="504,55,656,80"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="457,65,489,65,489,70,457,70"/>
-<area shape="rect" id="Node000005" href="$class_p_e_core.html#ae19b9fc1ba78c32982baeda811479de1" title=" " alt="" coords="704,55,863,80"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="657,65,689,65,689,70,657,70"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,204,31"/>
+<area shape="rect" id="Node000002" href="$class_opt_hdr_wrapper.html#a41ebcb5b5723fb2b0c1b76388e4c7396" title=" " alt="" coords="252,5,456,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,16,236,16,236,21,204,21"/>
+<area shape="rect" id="Node000003" href="$class_p_e_file.html#af2560116036624efbb020a312d8017b2" title=" " alt="" coords="504,5,656,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="457,16,489,16,489,21,457,21"/>
+<area shape="rect" id="Node000004" href="$class_p_e_core.html#ae19b9fc1ba78c32982baeda811479de1" title=" " alt="" coords="704,5,863,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="657,16,689,16,689,21,657,21"/>
 </map>

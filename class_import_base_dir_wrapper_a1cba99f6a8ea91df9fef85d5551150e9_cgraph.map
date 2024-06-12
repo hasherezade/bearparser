@@ -1,8 +1,6 @@
 <map id="ImportBaseDirWrapper::thunkToLib" name="ImportBaseDirWrapper::thunkToLib">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,35,158,76"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="246,5,353,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,40,230,27,231,32,159,45"/>
-<area shape="rect" id="Node000003" href="$class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="206,79,393,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,65,203,73,202,78,158,71"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="263,80,256,70,260,60,275,54,299,52,326,55,340,62,337,66,325,60,299,57,276,59,264,64,261,69,267,77"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,22,158,63"/>
+<area shape="rect" id="Node000002" href="$class_exe_node_wrapper.html#a6cce2ccdd539d5afa4eb463b34941123" title=" " alt="" coords="206,29,393,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,40,190,40,190,45,158,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="263,31,256,21,260,11,275,5,299,3,326,5,340,12,337,17,325,10,299,8,276,10,264,15,261,20,267,27"/>
 </map>

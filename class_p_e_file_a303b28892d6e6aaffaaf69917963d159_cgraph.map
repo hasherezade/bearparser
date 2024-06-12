@@ -1,13 +1,9 @@
 <map id="PEFile::~PEFile" name="PEFile::~PEFile">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,32,116,58"/>
-<area shape="rect" id="Node000002" href="$class_p_e_file.html#aa84f5074e8e5f9c6b29becd0ddfd523c" title=" " alt="" coords="164,32,312,58"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,42,149,42,149,47,116,47"/>
-<area shape="rect" id="Node000003" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="560,32,668,58"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="279,29,360,10,436,3,513,10,566,24,564,29,512,15,436,8,360,15,280,34"/>
-<area shape="rect" id="Node000004" href="$class_exe_wrappers_container.html#a54af5aa313aaa568653fb32395a80195" title=" " alt="" coords="360,24,512,65"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="313,42,345,42,345,47,313,47"/>
-<area shape="rect" id="Node000005" href="$class_p_e_file.html#a70787fd96ff91491b6926614ed41ef17" title=" " alt="" coords="367,89,505,115"/>
-<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="286,56,375,82,374,87,284,61"/>
-<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="513,42,545,42,545,47,513,47"/>
-<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="478,86,557,60,558,65,479,91"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,42,116,68"/>
+<area shape="rect" id="Node000002" href="$class_p_e_file.html#aa84f5074e8e5f9c6b29becd0ddfd523c" title=" " alt="" coords="164,42,312,68"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,52,149,52,149,58,116,58"/>
+<area shape="rect" id="Node000003" href="$class_exe_wrappers_container.html#a54af5aa313aaa568653fb32395a80195" title=" " alt="" coords="360,5,512,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="312,41,344,37,345,42,313,47"/>
+<area shape="rect" id="Node000004" href="$class_p_e_file.html#a70787fd96ff91491b6926614ed41ef17" title=" " alt="" coords="367,70,505,96"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="313,63,352,68,351,74,312,68"/>
 </map>

@@ -1,8 +1,6 @@
 <map id="ResourceDirWrapper::getEntriesAreaSize" name="ResourceDirWrapper::getEntriesAreaSize">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,146,80"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="233,5,340,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,43,217,29,218,34,147,48"/>
-<area shape="rect" id="Node000003" href="$class_exe_node_wrapper.html#aacbf801e0cf579c0e16a7e27f8165693" title=" " alt="" coords="194,79,379,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="147,70,179,76,178,82,146,75"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="246,79,244,69,251,60,265,55,286,53,309,55,323,61,321,66,308,60,286,58,266,60,254,64,250,70,252,78"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,146,70"/>
+<area shape="rect" id="Node000002" href="$class_exe_node_wrapper.html#aacbf801e0cf579c0e16a7e27f8165693" title=" " alt="" coords="194,29,379,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,47,178,47,178,52,146,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="246,29,244,19,251,10,265,5,286,3,309,5,323,11,321,16,308,10,286,8,266,10,254,15,250,20,252,28"/>
 </map>

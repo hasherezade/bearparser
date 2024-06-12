@@ -1,8 +1,5 @@
 <map id="ResourcesAlbum::getResourcesOfType" name="ResourcesAlbum::getResourcesOfType">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,5,212,46"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="483,13,590,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,23,468,23,468,28,212,28"/>
-<area shape="rect" id="Node000003" href="$class_resources_album.html#afa48907b5b2399ce63e6cebe56549a0b" title=" " alt="" coords="260,38,435,64"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,34,245,37,244,43,212,39"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="435,37,467,32,468,37,436,42"/>
+<area shape="rect" id="Node000002" href="$class_resources_album.html#afa48907b5b2399ce63e6cebe56549a0b" title=" " alt="" coords="260,13,435,39"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,23,244,23,244,28,212,28"/>
 </map>

@@ -1,14 +1,11 @@
 <map id="PEFile::secHdrsOffset" name="PEFile::secHdrsOffset">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,155,55"/>
-<area shape="rect" id="Node000002" href="$class_p_e_core.html#ac2d793b316b1ee2a64fa8ed606e028b8" title=" " alt="" coords="203,29,358,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,40,187,40,187,45,155,45"/>
-<area shape="rect" id="Node000003" href="$class_p_e_core.html#a6bf58c2b373385ac5ce05aa676dc43b7" title=" " alt="" coords="406,29,568,55"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="358,40,390,40,390,45,358,45"/>
-<area shape="rect" id="Node000004" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="861,5,968,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="569,35,845,19,845,25,569,40"/>
-<area shape="rect" id="Node000005" href="$class_p_e_core.html#a809ce6d61e968f409e6d630514b224bb" title=" " alt="" coords="616,55,779,80"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="569,49,601,53,600,59,568,55"/>
-<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="757,51,845,31,846,36,758,57"/>
-<area shape="rect" id="Node000006" href="$class_p_e_core.html#aa2ff4665d8b56b2a5e1e1e00bc446b18" title=" " alt="" coords="827,55,1002,80"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="779,65,811,65,811,70,779,70"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,155,31"/>
+<area shape="rect" id="Node000002" href="$class_p_e_core.html#ac2d793b316b1ee2a64fa8ed606e028b8" title=" " alt="" coords="203,5,358,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,16,187,16,187,21,155,21"/>
+<area shape="rect" id="Node000003" href="$class_p_e_core.html#a6bf58c2b373385ac5ce05aa676dc43b7" title=" " alt="" coords="406,5,568,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="358,16,390,16,390,21,358,21"/>
+<area shape="rect" id="Node000004" href="$class_p_e_core.html#a809ce6d61e968f409e6d630514b224bb" title=" " alt="" coords="616,5,779,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="569,16,601,16,601,21,569,21"/>
+<area shape="rect" id="Node000005" href="$class_p_e_core.html#aa2ff4665d8b56b2a5e1e1e00bc446b18" title=" " alt="" coords="827,5,1002,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="779,16,811,16,811,21,779,21"/>
 </map>

@@ -1,8 +1,5 @@
 <map id="FileHdrWrapper::translateCharacteristics" name="FileHdrWrapper::translateCharacteristics">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,5,173,46"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="448,13,555,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,23,432,23,432,28,173,28"/>
-<area shape="rect" id="Node000003" href="$class_file_hdr_wrapper.html#a65e7374f6ae6468b5fb772940721a602" title=" " alt="" coords="221,38,400,64"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,33,205,36,205,42,173,38"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="400,36,432,32,433,37,401,42"/>
+<area shape="rect" id="Node000002" href="$class_file_hdr_wrapper.html#a65e7374f6ae6468b5fb772940721a602" title=" " alt="" coords="221,13,400,39"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,23,205,23,205,28,173,28"/>
 </map>

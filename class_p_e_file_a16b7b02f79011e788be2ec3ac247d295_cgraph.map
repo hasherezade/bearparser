@@ -1,9 +1,7 @@
 <map id="PEFile::getSectionAlignment" name="PEFile::getSectionAlignment">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,191,56"/>
-<area shape="rect" id="Node000002" href="$class_p_e_file.html#acfaebe1d9ceb92b150eee6357cf1ca5c" title=" " alt="" coords="239,31,380,56"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,41,223,41,223,46,191,46"/>
-<area shape="rect" id="Node000003" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="448,5,555,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="380,32,432,25,433,30,381,37"/>
-<area shape="rect" id="Node000004" href="$class_p_e_core.html#a4acc20ded3755cb301f284b0de0b0652" title=" " alt="" coords="428,55,575,80"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="381,50,413,54,412,59,380,55"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,191,31"/>
+<area shape="rect" id="Node000002" href="$class_p_e_file.html#acfaebe1d9ceb92b150eee6357cf1ca5c" title=" " alt="" coords="239,5,380,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,16,223,16,223,21,191,21"/>
+<area shape="rect" id="Node000003" href="$class_p_e_core.html#a4acc20ded3755cb301f284b0de0b0652" title=" " alt="" coords="428,5,575,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="380,16,412,16,412,21,380,21"/>
 </map>

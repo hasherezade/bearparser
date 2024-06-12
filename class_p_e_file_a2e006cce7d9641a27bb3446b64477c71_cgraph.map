@@ -1,8 +1,5 @@
 <map id="PEFile::hasDirectory" name="PEFile::hasDirectory">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,5,143,31"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="394,5,501,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,16,379,16,379,21,143,21"/>
-<area shape="rect" id="Node000003" href="$class_p_e_file.html#a9c486bba23979268695ac6cdfcda318e" title=" " alt="" coords="191,31,346,56"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="143,24,175,29,175,34,143,30"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="346,30,378,25,379,31,347,35"/>
+<area shape="rect" id="Node000002" href="$class_p_e_file.html#a9c486bba23979268695ac6cdfcda318e" title=" " alt="" coords="191,5,346,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,16,175,16,175,21,143,21"/>
 </map>

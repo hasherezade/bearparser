@@ -1,8 +1,5 @@
 <map id="Formatter::operator[]" name="Formatter::operator[]">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,5,144,31"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="366,5,473,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,16,350,16,350,21,144,21"/>
-<area shape="rect" id="Node000003" href="$namespacepe__util.html#aad5182df7cffa8c7cbcadcf71ff60a19" title=" " alt="" coords="192,31,318,56"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="144,25,177,30,176,35,144,31"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="318,31,350,26,351,31,319,36"/>
+<area shape="rect" id="Node000002" href="$namespacepe__util.html#aad5182df7cffa8c7cbcadcf71ff60a19" title=" " alt="" coords="192,5,318,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,16,176,16,176,21,144,21"/>
 </map>

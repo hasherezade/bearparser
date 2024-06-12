@@ -1,12 +1,9 @@
 <map id="PEFile::getMappedSize" name="PEFile::getMappedSize">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,35,160,60"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="446,5,553,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,31,207,20,325,13,430,13,430,18,325,18,208,25,139,37"/>
-<area shape="rect" id="Node000003" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="208,84,386,110"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="142,58,224,77,222,83,141,64"/>
-<area shape="rect" id="Node000005" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="222,35,372,60"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="160,45,206,45,206,50,160,50"/>
-<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="434,77,564,117"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="386,94,418,94,418,100,386,100"/>
-<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="372,34,430,25,431,31,373,39"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,38,160,64"/>
+<area shape="rect" id="Node000002" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="208,13,386,39"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,39,192,35,193,41,161,45"/>
+<area shape="rect" id="Node000004" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="222,62,372,88"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="161,57,207,62,206,68,160,62"/>
+<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="434,5,564,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="386,23,418,23,418,28,386,28"/>
 </map>

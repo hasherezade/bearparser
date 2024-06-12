@@ -1,9 +1,6 @@
 <map id="ResourcesAlbum::clearLeafsContent" name="ResourcesAlbum::clearLeafsContent">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,193,46"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="444,13,551,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,14,241,11,318,8,396,11,429,14,428,19,396,16,318,14,241,16,193,19"/>
-<area shape="rect" id="Node000003" href="$class_exe_node_wrapper.html#abd74c2637211cf471d022b528654c84c" title=" " alt="" coords="241,50,396,76"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,39,226,45,225,50,192,44"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="383,47,429,37,430,42,384,52"/>
-<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="288,51,282,42,286,32,298,26,318,24,340,26,352,33,349,37,338,31,318,29,300,31,290,35,287,41,293,48"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,22,193,63"/>
+<area shape="rect" id="Node000002" href="$class_exe_node_wrapper.html#abd74c2637211cf471d022b528654c84c" title=" " alt="" coords="241,29,396,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,40,225,40,225,45,193,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="282,31,275,21,279,11,294,5,318,3,345,5,359,12,356,17,344,10,318,8,295,10,283,15,280,20,286,27"/>
 </map>

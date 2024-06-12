@@ -1,5 +1,7 @@
 <map id="AbstractFileBuffer::dump" name="AbstractFileBuffer::dump">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,131,46"/>
-<area shape="rect" id="Node000002" href="$_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="179,13,286,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,23,163,23,163,28,131,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,131,79"/>
+<area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="179,5,309,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,45,163,38,164,43,131,50"/>
+<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="179,71,309,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,68,164,74,163,79,130,73"/>
 </map>
