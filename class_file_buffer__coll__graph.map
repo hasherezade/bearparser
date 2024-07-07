@@ -1,10 +1,10 @@
 <map id="FileBuffer" name="FileBuffer">
-<area shape="rect" id="Node000001" title=" " alt="" coords="95,169,171,195"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="76,169,153,195"/>
 <area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html" title=" " alt="" coords="5,5,136,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,46,75,75,82,105,102,140,124,167,119,170,97,143,77,107,70,76,67,47"/>
-<area shape="rect" id="Node000004" href="$class_byte_buffer.html" title=" " alt="" coords="93,80,174,106"/>
-<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="93,41,125,78,121,82,89,45"/>
-<area shape="rect" id="Node000003" href="$class_abstract_file_buffer.html" title=" " alt="" coords="199,80,324,106"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,117,153,171,150,166,229,113"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="136,122,136,169,131,169,131,122"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,47,62,75,65,105,83,140,105,167,101,170,79,143,60,107,56,75,60,46"/>
+<area shape="rect" id="Node000004" href="$class_byte_buffer.html" title=" " alt="" coords="74,80,155,106"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="88,43,110,79,105,81,83,46"/>
+<area shape="rect" id="Node000003" href="$class_abstract_file_buffer.html" title=" " alt="" coords="180,80,305,106"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,117,134,171,131,166,211,113"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="117,122,117,169,112,169,112,122"/>
 </map>
