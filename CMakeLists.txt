@@ -7,7 +7,8 @@ option(CMD_BUILD_TESTING "Enable testing for bearcommander" ON)
 set ( M_BEARPARSER "parser" )
 set ( M_BEARCOMMANDER "commander" )
 
-option( USE_QT4 "Use Qt4 (Qt5 by default)" OFF )
+option(USE_QT4 "Use Qt4" OFF )
+option(USE_QT5 "Use Qt5" OFF )
 
 # modules paths:
 set (BEARPARSER_INC "${M_BEARPARSER}/include")
