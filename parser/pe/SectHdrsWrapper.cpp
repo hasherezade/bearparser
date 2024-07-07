@@ -534,7 +534,6 @@ QString SectHdrsWrapper::getFieldName(size_t fieldId)
 
 SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executable::addr_type addrType, bool recalculate, bool verbose)
 {
-    size_t size = this->entries.size();
     std::map<offset_t, SectionHdrWrapper*> *secMap = NULL;
 
     if (addrType == Executable::RAW) {
@@ -542,7 +541,7 @@ SectionHdrWrapper* SectHdrsWrapper::getSecHdrAtOffset(offset_t offset, Executabl
     } else if (addrType == Executable::RVA || addrType == Executable::VA) {
         secMap = &this->vSec;
     }
-    if (secMap == NULL) return NULL;
+    if (!secMap) return NULL;
 
     std::map<offset_t, SectionHdrWrapper*>::iterator found = secMap->lower_bound(offset);
     std::map<offset_t, SectionHdrWrapper*>::iterator itr;

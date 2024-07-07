@@ -87,8 +87,6 @@ uint64_t ImportedFuncWrapper::getThunkValue()
 
 bool ImportedFuncWrapper::isByOrdinal()
 {
-    bool isOk = false;
-
     void *p = getValuePtr(ImportEntryWrapper::ORIG_FIRST_THUNK);
     if (!p) p = getValuePtr(ImportEntryWrapper::FIRST_THUNK);
     if (!p) return false;
@@ -122,12 +120,8 @@ bufsize_t ImportedFuncWrapper::getSize()
 
 void* ImportedFuncWrapper::getFieldPtr(size_t fId, size_t subField)
 {
-    bool is64 = isBit64();
     void *entryPtr = this->getPtr();
     if (entryPtr == NULL) return NULL;
-
-    IMAGE_THUNK_DATA32* en32 = is64 ? NULL : (IMAGE_THUNK_DATA32*) entryPtr;
-    IMAGE_THUNK_DATA64* en64 = is64 ? (IMAGE_THUNK_DATA64*) entryPtr : NULL;
 
     switch (fId) {
         case ORIG_THUNK: return (void*) getValuePtr(ImportEntryWrapper::ORIG_FIRST_THUNK);

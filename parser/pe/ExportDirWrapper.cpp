@@ -56,14 +56,13 @@ size_t ExportDirWrapper::mapNames()
         nameOrdRVA += sizeof(WORD);
         //nameRVA += sizeof(DWORD);
     }
-    //printf("parsed num: %d\n", this->ordToNameRVA.size());
     return i;
 }
 
 bool ExportDirWrapper::wrap()
 {
     clear();
-    size_t mapNum = mapNames();
+    mapNames();
 
     IMAGE_EXPORT_DIRECTORY* exp = exportDir();
     if (exp == NULL) return 0;
