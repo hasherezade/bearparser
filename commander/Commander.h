@@ -39,6 +39,7 @@ friend class Commander;
 class Command
 {
 public:
+    Command() {}
     Command(const std::string& v_desc) : desc(v_desc) {}
     virtual ~Command() {}
 

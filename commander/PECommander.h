@@ -101,8 +101,6 @@ public:
 
        cmd_util::printStrings(pe, limit);
     }
-protected:
-    int wrapperId; //TODO: fetch it from params!
 };
 
 class PrintWrapperTypesCommand : public Command
