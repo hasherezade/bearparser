@@ -208,9 +208,12 @@ public:
         PEFile *pe = cmd_util::getPEFromContext(context);
         if (!pe) return;
 
-        size_t sectHdrCount = pe->getSectionsCount(false);
-        size_t sectCount = pe->getSectionsCount(true);
+        const size_t sectHdrCount = pe->getSectionsCount(false);
+        const size_t sectCount = pe->getSectionsCount(true);
         std:: cout << "Sections count = " << std::dec << sectCount << "\n";
+        if (sectCount < sectHdrCount) {
+            std::cout << "WARNING: Not all declared sections are mapped! Declared: "  << std::dec << sectHdrCount << "\n";
+        }
         if (sectCount == 0) {
             //no sections, cannot list
             return;
