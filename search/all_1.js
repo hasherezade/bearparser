@@ -17,5 +17,8 @@ var searchData=
   ['alltypes_14',['allTypes',['../class_resources_album.html#a4d90ee8c8bda3be316682910103ffedc',1,'ResourcesAlbum']]],
   ['allwrappers_15',['allWrappers',['../class_resources_album.html#afede7c622220c8f750c1b906fc38af6a',1,'ResourcesAlbum']]],
   ['append_16',['append',['../namespace_logger.html#a36e3deee152da96a491b670a00d224c9',1,'Logger']]],
-  ['attrs_17',['ATTRS',['../class_delay_imp_entry_wrapper.html#ab3020a74b9682cd49e18c1da1e8096faa89a76d323dd34b635c8cf3fa80e65f92',1,'DelayImpEntryWrapper']]]
+  ['arch_5farm_17',['ARCH_ARM',['../class_executable.html#ae50d17f8bc9d8a8bf520593f81803186aae269d4846788edce37e4dc8d721b067',1,'Executable']]],
+  ['arch_5fintel_18',['ARCH_INTEL',['../class_executable.html#ae50d17f8bc9d8a8bf520593f81803186ad4e524138a13dd7b5d94fcdf007fdc0f',1,'Executable']]],
+  ['arch_5funknown_19',['ARCH_UNKNOWN',['../class_executable.html#ae50d17f8bc9d8a8bf520593f81803186a3b36fcfbe78f5f2320d8f0d68f7947b8',1,'Executable']]],
+  ['attrs_20',['ATTRS',['../class_delay_imp_entry_wrapper.html#ab3020a74b9682cd49e18c1da1e8096faa89a76d323dd34b635c8cf3fa80e65f92',1,'DelayImpEntryWrapper']]]
 ];
