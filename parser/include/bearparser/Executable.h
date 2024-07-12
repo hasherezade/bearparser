@@ -31,6 +31,12 @@ public:
         BITS_32 = 32,
         BITS_64 = 64,
     };
+	
+	enum exe_arch {
+		ARCH_UNKNOWN = 0,
+		ARCH_INTEL = 1,
+		ARCH_ARM = 2
+	};
 
     enum addr_type {
         NOT_ADDR = 0,

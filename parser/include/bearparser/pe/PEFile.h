@@ -71,6 +71,7 @@ public:
     virtual offset_t getEntryPoint(Executable::addr_type addrType = Executable::RVA); // returns INVALID_ADDR if failed
 
     virtual exe_bits getBitMode() { return getHdrBitMode(); }
+    virtual exe_arch getArch() { return getHdrArch(); }
     //---
     // PEFile only:
     offset_t peFileHdrOffset() const { return core.peFileHdrOffset(); }
@@ -94,6 +95,8 @@ public:
 
     exe_bits getHdrBitMode() { return core.getHdrBitMode(); }
 
+    exe_arch getHdrArch() { return core.getHdrArch(); }
+    
 /* mutex protected: section operations */
 
     offset_t getLastMapped(Executable::addr_type aType)

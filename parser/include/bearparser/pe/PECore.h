@@ -25,6 +25,7 @@ public:
     virtual bufsize_t getImageSize();
 
     Executable::exe_bits getHdrBitMode() const;
+    Executable::exe_arch getHdrArch() const;
     offset_t peSignatureOffset() const;
     offset_t peFileHdrOffset() const;
     offset_t secHdrsOffset() const;

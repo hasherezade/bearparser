@@ -56,6 +56,20 @@ Executable::exe_bits PECore::getHdrBitMode() const
     return Executable::BITS_32; // DEFAULT
 }
 
+Executable::exe_arch PECore::getHdrArch() const
+{
+    if (!this->fHdr) {
+        return Executable::ARCH_UNKNOWN;
+    }
+    if (this->fHdr->Machine == M_I386 || this->fHdr->Machine == M_AMD64) {
+        return Executable::ARCH_INTEL;
+    }
+    if (this->fHdr->Machine == M_ARM || this->fHdr->Machine == M_ARM64LE) {
+        return Executable::ARCH_ARM;
+    }
+    return Executable::ARCH_UNKNOWN;
+}
+
 offset_t PECore::peSignatureOffset() const
 {
     if (!dos) return INVALID_ADDR;
