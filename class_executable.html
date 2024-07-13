@@ -139,6 +139,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7b97bf825e213b49b13b076b591c8bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f2044788eb57c73903dca8e6a0477c2" id="r_a2f2044788eb57c73903dca8e6a0477c2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="#a2f0aa130b569d7d8f56ec7c746d08684">exe_bits</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f2044788eb57c73903dca8e6a0477c2">getBitMode</a> ()</td></tr>
 <tr class="separator:a2f2044788eb57c73903dca8e6a0477c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a383c8f5a1b5d5c71c3045855de826d90" id="r_a383c8f5a1b5d5c71c3045855de826d90"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="#ae50d17f8bc9d8a8bf520593f81803186">exe_arch</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a383c8f5a1b5d5c71c3045855de826d90">getArch</a> ()=0</td></tr>
+<tr class="separator:a383c8f5a1b5d5c71c3045855de826d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb23198ec798984f5b1cf6a3139be8f2" id="r_aeb23198ec798984f5b1cf6a3139be8f2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb23198ec798984f5b1cf6a3139be8f2">getContentSize</a> ()</td></tr>
 <tr class="separator:aeb23198ec798984f5b1cf6a3139be8f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66e5a30580de455968bd682da7781af4" id="r_a66e5a30580de455968bd682da7781af4"><td class="memItemLeft" align="right" valign="top">virtual BYTE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66e5a30580de455968bd682da7781af4">getContent</a> ()</td></tr>
@@ -354,7 +356,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00053">53</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00054">54</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 
 </div>
 </div>
@@ -588,7 +590,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_p_e_file.html#a601394b4354a7b4091bef37c00345868">PEFile</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00075">75</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00077">77</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -599,6 +601,33 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="195,16,227,16,227,21,195,21"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="a383c8f5a1b5d5c71c3045855de826d90" name="a383c8f5a1b5d5c71c3045855de826d90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a383c8f5a1b5d5c71c3045855de826d90">&#9670;&#160;</a></span>getArch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="#ae50d17f8bc9d8a8bf520593f81803186">exe_arch</a> Executable::getArch </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_d_o_s_exe.html#aa933fb4fcec4dc905d1f6c17d91ce0f9">DOSExe</a>, and <a class="el" href="class_p_e_file.html#abbc44f22a413a4877bb4fb430c709e66">PEFile</a>.</p>
 
 </div>
 </div>
@@ -627,7 +656,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_p_e_file.html#ad3a9277a8a87d1f8aebffc93551e2665">PEFile</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00055">55</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00056">56</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 
 </div>
 </div>
@@ -656,7 +685,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a">AbstractByteBuffer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00058">58</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00060">60</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -704,7 +733,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d">AbstractByteBuffer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00063">63</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00065">65</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -830,7 +859,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_abstract_byte_buffer.html#a1bb3488a20437ae30801b5f1b30d10ca">AbstractByteBuffer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00062">62</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00064">64</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -879,7 +908,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577">AbstractByteBuffer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00057">57</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00059">59</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -943,7 +972,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00122">122</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00124">124</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 
 </div>
 </div>
@@ -1057,7 +1086,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00072">72</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00074">74</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1121,7 +1150,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00060">60</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00062">62</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1158,7 +1187,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00051">51</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00052">52</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1194,7 +1223,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00048">48</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00049">49</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1231,7 +1260,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00050">50</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00051">51</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1267,7 +1296,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00047">47</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00048">48</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1306,7 +1335,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_abstract_byte_buffer.html#a20e43caa5780d199dd1d7d919f9d590e">AbstractByteBuffer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00117">117</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00119">119</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1345,7 +1374,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_abstract_byte_buffer.html#a113d0f29022df23ed74ff1c171df8c82">AbstractByteBuffer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00119">119</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00121">121</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1425,7 +1454,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00084">84</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00086">86</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1497,7 +1526,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_mapped_exe.html#a48c66e1ace578bb506e5beb7f1b661cc">MappedExe</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00115">115</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00117">117</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1561,7 +1590,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00099">99</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00101">101</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1660,7 +1689,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00105">105</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00107">107</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1752,7 +1781,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00130">130</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00132">132</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 
 </div>
 </div>
@@ -1776,7 +1805,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00131">131</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_executable_8h_source.html#l00133">133</a> of file <a class="el" href="_executable_8h_source.html">Executable.h</a>.</p>
 
 </div>
 </div>
