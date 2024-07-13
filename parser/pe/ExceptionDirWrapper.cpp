@@ -9,6 +9,12 @@ typedef struct _IMAGE_IA64_RUNTIME_FUNCTION_ENTRY {
 } IMAGE_IA64_RUNTIME_FUNCTION_ENTRY, *PIMAGE_IA64_RUNTIME_FUNCTION_ENTRY;
 */
 
+typedef struct _ARM_EXCEPT_RECORD {
+    DWORD Start;
+    DWORD Xdata;
+} ARM_EXCEPT_RECORD;
+
+
 bool ExceptionDirWrapper::wrap()
 {
     clear();
@@ -60,7 +66,7 @@ void* ExceptionDirWrapper::getPtr()
     }
     return first;
 }
-
+/*
 IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* ExceptionDirWrapper::exceptFunc64()
 {
     offset_t rva = getDirEntryAddress();
@@ -70,7 +76,7 @@ IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* ExceptionDirWrapper::exceptFunc64()
     IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exc = (IMAGE_IA64_RUNTIME_FUNCTION_ENTRY*) ptr;
     return exc;
 }
-
+*/
 //----------------
 
 void* ExceptionEntryWrapper::getPtr()
@@ -117,15 +123,18 @@ size_t ExceptionEntryWrapper::getFieldsCount()
         return FIELD_COUNTER; 
     }
     else if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
-        return 1;
+        return 2;
     }
     return 0;
 }
 
 void* ExceptionEntryWrapper::getFieldPtr(size_t fieldId, size_t subField)
 {
+    void *ptr = this->getPtr();
+    if (!ptr) return nullptr;
+    
     if (this->m_Exe->getArch() == Executable::ARCH_INTEL) {
-        IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exc = (IMAGE_IA64_RUNTIME_FUNCTION_ENTRY*) this->getPtr();
+        IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exc = (IMAGE_IA64_RUNTIME_FUNCTION_ENTRY*) ptr;
         if (!exc) return NULL;
 
         switch (fieldId) {
@@ -134,12 +143,16 @@ void* ExceptionEntryWrapper::getFieldPtr(size_t fieldId, size_t subField)
             case UNWIND_INFO_ADDR : return &exc->UnwindInfoAddress;
         }
     }
-    if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
+    else if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
+        ARM_EXCEPT_RECORD *rec = (ARM_EXCEPT_RECORD*) ptr;
+        if (!rec) return NULL;
+        
         switch (fieldId) {
-            case BEGIN_ADDR : this->getPtr();
+            case BEGIN_ADDR : return &rec->Start;
+            case END_ADDR : return &rec->Xdata;
         }
     }
-    return getPtr();
+    return ptr;
 }
 
 QString ExceptionEntryWrapper::getFieldName(size_t fieldId)
@@ -152,8 +165,9 @@ QString ExceptionEntryWrapper::getFieldName(size_t fieldId)
         }
         return "";
     }
-    if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
-        if (fieldId == BEGIN_ADDR) return "Record";
+    else if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
+        if (fieldId == BEGIN_ADDR) return "Start";
+        if (fieldId == END_ADDR) return "XData";
     }
     return getName();
 }
@@ -165,6 +179,13 @@ Executable::addr_type ExceptionEntryWrapper::containsAddrType(size_t fieldId, si
             case BEGIN_ADDR :
             case END_ADDR :
             case UNWIND_INFO_ADDR :
+                return Executable::RVA;
+        }
+    }
+    else if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
+        switch (fieldId) {
+            case BEGIN_ADDR :
+            case END_ADDR :
                 return Executable::RVA;
         }
     }

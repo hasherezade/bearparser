@@ -23,9 +23,6 @@ public:
     virtual QString getFieldName(size_t fieldId) { return "Exceptions Block"; }
     virtual QString getFieldName(size_t fieldId, size_t subField) { return getSubfieldName(fieldId, subField); }
 
-protected:
-    IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exceptFunc64();
-
 private:
     bufsize_t parsedSize;
 
