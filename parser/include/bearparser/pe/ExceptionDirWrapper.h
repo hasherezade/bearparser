@@ -29,17 +29,25 @@ private:
 friend class ExceptionEntryWrapper;
 };
 
-
+#define ARM_XDATA_FLAG 0x3
+    
 class ExceptionEntryWrapper : public ExeNodeWrapper
 {
 public:
     // fields :
-    enum ExceptionBlockFID {
+    enum ExceptionBlockFID_Intel {
         NONE = FIELD_NONE,
         BEGIN_ADDR,
         END_ADDR,
         UNWIND_INFO_ADDR,
         FIELD_COUNTER
+    };
+    
+    enum ExceptionBlockFID_Arm64 {
+        ARM_EXCEPT_NONE = FIELD_NONE,
+        ARM_EXCEPT_START = ExceptionEntryWrapper::BEGIN_ADDR,
+        ARM_EXCEPT_XDATA = ExceptionEntryWrapper::END_ADDR,
+        ARM_EXCEPT_FIELD_COUNTER
     };
 
     ExceptionEntryWrapper(Executable *pe, ExceptionDirWrapper *parentDir, size_t entryNumber)

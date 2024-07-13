@@ -66,17 +66,7 @@ void* ExceptionDirWrapper::getPtr()
     }
     return first;
 }
-/*
-IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* ExceptionDirWrapper::exceptFunc64()
-{
-    offset_t rva = getDirEntryAddress();
-    BYTE *ptr = m_Exe->getContentAt(rva, Executable::RVA, sizeof(IMAGE_IA64_RUNTIME_FUNCTION_ENTRY));
-    if (ptr == NULL) return NULL;
 
-    IMAGE_IA64_RUNTIME_FUNCTION_ENTRY* exc = (IMAGE_IA64_RUNTIME_FUNCTION_ENTRY*) ptr;
-    return exc;
-}
-*/
 //----------------
 
 void* ExceptionEntryWrapper::getPtr()
@@ -120,10 +110,10 @@ bufsize_t ExceptionEntryWrapper::getSize()
 size_t ExceptionEntryWrapper::getFieldsCount()
 {
     if (this->m_Exe->getArch() == Executable::ARCH_INTEL) {
-        return FIELD_COUNTER; 
+        return ExceptionBlockFID_Intel::FIELD_COUNTER; 
     }
     else if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
-        return 2;
+        return ExceptionBlockFID_Arm64::ARM_EXCEPT_FIELD_COUNTER;
     }
     return 0;
 }
@@ -148,8 +138,8 @@ void* ExceptionEntryWrapper::getFieldPtr(size_t fieldId, size_t subField)
         if (!rec) return NULL;
         
         switch (fieldId) {
-            case BEGIN_ADDR : return &rec->Start;
-            case END_ADDR : return &rec->Xdata;
+            case ARM_EXCEPT_START : return &rec->Start;
+            case ARM_EXCEPT_XDATA : return &rec->Xdata;
         }
     }
     return ptr;
@@ -166,8 +156,10 @@ QString ExceptionEntryWrapper::getFieldName(size_t fieldId)
         return "";
     }
     else if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
-        if (fieldId == BEGIN_ADDR) return "Start";
-        if (fieldId == END_ADDR) return "XData";
+        switch (fieldId) {
+            case ARM_EXCEPT_START : return "Start";
+            case ARM_EXCEPT_XDATA : return "XData";
+        }
     }
     return getName();
 }
@@ -183,11 +175,18 @@ Executable::addr_type ExceptionEntryWrapper::containsAddrType(size_t fieldId, si
         }
     }
     else if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
-        switch (fieldId) {
-            case BEGIN_ADDR :
-            case END_ADDR :
-                return Executable::RVA;
-        }
+
+        if (fieldId == ARM_EXCEPT_START) return Executable::RVA;
+        if (fieldId == ARM_EXCEPT_XDATA) {
+            ARM_EXCEPT_RECORD *rec = (ARM_EXCEPT_RECORD*) this->getPtr();
+            if (!rec) return Executable::NOT_ADDR;
+            
+            if (rec->Xdata & ARM_XDATA_FLAG) {
+                return Executable::NOT_ADDR;
+            }
+            return Executable::RVA;
+        }  
+
     }
     return Executable::NOT_ADDR;
 }
