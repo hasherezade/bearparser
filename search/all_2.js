@@ -3,7 +3,7 @@ var searchData=
   ['base_0',['BASE',['../class_export_dir_wrapper.html#a22dd158da711b958e68d34e6d415e9f7af91fac5edd28e1bfb93dbda1b2b721ed',1,'ExportDirWrapper']]],
   ['bearparser_2eh_1',['bearparser.h',['../bearparser_8h.html',1,'']]],
   ['bearparser_5fversion_2',['BEARPARSER_VERSION',['../bearparser_8h.html#ada50c83fcdca1ea570bce475be44833a',1,'bearparser.h']]],
-  ['begin_5faddr_3',['BEGIN_ADDR',['../class_exception_entry_wrapper.html#a84568192904db189455113ad1f4963faa3a6b575509c2cabaf82ca0d17c0b0ced',1,'ExceptionEntryWrapper']]],
+  ['begin_5faddr_3',['BEGIN_ADDR',['../class_exception_entry_wrapper.html#afc5c0e1a065e581112a2fb1791a13beba3a6b575509c2cabaf82ca0d17c0b0ced',1,'ExceptionEntryWrapper']]],
   ['bitmode_4',['bitMode',['../class_executable.html#a9bfc2eab99bf8c4846a3a11c2691006d',1,'Executable']]],
   ['bits_5f16_5',['BITS_16',['../class_executable.html#a2f0aa130b569d7d8f56ec7c746d08684ad360fcfd63e52c71b68573a9a495b8cb',1,'Executable']]],
   ['bits_5f32_6',['BITS_32',['../class_executable.html#a2f0aa130b569d7d8f56ec7c746d08684ade6e5cfe04548ba12f4eb9646b9b091f',1,'Executable']]],

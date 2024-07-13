@@ -116,16 +116,22 @@ Collaboration diagram for ExceptionEntryWrapper:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a84568192904db189455113ad1f4963fa" id="r_a84568192904db189455113ad1f4963fa"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84568192904db189455113ad1f4963fa">ExceptionBlockFID</a> { <br />
-&#160;&#160;<a class="el" href="#a84568192904db189455113ad1f4963faa3c9f6c0e85bf94b86507faa162ae6d75">NONE</a> = FIELD_NONE
-, <a class="el" href="#a84568192904db189455113ad1f4963faa3a6b575509c2cabaf82ca0d17c0b0ced">BEGIN_ADDR</a>
-, <a class="el" href="#a84568192904db189455113ad1f4963faacac5bc77db162f5c15f058e2c68ad166">END_ADDR</a>
-, <a class="el" href="#a84568192904db189455113ad1f4963faa79212ef4241418e80bb4770198792cf6">UNWIND_INFO_ADDR</a>
+<tr class="memitem:afc5c0e1a065e581112a2fb1791a13beb" id="r_afc5c0e1a065e581112a2fb1791a13beb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc5c0e1a065e581112a2fb1791a13beb">ExceptionBlockFID_Intel</a> { <br />
+&#160;&#160;<a class="el" href="#afc5c0e1a065e581112a2fb1791a13beba3c9f6c0e85bf94b86507faa162ae6d75">NONE</a> = FIELD_NONE
+, <a class="el" href="#afc5c0e1a065e581112a2fb1791a13beba3a6b575509c2cabaf82ca0d17c0b0ced">BEGIN_ADDR</a>
+, <a class="el" href="#afc5c0e1a065e581112a2fb1791a13bebacac5bc77db162f5c15f058e2c68ad166">END_ADDR</a>
+, <a class="el" href="#afc5c0e1a065e581112a2fb1791a13beba79212ef4241418e80bb4770198792cf6">UNWIND_INFO_ADDR</a>
 , <br />
-&#160;&#160;<a class="el" href="#a84568192904db189455113ad1f4963faa9ab51a13e13d8850f1377d66baf13264">FIELD_COUNTER</a>
+&#160;&#160;<a class="el" href="#afc5c0e1a065e581112a2fb1791a13beba9ab51a13e13d8850f1377d66baf13264">FIELD_COUNTER</a>
 <br />
  }</td></tr>
-<tr class="separator:a84568192904db189455113ad1f4963fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:afc5c0e1a065e581112a2fb1791a13beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a372186eeead9b7d515d485c56c248596" id="r_a372186eeead9b7d515d485c56c248596"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a372186eeead9b7d515d485c56c248596">ExceptionBlockFID_Arm64</a> { <a class="el" href="#a372186eeead9b7d515d485c56c248596ad0a704537950026830dbd4563725d260">ARM_EXCEPT_NONE</a> = FIELD_NONE
+, <a class="el" href="#a372186eeead9b7d515d485c56c248596a7f9bfb12b0813e9c2e001da4039e56c8">ARM_EXCEPT_START</a> = ExceptionEntryWrapper::BEGIN_ADDR
+, <a class="el" href="#a372186eeead9b7d515d485c56c248596a79290b6516bb24ca9776fe9ac47e9e8f">ARM_EXCEPT_XDATA</a> = ExceptionEntryWrapper::END_ADDR
+, <a class="el" href="#a372186eeead9b7d515d485c56c248596a31c085fd3c7ebac9f089e26fa3218050">ARM_EXCEPT_FIELD_COUNTER</a>
+ }</td></tr>
+<tr class="separator:a372186eeead9b7d515d485c56c248596"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -317,28 +323,50 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00033">33</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00034">34</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="a84568192904db189455113ad1f4963fa" name="a84568192904db189455113ad1f4963fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84568192904db189455113ad1f4963fa">&#9670;&#160;</a></span>ExceptionBlockFID</h2>
+<a id="a372186eeead9b7d515d485c56c248596" name="a372186eeead9b7d515d485c56c248596"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a372186eeead9b7d515d485c56c248596">&#9670;&#160;</a></span>ExceptionBlockFID_Arm64</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="#a84568192904db189455113ad1f4963fa">ExceptionEntryWrapper::ExceptionBlockFID</a></td>
+          <td class="memname">enum <a class="el" href="#a372186eeead9b7d515d485c56c248596">ExceptionEntryWrapper::ExceptionBlockFID_Arm64</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a84568192904db189455113ad1f4963faa3c9f6c0e85bf94b86507faa162ae6d75" name="a84568192904db189455113ad1f4963faa3c9f6c0e85bf94b86507faa162ae6d75"></a>NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a84568192904db189455113ad1f4963faa3a6b575509c2cabaf82ca0d17c0b0ced" name="a84568192904db189455113ad1f4963faa3a6b575509c2cabaf82ca0d17c0b0ced"></a>BEGIN_ADDR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a84568192904db189455113ad1f4963faacac5bc77db162f5c15f058e2c68ad166" name="a84568192904db189455113ad1f4963faacac5bc77db162f5c15f058e2c68ad166"></a>END_ADDR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a84568192904db189455113ad1f4963faa79212ef4241418e80bb4770198792cf6" name="a84568192904db189455113ad1f4963faa79212ef4241418e80bb4770198792cf6"></a>UNWIND_INFO_ADDR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a84568192904db189455113ad1f4963faa9ab51a13e13d8850f1377d66baf13264" name="a84568192904db189455113ad1f4963faa9ab51a13e13d8850f1377d66baf13264"></a>FIELD_COUNTER&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a372186eeead9b7d515d485c56c248596ad0a704537950026830dbd4563725d260" name="a372186eeead9b7d515d485c56c248596ad0a704537950026830dbd4563725d260"></a>ARM_EXCEPT_NONE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a372186eeead9b7d515d485c56c248596a7f9bfb12b0813e9c2e001da4039e56c8" name="a372186eeead9b7d515d485c56c248596a7f9bfb12b0813e9c2e001da4039e56c8"></a>ARM_EXCEPT_START&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a372186eeead9b7d515d485c56c248596a79290b6516bb24ca9776fe9ac47e9e8f" name="a372186eeead9b7d515d485c56c248596a79290b6516bb24ca9776fe9ac47e9e8f"></a>ARM_EXCEPT_XDATA&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a372186eeead9b7d515d485c56c248596a31c085fd3c7ebac9f089e26fa3218050" name="a372186eeead9b7d515d485c56c248596a31c085fd3c7ebac9f089e26fa3218050"></a>ARM_EXCEPT_FIELD_COUNTER&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00037">37</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00046">46</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
+
+</div>
+</div>
+<a id="afc5c0e1a065e581112a2fb1791a13beb" name="afc5c0e1a065e581112a2fb1791a13beb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc5c0e1a065e581112a2fb1791a13beb">&#9670;&#160;</a></span>ExceptionBlockFID_Intel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#afc5c0e1a065e581112a2fb1791a13beb">ExceptionEntryWrapper::ExceptionBlockFID_Intel</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="afc5c0e1a065e581112a2fb1791a13beba3c9f6c0e85bf94b86507faa162ae6d75" name="afc5c0e1a065e581112a2fb1791a13beba3c9f6c0e85bf94b86507faa162ae6d75"></a>NONE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afc5c0e1a065e581112a2fb1791a13beba3a6b575509c2cabaf82ca0d17c0b0ced" name="afc5c0e1a065e581112a2fb1791a13beba3a6b575509c2cabaf82ca0d17c0b0ced"></a>BEGIN_ADDR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afc5c0e1a065e581112a2fb1791a13bebacac5bc77db162f5c15f058e2c68ad166" name="afc5c0e1a065e581112a2fb1791a13bebacac5bc77db162f5c15f058e2c68ad166"></a>END_ADDR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afc5c0e1a065e581112a2fb1791a13beba79212ef4241418e80bb4770198792cf6" name="afc5c0e1a065e581112a2fb1791a13beba79212ef4241418e80bb4770198792cf6"></a>UNWIND_INFO_ADDR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afc5c0e1a065e581112a2fb1791a13beba9ab51a13e13d8850f1377d66baf13264" name="afc5c0e1a065e581112a2fb1791a13beba9ab51a13e13d8850f1377d66baf13264"></a>FIELD_COUNTER&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00038">38</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -375,7 +403,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00045">45</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00053">53</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -409,15 +437,69 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_exe_element_wrapper.html#a8108914de5353bd75c8874bb3fb17129">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00175">175</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00167">167</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_exception_entry_wrapper_ae9404e5cb638b5c444aec3ffefacf096_cgraph.png" border="0" usemap="#aclass_exception_entry_wrapper_ae9404e5cb638b5c444aec3ffefacf096_cgraph" alt=""/></div>
 <map name="aclass_exception_entry_wrapper_ae9404e5cb638b5c444aec3ffefacf096_cgraph" id="aclass_exception_entry_wrapper_ae9404e5cb638b5c444aec3ffefacf096_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,160,46"/>
-<area shape="rect" href="class_executable.html#a383c8f5a1b5d5c71c3045855de826d90" title=" " alt="" coords="208,13,343,39"/>
-<area shape="poly" title=" " alt="" coords="160,23,193,23,193,28,160,28"/>
+<area shape="rect" title=" " alt="" coords="5,165,160,206"/>
+<area shape="rect" href="class_executable.html#a383c8f5a1b5d5c71c3045855de826d90" title=" " alt="" coords="615,145,750,171"/>
+<area shape="poly" title=" " alt="" coords="160,179,599,159,600,164,160,185"/>
+<area shape="rect" href="class_exception_entry_wrapper.html#a1ecd385f9c3e17306844d5a32be36461" title=" " alt="" coords="208,216,362,257"/>
+<area shape="poly" title=" " alt="" coords="161,202,193,211,192,216,159,208"/>
+<area shape="poly" title=" " alt="" coords="362,213,409,202,599,167,600,173,411,207,363,218"/>
+<area shape="rect" href="class_executable.html#a2f2044788eb57c73903dca8e6a0477c2" title=" " alt="" coords="604,310,761,336"/>
+<area shape="poly" title=" " alt="" coords="321,255,363,277,411,295,501,313,589,320,588,325,501,318,409,300,361,282,318,259"/>
+<area shape="rect" href="class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="599,196,766,221"/>
+<area shape="poly" title=" " alt="" coords="362,228,583,213,584,218,363,234"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a98ca205ec6f2d2deacd32327409a3539" title=" " alt="" coords="1456,423,1599,463"/>
+<area shape="poly" title=" " alt="" coords="311,255,372,302,460,358,512,384,567,405,624,419,681,424,1137,424,1298,428,1440,435,1440,440,1298,433,1137,430,681,430,623,424,565,410,510,389,458,363,369,307,308,259"/>
+<area shape="rect" href="class_exception_dir_wrapper.html#af3a057e5c31434c34098c067e28013f5" title=" " alt="" coords="410,245,551,286"/>
+<area shape="poly" title=" " alt="" coords="363,245,395,250,394,255,362,251"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="1462,37,1593,78"/>
+<area shape="poly" title=" " alt="" coords="730,192,813,171,1037,120,1264,80,1446,61,1447,66,1265,86,1038,125,814,176,732,198"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1654,71,1784,111"/>
+<area shape="poly" title=" " alt="" coords="1594,66,1639,74,1638,80,1593,72"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1654,5,1784,46"/>
+<area shape="poly" title=" " alt="" coords="1593,44,1638,36,1639,42,1594,49"/>
+<area shape="poly" title=" " alt="" coords="1491,423,1489,413,1495,404,1508,398,1527,396,1548,398,1561,405,1558,409,1547,404,1527,401,1509,403,1498,408,1494,414,1496,421"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116" title=" " alt="" coords="1647,263,1790,303"/>
+<area shape="poly" title=" " alt="" coords="1553,420,1597,384,1681,312,1684,316,1601,388,1556,425"/>
+<area shape="poly" title=" " alt="" coords="505,243,547,211,598,181,614,174,616,179,601,185,550,216,508,247"/>
+<area shape="poly" title=" " alt="" coords="552,283,621,303,619,308,551,288"/>
+<area shape="poly" title=" " alt="" coords="551,243,619,223,621,229,552,248"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#aa3bd2e16d3fde61e1e58e5cd7377884f" title=" " alt="" coords="612,245,753,286"/>
+<area shape="poly" title=" " alt="" coords="552,263,596,263,596,268,552,268"/>
+<area shape="rect" href="class_data_dir_entry_wrapper.html#af5e95792dc15586d7b769dc46ba55e59" title=" " alt="" coords="840,185,981,226"/>
+<area shape="poly" title=" " alt="" coords="753,245,824,226,825,231,754,250"/>
+<area shape="rect" href="class_data_dir_wrapper.html#ae9323984ac2986c3f1725a8c290c80b0" title=" " alt="" coords="814,253,1007,279"/>
+<area shape="poly" title=" " alt="" coords="753,263,798,263,798,268,753,268"/>
+<area shape="rect" href="class_exe_wrappers_container.html#adb485acf2f9b4ad9b32d73f15ef9bec3" title=" " alt="" coords="1060,301,1212,342"/>
+<area shape="poly" title=" " alt="" coords="754,278,814,288,934,303,1044,313,1044,318,933,308,813,294,753,283"/>
+<area shape="rect" href="class_p_e_file.html#aaf212c882b9f95a0f6542cd656ffbad4" title=" " alt="" coords="1055,186,1216,212"/>
+<area shape="poly" title=" " alt="" coords="981,201,1040,199,1040,204,982,206"/>
+<area shape="rect" href="class_exe_element_wrapper.html#af742979e13e19e532cc42ab72b2a0f80" title=" " alt="" coords="1064,236,1207,277"/>
+<area shape="poly" title=" " alt="" coords="1007,259,1048,257,1049,263,1008,264"/>
+<area shape="poly" title=" " alt="" coords="966,276,1045,296,1044,302,964,282"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a4a1afe592b11191cab1d74432f759b41" title=" " alt="" coords="1264,333,1408,374"/>
+<area shape="poly" title=" " alt="" coords="1190,275,1217,287,1286,323,1284,328,1215,292,1188,280"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a10ef93fdda6cf93c5db02b696a81b7c7" title=" " alt="" coords="1264,236,1408,277"/>
+<area shape="poly" title=" " alt="" coords="1208,254,1249,254,1249,259,1208,259"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a9476fc334d491f3882852b0048a76b77" title=" " alt="" coords="1271,95,1401,135"/>
+<area shape="poly" title=" " alt="" coords="1195,233,1215,222,1264,184,1304,145,1308,149,1267,188,1218,227,1197,238"/>
+<area shape="poly" title=" " alt="" coords="1383,372,1470,413,1467,418,1380,377"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf" title=" " alt="" coords="1456,333,1599,374"/>
+<area shape="poly" title=" " alt="" coords="1408,351,1440,351,1440,356,1408,356"/>
+<area shape="poly" title=" " alt="" coords="1364,233,1405,208,1455,188,1495,179,1528,175,1560,177,1600,188,1626,200,1650,215,1690,249,1687,253,1647,220,1623,205,1598,194,1559,183,1528,180,1496,184,1456,194,1408,213,1367,238"/>
+<area shape="poly" title=" " alt="" coords="1376,275,1457,318,1469,324,1466,329,1454,323,1374,280"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83" title=" " alt="" coords="1456,203,1599,243"/>
+<area shape="poly" title=" " alt="" coords="1408,241,1440,236,1441,241,1409,246"/>
+<area shape="rect" href="class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="1456,268,1599,309"/>
+<area shape="poly" title=" " alt="" coords="1409,266,1441,271,1440,276,1408,271"/>
+<area shape="poly" title=" " alt="" coords="1401,93,1447,79,1448,84,1403,98"/>
+<area shape="rect" href="_abstract_byte_buffer_8cpp.html#a52457e713057d1f693e69718b73549a1" title=" " alt="" coords="1474,102,1581,128"/>
+<area shape="poly" title=" " alt="" coords="1402,112,1458,112,1458,118,1402,118"/>
 </map>
 </div>
 
@@ -448,7 +530,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_node_wrapper.html#a086e8cfa49daea540fc55956821375f1">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00158">158</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00148">148</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -493,7 +575,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#a43f0978ee5667e5dd34293f155d3d3cf">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00131">131</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00121">121</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -587,7 +669,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#a561b2d35521c1f6cb5f07a183989dc83">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00120">120</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00110">110</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -626,7 +708,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#af2f26b8da4cf2339944f1a4b8473454b">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00054">54</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00062">62</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -655,7 +737,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#a227c20e3780b42bc18822e992bf4d116">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00082">82</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00072">72</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -745,7 +827,7 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616">ExeElementWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00106">106</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8cpp_source.html#l00096">96</a> of file <a class="el" href="_exception_dir_wrapper_8cpp_source.html">ExceptionDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -839,7 +921,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#ab83dd78bccf0c4693a7483c3484b2e39">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00056">56</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00064">64</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -868,7 +950,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a5cd7f16e4529be2a96f87237e31b2611">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00048">48</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_exception_dir_wrapper_8h_source.html#l00056">56</a> of file <a class="el" href="_exception_dir_wrapper_8h_source.html">ExceptionDirWrapper.h</a>.</p>
 
 </div>
 </div>

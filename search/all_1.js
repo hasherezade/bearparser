@@ -20,6 +20,11 @@ var searchData=
   ['arch_5farm_17',['ARCH_ARM',['../class_executable.html#ae50d17f8bc9d8a8bf520593f81803186aae269d4846788edce37e4dc8d721b067',1,'Executable']]],
   ['arch_5fintel_18',['ARCH_INTEL',['../class_executable.html#ae50d17f8bc9d8a8bf520593f81803186ad4e524138a13dd7b5d94fcdf007fdc0f',1,'Executable']]],
   ['arch_5funknown_19',['ARCH_UNKNOWN',['../class_executable.html#ae50d17f8bc9d8a8bf520593f81803186a3b36fcfbe78f5f2320d8f0d68f7947b8',1,'Executable']]],
-  ['arm_5fexcept_5frecord_20',['ARM_EXCEPT_RECORD',['../_exception_dir_wrapper_8cpp.html#a5aa88f0b92133e18d85eb0309473bc13',1,'ExceptionDirWrapper.cpp']]],
-  ['attrs_21',['ATTRS',['../class_delay_imp_entry_wrapper.html#ab3020a74b9682cd49e18c1da1e8096faa89a76d323dd34b635c8cf3fa80e65f92',1,'DelayImpEntryWrapper']]]
+  ['arm_5fexcept_5ffield_5fcounter_20',['ARM_EXCEPT_FIELD_COUNTER',['../class_exception_entry_wrapper.html#a372186eeead9b7d515d485c56c248596a31c085fd3c7ebac9f089e26fa3218050',1,'ExceptionEntryWrapper']]],
+  ['arm_5fexcept_5fnone_21',['ARM_EXCEPT_NONE',['../class_exception_entry_wrapper.html#a372186eeead9b7d515d485c56c248596ad0a704537950026830dbd4563725d260',1,'ExceptionEntryWrapper']]],
+  ['arm_5fexcept_5frecord_22',['ARM_EXCEPT_RECORD',['../_exception_dir_wrapper_8cpp.html#a5aa88f0b92133e18d85eb0309473bc13',1,'ExceptionDirWrapper.cpp']]],
+  ['arm_5fexcept_5fstart_23',['ARM_EXCEPT_START',['../class_exception_entry_wrapper.html#a372186eeead9b7d515d485c56c248596a7f9bfb12b0813e9c2e001da4039e56c8',1,'ExceptionEntryWrapper']]],
+  ['arm_5fexcept_5fxdata_24',['ARM_EXCEPT_XDATA',['../class_exception_entry_wrapper.html#a372186eeead9b7d515d485c56c248596a79290b6516bb24ca9776fe9ac47e9e8f',1,'ExceptionEntryWrapper']]],
+  ['arm_5fxdata_5fflag_25',['ARM_XDATA_FLAG',['../_exception_dir_wrapper_8h.html#a2301ad624ad87b81869c18baa9c49ceb',1,'ExceptionDirWrapper.h']]],
+  ['attrs_26',['ATTRS',['../class_delay_imp_entry_wrapper.html#ab3020a74b9682cd49e18c1da1e8096faa89a76d323dd34b635c8cf3fa80e65f92',1,'DelayImpEntryWrapper']]]
 ];
