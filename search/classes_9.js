@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['mappedexe_0',['MappedExe',['../class_mapped_exe.html',1,'']]]
+  ['ldconfigdirwrapper_0',['LdConfigDirWrapper',['../class_ld_config_dir_wrapper.html',1,'']]],
+  ['ldconfigentrywrapper_1',['LdConfigEntryWrapper',['../class_ld_config_entry_wrapper.html',1,'']]]
 ];

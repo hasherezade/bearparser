@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bufsize_5ft_0',['bufsize_t',['../_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d',1,'AbstractByteBuffer.h']]]
+  ['arm_5fexcept_5frecord_0',['ARM_EXCEPT_RECORD',['../_exception_dir_wrapper_8cpp.html#a5aa88f0b92133e18d85eb0309473bc13',1,'ExceptionDirWrapper.cpp']]]
 ];

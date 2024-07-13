@@ -13,5 +13,6 @@ var searchData=
   ['sects_10',['sects',['../class_p_e_file.html#a1dd347e771ea42e009f3309969f7a7f5',1,'PEFile']]],
   ['showlock_11',['showLock',['../class_watched_locker.html#a12568463b0517dea13ebb1c7ea485454',1,'WatchedLocker']]],
   ['size_12',['size',['../class_buffer_view.html#a9f2fd71058cc38e721a07c0967971389',1,'BufferView']]],
-  ['sizeptr_13',['sizePtr',['../class_res_string.html#ada06623351d8c2875d2093a743eed66a',1,'ResString']]]
+  ['sizeptr_13',['sizePtr',['../class_res_string.html#ada06623351d8c2875d2093a743eed66a',1,'ResString']]],
+  ['start_14',['Start',['../struct___a_r_m___e_x_c_e_p_t___r_e_c_o_r_d.html#a2429fd1a41b98c692bcffa44c1c74842',1,'_ARM_EXCEPT_RECORD']]]
 ];

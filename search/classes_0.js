@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['abstractbytebuffer_0',['AbstractByteBuffer',['../class_abstract_byte_buffer.html',1,'']]],
-  ['abstractfilebuffer_1',['AbstractFileBuffer',['../class_abstract_file_buffer.html',1,'']]],
-  ['abstractformatter_2',['AbstractFormatter',['../class_abstract_formatter.html',1,'']]]
+  ['_5farm_5fexcept_5frecord_0',['_ARM_EXCEPT_RECORD',['../struct___a_r_m___e_x_c_e_p_t___r_e_c_o_r_d.html',1,'']]]
 ];

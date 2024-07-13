@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['opthdrwrapper_0',['OptHdrWrapper',['../class_opt_hdr_wrapper.html',1,'']]]
+  ['mappedexe_0',['MappedExe',['../class_mapped_exe.html',1,'']]]
 ];
