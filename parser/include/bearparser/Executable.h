@@ -44,6 +44,7 @@ public:
         RVA = 2,
         VA = 3
     };
+    
     static bool isBit64(Executable *exe) { return (!exe || exe->getBitMode() != Executable::BITS_64) ? false: true; }
     static bool isBit32(Executable *exe) { return (!exe || exe->getBitMode() != Executable::BITS_32) ? false: true; }
 
@@ -53,6 +54,7 @@ public:
     virtual ~Executable(void) { }
 
     virtual exe_bits getBitMode() { return this->bitMode; }
+    virtual exe_arch getArch() = 0;
 
     virtual bufsize_t getContentSize() { return buf->getContentSize(); }
     virtual BYTE* getContent() { return buf->getContent(); }

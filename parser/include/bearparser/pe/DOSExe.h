@@ -27,6 +27,8 @@ public:
     DOSExe(AbstractByteBuffer *v_buf);
     virtual ~DOSExe() { }
 
+    virtual exe_arch getArch() { return exe_arch::ARCH_INTEL; }
+    
     // inherited from Executable:
     //
     virtual void wrap();

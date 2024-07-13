@@ -13,7 +13,7 @@ public:
 
     bool wrap();
 
-    virtual void* getPtr() { return exceptFunc64(); }
+    virtual void* getPtr();
     virtual bufsize_t getSize() { return parsedSize; }
 
     virtual QString getName() { return "Exceptions Dir."; }
@@ -55,7 +55,7 @@ public:
 
     virtual bufsize_t getSize();
     virtual QString getName() { return "Exceptions Block"; }
-    virtual size_t getFieldsCount() { return FIELD_COUNTER; }
+    virtual size_t getFieldsCount();
     virtual size_t getSubFieldsCount() { return 1; }
 
     // specific field boundaries
