@@ -74,13 +74,7 @@ void* ExceptionEntryWrapper::getPtr()
     if (!this->parentDir) {
         return NULL;
     }
-    size_t entrySize = 0;
-    if (this->m_Exe->getArch() == Executable::ARCH_INTEL) {
-        entrySize = sizeof(IMAGE_IA64_RUNTIME_FUNCTION_ENTRY);
-    }
-    else if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
-        entrySize = 8;
-    }
+    const size_t entrySize = _getSize();
     void* first = parentDir->getPtr();
     if (!first || !entrySize) {
         return NULL;
@@ -93,18 +87,25 @@ void* ExceptionEntryWrapper::getPtr()
     return ptr;
 }
 
+bufsize_t ExceptionEntryWrapper::_getSize()
+{
+    if (this->m_Exe) {
+        if (this->m_Exe->getArch() == Executable::ARCH_INTEL) {
+            return sizeof(IMAGE_IA64_RUNTIME_FUNCTION_ENTRY);
+        }
+        if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
+            return 8;
+        }
+    }
+    return 0;  
+}
+
 bufsize_t ExceptionEntryWrapper::getSize()
 {
     if (!this->parentDir) return 0;
     if (!this->getPtr()) return 0;
-    
-    if (this->m_Exe->getArch() == Executable::ARCH_INTEL) {
-        return sizeof(IMAGE_IA64_RUNTIME_FUNCTION_ENTRY);
-    }
-    if (this->m_Exe->getArch() == Executable::ARCH_ARM && this->m_Exe->getBitMode() == 64) {
-        return 8;
-    }
-    return 0;
+
+    return _getSize();
 }
 
 size_t ExceptionEntryWrapper::getFieldsCount()
@@ -185,9 +186,7 @@ Executable::addr_type ExceptionEntryWrapper::containsAddrType(size_t fieldId, si
                 return Executable::NOT_ADDR;
             }
             return Executable::RVA;
-        }  
-
+        }
     }
     return Executable::NOT_ADDR;
 }
-

@@ -69,6 +69,7 @@ public:
     virtual Executable::addr_type containsAddrType(size_t fieldId, size_t subField);
 
 private:
+    bufsize_t _getSize();
     offset_t cachedRaw;
     ExceptionDirWrapper* parentDir;
 };
