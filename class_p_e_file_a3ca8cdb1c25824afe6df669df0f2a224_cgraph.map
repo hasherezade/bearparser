@@ -1,8 +1,8 @@
 <map id="PEFile::_init" name="PEFile::_init">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,150,95,176"/>
-<area shape="rect" id="Node000002" href="$class_file_hdr_wrapper.html#a419d36c47f3b52cb32523cb23adc6bea" title=" " alt="" coords="160,125,313,151"/>
+<area shape="rect" id="Node000002" href="$class_file_hdr_wrapper.html#a419d36c47f3b52cb32523cb23adc6bea" title=" " alt="" coords="160,125,312,151"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,154,144,148,145,153,96,160"/>
-<area shape="rect" id="Node000010" href="$class_opt_hdr_wrapper.html#aac3a30285ab7098e9f7943ce729a9b29" title=" " alt="" coords="160,176,313,201"/>
+<area shape="rect" id="Node000010" href="$class_opt_hdr_wrapper.html#aac3a30285ab7098e9f7943ce729a9b29" title=" " alt="" coords="160,176,312,201"/>
 <area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="96,167,145,173,144,179,95,172"/>
 <area shape="rect" id="Node000017" href="$class_p_e_core.html#a7d654edc4d82e1d1643e49081bc5657c" title=" " alt="" coords="187,25,286,51"/>
 <area shape="poly" id="edge21_Node000001_Node000017" title=" " alt="" coords="69,148,202,57,205,62,72,152"/>
@@ -31,7 +31,7 @@
 <area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="549,235,609,235,609,241,549,241"/>
 <area shape="rect" id="Node000015" href="$class_p_e_file.html#aca1ded6302c26c4d25cd1f2dcedf737b" title=" " alt="" coords="652,176,801,201"/>
 <area shape="poly" id="edge15_Node000011_Node000015" title=" " alt="" coords="545,222,643,202,644,208,546,227"/>
-<area shape="rect" id="Node000013" href="$class_p_e_file.html#af2560116036624efbb020a312d8017b2" title=" " alt="" coords="888,225,1041,251"/>
+<area shape="rect" id="Node000013" href="$class_p_e_file.html#af2560116036624efbb020a312d8017b2" title=" " alt="" coords="888,225,1040,251"/>
 <area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="829,235,873,235,873,241,829,241"/>
 <area shape="rect" id="Node000014" href="$class_p_e_core.html#ae19b9fc1ba78c32982baeda811479de1" title=" " alt="" coords="1100,225,1258,251"/>
 <area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="1041,235,1084,235,1084,241,1041,241"/>

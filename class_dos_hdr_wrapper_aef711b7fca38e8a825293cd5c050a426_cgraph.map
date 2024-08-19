@@ -1,6 +1,6 @@
 <map id="DosHdrWrapper::getPtr" name="DosHdrWrapper::getPtr">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,13,160,39"/>
-<area shape="rect" id="Node000002" href="$class_executable.html#a66e5a30580de455968bd682da7781af4" title=" " alt="" coords="208,13,361,39"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,13,160,38"/>
+<area shape="rect" id="Node000002" href="$class_executable.html#a66e5a30580de455968bd682da7781af4" title=" " alt="" coords="208,13,361,38"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,23,192,23,192,28,160,28"/>
 <area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="409,5,539,46"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="361,23,393,23,393,28,361,28"/>

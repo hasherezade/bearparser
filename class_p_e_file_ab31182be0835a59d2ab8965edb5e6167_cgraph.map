@@ -1,5 +1,5 @@
 <map id="PEFile::hdrSectionsNum" name="PEFile::hdrSectionsNum">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,193,168,219"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,193,168,218"/>
 <area shape="rect" id="Node000002" href="$class_exe_element_wrapper.html#af742979e13e19e532cc42ab72b2a0f80" title=" " alt="" coords="216,185,359,226"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,203,200,203,200,208,168,208"/>
 <area shape="rect" id="Node000003" href="$class_exe_element_wrapper.html#a4a1afe592b11191cab1d74432f759b41" title=" " alt="" coords="407,95,550,135"/>
@@ -25,8 +25,8 @@
 <area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="544,350,601,350,601,355,544,355"/>
 <area shape="rect" id="Node000012" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="605,389,735,430"/>
 <area shape="poly" id="edge14_Node000010_Node000012" title=" " alt="" coords="545,369,591,383,589,388,544,374"/>
-<area shape="rect" id="Node000013" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="796,356,927,397"/>
+<area shape="rect" id="Node000013" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="796,356,926,397"/>
 <area shape="poly" id="edge15_Node000012_Node000013" title=" " alt="" coords="735,396,781,388,781,393,736,401"/>
-<area shape="rect" id="Node000014" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="796,421,927,462"/>
+<area shape="rect" id="Node000014" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="796,421,926,462"/>
 <area shape="poly" id="edge16_Node000012_Node000014" title=" " alt="" coords="736,418,781,426,781,431,735,423"/>
 </map>

@@ -1,12 +1,12 @@
 <map id="AbstractByteBuffer::intersectsBlock" name="AbstractByteBuffer::intersectsBlock">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,78,136,119"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,78,136,118"/>
 <area shape="rect" id="Node000002" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="194,5,304,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,75,203,35,205,40,119,80"/>
-<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="362,62,492,103"/>
+<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="362,62,492,102"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="136,93,346,83,347,88,136,98"/>
 <area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="362,139,492,180"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="102,117,140,139,184,156,225,163,267,167,346,166,347,171,267,172,224,169,183,161,138,143,100,121"/>
-<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="184,106,314,147"/>
+<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="184,106,314,146"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="137,106,169,111,168,116,136,111"/>
 <area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="314,107,346,99,348,105,315,113"/>
 <area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="315,136,347,142,346,147,314,141"/>

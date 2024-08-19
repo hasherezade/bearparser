@@ -1,11 +1,7 @@
 <map id="ResourcesAlbum::~ResourcesAlbum" name="ResourcesAlbum::~ResourcesAlbum">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,22,201,63"/>
-<area shape="rect" id="Node000002" href="$class_resources_album.html#a11466f13115f4491c5d1796d6092cffc" title=" " alt="" coords="249,29,403,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,40,234,40,234,45,201,45"/>
-<area shape="rect" id="Node000003" href="$class_exe_node_wrapper.html#abd74c2637211cf471d022b528654c84c" title=" " alt="" coords="686,29,842,55"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="403,37,451,36,638,36,671,36,670,42,638,41,451,41,403,42"/>
-<area shape="rect" id="Node000004" href="$class_resources_album.html#a3787964dab392032ae17f74ba747b9d8" title=" " alt="" coords="451,50,638,91"/>
-<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="404,49,436,54,435,59,403,55"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="728,31,720,21,725,11,740,5,764,3,791,5,805,12,802,17,789,10,764,8,741,10,728,15,726,20,732,27"/>
-<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="638,56,671,51,671,57,639,61"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,201,46"/>
+<area shape="rect" id="Node000002" href="$class_resources_album.html#a11466f13115f4491c5d1796d6092cffc" title=" " alt="" coords="249,13,403,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,23,234,23,234,28,201,28"/>
+<area shape="rect" id="Node000003" href="$class_resources_album.html#a3787964dab392032ae17f74ba747b9d8" title=" " alt="" coords="451,5,638,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="403,23,435,23,435,28,403,28"/>
 </map>

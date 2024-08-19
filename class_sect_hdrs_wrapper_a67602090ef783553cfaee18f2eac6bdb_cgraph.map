@@ -1,11 +1,11 @@
 <map id="SectHdrsWrapper::getSecHdrAtOffset" name="SectHdrsWrapper::getSecHdrAtOffset">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,142,198,183"/>
-<area shape="rect" id="Node000002" href="$class_section_hdr_wrapper.html#a9b8a20d530aa83ead9c43b4925171d76" title=" " alt="" coords="246,170,387,211"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,142,198,182"/>
+<area shape="rect" id="Node000002" href="$class_section_hdr_wrapper.html#a9b8a20d530aa83ead9c43b4925171d76" title=" " alt="" coords="246,170,387,210"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,172,231,176,230,182,197,177"/>
-<area shape="rect" id="Node000003" href="$class_section_hdr_wrapper.html#a9dee2f275d168224c31131b56564b230" title=" " alt="" coords="437,113,577,153"/>
+<area shape="rect" id="Node000003" href="$class_section_hdr_wrapper.html#a9dee2f275d168224c31131b56564b230" title=" " alt="" coords="436,112,577,153"/>
 <area shape="poly" id="edge15_Node000001_Node000003" title=" " alt="" coords="198,153,421,136,421,142,198,158"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="385,167,421,156,423,161,387,172"/>
-<area shape="rect" id="Node000013" href="$class_exe_element_wrapper.html#a0bd5e125d24bc597cb6e7f720352fd5a" title=" " alt="" coords="435,198,578,239"/>
+<area shape="rect" id="Node000013" href="$class_exe_element_wrapper.html#a0bd5e125d24bc597cb6e7f720352fd5a" title=" " alt="" coords="435,198,578,238"/>
 <area shape="poly" id="edge13_Node000002_Node000013" title=" " alt="" coords="388,198,420,203,419,208,387,203"/>
 <area shape="rect" id="Node000004" href="$class_p_e_file.html#acfaebe1d9ceb92b150eee6357cf1ca5c" title=" " alt="" coords="641,5,782,31"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="529,110,572,75,625,41,640,34,642,39,628,46,575,79,532,114"/>

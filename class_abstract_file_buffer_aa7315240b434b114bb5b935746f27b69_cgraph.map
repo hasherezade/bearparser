@@ -1,11 +1,11 @@
 <map id="AbstractFileBuffer::read" name="AbstractFileBuffer::read">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,73,131,113"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,72,131,113"/>
 <area shape="rect" id="Node000002" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="212,5,321,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,70,178,40,196,33,198,38,180,45,111,74"/>
 <area shape="rect" id="Node000003" href="$class_byte_buffer.html#a04b5a95c6ab66b3685c2c6ff0aebf29e" title=" " alt="" coords="191,55,342,80"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,82,176,76,176,82,132,87"/>
 <area shape="rect" id="Node000004" href="$class_byte_buffer.html#a1a8ecea490fbe8260620efab25dc1942" title=" " alt="" coords="179,104,354,130"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="132,98,164,102,163,107,131,103"/>
-<area shape="rect" id="Node000005" href="$class_abstract_file_buffer.html#a092c21c5227ed38657db948df12a2bb3" title=" " alt="" coords="204,154,329,195"/>
+<area shape="rect" id="Node000005" href="$class_abstract_file_buffer.html#a092c21c5227ed38657db948df12a2bb3" title=" " alt="" coords="204,154,329,194"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="115,111,180,140,194,145,192,150,178,145,113,116"/>
 </map>

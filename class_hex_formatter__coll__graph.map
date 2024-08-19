@@ -1,9 +1,9 @@
 <map id="HexFormatter" name="HexFormatter">
-<area shape="rect" id="Node000001" title=" " alt="" coords="20,241,121,267"/>
-<area shape="rect" id="Node000002" href="$class_formatter.html" title=" " alt="" coords="32,168,109,193"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,209,73,241,68,241,68,209"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="20,244,121,270"/>
+<area shape="rect" id="Node000002" href="$class_formatter.html" title=" " alt="" coords="32,169,109,195"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,210,73,244,68,244,68,210"/>
 <area shape="rect" id="Node000003" href="$class_abstract_formatter.html" title=" " alt="" coords="7,94,134,120"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="73,135,73,167,68,167,68,135"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="73,135,73,169,68,169,68,135"/>
 <area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html" title=" " alt="" coords="5,5,136,31"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="73,47,73,94,68,94,68,47"/>
 </map>
