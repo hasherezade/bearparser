@@ -89,6 +89,8 @@ bool _isFuncChar(const char c)
             || (c == '@')
             || (c == '?')
             || (c == '-')
+            || (c == '\\')
+            || (c == ':')
         )
     {
         return true;
