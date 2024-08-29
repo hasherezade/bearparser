@@ -31,11 +31,13 @@ else
     exit -1
 fi
 
-BUILD_DIR=build
+BUILD_DIR=build_qt5
 
+rm build
 mkdir $BUILD_DIR
 echo "[+] build directory created"
+ln -sf $BUILD_DIR build
 cd $BUILD_DIR
-cmake -G "CodeLite - Unix Makefiles" -DUSE_QT4=OFF -DCMAKE_INSTALL_PREFIX:PATH=$(pwd) ..
+cmake -G "CodeLite - Unix Makefiles" -DUSE_QT4=OFF -DUSE_QT5=ON -DCMAKE_INSTALL_PREFIX:PATH=$(pwd) ..
 cmake --build . --target install
 
