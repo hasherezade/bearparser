@@ -3,7 +3,7 @@ bearparser
 [![Build status](https://ci.appveyor.com/api/projects/status/8p6wp0bcq2mx8208?svg=true)](https://ci.appveyor.com/project/hasherezade/bearparser)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bc1bdddf14244559ab4786939c6f9569)](https://app.codacy.com/gh/hasherezade/bearparser/dashboard?branch=master)
 
-Portable Executable parsing library<br/>
+Portable Executable parsing library
 
 Requires:
 
@@ -11,7 +11,7 @@ Requires:
  + Qt6 Core
  + cmake http://www.cmake.org/
 
-**Possible to build with older versions of QT (Qt4, Qt5) by setting an appropriate CMake flag: USE_QT4 or USE_QT5**
+**Possible to build with older versions of QT (Qt4, Qt5) by setting an appropriate CMake flag: `USE_QT4` or `USE_QT5`**
 
 Example:
 
