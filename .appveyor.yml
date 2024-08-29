@@ -1,17 +1,16 @@
+version: '{branch}.{build}'
+skip_tags: true
 os:
-  - Visual Studio 2015
+  - Visual Studio 2019
 
-platform: x64
+platform:
   - x64
+  - x86
 
 branches:
   only:
     - master
    
-install:
-- git submodule update --init --recursive
-- set PATH=C:\Program Files\CMake\bin;%PATH%
-
 build:
   verbosity: detailed
 
@@ -19,30 +18,31 @@ configuration:
   - Release
   
 environment:
-  artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(CONFIGURATION)
-  matrix:
-    - env_arch: "x64"
-      QT5: C:\Qt\5.11\msvc2015_64
-    - env_arch: "x86"
-      QT5: C:\Qt\5.11\msvc2015
+  artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(PLATFORM)
+  buildPlatform: $(PLATFORM)
+
+install:
+- git submodule update --init --recursive
+- if [%buildPlatform%]==[x64] (set QT_VER=6)
+- if [%buildPlatform%]==[x64] (set QT=C:\Qt\6.7\msvc2019_64)
+- if [%buildPlatform%]==[x86] (set QT_VER=5) 
+- if [%buildPlatform%]==[x86] (set QT=C:\Qt\5.15.2\msvc2019)
+- set QT_DIR=%QT%
+- set PATH=%PATH%;%QT%\bin;%QT%\lib\cmake
 
 before_build:
-  - set PATH=%PATH%;%QT5%\bin;%QT5%\lib\cmake
-  - set Qt5Core_DIR=%QT5%
   - mkdir build
   - cd build
-  - if [%env_arch%]==[x64] (
-    cmake .. -A x64 -DUSE_QT5=ON)
-  - if [%env_arch%]==[x86] (
-    cmake .. -A Win32 -DUSE_QT5=ON)
     
 build_script:
+  - if [%buildPlatform%]==[x64] ( cmake .. -A x64 )
+  - if [%buildPlatform%]==[x86] ( cmake .. -A Win32 -DUSE_QT5=ON )
   - cmake --build . --config %CONFIGURATION%
   
 after_build:
   - mkdir %artifactName%
   - cp -r commander/%CONFIGURATION%/* %artifactName%
-  - cp %QT5%\bin\Qt5Core.dll %artifactName%
+  - cp "%QT%\bin\Qt%QT_VER%Core.dll" %artifactName%
   
 artifacts:
   - path: build\%artifactName%
