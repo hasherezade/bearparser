@@ -6,12 +6,15 @@ bearparser
 Portable Executable parsing library<br/>
 
 Requires:
-+ Qt5 SDK<br/>
-+ Qt5 Core<br/>
-+ cmake http://www.cmake.org/<br/>
 
-<b>Possible to build with Qt4 (instead of Qt5) by setting a CMake flag: USE_QT4</b><br/>
+ + Qt6 SDK
+ + Qt6 Core
+ + cmake http://www.cmake.org/
+
+**Possible to build with older versions of QT (Qt4, Qt5) by setting an appropriate CMake flag: USE_QT4 or USE_QT5**
+
 Example:
+
 ```
 cmake -G "Unix Makefiles" -D USE_QT4=ON ../
 ```
@@ -27,3 +30,4 @@ https://github.com/hasherezade/bearparser/wiki
 
 Check also PE-bear - a GUI application using `bearparser`:
 + https://github.com/hasherezade/pe-bear
+
