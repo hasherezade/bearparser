@@ -30,6 +30,7 @@ environment:
   artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(PLATFORM)
   buildPlatform: $(PLATFORM)
 
+for:  
   -
     matrix:
       only:
