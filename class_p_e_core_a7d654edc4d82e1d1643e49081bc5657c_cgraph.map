@@ -1,11 +1,5 @@
 <map id="PECore::wrap" name="PECore::wrap">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,74,105,100"/>
-<area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="153,37,283,78"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,75,137,69,138,75,106,81"/>
-<area shape="rect" id="Node000005" href="$class_p_e_core.html#a91d89cd5d9f8b6f84c6eab5b195dc1ec" title=" " alt="" coords="168,102,268,128"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="106,93,153,101,152,106,105,98"/>
-<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="331,5,461,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="283,43,315,37,316,43,284,49"/>
-<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="331,71,461,111"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="284,67,316,73,315,79,283,73"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,105,31"/>
+<area shape="rect" id="Node000002" href="$class_p_e_core.html#a91d89cd5d9f8b6f84c6eab5b195dc1ec" title=" " alt="" coords="153,5,253,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,16,137,16,137,21,105,21"/>
 </map>

@@ -18,12 +18,12 @@ var searchData=
   ['exceptiondirwrapper_15',['ExceptionDirWrapper',['../class_exception_dir_wrapper.html',1,'ExceptionDirWrapper'],['../class_exception_dir_wrapper.html#a1f62d74773a39a6e2f25da0e58c05dcf',1,'ExceptionDirWrapper::ExceptionDirWrapper()']]],
   ['exceptiondirwrapper_2ecpp_16',['ExceptionDirWrapper.cpp',['../_exception_dir_wrapper_8cpp.html',1,'']]],
   ['exceptiondirwrapper_2eh_17',['ExceptionDirWrapper.h',['../_exception_dir_wrapper_8h.html',1,'']]],
-  ['exceptionentrywrapper_18',['ExceptionEntryWrapper',['../class_exception_entry_wrapper.html',1,'ExceptionEntryWrapper'],['../class_exception_dir_wrapper.html#a658cfc82f99748458274f6834239dc27',1,'ExceptionDirWrapper::ExceptionEntryWrapper'],['../class_exception_entry_wrapper.html#a314c3e64aa3aeed05310b6bda3d45419',1,'ExceptionEntryWrapper::ExceptionEntryWrapper()']]],
+  ['exceptionentrywrapper_18',['ExceptionEntryWrapper',['../class_exception_entry_wrapper.html',1,'ExceptionEntryWrapper'],['../class_exception_dir_wrapper.html#a658cfc82f99748458274f6834239dc27',1,'ExceptionDirWrapper::ExceptionEntryWrapper()'],['../class_exception_entry_wrapper.html#a314c3e64aa3aeed05310b6bda3d45419',1,'ExceptionEntryWrapper::ExceptionEntryWrapper()']]],
   ['exe_5farch_19',['exe_arch',['../class_executable.html#ae50d17f8bc9d8a8bf520593f81803186',1,'Executable']]],
   ['exe_5fbits_20',['exe_bits',['../class_executable.html#a2f0aa130b569d7d8f56ec7c746d08684',1,'Executable']]],
   ['exe_5ftype_21',['exe_type',['../class_exe_factory.html#adc59e611b34ce9a0c6888fddd3699715',1,'ExeFactory']]],
   ['exebuilder_22',['ExeBuilder',['../class_exe_builder.html',1,'ExeBuilder'],['../class_exe_builder.html#a0d3ffa25b75a2db8a91dd835dda22a06',1,'ExeBuilder::ExeBuilder()']]],
-  ['executable_23',['Executable',['../class_executable.html',1,'Executable'],['../class_exe_element_wrapper.html#ab7df12d050ebc48a6ffd6ff53896d7c5',1,'ExeElementWrapper::Executable'],['../class_executable.html#a7d35fd59935c85ec8169522d0830634b',1,'Executable::Executable()']]],
+  ['executable_23',['Executable',['../class_executable.html',1,'Executable'],['../class_exe_element_wrapper.html#ab7df12d050ebc48a6ffd6ff53896d7c5',1,'ExeElementWrapper::Executable()'],['../class_executable.html#a7d35fd59935c85ec8169522d0830634b',1,'Executable::Executable()']]],
   ['executable_2ecpp_24',['Executable.cpp',['../_executable_8cpp.html',1,'']]],
   ['executable_2eh_25',['Executable.h',['../_executable_8h.html',1,'']]],
   ['exeelementwrapper_26',['ExeElementWrapper',['../class_exe_element_wrapper.html',1,'ExeElementWrapper'],['../class_exe_element_wrapper.html#a7764c345edef03df4f974f7f09a70a3b',1,'ExeElementWrapper::ExeElementWrapper()']]],
@@ -45,6 +45,6 @@ var searchData=
   ['exportdirwrapper_42',['ExportDirWrapper',['../class_export_dir_wrapper.html',1,'ExportDirWrapper'],['../class_export_dir_wrapper.html#a5b0b8f1f86d3848ee3533adcf6c8988c',1,'ExportDirWrapper::ExportDirWrapper()']]],
   ['exportdirwrapper_2ecpp_43',['ExportDirWrapper.cpp',['../_export_dir_wrapper_8cpp.html',1,'']]],
   ['exportdirwrapper_2eh_44',['ExportDirWrapper.h',['../_export_dir_wrapper_8h.html',1,'']]],
-  ['exportentrywrapper_45',['ExportEntryWrapper',['../class_export_entry_wrapper.html',1,'ExportEntryWrapper'],['../class_export_dir_wrapper.html#ae757830db4d5fa30625733af6c992649',1,'ExportDirWrapper::ExportEntryWrapper'],['../class_export_entry_wrapper.html#a4c73ac98d0352dfe881d26ef5af22876',1,'ExportEntryWrapper::ExportEntryWrapper()']]],
+  ['exportentrywrapper_45',['ExportEntryWrapper',['../class_export_entry_wrapper.html',1,'ExportEntryWrapper'],['../class_export_dir_wrapper.html#ae757830db4d5fa30625733af6c992649',1,'ExportDirWrapper::ExportEntryWrapper()'],['../class_export_entry_wrapper.html#a4c73ac98d0352dfe881d26ef5af22876',1,'ExportEntryWrapper::ExportEntryWrapper()']]],
   ['extendlastsection_46',['extendLastSection',['../class_p_e_file.html#a698d54ae96d87128727289e73f9e8f19',1,'PEFile']]]
 ];

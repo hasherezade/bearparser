@@ -1,7 +1,0 @@
-<map id="FileBuffer::resize" name="FileBuffer::resize">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,122,31"/>
-<area shape="rect" id="Node000002" href="$class_byte_buffer.html#ab92692d610d9138a850e0cd04bef69d2" title=" " alt="" coords="170,5,291,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,16,154,16,154,21,122,21"/>
-<area shape="rect" id="Node000003" href="$class_byte_buffer.html#a95821f73489496d751fefe6382d1e489" title=" " alt="" coords="339,5,498,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="291,16,323,16,323,21,291,21"/>
-</map>

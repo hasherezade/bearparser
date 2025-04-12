@@ -1,13 +1,5 @@
 <map id="ResString::getName" name="ResString::getName">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,46,143,72"/>
-<area shape="rect" id="Node000002" href="$class_res_string.html#a47a3d4c86e4414a0b9d130742483e880" title=" " alt="" coords="191,46,337,72"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,56,175,56,175,62,143,62"/>
-<area shape="rect" id="Node000003" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="385,46,551,72"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="337,56,369,56,369,62,337,62"/>
-<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="599,39,730,79"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="552,56,584,56,584,62,552,62"/>
-<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="778,5,908,46"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="730,44,762,38,763,43,731,49"/>
-<area shape="rect" id="Node000006" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="778,71,908,111"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="731,68,763,74,762,79,730,73"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,143,31"/>
+<area shape="rect" id="Node000002" href="$class_res_string.html#a47a3d4c86e4414a0b9d130742483e880" title=" " alt="" coords="191,5,337,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,16,175,16,175,21,143,21"/>
 </map>

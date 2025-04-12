@@ -1,0 +1,13 @@
+<map id="PEElementWrapper::PEElementWrapper" name="PEElementWrapper::PEElementWrapper">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,209,120"/>
+<area shape="rect" id="Node000002" href="$class_exe_element_wrapper.html#a7764c345edef03df4f974f7f09a70a3b" title=" " alt="" coords="274,38,417,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,79,258,71,259,76,210,84"/>
+<area shape="rect" id="Node000005" href="$class_p_e_element_wrapper.html#a28b20b86c5782d2fe7e08249d0c503fd" title=" " alt="" coords="257,127,434,152"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="210,114,250,121,249,126,209,119"/>
+<area shape="rect" id="Node000003" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="499,5,608,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="417,42,484,29,485,34,418,47"/>
+<area shape="rect" id="Node000004" href="$class_exe_element_wrapper.html#ab7df12d050ebc48a6ffd6ff53896d7c5" title=" " alt="" coords="482,79,625,120"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="418,70,467,80,466,85,417,75"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="514,79,512,69,519,60,533,55,554,53,576,55,590,61,587,66,575,60,554,58,534,60,522,64,517,70,519,78"/>
+<area shape="poly" id="edge6_Node000005_Node000005" title=" " alt="" coords="311,128,304,118,308,108,322,102,345,100,371,103,384,110,381,114,369,108,345,105,323,107,312,112,309,117,315,125"/>
+</map>

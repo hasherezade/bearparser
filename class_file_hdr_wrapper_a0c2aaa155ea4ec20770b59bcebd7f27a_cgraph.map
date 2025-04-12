@@ -1,19 +1,5 @@
 <map id="FileHdrWrapper::wrap" name="FileHdrWrapper::wrap">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,108,151,133"/>
-<area shape="rect" id="Node000002" href="$class_file_hdr_wrapper.html#a419d36c47f3b52cb32523cb23adc6bea" title=" " alt="" coords="199,108,351,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,118,183,118,183,123,151,123"/>
-<area shape="rect" id="Node000003" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="399,81,565,106"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="351,108,383,104,384,109,352,113"/>
-<area shape="rect" id="Node000007" href="$class_p_e_file.html#a1bce6b846bd7e24d5aae0b15af67f58a" title=" " alt="" coords="404,132,560,157"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="352,126,389,131,388,136,351,132"/>
-<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="629,71,760,111"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="566,90,614,89,614,95,566,95"/>
-<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="846,5,976,46"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="759,69,831,47,832,52,761,74"/>
-<area shape="rect" id="Node000006" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="846,71,976,111"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="760,88,831,88,831,94,760,94"/>
-<area shape="rect" id="Node000008" href="$class_p_e_core.html#a809ce6d61e968f409e6d630514b224bb" title=" " alt="" coords="613,136,776,161"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="561,143,598,144,598,149,561,148"/>
-<area shape="rect" id="Node000009" href="$class_p_e_core.html#aa2ff4665d8b56b2a5e1e1e00bc446b18" title=" " alt="" coords="824,136,999,161"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="776,146,808,146,808,151,776,151"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,151,31"/>
+<area shape="rect" id="Node000002" href="$class_file_hdr_wrapper.html#a419d36c47f3b52cb32523cb23adc6bea" title=" " alt="" coords="199,5,351,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,16,183,16,183,21,151,21"/>
 </map>

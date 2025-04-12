@@ -1,0 +1,20 @@
+<map id="ResourceVersionWrapper::ResourceVersionWrapper" name="ResourceVersionWrapper::ResourceVersionWrapper">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,180,46"/>
+<area shape="rect" id="Node000002" href="$class_exe_element_wrapper.html#ab7df12d050ebc48a6ffd6ff53896d7c5" title=" " alt="" coords="930,52,1073,93"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,20,228,19,412,16,556,17,699,25,882,46,915,51,914,56,881,51,698,31,555,22,412,21,228,24,180,25"/>
+<area shape="rect" id="Node000003" href="$class_resource_content_wrapper.html#a0a191f56c69c5a5e9cdb4e272bf03912" title=" " alt="" coords="228,33,403,74"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="181,34,212,38,212,43,180,39"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="964,52,962,42,968,33,981,27,1001,25,1023,28,1036,34,1033,39,1021,33,1001,31,983,33,971,37,967,43,969,51"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="404,53,914,67,914,73,403,59"/>
+<area shape="rect" id="Node000004" href="$class_exe_node_wrapper.html#a62bc3ef1f006f8b4ac823c3d573819ce" title=" " alt="" coords="451,125,678,150"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="379,72,511,117,509,122,377,77"/>
+<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="655,122,914,83,915,88,656,127"/>
+<area shape="poly" id="edge10_Node000004_Node000004" title=" " alt="" coords="525,126,517,116,522,106,538,100,565,98,594,101,609,108,607,113,593,106,565,103,539,106,526,110,523,116,529,123"/>
+<area shape="rect" id="Node000005" href="$class_exe_element_wrapper.html#a7764c345edef03df4f974f7f09a70a3b" title=" " alt="" coords="732,135,876,175"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="679,143,717,146,716,151,679,149"/>
+<area shape="rect" id="Node000007" href="$class_exe_node_wrapper.html#a5cd7f16e4529be2a96f87237e31b2611" title=" " alt="" coords="726,200,882,225"/>
+<area shape="poly" id="edge11_Node000004_Node000007" title=" " alt="" coords="609,148,746,192,745,197,608,154"/>
+<area shape="poly" id="edge9_Node000005_Node000002" title=" " alt="" coords="853,132,936,97,938,102,855,137"/>
+<area shape="rect" id="Node000006" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="947,142,1056,168"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="876,152,931,152,931,158,876,158"/>
+</map>

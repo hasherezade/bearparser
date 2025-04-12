@@ -1,13 +1,5 @@
 <map id="ExeElementWrapper::canCopyToOffset" name="ExeElementWrapper::canCopyToOffset">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,149,79"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,149,46"/>
 <area shape="rect" id="Node000002" href="$class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="197,5,340,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,44,181,38,182,43,150,49"/>
-<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#ad6e51045cafb47ed7d4467b55ad74d4f" title=" " alt="" coords="203,71,334,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,68,188,75,187,80,149,74"/>
-<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="388,71,518,111"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="334,88,373,88,373,94,334,94"/>
-<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="566,37,697,78"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="518,76,550,70,551,75,519,81"/>
-<area shape="rect" id="Node000006" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="566,103,697,143"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="519,100,551,106,550,111,518,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,23,181,23,181,28,149,28"/>
 </map>

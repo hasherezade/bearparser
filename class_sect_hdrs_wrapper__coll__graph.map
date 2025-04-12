@@ -15,7 +15,7 @@
 <area shape="rect" id="Node000011" href="$class_dos_hdr_wrapper.html" title=" " alt="" coords="689,215,802,241"/>
 <area shape="poly" id="edge16_Node000011_Node000004" title=" " alt="" coords="623,231,689,228,689,233,624,237"/>
 <area shape="rect" id="Node000013" href="$class_p_e_element_wrapper.html" title=" " alt="" coords="1123,339,1256,365"/>
-<area shape="poly" id="edge19_Node000013_Node000004" title=" " alt="" coords="579,256,628,280,684,300,803,326,924,341,1034,348,1122,350,1122,355,1034,353,923,346,803,331,683,305,626,285,576,261"/>
+<area shape="poly" id="edge19_Node000013_Node000004" title=" " alt="" coords="579,256,628,280,684,300,803,325,924,341,1034,348,1122,350,1122,355,1034,353,924,346,803,331,683,305,626,285,576,261"/>
 <area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html" title=" " alt="" coords="5,254,136,279"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="151,260,446,243,470,241,470,246,447,248,151,265"/>
 <area shape="rect" id="Node000006" href="$class_executable.html" title=" " alt="" coords="239,212,323,238"/>
@@ -41,5 +41,5 @@
 <area shape="poly" id="edge21_Node000007_Node000014" title=" " alt="" coords="1304,299,1217,285,1122,265,1036,240,1038,235,1123,260,1218,280,1305,294"/>
 <area shape="rect" id="Node000015" href="$class_resources_album.html" title=" " alt="" coords="686,264,806,290"/>
 <area shape="poly" id="edge24_Node000007_Node000015" title=" " alt="" coords="821,268,886,259,953,246,976,238,978,243,954,251,887,265,822,274"/>
-<area shape="poly" id="edge25_Node000007_Node000016" title=" " alt="" coords="1300,162,1061,217,1038,223,1036,218,1060,212,1299,157"/>
+<area shape="poly" id="edge25_Node000007_Node000016" title=" " alt="" coords="1297,162,1061,216,1038,222,1036,217,1060,211,1295,156"/>
 </map>

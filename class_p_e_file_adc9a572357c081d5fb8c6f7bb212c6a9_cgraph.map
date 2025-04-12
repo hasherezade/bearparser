@@ -1,17 +1,9 @@
 <map id="PEFile::canResize" name="PEFile::canResize">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,70,131,96"/>
-<area shape="rect" id="Node000002" href="$class_executable.html#a862ee23abe249ba557c740f2d2c246c5" title=" " alt="" coords="183,17,342,42"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,67,197,45,199,50,118,72"/>
-<area shape="rect" id="Node000004" href="$class_p_e_file.html#aca1ded6302c26c4d25cd1f2dcedf737b" title=" " alt="" coords="188,70,337,96"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="131,80,172,80,172,86,131,86"/>
-<area shape="rect" id="Node000006" href="$class_p_e_file.html#a2591ddf9ec68450e67c875625b190821" title=" " alt="" coords="179,120,346,145"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="122,94,195,112,193,118,121,99"/>
-<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="416,5,547,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="342,26,401,24,401,30,343,31"/>
-<area shape="rect" id="Node000005" href="$class_p_e_core.html#aa2ff4665d8b56b2a5e1e1e00bc446b18" title=" " alt="" coords="394,70,569,96"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="338,80,379,80,379,86,338,86"/>
-<area shape="rect" id="Node000007" href="$class_p_e_core.html#aa9c0035f661485e8c24fc548a0a233c1" title=" " alt="" coords="395,120,568,145"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="346,130,379,130,379,135,346,135"/>
-<area shape="rect" id="Node000008" href="$class_p_e_core.html#ae19b9fc1ba78c32982baeda811479de1" title=" " alt="" coords="617,120,776,145"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="569,130,601,130,601,135,569,135"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,131,80"/>
+<area shape="rect" id="Node000002" href="$class_executable.html#a862ee23abe249ba557c740f2d2c246c5" title=" " alt="" coords="183,5,342,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,51,193,33,195,38,122,57"/>
+<area shape="rect" id="Node000003" href="$class_p_e_file.html#aca1ded6302c26c4d25cd1f2dcedf737b" title=" " alt="" coords="188,55,337,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,65,172,65,172,70,131,70"/>
+<area shape="rect" id="Node000004" href="$class_p_e_file.html#a2591ddf9ec68450e67c875625b190821" title=" " alt="" coords="179,104,346,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="122,78,195,97,193,102,121,84"/>
 </map>

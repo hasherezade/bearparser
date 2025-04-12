@@ -1,7 +1,9 @@
 <map id="PEFile::getSecHdr" name="PEFile::getSecHdr">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,133,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,133,56"/>
 <area shape="rect" id="Node000002" href="$class_p_e_file.html#a23dec5b7be4a14d6b32f40aec59f4387" title=" " alt="" coords="181,5,315,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,16,165,16,165,21,133,21"/>
-<area shape="rect" id="Node000003" href="$class_sect_hdrs_wrapper.html#a1dab0aca36f57b33456321ad5e4df469" title=" " alt="" coords="363,5,562,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="315,16,348,16,348,21,315,21"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,32,165,27,166,32,133,37"/>
+<area shape="rect" id="Node000003" href="$class_p_e_file.html#a92ee10a1b4298961e6b05448d6e8255d" title=" " alt="" coords="363,31,541,56"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="133,41,347,41,347,46,133,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="316,24,348,28,347,33,315,29"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="418,32,411,22,415,12,429,6,452,4,477,7,490,14,488,18,476,12,452,9,431,11,419,16,417,21,422,29"/>
 </map>

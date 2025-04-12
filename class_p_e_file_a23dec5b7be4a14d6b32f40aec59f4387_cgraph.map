@@ -1,5 +1,6 @@
 <map id="PEFile::_getSecHdr" name="PEFile::_getSecHdr">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,140,31"/>
-<area shape="rect" id="Node000002" href="$class_sect_hdrs_wrapper.html#a1dab0aca36f57b33456321ad5e4df469" title=" " alt="" coords="188,5,387,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,16,172,16,172,21,140,21"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,140,55"/>
+<area shape="rect" id="Node000002" href="$class_p_e_file.html#a92ee10a1b4298961e6b05448d6e8255d" title=" " alt="" coords="188,29,366,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,40,172,40,172,45,140,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="243,31,236,21,240,11,254,5,277,3,302,5,315,12,312,17,300,10,277,8,255,10,244,15,241,20,247,27"/>
 </map>

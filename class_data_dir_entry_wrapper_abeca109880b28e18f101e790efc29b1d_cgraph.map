@@ -1,5 +1,27 @@
 <map id="DataDirEntryWrapper::DataDirEntryWrapper" name="DataDirEntryWrapper::DataDirEntryWrapper">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,153,46"/>
-<area shape="rect" id="Node000002" href="$class_exe_node_wrapper.html#a5cd7f16e4529be2a96f87237e31b2611" title=" " alt="" coords="201,13,356,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,23,185,23,185,28,153,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,175,153,215"/>
+<area shape="rect" id="Node000002" href="$class_data_dir_entry_wrapper.html#a28b20b86c5782d2fe7e08249d0c503fd" title=" " alt="" coords="240,93,381,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,172,200,143,224,135,226,140,202,148,129,177"/>
+<area shape="rect" id="Node000003" href="$class_p_e_node_wrapper.html#a313df66e81dfce411fa83d0ebc08c935" title=" " alt="" coords="201,182,420,208"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="153,192,185,192,185,198,153,198"/>
+<area shape="rect" id="Node000008" href="$class_exe_node_wrapper.html#a5cd7f16e4529be2a96f87237e31b2611" title=" " alt="" coords="743,152,899,177"/>
+<area shape="poly" id="edge16_Node000001_Node000008" title=" " alt="" coords="138,213,244,245,311,261,384,273,461,281,540,282,619,274,694,255,724,242,751,224,796,186,799,190,755,229,726,247,696,260,620,279,540,287,461,286,383,278,309,266,242,250,136,219"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="267,93,265,83,272,74,287,69,310,67,335,69,350,75,348,80,334,74,310,72,288,74,275,79,270,85,272,92"/>
+<area shape="poly" id="edge14_Node000003_Node000003" title=" " alt="" coords="272,183,264,174,269,164,285,158,310,156,339,158,353,165,351,170,337,163,310,161,286,163,273,168,270,173,276,180"/>
+<area shape="rect" id="Node000004" href="$class_exe_node_wrapper.html#a62bc3ef1f006f8b4ac823c3d573819ce" title=" " alt="" coords="468,94,695,120"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="346,179,467,136,515,122,516,127,469,142,348,184"/>
+<area shape="poly" id="edge15_Node000003_Node000008" title=" " alt="" coords="420,184,468,180,728,166,728,171,468,186,421,189"/>
+<area shape="rect" id="Node000009" href="$class_p_e_node_wrapper.html#a28b20b86c5782d2fe7e08249d0c503fd" title=" " alt="" coords="501,220,662,245"/>
+<area shape="poly" id="edge12_Node000003_Node000009" title=" " alt="" coords="409,206,486,217,485,222,408,211"/>
+<area shape="poly" id="edge10_Node000004_Node000004" title=" " alt="" coords="542,96,534,86,539,76,555,70,582,68,611,70,626,77,624,82,610,75,582,73,556,75,543,80,540,85,546,92"/>
+<area shape="rect" id="Node000005" href="$class_exe_element_wrapper.html#ab7df12d050ebc48a6ffd6ff53896d7c5" title=" " alt="" coords="947,29,1090,70"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="642,91,743,72,931,53,932,58,744,78,643,96"/>
+<area shape="rect" id="Node000006" href="$class_exe_element_wrapper.html#a7764c345edef03df4f974f7f09a70a3b" title=" " alt="" coords="749,87,893,127"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="696,104,734,104,734,110,696,110"/>
+<area shape="poly" id="edge11_Node000004_Node000008" title=" " alt="" coords="639,118,750,145,749,150,638,123"/>
+<area shape="poly" id="edge6_Node000005_Node000005" title=" " alt="" coords="981,29,979,19,985,10,998,5,1018,3,1040,5,1053,11,1050,16,1038,10,1018,8,1000,10,988,15,984,20,986,28"/>
+<area shape="poly" id="edge9_Node000006_Node000005" title=" " alt="" coords="892,84,931,72,933,77,894,89"/>
+<area shape="rect" id="Node000007" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="964,94,1073,120"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="893,104,948,104,948,110,893,110"/>
+<area shape="poly" id="edge13_Node000009_Node000009" title=" " alt="" coords="542,221,534,211,539,201,555,195,582,193,611,196,626,203,624,208,610,201,582,198,556,200,543,205,540,210,546,217"/>
 </map>

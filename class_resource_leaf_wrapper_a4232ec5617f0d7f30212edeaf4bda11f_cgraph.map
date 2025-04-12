@@ -1,13 +1,5 @@
 <map id="ResourceLeafWrapper::getPtr" name="ResourceLeafWrapper::getPtr">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,156,79"/>
-<area shape="rect" id="Node000002" href="$class_resource_leaf_wrapper.html#a00acc594812f9d0e856a7e7a781b6e96" title=" " alt="" coords="204,39,354,79"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,56,188,56,188,62,156,62"/>
-<area shape="rect" id="Node000003" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="402,46,568,72"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="354,56,386,56,386,62,354,62"/>
-<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="616,39,747,79"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="569,56,601,56,601,62,569,62"/>
-<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="795,5,925,46"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="747,44,779,38,780,43,748,49"/>
-<area shape="rect" id="Node000006" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="795,71,925,111"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="748,68,780,74,779,79,747,73"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,156,46"/>
+<area shape="rect" id="Node000002" href="$class_resource_leaf_wrapper.html#a00acc594812f9d0e856a7e7a781b6e96" title=" " alt="" coords="204,5,354,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,23,188,23,188,28,156,28"/>
 </map>

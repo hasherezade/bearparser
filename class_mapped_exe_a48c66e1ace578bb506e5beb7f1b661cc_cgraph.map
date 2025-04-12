@@ -4,8 +4,6 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,51,191,33,193,38,123,57"/>
 <area shape="rect" id="Node000003" href="$class_executable.html#ab87eef44bb2ba2cdd64f830d7f067d31" title=" " alt="" coords="197,55,321,80"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,65,181,65,181,70,134,70"/>
-<area shape="rect" id="Node000005" href="$class_mapped_exe.html#a7e35d175829b4750b321c074da6820db" title=" " alt="" coords="198,104,320,130"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="123,78,193,97,191,102,121,84"/>
-<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#ac1710ac29680e17156a74a3618fe35f2" title=" " alt="" coords="384,47,514,88"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="322,65,369,65,369,70,322,70"/>
+<area shape="rect" id="Node000004" href="$class_mapped_exe.html#a7e35d175829b4750b321c074da6820db" title=" " alt="" coords="198,104,320,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="123,78,193,97,191,102,121,84"/>
 </map>

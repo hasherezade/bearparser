@@ -1,6 +1,8 @@
 <map id="FileView::FileView" name="FileView::FileView">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,133,55"/>
-<area shape="rect" id="Node000002" href="$class_file_view.html#aca3fe90c560d2512a3c47c507cc0192d" title=" " alt="" coords="181,29,357,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,40,165,40,165,45,133,45"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="235,30,229,21,233,11,246,5,269,3,293,5,306,12,303,17,292,10,269,8,248,10,237,15,234,20,240,27"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,54,133,80"/>
+<area shape="rect" id="Node000002" href="$class_abstract_file_buffer.html#ad81001a3650854c762c761b8c21ff762" title=" " alt="" coords="203,5,334,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,51,187,40,188,45,134,56"/>
+<area shape="rect" id="Node000003" href="$class_file_view.html#aca3fe90c560d2512a3c47c507cc0192d" title=" " alt="" coords="181,94,357,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,77,187,88,186,93,133,82"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="235,95,229,86,233,76,246,70,269,68,293,70,306,77,303,82,292,75,269,73,248,75,237,80,234,85,240,92"/>
 </map>

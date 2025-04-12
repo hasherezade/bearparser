@@ -1,28 +1,16 @@
 <map id="SectionHdrWrapper::getContentEndOffset" name="SectionHdrWrapper::getContentEndOffset">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,166,147,206"/>
-<area shape="rect" id="Node000002" href="$class_section_hdr_wrapper.html#a9dee2f275d168224c31131b56564b230" title=" " alt="" coords="196,112,336,153"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,164,180,154,182,159,148,169"/>
-<area shape="rect" id="Node000012" href="$class_exe_element_wrapper.html#a0bd5e125d24bc597cb6e7f720352fd5a" title=" " alt="" coords="195,198,338,238"/>
-<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="148,195,180,201,179,206,147,201"/>
-<area shape="rect" id="Node000003" href="$class_p_e_file.html#acfaebe1d9ceb92b150eee6357cf1ca5c" title=" " alt="" coords="400,5,542,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="288,110,331,75,385,41,400,34,402,39,387,46,334,79,292,114"/>
-<area shape="rect" id="Node000005" href="$class_section_hdr_wrapper.html#a698831115eda474980d6be3e86747ee2" title=" " alt="" coords="386,55,556,96"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="336,111,380,98,382,103,337,116"/>
-<area shape="rect" id="Node000006" href="$class_p_e_file.html#a1056ad3e332b1f896e211c5f864ce8e1" title=" " alt="" coords="394,120,548,146"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="337,130,378,130,378,136,337,136"/>
-<area shape="rect" id="Node000010" href="$namespacepe__util.html#a2a369e52bafe749186319d717122796e" title=" " alt="" coords="408,169,535,195"/>
-<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="337,147,401,163,400,168,336,152"/>
-<area shape="rect" id="Node000004" href="$class_p_e_core.html#a4acc20ded3755cb301f284b0de0b0652" title=" " alt="" coords="620,5,767,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="542,16,604,16,604,21,542,21"/>
-<area shape="rect" id="Node000007" href="$class_executable.html#aeb23198ec798984f5b1cf6a3139be8f2" title=" " alt="" coords="604,71,783,96"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="532,117,617,98,618,103,533,122"/>
-<area shape="rect" id="Node000009" href="$class_p_e_core.html#a968d53a13a783b32a6b3adbbdbd00e96" title=" " alt="" coords="618,120,769,146"/>
-<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="549,130,603,130,603,136,549,136"/>
-<area shape="rect" id="Node000008" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="831,63,961,104"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="783,81,815,81,815,86,783,86"/>
-<area shape="rect" id="Node000011" href="$namespacepe__util.html#a9dc8feee375f5c7288ea1221c3965dfb" title=" " alt="" coords="638,169,749,195"/>
-<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="535,188,622,188,622,193,535,193"/>
-<area shape="poly" id="edge11_Node000011_Node000010" title=" " alt="" coords="637,177,551,176,551,171,637,172"/>
-<area shape="rect" id="Node000013" href="$class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="400,219,543,260"/>
-<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="339,223,384,228,384,233,338,228"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,92,147,133"/>
+<area shape="rect" id="Node000002" href="$class_section_hdr_wrapper.html#a9dee2f275d168224c31131b56564b230" title=" " alt="" coords="196,59,336,99"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,97,180,91,181,97,148,103"/>
+<area shape="rect" id="Node000006" href="$class_exe_element_wrapper.html#a0bd5e125d24bc597cb6e7f720352fd5a" title=" " alt="" coords="195,124,338,165"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="148,122,180,127,179,132,147,127"/>
+<area shape="rect" id="Node000003" href="$class_section_hdr_wrapper.html#a698831115eda474980d6be3e86747ee2" title=" " alt="" coords="386,5,556,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="336,58,375,48,376,53,337,63"/>
+<area shape="rect" id="Node000004" href="$namespacepe__util.html#a2a369e52bafe749186319d717122796e" title=" " alt="" coords="408,70,535,96"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="337,78,392,79,392,84,337,83"/>
+<area shape="rect" id="Node000005" href="$namespacepe__util.html#a9dc8feee375f5c7288ea1221c3965dfb" title=" " alt="" coords="604,70,716,96"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="535,89,589,89,589,94,535,94"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="604,77,550,77,550,71,604,72"/>
+<area shape="rect" id="Node000007" href="$class_exe_element_wrapper.html#a087ecf5a983c1ef1e8de95b16c487616" title=" " alt="" coords="400,124,543,165"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="338,142,384,142,384,147,338,147"/>
 </map>
