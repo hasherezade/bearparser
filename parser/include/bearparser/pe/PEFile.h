@@ -224,7 +224,32 @@ public:
     bool moveDataDirEntry(pe::dir_entry id, offset_t newOffset, Executable::addr_type addType = Executable::RAW); //throws CustomException
 
     bool unbindImports();
+    
+    DosHdrWrapper* getDosHdrWrapper()
+    {
+        return dynamic_cast<DosHdrWrapper*>(getWrapper(PEFile::WR_DOS_HDR));
+    }
 
+    FileHdrWrapper* getFileHdrWrapper()
+    {
+        return dynamic_cast<FileHdrWrapper*>(getWrapper(PEFile::WR_FILE_HDR));
+    }
+    
+    OptHdrWrapper* getOptHdrWrapper()
+    {
+        return dynamic_cast<OptHdrWrapper*>(getWrapper(PEFile::WR_OPTIONAL_HDR));
+    }
+    
+    DataDirWrapper* getDataDirWrapper()
+    {
+        return dynamic_cast<DataDirWrapper*>(getWrapper(PEFile::WR_DATADIR));
+    }
+    
+    RichHdrWrapper* getRichHdrWrapper()
+    {
+        return dynamic_cast<RichHdrWrapper*>(getWrapper(PEFile::WR_RICH_HDR));
+    }
+    
     /* wrappers for fetching the initialized directories */
     ImportDirWrapper* getImportsDir()
     {
