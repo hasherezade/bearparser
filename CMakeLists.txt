@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5...3.15)
 project (re-bear)
 
 option(CMD_BUILD_TESTING "Enable testing for bearcommander" ON)
