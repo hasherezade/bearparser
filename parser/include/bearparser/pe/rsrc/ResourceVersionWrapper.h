@@ -46,16 +46,17 @@ public:
     virtual WrappedValue::data_type containsDataType(size_t fieldId, size_t subField = FIELD_NONE);
 
     pe::version_info *getVersionInfo();
+
     QString getVersionText()
     {
         pe::version_info *info = getVersionInfo();
-        if (info == NULL) return ""; //ERROR
+        if (!info) return ""; //ERROR
 
         int size = INFOTEXT_LEN;
-        WORD *content = info->key;
-        if (content == NULL) return "";
+        const WORD *content = info->key;
+        if (!content) return "";
 
-        return QString::fromUtf16(content, size);
+        return QString::fromUtf16(reinterpret_cast<const char16_t*>(content), size);
     }
 
 

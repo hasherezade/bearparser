@@ -180,7 +180,7 @@ private:
 
     std::vector<ExeNodeWrapper*>* getSubEntriesList(size_t parentType)
     {
-        std::map<uint32_t, std::vector<ExeNodeWrapper*> >::iterator itr = subEntriesMap.find(parentType);
+        auto itr = subEntriesMap.find((uint32_t)parentType);
         if (itr == subEntriesMap.end()){
             return NULL;
         }
