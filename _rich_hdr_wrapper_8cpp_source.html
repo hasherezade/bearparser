@@ -279,7 +279,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordflow">if</span> (!data || dansOffset == <a class="code hl_variable" href="_abstract_byte_buffer_8h.html#ab99058386f4a8bc4e8cd07fad8198178">INVALID_ADDR</a>) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    DWORD cksum = dansOffset;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; dansOffset &amp;&amp; i &lt; dataSize; i++) {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; (size_t)dansOffset &amp;&amp; i &lt; dataSize; i++) {</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="comment">//skip e_lfanew</span></div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keywordflow">if</span> (i &gt;= 0x3c &amp;&amp; i &lt; 0x40) {</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            <span class="keywordflow">continue</span>;</div>

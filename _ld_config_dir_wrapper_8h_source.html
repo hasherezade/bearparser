@@ -285,7 +285,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    std::vector&lt;ExeNodeWrapper*&gt;* getSubEntriesList(<span class="keywordtype">size_t</span> parentType)</div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    {</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        std::map&lt;uint32_t, std::vector&lt;ExeNodeWrapper*&gt; &gt;::iterator itr = subEntriesMap.find(parentType);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keyword">auto</span> itr = subEntriesMap.find((uint32_t)parentType);</div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">if</span> (itr == subEntriesMap.end()){</div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        }</div>

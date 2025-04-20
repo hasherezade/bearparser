@@ -136,7 +136,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        WORD *content = (WORD*) this-&gt;<a class="code hl_variable" href="class_exe_element_wrapper.html#ad5100967cd4bb4831c0e96de7659d53e">m_Exe</a>-&gt;getContentAt(<a class="code hl_variable" href="class_res_string.html#a9b09eb92c820f6945a4540938c188da5">offset</a>,<a class="code hl_enumvalue" href="class_executable.html#a2202e0db9d88f3be2b26fc138ddd3b5badb8a64acd3f74166ea450698d025db3b">Executable::RAW</a>, size);</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">if</span> (content == NULL) <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span> QString::fromUtf16(content, size);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span> QString::fromUtf16(<span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char16_t</span>*<span class="keyword">&gt;</span>(content), size);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
 </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>

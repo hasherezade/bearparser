@@ -458,7 +458,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    }</div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    <span class="comment">// trim to next section</span></div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="keywordtype">int</span> secCounter = <a class="code hl_variable" href="class_p_e_node_wrapper.html#ab6fa549a7490efc0a84ab0c39fe0ef95">m_PE</a>-&gt;_getSectionsCount(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="keywordtype">size_t</span> secCounter = <a class="code hl_variable" href="class_p_e_node_wrapper.html#ab6fa549a7490efc0a84ab0c39fe0ef95">m_PE</a>-&gt;_getSectionsCount(<span class="keyword">true</span>);</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; secCounter; i++) {</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>        <a class="code hl_function" href="class_section_hdr_wrapper.html#a36e21a830a294c26c9d5a750fdf23d54">SectionHdrWrapper</a> *sec = <a class="code hl_variable" href="class_p_e_node_wrapper.html#ab6fa549a7490efc0a84ab0c39fe0ef95">m_PE</a>-&gt;_getSecHdr(i);</div>
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        <span class="keywordflow">if</span> (!sec) <span class="keywordflow">continue</span>;</div>
