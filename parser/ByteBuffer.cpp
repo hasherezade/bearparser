@@ -89,7 +89,7 @@ bool ByteBuffer::resize(bufsize_t newSize)
             this->content = newContent;
             this->contentSize = newSize;   
         }
-    } catch (BufferException &e) {
+    } catch (const BufferException&) {
          isOk = false;
     }
     return isOk;
