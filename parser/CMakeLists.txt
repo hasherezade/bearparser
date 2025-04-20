@@ -20,6 +20,11 @@ else()
     get_target_property(QtCore_location Qt${QT_VERSION_MAJOR}::Core LOCATION)
 endif()
 
+# multi-processor compilation
+if(MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+endif()
+
 include_directories (include/bearparser)
 
 set (win_hdrs
