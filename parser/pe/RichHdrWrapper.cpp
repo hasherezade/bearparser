@@ -164,7 +164,7 @@ DWORD RichHdrWrapper::calcChecksum()
     if (!data || dansOffset == INVALID_ADDR) return 0;
 
     DWORD cksum = dansOffset;
-    for (size_t i = 0; i < dansOffset && i < dataSize; i++) {
+    for (size_t i = 0; i < (size_t)dansOffset && i < dataSize; i++) {
         //skip e_lfanew
         if (i >= 0x3c && i < 0x40) {
             continue;

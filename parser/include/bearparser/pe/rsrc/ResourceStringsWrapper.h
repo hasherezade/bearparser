@@ -36,7 +36,7 @@ public:
         WORD *content = (WORD*) this->m_Exe->getContentAt(offset,Executable::RAW, size);
         if (content == NULL) return "";
 
-        return QString::fromUtf16(content, size);
+        return QString::fromUtf16(reinterpret_cast<const char16_t*>(content), size);
     }
 
     virtual size_t getStrLen() { return (sizePtr == NULL) ? 0 : static_cast<size_t>(*sizePtr); }

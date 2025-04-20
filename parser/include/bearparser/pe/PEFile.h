@@ -324,7 +324,7 @@ public:
 
     /* wrappers:
     */
-    bool hasDirectory(pe::dir_entry dirNum)
+    bool hasDirectory(const pe::dir_entry &dirNum)
     {
         return this->getDataDirEntry(dirNum) ? true : false;
     }
@@ -339,8 +339,7 @@ public:
         return this->getAlignment(Executable::RVA);
     }
 
-
-    void setImageSize(size_t newSize)
+    void setImageSize(bufsize_t newSize)
     {
         this->setVirtualSize(newSize);
     }
