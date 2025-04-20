@@ -59,8 +59,6 @@ public:
         return QString::fromUtf16(reinterpret_cast<const char16_t*>(content), size);
     }
 
-
-
 friend class ResourceContentFactory;
 };
 

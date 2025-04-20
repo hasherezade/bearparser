@@ -168,7 +168,7 @@ QString AbstractByteBuffer::getWStringValue(offset_t rawOffset, bufsize_t len)
     }
     WORD* ptr = (WORD*) this->getContentAt(rawOffset, size);
     if (ptr == NULL) return "";
-    return QString::fromUtf16(ptr, static_cast<int>(len));
+    return QString::fromUtf16(reinterpret_cast<const char16_t*>(ptr), static_cast<int>(len));
 }
 
 QString AbstractByteBuffer::getWAsciiStringValue(offset_t rawOffset, bufsize_t len, bool acceptNonTerminated)
@@ -182,7 +182,7 @@ QString AbstractByteBuffer::getWAsciiStringValue(offset_t rawOffset, bufsize_t l
     if (!ptr) return "";
 
     size_t asciiLen = pe_util::getAsciiLenW(ptr, len, acceptNonTerminated);
-    return QString::fromUtf16(ptr, static_cast<int>(asciiLen));
+    return QString::fromUtf16(reinterpret_cast<const char16_t*>(ptr), static_cast<int>(asciiLen));
 }
 
 bool AbstractByteBuffer::isAreaEmpty(offset_t rawOffset, bufsize_t size)
