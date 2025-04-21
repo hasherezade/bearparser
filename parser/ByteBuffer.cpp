@@ -1,16 +1,6 @@
 #include "ByteBuffer.h"
 #include <iostream>
 
-ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
-    : content(nullptr), contentSize(0), padding(v_padding),
-    originalSize(0), m_refs(0)
-{
-    if (v_size == 0) throw BufferException("Zero size requested");
-
-    this->content = allocContent(v_size, v_padding);
-    this->contentSize = v_size;
-    this->originalSize = v_size;
-}
 
 ByteBuffer::ByteBuffer(BYTE *v_content, bufsize_t v_size, bufsize_t v_padding)
     : content(nullptr), contentSize(0), padding(v_padding),
@@ -22,12 +12,19 @@ ByteBuffer::ByteBuffer(BYTE *v_content, bufsize_t v_size, bufsize_t v_padding)
      if (this->content) {
         this->contentSize = v_size;
         this->originalSize = v_size;
-        ::memcpy(this->content, v_content, v_size);
+        if (v_content) {
+            ::memcpy(this->content, v_content, v_size);
+        }
      }
 }
 
+ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
+    : ByteBuffer(nullptr, v_size, v_padding)
+{
+}
+
 ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_t v_size, bufsize_t v_padding)
-    : content(NULL), contentSize(0), padding(0),
+    : content(nullptr), contentSize(0), padding(0),
     originalSize(0), m_refs(0)
 {
     if (!v_parent) throw BufferException("Cannot make subBuffer for NULL buffer!");
