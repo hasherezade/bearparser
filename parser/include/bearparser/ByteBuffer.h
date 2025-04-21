@@ -6,10 +6,6 @@
 class ByteBuffer : public AbstractByteBuffer
 {
 public:
-    ByteBuffer()
-        : content(nullptr), contentSize(0), padding(0), originalSize(0)
-    {}
-
     ByteBuffer(bufsize_t v_size, bufsize_t padding = DEFAULT_PADDING);
     ByteBuffer(BYTE *v_content, bufsize_t v_size, bufsize_t padding = DEFAULT_PADDING);
     ByteBuffer(AbstractByteBuffer *sourceBuf, offset_t offset, bufsize_t size, bufsize_t padding = DEFAULT_PADDING);
@@ -30,4 +26,7 @@ protected:
     bufsize_t padding;
 
     bufsize_t originalSize;
+
+private:
+	void _init(const bufsize_t& v_size, const bufsize_t& v_padding = DEFAULT_PADDING);
 };
