@@ -1,31 +1,30 @@
 #include "ByteBuffer.h"
 #include <iostream>
 
-
-ByteBuffer::ByteBuffer(BYTE *v_content, bufsize_t v_size, bufsize_t v_padding)
-    : content(nullptr), contentSize(0), padding(v_padding),
-    originalSize(0)
+ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
+    : ByteBuffer()
 {
     if (v_size == 0) throw BufferException("Zero size requested");
 
     this->content = allocContent(v_size, v_padding);
-     if (this->content) {
+    if (this->content) {
+        this->padding = v_padding;
         this->contentSize = v_size;
         this->originalSize = v_size;
-        if (v_content) {
-            ::memcpy(this->content, v_content, v_size);
-        }
-     }
+    }
 }
 
-ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
-    : ByteBuffer(nullptr, v_size, v_padding)
+ByteBuffer::ByteBuffer(BYTE* v_content, bufsize_t v_size, bufsize_t v_padding)
+    : ByteBuffer(v_size, v_padding)
 {
+    if (v_size == 0) throw BufferException("Zero size requested");
+    if (this->content && v_content) {
+        ::memcpy(this->content, v_content, v_size);
+    }
 }
 
 ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_t v_size, bufsize_t v_padding)
-    : content(nullptr), contentSize(0), padding(0),
-    originalSize(0)
+    : ByteBuffer()
 {
     if (!v_parent) throw BufferException("Cannot make subBuffer for NULL buffer!");
     if (!v_size) throw BufferException("Cannot make 0 size buffer!");
@@ -40,6 +39,7 @@ ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_
 
     this->content = allocContent(allocSize, v_padding);
     if (this->content) {
+        this->padding = v_padding;
         this->contentSize = allocSize;
         this->originalSize = this->contentSize;
         ::memcpy(this->content, bContent, copySize);
