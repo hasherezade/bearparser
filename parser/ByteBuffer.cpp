@@ -52,27 +52,17 @@ ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_
 BYTE* ByteBuffer::allocContent(bufsize_t v_size, bufsize_t v_padding)
 {
     if (!v_size) throw BufferException("Zero size requested");
-    
-    const bufsize_t allocSize = v_size + v_padding;
-    std::cerr << "Trying to resize. Ptr: " << std::hex << (void*)content << " New size: " << allocSize << std::endl;
 
+    const bufsize_t allocSize = v_size + v_padding;
     const bufsize_t sizeDiff = (allocSize > this->contentSize) ? (allocSize - this->contentSize) : 0;
+
     BYTE* content = reinterpret_cast<BYTE*>(::realloc((void*)this->content, allocSize));
-    
     if (!content) {
-        std::cerr << "Error!" << std::endl;
         throw BufferException("Cannot allocate buffer of size: 0x" + QString::number(allocSize, 16));
     }
     if (sizeDiff) {
-        std::cerr << "Ptr: " << std::hex << (void*)content << " Additional size: " << sizeDiff << " BaseContentSize: " << this->contentSize << std::endl;
         ::memset(content + this->contentSize, 0, sizeDiff);
-    } else {
-        std::cerr << "Ptr: " << std::hex << (void*)content << " New size: " << allocSize << std::endl;
     }
-    /*if (sizeDiff) {
-        // if some memory has been added to the existing buffer, initialize it with 0
-        ::memset(content + this->contentSize, 0, sizeDiff);
-    }*/
     return content;
 }
 
@@ -87,7 +77,7 @@ bool ByteBuffer::resize(bufsize_t newSize)
         newContent = allocContent(newSize, this->padding);
         if (newContent) {
             this->content = newContent;
-            this->contentSize = newSize;   
+            this->contentSize = newSize;
         }
     } catch (const BufferException&) {
          isOk = false;
@@ -97,6 +87,5 @@ bool ByteBuffer::resize(bufsize_t newSize)
 
 ByteBuffer::~ByteBuffer()
 {
-    std::cerr << "Ptr: " << std::hex << (void*)content << " BaseContentSize: " << this->contentSize << " : " << __FUNCTION__ << std::endl;
     ::free(this->content);
 }
