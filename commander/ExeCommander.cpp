@@ -103,8 +103,9 @@ void cmd_util::printWrapperNames(MappedExe *exe)
         if (wr == NULL || wr->getPtr() == NULL) {
             continue;
         }
-        std::cout << "[" << std::dec << i << "] ";
-        std::cout << exe->getWrapperName(i).toStdString() << std::endl;
+        std::cout << "[" << std::dec << i << "] "
+            << exe->getWrapperName(i).toStdString()
+            << std::endl;
     }
 }
 
@@ -115,12 +116,11 @@ void cmd_util::dumpEntryInfo(ExeElementWrapper *w)
     std::cout << "\n------\n";
     size_t fields = w->getFieldsCount();
     
-    std::cout << "[" << w->getName().toStdString() << "] ";
-    std::cout << "size: ";
-    
-    OUT_PADDED_HEX(std::cout, w->getSize(), sizeof(bufsize_t));
-    std::cout << " ";
-    std::cout << "fieldsCount: " << std::dec << fields << "\n" << std::endl;
+    std::cout << "[" << w->getName().toStdString() << "] "
+        << "size: 0x" << std::hex << w->getSize()
+        << " " 
+        << "fieldsCount: " << std::dec << fields << "\n" 
+        << std::endl;
 
     for (size_t i = 0; i < fields; i++) {
         offset_t offset = w->getFieldOffset(i);
@@ -160,7 +160,8 @@ void cmd_util::dumpNodeInfo(ExeNodeWrapper *w)
     std::cout << "------" << std::endl;
     size_t entriesCnt = w->getEntriesCount();
     std::cout << "\t [" << w->getName().toStdString() << "] "
-        << "entriesCount: " << std::dec << entriesCnt << std::endl;
+        << "entriesCount: " << std::dec << entriesCnt 
+        << std::endl;
 
     for (size_t i = 0; i < entriesCnt; i++) {
         ExeNodeWrapper* entry = w->getEntryAt(i);
@@ -214,10 +215,10 @@ void ConvertAddrCommand::execute(CmdParams *params, CmdContext  *context)
         std::cout << "[WARNING] This address cannot be mapped" << std::endl;
         return;
     }
-    std::cout << "[" << cmd_util::addrTypeToStr(addrFrom) << "]";
-    std::cout << "\t->\t";
-    std::cout << "[" << cmd_util::addrTypeToStr(addrTo) << "]";
-    std::cout << ":\n";
+    std::cout << "[" << cmd_util::addrTypeToStr(addrFrom) << "]"
+    	<< "\t->\t"
+    	<< "[" << cmd_util::addrTypeToStr(addrTo) << "]"
+    	<< ":\n";
     OUT_PADDED_OFFSET(std::cout, offset);
     std::cout << "\t->\t";
     OUT_PADDED_OFFSET(std::cout, outOffset);
