@@ -95,6 +95,7 @@ ByteBuffer* AbstractFileBuffer::read(QFile &fIn, bufsize_t minBufSize, const boo
 bufsize_t AbstractFileBuffer::getReadableSize(QFile &fIn)
 {
     qint64 fileSize = fIn.size();
+    if (!fileSize) return 0;
     if (fileSize > qint64(FILE_MAXSIZE)) {
         fileSize = qint64(FILE_MAXSIZE);
     }

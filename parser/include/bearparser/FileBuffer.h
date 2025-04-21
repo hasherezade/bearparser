@@ -1,9 +1,9 @@
 #pragma once
 #include <QtCore>
-
+#include <limits.h>
 #include "ByteBuffer.h"
 
-const bufsize_t FILE_MAXSIZE = BUFSIZE_MAX;
+const bufsize_t FILE_MAXSIZE = (LLONG_MAX > BUFSIZE_MAX ? BUFSIZE_MAX : LLONG_MAX);
 const bufsize_t FILEVIEW_MAXSIZE = (1024*1024*400); //419mb
 
 class FileBufferException : public BufferException
