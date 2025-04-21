@@ -1,7 +1,0 @@
-<map id="ByteBuffer::ByteBuffer" name="ByteBuffer::ByteBuffer">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,153,56"/>
-<area shape="rect" id="Node000002" href="$class_byte_buffer.html#a95821f73489496d751fefe6382d1e489" title=" " alt="" coords="201,5,360,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,32,185,27,185,33,154,37"/>
-<area shape="rect" id="Node000003" href="$class_byte_buffer.html#adc1d4da00319096a5eb0043f4a37e2be" title=" " alt="" coords="207,55,354,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="154,50,191,54,191,60,153,55"/>
-</map>
