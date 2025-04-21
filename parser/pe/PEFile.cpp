@@ -558,8 +558,8 @@ SectionHdrWrapper* PEFile::addNewSection(QString name, bufsize_t r_size, bufsize
         }
         secHdr.PointerToRawData = static_cast<DWORD>(roundedRawEnd);
         secHdr.VirtualAddress = static_cast<DWORD>(roundedVirtualEnd);
-        secHdr.SizeOfRawData = r_size;
-        secHdr.Misc.VirtualSize = v_size;
+        secHdr.SizeOfRawData = MASK_TO_DWORD(r_size);
+        secHdr.Misc.VirtualSize = MASK_TO_DWORD(v_size);
 
         SectionHdrWrapper wr(this, &secHdr);
         secHdrWr = dynamic_cast<SectionHdrWrapper*>(sec->addEntry(&wr));

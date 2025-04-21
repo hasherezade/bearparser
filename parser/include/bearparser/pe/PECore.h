@@ -18,7 +18,7 @@ public:
 
     bool wrap(AbstractByteBuffer *v_buf);
 
-    virtual offset_t getRawSize() const { return static_cast<offset_t>(buf->getContentSize()); }
+    virtual offset_t getRawSize() const { return buf ? static_cast<offset_t>(buf->getContentSize()) : 0; }
 
     virtual bufsize_t getAlignment(Executable::addr_type aType) const;
     virtual offset_t getImageBase(bool recalculate = false);
@@ -35,11 +35,11 @@ public:
 
     void setImageSize(bufsize_t newSize)
     {
-        if (opt32) {
-            this->opt32->SizeOfImage = newSize;
+        if (this->opt32) {
+            this->opt32->SizeOfImage = MASK_TO_DWORD(newSize);
         }
-        else if (opt64) {
-            this->opt64->SizeOfImage = newSize;
+        else if (this->opt64) {
+            this->opt64->SizeOfImage = MASK_TO_DWORD(newSize);
         }
     }
 
