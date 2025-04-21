@@ -96,6 +96,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;QtCore&gt;</code><br />
+<code>#include &lt;limits.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="_byte_buffer_8h_source.html">ByteBuffer.h</a>&quot;</code><br />
 </div>
 <p><a href="_file_buffer_8h_source.html">Go to the source code of this file.</a></p>
@@ -113,7 +114,7 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ade633a52361f4d36fb0c82ac2acfbe67" id="r_ade633a52361f4d36fb0c82ac2acfbe67"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade633a52361f4d36fb0c82ac2acfbe67">FILE_MAXSIZE</a> = <a class="el" href="_abstract_byte_buffer_8h.html#a06eeddcfd3f26853ac1210c897f8a003">BUFSIZE_MAX</a></td></tr>
+<tr class="memitem:ade633a52361f4d36fb0c82ac2acfbe67" id="r_ade633a52361f4d36fb0c82ac2acfbe67"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade633a52361f4d36fb0c82ac2acfbe67">FILE_MAXSIZE</a> = (LLONG_MAX &gt; <a class="el" href="_abstract_byte_buffer_8h.html#a06eeddcfd3f26853ac1210c897f8a003">BUFSIZE_MAX</a> ? <a class="el" href="_abstract_byte_buffer_8h.html#a06eeddcfd3f26853ac1210c897f8a003">BUFSIZE_MAX</a> : LLONG_MAX)</td></tr>
 <tr class="separator:ade633a52361f4d36fb0c82ac2acfbe67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c995a9bac9ca6c6d057896ae4b4ea76" id="r_a5c995a9bac9ca6c6d057896ae4b4ea76"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c995a9bac9ca6c6d057896ae4b4ea76">FILEVIEW_MAXSIZE</a> = (1024*1024*400)</td></tr>
 <tr class="separator:a5c995a9bac9ca6c6d057896ae4b4ea76"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,7 +127,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a> FILE_MAXSIZE = <a class="el" href="_abstract_byte_buffer_8h.html#a06eeddcfd3f26853ac1210c897f8a003">BUFSIZE_MAX</a></td>
+          <td class="memname">const <a class="el" href="_abstract_byte_buffer_8h.html#a9067dc831274514d508e98df05bf015d">bufsize_t</a> FILE_MAXSIZE = (LLONG_MAX &gt; <a class="el" href="_abstract_byte_buffer_8h.html#a06eeddcfd3f26853ac1210c897f8a003">BUFSIZE_MAX</a> ? <a class="el" href="_abstract_byte_buffer_8h.html#a06eeddcfd3f26853ac1210c897f8a003">BUFSIZE_MAX</a> : LLONG_MAX)</td>
         </tr>
       </table>
 </div><div class="memdoc">
