@@ -25,7 +25,7 @@ public:
 protected:
     static ByteBuffer* read(QFile &fIn, bufsize_t minBufSize, const bool allowTruncate); //throws exceptions
 
-    AbstractFileBuffer(QString v_fileName) :fileName(v_fileName) {}
+    AbstractFileBuffer(QString v_fileName) :fileName(v_fileName), fileSize(0) {}
 
     QString fileName;
     qint64 fileSize; // real size of the file
