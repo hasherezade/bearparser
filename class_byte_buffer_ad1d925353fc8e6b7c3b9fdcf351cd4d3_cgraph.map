@@ -1,7 +1,6 @@
 <map id="ByteBuffer::release" name="ByteBuffer::release">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,135,31"/>
-<area shape="rect" id="Node000002" href="$class_byte_buffer.html#a7aa532de539fe0d1218349bb9dd043df" title=" " alt="" coords="183,5,330,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,16,167,16,167,21,135,21"/>
-<area shape="rect" id="Node000003" href="$class_byte_buffer.html#a95821f73489496d751fefe6382d1e489" title=" " alt="" coords="378,5,537,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="331,16,362,16,362,21,331,21"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,135,55"/>
+<area shape="rect" id="Node000002" href="$class_byte_buffer.html#a7aa532de539fe0d1218349bb9dd043df" title=" " alt="" coords="183,29,330,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,40,167,40,167,45,135,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="225,30,219,21,223,11,235,5,256,3,279,5,291,12,288,16,277,10,256,8,237,10,226,15,224,20,229,27"/>
 </map>
