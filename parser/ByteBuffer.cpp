@@ -1,5 +1,6 @@
 #include "ByteBuffer.h"
 #include <iostream>
+#include <limits.h>
 
 ByteBuffer::ByteBuffer(bufsize_t v_size, bufsize_t v_padding)
     : ByteBuffer()
@@ -49,6 +50,7 @@ ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_
 BYTE* ByteBuffer::allocContent(bufsize_t v_size, bufsize_t v_padding)
 {
     if (!v_size) throw BufferException("Zero size requested");
+    if (v_size >= BUFSIZE_MAX || v_size >= LLONG_MAX) throw BufferException("Too big size requested");
 
     const bufsize_t allocSize = v_size + v_padding;
     const bufsize_t sizeDiff = (allocSize > this->contentSize) ? (allocSize - this->contentSize) : 0;

@@ -14,7 +14,7 @@
 #define MASK_TO_DWORD(val) ((val < MAX_DWORD) ? (val & MAX_DWORD) : MAX_DWORD)
 #define MASK_TO_WORD(val) ((val < MAX_WORD) ? (val & MAX_WORD) : MAX_WORD)
 
-typedef uint32_t bufsize_t;
+typedef size_t bufsize_t;
 const bufsize_t BUFSIZE_MAX = bufsize_t(-1);
 
 typedef uint64_t offset_t;
