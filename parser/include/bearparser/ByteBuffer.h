@@ -10,6 +10,22 @@ public:
     ByteBuffer(BYTE *v_content, bufsize_t v_size, bufsize_t padding = DEFAULT_PADDING);
     ByteBuffer(AbstractByteBuffer *sourceBuf, offset_t offset, bufsize_t size, bufsize_t padding = DEFAULT_PADDING);
 
+    static bool release(ByteBuffer* buf)
+    {
+        if (!buf) return false;
+        if (buf->m_refs == 0) {
+            delete buf;
+            return true;
+        }
+        buf->m_refs--;
+        return false;
+    }
+
+    void addRef()
+    {
+        m_refs++;
+    }
+
     virtual ~ByteBuffer();
 
     virtual bufsize_t getContentSize() { return contentSize; }
@@ -26,5 +42,7 @@ protected:
     bufsize_t padding;
 
     bufsize_t originalSize;
+
+    size_t m_refs;
 };
 
