@@ -7,7 +7,6 @@ var searchData=
   ['addentryat_4',['addEntryAt',['../class_exe_node_wrapper.html#a22e7c147e4a0f6f9882d6ac3bb40ed25',1,'ExeNodeWrapper']]],
   ['addmapping_5',['addMapping',['../class_exe_node_wrapper.html#a7689f2efd4ed0f43890385839a0b617a',1,'ExeNodeWrapper::addMapping()'],['../class_import_base_dir_wrapper.html#ae3401167a9ee3eee123cb42728d90b42',1,'ImportBaseDirWrapper::addMapping()'],['../class_import_base_entry_wrapper.html#abc5866cd92a0da7af6faa18b674e8e9a',1,'ImportBaseEntryWrapper::addMapping()']]],
   ['addnewsection_6',['addNewSection',['../class_p_e_file.html#afdb1b254ee5f6d557c4d850196abd6e3',1,'PEFile']]],
-  ['addref_7',['addRef',['../class_byte_buffer.html#a16568393231ce2c3dc8eaf0ea91b35d7',1,'ByteBuffer']]],
-  ['alloccontent_8',['allocContent',['../class_byte_buffer.html#a95821f73489496d751fefe6382d1e489',1,'ByteBuffer']]],
-  ['append_9',['append',['../namespace_logger.html#a36e3deee152da96a491b670a00d224c9',1,'Logger']]]
+  ['alloccontent_7',['allocContent',['../class_byte_buffer.html#a95821f73489496d751fefe6382d1e489',1,'ByteBuffer']]],
+  ['append_8',['append',['../namespace_logger.html#a36e3deee152da96a491b670a00d224c9',1,'Logger']]]
 ];
