@@ -42,11 +42,11 @@ Executable* PEFileBuilder::build(AbstractByteBuffer *buf)
 }
 
 //-------------------------------------------------------------
-long PEFile::computeChecksum(BYTE* buffer, size_t bufferSize, offset_t checksumOffset)
+long PEFile::computeChecksum(const BYTE* buffer, size_t bufferSize, offset_t checksumOffset)
 {
     if (!buffer || !bufferSize) return 0;
 
-    WORD* wordsBuff = reinterpret_cast<WORD*>(buffer);
+    const WORD* wordsBuff = reinterpret_cast<const WORD*>(buffer);
     const size_t wordsCount = bufferSize / sizeof(WORD);
     const size_t remainingBytes = bufferSize % sizeof(WORD);
     

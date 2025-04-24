@@ -57,7 +57,7 @@ public:
         COUNT_WRAPPERS
     };
 
-    static long computeChecksum(BYTE *buffer, size_t bufferSize, offset_t checksumOffset);
+    static long computeChecksum(const BYTE *buffer, size_t bufferSize, offset_t checksumOffset);
 
     PEFile(AbstractByteBuffer *v_buf);
     virtual ~PEFile() { clearWrappers(); delete album; }
