@@ -118,7 +118,7 @@ void* TlsEntryWrapper::getPtr()
 
     bool isOk = false;
     offset_t firstVA = static_cast<offset_t>(this->parentDir->getNumValue(TlsDirWrapper::CALLBACKS_ADDR, &isOk));
-    if (!isOk) return NULL;
+    if (!isOk || (firstVA == 0)) return NULL;
 
     offset_t firstRaw = m_Exe->toRaw(firstVA, Executable::VA);
     if (firstRaw == INVALID_ADDR) {
