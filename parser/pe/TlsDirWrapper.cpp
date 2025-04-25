@@ -7,8 +7,7 @@ bool TlsDirWrapper::wrap()
     size_t entryId = 0;
     while (true) {
         TlsEntryWrapper* entry = new TlsEntryWrapper(this->m_Exe, this, entryId++);
-
-        if (entry->getPtr() == NULL) {
+        if (!entry->getPtr()) {
             delete entry;
             break;
         }
@@ -34,7 +33,7 @@ void* TlsDirWrapper::getPtr()
 
 bufsize_t TlsDirWrapper::getSize()
 {
-    if (getPtr() == NULL) return 0;
+    if (!getPtr()) return 0;
     if (m_Exe->getBitMode() == Executable::BITS_32) {
         return sizeof(IMAGE_TLS_DIRECTORY32);
     }
@@ -73,7 +72,7 @@ void* TlsDirWrapper::getFieldPtr(size_t fId, size_t subField)
     IMAGE_TLS_DIRECTORY32* t32 = tls32();
     IMAGE_TLS_DIRECTORY64* t64 = tls64();
 
-    if (t32 == NULL && t64 == NULL) return NULL;
+    if (!t32 && !t64) return NULL;
 
     switch (fId) {
         case START_ADDR : return t32 ? (void*) &t32->StartAddressOfRawData : (void*) &t64->StartAddressOfRawData;
@@ -114,26 +113,26 @@ Executable::addr_type TlsDirWrapper::containsAddrType(size_t fieldId, size_t sub
 //----------------
 void* TlsEntryWrapper::getPtr()
 {
-    if (this->parentDir == NULL) return NULL;
+    if (!this->parentDir) return nullptr;
 
     bool isOk = false;
-    offset_t firstVA = static_cast<offset_t>(this->parentDir->getNumValue(TlsDirWrapper::CALLBACKS_ADDR, &isOk));
-    if (!isOk || (firstVA == 0)) return NULL;
+    const offset_t firstVA = static_cast<offset_t>(this->parentDir->getNumValue(TlsDirWrapper::CALLBACKS_ADDR, &isOk));
+    if (!isOk || (firstVA == 0)) return nullptr;
 
-    offset_t firstRaw = m_Exe->toRaw(firstVA, Executable::VA);
+    const offset_t firstRaw = m_Exe->toRaw(firstVA, Executable::VA);
     if (firstRaw == INVALID_ADDR) {
-        return NULL;
+        return nullptr;
     }
 
-    bufsize_t addrSize = this->parentDir->getFieldSize(TlsDirWrapper::CALLBACKS_ADDR);
-    offset_t myRaw = firstRaw + (addrSize * this->entryNum);
+    const bufsize_t addrSize = this->parentDir->getFieldSize(TlsDirWrapper::CALLBACKS_ADDR);
+    const offset_t myRaw = firstRaw + (addrSize * this->entryNum);
     BYTE *ptr  = m_Exe->getContentAt(myRaw, Executable::RAW, addrSize);
     return ptr;
 }
 
 bufsize_t TlsEntryWrapper::getSize()
 {
-    if (this->parentDir == NULL) return 0;
-    bufsize_t addrSize = this->parentDir->getFieldSize(TlsDirWrapper::CALLBACKS_ADDR);
+    if (!this->parentDir) return 0;
+    const bufsize_t addrSize = this->parentDir->getFieldSize(TlsDirWrapper::CALLBACKS_ADDR);
     return addrSize;
 }
