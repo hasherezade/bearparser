@@ -80,21 +80,13 @@ bool pe_util::hasNonPrintable(const char *inp, size_t maxInp)
 
 bool _isFuncChar(const char c)
 {
-    if ((c >= 'a' && c <= 'z')
-            || (c >= 'A' && c <= 'Z')
-            || (c >= '0' && c <= '9')
-            || (c == '_')
-            || (c == '.')
-            || (c== '#') 
-            || (c == '@')
-            || (c == '?')
-            || (c == '-')
-            || (c == '\\')
-            || (c == '/')
-            || (c == ':')
-        )
-    {
+    char charset[] = "_.#@?-\\/:$ ";
+    
+    if (::isalnum(c)) {
         return true;
+    }
+    for (size_t i = 0; i < sizeof(charset); ++i) {
+        if (c == charset[i]) return true;
     }
     return false;
 }
