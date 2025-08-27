@@ -185,142 +185,134 @@ $(function(){ initResizable(false); });
 <div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="_util_8cpp.html#aa4fdbecc18b0d1086fc76c27bc2db21d">   81</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="_util_8cpp.html#aa4fdbecc18b0d1086fc76c27bc2db21d">_isFuncChar</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> c)</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>{</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">if</span> ((c &gt;= <span class="charliteral">&#39;a&#39;</span> &amp;&amp; c &lt;= <span class="charliteral">&#39;z&#39;</span>)</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            || (c &gt;= <span class="charliteral">&#39;A&#39;</span> &amp;&amp; c &lt;= <span class="charliteral">&#39;Z&#39;</span>)</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            || (c &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; c &lt;= <span class="charliteral">&#39;9&#39;</span>)</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            || (c == <span class="charliteral">&#39;_&#39;</span>)</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            || (c == <span class="charliteral">&#39;.&#39;</span>)</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            || (c== <span class="charliteral">&#39;#&#39;</span>) </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            || (c == <span class="charliteral">&#39;@&#39;</span>)</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            || (c == <span class="charliteral">&#39;?&#39;</span>)</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            || (c == <span class="charliteral">&#39;-&#39;</span>)</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            || (c == <span class="charliteral">&#39;\\&#39;</span>)</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            || (c == <span class="charliteral">&#39;/&#39;</span>)</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            || (c == <span class="charliteral">&#39;:&#39;</span>)</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        )</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    {</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>}</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">char</span> charset[] = <span class="stringliteral">&quot;_.#@?-\\/:$ &quot;</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">if</span> (::isalnum(c)) {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <span class="keyword">sizeof</span>(charset); ++i) {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">if</span> (c == charset[i]) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}</div>
 </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="foldopen" id="foldopen00102" data-start="{" data-end="}">
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="namespacepe__util.html#a71bb568fb36e1ec857def028578e4d05">  102</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacepe__util.html#a71bb568fb36e1ec857def028578e4d05">pe_util::validateFuncName</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* fPtr, <span class="keywordtype">size_t</span> bufSize)</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>{</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">if</span> (!fPtr || !bufSize) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">for</span> (<span class="keywordtype">char</span> i = 0; i &lt; bufSize; i++) {</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keyword">const</span> <span class="keywordtype">char</span> c = fPtr[i];</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">if</span> (c == 0) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">if</span> (!<a class="code hl_function" href="_util_8cpp.html#aa4fdbecc18b0d1086fc76c27bc2db21d">_isFuncChar</a>(c)) {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        }</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    }</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>}</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="foldopen" id="foldopen00094" data-start="{" data-end="}">
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="namespacepe__util.html#a71bb568fb36e1ec857def028578e4d05">   94</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacepe__util.html#a71bb568fb36e1ec857def028578e4d05">pe_util::validateFuncName</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* fPtr, <span class="keywordtype">size_t</span> bufSize)</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>{</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">if</span> (!fPtr || !bufSize) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">for</span> (<span class="keywordtype">char</span> i = 0; i &lt; bufSize; i++) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keyword">const</span> <span class="keywordtype">char</span> c = fPtr[i];</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">if</span> (c == 0) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">if</span> (!<a class="code hl_function" href="_util_8cpp.html#aa4fdbecc18b0d1086fc76c27bc2db21d">_isFuncChar</a>(c)) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}</div>
 </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="namespacepe__util.html#a242ea277da991102b3d65c0ea87be014">  116</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="namespacepe__util.html#a242ea277da991102b3d65c0ea87be014">pe_util::forwarderNameLen</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* fPtr, <span class="keywordtype">size_t</span> bufSize)</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>{</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">if</span> (!fPtr || bufSize == 0) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="comment">// names can be also mangled, i.e. MSVCRT.??0__non_rtti_object@std@@QAE@ABV01@@Z</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordtype">bool</span> has_dot = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordtype">size_t</span> len = 0;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">while</span> ((*fPtr == <span class="charliteral">&#39;.&#39;</span>) || <a class="code hl_function" href="_util_8cpp.html#aa4fdbecc18b0d1086fc76c27bc2db21d">_isFuncChar</a>(*fPtr))</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">if</span> (*fPtr == <span class="charliteral">&#39;.&#39;</span>) has_dot = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        len++;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">if</span> ((--bufSize) == 0) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        fPtr++;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    }</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">if</span> (*fPtr == <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">if</span> (!has_dot) {</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">return</span> 0; <span class="comment">//this is not a valid forwarder</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        }</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">return</span> len;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>}</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="foldopen" id="foldopen00108" data-start="{" data-end="}">
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="namespacepe__util.html#a242ea277da991102b3d65c0ea87be014">  108</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="namespacepe__util.html#a242ea277da991102b3d65c0ea87be014">pe_util::forwarderNameLen</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* fPtr, <span class="keywordtype">size_t</span> bufSize)</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>{</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">if</span> (!fPtr || bufSize == 0) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="comment">// names can be also mangled, i.e. MSVCRT.??0__non_rtti_object@std@@QAE@ABV01@@Z</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordtype">bool</span> has_dot = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">size_t</span> len = 0;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">while</span> ((*fPtr == <span class="charliteral">&#39;.&#39;</span>) || <a class="code hl_function" href="_util_8cpp.html#aa4fdbecc18b0d1086fc76c27bc2db21d">_isFuncChar</a>(*fPtr))</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">if</span> (*fPtr == <span class="charliteral">&#39;.&#39;</span>) has_dot = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        len++;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordflow">if</span> ((--bufSize) == 0) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        fPtr++;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordflow">if</span> (*fPtr == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">if</span> (!has_dot) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keywordflow">return</span> 0; <span class="comment">//this is not a valid forwarder</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordflow">return</span> len;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}</div>
 </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="namespacepe__util.html#a5d0faa3e638d06b8762b1e646c5ee8bb">  139</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="namespacepe__util.html#a5d0faa3e638d06b8762b1e646c5ee8bb">pe_util::noWhiteCount</a>(<span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> bufSize) {</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordtype">size_t</span> cntr = 0;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordtype">size_t</span> i = 0;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordflow">for</span> (i = 0; i &lt; bufSize; i++) {</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordflow">if</span> (<a class="code hl_define" href="_util_8h.html#a1a739e1f368dc1b3b122572eec3d12ab">IS_PRINTABLE</a>(buf[i]) &amp;&amp; buf[i] != <span class="charliteral">&#39; &#39;</span>)</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            cntr++;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    }</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordflow">return</span> cntr;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>}</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="foldopen" id="foldopen00131" data-start="{" data-end="}">
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="namespacepe__util.html#a5d0faa3e638d06b8762b1e646c5ee8bb">  131</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="namespacepe__util.html#a5d0faa3e638d06b8762b1e646c5ee8bb">pe_util::noWhiteCount</a>(<span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> bufSize) {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">size_t</span> cntr = 0;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">size_t</span> i = 0;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">for</span> (i = 0; i &lt; bufSize; i++) {</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordflow">if</span> (<a class="code hl_define" href="_util_8h.html#a1a739e1f368dc1b3b122572eec3d12ab">IS_PRINTABLE</a>(buf[i]) &amp;&amp; buf[i] != <span class="charliteral">&#39; &#39;</span>)</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            cntr++;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordflow">return</span> cntr;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}</div>
 </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="foldopen" id="foldopen00149" data-start="{" data-end="}">
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="namespacepe__util.html#ac9d2020d6eb85db1c13823e993139440">  149</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="namespacepe__util.html#a5d0faa3e638d06b8762b1e646c5ee8bb">pe_util::noWhiteCount</a>(std::string s)</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>{</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordtype">size_t</span> bufSize = s.length();</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordtype">size_t</span> cntr = 0;</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordtype">size_t</span> i = 0;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordflow">for</span> (i = 0; i &lt; bufSize; i++) {</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">if</span> (<a class="code hl_define" href="_util_8h.html#a1a739e1f368dc1b3b122572eec3d12ab">IS_PRINTABLE</a>(s[i]) &amp;&amp; s[i] != <span class="charliteral">&#39; &#39;</span>)</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            cntr++;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordflow">return</span> cntr;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="foldopen" id="foldopen00141" data-start="{" data-end="}">
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="namespacepe__util.html#ac9d2020d6eb85db1c13823e993139440">  141</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="namespacepe__util.html#a5d0faa3e638d06b8762b1e646c5ee8bb">pe_util::noWhiteCount</a>(std::string s)</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>{</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordtype">size_t</span> bufSize = s.length();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordtype">size_t</span> cntr = 0;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordtype">size_t</span> i = 0;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordflow">for</span> (i = 0; i &lt; bufSize; i++) {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">if</span> (<a class="code hl_define" href="_util_8h.html#a1a739e1f368dc1b3b122572eec3d12ab">IS_PRINTABLE</a>(s[i]) &amp;&amp; s[i] != <span class="charliteral">&#39; &#39;</span>)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            cntr++;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">return</span> cntr;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>}</div>
 </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
-<div class="foldopen" id="foldopen00161" data-start="{" data-end="}">
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="namespacepe__util.html#a8d27344da7a33a4c5b7c43c329179367">  161</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacepe__util.html#a8d27344da7a33a4c5b7c43c329179367">pe_util::isSpaceClear</a>(<span class="keywordtype">void</span>* ptr, uint64_t size)</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>{</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    BYTE* testblock = (BYTE*) calloc(size, <span class="keyword">sizeof</span>(BYTE));</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordtype">bool</span> isClear = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordflow">if</span> (memcmp (testblock, ptr, size)) {</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        isClear = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    }</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    free(testblock);</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordflow">return</span> isClear;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="namespacepe__util.html#a8d27344da7a33a4c5b7c43c329179367">  153</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacepe__util.html#a8d27344da7a33a4c5b7c43c329179367">pe_util::isSpaceClear</a>(<span class="keywordtype">void</span>* ptr, uint64_t size)</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>{</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    BYTE* testblock = (BYTE*) calloc(size, <span class="keyword">sizeof</span>(BYTE));</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordtype">bool</span> isClear = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordflow">if</span> (memcmp (testblock, ptr, size)) {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        isClear = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    free(testblock);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordflow">return</span> isClear;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>}</div>
+</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="foldopen" id="foldopen00164" data-start="{" data-end="}">
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="namespacepe__util.html#ad7a076665793ae6a73d7fb9243d4501e">  164</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacepe__util.html#ad7a076665793ae6a73d7fb9243d4501e">pe_util::isHexChar</a>(<span class="keywordtype">char</span> c)</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>{</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordflow">if</span> (isdigit(c)) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordflow">if</span> (c &gt;= <span class="charliteral">&#39;A&#39;</span> &amp;&amp; c &lt;= <span class="charliteral">&#39;F&#39;</span>) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">if</span> (c &gt;= <span class="charliteral">&#39;a&#39;</span> &amp;&amp; c &lt;= <span class="charliteral">&#39;f&#39;</span>) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>}</div>
 </div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
 <div class="foldopen" id="foldopen00172" data-start="{" data-end="}">
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="namespacepe__util.html#ad7a076665793ae6a73d7fb9243d4501e">  172</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacepe__util.html#ad7a076665793ae6a73d7fb9243d4501e">pe_util::isHexChar</a>(<span class="keywordtype">char</span> c)</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="namespacepe__util.html#a89542115abc280faa162fbd815672f48">  172</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacepe__util.html#a89542115abc280faa162fbd815672f48">pe_util::hexdump</a>(BYTE *buf, <span class="keywordtype">size_t</span> bufSize, <span class="keywordtype">size_t</span> pad)</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>{</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">if</span> (isdigit(c)) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordflow">if</span> (c &gt;= <span class="charliteral">&#39;A&#39;</span> &amp;&amp; c &lt;= <span class="charliteral">&#39;F&#39;</span>) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">if</span> (c &gt;= <span class="charliteral">&#39;a&#39;</span> &amp;&amp; c &lt;= <span class="charliteral">&#39;f&#39;</span>) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">if</span> (buf == NULL) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    printf(<span class="stringliteral">&quot;\n---\n&quot;</span>);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; bufSize; i++) {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="keywordflow">if</span> (i % pad == 0) printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        printf(<span class="stringliteral">&quot;0x%02X &quot;</span>, buf[i]);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    }</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    printf(<span class="stringliteral">&quot;\n---\n&quot;</span>);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>}</div>
 </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
-<div class="foldopen" id="foldopen00180" data-start="{" data-end="}">
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="namespacepe__util.html#a89542115abc280faa162fbd815672f48">  180</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacepe__util.html#a89542115abc280faa162fbd815672f48">pe_util::hexdump</a>(BYTE *buf, <span class="keywordtype">size_t</span> bufSize, <span class="keywordtype">size_t</span> pad)</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>{</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">if</span> (buf == NULL) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    printf(<span class="stringliteral">&quot;\n---\n&quot;</span>);</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; bufSize; i++) {</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordflow">if</span> (i % pad == 0) printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        printf(<span class="stringliteral">&quot;0x%02X &quot;</span>, buf[i]);</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    printf(<span class="stringliteral">&quot;\n---\n&quot;</span>);</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>}</div>
-</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
-<div class="foldopen" id="foldopen00191" data-start="{" data-end="}">
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="namespacepe__util.html#af4fa1d5d65e07a71f61ae4d437923445">  191</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacepe__util.html#af4fa1d5d65e07a71f61ae4d437923445">pe_util::endsWith</a>(std::string str, std::string endStr)</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>{</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordflow">if</span> (str.length() &lt; endStr.length()) {</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    } </div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordtype">size_t</span> pos = str.length() - endStr.length();</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    std::string str3 = str.substr(pos);   </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordflow">if</span> ( str3 == endStr ) {</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>}</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="foldopen" id="foldopen00183" data-start="{" data-end="}">
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="namespacepe__util.html#af4fa1d5d65e07a71f61ae4d437923445">  183</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacepe__util.html#af4fa1d5d65e07a71f61ae4d437923445">pe_util::endsWith</a>(std::string str, std::string endStr)</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>{</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordflow">if</span> (str.length() &lt; endStr.length()) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    } </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordtype">size_t</span> pos = str.length() - endStr.length();</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    std::string str3 = str.substr(pos);   </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordflow">if</span> ( str3 == endStr ) {</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>}</div>
 </div>
 <div class="ttc" id="a_util_8cpp_html_a842ed03f27719bc87666bfd1f75415b8"><div class="ttname"><a href="_util_8cpp.html#a842ed03f27719bc87666bfd1f75415b8">MAX_LINE</a></div><div class="ttdeci">#define MAX_LINE</div><div class="ttdef"><b>Definition</b> <a href="#l00006">Util.cpp:6</a></div></div>
 <div class="ttc" id="a_util_8cpp_html_aa4fdbecc18b0d1086fc76c27bc2db21d"><div class="ttname"><a href="_util_8cpp.html#aa4fdbecc18b0d1086fc76c27bc2db21d">_isFuncChar</a></div><div class="ttdeci">bool _isFuncChar(const char c)</div><div class="ttdef"><b>Definition</b> <a href="#l00081">Util.cpp:81</a></div></div>
@@ -334,16 +326,16 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="anamespace_logger_html_ac865c986e93dc9338b084620d59c6e97a7a600e2a74793434c9cdb5a03c87a48c"><div class="ttname"><a href="namespace_logger.html#ac865c986e93dc9338b084620d59c6e97a7a600e2a74793434c9cdb5a03c87a48c">Logger::D_ERROR</a></div><div class="ttdeci">@ D_ERROR</div><div class="ttdef"><b>Definition</b> <a href="_util_8h_source.html#l00026">Util.h:26</a></div></div>
 <div class="ttc" id="anamespacepe__util_html"><div class="ttname"><a href="namespacepe__util.html">pe_util</a></div><div class="ttdef"><b>Definition</b> <a href="_util_8h_source.html#l00031">Util.h:31</a></div></div>
 <div class="ttc" id="anamespacepe__util_html_a103f13d1382d5fa542fa6fb8a073f28a"><div class="ttname"><a href="namespacepe__util.html#a103f13d1382d5fa542fa6fb8a073f28a">pe_util::hasNonPrintable</a></div><div class="ttdeci">bool hasNonPrintable(const char *ptr, size_t maxInp)</div><div class="ttdef"><b>Definition</b> <a href="#l00070">Util.cpp:70</a></div></div>
-<div class="ttc" id="anamespacepe__util_html_a242ea277da991102b3d65c0ea87be014"><div class="ttname"><a href="namespacepe__util.html#a242ea277da991102b3d65c0ea87be014">pe_util::forwarderNameLen</a></div><div class="ttdeci">size_t forwarderNameLen(const char *ptr, size_t max_len)</div><div class="ttdef"><b>Definition</b> <a href="#l00116">Util.cpp:116</a></div></div>
+<div class="ttc" id="anamespacepe__util_html_a242ea277da991102b3d65c0ea87be014"><div class="ttname"><a href="namespacepe__util.html#a242ea277da991102b3d65c0ea87be014">pe_util::forwarderNameLen</a></div><div class="ttdeci">size_t forwarderNameLen(const char *ptr, size_t max_len)</div><div class="ttdef"><b>Definition</b> <a href="#l00108">Util.cpp:108</a></div></div>
 <div class="ttc" id="anamespacepe__util_html_a29d9c3fbe1df4a57764cd7da1263c695"><div class="ttname"><a href="namespacepe__util.html#a29d9c3fbe1df4a57764cd7da1263c695">pe_util::getAsciiLen</a></div><div class="ttdeci">size_t getAsciiLen(const char *ptr, size_t maxCount, bool acceptNotTerminated=false)</div><div class="ttdef"><b>Definition</b> <a href="#l00046">Util.cpp:46</a></div></div>
 <div class="ttc" id="anamespacepe__util_html_a3206ffc8778304d1d269decfbe3ab0b6"><div class="ttname"><a href="namespacepe__util.html#a3206ffc8778304d1d269decfbe3ab0b6">pe_util::isStrLonger</a></div><div class="ttdeci">bool isStrLonger(const char *inp, size_t maxLen)</div><div class="ttdef"><b>Definition</b> <a href="#l00038">Util.cpp:38</a></div></div>
-<div class="ttc" id="anamespacepe__util_html_a5d0faa3e638d06b8762b1e646c5ee8bb"><div class="ttname"><a href="namespacepe__util.html#a5d0faa3e638d06b8762b1e646c5ee8bb">pe_util::noWhiteCount</a></div><div class="ttdeci">size_t noWhiteCount(char *buf, size_t bufSize)</div><div class="ttdef"><b>Definition</b> <a href="#l00139">Util.cpp:139</a></div></div>
-<div class="ttc" id="anamespacepe__util_html_a71bb568fb36e1ec857def028578e4d05"><div class="ttname"><a href="namespacepe__util.html#a71bb568fb36e1ec857def028578e4d05">pe_util::validateFuncName</a></div><div class="ttdeci">bool validateFuncName(const char *fPtr, size_t bufSize)</div><div class="ttdef"><b>Definition</b> <a href="#l00102">Util.cpp:102</a></div></div>
-<div class="ttc" id="anamespacepe__util_html_a89542115abc280faa162fbd815672f48"><div class="ttname"><a href="namespacepe__util.html#a89542115abc280faa162fbd815672f48">pe_util::hexdump</a></div><div class="ttdeci">void hexdump(BYTE *buf, size_t bufSize, size_t pad)</div><div class="ttdef"><b>Definition</b> <a href="#l00180">Util.cpp:180</a></div></div>
-<div class="ttc" id="anamespacepe__util_html_a8d27344da7a33a4c5b7c43c329179367"><div class="ttname"><a href="namespacepe__util.html#a8d27344da7a33a4c5b7c43c329179367">pe_util::isSpaceClear</a></div><div class="ttdeci">bool isSpaceClear(void *ptr, uint64_t size)</div><div class="ttdef"><b>Definition</b> <a href="#l00161">Util.cpp:161</a></div></div>
+<div class="ttc" id="anamespacepe__util_html_a5d0faa3e638d06b8762b1e646c5ee8bb"><div class="ttname"><a href="namespacepe__util.html#a5d0faa3e638d06b8762b1e646c5ee8bb">pe_util::noWhiteCount</a></div><div class="ttdeci">size_t noWhiteCount(char *buf, size_t bufSize)</div><div class="ttdef"><b>Definition</b> <a href="#l00131">Util.cpp:131</a></div></div>
+<div class="ttc" id="anamespacepe__util_html_a71bb568fb36e1ec857def028578e4d05"><div class="ttname"><a href="namespacepe__util.html#a71bb568fb36e1ec857def028578e4d05">pe_util::validateFuncName</a></div><div class="ttdeci">bool validateFuncName(const char *fPtr, size_t bufSize)</div><div class="ttdef"><b>Definition</b> <a href="#l00094">Util.cpp:94</a></div></div>
+<div class="ttc" id="anamespacepe__util_html_a89542115abc280faa162fbd815672f48"><div class="ttname"><a href="namespacepe__util.html#a89542115abc280faa162fbd815672f48">pe_util::hexdump</a></div><div class="ttdeci">void hexdump(BYTE *buf, size_t bufSize, size_t pad)</div><div class="ttdef"><b>Definition</b> <a href="#l00172">Util.cpp:172</a></div></div>
+<div class="ttc" id="anamespacepe__util_html_a8d27344da7a33a4c5b7c43c329179367"><div class="ttname"><a href="namespacepe__util.html#a8d27344da7a33a4c5b7c43c329179367">pe_util::isSpaceClear</a></div><div class="ttdeci">bool isSpaceClear(void *ptr, uint64_t size)</div><div class="ttdef"><b>Definition</b> <a href="#l00153">Util.cpp:153</a></div></div>
 <div class="ttc" id="anamespacepe__util_html_acc15740993227e006ab9ae4ea53ef6d3"><div class="ttname"><a href="namespacepe__util.html#acc15740993227e006ab9ae4ea53ef6d3">pe_util::getAsciiLenW</a></div><div class="ttdeci">size_t getAsciiLenW(const WORD *ptr, size_t maxCount, bool acceptNotTerminated=false)</div><div class="ttdef"><b>Definition</b> <a href="#l00058">Util.cpp:58</a></div></div>
-<div class="ttc" id="anamespacepe__util_html_ad7a076665793ae6a73d7fb9243d4501e"><div class="ttname"><a href="namespacepe__util.html#ad7a076665793ae6a73d7fb9243d4501e">pe_util::isHexChar</a></div><div class="ttdeci">bool isHexChar(char c)</div><div class="ttdef"><b>Definition</b> <a href="#l00172">Util.cpp:172</a></div></div>
-<div class="ttc" id="anamespacepe__util_html_af4fa1d5d65e07a71f61ae4d437923445"><div class="ttname"><a href="namespacepe__util.html#af4fa1d5d65e07a71f61ae4d437923445">pe_util::endsWith</a></div><div class="ttdeci">bool endsWith(std::string string, std::string endStr)</div><div class="ttdef"><b>Definition</b> <a href="#l00191">Util.cpp:191</a></div></div>
+<div class="ttc" id="anamespacepe__util_html_ad7a076665793ae6a73d7fb9243d4501e"><div class="ttname"><a href="namespacepe__util.html#ad7a076665793ae6a73d7fb9243d4501e">pe_util::isHexChar</a></div><div class="ttdeci">bool isHexChar(char c)</div><div class="ttdef"><b>Definition</b> <a href="#l00164">Util.cpp:164</a></div></div>
+<div class="ttc" id="anamespacepe__util_html_af4fa1d5d65e07a71f61ae4d437923445"><div class="ttname"><a href="namespacepe__util.html#af4fa1d5d65e07a71f61ae4d437923445">pe_util::endsWith</a></div><div class="ttdeci">bool endsWith(std::string string, std::string endStr)</div><div class="ttdef"><b>Definition</b> <a href="#l00183">Util.cpp:183</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
