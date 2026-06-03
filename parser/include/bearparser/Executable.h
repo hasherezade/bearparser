@@ -31,18 +31,20 @@ public:
         BITS_32 = 32,
         BITS_64 = 64,
     };
-	
-	enum exe_arch {
-		ARCH_UNKNOWN = 0,
-		ARCH_INTEL = 1,
-		ARCH_ARM = 2
-	};
+
+    enum exe_arch {
+        ARCH_UNKNOWN = 0,
+        ARCH_INTEL = 1,
+        ARCH_ARM = 2,
+        EXE_ARCH_COUNT
+    };
 
     enum addr_type {
         NOT_ADDR = 0,
         RAW = 1,
         RVA = 2,
-        VA = 3
+        VA = 3,
+        ADDR_TYPE_COUNT
     };
     
     static bool isBit64(Executable *exe) { return (!exe || exe->getBitMode() != Executable::BITS_64) ? false: true; }
