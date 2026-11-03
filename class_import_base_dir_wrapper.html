@@ -263,6 +263,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:af2df5dacf09eac59450a04a636f7d0ba" id="r_af2df5dacf09eac59450a04a636f7d0ba"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af2df5dacf09eac59450a04a636f7d0ba">ImportBaseDirWrapper</a> (<a class="el" href="class_p_e_file.html">PEFile</a> *pe, pe::dir_entry v_entryType)</td></tr>
+<tr class="memitem:afe88da9369b2a18c158ea15e1080546b" id="r_afe88da9369b2a18c158ea15e1080546b"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#afe88da9369b2a18c158ea15e1080546b">getFuncsLimit</a> ()</td></tr>
 <tr class="memitem:ae3401167a9ee3eee123cb42728d90b42" id="r_ae3401167a9ee3eee123cb42728d90b42"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae3401167a9ee3eee123cb42728d90b42">addMapping</a> (<a class="el" href="class_exe_node_wrapper.html">ExeNodeWrapper</a> *func)</td></tr>
 <tr class="memitem:a1cba99f6a8ea91df9fef85d5551150e9" id="r_a1cba99f6a8ea91df9fef85d5551150e9"><td class="memItemLeft"><a class="el" href="class_import_base_entry_wrapper.html">ImportBaseEntryWrapper</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a1cba99f6a8ea91df9fef85d5551150e9">thunkToLib</a> (<a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> thunk)</td></tr>
 <tr class="inherit_header pro_methods_class_data_dir_entry_wrapper"><td colspan="2">Protected Member Functions inherited from <a class="el" href="class_data_dir_entry_wrapper.html">DataDirEntryWrapper</a></td></tr>
@@ -284,6 +285,7 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a207ed748a2f35522f83d52ce63c91452" id="r_a207ed748a2f35522f83d52ce63c91452"><td class="memItemLeft">QList&lt; <a class="el" href="_abstract_byte_buffer_8h.html#aea96e09e4ebfca2845a36a4d9882f7f6">offset_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a207ed748a2f35522f83d52ce63c91452">thunksList</a></td></tr>
 <tr class="memitem:a5c3f77f425a0eaa22f31b836bf9c868c" id="r_a5c3f77f425a0eaa22f31b836bf9c868c"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a5c3f77f425a0eaa22f31b836bf9c868c">importsCount</a></td></tr>
 <tr class="memitem:a95f149570cb65af74067c1718cba6fe9" id="r_a95f149570cb65af74067c1718cba6fe9"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a95f149570cb65af74067c1718cba6fe9">invalidEntries</a></td></tr>
+<tr class="memitem:a99de7dcd01c0c7c08259dce9ae8bac96" id="r_a99de7dcd01c0c7c08259dce9ae8bac96"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a99de7dcd01c0c7c08259dce9ae8bac96">funcsCount</a></td></tr>
 <tr class="inherit_header pro_attribs_class_data_dir_entry_wrapper"><td colspan="2">Protected Attributes inherited from <a class="el" href="class_data_dir_entry_wrapper.html">DataDirEntryWrapper</a></td></tr>
 <tr class="memitem:aa778a169c81c7dc7273156633ca030a9 pro_attribs_class_data_dir_entry_wrapper" id="r_aa778a169c81c7dc7273156633ca030a9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="class_data_dir_entry_wrapper.html#aa778a169c81c7dc7273156633ca030a9">entryType</a></td></tr>
 <tr class="inherit_header pro_attribs_class_p_e_node_wrapper"><td colspan="2">Protected Attributes inherited from <a class="el" href="class_p_e_node_wrapper.html">PENodeWrapper</a></td></tr>
@@ -398,7 +400,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a7689f2efd4ed0f43890385839a0b617a">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00030">30</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00040">40</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -465,7 +467,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00052">52</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00062">62</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
 
 </div>
 </div>
@@ -805,6 +807,49 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="afe88da9369b2a18c158ea15e1080546b" name="afe88da9369b2a18c158ea15e1080546b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe88da9369b2a18c158ea15e1080546b">&#9670;&#160;</a></span>getFuncsLimit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ImportBaseDirWrapper::getFuncsLimit </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00030">30</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_import_base_dir_wrapper_afe88da9369b2a18c158ea15e1080546b_cgraph.png" border="0" usemap="#aclass_import_base_dir_wrapper_afe88da9369b2a18c158ea15e1080546b_cgraph" loading="lazy" alt=""/></div>
+<map name="aclass_import_base_dir_wrapper_afe88da9369b2a18c158ea15e1080546b_cgraph" id="aclass_import_base_dir_wrapper_afe88da9369b2a18c158ea15e1080546b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,47,158,88"/>
+<area shape="rect" href="class_executable.html#a2f2044788eb57c73903dca8e6a0477c2" title=" " alt="" coords="207,5,364,31"/>
+<area shape="poly" title=" " alt="" coords="158,46,214,33,215,38,159,52"/>
+<area shape="rect" href="class_executable.html#a862ee23abe249ba557c740f2d2c246c5" title=" " alt="" coords="206,55,365,80"/>
+<area shape="poly" title=" " alt="" coords="158,65,190,65,190,70,158,70"/>
+<area shape="rect" href="class_import_base_dir_wrapper.html#a16504e08c818494a65042cbb0138e22e" title=" " alt="" coords="209,104,362,145"/>
+<area shape="poly" title=" " alt="" coords="157,86,197,97,195,102,155,91"/>
+<area shape="rect" href="class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="413,47,543,88"/>
+<area shape="poly" title=" " alt="" coords="366,65,398,65,398,70,366,70"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a8c925ecdf852aa1886000cfb8f521f30" name="a8c925ecdf852aa1886000cfb8f521f30"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c925ecdf852aa1886000cfb8f521f30">&#9670;&#160;</a></span>getThunksList()</h2>
 
@@ -884,7 +929,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#aa90cce24f1bec49d87dc18b329dce62e">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00149">149</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00160">160</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -923,7 +968,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a659e73a1d597a93ae7dd31cf7e98f23a">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00059">59</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00069">69</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1025,7 +1070,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00097">97</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00107">107</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1104,7 +1149,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00085">85</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00095">95</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1164,7 +1209,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00075">75</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00085">85</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1212,7 +1257,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00107">107</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00117">117</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1275,7 +1320,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_exe_node_wrapper.html#a5cd7f16e4529be2a96f87237e31b2611">ExeNodeWrapper</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00114">114</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8cpp_source.html#l00124">124</a> of file <a class="el" href="_import_base_dir_wrapper_8cpp_source.html">ImportBaseDirWrapper.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1335,11 +1380,35 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00062">62</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00065">65</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a99de7dcd01c0c7c08259dce9ae8bac96" name="a99de7dcd01c0c7c08259dce9ae8bac96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99de7dcd01c0c7c08259dce9ae8bac96">&#9670;&#160;</a></span>funcsCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ImportBaseDirWrapper::funcsCount</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00063">63</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+
+</div>
+</div>
 <a id="a5c3f77f425a0eaa22f31b836bf9c868c" name="a5c3f77f425a0eaa22f31b836bf9c868c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5c3f77f425a0eaa22f31b836bf9c868c">&#9670;&#160;</a></span>importsCount</h2>
 
@@ -1360,7 +1429,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00059">59</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00061">61</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1384,7 +1453,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00060">60</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00062">62</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1408,7 +1477,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00057">57</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00059">59</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1432,7 +1501,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00056">56</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_import_base_dir_wrapper_8h_source.html#l00058">58</a> of file <a class="el" href="_import_base_dir_wrapper_8h_source.html">ImportBaseDirWrapper.h</a>.</p>
 
 </div>
 </div>

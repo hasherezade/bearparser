@@ -6,5 +6,6 @@ var searchData=
   ['filesize_3',['fileSize',['../class_abstract_file_buffer.html#adc73322cb20b97be9ffb987c6b290e40',1,'AbstractFileBuffer']]],
   ['fileview_5fmaxsize_4',['FILEVIEW_MAXSIZE',['../_file_buffer_8h.html#a5c995a9bac9ca6c6d057896ae4b4ea76',1,'FileBuffer.h']]],
   ['fin_5',['fIn',['../class_file_view.html#aa061c716dd6d732172af077cb137c55f',1,'FileView']]],
-  ['funcname_6',['funcName',['../class_watched_locker.html#a146839661512b98a9082bc067cb935e3',1,'WatchedLocker']]]
+  ['funcname_6',['funcName',['../class_watched_locker.html#a146839661512b98a9082bc067cb935e3',1,'WatchedLocker']]],
+  ['funcscount_7',['funcsCount',['../class_import_base_dir_wrapper.html#a99de7dcd01c0c7c08259dce9ae8bac96',1,'ImportBaseDirWrapper']]]
 ];
