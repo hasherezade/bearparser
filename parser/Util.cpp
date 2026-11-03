@@ -85,7 +85,7 @@ bool _isFuncChar(const char c)
     if (::isalnum(c)) {
         return true;
     }
-    for (size_t i = 0; i < sizeof(charset); ++i) {
+    for (size_t i = 0; i + 1 < sizeof(charset); ++i) {
         if (c == charset[i]) return true;
     }
     return false;
