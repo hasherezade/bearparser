@@ -1,7 +1,14 @@
 <map id="ExeFactory::getTypeName" name="ExeFactory::getTypeName">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,178,56"/>
-<area shape="rect" id="Node000002" href="$class_exe_factory.html#a754878078e16859193af16b68dc19457" title=" " alt="" coords="245,5,354,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,30,230,24,230,29,178,36"/>
-<area shape="rect" id="Node000003" href="$class_exe_builder.html#ac80d9e1cf0d54bf93d915f249998cdc7" title=" " alt="" coords="226,55,373,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,51,211,55,210,60,178,56"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,178,80"/>
+<area shape="rect" id="Node000002" href="$class_exe_factory.html#a754878078e16859193af16b68dc19457" title=" " alt="" coords="245,29,354,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,54,230,48,230,53,178,60"/>
+<area shape="rect" id="Node000006" href="$class_exe_builder.html#ac80d9e1cf0d54bf93d915f249998cdc7" title=" " alt="" coords="226,79,373,104"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="178,75,211,79,210,84,178,80"/>
+<area shape="rect" id="Node000003" href="$class_d_o_s_exe_builder.html#a47514a2fe69102516c7d0730cec1b850" title=" " alt="" coords="421,5,626,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="353,34,405,28,406,33,354,39"/>
+<area shape="rect" id="Node000005" href="$class_p_e_file_builder.html#a45fd170cbdd43ed35697b42946130eb4" title=" " alt="" coords="432,55,615,80"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="354,46,417,53,416,58,353,51"/>
+<area shape="rect" id="Node000004" href="$class_exe_builder.html#a0d3ffa25b75a2db8a91dd835dda22a06" title=" " alt="" coords="674,31,824,56"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="627,27,660,31,659,36,626,32"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="615,55,658,50,659,56,616,60"/>
 </map>

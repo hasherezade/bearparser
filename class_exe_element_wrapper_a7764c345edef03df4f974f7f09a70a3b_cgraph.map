@@ -1,8 +1,10 @@
 <map id="ExeElementWrapper::ExeElementWrapper" name="ExeElementWrapper::ExeElementWrapper">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,149,80"/>
-<area shape="rect" id="Node000002" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="214,5,323,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,41,198,30,200,36,150,47"/>
-<area shape="rect" id="Node000003" href="$class_exe_element_wrapper.html#ab7df12d050ebc48a6ffd6ff53896d7c5" title=" " alt="" coords="197,79,340,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,72,182,79,181,84,149,77"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="232,79,230,69,236,60,249,55,268,53,289,55,302,61,299,66,288,60,268,58,250,60,239,64,235,70,237,78"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,47,149,88"/>
+<area shape="rect" id="Node000002" href="$namespace_logger.html#a36e3deee152da96a491b670a00d224c9" title=" " alt="" coords="257,5,366,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,50,196,40,241,30,242,35,197,45,150,55"/>
+<area shape="rect" id="Node000003" href="$class_custom_exception.html#a1de10b1a2ce870d04854456f3d69590f" title=" " alt="" coords="197,55,426,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,65,181,65,181,70,149,70"/>
+<area shape="rect" id="Node000004" href="$class_exe_element_wrapper.html#ab7df12d050ebc48a6ffd6ff53896d7c5" title=" " alt="" coords="240,128,383,169"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="139,86,237,120,235,125,137,91"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="267,128,265,119,272,109,288,104,311,102,337,104,352,110,350,115,335,109,311,107,289,109,275,114,270,120,272,127"/>
 </map>

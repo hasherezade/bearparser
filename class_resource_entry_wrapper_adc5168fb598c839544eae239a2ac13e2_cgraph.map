@@ -1,5 +1,17 @@
 <map id="ResourceEntryWrapper::getChildOffsetToDirectory" name="ResourceEntryWrapper::getChildOffsetToDirectory">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,181,46"/>
-<area shape="rect" id="Node000002" href="$class_resource_entry_wrapper.html#a7b9e82ed92670df405c16b75dd868046" title=" " alt="" coords="229,5,382,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,23,213,23,213,28,181,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,181,96"/>
+<area shape="rect" id="Node000002" href="$class_resource_entry_wrapper.html#a7b9e82ed92670df405c16b75dd868046" title=" " alt="" coords="229,55,382,96"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,73,213,73,213,78,181,78"/>
+<area shape="rect" id="Node000003" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="430,63,596,88"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="382,73,414,73,414,78,382,78"/>
+<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="644,55,775,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="597,73,629,73,629,78,597,78"/>
+<area shape="rect" id="Node000005" href="$class_buffer_exception.html#a4af32a7ca757175a41906ec6e889b126" title=" " alt="" coords="823,5,1030,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="774,54,822,41,854,33,855,38,823,46,776,59"/>
+<area shape="rect" id="Node000007" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="861,55,992,96"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="775,73,846,73,846,78,775,78"/>
+<area shape="rect" id="Node000008" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="861,120,992,161"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="776,93,847,114,846,119,774,98"/>
+<area shape="rect" id="Node000006" href="$class_custom_exception.html#a1de10b1a2ce870d04854456f3d69590f" title=" " alt="" coords="1078,5,1307,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1030,16,1062,16,1062,21,1030,21"/>
 </map>

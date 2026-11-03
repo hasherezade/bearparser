@@ -1,10 +1,15 @@
 <map id="AbstractByteBuffer::setBufferedValue" name="AbstractByteBuffer::setBufferedValue">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,35,136,75"/>
-<area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="362,5,492,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,47,346,30,347,35,136,52"/>
-<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="184,63,314,103"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="137,63,169,68,168,73,136,68"/>
-<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="313,60,346,49,348,54,315,65"/>
-<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="362,71,492,111"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="315,83,346,85,346,90,314,89"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,136,96"/>
+<area shape="rect" id="Node000002" href="$class_buffer_exception.html#a4af32a7ca757175a41906ec6e889b126" title=" " alt="" coords="362,5,569,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,52,183,41,266,29,347,21,347,26,267,34,184,46,136,58"/>
+<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="400,120,531,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="136,93,184,105,289,122,386,132,385,138,288,127,183,110,135,98"/>
+<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="184,55,314,96"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="136,73,168,73,168,78,136,78"/>
+<area shape="rect" id="Node000003" href="$class_custom_exception.html#a1de10b1a2ce870d04854456f3d69590f" title=" " alt="" coords="617,5,847,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="570,16,602,16,602,21,570,21"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="314,54,361,41,393,33,394,38,363,46,315,59"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="315,93,387,114,385,119,314,98"/>
+<area shape="rect" id="Node000006" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="400,55,531,96"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="314,73,385,73,385,78,314,78"/>
 </map>

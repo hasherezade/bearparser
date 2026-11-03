@@ -1,0 +1,17 @@
+<map id="DOSExe::peSignatureOffset" name="DOSExe::peSignatureOffset">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,186,88"/>
+<area shape="rect" id="Node000002" href="$class_dos_hdr_wrapper.html#aa7cf9049040b0c1bcb92e4c588d2f8e5" title=" " alt="" coords="234,63,416,88"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,73,218,73,218,78,186,78"/>
+<area shape="rect" id="Node000003" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="464,63,630,88"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="416,73,448,73,448,78,416,78"/>
+<area shape="rect" id="Node000004" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="678,55,809,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="631,73,663,73,663,78,631,78"/>
+<area shape="rect" id="Node000005" href="$class_buffer_exception.html#a4af32a7ca757175a41906ec6e889b126" title=" " alt="" coords="857,5,1064,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="808,54,856,41,888,33,889,38,857,46,810,59"/>
+<area shape="rect" id="Node000007" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="895,55,1026,96"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="809,73,880,73,880,78,809,78"/>
+<area shape="rect" id="Node000008" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="895,120,1026,161"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="810,93,881,114,880,119,808,98"/>
+<area shape="rect" id="Node000006" href="$class_custom_exception.html#a1de10b1a2ce870d04854456f3d69590f" title=" " alt="" coords="1112,5,1341,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1064,16,1096,16,1096,21,1064,21"/>
+</map>

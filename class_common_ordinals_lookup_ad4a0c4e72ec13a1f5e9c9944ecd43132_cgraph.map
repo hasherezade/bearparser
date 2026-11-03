@@ -1,5 +1,12 @@
 <map id="CommonOrdinalsLookup::CommonOrdinalsLookup" name="CommonOrdinalsLookup::CommonOrdinalsLookup">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,176,46"/>
-<area shape="rect" id="Node000002" href="$class_common_ordinals_lookup.html#a256345e66253fa446d1eafe29094b7dc" title=" " alt="" coords="224,5,388,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,23,208,23,208,28,176,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,176,79"/>
+<area shape="rect" id="Node000002" href="$class_common_ordinals_lookup.html#a256345e66253fa446d1eafe29094b7dc" title=" " alt="" coords="224,39,388,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,56,208,56,208,62,176,62"/>
+<area shape="rect" id="Node000003" href="$class_common_ordinals_oleaut32.html#a4d4f52ee8b2e2de7cedef847536997cc" title=" " alt="" coords="436,5,615,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="388,44,420,39,421,44,389,49"/>
+<area shape="rect" id="Node000005" href="$class_common_ordinals_w_s2__32.html#a9439a5235aa2f216ec4bb81d07f474d8" title=" " alt="" coords="438,71,614,111"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="389,68,422,73,421,79,388,74"/>
+<area shape="rect" id="Node000004" href="$class_common_ordinals_map.html#a59e06f8c0779dfe150dd3e5ba23fb3f8" title=" " alt="" coords="663,39,816,79"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="616,37,648,42,647,47,616,42"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="614,75,647,70,648,75,615,80"/>
 </map>

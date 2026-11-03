@@ -1,7 +1,29 @@
 <map id="RichHdrWrapper::getPtr" name="RichHdrWrapper::getPtr">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,163,31"/>
-<area shape="rect" id="Node000002" href="$class_rich_hdr_wrapper.html#a5b8139d2b81d4508cfbb81c26662a96c" title=" " alt="" coords="211,5,361,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,16,195,16,195,21,163,21"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,163,80"/>
+<area shape="rect" id="Node000002" href="$class_rich_hdr_wrapper.html#a5b8139d2b81d4508cfbb81c26662a96c" title=" " alt="" coords="211,55,361,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,65,195,65,195,70,163,70"/>
 <area shape="rect" id="Node000003" href="$class_rich_hdr_wrapper.html#a9fa2a440b039172e68a3966841dea293" title=" " alt="" coords="409,5,608,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="361,16,394,16,394,21,361,21"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="347,51,432,32,433,38,348,57"/>
+<area shape="rect" id="Node000004" href="$class_p_e_file.html#a5efa2fcf1a0e940084ccf8f3365ebc57" title=" " alt="" coords="422,104,596,130"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="348,78,433,97,432,103,347,84"/>
+<area shape="rect" id="Node000012" href="$class_p_e_file.html#adb187c47cea5a6cfa260528b7cf577ce" title=" " alt="" coords="420,55,597,80"/>
+<area shape="poly" id="edge14_Node000002_Node000012" title=" " alt="" coords="361,65,404,65,404,70,361,70"/>
+<area shape="rect" id="Node000005" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="656,55,823,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="572,101,661,82,662,87,573,106"/>
+<area shape="rect" id="Node000011" href="$class_abstract_byte_buffer.html#adb10018e327d14ac29d842aee3ab5465" title=" " alt="" coords="871,108,1001,149"/>
+<area shape="poly" id="edge10_Node000004_Node000011" title=" " alt="" coords="596,117,855,124,855,129,596,122"/>
+<area shape="rect" id="Node000006" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="871,43,1001,84"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="823,63,855,62,855,68,823,68"/>
+<area shape="rect" id="Node000007" href="$class_buffer_exception.html#a4af32a7ca757175a41906ec6e889b126" title=" " alt="" coords="1049,21,1256,47"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1001,52,1038,47,1039,52,1002,57"/>
+<area shape="rect" id="Node000009" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="1088,71,1218,112"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="1002,69,1072,79,1072,84,1001,75"/>
+<area shape="rect" id="Node000010" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="1088,136,1218,177"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="979,82,1002,94,1050,121,1074,131,1072,136,1048,126,1000,99,976,87"/>
+<area shape="rect" id="Node000008" href="$class_custom_exception.html#a1de10b1a2ce870d04854456f3d69590f" title=" " alt="" coords="1304,21,1534,47"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="1257,32,1289,32,1289,37,1257,37"/>
+<area shape="poly" id="edge11_Node000011_Node000007" title=" " alt="" coords="978,106,999,93,1023,74,1048,57,1066,50,1068,55,1050,62,1026,79,1003,98,981,110"/>
+<area shape="poly" id="edge12_Node000011_Node000009" title=" " alt="" coords="1001,115,1072,103,1073,108,1002,120"/>
+<area shape="poly" id="edge13_Node000011_Node000010" title=" " alt="" coords="1002,135,1072,144,1072,149,1001,140"/>
+<area shape="poly" id="edge15_Node000012_Node000005" title=" " alt="" coords="598,65,640,65,640,70,598,70"/>
 </map>

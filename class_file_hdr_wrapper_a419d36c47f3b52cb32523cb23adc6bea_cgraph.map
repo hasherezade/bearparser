@@ -1,0 +1,21 @@
+<map id="FileHdrWrapper::getPtr" name="FileHdrWrapper::getPtr">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,125,158,151"/>
+<area shape="rect" id="Node000002" href="$class_executable.html#a3f2511a46b6732f4afbcaa6a1bfb6c46" title=" " alt="" coords="206,99,372,124"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,126,190,122,190,127,158,131"/>
+<area shape="rect" id="Node000008" href="$class_p_e_file.html#a1bce6b846bd7e24d5aae0b15af67f58a" title=" " alt="" coords="211,149,367,175"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="158,144,195,149,195,154,158,150"/>
+<area shape="rect" id="Node000003" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="436,88,566,129"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="372,108,421,107,421,113,372,113"/>
+<area shape="rect" id="Node000004" href="$class_buffer_exception.html#a4af32a7ca757175a41906ec6e889b126" title=" " alt="" coords="630,5,838,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="537,86,580,63,629,41,653,33,655,38,631,46,583,67,539,90"/>
+<area shape="rect" id="Node000006" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="669,55,799,96"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="566,97,653,84,654,90,567,102"/>
+<area shape="rect" id="Node000007" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="669,120,799,161"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="567,115,654,127,653,132,566,120"/>
+<area shape="rect" id="Node000005" href="$class_custom_exception.html#a1de10b1a2ce870d04854456f3d69590f" title=" " alt="" coords="886,5,1115,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="838,16,870,16,870,21,838,21"/>
+<area shape="rect" id="Node000009" href="$class_p_e_core.html#a809ce6d61e968f409e6d630514b224bb" title=" " alt="" coords="420,153,582,179"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="368,161,405,162,405,167,368,166"/>
+<area shape="rect" id="Node000010" href="$class_p_e_core.html#aa2ff4665d8b56b2a5e1e1e00bc446b18" title=" " alt="" coords="646,185,822,211"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="583,175,631,181,631,187,582,180"/>
+</map>

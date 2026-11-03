@@ -1,5 +1,9 @@
 <map id="BufferView::BufferView" name="BufferView::BufferView">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,13,159,38"/>
-<area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html#a083856a64bf8a0682a6a7799830f0ec1" title=" " alt="" coords="207,5,343,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,23,191,23,191,28,159,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,42,159,68"/>
+<area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html#a083856a64bf8a0682a6a7799830f0ec1" title=" " alt="" coords="242,5,378,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,43,226,34,227,39,159,48"/>
+<area shape="rect" id="Node000003" href="$class_buffer_exception.html#a4af32a7ca757175a41906ec6e889b126" title=" " alt="" coords="207,70,414,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,62,192,66,191,71,159,67"/>
+<area shape="rect" id="Node000004" href="$class_custom_exception.html#a1de10b1a2ce870d04854456f3d69590f" title=" " alt="" coords="462,70,691,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="414,80,446,80,446,86,414,86"/>
 </map>

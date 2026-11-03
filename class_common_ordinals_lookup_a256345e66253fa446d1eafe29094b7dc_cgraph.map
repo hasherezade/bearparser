@@ -1,0 +1,10 @@
+<map id="CommonOrdinalsLookup::init" name="CommonOrdinalsLookup::init">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,170,79"/>
+<area shape="rect" id="Node000002" href="$class_common_ordinals_oleaut32.html#a4d4f52ee8b2e2de7cedef847536997cc" title=" " alt="" coords="218,5,397,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,44,202,39,203,44,171,49"/>
+<area shape="rect" id="Node000004" href="$class_common_ordinals_w_s2__32.html#a9439a5235aa2f216ec4bb81d07f474d8" title=" " alt="" coords="219,71,396,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="171,68,204,73,203,79,170,74"/>
+<area shape="rect" id="Node000003" href="$class_common_ordinals_map.html#a59e06f8c0779dfe150dd3e5ba23fb3f8" title=" " alt="" coords="445,39,597,79"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="398,37,430,42,429,47,397,42"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="395,75,429,70,430,75,396,80"/>
+</map>

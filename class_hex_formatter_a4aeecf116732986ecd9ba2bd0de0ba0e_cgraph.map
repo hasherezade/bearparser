@@ -4,4 +4,8 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,23,223,23,223,28,191,28"/>
 <area shape="rect" id="Node000003" href="$class_abstract_formatter.html#a57a59b2942bb9c829fcc1b45aba1bbb1" title=" " alt="" coords="426,5,558,46"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="378,23,411,23,411,28,378,28"/>
+<area shape="rect" id="Node000004" href="$class_buffer_exception.html#a4af32a7ca757175a41906ec6e889b126" title=" " alt="" coords="606,13,814,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="559,23,591,23,591,28,559,28"/>
+<area shape="rect" id="Node000005" href="$class_custom_exception.html#a1de10b1a2ce870d04854456f3d69590f" title=" " alt="" coords="862,13,1091,38"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="814,23,846,23,846,28,814,28"/>
 </map>

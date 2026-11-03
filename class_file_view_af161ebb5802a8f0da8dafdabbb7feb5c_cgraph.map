@@ -1,8 +1,16 @@
 <map id="FileView::FileView" name="FileView::FileView">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,54,133,80"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,100,133,125"/>
 <area shape="rect" id="Node000002" href="$class_abstract_file_buffer.html#ad81001a3650854c762c761b8c21ff762" title=" " alt="" coords="203,5,334,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,51,187,40,188,45,134,56"/>
-<area shape="rect" id="Node000003" href="$class_file_view.html#aca3fe90c560d2512a3c47c507cc0192d" title=" " alt="" coords="181,94,357,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,77,187,88,186,93,133,82"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="235,95,229,86,233,76,246,70,269,68,293,70,306,77,303,82,292,75,269,73,248,75,237,80,234,85,240,92"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,97,205,50,207,55,102,101"/>
+<area shape="rect" id="Node000003" href="$class_buffer_exception.html#a4af32a7ca757175a41906ec6e889b126" title=" " alt="" coords="405,100,612,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="133,107,181,106,357,106,390,106,390,112,357,111,181,111,133,112"/>
+<area shape="rect" id="Node000005" href="$class_file_buffer_exception.html#a69b33bb8aa338971160d131659a25990" title=" " alt="" coords="200,120,338,161"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="134,119,185,126,184,131,133,124"/>
+<area shape="rect" id="Node000006" href="$class_file_view.html#a43cf76fbb17e4e13367f6e87fefe5cd6" title=" " alt="" coords="181,185,357,210"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="93,123,133,147,182,170,201,177,199,182,180,175,131,151,90,128"/>
+<area shape="rect" id="Node000004" href="$class_custom_exception.html#a1de10b1a2ce870d04854456f3d69590f" title=" " alt="" coords="660,100,890,125"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="613,110,645,110,645,115,613,115"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="338,130,389,124,390,129,338,135"/>
+<area shape="rect" id="Node000007" href="$class_abstract_file_buffer.html#a092c21c5227ed38657db948df12a2bb3" title=" " alt="" coords="446,177,571,218"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="357,195,430,195,430,200,357,200"/>
 </map>

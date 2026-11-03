@@ -1,5 +1,16 @@
 <map id="BufferView::getContent" name="BufferView::getContent">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,159,31"/>
-<area shape="rect" id="Node000002" href="$class_buffer_view.html#afa235f02a4619a7e2f1e869d390c2cbf" title=" " alt="" coords="207,5,385,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,16,191,16,191,21,159,21"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,96,159,122"/>
+<area shape="rect" id="Node000002" href="$class_abstract_byte_buffer.html#a64f38e33f915741eb283ef9a34cacb6d" title=" " alt="" coords="231,58,361,98"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,95,215,87,215,92,159,100"/>
+<area shape="rect" id="Node000007" href="$class_buffer_view.html#afa235f02a4619a7e2f1e869d390c2cbf" title=" " alt="" coords="207,124,385,150"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="159,116,191,120,191,126,159,122"/>
+<area shape="rect" id="Node000003" href="$class_buffer_exception.html#a4af32a7ca757175a41906ec6e889b126" title=" " alt="" coords="433,5,640,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="361,59,432,41,465,33,467,38,434,46,362,64"/>
+<area shape="rect" id="Node000005" href="$class_abstract_byte_buffer.html#a2d68f6930726a129478c8ab5ed38779a" title=" " alt="" coords="472,55,602,96"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="362,75,456,74,456,79,362,80"/>
+<area shape="rect" id="Node000006" href="$class_abstract_byte_buffer.html#a0493bdae87b5011993652335adb19577" title=" " alt="" coords="472,120,602,161"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="362,93,457,118,456,123,361,98"/>
+<area shape="rect" id="Node000004" href="$class_custom_exception.html#a1de10b1a2ce870d04854456f3d69590f" title=" " alt="" coords="688,5,918,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="641,16,673,16,673,21,641,21"/>
+<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="386,136,456,137,456,142,385,141"/>
 </map>
