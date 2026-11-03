@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">if</span> (::isalnum(c)) {</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <span class="keyword">sizeof</span>(charset); ++i) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i + 1 &lt; <span class="keyword">sizeof</span>(charset); ++i) {</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">if</span> (c == charset[i]) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
