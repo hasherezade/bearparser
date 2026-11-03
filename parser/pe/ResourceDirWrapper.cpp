@@ -78,11 +78,18 @@ bool ResourceDirWrapper::wrap()
     }
     IMAGE_RESOURCE_DIRECTORY* dir = resourceDir();
     if (dir == NULL) return false;
+    if (this->root == this) {
+        // the top directory is the first one to be expanded (it is addressed by rawOff == 0)
+        this->expandedDirs.clear();
+        this->entriesLeft = static_cast<size_t>(m_Exe->getRawSize()) / sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY);
+        markExpanded(getOffset(mainResourceDir()));
+    }
     size_t namesNum = dir->NumberOfNamedEntries;
     size_t idsNum = dir->NumberOfIdEntries;
 
     size_t totalEntries = namesNum + idsNum;
     for (size_t i = 0; i < totalEntries && i < MAX_ENTRIES; i++ ) {
+        if (!takeEntry()) break;
 
         long topDirId = (this->topEntryID != TOP_ENTRY_ROOT) ? this->topEntryID : long(i) ;
 
@@ -183,7 +190,11 @@ bool ResourceEntryWrapper::wrap()
     if (this->isDir()) {
         long depth = this->parentDir->getDepth() + 1;
         if (depth >= MAX_DEPTH) return false;
-        this->childDir = new ResourceDirWrapper(this->m_PE, this->album, childRaw, depth, topEntryID);
+        // A malformed file may make directories point back at themselves (or at the top directory),
+        // or make many entries point at the same child. Expand every directory only once;
+        // otherwise the tree grows exponentially with the depth.
+        if (!this->parentDir->markExpanded(childRaw)) return false;
+        this->childDir = new ResourceDirWrapper(this->m_PE, this->album, childRaw, depth, topEntryID, this->parentDir->getRoot());
     } else {
         this->childLeaf = new ResourceLeafWrapper(m_Exe, childRaw, topEntryID);
         if (this->album != NULL) {

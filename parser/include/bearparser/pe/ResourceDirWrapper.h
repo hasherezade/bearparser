@@ -7,6 +7,7 @@
 #include "rsrc/ResourceContentFactory.h"
 
 #include <map>
+#include <set>
 #include <vector>
 
 
@@ -25,9 +26,9 @@ public:
         FIELD_COUNTER
     };
 
-    ResourceDirWrapper(PEFile* pe, ResourcesAlbum *resAlbum = NULL, offset_t rawOffset = 0, long depth = 0, long topEntryId = TOP_ENTRY_ROOT)
+    ResourceDirWrapper(PEFile* pe, ResourcesAlbum *resAlbum = NULL, offset_t rawOffset = 0, long depth = 0, long topEntryId = TOP_ENTRY_ROOT, ResourceDirWrapper *rootDir = NULL)
         : DataDirEntryWrapper(pe, pe::DIR_RESOURCE),
-        rawOff(rawOffset), dirDepth(depth), album(resAlbum), topEntryID(topEntryId)
+        rawOff(rawOffset), dirDepth(depth), album(resAlbum), topEntryID(topEntryId), root(rootDir ? rootDir : this), entriesLeft(0)
     { 
         wrap();
     }
@@ -55,12 +56,33 @@ public:
     IMAGE_RESOURCE_DIRECTORY* mainResourceDir();
     ResourcesAlbum* getAlbumPtr() { return album; }
 
+    /* Registers the directory at the given raw offset as expanded in the tree
+     * this directory belongs to. Returns false if it was already expanded:
+     * a directory is parsed at most once, so entries that form cycles or share
+     * children do not make the tree grow exponentially. */
+    bool markExpanded(offset_t dirRawOffset) { return root->expandedDirs.insert(dirRawOffset).second; }
+
+    /* Takes one entry from the budget of the tree. Returns false when the budget is spent.
+     * The budget is the number of entries that fit in the file: in a well-formed tree
+     * every entry occupies its own bytes, but directories of a malformed file may overlap
+     * and reuse the same bytes as entries of many other directories. */
+    bool takeEntry()
+    {
+        if (root->entriesLeft == 0) return false;
+        root->entriesLeft--;
+        return true;
+    }
+    ResourceDirWrapper* getRoot() { return root; }
+
 private:
     IMAGE_RESOURCE_DIRECTORY* resourceDir();
     offset_t rawOff;
     long dirDepth;
     ResourcesAlbum *album;
     long topEntryID;
+    ResourceDirWrapper *root; // the top directory of this tree (this, for the top directory itself)
+    std::set<offset_t> expandedDirs; // used only in the root
+    size_t entriesLeft; // used only in the root
 };
 
 class ResourceEntryWrapper : public PENodeWrapper
