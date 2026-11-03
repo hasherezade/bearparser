@@ -27,6 +27,16 @@ bufsize_t ImportBaseDirWrapper::thunkSize(Executable::exe_bits bits) {
 }
 
 
+size_t ImportBaseDirWrapper::getFuncsLimit()
+{
+    // Every imported function has its own thunk in the file, so a well-formed file
+    // cannot have more functions than thunks that fit in it. Without this limit,
+    // many descriptors pointing to the same thunk array make the parsing quadratic.
+    const bufsize_t tSize = thunkSize(m_Exe->getBitMode());
+    if (tSize == 0) return 0;
+    return static_cast<size_t>(m_Exe->getRawSize() / tSize);
+}
+
 void ImportBaseDirWrapper::addMapping(ExeNodeWrapper *funcNode)
 {
     ImportBaseFuncWrapper* func = dynamic_cast<ImportBaseFuncWrapper*> (funcNode);
@@ -119,6 +129,7 @@ bool ImportBaseDirWrapper::wrap()
     size_t oldCount = this->importsCount;
     this->importsCount = 0;
     this->invalidEntries = 0;
+    this->funcsCount = 0;
     
     if (!getDataDirectory()) {
         return (oldCount != this->importsCount); //has count changed
@@ -167,12 +178,20 @@ bool ImportBaseEntryWrapper::isValid()
 
 bool ImportBaseEntryWrapper::wrap()
 {
+    if (impDir) {
+        // the functions of this entry are counted again below
+        impDir->funcsCount -= (entries.size() < impDir->funcsCount) ? entries.size() : impDir->funcsCount;
+    }
     clear();
     thunkToFuncMap.clear();
 
     this->invalidEntries = 0;
     
-    const size_t LIMIT = (-1);
+    size_t LIMIT = (-1);
+    if (impDir) {
+        const size_t funcsLimit = impDir->getFuncsLimit();
+        LIMIT = (impDir->funcsCount < funcsLimit) ? (funcsLimit - impDir->funcsCount) : 0;
+    }
     const size_t INVALID_LIMIT = 100;
     if (!isValid()) {
         return false;
@@ -195,6 +214,12 @@ bool ImportBaseEntryWrapper::wrap()
             invalidSeries++;
             this->invalidEntries++;
             if (invalidSeries >= INVALID_LIMIT) break;
+        }
+    }
+    if (impDir) {
+        impDir->funcsCount += entries.size();
+        if (LIMIT && cntr == LIMIT) {
+            Logger::append(Logger::D_WARNING, "Imports: the limit of functions has been reached: %lu", static_cast<unsigned long>(impDir->funcsCount));
         }
     }
     //printf("Entries: %d\n", entries.size());

@@ -44,9 +44,11 @@ public:
 protected:
     ImportBaseDirWrapper(PEFile *pe, pe:: dir_entry v_entryType)
         : DataDirEntryWrapper(pe, v_entryType),
-        importsCount(0), invalidEntries(0)
+        importsCount(0), invalidEntries(0), funcsCount(0)
     {
     }
+
+    size_t getFuncsLimit();
 
     //virtual bool loadNextEntry(size_t entryNum) = 0;
 
@@ -58,6 +60,7 @@ protected:
 
     size_t importsCount;
     size_t invalidEntries;
+    size_t funcsCount; // functions wrapped in all the entries, bounded by getFuncsLimit()
 
 friend class ImportBaseEntryWrapper;
 };
