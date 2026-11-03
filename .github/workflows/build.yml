@@ -1,0 +1,44 @@
+name: Build and test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        qt: [ qt5, qt6 ]
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        if [ "${{ matrix.qt }}" = "qt5" ]; then
+          sudo apt --yes install cmake g++ qtbase5-dev
+        else
+          sudo apt --yes install cmake g++ qt6-base-dev
+        fi
+
+    # the tests expect bearcommander directly in the build directory,
+    # so install into it (same as build_qt5.sh)
+    - name: Configure
+      run: >
+        cmake -S . -B build
+        -DUSE_QT5=${{ matrix.qt == 'qt5' && 'ON' || 'OFF' }}
+        -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/build
+
+    - name: Build
+      run: cmake --build build --parallel --target install
+
+    # TestRuns starts bearcommander; TestExternal runs test.sh over the
+    # bearparser_tests samples (it clones them on first use)
+    - name: Test
+      run: ctest --test-dir build --output-on-failure
