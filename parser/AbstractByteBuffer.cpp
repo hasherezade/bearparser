@@ -75,7 +75,7 @@ BYTE* AbstractByteBuffer::getContentAt(offset_t offset, bufsize_t size, bool all
         return NULL;
     }
     const offset_t endOffset = offset + size;
-    if (endOffset > fileSize) {
+    if (size > fileSize - offset) { // offset < fileSize: no underflow; offset + size may wrap
         if (allowExceptions) throw BufferException("Too big size requested! Buffer size: "
             + QString::number(fileSize) + " vs end of the requested area: 0x" + QString::number(endOffset, 16));
         return NULL;
