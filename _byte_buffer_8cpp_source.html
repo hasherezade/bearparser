@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    _init(v_size, v_padding);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="class_byte_buffer.html#a3a208ad6d20f60f38bab50760da3b7e4">content</a> &amp;&amp; bContent) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        ::memcpy(this-&gt;<a class="code hl_variable" href="class_byte_buffer.html#a3a208ad6d20f60f38bab50760da3b7e4">content</a>, bContent, v_size);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        ::memcpy(this-&gt;<a class="code hl_variable" href="class_byte_buffer.html#a3a208ad6d20f60f38bab50760da3b7e4">content</a>, bContent, copySize); <span class="comment">// the rest is zero-filled by allocContent</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
 </div>
