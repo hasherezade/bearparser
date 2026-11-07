@@ -46,7 +46,7 @@ ByteBuffer::ByteBuffer(AbstractByteBuffer *v_parent, offset_t v_offset, bufsize_
 
     _init(v_size, v_padding);
     if (this->content && bContent) {
-        ::memcpy(this->content, bContent, v_size);
+        ::memcpy(this->content, bContent, copySize); // the rest is zero-filled by allocContent
     }
 }
 
